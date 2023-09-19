@@ -14,4 +14,6 @@
 | 10  | <https://github.com/salrashid123/tpm2>                                                                            | Rich TPM recipes achieved with tpm2_tools and go-tpm, written in Go. |
 | 11  | <https://github.com/tpm2-software/tpm2-tools/tree/master/tools>                                                   | The source library for TPM tools (tpm2-tools) written in C.          |
 | 12  | <https://github.com/tpm2-software/tpm2-tss>                                                                       | OSS implementation of the TCG TPM2 Software Stack (TSS2).            |
+| 13  | <http://junyelee.blogspot.com/2020/11/a-practical-guide-to-tpm-2.html>                                            | Blog of TPM.                                                         |
+| 14  | <https://blog.csdn.net/buaa_shang/article/details/26157253>                                                       | Code to use TSS modifying register of TPM.                           |
 
