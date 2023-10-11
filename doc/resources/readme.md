@@ -30,4 +30,7 @@
 | 26  | infineon OPTIGA™ TPM Application Note.                                                                 | <https://www.infineon.com/dgdl/Infineon-OPTIGA_TPM_SLx9670_TPM_2.0-ApplicationNotes-v01_00-EN.pdf?fileId=5546d46271bf4f920171c5598a3a0e7b>  |
 | 27  | The TPM: Integrity Measurement.                                                                        | <https://hal.science/hal-03088321v1/file/tpm_integ.pdf>                                                                                     |
 | 28  | TCG Guidance on Integrity Measurements and Event Log Processing.                                       | <https://trustedcomputinggroup.org/wp-content/uploads/TCG-Guidance-Integrity-Measurements-Event-Log-Processing_v1_r0p118_24feb2022-1.pdf>   |
+| 29  | TCG Guidance on Integrity Measurements and Event Log Processing.                                       | TCG-Guidance-Integrity-Measurements-Event-Log-Processing_v1_r0p118_24feb2022-1.pdf                                                          |
+| 30  | How does the TPM perform integrity measurements on a system?                                           | <How does the TPM perform integrity measurements on a system?>                                                                              |
+| 31  | TPM-based Network Device Remote Integrity Verification                                                 | <https://datatracker.ietf.org/doc/draft-ietf-rats-tpm-based-network-device-attest/>                                                         |
 
