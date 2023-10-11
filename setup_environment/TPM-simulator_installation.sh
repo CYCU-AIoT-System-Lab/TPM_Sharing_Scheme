@@ -41,4 +41,11 @@ systemctl daemon-reload
 systemctl start tpm-server.service
 
 # check its status, if all is fine should be in Active state
-service tpm-server status
+# service tpm-server status
+tpm_server_status=$(systemctl show -p SubState --value tpm-server)
+if [ $tpm_server_status == "running" ]; then
+    echo "TPM server is installed and running ..."
+else
+    echo "TPM server is not running"
+    exit 1
+fi
