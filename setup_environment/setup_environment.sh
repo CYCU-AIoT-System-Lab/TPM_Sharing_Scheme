@@ -24,6 +24,8 @@ curl
 
 # change bash scripts to executable
 chmod +x ./TPM-simulator_installation.sh
+chmod +x ./tpm2-tss_installation.sh
 
 # call bash scripts one by one
+./tpm2-tss_installation.sh
 ./TPM-simulator_installation.sh

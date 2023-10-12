@@ -10,8 +10,11 @@
 # =====================================================================================================
 #!/bin/bash
 
+# acquire the current directory
+path=$(pwd)
+
 # install dependencies
-apt-get install lcov \
+apt-get install -y lcov \
 pandoc autoconf-archive liburiparser-dev \
 libdbus-1-dev libglib2.0-dev dbus-x11 \
 libssl-dev autoconf automake \
@@ -49,3 +52,6 @@ else
     echo "TPM server is not running"
     exit 1
 fi
+
+# Return to the original directory
+cd $path
