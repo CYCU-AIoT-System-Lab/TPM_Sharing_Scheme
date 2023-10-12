@@ -14,10 +14,12 @@
 # Acquire the script
 wget https://raw.githubusercontent.com/kontr0x/github-desktop-install/main/installGitHubDesktop.sh
 # --------------------
-if [ bash ./installGitHubDesktop.sh ]; then
-    echo "Github Desktop installed successfully!"
+status=$?
+status=$(bash ./installGitHubDesktop.sh)
+if [ $status -eq 0 ]; then
+    echo "GitHub Desktop installed successfully!"
 else
-    echo "Github Desktop installation failed!"
+    echo "GitHub Desktop installation failed!"
 fi
 
 # Launch Github Desktop
