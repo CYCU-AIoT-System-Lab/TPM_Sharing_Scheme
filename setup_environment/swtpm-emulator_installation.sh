@@ -17,14 +17,13 @@
 # acquire the current directory
 path=$(pwd)
 
-# Install dependencies
-apt-get install -y libtasn1-devel expect socat python3-twisted fuse-devel glib2-devel gnutls-devel gnutls-utils gnutls json-glib-devel
+apt-get install dh-autoreconf libssl-dev \
+libtasn1-6-dev pkg-config libtpms-dev \
+net-tools iproute2 libjson-glib-dev \
+libgnutls28-dev expect gawk socat \
+libseccomp-dev make -y
 ./autogen.sh --with-openssl --prefix=/usr
 make -j4
-# Depending on how many CPUs you have, choose the -j parameter 
-# carefully for the next command. The tests work on Raspberry PI 2
-# for example but only if run with '-j1', otherwise timeouts may
-# occur.
 make -j4 check
 make install
 
