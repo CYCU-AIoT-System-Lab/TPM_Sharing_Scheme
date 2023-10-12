@@ -3,6 +3,10 @@
 # 1. https://francislampayan.medium.com/how-to-setup-tpm-simulator-in-ubuntu-20-04-25ec673b88dc
 # 2. https://gist.github.com/fbdlampayan/5ceaadda9c32d4c23478ee46f80207f9#file-gistfile1-txt
 # =====================================================================================================
+# Related Source:
+# 1. https://sourceforge.net/projects/ibmswtpm2/
+# 2. https://sourceforge.net/projects/ibmtpm20tss/
+# =====================================================================================================
 # Modified by: Dachuan Chen
 # Date: 2023/10/11
 # Removed all "sudo" commands.

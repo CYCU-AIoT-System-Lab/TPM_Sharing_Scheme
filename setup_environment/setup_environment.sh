@@ -24,6 +24,7 @@ curl \
 build-essential
 
 # change bash scripts to executable
+chmod +x ./github-desktop_installation.sh
 chmod +x ./TPM-simulator_installation.sh
 chmod +x ./tpm2-tss_installation.sh
 chmod +x ./tpm2-abrmd_installation.sh
@@ -32,6 +33,7 @@ chmod +x ./tpm2-tools_installation.sh
 chmod +x ./test_commands.sh
 
 # call bash scripts one by one
+bash ./github-desktop_installation.sh
 bash ./TPM-simulator_installation.sh
 bash ./tpm2-tss_installation.sh
 bash ./tpm2-abrmd_installation.sh

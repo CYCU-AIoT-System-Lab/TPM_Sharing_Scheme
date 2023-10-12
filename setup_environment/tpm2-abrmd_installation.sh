@@ -3,6 +3,9 @@
 # 1. https://francislampayan.medium.com/how-to-setup-tpm-simulator-in-ubuntu-20-04-25ec673b88dc
 # 2. https://gist.github.com/fbdlampayan/5ceaadda9c32d4c23478ee46f80207f9#file-gistfile1-txt
 # =====================================================================================================
+# Related Source:
+# 1. https://github.com/tpm2-software/tpm2-abrmd/releases
+# =====================================================================================================
 # Modified by: Dachuan Chen
 # Date: 2023/10/12
 # Removed all "sudo" commands.
@@ -20,11 +23,11 @@ path=$(pwd)
 useradd --system --user-group tss
 
 # download tpm2-abrmd
-wget https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz
+wget https://github.com/tpm2-software/tpm2-abrmd/releases/download/3.0.0/tpm2-abrmd-3.0.0.tar.gz
 
 # extract, configure, and install
-tar -xzvf tpm2-abrmd-2.3.1.tar.gz 
-cd tpm2-abrmd-2.3.1
+tar -xzvf tpm2-abrmd-3.0.0.tar.gz 
+cd tpm2-abrmd-3.0.0
 ldconfig
 
 # --with-dbuspolicydir this is th directory where a policy that will allow tss user account to claim a name on the D-Bus system bus.
