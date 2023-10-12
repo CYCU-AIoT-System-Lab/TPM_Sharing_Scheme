@@ -8,6 +8,9 @@
 # Removed all "sudo" commands.
 # Nevigate to your desired directory and run this script with "sudo ./TPM-simulator_installation.sh"
 # =====================================================================================================
+# Issue:
+# tpm_server daemon can't be started
+# =====================================================================================================
 #!/bin/bash
 
 # acquire the current directory
