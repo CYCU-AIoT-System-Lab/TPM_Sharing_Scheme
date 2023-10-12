@@ -6,7 +6,7 @@
 # Modified by: Dachuan Chen
 # Date: 2023/10/12
 # Removed all "sudo" commands.
-# Nevigate to your desired directory and run this script with "sudo ./tpm2-tss_installation.sh"
+# Nevigate to your desired directory and run this script with "sudo ./tpm2-tools_installation.sh"
 # =====================================================================================================
 # Issue:
 # =====================================================================================================
