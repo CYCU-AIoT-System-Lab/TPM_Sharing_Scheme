@@ -20,11 +20,12 @@ iftop \
 neovim \
 git \
 wget \
-curl 
+curl \
+build-essential
 
 # change bash scripts to executable
-chmod +x ./tpm2-tss_installation.sh
 chmod +x ./TPM-simulator_installation.sh
+chmod +x ./tpm2-tss_installation.sh
 chmod +x ./tpm2-abrmd_installation.sh
 chmod +x ./tpm2-tss-engine_installation.sh
 chmod +x ./tpm2-tools_installation.sh
