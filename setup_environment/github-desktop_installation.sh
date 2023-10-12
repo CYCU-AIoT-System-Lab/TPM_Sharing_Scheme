@@ -16,6 +16,7 @@ wget https://raw.githubusercontent.com/kontr0x/github-desktop-install/main/insta
 # --------------------
 status=$?
 status=$(bash ./installGitHubDesktop.sh)
+echo $status
 if [ $status -eq 0 ]; then
     echo "GitHub Desktop installed successfully!"
 else
