@@ -14,20 +14,20 @@
 
 # TPM-simulator installation
 # command: service tpm-server status
-echo "\n1. TPM-simulator installation"
-echo "command: \"service tpm-server status\"\n"
+echo -e "\n1. TPM-simulator installation"
+echo -e "command: \"service tpm-server status\"\n"
 
 # tpm2-abrmd installation
 # command: service tpm2-abrmd status
-echo "\n2. tpm2-abrmd installation"
-echo "command: \"service tpm2-abrmd status\"\n"
+echo -e "\n2. tpm2-abrmd installation"
+echo -e "command: \"service tpm2-abrmd status\"\n"
 
 # tpm2-tools installation (test with openssl)
 # command: openssl rand -engine tpm2tss -hex 20
-echo "\n3. tpm2-tools installation"
-echo "command: \"openssl rand -engine tpm2tss -hex 20\"\n"
+echo -e "\n3. tpm2-tools installation"
+echo -e "command: \"openssl rand -engine tpm2tss -hex 20\"\n"
 
 # tpm2-tools isntallation
 # command: tpm2_pcrread
-echo "\n4. tpm2-tools isntallation"
-echo "command: \"tpm2_pcrread\"\n"
+echo -e "\n4. tpm2-tools isntallation"
+echo -e "command: \"tpm2_pcrread\"\n"

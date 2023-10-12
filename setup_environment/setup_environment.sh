@@ -39,3 +39,4 @@ bash ./tpm2-tss_installation.sh
 bash ./tpm2-abrmd_installation.sh
 bash ./tpm2-tss-engine_installation.sh
 bash ./tpm2-tools_installation.sh
+bash ./test_commands.sh
