@@ -29,10 +29,12 @@ chmod +x ./tpm2-tss_installation.sh
 chmod +x ./tpm2-abrmd_installation.sh
 chmod +x ./tpm2-tss-engine_installation.sh
 chmod +x ./tpm2-tools_installation.sh
+chmod +x ./test_commands.sh
 
 # call bash scripts one by one
-./TPM-simulator_installation.sh
-./tpm2-tss_installation.sh
-./tpm2-abrmd_installation.sh
-./tpm2-tss-engine_installation.sh
-./tpm2-tools_installation.sh
+bash ./TPM-simulator_installation.sh
+bash ./tpm2-tss_installation.sh
+bash ./tpm2-abrmd_installation.sh
+bash ./tpm2-tss-engine_installation.sh
+bash ./tpm2-tools_installation.sh
+bash ./github-desktop_installation.sh

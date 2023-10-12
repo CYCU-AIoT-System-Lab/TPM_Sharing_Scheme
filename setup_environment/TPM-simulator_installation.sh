@@ -25,12 +25,12 @@ libtool pkg-config gcc \
 libcurl4-gnutls-dev libgcrypt20-dev libcmocka-dev uthash-dev \
 
 # download TPM simulator
-wget https://jaist.dl.sourceforge.net/project/ibmswtpm2/ibmtpm1661.tar.gz
+wget https://jaist.dl.sourceforge.net/project/ibmswtpm2/ibmtpm1682.tar.gz
 
 # create installation directory to extract towards into
-mkdir ibmtpm1661
-cd ibmtpm1661
-tar -xzvf ../ibmtpm1661.tar.gz
+mkdir ibmtpm1682
+cd ibmtpm1682
+tar -xzvf ../ibmtpm1682.tar.gz
 
 # enter src/ directory and execute build
 cd src/

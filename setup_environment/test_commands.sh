@@ -4,31 +4,30 @@
 # 2. https://gist.github.com/fbdlampayan/5ceaadda9c32d4c23478ee46f80207f9#file-gistfile1-txt
 # =====================================================================================================
 # Modified by: Dachuan Chen
-# Date: 2023/10/12
+# Date: 2023/10/11
 # Removed all "sudo" commands.
-# Nevigate to your desired directory and run this script with "sudo ./tpm2-tss_installation.sh"
+# Nevigate to your desired directory and run this script with "sudo ./TPM-simulator_installation.sh"
 # =====================================================================================================
 # Issue:
 # =====================================================================================================
 #!/bin/bash
 
-# acquire the current directory
-path=$(pwd)
+# TPM-simulator installation
+# command: service tpm-server status
+echo "\n1. TPM-simulator installation"
+echo "command: \"service tpm-server status\"\n"
 
-# install json-c on top of the other dependencies we've installed from the previous step
-apt-get install -y libjson-c-dev
+# tpm2-abrmd installation
+# command: service tpm2-abrmd status
+echo "\n2. tpm2-abrmd installation"
+echo "command: \"service tpm2-abrmd status\"\n"
 
-# download release 3.1.0 of tpm2-tss
-wget https://github.com/tpm2-software/tpm2-tss/releases/download/3.2.2/tpm2-tss-3.2.2.tar.gz
+# tpm2-tools installation (test with openssl)
+# command: openssl rand -engine tpm2tss -hex 20
+echo "\n3. tpm2-tools installation"
+echo "command: \"openssl rand -engine tpm2tss -hex 20\"\n"
 
-# extract, configure and build
-tar -xzvf tpm2-tss-3.2.2.tar.gz
-cd tpm2-tss-3.2.2/
-./configure
-make install
-
-# Update the run-time bindings before executing a program that links against the libraries, as prep for the next item that we will install
-ldconfig
-
-# Return to the original directory
-cd $path
+# tpm2-tools isntallation
+# command: tpm2_pcrread
+echo "\n4. tpm2-tools isntallation"
+echo "command: \"tpm2_pcrread\"\n"
