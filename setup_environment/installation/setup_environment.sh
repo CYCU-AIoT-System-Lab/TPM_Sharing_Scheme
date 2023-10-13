@@ -35,7 +35,7 @@ chmod +x ./swtpm-simulator_installation.sh
 chmod +x ./test_commands.sh
 
 # call bash scripts one by one
-# bash ./github-desktop_installation.sh
+# bash ./github-desktop_installation.sh -y
 bash ./TPM-simulator_installation.sh
 bash ./tpm2-tss_installation.sh
 bash ./tpm2-abrmd_installation.sh

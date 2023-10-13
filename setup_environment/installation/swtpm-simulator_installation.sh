@@ -27,7 +27,7 @@ apt -y install dpkg-dev debhelper libssl-dev libtool net-tools libfuse-dev libgl
 # install libtpms
 git clone https://github.com/stefanberger/libtpms.git
 cd ./libtpms
-cd ./autogen.sh --with-openssl
+bash ./autogen.sh --with-openssl
 make dist
 # automatically install dependencies for liptpms
 mk-build-deps --install --root-cmd sudo --remove -y
@@ -48,17 +48,5 @@ apt install ../swtpm*.deb
 # modify bash profile
 echo -e "\nexport TPM2TOOLS_TCTI=\"swtpm:port=2321\"\n" >> ~/.profile
 
-# # download TPM simulator
-# ./autogen.sh --with-openssl --prefix=/usr
-# make -j4
-# make -j4 check
-# make install
-
 # Return to the original directory
 cd $path
-
-# Activation Command\
-# reboot # require restart after installation to free tcp port
-# netstat -tuln | grep -E "2321|2322" # check if the port is occupied
-# mkdir /tmp/tpmrm0
-# swtpm socket --tpmstate dir="/tmp/tpm0" --tpm2 --flags not-need-init,startup-clear --server type=tcp,port=2321 --ctrl type=tcp,port=2322
