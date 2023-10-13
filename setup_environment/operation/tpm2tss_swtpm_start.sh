@@ -18,9 +18,11 @@ echo -e "\nPlz execute \"../activate/activate_swtpm_simulator.sh\" first.\n"
 echo -e "\nIf this script ends with output like the following message:\nsha1:\n  10: 0x0000000000000000000000000000000000000000\nSW TPM simulator is successfully activated.\n\n"
 
 # activate swtpm
+echo -e "=====================================================================================================\nOutput:\n"
 export TPM2TOOLS_TCTI="swtpm:port=2321"
 tpm2_startup -c
 tpm2_pcrread sha1:10
+echo -e "\n=====================================================================================================\n"
 
 # message
 echo -e "\n\n Finished! \n"
