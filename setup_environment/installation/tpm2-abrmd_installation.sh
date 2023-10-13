@@ -5,6 +5,8 @@
 # =====================================================================================================
 # Related Source:
 # 1. https://github.com/tpm2-software/tpm2-abrmd/releases
+# 2. https://github.com/tpm2-software/tpm2-abrmd/blob/master/INSTALL.md
+# 3. https://www.gnu.org/prep/standards/html_node/Directory-Variables.html
 # =====================================================================================================
 # Modified by: Dachuan Chen
 # Date: 2023/10/12
@@ -38,6 +40,7 @@ ldconfig
 # --with-dbuspolicydir this is th directory where a policy that will allow tss user account to claim a name on the D-Bus system bus.
 # --with-systemdsystemunitdir: systemd unit directory that is needed for tpm2-abrmd daemon to be started as part of the boot process of your unit.
 ./configure --with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/usr/lib/systemd/system
+make
 make install
 
 # add tpm2-abrmd into the system service
@@ -51,7 +54,11 @@ pkill -HUP dbus-daemon
 # modify the tpm2-abrmd service configuration.
 # there specify that the TCTI interface to be used is that of the software TPM
 # this will make it act as the access broker for the software TPM
-echo -e "\n[Unit]\nDescript=TPM2 Access Broker and Resource Management Daemon\n[Service]\nType=dbus\nRestart=always\nRestartSec=5\nBusName=com.intel.tss2.Tabrmd\nStandardOutput=syslog\nExecStart=/usr/local/sbin/tpm2-abrmd --tcti=\"libtss2-tcti-mssim.so.0:host=127.0.0.1,port=2321\"\nUser=tss\n[Install]\nWantedBy=multi-user.target\n" >> /lib/systemd/system/tpm2-abrmd.service
+# comment out this line if you want to use the hardware TPM / the original settings
+# for simulators
+echo -e "[Unit]\nDescript=TPM2 Access Broker and Resource Management Daemon\n\n[Service]\nType=dbus\nRestart=always\nRestartSec=5\nBusName=com.intel.tss2.Tabrmd\nStandardOutput=syslog\nExecStart=/usr/local/sbin/tpm2-abrmd --tcti=\"libtss2-tcti-mssim.so.0:host=127.0.0.1,port=2321\"\nUser=tss\n\n[Install]\nWantedBy=multi-user.target\n" > /lib/systemd/system/tpm2-abrmd.service
+# for hardware TPM
+# echo -e "[Unit]\nDescript=TPM2 Access Broker and Resource Management Daemon\n# These settings are needed when using the device TCTI. If the\n# TCP mssim is used then the settings should be commented out.\nAfter=dev-tpm0.device\nRequires=dev-tpm0.device\n\n[Service]\nType=dbus\nBusName=com.intel.tss2.Tabrmd\nExecStart=/usr/local/sbin/tpm2-abrmd\nUser=tss\n\n[Install]\nWantedBy=multi-user.target\n" > /lib/systemd/system/tpm2-abrmd.service
 
 # run the service and check its state. Should be in active state if all is good.
 systemctl daemon-reload
