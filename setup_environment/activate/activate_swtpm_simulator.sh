@@ -1,0 +1,26 @@
+# =====================================================================================================
+# The following code is modified from the following source:
+# 1. https://github.com/stefanberger/swtpm/wiki/Using-the-Intel-TSS-with-swtpm
+# =====================================================================================================
+# Related Source:
+# =====================================================================================================
+# Modified by: Dachuan Chen
+# Date: 2023/10/13
+# Removed all "sudo" commands.
+# Nevigate to your desired directory and run this script with "sudo ./activate_swtpm_simulator.sh"
+# =====================================================================================================
+# Issue:
+# =====================================================================================================
+#!/bin/bash
+
+# info
+echo -e "\nIf this script ends with error message:\n\"swtpm: Could not open TCP socket: Address already in use\"\nTry restart your computer.\nIf not, plz keep it running.\n"
+
+# create a directory for swtpm
+dir=/tmp/tpm0
+ctrl_port=2322
+server_port=2321
+mkdir $dir
+swtpm socket --tpmstate dir=$dir --tpm2 --ctrl type=tcp,port=$ctrl_port --server type=tcp,port=$server_port --flags not-need-init
+
+# Go to "./operation/tpm2tss_swtpm_start.sh"

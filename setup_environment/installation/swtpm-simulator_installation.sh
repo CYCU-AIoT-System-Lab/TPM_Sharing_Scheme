@@ -58,6 +58,7 @@ echo -e "\nexport TPM2TOOLS_TCTI=\"swtpm:port=2321\"\n" >> ~/.profile
 cd $path
 
 # Activation Command\
+# reboot # require restart after installation to free tcp port
 # netstat -tuln | grep -E "2321|2322" # check if the port is occupied
 # mkdir /tmp/tpmrm0
 # swtpm socket --tpmstate dir="/tmp/tpm0" --tpm2 --flags not-need-init,startup-clear --server type=tcp,port=2321 --ctrl type=tcp,port=2322
