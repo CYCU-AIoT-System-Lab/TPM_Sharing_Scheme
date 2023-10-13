@@ -19,3 +19,5 @@ echo -e "\nPlz execute \"../activate/activate_swtpm_simulator.sh\" and \"./tpm2t
 # create a directory for swtpm
 swtpm_ioctl -i --tcp :2322
 
+# message
+echo -e "\n Finished! \n"

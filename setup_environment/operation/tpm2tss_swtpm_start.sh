@@ -22,3 +22,5 @@ export TPM2TOOLS_TCTI="swtpm:port=2321"
 tpm2_startup -c
 tpm2_pcrread sha1:10
 
+# message
+echo -e "\n Finished! \n"
