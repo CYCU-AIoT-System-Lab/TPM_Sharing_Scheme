@@ -1,5 +1,7 @@
 # Setup Environment
 
+These scripts aim for setting up TPM development environment on VM without physical TPM attached.
+
 Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
 
 ## Execute Steps
