@@ -49,7 +49,7 @@ make
 cp tpm_server /usr/local/bin
 
 # configure TPM simulator as a daemon service in ubuntu
-echo -e "\nConfigure TPM simulator as a daemon service in ubuntu\n[Unit]\nDescription=TPM2.0 Simulator Server daemon\nBefore=tpm2-abrmd.service\n[Service]\nExecStart=/usr/local/bin/tpm_server\nRestart=always\nEnvironment=PATH=/usr/bin:/usr/local/bin\n[Install]\nWantedBy=multi-user.target\n" >> /lib/systemd/system/tpm-server.service
+echo -e "Configure TPM simulator as a daemon service in ubuntu\n[Unit]\nDescription=TPM2.0 Simulator Server daemon\nBefore=tpm2-abrmd.service\n[Service]\nExecStart=/usr/local/bin/tpm_server\nRestart=always\nEnvironment=PATH=/usr/bin:/usr/local/bin\n[Install]\nWantedBy=multi-user.target\n" >> /lib/systemd/system/tpm-server.service
 
 # reload daemon and start the service
 systemctl daemon-reload

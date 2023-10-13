@@ -12,3 +12,7 @@ Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
 4. ```cp ./TPM_Sharing_Scheme-setup_environment/setup_environment/installation/*.sh ./```
 5. ```sudo chmod +x setup_environment.sh```
 6. ```sudo ./setup_environment.sh```
+
+## Debug list
+
+1. "tpm2tss.so" location.
