@@ -4,7 +4,8 @@
 # 2. https://stackoverflow.com/questions/71220170/how-to-install-start-using-swtpm-on-linux
 # =====================================================================================================
 # Related Source:
-# 1. https://github.com/stefanberger/swtpm/releases
+# 1. https://github.com/stefanberger/libtpms/releases
+# 2. https://github.com/stefanberger/swtpm/releases
 # =====================================================================================================
 # Modified by: Dachuan Chen
 # Date: 2023/10/12
@@ -34,7 +35,7 @@ apt install ../libtpms*.deb
 cd $path
 
 # install swtpm dependencies
-apt-get install -y dh-apparmor
+apt-get install -y dh-apparmor swtpm-tools
 
 # install swtpm
 git clone https://github.com/stefanberger/swtpm.git
@@ -55,5 +56,7 @@ echo -e "\nexport TPM2TOOLS_TCTI=\"swtpm:port=2321\"\n" >> ~/.profile
 # Return to the original directory
 cd $path
 
-# Activation Command
-# swtpm socket --tpmstate dir="~/Downloads/swtpm/" --tpm2 --flags not-need-init,startup-clear --server type=tcp,port=2322 --ctrl type=tcp,port=2322
+# Activation Command\
+# netstat -tuln | grep -E "2321|2322" # check if the port is occupied
+# mkdir /tmp/tpmrm0
+# swtpm socket --tpmstate dir="/tmp/tpm0" --tpm2 --flags not-need-init,startup-clear --server type=tcp,port=2321 --ctrl type=tcp,port=2322

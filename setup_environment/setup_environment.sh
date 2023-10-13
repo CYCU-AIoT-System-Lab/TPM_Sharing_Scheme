@@ -6,6 +6,7 @@
 # 1. Acquire all required files from the following source:
 #       https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/main/setup_environment
 # 2. Nevigate to your desired directory and run this script with "sudo ./setup_environment.sh"
+# 3. Recommend to move all scripts to a different directory than downloaded repository.
 # =====================================================================================================
 #!/bin/bash
 
