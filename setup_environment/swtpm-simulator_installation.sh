@@ -22,13 +22,15 @@
 path=$(pwd)
 
 # install dependencies for libtpms
-apt -y install dpkg-dev debhelper libssl-dev libtool net-tools libfuse-dev libglib2.0-dev libgmp-dev expect libtasn1-dev socat python3-twisted gnutls-dev gnutls-bin  libjson-glib-dev gawk git python3-setuptools softhsm2 libseccomp-dev automake autoconf libtool gcc build-essential libssl-dev dh-exec pkg-config dh-autoreconf libtool-bin tpm2-tools libtss0 libtss2-dev dh-apparmor swtpm-tools
+apt -y install dpkg-dev debhelper libssl-dev libtool net-tools libfuse-dev libglib2.0-dev libgmp-dev expect libtasn1-dev socat python3-twisted gnutls-dev gnutls-bin  libjson-glib-dev gawk git python3-setuptools softhsm2 libseccomp-dev automake autoconf libtool gcc build-essential libssl-dev dh-exec pkg-config dh-autoreconf libtool-bin tpm2-tools libtss0 libtss2-dev dh-apparmor swtpm-tools devscripts equivs
 
 # install libtpms
 git clone https://github.com/stefanberger/libtpms.git
 cd ./libtpms
 cd ./autogen.sh --with-openssl
 make dist
+# automatically install dependencies for liptpms
+mk-build-deps --install --root-cmd sudo --remove -y
 dpkg-buildpackage -us -uc -j4
 libtool --finish /usr/lib/x86_64-linux-gnu
 apt install ../libtpms*.deb
@@ -37,6 +39,8 @@ cd $path
 # install swtpm
 git clone https://github.com/stefanberger/swtpm.git
 cd ./swtpm
+# automatically install dependencies for swtpm
+mk-build-deps --install --root-cmd sudo --remove -y
 dpkg-buildpackage -us -uc -j4
 libtool --finish /usr/lib/x86_64-linux-gnu/
 apt install ../swtpm*.deb
