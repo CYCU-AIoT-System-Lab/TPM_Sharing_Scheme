@@ -22,7 +22,7 @@
 path=$(pwd)
 
 # install dependencies for libtpms
-apt -y install dpkg-dev debhelper libssl-dev libtool net-tools libfuse-dev libglib2.0-dev libgmp-dev expect libtasn1-dev socat python3-twisted gnutls-dev gnutls-bin  libjson-glib-dev gawk git python3-setuptools softhsm2 libseccomp-dev automake autoconf libtool gcc build-essential libssl-dev dh-exec pkg-config dh-autoreconf libtool-bin tpm2-tools libtss0 libtss2-dev
+apt -y install dpkg-dev debhelper libssl-dev libtool net-tools libfuse-dev libglib2.0-dev libgmp-dev expect libtasn1-dev socat python3-twisted gnutls-dev gnutls-bin  libjson-glib-dev gawk git python3-setuptools softhsm2 libseccomp-dev automake autoconf libtool gcc build-essential libssl-dev dh-exec pkg-config dh-autoreconf libtool-bin tpm2-tools libtss0 libtss2-dev dh-apparmor swtpm-tools
 
 # install libtpms
 git clone https://github.com/stefanberger/libtpms.git
@@ -33,9 +33,6 @@ dpkg-buildpackage -us -uc -j4
 libtool --finish /usr/lib/x86_64-linux-gnu
 apt install ../libtpms*.deb
 cd $path
-
-# install swtpm dependencies
-apt-get install -y dh-apparmor swtpm-tools
 
 # install swtpm
 git clone https://github.com/stefanberger/swtpm.git
