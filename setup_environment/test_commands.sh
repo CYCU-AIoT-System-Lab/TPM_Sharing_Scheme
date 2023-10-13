@@ -12,20 +12,22 @@
 # =====================================================================================================
 #!/bin/bash
 
+echo -e "\nList of test commands:\n"
+
 # TPM-simulator installation
 # command: service tpm-server status
 echo -e "\n1. TPM-simulator installation"
-echo -e "command: \"service tpm-server status\"\n"
+echo -e "command: \"service tpm-server status\""
 
 # tpm2-abrmd installation
 # command: service tpm2-abrmd status
 echo -e "\n2. tpm2-abrmd installation"
-echo -e "command: \"service tpm2-abrmd status\"\n"
+echo -e "command: \"service tpm2-abrmd status\""
 
 # tpm2-tools installation (test with openssl)
 # command: openssl rand -engine tpm2tss -hex 20
 echo -e "\n3. tpm2-tools installation"
-echo -e "command: \"openssl rand -engine tpm2tss -hex 20\"\n"
+echo -e "command: \"openssl rand -engine tpm2tss -hex 20\""
 
 # tpm2-tools isntallation
 # command: tpm2_pcrread

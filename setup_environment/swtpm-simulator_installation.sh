@@ -10,7 +10,7 @@
 # Modified by: Dachuan Chen
 # Date: 2023/10/12
 # Removed all "sudo" commands.
-# Nevigate to your desired directory and run this script with "sudo ./swtpm-emulator_installation.sh"
+# Nevigate to your desired directory and run this script with "sudo ./swtpm-simulator_installation.sh"
 # =====================================================================================================
 # Issue:
 # 1. Can't use activation command to start swtpm socket with the following error:
@@ -47,7 +47,7 @@ apt install ../swtpm*.deb
 # modify bash profile
 echo -e "\nexport TPM2TOOLS_TCTI=\"swtpm:port=2321\"\n" >> ~/.profile
 
-# # download TPM emulator
+# # download TPM simulator
 # ./autogen.sh --with-openssl --prefix=/usr
 # make -j4
 # make -j4 check
