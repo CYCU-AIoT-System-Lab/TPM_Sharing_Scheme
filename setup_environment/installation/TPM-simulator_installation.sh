@@ -17,6 +17,9 @@
 # =====================================================================================================
 #!/bin/bash
 
+# set IBM simulator version
+ver=1682
+
 # acquire the current directory
 path=$(pwd)
 
@@ -29,12 +32,12 @@ libtool pkg-config gcc \
 libcurl4-gnutls-dev libgcrypt20-dev libcmocka-dev uthash-dev \
 
 # download TPM simulator
-wget https://jaist.dl.sourceforge.net/project/ibmswtpm2/ibmtpm1682.tar.gz
+wget "https://jaist.dl.sourceforge.net/project/ibmswtpm2/ibmtpm$ver.tar.gz"
 
 # create installation directory to extract towards into
-mkdir ibmtpm1682
-cd ibmtpm1682
-tar -xzvf ../ibmtpm1682.tar.gz
+mkdir "ibmtpm$ver"
+cd "ibmtpm$ver"
+tar -xzvf "../ibmtpm$ver.tar.gz"
 
 # enter src/ directory and execute build
 cd src/

@@ -15,6 +15,9 @@
 # =====================================================================================================
 #!/bin/bash
 
+# set tpm2-abrmd version
+ver=3.0.0
+
 # acquire the current directory
 path=$(pwd)
 
@@ -23,11 +26,11 @@ path=$(pwd)
 useradd --system --user-group tss
 
 # download tpm2-abrmd
-wget https://github.com/tpm2-software/tpm2-abrmd/releases/download/3.0.0/tpm2-abrmd-3.0.0.tar.gz
+wget "https://github.com/tpm2-software/tpm2-abrmd/releases/download/$ver/tpm2-abrmd-$ver.tar.gz"
 
 # extract, configure, and install
-tar -xzvf tpm2-abrmd-3.0.0.tar.gz 
-cd tpm2-abrmd-3.0.0
+tar -xzvf "tpm2-abrmd-$ver.tar.gz"
+cd "tpm2-abrmd-$ver"
 ldconfig
 
 # --with-dbuspolicydir this is th directory where a policy that will allow tss user account to claim a name on the D-Bus system bus.

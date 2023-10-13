@@ -15,15 +15,18 @@
 # =====================================================================================================
 #!/bin/bash
 
+# set tpm2-tools version
+ver=5.5
+
 # acquire the current directory
 path=$(pwd)
 
 # download from official release
-wget https://github.com/tpm2-software/tpm2-tools/releases/download/5.5/tpm2-tools-5.5.tar.gz
+wget "https://github.com/tpm2-software/tpm2-tools/releases/download/$ver/tpm2-tools-$ver.tar.gz"
 
 # extract, configure, install
-tar -xzvf tpm2-tools-5.5.tar.gz
-cd tpm2-tools-5.5/
+tar -xzvf "tpm2-tools-$ver.tar.gz"
+cd "tpm2-tools-$ver/"
 ./configure
 make install
 

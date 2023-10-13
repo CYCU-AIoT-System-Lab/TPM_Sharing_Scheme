@@ -15,6 +15,9 @@
 # =====================================================================================================
 #!/bin/bash
 
+# set tpm2-tss version
+ver=3.2.2
+
 # acquire the current directory
 path=$(pwd)
 
@@ -22,11 +25,11 @@ path=$(pwd)
 apt-get install -y libjson-c-dev
 
 # download release 3.1.0 of tpm2-tss
-wget https://github.com/tpm2-software/tpm2-tss/releases/download/3.2.2/tpm2-tss-3.2.2.tar.gz
+wget "https://github.com/tpm2-software/tpm2-tss/releases/download/$ver/tpm2-tss-$ver.tar.gz"
 
 # extract, configure and build
-tar -xzvf tpm2-tss-3.2.2.tar.gz
-cd tpm2-tss-3.2.2/
+tar -xzvf "tpm2-tss-$ver.tar.gz"
+cd "tpm2-tss-$ver/"
 ./configure
 make install
 

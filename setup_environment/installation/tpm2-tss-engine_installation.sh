@@ -15,15 +15,18 @@
 # =====================================================================================================
 #!/bin/bash
 
+# set tpm2-tss-engine version
+ver=1.2.0
+
 # acquire the current directory
 path=$(pwd)
 
 # get version compatible, for this article's example its 1.2.0
-wget https://github.com/tpm2-software/tpm2-tss-engine/releases/download/v1.2.0/tpm2-tss-engine-1.2.0.tar.gz
+wget "https://github.com/tpm2-software/tpm2-tss-engine/releases/download/v$ver/tpm2-tss-engine-$ver.tar.gz"
 
 # extract, configure, install
-tar -xzvf tpm2-tss-engine-1.2.0.tar.gz
-cd tpm2-tss-engine-1.2.0/
+tar -xzvf "tpm2-tss-engine-$ver.tar.gz"
+cd "tpm2-tss-engine-$ver/"
 ./configure
 make install
 ldconfig
