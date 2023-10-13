@@ -46,3 +46,6 @@ bash ./swtpm-simulator_installation.sh
 echo -e "Installation completed.\n"
 
 bash ./test_commands.sh
+
+# message
+echo -e "\n ===================================================================================================== \n Installation process is fully finished! \n Please reboot your system. \n ===================================================================================================== \n"
