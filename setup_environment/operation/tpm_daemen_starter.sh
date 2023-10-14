@@ -12,18 +12,22 @@
 # =====================================================================================================
 #!/bin/bash
 
+# Port number
+port=2321
+
 echo -e "\n=====================================================================================================\nStart installing tpm_daemen_starter ...\n=====================================================================================================\n"
 
 # Manipulate services
 # 1. tpm2-abrmd.service
 # 2. tpm-server.service
 
-systemctl daemon-reload
-
 # Stop tpm-server.service
+systemctl daemon-reload
 systemctl start tpm-server.service
 
 # Stop tpm2-abrmd.service
+kill -9 $(lsof -t -i:$port)
+systemctl daemon-reload
 systemctl start tpm2-abrmd.service
 
 # Message

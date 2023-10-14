@@ -31,3 +31,7 @@ Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
 
 1. TPM daemen starter.
 2. TPM simulator & pysical chip daemen switcher.
+
+## Useful Commands
+
+1. ```journalctl -xe```
