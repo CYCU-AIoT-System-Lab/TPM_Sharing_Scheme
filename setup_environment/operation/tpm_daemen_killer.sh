@@ -26,8 +26,12 @@ systemctl stop tpm2-abrmd.service
 # Stop tpm-server.service
 systemctl stop tpm-server.service
 
+# Message
+echo -e "\n=====================================================================================================\nAll TPM daemons are stopped.\n=====================================================================================================\n"
+
 # Show daemon status
 echo -e "\n=====================================================================================================\nShow daemon status ...\n=====================================================================================================\n"
+echo -e "Press \"q\" to continue script ...\n"
 # systemctl status tpm2-abrmd.service
 # systemctl status tpm-server.service
 service tpm2-abrmd status
