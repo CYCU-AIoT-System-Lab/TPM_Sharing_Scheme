@@ -22,6 +22,11 @@ Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
       2. Open new terminal, ```./setup_environment/operation/tpm2tss_swtpm_start.sh``` to start SW TPM.
    2. Reset
       1. ```./setup_environment/operation/tpm2tss_swtpm_reset.sh```
+2. General Operation
+   1. Kill tpm daemen
+      1. ```./setup_environment/operation/tpm_daemen_killer.sh```
+   2. Start tpm daemen
+      1. ```./setup_environment/operation/tpm_daemen_starter.sh```
 
 ## Debug List
 
@@ -29,8 +34,13 @@ Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
 
 ## Feature List
 
-1. TPM daemen starter.
-2. TPM simulator & pysical chip daemen switcher.
+1. TPM simulator & pysical chip daemen switcher.
+2. Docker implementation.
+3. New method to download code.
+   1. Use ```ssh-genkey```, and copy the generated key content.
+   2. Go to [GitHub Key Settings](https://github.com/settings/keys) to add new SSH key.
+   3. Use ```git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git```
+4. Consider deploying [Gerrit](https://www.gerritcodereview.com/).
 
 ## Useful Commands
 
