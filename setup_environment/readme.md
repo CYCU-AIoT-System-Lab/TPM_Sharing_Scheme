@@ -27,6 +27,8 @@ Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
       1. ```./setup_environment/operation/tpm_daemen_killer.sh```
    2. Start tpm daemen
       1. ```./setup_environment/operation/tpm_daemen_starter.sh```
+   3. Switch between simulator and physical device.
+      1. ```./setup_environment/operation/tpm_switcher.sh```
 
 ## Debug List
 
@@ -45,3 +47,4 @@ Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
 ## Useful Commands
 
 1. ```journalctl -xe```
+2. ```ps```

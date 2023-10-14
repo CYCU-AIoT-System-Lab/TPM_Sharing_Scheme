@@ -21,11 +21,11 @@ echo -e "\n=====================================================================
 # 1. tpm2-abrmd.service
 # 2. tpm-server.service
 
-# Stop tpm-server.service
+# Start tpm-server.service
 systemctl daemon-reload
 systemctl start tpm-server.service
 
-# Stop tpm2-abrmd.service
+# Start tpm2-abrmd.service
 kill -9 $(lsof -t -i:$port)
 systemctl daemon-reload
 systemctl start tpm2-abrmd.service

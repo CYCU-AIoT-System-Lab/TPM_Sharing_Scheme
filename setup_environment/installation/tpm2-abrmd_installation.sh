@@ -56,9 +56,9 @@ pkill -HUP dbus-daemon
 # this will make it act as the access broker for the software TPM
 # comment out this line if you want to use the hardware TPM / the original settings
 # for simulators
-echo -e "[Unit]\nDescript=TPM2 Access Broker and Resource Management Daemon\n\n[Service]\nType=dbus\nRestart=always\nRestartSec=5\nBusName=com.intel.tss2.Tabrmd\nStandardOutput=syslog\nExecStart=/usr/local/sbin/tpm2-abrmd --tcti=\"libtss2-tcti-mssim.so.0:host=127.0.0.1,port=2321\"\nUser=tss\n\n[Install]\nWantedBy=multi-user.target\n" > /lib/systemd/system/tpm2-abrmd.service
+echo -e "#Settings for SIMULATORS\n\n[Unit]\nDescript=TPM2 Access Broker and Resource Management Daemon\n\n[Service]\nType=dbus\nRestart=always\nRestartSec=5\nBusName=com.intel.tss2.Tabrmd\nStandardOutput=syslog\nExecStart=/usr/local/sbin/tpm2-abrmd --tcti=\"libtss2-tcti-mssim.so.0:host=127.0.0.1,port=2321\"\nUser=tss\n\n[Install]\nWantedBy=multi-user.target\n" > /lib/systemd/system/tpm2-abrmd.service
 # for hardware TPM
-# echo -e "[Unit]\nDescript=TPM2 Access Broker and Resource Management Daemon\n# These settings are needed when using the device TCTI. If the\n# TCP mssim is used then the settings should be commented out.\nAfter=dev-tpm0.device\nRequires=dev-tpm0.device\n\n[Service]\nType=dbus\nBusName=com.intel.tss2.Tabrmd\nExecStart=/usr/local/sbin/tpm2-abrmd\nUser=tss\n\n[Install]\nWantedBy=multi-user.target\n" > /lib/systemd/system/tpm2-abrmd.service
+# echo -e "#Settings for PHYSICALDEVICE\n\n[Unit]\nDescript=TPM2 Access Broker and Resource Management Daemon\n# These settings are needed when using the device TCTI. If the\n# TCP mssim is used then the settings should be commented out.\nAfter=dev-tpm0.device\nRequires=dev-tpm0.device\n\n[Service]\nType=dbus\nBusName=com.intel.tss2.Tabrmd\nExecStart=/usr/local/sbin/tpm2-abrmd\nUser=tss\n\n[Install]\nWantedBy=multi-user.target\n" > /lib/systemd/system/tpm2-abrmd.service
 
 # run the service and check its state. Should be in active state if all is good.
 systemctl daemon-reload
