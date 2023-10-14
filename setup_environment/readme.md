@@ -29,6 +29,5 @@ Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
 
 ## Feature List
 
-1. TPM daemen killer.
-2. TPM daemen starter.
-3. TPM simulator & pysical chip daemen switcher.
+1. TPM daemen starter.
+2. TPM simulator & pysical chip daemen switcher.
