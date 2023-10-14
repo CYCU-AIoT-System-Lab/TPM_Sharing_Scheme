@@ -39,7 +39,7 @@ Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
 1. TPM simulator & pysical chip daemen switcher.
 2. Docker implementation.
 3. New method to download code.
-   1. Use ```ssh-genkey```, and copy the generated key content.
+   1. Use ```ssh-genkey```, and copy the generated key content. (```cat /home/user/.ssh/id_rsa.pub```)
    2. Go to [GitHub Key Settings](https://github.com/settings/keys) to add new SSH key.
    3. Use ```git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git```
 4. Consider deploying [Gerrit](https://www.gerritcodereview.com/).
