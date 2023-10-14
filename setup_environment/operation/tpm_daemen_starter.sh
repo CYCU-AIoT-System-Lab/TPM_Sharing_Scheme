@@ -20,11 +20,11 @@ echo -e "\n=====================================================================
 
 systemctl daemon-reload
 
-# Stop tpm2-abrmd.service
-systemctl start tpm2-abrmd.service
-
 # Stop tpm-server.service
 systemctl start tpm-server.service
+
+# Stop tpm2-abrmd.service
+systemctl start tpm2-abrmd.service
 
 # Message
 echo -e "\n=====================================================================================================\nAll TPM daemons are started.\n=====================================================================================================\n"
@@ -32,10 +32,10 @@ echo -e "\n=====================================================================
 # Show daemon status
 echo -e "\n=====================================================================================================\nShow daemon status ...\n=====================================================================================================\n"
 echo -e "Press \"q\" to continue script ...\n"
-# systemctl status tpm2-abrmd.service
 # systemctl status tpm-server.service
-service tpm2-abrmd status
+# systemctl status tpm2-abrmd.service
 service tpm-server status
+service tpm2-abrmd status
 
 # Message
 echo -e "\n=====================================================================================================\nAll TPM daemons are started.\n=====================================================================================================\n"
