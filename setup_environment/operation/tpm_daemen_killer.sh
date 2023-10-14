@@ -28,8 +28,10 @@ systemctl stop tpm-server.service
 
 # Show daemon status
 echo -e "\n=====================================================================================================\nShow daemon status ...\n=====================================================================================================\n"
-systemctl status tpm2-abrmd.service
-systemctl status tpm-server.service
+# systemctl status tpm2-abrmd.service
+# systemctl status tpm-server.service
+service tpm2-abrmd status
+service tpm-server status
 
 # Message
 echo -e "\n=====================================================================================================\nAll TPM daemons are killed.\n=====================================================================================================\n"
