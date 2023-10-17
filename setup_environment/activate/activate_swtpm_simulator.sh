@@ -14,7 +14,10 @@
 #!/bin/bash
 
 # info
-echo -e "\nIf this script ends with error message:\n\"swtpm: Could not open TCP socket: Address already in use\"\nTry restart your computer.\nIf not, plz keep it running.\n"
+echo -e "\nIf this script ends with error message:\n\"swtpm: Could not open TCP socket: Address already in use\"\nTry running \"../operation/tpm_daemen_killer\".\nIf not, plz keep it running.\n"
+
+# kill all tpm daemons
+kill -9 $(lsof -t -i:$port)
 
 # create a directory for swtpm
 dir=/tmp/tpm0
