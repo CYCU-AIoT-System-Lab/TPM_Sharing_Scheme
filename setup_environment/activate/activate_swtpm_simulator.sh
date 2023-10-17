@@ -13,6 +13,9 @@
 # =====================================================================================================
 #!/bin/bash
 
+# port number
+port=2321
+
 # info
 echo -e "\nIf this script ends with error message:\n\"swtpm: Could not open TCP socket: Address already in use\"\nTry running \"../operation/tpm_daemen_killer\".\nIf not, plz keep it running.\n"
 
@@ -22,7 +25,7 @@ kill -9 $(lsof -t -i:$port)
 # create a directory for swtpm
 dir=/tmp/tpm0
 ctrl_port=2322
-server_port=2321
+server_port=$port
 mkdir $dir
 swtpm socket --tpmstate dir=$dir --tpm2 --ctrl type=tcp,port=$ctrl_port --server type=tcp,port=$server_port --flags not-need-init
 
