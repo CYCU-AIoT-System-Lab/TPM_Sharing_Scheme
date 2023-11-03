@@ -1,6 +1,6 @@
 #!/bin/bash
 
-download_dir="~/Downloads"
+download_dir="/home/user/Downloads"
 
 echo -e "\n====================================================\nSetup IBMTPM\n====================================================\n"
 
