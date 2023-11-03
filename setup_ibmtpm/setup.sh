@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 download_dir="/home/user/Downloads"
 
