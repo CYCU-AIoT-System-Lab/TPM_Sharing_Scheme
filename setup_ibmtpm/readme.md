@@ -6,7 +6,7 @@ Scripts here is tested on Ubuntu 18.04 VM.
 
 1. In VM terminal, type ```ssh-keygen```, keep pressing ```enter``` till command is finished.
 2. In VM terminal, type ```cat /home/user/.ssh/id_rsa.pub```, copy all of the output strings.
-3. In browser, go to <https://github.com/settings/keys>, create new SSH key, and paste copied RSA public key in.
+3. In browser, go to <https://github.com/settings/ssh/new>, type the name of this key in title, and paste copied RSA public key in.
 4. In VM terminal, nevigate to your desire directory, and type ```git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git```.
 5. In VM terminal, nevigate inside cloned folder with ```cd ./TPM_Sharing_Scheme```.
 6. In VM terminal, switch development branch with ```git checkout setup_ibmtpm```.
