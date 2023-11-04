@@ -26,9 +26,9 @@ echo -e "${BLUE}Downloading IBMTPM...${NC}"
 file_ibmtss="${download_dir}/ibmtss${ibmtss_ver}.tar.gz"
 file_ibmtpm="${download_dir}/ibmtpm${ibmtpm_ver}.tar.gz"
 file_ibmacs="${download_dir}/ibmacs${ibmacs_ver}.tar.gz"
-curl -L https://sourceforge.net/project/ibmtpm20tss/files/ibmtss${ibmtss_ver}.tar.gz > ${file_ibmtss}
-curl -L https://sourceforge.net/project/ibmswtpm2/files/ibmtpm${ibmtpm_ver}.tar.gz > ${file_ibmtpm}
-curl -L https://sourceforge.net/projects/ibmtpm20acs/files/ibmacs${ibmacs_ver}.tar.gz > ${file_ibmacs}
+wget "https://sourceforge.net/projects/ibmswtpm2/files/ibmtpm${ibmtpm_ver}.tar.gz/download" -O ${file_ibmtpm}
+wget "https://sourceforge.net/projects/ibmswtpm2/files/ibmtss${ibmtss_ver}.tar.gz/download" -O ${file_ibmtss}
+wget "https://sourceforge.net/projects/ibmtpm20acs/files/ibmacs${ibmacs_ver}.tar.gz/download" -O ${file_ibmacs}
 
 echo -e "${BLUE}Creating directories...${NC}"
 path_ibmtss="/opt/ibmtss${ibmtss_ver}/"
