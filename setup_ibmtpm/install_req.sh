@@ -44,8 +44,8 @@ cp ${file_ibmtpm} ${path_ibmtpm}
 cp ${file_ibmacs} ${path_ibmacs}
 
 echo -e "${BLUE}Extracting files...${NC}"
-tar -zxvf "/opt/ibmtss${ibmtss_ver}/ibmtss${ibmtss_ver}.tar.gz"
-tar -zxvf "/opt/ibmtpm${ibmtpm_ver}/ibmtpm${ibmtpm_ver}.tar.gz"
-tar -zxvf "/opt/ibmacs${ibmacs_ver}/ibmacs${ibmacs_ver}.tar.gz"
+tar -zxvf "/opt/ibmtss${ibmtss_ver}/ibmtss${ibmtss_ver}.tar.gz" -C ${path_ibmtss}
+tar -zxvf "/opt/ibmtpm${ibmtpm_ver}/ibmtpm${ibmtpm_ver}.tar.gz" -C ${path_ibmtpm}
+tar -zxvf "/opt/ibmacs${ibmacs_ver}/ibmacs${ibmacs_ver}.tar.gz" -C ${path_ibmacs}
 
 echo -e "\n====================================================\nInstalling IBMTPM Complete\n====================================================\n"
