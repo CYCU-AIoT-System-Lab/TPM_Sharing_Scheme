@@ -3,19 +3,27 @@
 # ==================================================================================================
 # Parameters
 # Param - path
-download_dir="/home/user/Downloads"
-base_dir="/opt"
-html_dir="/var/www/html/acs"
-c_src_dir="/usr/include/json-c"
-c_link_dir="/usr/include/json"
+download_dir="/home/user/Downloads"      # default: /home/user/Downloads
+base_dir="/opt"                          # default: /opt
+html_dir="/var/www/html/acs"             # default: /var/www/html/acs
+c_json_lib_dir="/usr/include/json-c"     # default: /usr/include/json-c
+c_json_lib_link_dir="/usr/include/json"  # default: /usr/include/json
 # Param - version
-ibmtss_ver="2.1.1" # latest: 2.1.1
-ibmtpm_ver="1682" # latest: 1682
-ibmacs_ver="1658" # latest: 1658
+ibmtss_ver="2.1.1"                       # latest: 2.1.1
+ibmtpm_ver="1682"                        # latest: 1682
+ibmacs_ver="1658"                        # latest: 1658
 # Param - mode
-verMode=2 # 1: TPM 2.0, 2: TPM 1.2 & 2.0
-TPMMode=2 # 1: Pysical TPM, 2: Software TPM
-acsMode=1 # 1: Server, 2: Client
+verMode=2                                # 1: TPM 2.0, 2: TPM 1.2 & 2.0
+TPMMode=2                                # 1: Pysical TPM, 2: Software TPM
+acsMode=1                                # 1: Server, 2: Client
+# Param - job
+install_req=0                            # 0: No, 1: Yes
+setup_ibmtpmtss_env=0                    # 0: No, 1: Yes
+compile_ibmtpmtss=0                      # 0: No, 1: Yes
+setup_ibmswtpm_env=0                     # 0: No, 1: Yes
+compile_ibmswtpm=0                       # 0: No, 1: Yes
+setup_ibmacs_env=0                       # 0: No, 1: Yes
+compile_ibmacs=0                         # 0: No, 1: Yes
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -208,8 +216,8 @@ setup_ibmacs_env () {
     chgrp root ${html_dir}
     chmod 777 ${html_dir}
 
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${c_src_dir} ......${NC}"
-    ln -s "${c_src_dir}" "${c_link_dir}"
+    echo -e "${BOLD}${BLUE}Creating symbolic link to ${c_json_lib_dir} ......${NC}"
+    ln -s "${c_json_lib_dir}" "${c_json_lib_link_dir}"
 
     echo -e "${BOLD}${BLUE}Setting include path ......${NC}"
     if [ $verMode == 1 ]; then
@@ -268,15 +276,15 @@ compile_ibmacs () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}\n====================================================\n"
 }
 
-install_req
+if [ $install_req == 1 ]; then install_req; fi
 
-setup_ibmtpmtss_env
-compile_ibmtpmtss
+if [ $setup_ibmtpmtss_env == 1 ]; then setup_ibmtpmtss_env; fi
+if [ $compile_ibmtpmtss == 1 ]; then compile_ibmtpmtss; fi
 
-setup_ibmswtpm_env
-compile_ibmswtpm
+if [ $setup_ibmswtpm_env == 1 ]; then setup_ibmswtpm_env; fi
+if [ $compile_ibmswtpm == 1 ]; then compile_ibmswtpm; fi
 
-setup_ibmacs_env
-compile_ibmacs
+if [ $setup_ibmacs_env == 1 ]; then setup_ibmacs_env; fi
+if [ $compile_ibmacs == 1 ]; then compile_ibmacs; fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
