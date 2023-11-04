@@ -67,7 +67,7 @@ if [ $verMode == 1 ]; then
     export LIBRARY_PATH="${path_ibmtss}/utils"
     make clean
     make
-elif [ $verMode == 2]; then
+elif [ $verMode == 2 ]; then
     # for TPM 1.2 & 2.0
     cd "${path_ibmacs}/acs/"
     export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"

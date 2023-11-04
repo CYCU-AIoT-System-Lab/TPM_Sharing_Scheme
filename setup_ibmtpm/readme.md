@@ -2,6 +2,8 @@
 
 Scripts here is tested on Ubuntu 18.04 VM.
 
+Currently, TPM2.0 only mode can't support ACS.
+
 ## Installation Steps
 
 1. In VM terminal, type ```ssh-keygen```, keep pressing ```enter``` till command is finished.

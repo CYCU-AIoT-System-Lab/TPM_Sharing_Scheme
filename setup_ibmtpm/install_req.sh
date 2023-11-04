@@ -4,8 +4,8 @@
 # Parameters
 download_dir="/home/user/Downloads"
 base_dir="/opt"
-ibmtss_ver="1.6.0" # latest: 2.1.1
-ibmtpm_ver="1637" # latest: 1682
+ibmtss_ver="2.1.1" # latest: 2.1.1
+ibmtpm_ver="1682" # latest: 1682
 ibmacs_ver="1658" # latest: 1658
 # ==================================================================================================
 
@@ -35,7 +35,9 @@ echo -e "${BOLD}${BLUE}Installing tools ......${NC}"
 apt-get install -y htop iftop neovim git curl wget
 
 echo -e "${BOLD}${BLUE}Installing IBMTPM dependencies ......${NC}"
-apt-get install -y build-essential make gcc libssl-dev libtss0 libtss-dev libtss2-dev libtss2-doc libtss2-esys0 libtss2-esys-3.0.2-0 libtss2-fapi1 libtss2-mu0 libtss2-policy0 libtss2-rc0 libtss2-sys1 libtss2-tcti-cmd0 libtss2-tcti-device0 libtss2-tcti-libtpms0 libtss2-tcti-mssim0 libtss2-tcti-pcap0 libtss2-tcti-spi-helper0 libtss2-tcti-swtpm0 libtss2-tcti-tabrmd-dev libtss2-tcti-tabrmd0 libtss2-tctidr0
+apt-get install -y build-essential make gcc libssl-dev
+# tss dependencies on ubuntu packages
+# apt-get install -y libtss0 libtss-dev libtss2-dev libtss2-doc libtss2-esys0 libtss2-esys-3.0.2-0 libtss2-fapi1 libtss2-mu0 libtss2-policy0 libtss2-rc0 libtss2-sys1 libtss2-tcti-cmd0 libtss2-tcti-device0 libtss2-tcti-libtpms0 libtss2-tcti-mssim0 libtss2-tcti-pcap0 libtss2-tcti-spi-helper0 libtss2-tcti-swtpm0 libtss2-tcti-tabrmd-dev libtss2-tcti-tabrmd0 libtss2-tctidr0
 
 echo -e "${BOLD}${BLUE}Downloading IBMTPM ......${NC}"
 wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O ${file_ibmtss}
