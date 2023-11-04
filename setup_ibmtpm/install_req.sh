@@ -4,9 +4,9 @@
 # Parameters
 download_dir="/home/user/Downloads"
 base_dir="/opt"
-ibmtss_ver="2.1.1"
-ibmtpm_ver="1682"
-ibmacs_ver="1658"
+ibmtss_ver="1.6.0" # latest: 2.1.1
+ibmtpm_ver="1637" # latest: 1682
+ibmacs_ver="1658" # latest: 1658
 # ==================================================================================================
 
 BOLD='\033[1m'
