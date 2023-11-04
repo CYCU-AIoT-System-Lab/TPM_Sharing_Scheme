@@ -38,7 +38,7 @@ echo -e "${BOLD}${BLUE}Setting path ......${NC}"
 if [ $TPMMode == 1 ]; then
     # for Pysical TPM
     export TPM_INTERFACE_TYPE=dev
-elif [ $TPMMode == 2]; then
+elif [ $TPMMode == 2 ]; then
     # for Software TPM
     export TPM_INTERFACE_TYPE=socsim
 else 
