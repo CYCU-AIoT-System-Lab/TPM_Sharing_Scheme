@@ -147,7 +147,7 @@ install_ibmswtpm () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMTPM Complete${NC}\n====================================================\n"
 }
 
-# Only need to setup once
+# Only need to setup once (can re-run)
 setup_ibmacs_env () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS Environment${NC}\n====================================================\n"
 
