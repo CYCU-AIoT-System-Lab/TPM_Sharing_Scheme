@@ -55,4 +55,4 @@ tar -zxvf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
 tar -zxvf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
 tar -zxvf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 
-echo -e "\n====================================================\nInstalling IBMTPM Complete\n====================================================\n"
+echo -e "\n====================================================\n${GREEN}Installing IBMTPM Complete${NC}\n====================================================\n"
