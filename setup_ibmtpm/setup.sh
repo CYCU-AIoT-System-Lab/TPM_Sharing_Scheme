@@ -44,13 +44,6 @@ cp ./*.sh "${download_dir}"
 # bash "${download_dir}/install_ibmswtpm.sh"
 # bash "${download_dir}/install_ibmacs.sh"
 
-install_req
-install_ibmtpmtss
-install_ibmswtpm
-install_ibmacs
-
-echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
-
 install_req () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements${NC}\n====================================================\n"
 
@@ -231,3 +224,10 @@ install_ibmacs () {
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS Complete${NC}\n====================================================\n"
 }
+
+install_req
+install_ibmtpmtss
+install_ibmswtpm
+install_ibmacs
+
+echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
