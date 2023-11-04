@@ -93,12 +93,11 @@ config_nvim () {
 
     echo -e "${BOLD}${BLUE}Configuring neovim ......${NC}"
     mkdir "${nvim_dir}"
-    wget "${nvim_config_url}" -O "${nvim_dir}/init.vim"
+    wget "${nvim_config_url}" -O "${nvim_dir}/init.nvim"
 
     echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
     # Ref: https://github.com/junegunn/vim-plug/issues/225
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
     apt-get install -y nodejs-dev node-gyp libssl1.0-dev
