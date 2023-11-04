@@ -44,10 +44,9 @@ path_ibmacs="${base_dir}/ibmacs${ibmacs_ver}/"
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup${NC}\n====================================================\n"
 
-echo -e "${BOLD}${BLUE}Copying files to ${download_dir} ......${NC}"
-cp ./*.sh "${download_dir}"
-
 # Install requirements for development, building, and testing
+# Download ibmtss, ibmtpm, and ibmacs from sourceforge
+# Extract ibmtss, ibmtpm, and ibmacs
 # Only need to setup once (can re-run)
 install_req () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements${NC}\n====================================================\n"
@@ -64,20 +63,15 @@ install_req () {
     # tss dependencies on ubuntu packages
     # apt-get install -y libtss0 libtss-dev libtss2-dev libtss2-doc libtss2-esys0 libtss2-esys-3.0.2-0 libtss2-fapi1 libtss2-mu0 libtss2-policy0 libtss2-rc0 libtss2-sys1 libtss2-tcti-cmd0 libtss2-tcti-device0 libtss2-tcti-libtpms0 libtss2-tcti-mssim0 libtss2-tcti-pcap0 libtss2-tcti-spi-helper0 libtss2-tcti-swtpm0 libtss2-tcti-tabrmd-dev libtss2-tcti-tabrmd0 libtss2-tctidr0
 
-    echo -e "${BOLD}${BLUE}Downloading IBMTPM ......${NC}"
-    wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O ${file_ibmtss}
-    wget "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O ${file_ibmtpm}
-    wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O ${file_ibmacs}
-
     echo -e "${BOLD}${BLUE}Creating directories ......${NC}"
     mkdir "${path_ibmtss}"
     mkdir "${path_ibmtpm}"
     mkdir "${path_ibmacs}"
 
-    echo -e "${BOLD}${BLUE}Copying files to /opt ......${NC}"
-    cp ${file_ibmtss} ${path_ibmtss}
-    cp ${file_ibmtpm} ${path_ibmtpm}
-    cp ${file_ibmacs} ${path_ibmacs}
+    echo -e "${BOLD}${BLUE}Downloading IBMTPM ......${NC}"
+    wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
+    wget "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
+    wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
     echo -e "${BOLD}${BLUE}Extracting files ......${NC}"
     tar -zxvf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
