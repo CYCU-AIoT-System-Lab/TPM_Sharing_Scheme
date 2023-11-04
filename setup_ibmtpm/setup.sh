@@ -95,17 +95,16 @@ config_nvim () {
     mkdir "${nvim_dir}"
     wget "${nvim_config_url}" -O "${nvim_dir}/init.nvim"
 
-    echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
-    # Ref: https://github.com/junegunn/vim-plug/issues/225
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    # echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
+    # sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-    echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
-    apt-get install -y nodejs-dev node-gyp libssl1.0-dev
-    apt-get install -y nodejs npm
-    source ${bashrc_dir}
-    npm cache clean -f
-    npm install -g n
-    n stable
+    # echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
+    # apt-get install -y nodejs-dev node-gyp libssl1.0-dev
+    # apt-get install -y nodejs npm
+    # source ${bashrc_dir}
+    # npm cache clean -f
+    # npm install -g n
+    # n stable
     source ${bashrc_dir}
 
     # Commands to install plugins and coc extensions
