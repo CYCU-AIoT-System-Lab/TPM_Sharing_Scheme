@@ -39,18 +39,6 @@ echo -e "\n====================================================\n>>${BOLD}${GREE
 echo -e "${BOLD}${BLUE}Copying files to ${download_dir} ......${NC}"
 cp ./*.sh "${download_dir}"
 
-# echo -e "${BOLD}${BLUE}Changing permissions ......${NC}"
-# chmod +x "${download_dir}/install_req.sh"
-# chmod +x "${download_dir}/install_ibmtpmtss.sh"
-# chmod +x "${download_dir}/install_ibmswtpm.sh"
-# chmod +x "${download_dir}/install_ibmacs.sh"
-
-# echo -e "${BOLD}${BLUE}Installing IBMTPM ......${NC}"
-# bash "${download_dir}/install_req.sh"
-# bash "${download_dir}/install_ibmtpmtss.sh"
-# bash "${download_dir}/install_ibmswtpm.sh"
-# bash "${download_dir}/install_ibmacs.sh"
-
 install_req () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements${NC}\n====================================================\n"
 
