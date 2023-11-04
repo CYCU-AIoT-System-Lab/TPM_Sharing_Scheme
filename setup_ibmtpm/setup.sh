@@ -97,11 +97,9 @@ config_nvim () {
 
     echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
     # Ref: https://github.com/junegunn/vim-plug/issues/225
-    let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-    if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-    endif
 
     echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
     apt-get install -y nodejs npm
