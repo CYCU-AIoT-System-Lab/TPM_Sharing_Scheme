@@ -99,10 +99,11 @@ config_nvim () {
     # Ref: https://github.com/junegunn/vim-plug/issues/225
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 
     echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
+    apt-get install -y nodejs-dev node-gyp libssl1.0-dev
     apt-get install -y nodejs npm
+    source ${bashrc_dir}
     npm cache clean -f
     npm install -g n
     n stable
