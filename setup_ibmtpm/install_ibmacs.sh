@@ -8,7 +8,7 @@ html_dir="/var/www/html/acs"
 c_src_dir="/usr/include/json-c"
 c_link_dir="/usr/include/json"
 acsMode=1 # 1: Server, 2: Client
-verMode=1 # 1: TPM 2.0, 2: TPM 1.2 & 2.0
+verMode=2 # 1: TPM 2.0, 2: TPM 1.2 & 2.0
 # ==================================================================================================
 
 BOLD='\033[1m'

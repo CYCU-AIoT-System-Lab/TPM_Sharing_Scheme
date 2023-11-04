@@ -4,7 +4,7 @@
 # Parameters
 base_dir="/opt"
 ibmtss_ver="2.1.1"
-verMode=1 # 1: TPM 2.0, 2: TPM 1.2 & 2.0
+verMode=2 # 1: TPM 2.0, 2: TPM 1.2 & 2.0
 TPMMode=2 # 1: Pysical TPM, 2: Software TPM
 # ==================================================================================================
 
