@@ -39,6 +39,8 @@ echo -e "\n====================================================\n>>${BOLD}${GREE
 echo -e "${BOLD}${BLUE}Copying files to ${download_dir} ......${NC}"
 cp ./*.sh "${download_dir}"
 
+# Install requirements for development, building, and testing
+# Only need to setup once (can re-run)
 install_req () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements${NC}\n====================================================\n"
 
@@ -77,8 +79,33 @@ install_req () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements Complete${NC}\n====================================================\n"
 }
 
-install_ibmtpmtss () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMTSS${NC}\n====================================================\n"
+# Set environment variables for ibmtss, and create symbolic link to ibmtss
+# Only need to setup once (can re-run)
+setup_ibmtpmtss_env () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting up IBMTSS Environment${NC}\n====================================================\n"
+
+    echo -e "${BOLD}${BLUE}Setting path ......${NC}"
+    if [ $TPMMode == 1 ]; then
+        # for Pysical TPM
+        export TPM_INTERFACE_TYPE=dev
+    elif [ $TPMMode == 2 ]; then
+        # for Software TPM
+        export TPM_INTERFACE_TYPE=socsim
+    else 
+        echo -e "${BOLD}${RED}Invalid TPMMode${NC}"
+        exit 1
+    fi
+
+    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtss} ......${NC}"
+    ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting up IBMTSS Environment Complete${NC}\n====================================================\n"
+}
+
+# Compile ibmtss
+# Can be run multiple times for code adjustment
+compile_ibmtpmtss () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMTSS${NC}\n====================================================\n"
 
     echo -e "${BOLD}${BLUE}Cleaning up ......${NC}"
     if [ $verMode == 1 ]; then
@@ -112,26 +139,24 @@ install_ibmtpmtss () {
         exit 1
     fi
 
-    echo -e "${BOLD}${BLUE}Setting path ......${NC}"
-    if [ $TPMMode == 1 ]; then
-        # for Pysical TPM
-        export TPM_INTERFACE_TYPE=dev
-    elif [ $TPMMode == 2 ]; then
-        # for Software TPM
-        export TPM_INTERFACE_TYPE=socsim
-    else 
-        echo -e "${BOLD}${RED}Invalid TPMMode${NC}"
-        exit 1
-    fi
-
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtss} ......${NC}"
-    ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
-
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMTSS Complete${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMTSS Complete${NC}\n====================================================\n"
 }
 
-install_ibmswtpm () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMTPM${NC}\n====================================================\n"
+# Create symbolic link to ibmswtpm
+# Only need to setup once (can re-run)
+setup_ibmswtpm_env () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting up IBMSWTPM Environment${NC}\n====================================================\n"
+
+    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtpm} ......${NC}"
+    ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting up IBMSWTPM Environment Complete${NC}\n====================================================\n"
+}
+
+# Compile ibmswtpm
+# Can be run multiple times for code adjustment
+compile_ibmswtpm () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMTPM${NC}\n====================================================\n"
 
     echo -e "${BOLD}${BLUE}Cleaning up ......${NC}"
     cd "${path_ibmtpm}/src/"
@@ -141,15 +166,13 @@ install_ibmswtpm () {
     cd "${path_ibmtpm}/src/"
     make
 
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtpm} ......${NC}"
-    ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
-
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMTPM Complete${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMTPM Complete${NC}\n====================================================\n"
 }
 
+# Install requirements for ibmacs, create mysql database, set environment variables, link directories, and generate directory for webpage
 # Only need to setup once (can re-run)
 setup_ibmacs_env () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS Environment${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting Up IBMACS Environment${NC}\n====================================================\n"
 
     echo -e "${BOLD}${BLUE}Installing IBMACS dependencies ......${NC}"
     if [ $acsMode == 1 ]; then
@@ -204,12 +227,13 @@ setup_ibmacs_env () {
         exit 1
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS Environment Complete${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting Up IBMACS Environment Complete${NC}\n====================================================\n"
 }
 
+# Compile ibmacs
 # Can be run multiple times for code adjustment
 compile_ibmacs () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS${NC}\n====================================================\n"
 
     echo -e "${BOLD}${BLUE}Compiling IBMACS and setting include path ......${NC}"
     if [ $verMode == 1 ]; then
@@ -241,12 +265,16 @@ compile_ibmacs () {
         exit 1
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS Complete${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}\n====================================================\n"
 }
 
 install_req
-install_ibmtpmtss
-install_ibmswtpm
+
+setup_ibmtpmtss_env
+compile_ibmtpmtss
+
+setup_ibmswtpm_env
+compile_ibmswtpm
 
 setup_ibmacs_env
 compile_ibmacs
