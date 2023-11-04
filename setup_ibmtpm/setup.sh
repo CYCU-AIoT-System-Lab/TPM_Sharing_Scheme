@@ -21,7 +21,7 @@ verMode=2                                # 1: TPM 2.0, 2: TPM 1.2 & 2.0
 TPMMode=2                                # 1: Physical TPM, 2: Software TPM
 acsMode=1                                # 1: Server, 2: Client
 # Param - job
-install_req=0                            # 0: No, 1: Yes
+install_req=1                            # 0: No, 1: Yes
 config_nvim=1                            # 0: No, 1: Yes
 setup_ibmtpmtss_env=0                    # 0: No, 1: Yes
 compile_ibmtpmtss=0                      # 0: No, 1: Yes
@@ -97,7 +97,7 @@ config_nvim () {
 
     echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
     # Ref: https://github.com/junegunn/vim-plug/issues/225
-    curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
     echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
     apt-get install -y nodejs-dev node-gyp libssl1.0-dev
