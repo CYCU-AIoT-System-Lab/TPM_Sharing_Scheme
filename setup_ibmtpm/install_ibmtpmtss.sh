@@ -22,13 +22,13 @@ echo -e "${BOLD}${BLUE}Cleaning up ......${NC}"
 if [ $verMode == 1 ]; then
     # for TPM 2.0
     cd "${path_ibmtss}/utils/"
-    make -f clean
+    make -f makefiletpm20 clean
 elif [ $verMode == 2]; then
     # for TPM 1.2 & 2.0
     cd "${path_ibmtss}/utils/"
-    make -f clean
+    make -f makefiletpmc clean
     cd "${path_ibmtss}/utils12/"
-    make -f clean
+    make -f makefiletpmc clean
 else 
     echo -e "${BOLD}${RED}Invalid verMode${NC}"
     exit 1
