@@ -69,9 +69,9 @@ install_req () {
     # apt-get install -y libtss0 libtss-dev libtss2-dev libtss2-doc libtss2-esys0 libtss2-esys-3.0.2-0 libtss2-fapi1 libtss2-mu0 libtss2-policy0 libtss2-rc0 libtss2-sys1 libtss2-tcti-cmd0 libtss2-tcti-device0 libtss2-tcti-libtpms0 libtss2-tcti-mssim0 libtss2-tcti-pcap0 libtss2-tcti-spi-helper0 libtss2-tcti-swtpm0 libtss2-tcti-tabrmd-dev libtss2-tcti-tabrmd0 libtss2-tctidr0
 
     echo -e "${BOLD}${BLUE}Creating directories ......${NC}"
-    mkdir -p "${path_ibmtss}"
-    mkdir -p "${path_ibmtpm}"
-    mkdir -p "${path_ibmacs}"
+    mkdir "${path_ibmtss}"
+    mkdir "${path_ibmtpm}"
+    mkdir "${path_ibmacs}"
 
     echo -e "${BOLD}${BLUE}Downloading IBMTPM ......${NC}"
     wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
@@ -92,7 +92,7 @@ config_nvim () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Configuring neovim${NC}\n====================================================\n"
 
     echo -e "${BOLD}${BLUE}Configuring neovim ......${NC}"
-    mkdir -p "${nvim_dir}"
+    mkdir "${nvim_dir}"
     wget "${nvim_config_url}" -O "${nvim_dir}/init.vim"
 
     echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
@@ -107,9 +107,6 @@ config_nvim () {
     npm install -g n
     n stable
     source ${bashrc_dir}
-
-    # Install plugins
-    call plug#begin('~/.vim/plugged')
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Configuring neovim Complete${NC}\n====================================================\n"
 }
