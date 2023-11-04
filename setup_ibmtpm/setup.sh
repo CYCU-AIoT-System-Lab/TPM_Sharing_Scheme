@@ -22,7 +22,7 @@ TPMMode=2                                # 1: Physical TPM, 2: Software TPM
 acsMode=1                                # 1: Server, 2: Client
 # Param - job
 install_req=1                            # 0: No, 1: Yes
-config_nvim=1                            # 0: No, 1: Yes
+config_nvim=1                            # 0: No, 1: Yes (buggy)
 setup_ibmtpmtss_env=0                    # 0: No, 1: Yes
 compile_ibmtpmtss=0                      # 0: No, 1: Yes
 setup_ibmswtpm_env=0                     # 0: No, 1: Yes
