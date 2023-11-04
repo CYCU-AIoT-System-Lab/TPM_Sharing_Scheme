@@ -4,7 +4,11 @@
 # Parameters
 base_dir="/opt"
 ibmacs_ver="1658"
+html_dir="/var/www/html/acs"
+c_src_dir="/usr/include/json-c"
+c_link_dir="/usr/include/json"
 acsMode=1 # 1: Server, 2: Client
+verMode=1 # 1: TPM 2.0, 2: TPM 1.2 & 2.0
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -39,9 +43,48 @@ if [ $acsMode == 1 ]; then
     mysql -D tpm2 < "${path_ibmacs}/acs/dbinit.sql"
 fi
 
-echo -e "${BOLD}${BLUE}Setting path ......${NC}"
+echo -e "${BOLD}${BLUE}Setting include path ......${NC}"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
 echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmacs} ......${NC}"
 ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
+
+echo -e "${BOLD}${BLUE}Setting html directory ......${NC}"
+mkdir ${html_dir}
+chown root ${html_dir}
+chgrp root ${html_dir}
+chmod 777 ${html_dir}
+
+echo -e "${BOLD}${BLUE}Creating symbolic link to ${c_src_dir} ......${NC}"
+ln -s "${c_src_dir}" "${c_link_dir}"
+
+echo -e "${BOLD}${BLUE}Compiling IBMACS and setting include path ......${NC}"
+if [ $verMode == 1 ]; then
+    # for TPM 2.0
+    cd "${path_ibmacs}/acs/"
+    export CPATH="${path_ibmtss}/utils"
+    export LIBRARY_PATH="${path_ibmtss}/utils"
+    make clean
+    make
+elif [ $verMode == 2]; then
+    # for TPM 1.2 & 2.0
+    cd "${path_ibmacs}/acs/"
+    export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
+    export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
+    if [ $acsMode == 1 ]; then
+        # for Server
+        make -f makefiletpm12 clean
+        make -f makefiletpm12
+    elif [ $acsMode == 2 ]; then
+        # for Client
+        make -f makefiletpmc clean
+        make -f makefiletpmc
+    else 
+        echo -e "${BOLD}${RED}Invalid acsMode${NC}"
+        exit 1
+    fi
+else 
+    echo -e "${BOLD}${RED}Invalid verMode${NC}"
+    exit 1
+fi
