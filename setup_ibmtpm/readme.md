@@ -11,4 +11,11 @@ Scripts here is tested on Ubuntu 18.04 VM.
 5. In VM terminal, nevigate inside cloned folder with ```cd ./TPM_Sharing_Scheme```.
 6. In VM terminal, switch development branch with ```git checkout setup_ibmtpm```.
 7. In VM terminal, nevigate to installation scripts with ```cd ./src/setup_ibmtpm```.
-8. In VM terminal, install with ```sudo bash setup.sh```.
+8. In VM, check the start of each scripts to see whether settings are correct.
+9. In VM terminal, install with ```sudo bash setup.sh```.
+
+## Installing Tools
+
+1. Software stack: [IBMTSS](https://github.com/kgoldman/ibmtss)
+2. Emulated TPM: [SWTPM](https://github.com/stefanberger/swtpm)
+3. Demo example: [IBMACS](https://github.com/kgoldman/acs)
