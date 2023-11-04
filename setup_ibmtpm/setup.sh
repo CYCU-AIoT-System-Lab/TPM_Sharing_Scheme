@@ -97,8 +97,8 @@ config_nvim () {
 
     echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
     # Ref: https://github.com/junegunn/vim-plug/issues/225
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
     apt-get install -y nodejs-dev node-gyp libssl1.0-dev
@@ -108,6 +108,10 @@ config_nvim () {
     npm install -g n
     n stable
     source ${bashrc_dir}
+
+    # Commands to install plugins and coc extensions
+    # :PlugInstall
+    # :
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Configuring neovim Complete${NC}\n====================================================\n"
 }
