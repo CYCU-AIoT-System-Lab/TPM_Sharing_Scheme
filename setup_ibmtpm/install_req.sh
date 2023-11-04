@@ -3,6 +3,7 @@
 # ==================================================================================================
 # Parameters
 download_dir="/home/user/Downloads"
+base_dir="/opt"
 ibmtss_ver="2.1.1"
 ibmtpm_ver="1682"
 ibmacs_ver="1658"
@@ -22,9 +23,9 @@ fn_ibmacs="ibmacs${ibmacs_ver}.tar.gz"
 file_ibmtss="${download_dir}/${fn_ibmtss}"
 file_ibmtpm="${download_dir}/${fn_ibmtpm}"
 file_ibmacs="${download_dir}/${fn_ibmacs}"
-path_ibmtss="/opt/ibmtss${ibmtss_ver}/"
-path_ibmtpm="/opt/ibmtpm${ibmtpm_ver}/"
-path_ibmacs="/opt/ibmacs${ibmacs_ver}/"
+path_ibmtss="${base_dir}/ibmtss${ibmtss_ver}/"
+path_ibmtpm="${base_dir}/ibmtpm${ibmtpm_ver}/"
+path_ibmacs="${base_dir}/ibmacs${ibmacs_ver}/"
 
 echo -e "${BOLD}${BLUE}Updating system ......${NC}"
 apt-get update
