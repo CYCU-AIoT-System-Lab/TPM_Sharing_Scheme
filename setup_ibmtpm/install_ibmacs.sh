@@ -88,3 +88,5 @@ else
     echo -e "${BOLD}${RED}Invalid verMode${NC}"
     exit 1
 fi
+
+echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS Complete${NC}\n====================================================\n"

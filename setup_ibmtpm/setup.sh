@@ -11,7 +11,7 @@ RED='\033[31m'
 GREEN='\033[32m'
 NC='\033[0m'
 
-echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup IBMTPM${NC}\n====================================================\n"
+echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup${NC}\n====================================================\n"
 
 echo -e "${BOLD}${BLUE}Copying files to ${download_dir} ......${NC}"
 cp ./*.sh "${download_dir}"
@@ -28,4 +28,4 @@ bash "${download_dir}/install_ibmtpmtss.sh"
 bash "${download_dir}/install_ibmswtpm.sh"
 bash "${download_dir}/install_ibmacs.sh"
 
-echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup IBMTPM Complete${NC}\n====================================================\n"
+echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"

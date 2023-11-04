@@ -26,3 +26,5 @@ make
 
 echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtpm} ......${NC}"
 ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
+
+echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMTPM Complete${NC}\n====================================================\n"

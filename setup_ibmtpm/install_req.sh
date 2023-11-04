@@ -15,7 +15,7 @@ RED='\033[31m'
 GREEN='\033[32m'
 NC='\033[0m'
 
-echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMTPM${NC}\n====================================================\n"
+echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements${NC}\n====================================================\n"
 
 fn_ibmtss="ibmtss${ibmtss_ver}.tar.gz"
 fn_ibmtpm="ibmtpm${ibmtpm_ver}.tar.gz"
@@ -57,4 +57,4 @@ tar -zxvf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
 tar -zxvf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
 tar -zxvf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 
-echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMTPM Complete${NC}\n====================================================\n"
+echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements Complete${NC}\n====================================================\n"
