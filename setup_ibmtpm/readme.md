@@ -19,3 +19,7 @@ Scripts here is tested on Ubuntu 18.04 VM.
 1. Software stack: [IBMTSS](https://github.com/kgoldman/ibmtss)
 2. Emulated TPM: [SWTPM](https://github.com/stefanberger/swtpm)
 3. Demo example: [IBMACS](https://github.com/kgoldman/acs)
+
+## Related Sources
+
+1. [libtss packages in ubuntu](https://packages.ubuntu.com/search?keywords=libtss&searchon=names)
