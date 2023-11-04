@@ -14,7 +14,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-echo -e "\n====================================================\n${BOLD}${GREEN}Installing IBMTPM${NC}${NC}\n====================================================\n"
+echo -e "\n====================================================\n${BOLD}${GREEN}Installing IBMTPM${NC}\n====================================================\n"
 
 fn_ibmtss="ibmtss${ibmtss_ver}.tar.gz"
 fn_ibmtpm="ibmtpm${ibmtpm_ver}.tar.gz"
