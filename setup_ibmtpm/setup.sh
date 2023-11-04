@@ -147,8 +147,9 @@ install_ibmswtpm () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMTPM Complete${NC}\n====================================================\n"
 }
 
-install_ibmacs () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS${NC}\n====================================================\n"
+# Only need to setup once
+setup_ibmacs_env () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS Environment${NC}\n====================================================\n"
 
     echo -e "${BOLD}${BLUE}Installing IBMACS dependencies ......${NC}"
     if [ $acsMode == 1 ]; then
@@ -187,6 +188,29 @@ install_ibmacs () {
     echo -e "${BOLD}${BLUE}Creating symbolic link to ${c_src_dir} ......${NC}"
     ln -s "${c_src_dir}" "${c_link_dir}"
 
+    echo -e "${BOLD}${BLUE}Setting include path ......${NC}"
+    if [ $verMode == 1 ]; then
+        # for TPM 2.0
+        cd "${path_ibmacs}/acs/"
+        export CPATH="${path_ibmtss}/utils"
+        export LIBRARY_PATH="${path_ibmtss}/utils"
+    elif [ $verMode == 2 ]; then
+        # for TPM 1.2 & 2.0
+        cd "${path_ibmacs}/acs/"
+        export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
+        export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
+    else 
+        echo -e "${BOLD}${RED}Invalid verMode${NC}"
+        exit 1
+    fi
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS Environment Complete${NC}\n====================================================\n"
+}
+
+# Can be run multiple times for code adjustment
+compile_ibmacs () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing IBMACS${NC}\n====================================================\n"
+
     echo -e "${BOLD}${BLUE}Compiling IBMACS and setting include path ......${NC}"
     if [ $verMode == 1 ]; then
         # for TPM 2.0
@@ -223,6 +247,8 @@ install_ibmacs () {
 install_req
 install_ibmtpmtss
 install_ibmswtpm
-install_ibmacs
+
+setup_ibmacs_env
+compile_ibmacs
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
