@@ -8,16 +8,21 @@ base_dir="/opt"                          # default: /opt
 html_dir="/var/www/html/acs"             # default: /var/www/html/acs
 c_json_lib_dir="/usr/include/json-c"     # default: /usr/include/json-c
 c_json_lib_link_dir="/usr/include/json"  # default: /usr/include/json
+nvim_dir="/home/user/.config/nvim"       # default: /home/user/.config/nvim
+bashrc_dir="/home/user/.bashrc"          # default: /home/user/.bashrc
+# Param - url
+nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/wsl_init.vim"
 # Param - version
 ibmtss_ver="2.1.1"                       # latest: 2.1.1
 ibmtpm_ver="1682"                        # latest: 1682
 ibmacs_ver="1658"                        # latest: 1658
 # Param - mode
 verMode=2                                # 1: TPM 2.0, 2: TPM 1.2 & 2.0
-TPMMode=2                                # 1: Pysical TPM, 2: Software TPM
+TPMMode=2                                # 1: Physical TPM, 2: Software TPM
 acsMode=1                                # 1: Server, 2: Client
 # Param - job
 install_req=0                            # 0: No, 1: Yes
+config_nvim=1                            # 0: No, 1: Yes
 setup_ibmtpmtss_env=0                    # 0: No, 1: Yes
 compile_ibmtpmtss=0                      # 0: No, 1: Yes
 setup_ibmswtpm_env=0                     # 0: No, 1: Yes
@@ -64,9 +69,9 @@ install_req () {
     # apt-get install -y libtss0 libtss-dev libtss2-dev libtss2-doc libtss2-esys0 libtss2-esys-3.0.2-0 libtss2-fapi1 libtss2-mu0 libtss2-policy0 libtss2-rc0 libtss2-sys1 libtss2-tcti-cmd0 libtss2-tcti-device0 libtss2-tcti-libtpms0 libtss2-tcti-mssim0 libtss2-tcti-pcap0 libtss2-tcti-spi-helper0 libtss2-tcti-swtpm0 libtss2-tcti-tabrmd-dev libtss2-tcti-tabrmd0 libtss2-tctidr0
 
     echo -e "${BOLD}${BLUE}Creating directories ......${NC}"
-    mkdir "${path_ibmtss}"
-    mkdir "${path_ibmtpm}"
-    mkdir "${path_ibmacs}"
+    mkdir -p "${path_ibmtss}"
+    mkdir -p "${path_ibmtpm}"
+    mkdir -p "${path_ibmacs}"
 
     echo -e "${BOLD}${BLUE}Downloading IBMTPM ......${NC}"
     wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
@@ -79,6 +84,36 @@ install_req () {
     tar -zxvf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements Complete${NC}\n====================================================\n"
+}
+
+# Configure neovim
+# Only need to setup once (can re-run)
+config_nvim () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Configuring neovim${NC}\n====================================================\n"
+
+    echo -e "${BOLD}${BLUE}Configuring neovim ......${NC}"
+    mkdir -p "${nvim_dir}"
+    wget "${nvim_config_url}" -O "${nvim_dir}/init.vim"
+
+    echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
+    # Ref: https://github.com/junegunn/vim-plug/issues/225
+    let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+    if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
+
+    echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
+    apt-get install -y nodejs npm
+    npm cache clean -f
+    npm install -g n
+    n stable
+    source ${bashrc_dir}
+
+    # Install plugins
+    call plug#begin('~/.vim/plugged')
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Configuring neovim Complete${NC}\n====================================================\n"
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
@@ -271,6 +306,8 @@ compile_ibmacs () {
 }
 
 if [ $install_req == 1 ]; then install_req; fi
+
+if [ $config_nvim == 1 ]; then config_nvim; fi
 
 if [ $setup_ibmtpmtss_env == 1 ]; then setup_ibmtpmtss_env; fi
 if [ $compile_ibmtpmtss == 1 ]; then compile_ibmtpmtss; fi
