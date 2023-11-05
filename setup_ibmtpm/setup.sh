@@ -100,7 +100,7 @@ config_nvim () {
 
     echo -e "${BOLD}${BLUE}Configuring neovim ......${NC}"
     mkdir "${nvim_dir}"
-    wget "${nvim_config_url}" -O "${nvim_dir}/init.nvim"
+    wget "${nvim_config_url}" -O "${nvim_dir}/init.vim"
 
     # echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
     # sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
