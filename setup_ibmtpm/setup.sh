@@ -11,8 +11,6 @@ c_json_lib_link_dir="/usr/include/json"                      # default: /usr/inc
 nvim_dir="/home/user/.config/nvim"                           # default: /home/user/.config/nvim
 bashrc_dir="/home/user/.bashrc"                              # default: /home/user/.bashrc
 tpm_data_dir="/home/user/tpm2"                               # default: /home/user/tpm2
-acs_demo_server_log_dir="/opt/ibmacs/acs/serverenroll.log4j" # default: /opt/ibmacs/acs/serverenroll.log4j
-acs_demo_client_log_dir="/opt/ibmacs/acs/clientenroll.log4j" # default: /opt/ibmacs/acs/clientenroll.log4j
 # Param - filename
 RSAEK_cert="cakey.pem"                   # default: cakey.pem
 ECCEK_cert="cakeyecc.pem"                # default: cakeyecc.pem
@@ -61,7 +59,8 @@ generate_EK=$default_job_1               # 0: No, 1: Yes  # default: 1
 retrieve_hardware_NV=$default_job_0      # 0: No, 1: Yes  # default: 0 (not implemented)
 set_acs_sql_setting=$default_job_0       # 0: No, 1: Yes  # default: 0
 active_ACS_Demo_Server=$default_job_1    # 0: No, 1: Yes  # default: 1
-active_ADC_Demo_Client=$default_job_1    # 0: No, 1: Yes  # default: 1
+active_ACS_Demo_Client=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't enroll)
+active_ACS_Demo_verify=$default_job_1    # 0: No, 1: Yes  # default: 1
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -89,6 +88,13 @@ path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
 path_NV="${sym_link_ibmtpm}/src/NVChip"
 tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
 acs_demo_url="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
+acs_demo_server_log_dir="${sym_link_ibmacs}/serverenroll.log4j"
+acs_demo_client_log_dir="${sym_link_ibmacs}/clientenroll.log4j"
+swtpm_bios_log_dir="${sym_link_ibmtss}/utils/tpm2bios.log"
+acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmtss}/utils/b.log4j"
+ima_sig_log_dir="${sym_link_ibmtss}/utils/imasig.log4j"
+acs_demo_verify_imasig_log_dir="${sym_link_ibmtss}/utils/i.log4j"
+acs_demo_verify_client_log_dir="${sym_link_ibmtss}/utils/client.log4j"
 
 # Check if running as root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
@@ -499,7 +505,7 @@ active_ACS_Demo_Server () {
 
 # Active ACS Demo Client
 # Can be run multiple times
-active_ADC_Demo_Client () {
+active_ACS_Demo_Client () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo${NC}\n====================================================\n"
 
     cd "${path_ibmacs}/acs"
@@ -511,6 +517,39 @@ active_ADC_Demo_Client () {
         ./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem >| ${acs_demo_client_log_dir}
     else 
         echo -e "${BOLD}${RED}Invalid acsClientMode${NC}"
+        exit 1
+    fi
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
+}
+
+# Active ACS Demo verify
+# Can be run multiple times
+active_ACS_Demo_verify () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo${NC}\n====================================================\n"
+
+    if [ $TPMMode == 1 ]; then
+        # for Pysical TPM
+        echo -e "${BOLD}${BLUE}Ignore when working with Physical TPM${NC}"
+    elif [ $TPMMode == 2 ]; then
+        # for Software TPM
+        cd "${path_ibmtss}/utils/"
+        echo -e "${BOLD}${BLUE}Checking TPM2BIOS.LOG ......${NC}"
+        ${path_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -> >| ${acs_demo_verify_tpm2bios_log_dir}
+        echo -e "${BOLD}${BLUE}Checking IMASIG.LOG ......${NC}"
+        ${path_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -tpm -> >| ${acs_demo_verify_imasig_log_dir}
+        if [ $acsClientMode == 1 ]; then
+            # for Local
+            ${path_ibmtss}/utils/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v >| ${acs_demo_verify_client_log_dir}
+        elif [ $acsClientMode == 2 ]; then
+            # for Remote
+            ${path_ibmtss}/utils/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip} >| ${acs_demo_verify_client_log_dir}
+        else 
+            echo -e "${BOLD}${RED}Invalid acsClientMode${NC}"
+            exit 1
+        fi
+    else 
+        echo -e "${BOLD}${RED}Invalid TPMMode${NC}"
         exit 1
     fi
 
@@ -533,6 +572,7 @@ if [ $generate_EK            == 1 ]; then generate_EK;                 fi
 if [ $retrieve_hardware_NV   == 1 ]; then retrieve_hardware_NV;        fi
 if [ $set_acs_sql_setting    == 1 ]; then set_acs_sql_setting;         fi
 if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
-if [ $active_ADC_Demo_Client == 1 ]; then active_ADC_Demo_Client;      fi
+if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
+if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
