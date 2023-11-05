@@ -70,6 +70,9 @@ GREEN='\033[32m'
 ORANGE='\033[33m'
 NC='\033[0m'
 
+start_spacer="\n====================================================\n"
+end_spacer="\n===================================================="
+
 dn_ibmtss="ibmtss"
 dn_ibmtpm="ibmtpm"
 dn_ibmacs="ibmacs"
@@ -103,14 +106,14 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
 fi
 
 
-echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup${NC}\n====================================================\n"
+echo -e "${start_spacer}>>${BOLD}${GREEN}Setup${NC}${end_spacer}"
 
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
 # Extract ibmtss, ibmtpm, and ibmacs
 # Only need to setup once (can re-run)
 install_req () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Installing requirements${NC}\n====================================================\n"
 
     echo -e "${BOLD}${BLUE}Updating system ......${NC}"
     apt-get update
@@ -139,13 +142,13 @@ install_req () {
     tar -zxvf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
     tar -zxvf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Installing requirements Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Installing requirements Complete${NC}${end_spacer}"
 }
 
 # Configure neovim
 # Only need to setup once (can re-run)
 config_nvim () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Configuring neovim${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Configuring neovim${NC}${end_spacer}"
 
     echo -e "${BOLD}${BLUE}Configuring neovim ......${NC}"
     mkdir "${nvim_dir}"
@@ -167,14 +170,14 @@ config_nvim () {
     # :PlugInstall
     # :
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Configuring neovim Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Configuring neovim Complete${NC}${end_spacer}"
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
 # Can re-run to update environment variables to switch between physical TPM and software TPM
 # Only need to setup once (can re-run)
 setup_ibmtpmtss_env () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting up IBMTSS Environment${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMTSS Environment${NC}${end_spacer}"
 
     echo -e "${BOLD}${BLUE}Setting path ......${NC}"
     if [ $TPMMode == 1 ]; then
@@ -192,13 +195,13 @@ setup_ibmtpmtss_env () {
     echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtss} ......${NC}"
     ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting up IBMTSS Environment Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMTSS Environment Complete${NC}${end_spacer}"
 }
 
 # Compile ibmtss
 # Can be run multiple times for code adjustment
 compile_ibmtpmtss () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMTSS${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTSS${NC}${end_spacer}"
 
     echo -e "${BOLD}${BLUE}Cleaning up ......${NC}"
     if [ $verMode == 1 ]; then
@@ -232,24 +235,24 @@ compile_ibmtpmtss () {
         exit 1
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMTSS Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTSS Complete${NC}${end_spacer}"
 }
 
 # Create symbolic link to ibmswtpm
 # Only need to setup once (can re-run)
 setup_ibmswtpm_env () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting up IBMSWTPM Environment${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMSWTPM Environment${NC}${end_spacer}"
 
     echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtpm} ......${NC}"
     ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting up IBMSWTPM Environment Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMSWTPM Environment Complete${NC}${end_spacer}"
 }
 
 # Compile ibmswtpm
 # Can be run multiple times for code adjustment
 compile_ibmswtpm () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMTPM${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTPM${NC}${end_spacer}"
 
     echo -e "${BOLD}${BLUE}Cleaning up ......${NC}"
     cd "${path_ibmtpm}/src/"
@@ -259,13 +262,13 @@ compile_ibmswtpm () {
     cd "${path_ibmtpm}/src/"
     make
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMTPM Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTPM Complete${NC}${end_spacer}"
 }
 
 # Install requirements for ibmacs, create mysql database, set environment variables, link directories, and generate directory for webpage
 # Only need to setup once (can re-run)
 setup_ibmacs_env () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting Up IBMACS Environment${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting Up IBMACS Environment${NC}${end_spacer}"
 
     echo -e "${BOLD}${BLUE}Installing IBMACS dependencies ......${NC}"
     if [ $acsMode == 1 ]; then
@@ -320,13 +323,13 @@ setup_ibmacs_env () {
         exit 1
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting Up IBMACS Environment Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting Up IBMACS Environment Complete${NC}${end_spacer}"
 }
 
 # Compile ibmacs
 # Can be run multiple times for code adjustment
 compile_ibmacs () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMACS${NC}${end_spacer}"
 
     echo -e "${BOLD}${BLUE}Compiling IBMACS and setting include path ......${NC}"
     if [ $verMode == 1 ]; then
@@ -360,26 +363,26 @@ compile_ibmacs () {
         exit 1
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}${end_spacer}"
 }
 
 # Open demo webpage with firefox
 # Can be run multiple times
 open_demo_webpage () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Opening Demo Webpage${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Opening Demo Webpage${NC}${end_spacer}"
 
     echo -e "${BOLD}${BLUE}Opening demo webpage ......${NC}"
     # start firefox without root on new terminal
     command1="sudo -u ${user_name} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
     gnome-terminal -t "Demo Firefox Website" -- bash -c "${command1}; exec bash"
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}${end_spacer}"
 }
 
 # Generate CA certificate and key
 # Only need to setup once (can re-run)
 generate_CA () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating CA${NC}${end_spacer}"
 
     echo -e "${BOLD}${ORANGE}Function not implemented${NC}"
     echo -e "${BOLD}${ORANGE}Refer to ${sym_link_ibmacs}/README.txt line 171 for steps.${NC}"
@@ -388,13 +391,13 @@ generate_CA () {
     echo -e "${BOLD}${GREEN}Generated CAs in ${sym_link_ibmacs} ...... ${NC}"
     ls "${sym_link_ibmacs}/"*.pem
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating CA Complete${NC}${end_spacer}"
 }
 
 # Activate TPM Server in new terminal
 # Only need to setup once (can re-run)
 activate_TPM_server () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM${NC}${end_spacer}"
 
     # apply TPMMode for ibmtss
     setup_ibmtpmtss_env
@@ -404,26 +407,26 @@ activate_TPM_server () {
     command="echo \"starting TPM simulator (server)\"; ./tpm_server"
     gnome-terminal -t "TPM SERVER" --active -- bash -c "${command}; exec bash"
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM Complete${NC}${end_spacer}"
 }
 
 # Activate TPM Client in current terminal
 # Only need to setup once (can re-run)
 activate_TPM_client () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM${NC}${end_spacer}"
 
     echo -e "${BOLD}${ORANGE}Starting TPM simulator (client) on new temrinal ......${NC}"
     cd "${sym_link_ibmtss}/utils/"
     ./powerup
     ./startup
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM Complete${NC}${end_spacer}"
 }
 
 # Create EK certificate and key, activated TPM on new terminal
 # Only need to setup once (can re-run)
 generate_EK () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating EK${NC}${end_spacer}"
 
     activate_TPM_server
 
@@ -438,23 +441,23 @@ generate_EK () {
     echo -e "${BOLD}${ORANGE}Generating ECCEK and load into NV ......${NC}"
     ./createekcert -ecc nistp256 -cakey $ECCEK_cert -capwd rrrr -caalg ec -v
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating EK Complete${NC}${end_spacer}"
 }
 
 # Retrieve hardware NVChip
 # Only need to setup once (can re-run)
 retrieve_hardware_NV () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Retrieving Hardware NVChip${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Retrieving Hardware NVChip${NC}${end_spacer}"
 
     echo -e "${BOLD}${ORANGE}Not implemented${NC}"
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Retrieving Hardware NVChip Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Retrieving Hardware NVChip Complete${NC}${end_spacer}"
 }
 
 # Set ACS MYSQL setting
 # Only need to setup once (can re-run)
 set_acs_sql_setting () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting ACS MYSQL Setting${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting ACS MYSQL Setting${NC}${end_spacer}"
 
     echo -e "${BOLD}${ORANGE}Setting ACS MYSQL Setting ......${NC}"
     export ACS_SQL_USERID="${mysql_user}"
@@ -468,13 +471,13 @@ set_acs_sql_setting () {
         echo -e "${BOLD}${ORANGE}Not Forcing ACS MYSQL Setting ......${NC}"
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting ACS MYSQL Setting Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting ACS MYSQL Setting Complete${NC}${end_spacer}"
 }
 
 # Active ACS Demo Server
 # Can be run multiple times
 active_ACS_Demo_Server () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Server${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Server${NC}${end_spacer}"
 
     if [ $SCmachineMode == 1 ]; then
         echo -e "${BOLD}${BLUE}Activating ACS Demo on same machine ......${NC}"
@@ -500,13 +503,13 @@ active_ACS_Demo_Server () {
     command="cd ${path_ibmacs}/acs; ./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
     gnome-terminal -t "ACS SERVER" --active -- bash -c "${command}; exec bash"
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Server Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Server Complete${NC}${end_spacer}"
 }
 
 # Active ACS Demo Client
 # Can be run multiple times
 active_ACS_Demo_Client () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Client${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Client${NC}${end_spacer}"
 
     cd "${path_ibmacs}/acs"
     if [ $acsClientMode == 1 ]; then
@@ -520,13 +523,13 @@ active_ACS_Demo_Client () {
         exit 1
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Client Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Client Complete${NC}${end_spacer}"
 }
 
 # Active ACS Demo verify
 # Can be run multiple times
 active_ACS_Demo_verify () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Verifying ACS Demo${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Verifying ACS Demo${NC}${end_spacer}"
 
     if [ $TPMMode == 1 ]; then
         # for Pysical TPM
@@ -555,7 +558,7 @@ active_ACS_Demo_verify () {
         exit 1
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Verifying ACS Demo Complete${NC}\n====================================================\n"
+    echo -e "${start_spacer}>>${BOLD}${GREEN}Verifying ACS Demo Complete${NC}${end_spacer}"
 }
 
 if [ $install_req            == 1 ]; then install_req;                 fi
@@ -577,4 +580,4 @@ if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 
-echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
+echo -e "${start_spacer}>>${BOLD}${GREEN}Setup Complete${NC}${end_spacer}"
