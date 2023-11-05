@@ -37,7 +37,8 @@ setup_ibmacs_env=0                       # 0: No, 1: Yes  # default: 1
 compile_ibmacs=0                         # 0: No, 1: Yes  # default: 1
 open_demo_webpage=0                      # 0: No, 1: Yes  # default: 1
 generate_CA=0                            # 0: No, 1: Yes  # default: 0
-generate_EK=1                              # 0: No, 1: Yes  # default: 1
+generate_EK=0                            # 0: No, 1: Yes  # default: 1
+retrieve_hardware_NV=1                   # 0: No, 1: Yes  # default: 0
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -342,7 +343,7 @@ open_demo_webpage () {
 
 # Generate CA certificate and key
 # Only need to setup once (can re-run)
-gen_CA () {
+generate_CA () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA${NC}\n====================================================\n"
 
     echo -e "${BOLD}${ORANGE}Function not implemented${NC}"
@@ -357,7 +358,7 @@ gen_CA () {
 
 # Create EK certificate and key
 # Only need to setup once (can re-run)
-gen_EK () {
+generate_EK () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK${NC}\n====================================================\n"
 
     echo -e "${BOLD}${ORANGE}Starting TPM simulator (server) on new temrinal ......${NC}"
@@ -382,6 +383,16 @@ gen_EK () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK Complete${NC}\n====================================================\n"
 }
 
+# Retrieve hardware NVChip
+# Only need to setup once (can re-run)
+retrieve_hardware_NV () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Retrieving Hardware NVChip${NC}\n====================================================\n"
+
+    echo -e "${BOLD}${ORANGE}Not implemented${NC}"
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Retrieving Hardware NVChip Complete${NC}\n====================================================\n"
+}
+
 if [ $install_req == 1 ]; then install_req; fi
 if [ $config_nvim == 1 ]; then config_nvim; fi
 if [ $setup_ibmtpmtss_env == 1 ]; then setup_ibmtpmtss_env; fi
@@ -391,7 +402,8 @@ if [ $compile_ibmswtpm == 1 ]; then compile_ibmswtpm; fi
 if [ $setup_ibmacs_env == 1 ]; then setup_ibmacs_env; fi
 if [ $compile_ibmacs == 1 ]; then compile_ibmacs; fi
 if [ $open_demo_webpage == 1 ]; then open_demo_webpage; fi
-if [ $generate_CA == 1 ]; then gen_CA; fi
-if [ $generate_EK == 1 ]; then gen_EK; fi
+if [ $generate_CA == 1 ]; then generate_CA; fi
+if [ $generate_EK == 1 ]; then generate_EK; fi
+if [ $retrieve_hardware_NV == 1 ]; then retrieve_hardware_NV; fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
