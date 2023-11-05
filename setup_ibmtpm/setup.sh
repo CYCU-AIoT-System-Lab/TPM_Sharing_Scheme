@@ -90,11 +90,11 @@ tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
 acs_demo_url="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
 acs_demo_server_log_dir="${sym_link_ibmacs}/serverenroll.log4j"
 acs_demo_client_log_dir="${sym_link_ibmacs}/clientenroll.log4j"
-swtpm_bios_log_dir="${sym_link_ibmtss}/utils/tpm2bios.log"
-acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmtss}/utils/b.log4j"
-ima_sig_log_dir="${sym_link_ibmtss}/utils/imasig.log4j"
-acs_demo_verify_imasig_log_dir="${sym_link_ibmtss}/utils/i.log4j"
-acs_demo_verify_client_log_dir="${sym_link_ibmtss}/utils/client.log4j"
+swtpm_bios_log_dir="${sym_link_ibmacs}/utils/tpm2bios.log"
+acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmacs}/utils/b.log4j"
+ima_sig_log_dir="${sym_link_ibmacs}/utils/imasig.log4j"
+acs_demo_verify_imasig_log_dir="${sym_link_ibmacs}/utils/i.log4j"
+acs_demo_verify_client_log_dir="${sym_link_ibmacs}/utils/client.log4j"
 
 # Check if running as root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
@@ -474,7 +474,7 @@ set_acs_sql_setting () {
 # Active ACS Demo Server
 # Can be run multiple times
 active_ACS_Demo_Server () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Server${NC}\n====================================================\n"
 
     if [ $SCmachineMode == 1 ]; then
         echo -e "${BOLD}${BLUE}Activating ACS Demo on same machine ......${NC}"
@@ -500,13 +500,13 @@ active_ACS_Demo_Server () {
     command="cd ${path_ibmacs}/acs; ./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
     gnome-terminal -t "ACS SERVER" --active -- bash -c "${command}; exec bash"
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Server Complete${NC}\n====================================================\n"
 }
 
 # Active ACS Demo Client
 # Can be run multiple times
 active_ACS_Demo_Client () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Client${NC}\n====================================================\n"
 
     cd "${path_ibmacs}/acs"
     if [ $acsClientMode == 1 ]; then
@@ -520,13 +520,13 @@ active_ACS_Demo_Client () {
         exit 1
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Client Complete${NC}\n====================================================\n"
 }
 
 # Active ACS Demo verify
 # Can be run multiple times
 active_ACS_Demo_verify () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Verifying ACS Demo${NC}\n====================================================\n"
 
     if [ $TPMMode == 1 ]; then
         # for Pysical TPM
@@ -555,7 +555,7 @@ active_ACS_Demo_verify () {
         exit 1
     fi
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Verifying ACS Demo Complete${NC}\n====================================================\n"
 }
 
 if [ $install_req            == 1 ]; then install_req;                 fi
