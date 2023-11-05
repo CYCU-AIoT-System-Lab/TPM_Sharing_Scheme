@@ -31,7 +31,8 @@ compile_ibmtpmtss=0                      # 0: No, 1: Yes
 setup_ibmswtpm_env=0                     # 0: No, 1: Yes
 compile_ibmswtpm=0                       # 0: No, 1: Yes
 setup_ibmacs_env=0                       # 0: No, 1: Yes
-compile_ibmacs=1                         # 0: No, 1: Yes
+compile_ibmacs=0                         # 0: No, 1: Yes
+open_demo_webpage=1                      # 0: No, 1: Yes
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -312,11 +313,19 @@ compile_ibmacs () {
         exit 1
     fi
 
-    echo -e "${BOLD}${BLUE}Setting demo webpage ......${NC}"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}\n====================================================\n"
+}
+
+# Open demo webpage with firefox
+# Can be run multiple times
+open_demo_webpage () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Opening Demo Webpage${NC}\n====================================================\n"
+
+    echo -e "${BOLD}${BLUE}Opening demo webpage ......${NC}"
     # start firefox without root
     sudo -u ${user_name} bash -c "firefox ${acs_demo_url} &"
 
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}\n====================================================\n"
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}\n====================================================\n"
 }
 
 if [ $install_req == 1 ]; then install_req; fi
@@ -331,5 +340,7 @@ if [ $compile_ibmswtpm == 1 ]; then compile_ibmswtpm; fi
 
 if [ $setup_ibmacs_env == 1 ]; then setup_ibmacs_env; fi
 if [ $compile_ibmacs == 1 ]; then compile_ibmacs; fi
+
+if [ $open_demo_webpage == 1 ]; then open_demo_webpage; fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
