@@ -18,6 +18,17 @@ Currently, TPM2.0 only mode can't support ACS.
 10. In VM terminal, login as root with ```sudo -s```.
 11. In VM terminal, install with ```source setup.sh```.
 
+```
+sudo apt-get install git
+cd ~
+git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git
+cd ~/TPM_Sharing_Scheme
+git checkout setup_ibmtpm
+cd ./src/setup_ibmtpm
+sudo -s
+source setup.sh
+```
+
 ## Installing Tools
 
 1. Software stack: [IBMTSS](https://github.com/kgoldman/ibmtss)
