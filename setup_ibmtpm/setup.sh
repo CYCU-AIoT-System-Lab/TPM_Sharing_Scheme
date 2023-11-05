@@ -329,9 +329,9 @@ open_demo_webpage () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Opening Demo Webpage${NC}\n====================================================\n"
 
     echo -e "${BOLD}${BLUE}Opening demo webpage ......${NC}"
-    # start firefox without root
+    # start firefox without root on new terminal
     command="sudo -u ${user_name} bash -c \"firefox ${acs_demo_url} &\""
-    gnome-terminal --tab -- bash -c "${command}; exec bash"
+    gnome-terminal -- bash -c "${command}; exec bash"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}\n====================================================\n"
 }
