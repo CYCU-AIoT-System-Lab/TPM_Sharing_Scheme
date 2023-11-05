@@ -457,20 +457,20 @@ active_ACS_Demo () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
 }
 
-if [ $install_req == 1          ]; then install_req; fi
-if [ $config_nvim == 1          ]; then config_nvim; fi
-if [ $setup_ibmtpmtss_env == 1  ]; then setup_ibmtpmtss_env; fi
-if [ $compile_ibmtpmtss == 1    ]; then compile_ibmtpmtss; fi
-if [ $setup_ibmswtpm_env == 1   ]; then setup_ibmswtpm_env; fi
-if [ $compile_ibmswtpm == 1     ]; then compile_ibmswtpm; fi
-if [ $setup_ibmacs_env == 1     ]; then setup_ibmacs_env; fi
-if [ $compile_ibmacs == 1       ]; then compile_ibmacs; fi
-if [ $open_demo_webpage == 1    ]; then open_demo_webpage; fi
-if [ $generate_CA == 1          ]; then generate_CA; fi
-if [ $activate_TPM_server == 1  ]; then activate_TPM_server; fi
-if [ $activate_TPM_client == 1  ]; then activate_TPM_client; fi
-if [ $generate_EK == 1          ]; then generate_EK; fi
+if [ $install_req          == 1 ]; then install_req;          fi
+if [ $config_nvim          == 1 ]; then config_nvim;          fi
+if [ $setup_ibmtpmtss_env  == 1 ]; then setup_ibmtpmtss_env;  fi
+if [ $compile_ibmtpmtss    == 1 ]; then compile_ibmtpmtss;    fi
+if [ $setup_ibmswtpm_env   == 1 ]; then setup_ibmswtpm_env;   fi
+if [ $compile_ibmswtpm     == 1 ]; then compile_ibmswtpm;     fi
+if [ $setup_ibmacs_env     == 1 ]; then setup_ibmacs_env;     fi
+if [ $compile_ibmacs       == 1 ]; then compile_ibmacs;       fi
+if [ $open_demo_webpage    == 1 ]; then open_demo_webpage;    fi
+if [ $generate_CA          == 1 ]; then generate_CA;          fi
+if [ $activate_TPM_server  == 1 ]; then activate_TPM_server;  fi
+if [ $activate_TPM_client  == 1 ]; then activate_TPM_client;  fi
+if [ $generate_EK          == 1 ]; then generate_EK;          fi
 if [ $retrieve_hardware_NV == 1 ]; then retrieve_hardware_NV; fi
-if [ $active_ACS_Demo == 1      ]; then active_ACS_Demo; fi
+if [ $active_ACS_Demo      == 1 ]; then active_ACS_Demo;      fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
