@@ -3,22 +3,25 @@
 # ==================================================================================================
 # Parameters
 # Param - path
-download_dir="/home/user/Downloads"      # default: /home/user/Downloads
-base_dir="/opt"                          # default: /opt
-html_dir="/var/www/html/acs"             # default: /var/www/html/acs
-c_json_lib_dir="/usr/include/json-c"     # default: /usr/include/json-c
-c_json_lib_link_dir="/usr/include/json"  # default: /usr/include/json
-nvim_dir="/home/user/.config/nvim"       # default: /home/user/.config/nvim
-bashrc_dir="/home/user/.bashrc"          # default: /home/user/.bashrc
-tpm_data_dir="/home/user/tpm2"           # default: /home/user/tpm2
+download_dir="/home/user/Downloads"                          # default: /home/user/Downloads
+base_dir="/opt"                                              # default: /opt
+html_dir="/var/www/html/acs"                                 # default: /var/www/html/acs
+c_json_lib_dir="/usr/include/json-c"                         # default: /usr/include/json-c
+c_json_lib_link_dir="/usr/include/json"                      # default: /usr/include/json
+nvim_dir="/home/user/.config/nvim"                           # default: /home/user/.config/nvim
+bashrc_dir="/home/user/.bashrc"                              # default: /home/user/.bashrc
+tpm_data_dir="/home/user/tpm2"                               # default: /home/user/tpm2
+acs_demo_server_log_dir="/opt/ibmacs/acs/serverenroll.log4j" # default: /opt/ibmacs/acs/serverenroll.log4j
+acs_demo_client_log_dir="/opt/ibmacs/acs/clientenroll.log4j" # default: /opt/ibmacs/acs/clientenroll.log4j
 # Param - filename
 RSAEK_cert="cakey.pem"                   # default: cakey.pem
 ECCEK_cert="cakeyecc.pem"                # default: cakeyecc.pem
 # Param - url
 repo_url="https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/setup_ibmtpm/setup_ibmtpm"
 nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
-acs_demo_ip="localhost"                  # default: localhost
-acs_demo_port="80"                       # default: 80
+acs_demo_server_ip="localhost"           # default: localhost
+acs_demo_server_port="80"                # default: 80
+acs_demo_client_ip="localhost"           # default: localhost
 # Param - user account
 user_name="user"                         # default: user
 # Param - version
@@ -33,7 +36,8 @@ verMode=2                                # 1: TPM 2.0,      2: TPM 1.2 & 2.0    
 TPMMode=2                                # 1: Physical TPM, 2: Software TPM       # default: 2
 acsMode=1                                # 1: Server,       2: Client             # default: 1
 SCmachineMode=1                          # 1: Same machine, 2: Different machine  # default: 1 (server and client)
-force_acs_sql_setting=1                  # 0: No,           1: Yes                # default: 0
+force_acs_sql_setting=0                  # 0: No,           1: Yes                # default: 0 (not tested)
+acsClientMode=1                          # 1: Local,        2: Remote             # default: 1
 # Param - mysql
 mysql_user="tpm2ACS"                     # default: tpm2ACS
 mysql_password="123456"                  # default: 123456
@@ -56,7 +60,8 @@ activate_TPM_client=$default_job_0       # 0: No, 1: Yes  # default: 0
 generate_EK=$default_job_1               # 0: No, 1: Yes  # default: 1
 retrieve_hardware_NV=$default_job_0      # 0: No, 1: Yes  # default: 0 (not implemented)
 set_acs_sql_setting=$default_job_0       # 0: No, 1: Yes  # default: 0
-active_ACS_Demo=$default_job_1           # 0: No, 1: Yes  # default: 1
+active_ACS_Demo_Server=$default_job_1    # 0: No, 1: Yes  # default: 1
+active_ADC_Demo_Client=$default_job_1    # 0: No, 1: Yes  # default: 1
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -83,7 +88,7 @@ path_ibmtpm="${sym_link_ibmtpm}${ibmtpm_ver}"
 path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
 path_NV="${sym_link_ibmtpm}/src/NVChip"
 tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
-acs_demo_url="${acs_demo_ip}:${acs_demo_port}/acs"
+acs_demo_url="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
 
 # Check if running as root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
@@ -272,8 +277,8 @@ setup_ibmacs_env () {
         echo -e "${BOLD}${BLUE}Setting database ......${NC}"
         cd "${path_ibmacs}/acs/"
         mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
-        mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_ip}' IDENTIFIED BY '${mysql_password}';"
-        mysql -Bse "GRANT ALL PRIVILEGES ON ${mysql_database}.* TO '${mysql_user}'@'${acs_demo_ip}';"
+        mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_server_ip}' IDENTIFIED BY '${mysql_password}';"
+        mysql -Bse "GRANT ALL PRIVILEGES ON ${mysql_database}.* TO '${mysql_user}'@'${acs_demo_server_ip}';"
         mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
     fi
 
@@ -452,7 +457,7 @@ set_acs_sql_setting () {
     if [ $force_acs_sql_setting == 1 ]; then
         echo -e "${BOLD}${ORANGE}Forcing ACS MYSQL Setting ......${NC}"
         cp "${html_dir}/dbconnect.php" "${html_dir}/dbconnect.php.bak"
-        sed -i "s/\$connect = new mysqli(\$acs_sql_host, \$acs_sql_userid, \$acs_sql_password, \$acs_sql_database);/\$connect = new mysqli(${acs_demo_ip}, ${mysql_user}, ${mysql_password}, ${mysql_database});/g" "${html_dir}/dbconnect.php"
+        sed -i "s/\$connect = new mysqli(\$acs_sql_host, \$acs_sql_userid, \$acs_sql_password, \$acs_sql_database);/\$connect = new mysqli(${acs_demo_server_ip}, ${mysql_user}, ${mysql_password}, ${mysql_database});/g" "${html_dir}/dbconnect.php"
     else
         echo -e "${BOLD}${ORANGE}Not Forcing ACS MYSQL Setting ......${NC}"
     fi
@@ -460,9 +465,9 @@ set_acs_sql_setting () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting ACS MYSQL Setting Complete${NC}\n====================================================\n"
 }
 
-# Active ACS Demo
+# Active ACS Demo Server
 # Can be run multiple times
-active_ACS_Demo () {
+active_ACS_Demo_Server () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo${NC}\n====================================================\n"
 
     if [ $SCmachineMode == 1 ]; then
@@ -485,28 +490,49 @@ active_ACS_Demo () {
 
     set_acs_sql_setting
 
-    echo -e "${BOLD}${BLUE}Activating ACS Demo on new terminal ......${NC}"
-    command="cd ${path_ibmacs}/acs; ./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| serverenroll.log4j"
+    echo -e "${BOLD}${BLUE}Activating ACS Server Demo on new terminal ......${NC}"
+    command="cd ${path_ibmacs}/acs; ./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
     gnome-terminal -t "ACS SERVER" --active -- bash -c "${command}; exec bash"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
 }
 
-if [ $install_req          == 1 ]; then install_req;          fi
-if [ $config_nvim          == 1 ]; then config_nvim;          fi
-if [ $setup_ibmtpmtss_env  == 1 ]; then setup_ibmtpmtss_env;  fi
-if [ $compile_ibmtpmtss    == 1 ]; then compile_ibmtpmtss;    fi
-if [ $setup_ibmswtpm_env   == 1 ]; then setup_ibmswtpm_env;   fi
-if [ $compile_ibmswtpm     == 1 ]; then compile_ibmswtpm;     fi
-if [ $setup_ibmacs_env     == 1 ]; then setup_ibmacs_env;     fi
-if [ $compile_ibmacs       == 1 ]; then compile_ibmacs;       fi
-if [ $open_demo_webpage    == 1 ]; then open_demo_webpage;    fi
-if [ $generate_CA          == 1 ]; then generate_CA;          fi
-if [ $activate_TPM_server  == 1 ]; then activate_TPM_server;  fi
-if [ $activate_TPM_client  == 1 ]; then activate_TPM_client;  fi
-if [ $generate_EK          == 1 ]; then generate_EK;          fi
-if [ $retrieve_hardware_NV == 1 ]; then retrieve_hardware_NV; fi
-if [ $set_acs_sql_setting  == 1 ]; then set_acs_sql_setting;  fi
-if [ $active_ACS_Demo      == 1 ]; then active_ACS_Demo;      fi
+# Active ACS Demo Client
+# Can be run multiple times
+active_ADC_Demo_Client () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo${NC}\n====================================================\n"
+
+    cd "${path_ibmacs}/acs"
+    if [ $acsClientMode == 1 ]; then
+        echo -e "${BOLD}${BLUE}Activating ACS Client Demo on local machine ......${NC}"
+        ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem >| ${acs_demo_client_log_dir}
+    elif [ $acsClientMode == 2 ]; then
+        echo -e "${BOLD}${BLUE}Activating ACS Client Demo on remote machine ......${NC}"
+        ./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem >| ${acs_demo_client_log_dir}
+    else 
+        echo -e "${BOLD}${RED}Invalid acsClientMode${NC}"
+        exit 1
+    fi
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
+}
+
+if [ $install_req            == 1 ]; then install_req;                 fi
+if [ $config_nvim            == 1 ]; then config_nvim;                 fi
+if [ $setup_ibmtpmtss_env    == 1 ]; then setup_ibmtpmtss_env;         fi
+if [ $compile_ibmtpmtss      == 1 ]; then compile_ibmtpmtss;           fi
+if [ $setup_ibmswtpm_env     == 1 ]; then setup_ibmswtpm_env;          fi
+if [ $compile_ibmswtpm       == 1 ]; then compile_ibmswtpm;            fi
+if [ $setup_ibmacs_env       == 1 ]; then setup_ibmacs_env;            fi
+if [ $compile_ibmacs         == 1 ]; then compile_ibmacs;              fi
+if [ $open_demo_webpage      == 1 ]; then open_demo_webpage;           fi
+if [ $generate_CA            == 1 ]; then generate_CA;                 fi
+if [ $activate_TPM_server    == 1 ]; then activate_TPM_server;         fi
+if [ $activate_TPM_client    == 1 ]; then activate_TPM_client;         fi
+if [ $generate_EK            == 1 ]; then generate_EK;                 fi
+if [ $retrieve_hardware_NV   == 1 ]; then retrieve_hardware_NV;        fi
+if [ $set_acs_sql_setting    == 1 ]; then set_acs_sql_setting;         fi
+if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
+if [ $active_ADC_Demo_Client == 1 ]; then active_ADC_Demo_Client;      fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
