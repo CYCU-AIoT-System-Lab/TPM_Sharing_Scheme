@@ -33,7 +33,7 @@ verMode=2                                # 1: TPM 2.0,      2: TPM 1.2 & 2.0    
 TPMMode=2                                # 1: Physical TPM, 2: Software TPM       # default: 2
 acsMode=1                                # 1: Server,       2: Client             # default: 1
 SCmachineMode=1                          # 1: Same machine, 2: Different machine  # default: 1 (server and client)
-force_acs_sql_setting=0                  # 0: No,           1: Yes                # default: 0
+force_acs_sql_setting=1                  # 0: No,           1: Yes                # default: 0
 # Param - mysql
 mysql_user="tpm2ACS"                     # default: tpm2ACS
 mysql_password="123456"                  # default: 123456
