@@ -486,7 +486,7 @@ active_ACS_Demo () {
     set_acs_sql_setting
 
     echo -e "${BOLD}${BLUE}Activating ACS Demo on new terminal ......${NC}"
-    command="cd ${path_ibmacs}; ./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| serverenroll.log4j"
+    command="cd ${path_ibmacs}/acs; ./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| serverenroll.log4j"
     gnome-terminal -t "ACS SERVER" --active -- bash -c "${command}; exec bash"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
@@ -506,6 +506,7 @@ if [ $activate_TPM_server  == 1 ]; then activate_TPM_server;  fi
 if [ $activate_TPM_client  == 1 ]; then activate_TPM_client;  fi
 if [ $generate_EK          == 1 ]; then generate_EK;          fi
 if [ $retrieve_hardware_NV == 1 ]; then retrieve_hardware_NV; fi
+if [ $set_acs_sql_setting  == 1 ]; then set_acs_sql_setting;  fi
 if [ $active_ACS_Demo      == 1 ]; then active_ACS_Demo;      fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
