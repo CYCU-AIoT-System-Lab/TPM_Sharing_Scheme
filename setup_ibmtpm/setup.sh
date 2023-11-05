@@ -72,6 +72,7 @@ path_ibmtss="${sym_link_ibmtss}${ibmtss_ver}"
 path_ibmtpm="${sym_link_ibmtpm}${ibmtpm_ver}"
 path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
 path_NV="${sym_link_ibmtpm}/src/NVChip"
+tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
 
 # Check if running as root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
@@ -445,7 +446,9 @@ active_ACS_Demo () {
     fi
     activate_TPM_server
     activate_TPM_client
-    sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g"
+
+    echo -e "${BOLD}${BLUE}Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ......${NC}"
+    sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
     export ACS_PORT="${acs_port}"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
