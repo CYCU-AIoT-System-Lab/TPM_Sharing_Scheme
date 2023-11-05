@@ -9,14 +9,7 @@ Currently, TPM2.0 only mode can't support ACS.
 1. In VM terminal, type ```ssh-keygen```, keep pressing ```enter``` till command is finished.
 2. In VM terminal, type ```cat /home/user/.ssh/id_rsa.pub```, copy all of the output strings.
 3. In browser, go to <https://github.com/settings/ssh/new>, type the name of this key in title, and paste copied RSA public key in.
-4. In VM terminal, install git with ```sudo apt-get install git```
-5. In VM terminal, nevigate to your desire directory, and type ```git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git```.
-6. In VM terminal, nevigate inside cloned folder with ```cd ./TPM_Sharing_Scheme```.
-7. In VM terminal, switch development branch with ```git checkout setup_ibmtpm```.
-8. In VM terminal, nevigate to installation scripts with ```cd ./src/setup_ibmtpm```.
-9. In VM, check the start of each scripts to see whether settings are correct.
-10. In VM terminal, login as root with ```sudo -s```.
-11. In VM terminal, install with ```source setup.sh```.
+4. In VM terminal, copy the following commands and paste it in your terminal.
 
 ```
 sudo apt-get install git
