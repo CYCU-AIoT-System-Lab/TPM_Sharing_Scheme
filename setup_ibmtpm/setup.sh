@@ -47,6 +47,13 @@ path_ibmtss="${base_dir}/ibmtss${ibmtss_ver}/"
 path_ibmtpm="${base_dir}/ibmtpm${ibmtpm_ver}/"
 path_ibmacs="${base_dir}/ibmacs${ibmacs_ver}/"
 
+# Check if running as root
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "Please run with command: sudo bash setup.sh"
+    exit 1
+fi
+
+
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup${NC}\n====================================================\n"
 
 # Install requirements for development, building, and testing
