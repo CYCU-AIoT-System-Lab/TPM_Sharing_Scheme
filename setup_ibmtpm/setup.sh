@@ -23,9 +23,10 @@ ibmtss_ver="2.1.1"                       # default: 2.1.1
 ibmtpm_ver="1682"                        # default: 1682
 ibmacs_ver="1658"                        # default: 1658
 # Param - mode
-verMode=2                                # 1: TPM 2.0,      2: TPM 1.2 & 2.0  # default: 2
-TPMMode=2                                # 1: Physical TPM, 2: Software TPM   # default: 2
-acsMode=1                                # 1: Server,       2: Client         # default: 1
+verMode=2                                # 1: TPM 2.0,      2: TPM 1.2 & 2.0      # default: 2
+TPMMode=2                                # 1: Physical TPM, 2: Software TPM       # default: 2
+acsMode=1                                # 1: Server,       2: Client             # default: 1
+SCmachineMode=1                          # 1: Same machine, 2: Different machine  # default: 1 (server and client)
 # Param - job
 install_req=0                            # 0: No, 1: Yes  # default: 1
 config_nvim=0                            # 0: No, 1: Yes  # default: 1
@@ -36,9 +37,11 @@ compile_ibmswtpm=0                       # 0: No, 1: Yes  # default: 1
 setup_ibmacs_env=0                       # 0: No, 1: Yes  # default: 1
 compile_ibmacs=0                         # 0: No, 1: Yes  # default: 1
 open_demo_webpage=0                      # 0: No, 1: Yes  # default: 1
-generate_CA=0                            # 0: No, 1: Yes  # default: 0
-generate_EK=0                            # 0: No, 1: Yes  # default: 1
-retrieve_hardware_NV=1                   # 0: No, 1: Yes  # default: 0
+generate_CA=0                            # 0: No, 1: Yes  # default: 0 (not implemented)
+activate_TPM=0                           # 0: No, 1: Yes  # default: 0
+generate_EK=1                            # 0: No, 1: Yes  # default: 1
+retrieve_hardware_NV=0                   # 0: No, 1: Yes  # default: 0 (not implemented)
+active_ACS_Demo=0                        # 0: No, 1: Yes  # default: 1
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -356,15 +359,28 @@ generate_CA () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA Complete${NC}\n====================================================\n"
 }
 
-# Create EK certificate and key
+# Activate TPM in new terminal
 # Only need to setup once (can re-run)
-generate_EK () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK${NC}\n====================================================\n"
+activate_TPM () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM${NC}\n====================================================\n"
+
+    # apply TPMMode for ibmtss
+    setup_ibmtpmtss_env
 
     echo -e "${BOLD}${ORANGE}Starting TPM simulator (server) on new temrinal ......${NC}"
     cd "${sym_link_ibmtpm}/src/"
     command="echo \"starting TPM simulator (server)\"; ./tpm_server"
     gnome-terminal -t "TPM SERVER" --active -- bash -c "${command}; exec bash"
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM Complete${NC}\n====================================================\n"
+}
+
+# Create EK certificate and key, activated TPM on new terminal
+# Only need to setup once (can re-run)
+generate_EK () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK${NC}\n====================================================\n"
+
+    activate_TPM
 
     echo -e "${BOLD}${ORANGE}Starting TPM simulator (client) on new temrinal ......${NC}"
     cd "${sym_link_ibmtss}/utils/"
@@ -391,6 +407,16 @@ retrieve_hardware_NV () {
     echo -e "${BOLD}${ORANGE}Not implemented${NC}"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Retrieving Hardware NVChip Complete${NC}\n====================================================\n"
+}
+
+# Active ACS Demo
+# Can be run multiple times
+active_ACS_Demo () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo${NC}\n====================================================\n"
+
+    echo -e "${BOLD}${ORANGE}Not implemented${NC}"
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
 }
 
 if [ $install_req == 1 ]; then install_req; fi
