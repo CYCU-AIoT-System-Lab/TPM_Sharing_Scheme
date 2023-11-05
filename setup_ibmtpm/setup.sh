@@ -10,6 +10,9 @@ c_json_lib_dir="/usr/include/json-c"     # default: /usr/include/json-c
 c_json_lib_link_dir="/usr/include/json"  # default: /usr/include/json
 nvim_dir="/home/user/.config/nvim"       # default: /home/user/.config/nvim
 bashrc_dir="/home/user/.bashrc"          # default: /home/user/.bashrc
+# Param - filename
+RSAEK_cert="cakey.pem"                   # default: cakey.pem
+ECCEK_cert="cakeyecc.pem"                # default: cakeyecc.pem
 # Param - url
 nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
 acs_demo_url="localhost:80/acs"
@@ -56,6 +59,7 @@ sym_link_ibmacs="${base_dir}/ibmacs"
 path_ibmtss="${sym_link_ibmtss}${ibmtss_ver}"
 path_ibmtpm="${sym_link_ibmtpm}${ibmtpm_ver}"
 path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
+path_NV="${sym_link_ibmtpm}/src/NVChip"
 
 # Check if running as root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
@@ -360,6 +364,21 @@ gen_EK () {
     cd "${sym_link_ibmtpm}/src/"
     command="echo \"starting TPM simulator (server)\"; ./tpm_server"
     gnome-terminal -t "TPM SERVER" -- bash -c "${command}; exec bash"
+
+    echo -e "${BOLD}${ORANGE}Starting TPM simulator (client) on new temrinal ......${NC}"
+    cd "${sym_link_ibmtpm}/src/"
+    command="echo \"starting TPM simulator (client)\"; ./powerup; ./startup"
+
+    echo -e "${BOLD}${ORANGE}Backing up NVChip ......${NC}"
+    cp "${path_NV}" "${path_NV}.bak"
+
+    echo -e "${BOLD}${ORANGE}Generating RSAEK and load into NV ......${NC}"
+    cd "${sym_link_ibmtpm}/src/"
+    ./createekcert -rsa 2048 -cakey $RSAEK_cert -capwd rrrr -v
+
+    echo -e "${BOLD}${ORANGE}Generating ECCEK and load into NV ......${NC}"
+    cd "${sym_link_ibmtpm}/src/"
+    ./createekcert -ecc nistp256 -cakey $ECCEK_cert -capwd rrrr -caalg ec -v
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK Complete${NC}\n====================================================\n"
 }
