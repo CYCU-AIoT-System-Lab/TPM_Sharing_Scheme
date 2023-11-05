@@ -60,7 +60,7 @@ retrieve_hardware_NV=$default_job_0      # 0: No, 1: Yes  # default: 0 (not impl
 set_acs_sql_setting=$default_job_0       # 0: No, 1: Yes  # default: 0
 active_ACS_Demo_Server=$default_job_1    # 0: No, 1: Yes  # default: 1
 active_ACS_Demo_Client=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't enroll)
-active_ACS_Demo_verify=$default_job_1    # 0: No, 1: Yes  # default: 1
+active_ACS_Demo_verify=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't verify)
 # ==================================================================================================
 
 BOLD='\033[1m'
