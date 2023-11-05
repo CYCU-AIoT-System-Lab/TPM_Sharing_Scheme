@@ -15,6 +15,7 @@ tpm_data_dir="/home/user/tpm2"           # default: /home/user/tpm2
 RSAEK_cert="cakey.pem"                   # default: cakey.pem
 ECCEK_cert="cakeyecc.pem"                # default: cakeyecc.pem
 # Param - url
+repo_url="https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/setup_ibmtpm/setup_ibmtpm"
 nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
 acs_demo_url="localhost:80/acs"
 # Param - user account
@@ -350,7 +351,7 @@ open_demo_webpage () {
 
     echo -e "${BOLD}${BLUE}Opening demo webpage ......${NC}"
     # start firefox without root on new terminal
-    command="sudo -u ${user_name} bash -c \"firefox --new-window ${acs_demo_url} &\""
+    command="sudo -u ${user_name} bash -c \"firefox --new-tab ${acs_demo_url} & && firefox --new-tab ${repo_url} &\""
     gnome-terminal -t "Demo Firefox Website" -- bash -c "${command}; exec bash"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}\n====================================================\n"
