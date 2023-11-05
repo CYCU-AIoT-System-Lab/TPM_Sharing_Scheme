@@ -363,10 +363,10 @@ gen_EK () {
     echo -e "${BOLD}${ORANGE}Starting TPM simulator (server) on new temrinal ......${NC}"
     cd "${sym_link_ibmtpm}/src/"
     command="echo \"starting TPM simulator (server)\"; ./tpm_server"
-    gnome-terminal -t "TPM SERVER" -- bash -c "${command}; exec bash"
+    gnome-terminal -t "TPM SERVER" --active -- bash -c "${command}; exec bash"
 
     echo -e "${BOLD}${ORANGE}Starting TPM simulator (client) on new temrinal ......${NC}"
-    cd "${sym_link_ibmtpm}/utils/"
+    cd "${sym_link_ibmtss}/utils/"
     ./powerup
     ./startup
 
@@ -374,11 +374,9 @@ gen_EK () {
     cp "${path_NV}" "${path_NV}.bak"
 
     echo -e "${BOLD}${ORANGE}Generating RSAEK and load into NV ......${NC}"
-    cd "${sym_link_ibmtpm}/utils/"
     ./createekcert -rsa 2048 -cakey $RSAEK_cert -capwd rrrr -v
 
     echo -e "${BOLD}${ORANGE}Generating ECCEK and load into NV ......${NC}"
-    cd "${sym_link_ibmtpm}/utils/"
     ./createekcert -ecc nistp256 -cakey $ECCEK_cert -capwd rrrr -caalg ec -v
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK Complete${NC}\n====================================================\n"
