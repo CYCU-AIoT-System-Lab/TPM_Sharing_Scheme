@@ -13,6 +13,8 @@ bashrc_dir="/home/user/.bashrc"          # default: /home/user/.bashrc
 # Param - url
 nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
 acs_demo_url="localhost:80/acs"
+# Param - user account
+user_name="user"                         # default: user
 # Param - version
 ibmtss_ver="2.1.1"                       # latest: 2.1.1
 ibmtpm_ver="1682"                        # latest: 1682
@@ -22,13 +24,13 @@ verMode=2                                # 1: TPM 2.0, 2: TPM 1.2 & 2.0
 TPMMode=2                                # 1: Physical TPM, 2: Software TPM
 acsMode=1                                # 1: Server, 2: Client
 # Param - job
-install_req=1                            # 0: No, 1: Yes
-config_nvim=1                            # 0: No, 1: Yes
-setup_ibmtpmtss_env=1                    # 0: No, 1: Yes
-compile_ibmtpmtss=1                      # 0: No, 1: Yes
-setup_ibmswtpm_env=1                     # 0: No, 1: Yes
-compile_ibmswtpm=1                       # 0: No, 1: Yes
-setup_ibmacs_env=1                       # 0: No, 1: Yes
+install_req=0                            # 0: No, 1: Yes
+config_nvim=0                            # 0: No, 1: Yes
+setup_ibmtpmtss_env=0                    # 0: No, 1: Yes
+compile_ibmtpmtss=0                      # 0: No, 1: Yes
+setup_ibmswtpm_env=0                     # 0: No, 1: Yes
+compile_ibmswtpm=0                       # 0: No, 1: Yes
+setup_ibmacs_env=0                       # 0: No, 1: Yes
 compile_ibmacs=1                         # 0: No, 1: Yes
 # ==================================================================================================
 
@@ -310,7 +312,7 @@ compile_ibmacs () {
         exit 1
     fi
 
-    firefox ${acs_demo_url} &
+    sudo -u ${user_name} bash -c firefox ${acs_demo_url} &
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}\n====================================================\n"
 }
