@@ -32,8 +32,9 @@ setup_ibmswtpm_env=0                     # 0: No, 1: Yes  # default: 1
 compile_ibmswtpm=0                       # 0: No, 1: Yes  # default: 1
 setup_ibmacs_env=0                       # 0: No, 1: Yes  # default: 1
 compile_ibmacs=0                         # 0: No, 1: Yes  # default: 1
-open_demo_webpage=0                      # 0: No, 1: Yes  # default: 1
-generate_CA=1                            # 0: No, 1: Yes  # default: 0
+open_demo_webpage=1                      # 0: No, 1: Yes  # default: 1
+generate_CA=0                            # 0: No, 1: Yes  # default: 0
+generate_EK=0                              # 0: No, 1: Yes  # default: 1
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -329,7 +330,8 @@ open_demo_webpage () {
 
     echo -e "${BOLD}${BLUE}Opening demo webpage ......${NC}"
     # start firefox without root
-    sudo -u ${user_name} bash -c "firefox ${acs_demo_url} &"
+    command="sudo -u ${user_name} bash -c \"firefox ${acs_demo_url} &\""
+    gnome-terminal --tab -- bash -c "${command}; exec bash"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}\n====================================================\n"
 }
@@ -349,21 +351,26 @@ gen_CA () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA Complete${NC}\n====================================================\n"
 }
 
+# Create EK certificate and key
+# Only need to setup once (can re-run)
+gen_EK () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK${NC}\n====================================================\n"
+
+    echo -e "${BOLD}${ORANGE}Starting TPM simulator (server) ......${NC}"
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK Complete${NC}\n====================================================\n"
+}
+
 if [ $install_req == 1 ]; then install_req; fi
-
 if [ $config_nvim == 1 ]; then config_nvim; fi
-
 if [ $setup_ibmtpmtss_env == 1 ]; then setup_ibmtpmtss_env; fi
 if [ $compile_ibmtpmtss == 1 ]; then compile_ibmtpmtss; fi
-
 if [ $setup_ibmswtpm_env == 1 ]; then setup_ibmswtpm_env; fi
 if [ $compile_ibmswtpm == 1 ]; then compile_ibmswtpm; fi
-
 if [ $setup_ibmacs_env == 1 ]; then setup_ibmacs_env; fi
 if [ $compile_ibmacs == 1 ]; then compile_ibmacs; fi
-
 if [ $open_demo_webpage == 1 ]; then open_demo_webpage; fi
-
 if [ $generate_CA == 1 ]; then gen_CA; fi
+if [ $generate_EK == 1 ]; then gen_EK; fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
