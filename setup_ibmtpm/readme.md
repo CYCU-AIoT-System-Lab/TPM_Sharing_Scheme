@@ -15,7 +15,8 @@ Currently, TPM2.0 only mode can't support ACS.
 7. In VM terminal, switch development branch with ```git checkout setup_ibmtpm```.
 8. In VM terminal, nevigate to installation scripts with ```cd ./src/setup_ibmtpm```.
 9. In VM, check the start of each scripts to see whether settings are correct.
-10. In VM terminal, install with ```sudo bash setup.sh```.
+10. In VM terminal, login as root with ```sudo -s```.
+11. In VM terminal, install with ```source setup.sh```.
 
 ## Installing Tools
 

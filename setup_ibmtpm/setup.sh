@@ -32,21 +32,23 @@ TPMMode=2                                # 1: Physical TPM, 2: Software TPM     
 acsMode=1                                # 1: Server,       2: Client             # default: 1
 SCmachineMode=1                          # 1: Same machine, 2: Different machine  # default: 1 (server and client)
 # Param - job
-install_req=0                            # 0: No, 1: Yes  # default: 1
-config_nvim=0                            # 0: No, 1: Yes  # default: 1
-setup_ibmtpmtss_env=0                    # 0: No, 1: Yes  # default: 1
-compile_ibmtpmtss=0                      # 0: No, 1: Yes  # default: 1
-setup_ibmswtpm_env=0                     # 0: No, 1: Yes  # default: 1
-compile_ibmswtpm=0                       # 0: No, 1: Yes  # default: 1
-setup_ibmacs_env=0                       # 0: No, 1: Yes  # default: 1
-compile_ibmacs=0                         # 0: No, 1: Yes  # default: 1
-open_demo_webpage=0                      # 0: No, 1: Yes  # default: 1
-generate_CA=0                            # 0: No, 1: Yes  # default: 0 (not implemented)
-activate_TPM_server=0                    # 0: No, 1: Yes  # default: 0
-activate_TPM_client=0                    # 0: No, 1: Yes  # default: 0
-generate_EK=0                            # 0: No, 1: Yes  # default: 1
-retrieve_hardware_NV=0                   # 0: No, 1: Yes  # default: 0 (not implemented)
-active_ACS_Demo=1                        # 0: No, 1: Yes  # default: 1
+default_job_1=1                          # 0: No, 1: Yes  # default: 1
+default_job_0=0                          # 0: No, 1: Yes  # default: 0
+install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
+config_nvim=$default_job_1               # 0: No, 1: Yes  # default: 1
+setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
+compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
+setup_ibmswtpm_env=$default_job_1        # 0: No, 1: Yes  # default: 1
+compile_ibmswtpm=$default_job_1          # 0: No, 1: Yes  # default: 1
+setup_ibmacs_env=$default_job_1          # 0: No, 1: Yes  # default: 1
+compile_ibmacs=$default_job_1            # 0: No, 1: Yes  # default: 1
+open_demo_webpage=$default_job_1         # 0: No, 1: Yes  # default: 1
+generate_CA=$default_job_0               # 0: No, 1: Yes  # default: 0 (not implemented)
+activate_TPM_server=$default_job_0       # 0: No, 1: Yes  # default: 0
+activate_TPM_client=$default_job_0       # 0: No, 1: Yes  # default: 0
+generate_EK=$default_job_1               # 0: No, 1: Yes  # default: 1
+retrieve_hardware_NV=$default_job_0      # 0: No, 1: Yes  # default: 0 (not implemented)
+active_ACS_Demo=$default_job_1           # 0: No, 1: Yes  # default: 1
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -464,6 +466,8 @@ if [ $setup_ibmacs_env == 1 ]; then setup_ibmacs_env; fi
 if [ $compile_ibmacs == 1 ]; then compile_ibmacs; fi
 if [ $open_demo_webpage == 1 ]; then open_demo_webpage; fi
 if [ $generate_CA == 1 ]; then generate_CA; fi
+if [ $activate_TPM_server == 1 ]; then activate_TPM_server; fi
+if [ $activate_TPM_client == 1 ]; then activate_TPM_client; fi
 if [ $generate_EK == 1 ]; then generate_EK; fi
 if [ $retrieve_hardware_NV == 1 ]; then retrieve_hardware_NV; fi
 if [ $active_ACS_Demo == 1 ]; then active_ACS_Demo; fi
