@@ -439,14 +439,14 @@ active_ACS_Demo () {
         export TPM_DATA_DIR="${tpm_data_dir}"
     elif [ $SCmachineMode == 2 ]; then
         echo -e "${BOLD}${BLUE}Activating ACS Demo on different machine ......${NC}"
-        activate_TPM_server
-        activate_TPM_client
-        sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g"
-        export ACS_PORT="${acs_port}"
     else 
         echo -e "${BOLD}${RED}Invalid SCmachineMode${NC}"
         exit 1
     fi
+    activate_TPM_server
+    activate_TPM_client
+    sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g"
+    export ACS_PORT="${acs_port}"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
 }
