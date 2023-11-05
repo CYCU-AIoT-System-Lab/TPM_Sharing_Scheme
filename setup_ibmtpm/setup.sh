@@ -16,29 +16,31 @@ acs_demo_url="localhost:80/acs"
 # Param - user account
 user_name="user"                         # default: user
 # Param - version
-ibmtss_ver="2.1.1"                       # latest: 2.1.1
-ibmtpm_ver="1682"                        # latest: 1682
-ibmacs_ver="1658"                        # latest: 1658
+ibmtss_ver="2.1.1"                       # default: 2.1.1
+ibmtpm_ver="1682"                        # default: 1682
+ibmacs_ver="1658"                        # default: 1658
 # Param - mode
-verMode=2                                # 1: TPM 2.0, 2: TPM 1.2 & 2.0
-TPMMode=2                                # 1: Physical TPM, 2: Software TPM
-acsMode=1                                # 1: Server, 2: Client
+verMode=2                                # 1: TPM 2.0,      2: TPM 1.2 & 2.0  # default: 2
+TPMMode=2                                # 1: Physical TPM, 2: Software TPM   # default: 2
+acsMode=1                                # 1: Server,       2: Client         # default: 1
 # Param - job
-install_req=0                            # 0: No, 1: Yes
-config_nvim=0                            # 0: No, 1: Yes
-setup_ibmtpmtss_env=0                    # 0: No, 1: Yes
-compile_ibmtpmtss=0                      # 0: No, 1: Yes
-setup_ibmswtpm_env=0                     # 0: No, 1: Yes
-compile_ibmswtpm=0                       # 0: No, 1: Yes
-setup_ibmacs_env=0                       # 0: No, 1: Yes
-compile_ibmacs=0                         # 0: No, 1: Yes
-open_demo_webpage=1                      # 0: No, 1: Yes
+install_req=0                            # 0: No, 1: Yes  # default: 1
+config_nvim=0                            # 0: No, 1: Yes  # default: 1
+setup_ibmtpmtss_env=0                    # 0: No, 1: Yes  # default: 1
+compile_ibmtpmtss=0                      # 0: No, 1: Yes  # default: 1
+setup_ibmswtpm_env=0                     # 0: No, 1: Yes  # default: 1
+compile_ibmswtpm=0                       # 0: No, 1: Yes  # default: 1
+setup_ibmacs_env=0                       # 0: No, 1: Yes  # default: 1
+compile_ibmacs=0                         # 0: No, 1: Yes  # default: 1
+open_demo_webpage=0                      # 0: No, 1: Yes  # default: 1
+generate_CA=1                            # 0: No, 1: Yes  # default: 0
 # ==================================================================================================
 
 BOLD='\033[1m'
 BLUE='\033[34m'
 RED='\033[31m'
 GREEN='\033[32m'
+ORANGE='\033[33m'
 NC='\033[0m'
 
 fn_ibmtss="ibmtss${ibmtss_ver}.tar.gz"
@@ -126,6 +128,7 @@ config_nvim () {
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
+# Can re-run to update environment variables to switch between physical TPM and software TPM
 # Only need to setup once (can re-run)
 setup_ibmtpmtss_env () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting up IBMTSS Environment${NC}\n====================================================\n"
@@ -328,6 +331,20 @@ open_demo_webpage () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}\n====================================================\n"
 }
 
+# Generate CA certificate and key
+# Only need to setup once (can re-run)
+gen_CA () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA${NC}\n====================================================\n"
+
+    echo -e "${BOLD}${ORANGE}Function not implemented${NC}"
+    echo -e "${BOLD}${ORANGE}Refer to ${ibmacs_dir}/README.md line 171 for steps.${NC}"
+    echo -e "${BOLD}${GREEN}Generated CAs ......${NC}"
+    ls "${ibmtss_dir}/utils/*.pem"
+    ls "${ibmacs_dir}/*.pem"
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA Complete${NC}\n====================================================\n"
+}
+
 if [ $install_req == 1 ]; then install_req; fi
 
 if [ $config_nvim == 1 ]; then config_nvim; fi
@@ -342,5 +359,7 @@ if [ $setup_ibmacs_env == 1 ]; then setup_ibmacs_env; fi
 if [ $compile_ibmacs == 1 ]; then compile_ibmacs; fi
 
 if [ $open_demo_webpage == 1 ]; then open_demo_webpage; fi
+
+if [ $generate_CA == 1 ]; then gen_CA; fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
