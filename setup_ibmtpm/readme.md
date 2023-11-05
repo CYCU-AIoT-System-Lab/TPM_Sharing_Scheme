@@ -15,6 +15,7 @@ sudo apt-get install git
 cd ~
 git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git
 cd ~/TPM_Sharing_Scheme
+git pull
 git checkout setup_ibmtpm
 cd ./setup_ibmtpm
 sudo -s # use source to run script
