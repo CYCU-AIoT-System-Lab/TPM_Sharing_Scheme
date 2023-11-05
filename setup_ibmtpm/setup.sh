@@ -23,6 +23,9 @@ user_name="user"                         # default: user
 ibmtss_ver="2.1.1"                       # default: 2.1.1
 ibmtpm_ver="1682"                        # default: 1682
 ibmacs_ver="1658"                        # default: 1658
+# Param - port
+tpm_command_port="2321"                  # default: 2321
+acs_port="2323"                          # default: 2323
 # Param - mode
 verMode=2                                # 1: TPM 2.0,      2: TPM 1.2 & 2.0      # default: 2
 TPMMode=2                                # 1: Physical TPM, 2: Software TPM       # default: 2
@@ -41,9 +44,9 @@ open_demo_webpage=0                      # 0: No, 1: Yes  # default: 1
 generate_CA=0                            # 0: No, 1: Yes  # default: 0 (not implemented)
 activate_TPM_server=0                    # 0: No, 1: Yes  # default: 0
 activate_TPM_client=0                    # 0: No, 1: Yes  # default: 0
-generate_EK=1                            # 0: No, 1: Yes  # default: 1
+generate_EK=0                            # 0: No, 1: Yes  # default: 1
 retrieve_hardware_NV=0                   # 0: No, 1: Yes  # default: 0 (not implemented)
-active_ACS_Demo=0                        # 0: No, 1: Yes  # default: 1
+active_ACS_Demo=1                        # 0: No, 1: Yes  # default: 1
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -53,15 +56,18 @@ GREEN='\033[32m'
 ORANGE='\033[33m'
 NC='\033[0m'
 
-fn_ibmtss="ibmtss${ibmtss_ver}.tar.gz"
-fn_ibmtpm="ibmtpm${ibmtpm_ver}.tar.gz"
-fn_ibmacs="ibmacs${ibmacs_ver}.tar.gz"
+dn_ibmtss="ibmtss"
+dn_ibmtpm="ibmtpm"
+dn_ibmacs="ibmacs"
+fn_ibmtss="${dn_ibmtss}${ibmtss_ver}.tar.gz"
+fn_ibmtpm="${dn_ibmtpm}${ibmtpm_ver}.tar.gz"
+fn_ibmacs="${dn_ibmacs}${ibmacs_ver}.tar.gz"
 file_ibmtss="${download_dir}/${fn_ibmtss}"
 file_ibmtpm="${download_dir}/${fn_ibmtpm}"
 file_ibmacs="${download_dir}/${fn_ibmacs}"
-sym_link_ibmtss="${base_dir}/ibmtss"
-sym_link_ibmtpm="${base_dir}/ibmtpm"
-sym_link_ibmacs="${base_dir}/ibmacs"
+sym_link_ibmtss="${base_dir}/${dn_ibmtss}"
+sym_link_ibmtpm="${base_dir}/${dn_ibmtpm}"
+sym_link_ibmacs="${base_dir}/${dn_ibmacs}"
 path_ibmtss="${sym_link_ibmtss}${ibmtss_ver}"
 path_ibmtpm="${sym_link_ibmtpm}${ibmtpm_ver}"
 path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
@@ -158,6 +164,7 @@ setup_ibmtpmtss_env () {
         echo -e "${BOLD}${RED}Invalid TPMMode${NC}"
         exit 1
     fi
+    export TPM_COMMAND_PORT="${tpm_command_port}"
 
     echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtss} ......${NC}"
     ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
@@ -434,6 +441,8 @@ active_ACS_Demo () {
         echo -e "${BOLD}${BLUE}Activating ACS Demo on different machine ......${NC}"
         activate_TPM_server
         activate_TPM_client
+        sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g"
+        export ACS_PORT="${acs_port}"
     else 
         echo -e "${BOLD}${RED}Invalid SCmachineMode${NC}"
         exit 1
