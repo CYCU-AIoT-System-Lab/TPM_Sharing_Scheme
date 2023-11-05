@@ -463,5 +463,6 @@ if [ $open_demo_webpage == 1 ]; then open_demo_webpage; fi
 if [ $generate_CA == 1 ]; then generate_CA; fi
 if [ $generate_EK == 1 ]; then generate_EK; fi
 if [ $retrieve_hardware_NV == 1 ]; then retrieve_hardware_NV; fi
+if [ $active_ACS_Demo == 1 ]; then active_ACS_Demo; fi
 
 echo -e "\n====================================================\n>>${BOLD}${GREEN}Setup Complete${NC}\n====================================================\n"
