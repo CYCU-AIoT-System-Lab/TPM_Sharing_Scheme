@@ -359,7 +359,7 @@ gen_EK () {
     echo -e "${BOLD}${ORANGE}Starting TPM simulator (server) on new temrinal ......${NC}"
     cd "${sym_link_ibmtpm}/src/"
     command="echo \"starting TPM simulator (server)\"; ./tpm_server"
-    gnome-terminal -- bash -c "${command}; exec bash"
+    gnome-terminal -t "TPM SERVER" -- bash -c "${command}; exec bash"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK Complete${NC}\n====================================================\n"
 }
