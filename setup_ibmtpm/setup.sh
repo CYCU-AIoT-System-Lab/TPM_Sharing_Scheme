@@ -292,10 +292,12 @@ compile_ibmacs () {
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         if [ $acsMode == 1 ]; then
             # for Server
-            make -f makefiletpm12 clean
-            make -f makefiletpm12
+            make -f makefiletpmc clean
+            make -f makefiletpmc
         elif [ $acsMode == 2 ]; then
             # for Client
+            make -f makefiletpm12 clean
+            make -f makefiletpm12
             make -f makefiletpmc clean
             make -f makefiletpmc
         else 
