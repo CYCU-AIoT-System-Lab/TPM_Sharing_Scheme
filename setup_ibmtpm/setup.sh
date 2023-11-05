@@ -12,6 +12,7 @@ nvim_dir="/home/user/.config/nvim"       # default: /home/user/.config/nvim
 bashrc_dir="/home/user/.bashrc"          # default: /home/user/.bashrc
 # Param - url
 nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
+acs_demo_url="localhost:80/acs"
 # Param - version
 ibmtss_ver="2.1.1"                       # latest: 2.1.1
 ibmtpm_ver="1682"                        # latest: 1682
@@ -308,6 +309,8 @@ compile_ibmacs () {
         echo -e "${BOLD}${RED}Invalid verMode${NC}"
         exit 1
     fi
+
+    firefox ${acs_demo_url} &
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}\n====================================================\n"
 }
