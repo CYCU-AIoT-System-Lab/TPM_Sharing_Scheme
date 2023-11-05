@@ -53,3 +53,10 @@ In VM terminal, adjust job settings, type ```sudo bash setup.sh```
 ## Related Sources
 
 1. [libtss packages in ubuntu](https://packages.ubuntu.com/search?keywords=libtss&searchon=names)
+
+## Possible Bugs
+
+1. Database initialize setting variable error.
+2. ACS demo setting variable error.
+3. ACS demo verification setting variable error.
+4. force_acs_sql_setting might need to be 1.
