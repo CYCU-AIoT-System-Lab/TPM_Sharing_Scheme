@@ -312,7 +312,9 @@ compile_ibmacs () {
         exit 1
     fi
 
-    sudo -u ${user_name} bash -c firefox ${acs_demo_url} &
+    echo -e "${BOLD}${BLUE}Setting demo webpage ......${NC}"
+    # start firefox without root
+    sudo -u ${user_name} bash -c "firefox ${acs_demo_url} &"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}\n====================================================\n"
 }
