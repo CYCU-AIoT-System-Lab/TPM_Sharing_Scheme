@@ -10,6 +10,7 @@ c_json_lib_dir="/usr/include/json-c"     # default: /usr/include/json-c
 c_json_lib_link_dir="/usr/include/json"  # default: /usr/include/json
 nvim_dir="/home/user/.config/nvim"       # default: /home/user/.config/nvim
 bashrc_dir="/home/user/.bashrc"          # default: /home/user/.bashrc
+tpm_data_dir="/home/user/tpm2"           # default: /home/user/tpm2
 # Param - filename
 RSAEK_cert="cakey.pem"                   # default: cakey.pem
 ECCEK_cert="cakeyecc.pem"                # default: cakeyecc.pem
@@ -38,7 +39,8 @@ setup_ibmacs_env=0                       # 0: No, 1: Yes  # default: 1
 compile_ibmacs=0                         # 0: No, 1: Yes  # default: 1
 open_demo_webpage=0                      # 0: No, 1: Yes  # default: 1
 generate_CA=0                            # 0: No, 1: Yes  # default: 0 (not implemented)
-activate_TPM=0                           # 0: No, 1: Yes  # default: 0
+activate_TPM_server=0                    # 0: No, 1: Yes  # default: 0
+activate_TPM_client=0                    # 0: No, 1: Yes  # default: 0
 generate_EK=1                            # 0: No, 1: Yes  # default: 1
 retrieve_hardware_NV=0                   # 0: No, 1: Yes  # default: 0 (not implemented)
 active_ACS_Demo=0                        # 0: No, 1: Yes  # default: 1
@@ -359,9 +361,9 @@ generate_CA () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA Complete${NC}\n====================================================\n"
 }
 
-# Activate TPM in new terminal
+# Activate TPM Server in new terminal
 # Only need to setup once (can re-run)
-activate_TPM () {
+activate_TPM_server () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM${NC}\n====================================================\n"
 
     # apply TPMMode for ibmtss
@@ -375,17 +377,27 @@ activate_TPM () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM Complete${NC}\n====================================================\n"
 }
 
-# Create EK certificate and key, activated TPM on new terminal
+# Activate TPM Client in current terminal
 # Only need to setup once (can re-run)
-generate_EK () {
-    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK${NC}\n====================================================\n"
-
-    activate_TPM
+activate_TPM_client () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM${NC}\n====================================================\n"
 
     echo -e "${BOLD}${ORANGE}Starting TPM simulator (client) on new temrinal ......${NC}"
     cd "${sym_link_ibmtss}/utils/"
     ./powerup
     ./startup
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating TPM Complete${NC}\n====================================================\n"
+}
+
+# Create EK certificate and key, activated TPM on new terminal
+# Only need to setup once (can re-run)
+generate_EK () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK${NC}\n====================================================\n"
+
+    activate_TPM_server
+
+    activate_TPM_client
 
     echo -e "${BOLD}${ORANGE}Backing up NVChip ......${NC}"
     cp "${path_NV}" "${path_NV}.bak"
@@ -414,7 +426,18 @@ retrieve_hardware_NV () {
 active_ACS_Demo () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo${NC}\n====================================================\n"
 
-    echo -e "${BOLD}${ORANGE}Not implemented${NC}"
+    if [ $SCmachineMode == 1 ]; then
+        echo -e "${BOLD}${BLUE}Activating ACS Demo on same machine ......${NC}"
+        mkdir "${tpm_data_dir}"
+        export TPM_DATA_DIR="${tpm_data_dir}"
+    elif [ $SCmachineMode == 2 ]; then
+        echo -e "${BOLD}${BLUE}Activating ACS Demo on different machine ......${NC}"
+        activate_TPM_server
+        activate_TPM_client
+    else 
+        echo -e "${BOLD}${RED}Invalid SCmachineMode${NC}"
+        exit 1
+    fi
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
 }
