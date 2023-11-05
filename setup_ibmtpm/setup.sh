@@ -32,9 +32,9 @@ setup_ibmswtpm_env=0                     # 0: No, 1: Yes  # default: 1
 compile_ibmswtpm=0                       # 0: No, 1: Yes  # default: 1
 setup_ibmacs_env=0                       # 0: No, 1: Yes  # default: 1
 compile_ibmacs=0                         # 0: No, 1: Yes  # default: 1
-open_demo_webpage=1                      # 0: No, 1: Yes  # default: 1
+open_demo_webpage=0                      # 0: No, 1: Yes  # default: 1
 generate_CA=0                            # 0: No, 1: Yes  # default: 0
-generate_EK=0                              # 0: No, 1: Yes  # default: 1
+generate_EK=1                              # 0: No, 1: Yes  # default: 1
 # ==================================================================================================
 
 BOLD='\033[1m'
@@ -356,7 +356,10 @@ gen_CA () {
 gen_EK () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK${NC}\n====================================================\n"
 
-    echo -e "${BOLD}${ORANGE}Starting TPM simulator (server) ......${NC}"
+    echo -e "${BOLD}${ORANGE}Starting TPM simulator (server) on new temrinal ......${NC}"
+    cd "${sym_link_ibmtpm}/src/"
+    command="./tpm_server"
+    gnome-terminal -- bash -c "${command}; exec bash"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating EK Complete${NC}\n====================================================\n"
 }
