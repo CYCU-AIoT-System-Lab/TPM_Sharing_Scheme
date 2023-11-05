@@ -27,6 +27,7 @@ git checkout setup_ibmtpm
 cd ./setup_ibmtpm
 sudo -s
 source setup.sh
+
 ```
 
 ## Installing Tools
