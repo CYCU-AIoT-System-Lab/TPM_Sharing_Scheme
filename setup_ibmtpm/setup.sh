@@ -341,8 +341,9 @@ gen_CA () {
 
     echo -e "${BOLD}${ORANGE}Function not implemented${NC}"
     echo -e "${BOLD}${ORANGE}Refer to ${ibmacs_dir}/README.md line 171 for steps.${NC}"
-    echo -e "${BOLD}${GREEN}Generated CAs ......${NC}"
+    echo -e "${BOLD}${GREEN}Generated CAs in ${sym_link_ibmtss}/utils ...... ${NC}"
     ls "${sym_link_ibmtss}/utils/"*.pem
+    echo -e "${BOLD}${GREEN}Generated CAs in ${sym_link_ibmacs} ...... ${NC}"
     ls "${sym_link_ibmacs}/"*.pem
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA Complete${NC}\n====================================================\n"
