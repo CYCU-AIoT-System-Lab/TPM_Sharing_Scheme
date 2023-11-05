@@ -17,7 +17,8 @@ ECCEK_cert="cakeyecc.pem"                # default: cakeyecc.pem
 # Param - url
 repo_url="https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/setup_ibmtpm/setup_ibmtpm"
 nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
-acs_demo_url="localhost:80/acs"
+acs_demo_ip="localhost"                  # default: localhost
+acs_demo_port="80"                       # default: 80
 # Param - user account
 user_name="user"                         # default: user
 # Param - version
@@ -32,6 +33,11 @@ verMode=2                                # 1: TPM 2.0,      2: TPM 1.2 & 2.0    
 TPMMode=2                                # 1: Physical TPM, 2: Software TPM       # default: 2
 acsMode=1                                # 1: Server,       2: Client             # default: 1
 SCmachineMode=1                          # 1: Same machine, 2: Different machine  # default: 1 (server and client)
+force_acs_sql_setting=0                  # 0: No,           1: Yes                # default: 0
+# Param - mysql
+mysql_user="tpm2ACS"                     # default: tpm2ACS
+mysql_password="123456"                  # default: 123456
+mysql_database="tpm2"                    # default: tpm2
 # Param - job
 default_job_1=1                          # 0: No, 1: Yes  # default: 1
 default_job_0=0                          # 0: No, 1: Yes  # default: 0
@@ -49,6 +55,7 @@ activate_TPM_server=$default_job_0       # 0: No, 1: Yes  # default: 0
 activate_TPM_client=$default_job_0       # 0: No, 1: Yes  # default: 0
 generate_EK=$default_job_1               # 0: No, 1: Yes  # default: 1
 retrieve_hardware_NV=$default_job_0      # 0: No, 1: Yes  # default: 0 (not implemented)
+set_acs_sql_setting=$default_job_0       # 0: No, 1: Yes  # default: 0
 active_ACS_Demo=$default_job_1           # 0: No, 1: Yes  # default: 1
 # ==================================================================================================
 
@@ -76,6 +83,7 @@ path_ibmtpm="${sym_link_ibmtpm}${ibmtpm_ver}"
 path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
 path_NV="${sym_link_ibmtpm}/src/NVChip"
 tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
+acs_demo_url="${acs_demo_ip}:${acs_demo_port}/acs"
 
 # Check if running as root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
@@ -263,10 +271,10 @@ setup_ibmacs_env () {
     if [ $acsMode == 1 ]; then
         echo -e "${BOLD}${BLUE}Setting database ......${NC}"
         cd "${path_ibmacs}/acs/"
-        mysql -Bse "CREATE DATABASE IF NOT EXISTS tpm2;"
-        mysql -Bse "CREATE USER IF NOT EXISTS 'tpm2ACS'@'localhost' IDENTIFIED BY '123456';"
-        mysql -Bse "GRANT ALL PRIVILEGES ON tpm2.* TO 'tpm2ACS'@'localhost';"
-        mysql -D tpm2 < "${path_ibmacs}/acs/dbinit.sql"
+        mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
+        mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_ip}' IDENTIFIED BY '${mysql_password}';"
+        mysql -Bse "GRANT ALL PRIVILEGES ON ${mysql_database}.* TO '${mysql_user}'@'${acs_demo_ip}';"
+        mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
     fi
 
     echo -e "${BOLD}${BLUE}Setting include path ......${NC}"
@@ -432,6 +440,26 @@ retrieve_hardware_NV () {
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Retrieving Hardware NVChip Complete${NC}\n====================================================\n"
 }
 
+# Set ACS MYSQL setting
+# Only need to setup once (can re-run)
+set_acs_sql_setting () {
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting ACS MYSQL Setting${NC}\n====================================================\n"
+
+    echo -e "${BOLD}${ORANGE}Setting ACS MYSQL Setting ......${NC}"
+    export ACS_SQL_USERID="${mysql_user}"
+    export ACS_SQL_PASSWORD="${mysql_password}"
+
+    if [ $force_acs_sql_setting == 1 ]; then
+        echo -e "${BOLD}${ORANGE}Forcing ACS MYSQL Setting ......${NC}"
+        cp "${html_dir}/dbconnect.php" "${html_dir}/dbconnect.php.bak"
+        sed -i "s/\$connect = new mysqli(\$acs_sql_host, \$acs_sql_userid, \$acs_sql_password, \$acs_sql_database);/\$connect = new mysqli(${acs_demo_ip}, ${mysql_user}, ${mysql_password}, ${mysql_database});/g" "${html_dir}/dbconnect.php"
+    else
+        echo -e "${BOLD}${ORANGE}Not Forcing ACS MYSQL Setting ......${NC}"
+    fi
+
+    echo -e "\n====================================================\n>>${BOLD}${GREEN}Setting ACS MYSQL Setting Complete${NC}\n====================================================\n"
+}
+
 # Active ACS Demo
 # Can be run multiple times
 active_ACS_Demo () {
@@ -451,8 +479,15 @@ active_ACS_Demo () {
     activate_TPM_client
 
     echo -e "${BOLD}${BLUE}Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ......${NC}"
+    cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
     sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
     export ACS_PORT="${acs_port}"
+
+    set_acs_sql_setting
+
+    echo -e "${BOLD}${BLUE}Activating ACS Demo on new terminal ......${NC}"
+    command="cd ${path_ibmacs}; ./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| serverenroll.log4j"
+    gnome-terminal -t "ACS SERVER" --active -- bash -c "${command}; exec bash"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Activating ACS Demo Complete${NC}\n====================================================\n"
 }
