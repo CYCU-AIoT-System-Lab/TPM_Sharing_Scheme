@@ -24,7 +24,7 @@ cd ~
 git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git
 cd ~/TPM_Sharing_Scheme
 git checkout setup_ibmtpm
-cd ./src/setup_ibmtpm
+cd ./setup_ibmtpm
 sudo -s
 source setup.sh
 ```
