@@ -21,7 +21,7 @@ cd ~/TPM_Sharing_Scheme
 git pull
 git checkout setup_ibmtpm
 cd ./setup_ibmtpm
-sudo bash setup.sh
+sudo bash +x setup.sh
 # exit
 ```
 
