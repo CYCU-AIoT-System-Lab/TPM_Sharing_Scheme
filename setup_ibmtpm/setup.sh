@@ -49,9 +49,12 @@ fn_ibmacs="ibmacs${ibmacs_ver}.tar.gz"
 file_ibmtss="${download_dir}/${fn_ibmtss}"
 file_ibmtpm="${download_dir}/${fn_ibmtpm}"
 file_ibmacs="${download_dir}/${fn_ibmacs}"
-path_ibmtss="${base_dir}/ibmtss${ibmtss_ver}/"
-path_ibmtpm="${base_dir}/ibmtpm${ibmtpm_ver}/"
-path_ibmacs="${base_dir}/ibmacs${ibmacs_ver}/"
+sym_link_ibmtss="${base_dir}/ibmtss"
+sym_link_ibmtpm="${base_dir}/ibmtpm"
+sym_link_ibmacs="${base_dir}/ibmacs"
+path_ibmtss="${sym_link_ibmtss}${ibmtss_ver}"
+path_ibmtpm="${sym_link_ibmtpm}${ibmtpm_ver}"
+path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
 
 # Check if running as root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
@@ -339,8 +342,8 @@ gen_CA () {
     echo -e "${BOLD}${ORANGE}Function not implemented${NC}"
     echo -e "${BOLD}${ORANGE}Refer to ${ibmacs_dir}/README.md line 171 for steps.${NC}"
     echo -e "${BOLD}${GREEN}Generated CAs ......${NC}"
-    ls "${ibmtss_dir}/utils/*.pem"
-    ls "${ibmacs_dir}/*.pem"
+    ls "${path_ibmtss}/utils/*.pem"
+    ls "${path_ibmacs}/*.pem"
 
     echo -e "\n====================================================\n>>${BOLD}${GREEN}Generating CA Complete${NC}\n====================================================\n"
 }
