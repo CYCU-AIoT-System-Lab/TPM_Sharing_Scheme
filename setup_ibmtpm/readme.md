@@ -60,3 +60,7 @@ In VM terminal, adjust job settings, type ```sudo bash setup.sh```
 2. ACS demo setting variable error.
 3. ACS demo verification setting variable error.
 4. force_acs_sql_setting might need to be 1.
+
+## Progress Update
+
+1. [TPM Sharing Scheme 2023/11/06:11:22:45 Commit: 121ea01](https://youtu.be/RcyuaFtERZM)
