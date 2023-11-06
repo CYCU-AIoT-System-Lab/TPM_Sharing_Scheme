@@ -132,9 +132,13 @@ install_req () {
     mkdir "${path_ibmtpm}"
     mkdir "${path_ibmacs}"
 
-    echo -e "${BOLD}${BLUE}Downloading IBMTPM ......${NC}"
+    echo -e "${BOLD}${BLUE}Downloading IBMTPMTSS ......${NC}"
     wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
+
+    echo -e "${BOLD}${BLUE}Downloading IBMSWTPM ......${NC}"
     wget "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
+
+    echo -e "${BOLD}${BLUE}Downloading IBMACS ......${NC}"
     wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
     echo -e "${BOLD}${BLUE}Extracting files ......${NC}"
