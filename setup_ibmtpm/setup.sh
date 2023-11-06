@@ -377,7 +377,7 @@ open_demo_webpage () {
 
     echo -e "${BOLD}${BLUE}Opening demo webpage ......${NC}"
     # start firefox without root on new terminal
-    command1="sudo -u ${user_name} bash -c \"firefox --safe-mode --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
+    command1="sudo -u ${user_name} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
     gnome-terminal -t "Demo Firefox Website" -- bash -c "${command1}; exec bash"
 
     echo -e "${start_spacer}>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}${end_spacer}"
