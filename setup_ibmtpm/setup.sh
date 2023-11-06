@@ -3,14 +3,14 @@
 # ==================================================================================================
 # Parameters
 # Param - path
-download_dir="/home/user/Downloads"                          # default: /home/user/Downloads
-base_dir="/opt"                                              # default: /opt
-html_dir="/var/www/html/acs"                                 # default: /var/www/html/acs
-c_json_lib_dir="/usr/include/json-c"                         # default: /usr/include/json-c
-c_json_lib_link_dir="/usr/include/json"                      # default: /usr/include/json
-nvim_dir="/home/user/.config/nvim"                           # default: /home/user/.config/nvim
-bashrc_dir="/home/user/.bashrc"                              # default: /home/user/.bashrc
-tpm_data_dir="/home/user/tpm2"                               # default: /home/user/tpm2
+download_dir="/home/user/Downloads"      # default: /home/user/Downloads
+base_dir="/opt"                          # default: /opt
+html_dir="/var/www/html/acs"             # default: /var/www/html/acs
+c_json_lib_dir="/usr/include/json-c"     # default: /usr/include/json-c
+c_json_lib_link_dir="/usr/include/json"  # default: /usr/include/json
+nvim_dir="/home/user/.config/nvim"       # default: /home/user/.config/nvim
+bashrc_dir="/home/user/.bashrc"          # default: /home/user/.bashrc
+tpm_data_dir="/home/user/tpm2"           # default: /home/user/tpm2
 # Param - filename
 RSAEK_cert="cakey.pem"                   # default: cakey.pem
 ECCEK_cert="cakeyecc.pem"                # default: cakeyecc.pem
