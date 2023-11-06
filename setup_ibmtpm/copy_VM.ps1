@@ -15,3 +15,4 @@ foreach($job in $jobs) {
     Invoke-Expression $job
 }
 echo "Done."
+
