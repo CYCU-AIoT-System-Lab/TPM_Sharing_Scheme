@@ -545,10 +545,10 @@ active_ACS_Demo_verify () {
 
         if [ $acsClientMode == 1 ]; then
             # for Local
-            ${sym_link_ibmtss}/acs/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v >| ${acs_demo_verify_client_log_dir}
+            ${sym_link_ibmacs}/acs/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v >| ${acs_demo_verify_client_log_dir}
         elif [ $acsClientMode == 2 ]; then
             # for Remote
-            ${sym_link_ibmtss}/acs/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip} >| ${acs_demo_verify_client_log_dir}
+            ${sym_link_ibmacs}/acs/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip} >| ${acs_demo_verify_client_log_dir}
         else 
             echo -e "${BOLD}${RED}Invalid acsClientMode${NC}"
             exit 1
