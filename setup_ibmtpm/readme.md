@@ -9,7 +9,8 @@ Currently, TPM2.0 only mode can't support ACS.
 1. In VM terminal, type ```ssh-keygen```, keep pressing ```enter``` till command is finished.
 2. In VM terminal, type ```cat /home/user/.ssh/id_rsa.pub```, copy all of the output strings.
 3. In browser, go to <https://github.com/settings/ssh/new>, type the name of this key in title, and paste copied RSA public key in.
-4. In VM terminal, copy the following commands and paste it in your terminal.
+4. In VM terminal, type ```sudo ls``` to acquire root privilege for this installation.
+5. In VM terminal, copy the following commands and paste it in your terminal.
 
 ### Installation Steps - Normal Install
 
