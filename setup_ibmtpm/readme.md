@@ -68,3 +68,4 @@ In VM terminal, adjust job settings, type ```sudo bash setup.sh```
 
 1. [TPM Sharing Scheme 2023/11/06:11:22:45 Commit: 121ea01](https://youtu.be/RcyuaFtERZM)
 2. [TPM Sharing Scheme 2023/11/06 20:02:42 Commit: cc7fc78](https://youtu.be/Na3WUpZXb0Q)
+3. [TPM Sharing Scheme 2023/11/06 20:15:36 Commit: 803fc86](https://youtu.be/0gP2gU_3JKY)
