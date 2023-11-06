@@ -16,6 +16,7 @@ Currently, TPM2.0 only mode can't support ACS.
 ```shell
 sudo apt-get install -y git
 cd ~
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git
 cd ~/TPM_Sharing_Scheme
 git pull
@@ -30,6 +31,7 @@ sudo bash +x setup.sh
 ```shell
 sudo apt-get install -y git
 cd ~
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git
 cd ~/TPM_Sharing_Scheme
 git pull
