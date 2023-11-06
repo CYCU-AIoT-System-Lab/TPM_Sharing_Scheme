@@ -93,11 +93,11 @@ tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
 acs_demo_url="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
 acs_demo_server_log_dir="${sym_link_ibmacs}/serverenroll.log4j"
 acs_demo_client_log_dir="${sym_link_ibmacs}/clientenroll.log4j"
-swtpm_bios_log_dir="${sym_link_ibmacs}/utils/tpm2bios.log"
-acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmacs}/utils/b.log4j"
-ima_sig_log_dir="${sym_link_ibmacs}/utils/imasig.log4j"
-acs_demo_verify_imasig_log_dir="${sym_link_ibmacs}/utils/i.log4j"
-acs_demo_verify_client_log_dir="${sym_link_ibmacs}/utils/client.log4j"
+swtpm_bios_log_dir="${sym_link_ibmtss}/utils/tpm2bios.log"
+acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmtss}/utils/b.log4j"
+ima_sig_log_dir="${sym_link_ibmtss}/utils/imasig.log4j"
+acs_demo_verify_imasig_log_dir="${sym_link_ibmtss}/utils/i.log4j"
+acs_demo_verify_client_log_dir="${sym_link_ibmtss}/utils/client.log4j"
 
 # Check if running as root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
