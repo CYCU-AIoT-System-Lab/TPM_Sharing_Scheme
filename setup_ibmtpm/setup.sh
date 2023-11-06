@@ -536,19 +536,19 @@ active_ACS_Demo_verify () {
         echo -e "${BOLD}${BLUE}Ignore when working with Physical TPM${NC}"
     elif [ $TPMMode == 2 ]; then
         # for Software TPM
-        cd "${path_ibmtss}/utils/"
+        cd "${sym_link_ibmtss}/utils/"
         echo -e "${BOLD}${BLUE}Checking TPM2BIOS.LOG ......${NC}"
-        ${path_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v >| ${acs_demo_verify_tpm2bios_log_dir}
+        ${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v >| ${acs_demo_verify_tpm2bios_log_dir}
 
         echo -e "${BOLD}${BLUE}Checking IMASIG.LOG ......${NC}"
-        ${path_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v >| ${acs_demo_verify_imasig_log_dir}
+        ${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v >| ${acs_demo_verify_imasig_log_dir}
 
         if [ $acsClientMode == 1 ]; then
             # for Local
-            ${path_ibmacs}/acs/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v >| ${acs_demo_verify_client_log_dir}
+            ${sym_link_ibmtss}/acs/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v >| ${acs_demo_verify_client_log_dir}
         elif [ $acsClientMode == 2 ]; then
             # for Remote
-            ${path_ibmacs}/acs/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip} >| ${acs_demo_verify_client_log_dir}
+            ${sym_link_ibmtss}/acs/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip} >| ${acs_demo_verify_client_log_dir}
         else 
             echo -e "${BOLD}${RED}Invalid acsClientMode${NC}"
             exit 1
