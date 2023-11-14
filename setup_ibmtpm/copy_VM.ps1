@@ -6,7 +6,7 @@ $dstVM2 = "Ubuntu 64-bit 18.04 Desktop 0x18"
 
 # $cp_command = "cp -R -force"
 #$cp_command = "cmd /c xcopy /h /i /c /k /e /r /y"
-$cp_command = "robocopy /ETA"
+$cp_command = "robocopy -E /ETA"
 $jobs = "$cp_command `"$baseDir/$srcVM1`" `"$baseDir/$dstVM1`"", 
         "$cp_command `"$baseDir/$srcVM1`" `"$baseDir/$dstVM2`""
 
