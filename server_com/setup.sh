@@ -5,7 +5,7 @@ install_client=1
 install_server=1
 
 # Set working directory
-proj_dir="${PWD}/server_com"
+proj_dir="${PWD}"
 
 # Delete cmake subproject
 awk '!/add_subdirectory/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
