@@ -8,4 +8,5 @@ install_server=1
 proj_dir="${PWD}/server_com"
 
 # Delete cmake subproject
-awk '/add_subdirectory/' "${PWD}/CMakeLists.txt"
+awk '!/add_subdirectory/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
+mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
