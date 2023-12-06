@@ -1,2 +1,4 @@
 *.code-workspace
 optiga-tpm-explorer/
+*/build/
+*/bin/
