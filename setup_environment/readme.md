@@ -49,3 +49,7 @@ Testing environment: Fresh installed ubuntu-20.04.6-desktop-amd64.iso in VM.
 
 1. ```journalctl -xe```
 2. ```ps```
+
+## Resources
+
+1. <https://github.com/Infineon/optiga-tpm-explorer>
