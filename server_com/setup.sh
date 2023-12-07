@@ -29,7 +29,7 @@ if [ $compile_client -eq 1 ]; then
 elif [ $compile_client -eq 0 ]; then
 	echo -e "${term_notice}Skipped client compiling task!"
 else
-	echo -e "${term_warn}Invalid client compiling task!"
+	echo -e "${term_warn}Invalid Argument! Skipped client compiling task!"
 fi
 
 # Add server subproject
@@ -39,7 +39,7 @@ if [ $compile_server -eq 1 ]; then
 elif [ $compile_server -eq 0 ]; then
 	echo -e "${term_notice}Skipped server compiling task!"
 else
-	echo -e "${term_warn}Invalid server compiling task!"
+	echo -e "${term_warn}Invalid Argument! Skipped server compiling task!"
 fi
 
 
