@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # General Settings
 proj_dir="${PWD}"
