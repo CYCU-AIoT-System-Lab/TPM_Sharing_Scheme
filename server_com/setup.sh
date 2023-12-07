@@ -120,5 +120,30 @@ else
 	echo -e "${term_warn}Invalid Argument! Skipped generating makefile!"
 fi
 
+#! Run
+
+# Run Client
+cd "${proj_dir}/bin"
+if [ $run_client -eq 1 ]; then
+	echo -e "${term_notice}Running client..."
+	./client
+elif [ $run_client -eq 0 ]; then
+	echo -e "${term_notice}Skipped running client!"
+else
+	echo -e "${term_warn}Invalid Argument! Skipped running client!"
+fi
+
+# Run Server
+cd "${proj_dir}/bin"
+if [ $run_server -eq 1 ]; then
+	echo -e "${term_notice}Running server..."
+	./server
+elif [ $run_server -eq 0 ]; then
+	echo -e "${term_notice}Skipped running server!"
+else
+	echo -e "${term_warn}Invalid Argument! Skipped running server!"
+fi
+
 # Finish
+cd "${proj_dir}"
 echo -e "${term_notice}Setup complete."
