@@ -103,14 +103,21 @@ fi
 
 # Build
 if [ $build_for_debug -eq 1 ]; then
-	echo -e "${term_notice}Building project for debug..."
+	echo -e "${term_notice}Generating makefile for debug..."
 	cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
+	echo -e "${term_notice}Building project..."
+	make -j"$(nproc)"
+	echo -e "${term_notice}Installing project..."
+	make install
 elif [ $build_for_debug -eq 0 ]; then
-	echo -e "${term_notice}Building project for release..."
+	echo -e "${term_notice}Generating makefile for release..."
 	cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
+	echo -e "${term_notice}Building project..."
+	make -j"$(nproc)"
+	echo -e "${term_notice}Installing project..."
+	make install
 else
-	echo -e "${term_warn}Invalid Argument! Building project for release..."
-	ccmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
+	echo -e "${term_warn}Invalid Argument! Skipped generating makefile!"
 fi
 
 # Finish
