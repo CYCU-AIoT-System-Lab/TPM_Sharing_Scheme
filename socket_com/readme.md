@@ -22,3 +22,4 @@ git stash && git stash clear && git pull && chmod +x setup.sh && ./setup.sh
 ## References
 
 1. <https://stackoverflow.com/questions/6318809/how-do-i-grab-an-ini-value-within-a-shell-script>
+2. <https://devicetests.com/change-gnome-terminal-title-command-line>
