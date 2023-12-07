@@ -6,7 +6,7 @@ term_notice="\033[1m\033[34m[NOTICE]\033[0m "
 term_warn="\033[1m\033[33m[WARNING]\033[0m "
 
 # Setup Tasks (0=No, 1=Yes)
-run_client=$(gawk -F "=" '/^run_client/ {gsub(/[ \t ]/, "", $2); print $2}' "${proj_dir}/config.ini")
+run_client=$(awk -F "=" '/^run_client/ {gsub(/[ \t ]/, "", $2); print $2}' "${proj_dir}/config.ini")
 run_server=1
 echo -e "Run Client: ${run_client}"
 
