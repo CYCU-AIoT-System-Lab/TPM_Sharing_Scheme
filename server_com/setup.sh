@@ -16,7 +16,6 @@ echo -e "${term_notice}Running setup script..."
 # Setup Tasks (0=No, 1=Yes)
 run_client=$(awk -F "=" '/^run_client/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 run_server=$(awk -F "=" '/^run_server/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
-echo -e "Run Client: ${run_client}"
 
 # SubTasks-dev (0=No, 1=Yes)
 perform_clean=$(awk -F "=" '/^perform_clean/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
@@ -39,6 +38,18 @@ echo -e "compile_server: ${compile_server}"
 
 # Main Flow
 # -----------------------------
+
+#! Clean
+cd "${proj_dir}/build"
+if [ $perform_clean -eq 1 ]; then
+	echo -e "${term_notice}Cleaning project..."
+	rm -rf "${proj_dir}/build"
+elif [ $perform_clean -eq 0 ]; then
+	echo -e "${term_notice}Skipped cleaning project!"
+else
+	echo -e "${term_warn}Invalid Argument! Skipped cleaning project!"
+fi
+
 
 # Delete cmake subproject
 awk '!/add_subdirectory/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
