@@ -2,11 +2,15 @@
 
 # General Settings
 proj_dir="${PWD}"
+conf_file="${proj_dir}/config.ini"
 term_notice="\033[1m\033[34m[NOTICE]\033[0m "
 term_warn="\033[1m\033[33m[WARNING]\033[0m "
 
+# Do not adjust below this line
+# -----------------------------
+
 # Setup Tasks (0=No, 1=Yes)
-run_client=$(awk -F "=" '/^run_client/ {gsub(/[ \t ]/, "", $2); print $2}' "${proj_dir}/config.ini")
+run_client=$(awk -F "=" '/^run_client/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 run_server=1
 echo -e "Run Client: ${run_client}"
 
