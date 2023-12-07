@@ -5,8 +5,8 @@ add_executable(
 	${PROJECT_NAME}
 	client.c
 )
-target_include_directories(
-)
+#target_include_directories(
+#)
 install(
 	TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION ${BINARY_DIR}
