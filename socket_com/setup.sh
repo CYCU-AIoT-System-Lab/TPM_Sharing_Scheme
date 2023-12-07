@@ -130,8 +130,6 @@ fi
 # Run Client
 cd "${proj_dir}/bin"
 
-xdotool search --onlyvisible --limit 1 --name "@" set_window --name "setup.sh"
-
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
 	launch_cmd="echo -e \"term_notice_client=${term_notice_client}; ${term_notice_client}Starting client...\"; ./client"
