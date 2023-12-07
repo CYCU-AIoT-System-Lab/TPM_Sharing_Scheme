@@ -27,7 +27,7 @@ if [ $compile_client -eq 1 ]; then
 	echo -e "${term_notice}Adding client compiling task..."
 	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
 else
-	echo -e "${term_warn}Client compiling task disabled."
+	echo -e "${term_notice}Client compiling task disabled."
 fi
 
 # Add server subproject
@@ -35,7 +35,7 @@ if [ $compile_server -eq 1 ]; then
 	echo -e "${term_notice}Adding server compiling task..."
 	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/server)" >> "${proj_dir}/CMakeLists.txt"
 else
-	echo -e "${term_warn}Server compiling task disabled."
+	echo -e "${term_notice}Server compiling task disabled."
 fi
 
 
