@@ -44,6 +44,9 @@ echo -e "compile_server:       ${compile_server}"
 # Main Flow
 # -----------------------------
 
+#! Setup Directories
+mkdir "${proj_dir}/build"
+
 #! Install Dependencies
 if [ $install_dependencies -eq 1 ]; then
 	echo -e "${term_notice}Installing dependencies..."
@@ -55,7 +58,6 @@ elif [ $install_dependencies -eq 0 ]; then
 else
 	echo -e "${term_warn}Invalid Argument! Skipped installing dependencies!"
 fi
-mkdir -p "${proj_dir}/build"
 
 #! Clean
 cd "${proj_dir}/build"
