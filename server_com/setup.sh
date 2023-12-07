@@ -11,15 +11,14 @@ term_warn="\033[1m\033[33m[WARNING]\033[0m "
 
 # Setup Tasks (0=No, 1=Yes)
 run_client=$(awk -F "=" '/^run_client/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
-run_server=1
+run_server=$(awk -F "=" '/^run_server/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 echo -e "Run Client: ${run_client}"
 
 # SubTasks-dev (0=No, 1=Yes)
-perform_clean=1
-perform_build=1
+perform_clean=$(awk -F "=" '/^perform_clean/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 
-# Do not adjust below this line
-# -----------------------------
+# Option Conditioning
 compile_client=$((perform_build * run_client))
 compile_server=$((perform_build * run_server))
 
