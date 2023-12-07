@@ -132,7 +132,7 @@ cd "${proj_dir}/bin"
 
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
-	launch_cmd="echo -e \"term_notice_client=${term_notice_client}; ${term_notice_client}Starting client...\"; ./client"
+	launch_cmd="echo -e \"${term_notice_client}Starting client...\"; ./client"
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 elif [ $run_client -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped running client!"
@@ -144,7 +144,7 @@ fi
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Running server on new terminal..."
-	launch_cmd="echo -e \"term_notice_server=${term_notice_server}; ${term_notice_server}Starting server...\"; ./server"
+	launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server"
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 elif [ $run_server -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped running server!"
