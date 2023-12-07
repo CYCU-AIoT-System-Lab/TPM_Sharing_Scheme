@@ -127,8 +127,8 @@ fi
 cd "${proj_dir}/bin"
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice}Running client on new terminal..."
-	launch_cmd="echo \"${term_notice}Starting client...\"; ./client"
-	gnome-terminal --active -- bash -c "${launch_cmd}; exec bash"
+	launch_cmd="echo -e \"${term_notice}Starting client...\"; ./client"
+	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 	xdotool getactivewindow set_window --name "socket_com client"
 elif [ $run_client -eq 0 ]; then
 	echo -e "${term_notice}Skipped running client!"
@@ -140,8 +140,8 @@ fi
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice}Running server on new terminal..."
-	launch_cmd="echo \"${term_notice}Starting server...\"; ./server"
-	gnome-terminal --active -- bash -c "${launch_cmd}; exec bash"
+	launch_cmd="echo -e \"${term_notice}Starting server...\"; ./server"
+	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 	xdotool getactivewindow set_window --name "socket_com server"
 elif [ $run_server -eq 0 ]; then
 	echo -e "${term_notice}Skipped running server!"
