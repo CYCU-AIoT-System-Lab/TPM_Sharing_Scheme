@@ -27,6 +27,7 @@ install_dependencies=$(awk -F "=" '/^install_dependencies/ {gsub(/[ \t ]/, "", $
 perform_clean=$(awk -F "=" '/^perform_clean/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 build_for_debug=$(awk -F "=" '/^build_for_debug/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+generate_docs=$(awk -F "=" '/^generate_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 
 # Option Conditioning
 # -----------------------------
@@ -52,6 +53,7 @@ echo -e "compile_client:       ${compile_client}"
 #! Setup Directories
 build_dir="${proj_dir}/build"
 bin_dir="${proj_dir}/bin"
+doc_dir="${proj_dir}/doc"
 echo -e "${term_notice_setup}Creating directories: ${build_dir}, ${bin_dir}"
 mkdir $build_dir
 mkdir $bin_dir
@@ -61,7 +63,7 @@ if [ $install_dependencies -eq 1 ]; then
 	echo -e "${term_notice_setup}Installing dependencies..."
 	sudo apt-get update
 	sudo apt-get update -y --fix-missing
-	sudo apt-get install -y neovim cmake build-essential
+	sudo apt-get install -y neovim cmake build-essential doxygen
 elif [ $install_dependencies -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped installing dependencies!"
 else
@@ -147,6 +149,17 @@ elif [ $run_client -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped running client!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running client!"
+fi
+
+#! Generate Documentation
+cd "${proj_dir}"
+if [ $generate_docs -eq 1 ]; then
+	echo -e "${term_notice_setup}Generating documentation..."
+	doxygen ./Doxyfile
+elif [ $generate_docs -eq 0 ]; then
+	echo -e "${term_notice_setup}Skipped generating documentation!"
+else
+	echo -e "${term_warn_setup}Invalid Argument! Skipped generating documentation!"
 fi
 
 # Finish
