@@ -30,8 +30,8 @@ perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}'
 build_for_debug=$(awk -F "=" '/^build_for_debug/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 generate_docs=$(awk -F "=" '/^generate_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 host_docs=$(awk -F "=" '/^host_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
-host_docs_ip=$(awk -F "=" '/^host_docs_ip/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
-host_docs_port=$(awk -F "=" '/^host_docs_port/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+host_ip=$(awk -F "=" '/^host_ip/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+host_port=$(awk -F "=" '/^host_port/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 open_docs_in_browser=$(awk -F "=" '/^open_docs_in_browser/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 
 # Option Conditioning
@@ -51,8 +51,8 @@ echo -e "perform_build:        ${perform_build}"
 echo -e "build_for_debug:      ${build_for_debug}"
 echo -e "generate_docs:        ${generate_docs}"
 echo -e "host_docs:            ${host_docs}"
-echo -e "host_docs_ip:         ${host_docs_ip}"
-echo -e "host_docs_port:       ${host_docs_port}"
+echo -e "host_ip:              ${host_ip}"
+echo -e "host_port:            ${host_port}"
 echo -e "open_docs_in_browser: ${open_docs_in_browser}"
 echo -e "compile_server:       ${compile_server}"
 echo -e "compile_client:       ${compile_client}"
@@ -176,7 +176,7 @@ fi
 if [ $host_docs -eq 1 ]; then
 	echo -e "${term_notice_setup}Hosting documentation in new terminal..."
 	cd "${doc_dir}/html"
-	launch_cmd="echo -e \"${term_notice_docs}Hosting documentation...\"; python3 -m http.server ${host_docs_port} --bind ${host_docs_ip} --directory ${doc_dir}/html"
+	launch_cmd="echo -e \"${term_notice_docs}Hosting documentation...\"; python3 -m http.server ${host_port} --bind ${host_ip} --directory ${doc_dir}/html"
 elif [ $host_docs -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped hosting documentation!"
 else
