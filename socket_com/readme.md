@@ -2,8 +2,11 @@
 
 ## Demo
 
-1. TPM Sharing Scheme 2023/12/07-19:52:02 Commit: 33d8ed85d8d6204850d2a6763a7d6ebddee37fc3 <https://youtu.be/8Zay1Opzdgk>
-2. TPM Sharing Scheme 2023/12/07-21:00:59 Commit: 0ee2072329c0306d6dfa493f87cd4deb5bc3e8c2 <https://youtu.be/zTvb3QRjuMI>
+| No. |      Date-Time      |                                                                             Commit                                                                              | Detail                                                 |           Demo Video           |
+| :-: | :-----------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------ | :----------------------------: |
+|  1  | 2023/12/07-19:52:02 | [33d8ed85d8d6204850d2a6763a7d6ebddee37fc3](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/33d8ed85d8d6204850d2a6763a7d6ebddee37fc3/socket_com) | Install req, clean, build, install.                    | <https://youtu.be/8Zay1Opzdgk> |
+|  2  | 2023/12/07-21:00:59 | [0ee2072329c0306d6dfa493f87cd4deb5bc3e8c2](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/0ee2072329c0306d6dfa493f87cd4deb5bc3e8c2/socket_com) | Adjust launch order.                                   | <https://youtu.be/zTvb3QRjuMI> |
+|  3  | 2023/12/07-23:12:45 | [c02cc3e3f7f36cd3964232ff4268dca5f7b374ed](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/c02cc3e3f7f36cd3964232ff4268dca5f7b374ed/socket_com) | Install req, clean, build, install, doc, host, browse. | <https://youtu.be/hjNEifu7EuQ> |
 
 ## Dev Deploy Command
 
