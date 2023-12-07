@@ -142,7 +142,7 @@ fi
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice}Running server on new terminal..."
-	launch_cmd="xdotool getactivewindow set_window --name \"socket_com server\"; echo -e \"${term_notice}Starting server...\"; ./server"
+	launch_cmd="xdotool search --onlyvisible --limit 1 --name \"@\" set_window --name \"socket_com server\"; echo -e \"${term_notice}Starting server...\"; ./server"
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 elif [ $run_server -eq 0 ]; then
 	echo -e "${term_notice}Skipped running server!"
