@@ -126,7 +126,7 @@ fi
 # Run Client
 cd "${proj_dir}/bin"
 
-gnome-terminal -- bash -c "exit; exec bash"
+gnome-terminal -- bash -c "sleep 5; exit; exec bash"
 
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice}Running client on new terminal..."
