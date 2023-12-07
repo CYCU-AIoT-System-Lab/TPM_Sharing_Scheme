@@ -1,4 +1,5 @@
-#!/bin/bash -x
+#!/bin/bash
+#!/bin/bash -x # for debugging
 
 # General Settings
 proj_dir="${PWD}"
