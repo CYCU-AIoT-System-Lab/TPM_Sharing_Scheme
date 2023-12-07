@@ -20,21 +20,24 @@ run_server=$(awk -F "=" '/^run_server/ {gsub(/[ \t ]/, "", $2); print $2}' "${co
 # SubTasks-dev (0=No, 1=Yes)
 perform_clean=$(awk -F "=" '/^perform_clean/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+build_for_debug=$(awk -F "=" '/^build_for_debug/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 
 # Option Conditioning
 # -----------------------------
 compile_client=$((perform_build * run_client))
 compile_server=$((perform_build * run_server))
+build_for_debug=$((perform_build * build_for_debug))
 
 # Show Options
 # -----------------------------
 echo -e "${term_notice}Settings in ${conf_file}:"
-echo -e "run_client:     ${run_client}"
-echo -e "run_server:     ${run_server}"
-echo -e "perform_clean:  ${perform_clean}"
-echo -e "perform_build:  ${perform_build}"
-echo -e "compile_client: ${compile_client}"
-echo -e "compile_server: ${compile_server}"
+echo -e "run_client:      ${run_client}"
+echo -e "run_server:      ${run_server}"
+echo -e "perform_clean:   ${perform_clean}"
+echo -e "perform_build:   ${perform_build}"
+echo -e "build_for_debug: ${build_for_debug}"
+echo -e "compile_client:  ${compile_client}"
+echo -e "compile_server:  ${compile_server}"
 
 # Main Flow
 # -----------------------------
@@ -50,6 +53,8 @@ else
 	echo -e "${term_warn}Invalid Argument! Skipped cleaning project!"
 fi
 
+#! Build
+cd "${proj_dir}/build"
 
 # Delete cmake subproject
 awk '!/add_subdirectory/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
@@ -75,6 +80,17 @@ else
 	echo -e "${term_warn}Invalid Argument! Skipped server compiling task!"
 fi
 
+# Build
+if [ $build_for_debug -eq 1 ]; then
+	echo -e "${term_notice}Building project for debug..."
+	cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
+elif [ $build_for_debug -eq 0 ]; then
+	echo -e "${term_notice}Building project for release..."
+	cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
+else
+	echo -e "${term_warn}Invalid Argument! Building project for release..."
+	ccmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
+fi
 
 # Finish
 echo -e "${term_notice}Setup complete."
