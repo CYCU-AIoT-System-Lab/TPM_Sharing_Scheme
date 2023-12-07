@@ -184,6 +184,17 @@ else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped hosting documentation!"
 fi
 
+#! Open Documentation in Browser
+if [ $open_docs_in_browser -eq 1 ]; then
+	echo -e "${term_notice_setup}Opening documentation in browser..."
+	launch_cmd="firefox --new-tab -url http://${host_ip}:${host_port}"
+	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
+elif [ $open_docs_in_browser -eq 0 ]; then
+	echo -e "${term_notice_setup}Skipped opening documentation in browser!"
+else
+	echo -e "${term_warn_setup}Invalid Argument! Skipped opening documentation in browser!"
+fi
+
 # Finish
 cd "${proj_dir}"
 echo -e "${term_notice_setup}Setup complete."
