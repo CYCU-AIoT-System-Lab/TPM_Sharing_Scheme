@@ -177,6 +177,7 @@ if [ $host_docs -eq 1 ]; then
 	echo -e "${term_notice_setup}Hosting documentation in new terminal..."
 	cd "${doc_dir}/html"
 	launch_cmd="echo -e \"${term_notice_docs}Hosting documentation...\"; python3 -m http.server ${host_port} --bind ${host_ip} --directory ${doc_dir}/html"
+	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 elif [ $host_docs -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped hosting documentation!"
 else
