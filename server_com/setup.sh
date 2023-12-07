@@ -45,7 +45,11 @@ echo -e "compile_server:       ${compile_server}"
 # -----------------------------
 
 #! Setup Directories
-mkdir "${proj_dir}/build"
+build_dir="${proj_dir}/build"
+bin_dir="${proj_dir}/bin"
+echo -e "${term_notice}Creating directories: ${build_dir}, ${bin_dir}"
+mkdir $build_dir
+mkdir $bin_dir
 
 #! Install Dependencies
 if [ $install_dependencies -eq 1 ]; then
