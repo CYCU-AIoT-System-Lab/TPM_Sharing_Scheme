@@ -10,10 +10,11 @@ term_notice_server="\033[1m\033[34m[NOTICE-server]\033[0m "
 term_warn_server="\033[1m\033[33m[WARNING-server]\033[0m "
 term_notice_client="\033[1m\033[34m[NOTICE-client]\033[0m "
 term_warn_client="\033[1m\033[33m[WARNING-client]\033[0m "
+term_notice_docs="\033[1m\033[34m[NOTICE-docs]\033[0m "
+term_warn_docs="\033[1m\033[33m[WARNING-docs]\033[0m "
 
 # Do not adjust below this line
 echo -e "${term_notice_setup}Running setup script..."
-
 
 # Read config.ini
 # -----------------------------
@@ -28,6 +29,10 @@ perform_clean=$(awk -F "=" '/^perform_clean/ {gsub(/[ \t ]/, "", $2); print $2}'
 perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 build_for_debug=$(awk -F "=" '/^build_for_debug/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 generate_docs=$(awk -F "=" '/^generate_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+host_docs=$(awk -F "=" '/^host_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+host_docs_ip=$(awk -F "=" '/^host_docs_ip/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+host_docs_port=$(awk -F "=" '/^host_docs_port/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+open_docs_in_browser=$(awk -F "=" '/^open_docs_in_browser/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 
 # Option Conditioning
 # -----------------------------
@@ -44,6 +49,11 @@ echo -e "install_dependencies: ${install_dependencies}"
 echo -e "perform_clean:        ${perform_clean}"
 echo -e "perform_build:        ${perform_build}"
 echo -e "build_for_debug:      ${build_for_debug}"
+echo -e "generate_docs:        ${generate_docs}"
+echo -e "host_docs:            ${host_docs}"
+echo -e "host_docs_ip:         ${host_docs_ip}"
+echo -e "host_docs_port:       ${host_docs_port}"
+echo -e "open_docs_in_browser: ${open_docs_in_browser}"
 echo -e "compile_server:       ${compile_server}"
 echo -e "compile_client:       ${compile_client}"
 
@@ -160,6 +170,17 @@ elif [ $generate_docs -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped generating documentation!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped generating documentation!"
+fi
+
+#! Host Documentation
+if [ $host_docs -eq 1 ]; then
+	echo -e "${term_notice_setup}Hosting documentation in new terminal..."
+	cd "${doc_dir}/html"
+	launch_cmd="echo -e \"${term_notice_docs}Hosting documentation...\"; python3 -m http.server ${host_docs_port} --bind ${host_docs_ip} --directory ${doc_dir}/html"
+elif [ $host_docs -eq 0 ]; then
+	echo -e "${term_notice_setup}Skipped hosting documentation!"
+else
+	echo -e "${term_warn_setup}Invalid Argument! Skipped hosting documentation!"
 fi
 
 # Finish
