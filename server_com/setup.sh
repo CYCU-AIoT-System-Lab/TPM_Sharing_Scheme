@@ -18,13 +18,13 @@ mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 # Add client subproject
 if [ $install_client -eq 1 ]; then
 	echo -e "${term_notice}Adding client compiling task..."
-	echo "add_subdirectory(${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
+	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
 fi
 
 # Add server subproject
 if [ $install_server -eq 1 ]; then
 	echo -e "${term_notice}Adding server compiling task..."
-	echo "add_subdirectory(${CMAKE_SOURCE_DIR}/server)" >> "${proj_dir}/CMakeLists.txt"
+	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/server)" >> "${proj_dir}/CMakeLists.txt"
 fi
 
 
