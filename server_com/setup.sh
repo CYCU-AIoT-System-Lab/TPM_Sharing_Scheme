@@ -7,6 +7,7 @@ term_notice="\033[1m\033[34m[NOTICE]\033[0m "
 term_warn="\033[1m\033[33m[WARNING]\033[0m "
 
 # Do not adjust below this line
+# Read config.ini
 # -----------------------------
 
 # Setup Tasks (0=No, 1=Yes)
@@ -19,8 +20,22 @@ perform_clean=$(awk -F "=" '/^perform_clean/ {gsub(/[ \t ]/, "", $2); print $2}'
 perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 
 # Option Conditioning
+# -----------------------------
 compile_client=$((perform_build * run_client))
 compile_server=$((perform_build * run_server))
+
+# Show Options
+# -----------------------------
+echo -e "${term_notice}Settings in ${conf_file}:"
+echo -e "run_client:     ${run_client}"
+echo -e "run_server:     ${run_server}"
+echo -e "perform_clean:  ${perform_clean}"
+echo -e "perform_build:  ${perform_build}"
+echo -e "compile_client: ${compile_client}"
+echo -e "compile_server: ${compile_server}"
+
+# Main Flow
+# -----------------------------
 
 # Delete cmake subproject
 awk '!/add_subdirectory/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
