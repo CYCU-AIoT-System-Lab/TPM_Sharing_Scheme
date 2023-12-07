@@ -7,6 +7,9 @@ term_notice="\033[1m\033[34m[NOTICE]\033[0m "
 term_warn="\033[1m\033[33m[WARNING]\033[0m "
 
 # Do not adjust below this line
+echo -e "${term_notice}Running setup script..."
+
+
 # Read config.ini
 # -----------------------------
 
