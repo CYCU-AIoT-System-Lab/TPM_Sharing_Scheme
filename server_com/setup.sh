@@ -67,7 +67,7 @@ fi
 cd "${proj_dir}/build"
 if [ $perform_clean -eq 1 ]; then
 	echo -e "${term_notice}Cleaning project..."
-	rm -rf "${proj_dir}/build"
+	rm -rf "${proj_dir}/build/*"
 elif [ $perform_clean -eq 0 ]; then
 	echo -e "${term_notice}Skipped cleaning project!"
 else
