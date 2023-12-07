@@ -18,6 +18,7 @@ run_client=$(awk -F "=" '/^run_client/ {gsub(/[ \t ]/, "", $2); print $2}' "${co
 run_server=$(awk -F "=" '/^run_server/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 
 # SubTasks-dev (0=No, 1=Yes)
+install_dependencies=$(awk -F "=" '/^install_dependencies/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 perform_clean=$(awk -F "=" '/^perform_clean/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 build_for_debug=$(awk -F "=" '/^build_for_debug/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
@@ -31,16 +32,30 @@ build_for_debug=$((perform_build * build_for_debug))
 # Show Options
 # -----------------------------
 echo -e "${term_notice}Settings in ${conf_file}:"
-echo -e "run_client:      ${run_client}"
-echo -e "run_server:      ${run_server}"
-echo -e "perform_clean:   ${perform_clean}"
-echo -e "perform_build:   ${perform_build}"
-echo -e "build_for_debug: ${build_for_debug}"
-echo -e "compile_client:  ${compile_client}"
-echo -e "compile_server:  ${compile_server}"
+echo -e "run_client:           ${run_client}"
+echo -e "run_server:           ${run_server}"
+echo -e "install_dependencies: ${install_dependencies}"
+echo -e "perform_clean:        ${perform_clean}"
+echo -e "perform_build:        ${perform_build}"
+echo -e "build_for_debug:      ${build_for_debug}"
+echo -e "compile_client:       ${compile_client}"
+echo -e "compile_server:       ${compile_server}"
 
 # Main Flow
 # -----------------------------
+
+#! Install Dependencies
+if [ $install_dependencies -eq 1 ]; then
+	echo -e "${term_notice}Installing dependencies..."
+	sudo apt-get update
+	sudo apt-get update -y --fix-missing
+	sudo apt-get install -y neovim cmake build-essential
+elif [ $install_dependencies -eq 0 ]; then
+	echo -e "${term_notice}Skipped installing dependencies!"
+else
+	echo -e "${term_warn}Invalid Argument! Skipped installing dependencies!"
+fi
+mkdir -p "${proj_dir}/build"
 
 #! Clean
 cd "${proj_dir}/build"
