@@ -140,7 +140,9 @@ fi
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice}Running server on new terminal..."
-	./server
+	#./server
+	launch_cmd="echo \"${term_notice}Starting server...\"; ./server"
+	gnome-terminal -t "server_com server" --active -- bash -c "${launch_cmd}; exec bash"
 elif [ $run_server -eq 0 ]; then
 	echo -e "${term_notice}Skipped running server!"
 else
