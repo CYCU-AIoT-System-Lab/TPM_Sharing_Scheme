@@ -4,11 +4,15 @@
 # General Settings
 proj_dir="${PWD}"
 conf_file="${proj_dir}/config.ini"
-term_notice="\033[1m\033[34m[NOTICE]\033[0m "
-term_warn="\033[1m\033[33m[WARNING]\033[0m "
+term_notice_setup="\033[1m\033[34m[NOTICE-setup]\033[0m "
+term_warn_setup="\033[1m\033[33m[WARNING-setup]\033[0m "
+term_notice_server="\033[1m\033[34m[NOTICE-server]\033[0m "
+term_warn_server="\033[1m\033[33m[WARNING-server]\033[0m "
+term_notice_client="\033[1m\033[34m[NOTICE-client]\033[0m "
+term_warn_client="\033[1m\033[33m[WARNING-client]\033[0m "
 
 # Do not adjust below this line
-echo -e "${term_notice}Running setup script..."
+echo -e "${term_notice_setup}Running setup script..."
 
 
 # Read config.ini
@@ -32,7 +36,7 @@ build_for_debug=$((perform_build * build_for_debug))
 
 # Show Options
 # -----------------------------
-echo -e "${term_notice}Settings in ${conf_file}:"
+echo -e "${term_notice_setup}Settings in ${conf_file}:"
 echo -e "run_client:           ${run_client}"
 echo -e "run_server:           ${run_server}"
 echo -e "install_dependencies: ${install_dependencies}"
@@ -48,31 +52,31 @@ echo -e "compile_server:       ${compile_server}"
 #! Setup Directories
 build_dir="${proj_dir}/build"
 bin_dir="${proj_dir}/bin"
-echo -e "${term_notice}Creating directories: ${build_dir}, ${bin_dir}"
+echo -e "${term_notice_setup}Creating directories: ${build_dir}, ${bin_dir}"
 mkdir $build_dir
 mkdir $bin_dir
 
 #! Install Dependencies
 if [ $install_dependencies -eq 1 ]; then
-	echo -e "${term_notice}Installing dependencies..."
+	echo -e "${term_notice_setup}Installing dependencies..."
 	sudo apt-get update
 	sudo apt-get update -y --fix-missing
-	sudo apt-get install -y neovim cmake build-essential xdotool
+	sudo apt-get install -y neovim cmake build-essential
 elif [ $install_dependencies -eq 0 ]; then
-	echo -e "${term_notice}Skipped installing dependencies!"
+	echo -e "${term_notice_setup}Skipped installing dependencies!"
 else
-	echo -e "${term_warn}Invalid Argument! Skipped installing dependencies!"
+	echo -e "${term_warn_setup}Invalid Argument! Skipped installing dependencies!"
 fi
 
 #! Clean
 cd "${proj_dir}/build"
 if [ $perform_clean -eq 1 ]; then
-	echo -e "${term_notice}Cleaning project..."
+	echo -e "${term_notice_setup}Cleaning project..."
 	rm -rf "${proj_dir}/build/*"
 elif [ $perform_clean -eq 0 ]; then
-	echo -e "${term_notice}Skipped cleaning project!"
+	echo -e "${term_notice_setup}Skipped cleaning project!"
 else
-	echo -e "${term_warn}Invalid Argument! Skipped cleaning project!"
+	echo -e "${term_warn_setup}Invalid Argument! Skipped cleaning project!"
 fi
 
 #! Build
@@ -84,41 +88,41 @@ mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 
 # Add client subproject
 if [ $compile_client -eq 1 ]; then
-	echo -e "${term_notice}Adding client compiling task..."
+	echo -e "${term_notice_setup}Adding client compiling task..."
 	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
 elif [ $compile_client -eq 0 ]; then
-	echo -e "${term_notice}Skipped client compiling task!"
+	echo -e "${term_notice_setup}Skipped client compiling task!"
 else
-	echo -e "${term_warn}Invalid Argument! Skipped client compiling task!"
+	echo -e "${term_warn_setup}Invalid Argument! Skipped client compiling task!"
 fi
 
 # Add server subproject
 if [ $compile_server -eq 1 ]; then
-	echo -e "${term_notice}Adding server compiling task..."
+	echo -e "${term_notice_setup}Adding server compiling task..."
 	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/server)" >> "${proj_dir}/CMakeLists.txt"
 elif [ $compile_server -eq 0 ]; then
-	echo -e "${term_notice}Skipped server compiling task!"
+	echo -e "${term_notice_setup}Skipped server compiling task!"
 else
-	echo -e "${term_warn}Invalid Argument! Skipped server compiling task!"
+	echo -e "${term_warn_setup}Invalid Argument! Skipped server compiling task!"
 fi
 
 # Build
 if [ $build_for_debug -eq 1 ]; then
-	echo -e "${term_notice}Generating makefile for debug..."
+	echo -e "${term_notice_setup}Generating makefile for debug..."
 	cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
-	echo -e "${term_notice}Building project..."
+	echo -e "${term_notice_setup}Building project..."
 	make -j"$(nproc)"
-	echo -e "${term_notice}Installing project..."
+	echo -e "${term_notice_setup}Installing project..."
 	make install
 elif [ $build_for_debug -eq 0 ]; then
-	echo -e "${term_notice}Generating makefile for release..."
+	echo -e "${term_notice_setup}Generating makefile for release..."
 	cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
-	echo -e "${term_notice}Building project..."
+	echo -e "${term_notice_setup}Building project..."
 	make -j"$(nproc)"
-	echo -e "${term_notice}Installing project..."
+	echo -e "${term_notice_setup}Installing project..."
 	make install
 else
-	echo -e "${term_warn}Invalid Argument! Skipped generating makefile!"
+	echo -e "${term_warn_setup}Invalid Argument! Skipped generating makefile!"
 fi
 
 #! Run
@@ -129,27 +133,27 @@ cd "${proj_dir}/bin"
 xdotool search --onlyvisible --limit 1 --name "@" set_window --name "setup.sh"
 
 if [ $run_client -eq 1 ]; then
-	echo -e "${term_notice}Running client on new terminal..."
-	launch_cmd="xdotool search --onlyvisible --limit 1 --name \"@\" set_window --name \"socket_com client\"; echo -e \"${term_notice}Starting client...\"; ./client"
+	echo -e "${term_notice_setup}Running client on new terminal..."
+	launch_cmd="echo -e \"term_notice_client=${term_notice_client}; ${term_notice_client}Starting client...\"; ./client"
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 elif [ $run_client -eq 0 ]; then
-	echo -e "${term_notice}Skipped running client!"
+	echo -e "${term_notice_setup}Skipped running client!"
 else
-	echo -e "${term_warn}Invalid Argument! Skipped running client!"
+	echo -e "${term_warn_setup}Invalid Argument! Skipped running client!"
 fi
 
 # Run Server
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
-	echo -e "${term_notice}Running server on new terminal..."
-	launch_cmd="xdotool search --onlyvisible --limit 1 --any --pid \$\$ set_window --name \"socket_com server\"; echo -e \"${term_notice}Starting server...\"; ./server"
+	echo -e "${term_notice_setup}Running server on new terminal..."
+	launch_cmd="echo -e \"term_notice_server=${term_notice_server}; ${term_notice_server}Starting server...\"; ./server"
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 elif [ $run_server -eq 0 ]; then
-	echo -e "${term_notice}Skipped running server!"
+	echo -e "${term_notice_setup}Skipped running server!"
 else
-	echo -e "${term_warn}Invalid Argument! Skipped running server!"
+	echo -e "${term_warn_setup}Invalid Argument! Skipped running server!"
 fi
 
 # Finish
 cd "${proj_dir}"
-echo -e "${term_notice}Setup complete."
+echo -e "${term_notice_setup}Setup complete."
