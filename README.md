@@ -8,7 +8,7 @@
 | --- | ------------------------------------------------- | ---------------------------------------------------------- |
 | 1.  | [```./common```](./common/)                       | Common utilities accross different subprojects.            |
 | 2.  | [```./doc```](./doc/)                             | Documentation used in this project.                        |
-| 3.  | [```./server_com```](./server_com/)               | Implement server communication with C.                     |
+| 3.  | [```./socket_com```](./socket_com/)               | Implement socket communication with C.                     |
 | 3.  | [```./setup_environment```](./setup_environment/) | Script used to perform linux developing environment setup. |
 | 4.  | [```./setup_ibmtpm```](./setup_ibmtpm/)           | Script used to perform IBM ACS demo setup.                 |
 | 5.  | [```./.gitignore```](./.gitignore)                | Files / Directory to ignore for this repo.                 |
