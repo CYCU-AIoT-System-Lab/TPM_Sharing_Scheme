@@ -129,7 +129,7 @@ if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice}Running client on new terminal..."
 	#./client
 	launch_cmd="echo \"${term_notice}Starting client...\"; ./client"
-	gnome-terminal --tab-with-profile "server_com client" --active -- bash -c "${launch_cmd}; exec bash"
+	gnome-terminal --title="server_com client" --active -- bash -c "${launch_cmd}; exec bash"
 elif [ $run_client -eq 0 ]; then
 	echo -e "${term_notice}Skipped running client!"
 else
