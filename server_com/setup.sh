@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Setup Tasks (0=No, 1=Yes)
-run_client=1
-run_server=1
-
 # General Settings
 proj_dir="${PWD}"
 term_notice="\033[1m\033[34m[NOTICE]\033[0m "
 term_warn="\033[1m\033[33m[WARNING]\033[0m "
+
+# Setup Tasks (0=No, 1=Yes)
+run_client=$(gawk -F "=" "/run_client/ {print $2}" "${proj_dir}/config.ini")
+run_server=1
 
 # SubTasks-dev (0=No, 1=Yes)
 perform_clean=1
