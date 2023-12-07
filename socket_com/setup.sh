@@ -63,7 +63,7 @@ if [ $install_dependencies -eq 1 ]; then
 	echo -e "${term_notice_setup}Installing dependencies..."
 	sudo apt-get update
 	sudo apt-get update -y --fix-missing
-	sudo apt-get install -y neovim cmake build-essential doxygen
+	sudo apt-get install -y neovim cmake build-essential doxygen graphviz
 elif [ $install_dependencies -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped installing dependencies!"
 else
