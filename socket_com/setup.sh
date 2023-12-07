@@ -19,8 +19,8 @@ echo -e "${term_notice_setup}Running setup script..."
 # -----------------------------
 
 # Setup Tasks (0=No, 1=Yes)
-run_client=$(awk -F "=" '/^run_client/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 run_server=$(awk -F "=" '/^run_server/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+run_client=$(awk -F "=" '/^run_client/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 
 # SubTasks-dev (0=No, 1=Yes)
 install_dependencies=$(awk -F "=" '/^install_dependencies/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
@@ -30,21 +30,21 @@ build_for_debug=$(awk -F "=" '/^build_for_debug/ {gsub(/[ \t ]/, "", $2); print 
 
 # Option Conditioning
 # -----------------------------
-compile_client=$((perform_build * run_client))
 compile_server=$((perform_build * run_server))
+compile_client=$((perform_build * run_client))
 build_for_debug=$((perform_build * build_for_debug))
 
 # Show Options
 # -----------------------------
 echo -e "${term_notice_setup}Settings in ${conf_file}:"
-echo -e "run_client:           ${run_client}"
 echo -e "run_server:           ${run_server}"
+echo -e "run_client:           ${run_client}"
 echo -e "install_dependencies: ${install_dependencies}"
 echo -e "perform_clean:        ${perform_clean}"
 echo -e "perform_build:        ${perform_build}"
 echo -e "build_for_debug:      ${build_for_debug}"
-echo -e "compile_client:       ${compile_client}"
 echo -e "compile_server:       ${compile_server}"
+echo -e "compile_client:       ${compile_client}"
 
 # Main Flow
 # -----------------------------
@@ -86,16 +86,6 @@ cd "${proj_dir}/build"
 awk '!/add_subdirectory/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
 mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 
-# Add client subproject
-if [ $compile_client -eq 1 ]; then
-	echo -e "${term_notice_setup}Adding client compiling task..."
-	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
-elif [ $compile_client -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped client compiling task!"
-else
-	echo -e "${term_warn_setup}Invalid Argument! Skipped client compiling task!"
-fi
-
 # Add server subproject
 if [ $compile_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Adding server compiling task..."
@@ -104,6 +94,16 @@ elif [ $compile_server -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped server compiling task!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped server compiling task!"
+fi
+
+# Add client subproject
+if [ $compile_client -eq 1 ]; then
+	echo -e "${term_notice_setup}Adding client compiling task..."
+	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
+elif [ $compile_client -eq 0 ]; then
+	echo -e "${term_notice_setup}Skipped client compiling task!"
+else
+	echo -e "${term_warn_setup}Invalid Argument! Skipped client compiling task!"
 fi
 
 # Build
@@ -130,16 +130,6 @@ fi
 # Run Client
 cd "${proj_dir}/bin"
 
-if [ $run_client -eq 1 ]; then
-	echo -e "${term_notice_setup}Running client on new terminal..."
-	launch_cmd="echo -e \"${term_notice_client}Starting client...\"; ./client"
-	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
-elif [ $run_client -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped running client!"
-else
-	echo -e "${term_warn_setup}Invalid Argument! Skipped running client!"
-fi
-
 # Run Server
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
@@ -150,6 +140,17 @@ elif [ $run_server -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped running server!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running server!"
+fi
+
+# Run Client
+if [ $run_client -eq 1 ]; then
+	echo -e "${term_notice_setup}Running client on new terminal..."
+	launch_cmd="echo -e \"${term_notice_client}Starting client...\"; ./client"
+	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
+elif [ $run_client -eq 0 ]; then
+	echo -e "${term_notice_setup}Skipped running client!"
+else
+	echo -e "${term_warn_setup}Invalid Argument! Skipped running client!"
 fi
 
 # Finish
