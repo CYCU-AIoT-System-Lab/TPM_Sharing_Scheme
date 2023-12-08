@@ -25,5 +25,6 @@ cd TPM_Sharing_Scheme
 cd common
 chmod +x setup.sh
 ./setup.sh
+cd ..
 
 ```
