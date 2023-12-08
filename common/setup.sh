@@ -56,8 +56,8 @@ echo -e "$term_notice Running common setup..."
 echo -e "$term_notice Current directory: $PWD"
 install_req
 config_nvim
-change_all_sh_mod
 update_src
+change_all_sh_mod
 reload_term
 echo -e "$term_notice Common setup complete."
 
