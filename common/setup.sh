@@ -37,9 +37,7 @@ config_nvim () {
 
 change_all_sh_mod () {
 	echo -e "$term_notice Changing all .sh files to executable..."
-	sudo chmod +x ../setup_environment/*.sh
-	sudo chmod +x ../setup_ibmtpm/setup.sh
-	sudo chmod +x ../socket_com/setup.sh
+	find .. -type f -name "*.sh" -exec chmod +x {} \;
 }
 
 update_src () {
