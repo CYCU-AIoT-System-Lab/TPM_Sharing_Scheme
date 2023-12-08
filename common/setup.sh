@@ -1,3 +1,5 @@
+#/bin/bash
+
 term_notice="\033[1m\033[34m[NOTICE-common/setup]\033[0m "
 term_warn="\033[1m\033[33m[WARN-common/setup]\033[0m "
 nvim_config_url=""
