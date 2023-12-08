@@ -2,7 +2,7 @@
 
 term_notice="\033[1m\033[34m[NOTICE-common/setup]\033[0m "
 term_warn="\033[1m\033[33m[WARN-common/setup]\033[0m "
-nvim_config_url="https://github.com/belongtothenight/config-files/blob/main/ubuntu_init.vim"
+nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
 nvim_dir="/home/user/.config/nvim"
 
 # sub_tasks (1=Enable)
@@ -37,7 +37,6 @@ config_nvim () {
 
 change_all_sh_mod () {
 	echo -e "$term_notice Changing all .sh files to executable..."
-	chmod +x *.sh
 	chmod +x ../setup_environment/*.sh
 	chmod +x ../setup_ibmtpm/setup.sh
 	chmod +x ../socket_com/setup.sh
