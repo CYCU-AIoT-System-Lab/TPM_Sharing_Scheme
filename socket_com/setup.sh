@@ -4,14 +4,14 @@
 # General Settings
 proj_dir="${PWD}"
 conf_file="${proj_dir}/config.ini"
-term_notice_setup="\033[1m\033[34m[NOTICE-setup]\033[0m "
-term_warn_setup="\033[1m\033[33m[WARNING-setup]\033[0m "
-term_notice_server="\033[1m\033[34m[NOTICE-server]\033[0m "
-term_warn_server="\033[1m\033[33m[WARNING-server]\033[0m "
-term_notice_client="\033[1m\033[34m[NOTICE-client]\033[0m "
-term_warn_client="\033[1m\033[33m[WARNING-client]\033[0m "
-term_notice_docs="\033[1m\033[34m[NOTICE-docs]\033[0m "
-term_warn_docs="\033[1m\033[33m[WARNING-docs]\033[0m "
+term_notice_setup="\033[1m\033[34m[NOTICE-socket_com/setup]\033[0m "
+term_warn_setup="\033[1m\033[33m[WARN-socket_com/setup]\033[0m "
+term_notice_server="\033[1m\033[34m[NOTICE-socket_com/server]\033[0m "
+term_warn_server="\033[1m\033[33m[WARN-socket_com/server]\033[0m "
+term_notice_client="\033[1m\033[34m[NOTICE-socket_com/client]\033[0m "
+term_warn_client="\033[1m\033[33m[WARN-socket_com/client]\033[0m "
+term_notice_docs="\033[1m\033[34m[NOTICE-socket_com/docs]\033[0m "
+term_warn_docs="\033[1m\033[33m[WARN-socket_com/docs]\033[0m "
 
 # Do not adjust below this line
 echo -e "${term_notice_setup}Running setup script..."
@@ -73,7 +73,7 @@ if [ $install_dependencies -eq 1 ]; then
 	echo -e "${term_notice_setup}Installing dependencies..."
 	sudo apt-get update
 	sudo apt-get update -y --fix-missing
-	sudo apt-get install -y neovim cmake build-essential doxygen graphviz
+	sudo apt-get install -y doxygen graphviz
 elif [ $install_dependencies -eq 0 ]; then
 	echo -e "${term_notice_setup}Skipped installing dependencies!"
 else
