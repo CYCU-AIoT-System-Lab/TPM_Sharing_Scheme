@@ -75,7 +75,7 @@ fi
 
 if [ $setup_socket_com -eq 1 ]; then
 	echo -e "$term_notice Running socket_com setup..."
-	cd socket_com
+	cd ../socket_com
 	./setup.sh
 	cd ..
 else
