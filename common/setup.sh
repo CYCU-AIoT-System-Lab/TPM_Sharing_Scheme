@@ -3,7 +3,7 @@
 term_notice="\033[1m\033[34m[NOTICE-common/setup]\033[0m "
 term_warn="\033[1m\033[33m[WARN-common/setup]\033[0m "
 nvim_config_url="https://github.com/belongtothenight/config-files/blob/main/ubuntu_init.vim"
-nvim_dir="~/.config/nvim"
+nvim_dir="/home/user/.config/nvim"
 repo_url="git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git"
 
 # sub_tasks (1=Enable)
