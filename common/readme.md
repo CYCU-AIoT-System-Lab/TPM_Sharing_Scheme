@@ -21,6 +21,7 @@ This directory holdes common utilities for this project.
 sudo apt-get install -y git
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git
+cd TPM_Sharing_Scheme
 git pull
 ./setup.sh
 ```
