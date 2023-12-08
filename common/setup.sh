@@ -2,8 +2,9 @@
 
 term_notice="\033[1m\033[34m[NOTICE-common/setup]\033[0m "
 term_warn="\033[1m\033[33m[WARN-common/setup]\033[0m "
-nvim_config_url=""
+nvim_config_url="https://github.com/belongtothenight/config-files/blob/main/ubuntu_init.vim"
 nvim_dir="~/.config/nvim"
+repo_url="git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git"
 
 # sub_tasks (1=Enable)
 setup_environment=0 # Not implemented
@@ -17,6 +18,7 @@ install_req () {
 	echo -e "$term_notice Installing required packages..."
 	sudo apt-get update
 	sudo apt-get upgrade -y
+	aptins "git"
 	aptins "htop"
 	aptins "iftop"
 	aptins "curl"
@@ -39,6 +41,13 @@ change_all_sh_mod () {
 	chmod +x *.sh
 }
 
+update_src () {
+	echo -e "$term_notice Pulling latest repo source..."
+	git stash
+	git stash clear
+	git pull
+}
+
 reload_term () {
 	echo -e "$term_notice Reloading terminal..."
 	reset
@@ -48,6 +57,7 @@ echo -e "$term_notice Running common setup..."
 install_req
 config_nvim
 change_all_sh_mod
+update_src
 reload_term
 echo -e "$term_notice Common setup complete."
 
