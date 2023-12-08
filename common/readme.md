@@ -19,7 +19,7 @@ This directory holdes common utilities for this project.
 
 ```bash
 sudo apt-get install -y git
-sudo apt autoremove
+sudo apt autoremove -y
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 git config --global user.email "dachuan516@gmail.com"
 git config --global user.name  "belongtothenight"
