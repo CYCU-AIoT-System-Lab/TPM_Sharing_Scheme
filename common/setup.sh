@@ -7,7 +7,7 @@ nvim_dir="/home/user/.config/nvim"
 
 # sub_tasks (1=Enable)
 setup_environment=0 # Not implemented
-setup_ibmtmp=0      # Not implemented
+setup_ibmtpm=0      # Not implemented
 setup_socket_com=1
 
 install_req () {
@@ -38,9 +38,9 @@ config_nvim () {
 change_all_sh_mod () {
 	echo -e "$term_notice Changing all .sh files to executable..."
 	chmod +x *.sh
-	chmod +x setup_environment/*.sh
-	chmod +x setup_ibmtmp/*.sh
-	chmod +x socket_com/*.sh
+	chmod +x ../setup_environment/*.sh
+	chmod +x ../setup_ibmtpm/*.sh
+	chmod +x ../socket_com/*.sh
 }
 
 update_src () {
@@ -56,6 +56,7 @@ reload_term () {
 }
 
 echo -e "$term_notice Running common setup..."
+echo -e "$term_notice Current directory: $PWD"
 install_req
 config_nvim
 change_all_sh_mod
@@ -66,13 +67,13 @@ echo -e "$term_notice Common setup complete."
 if [ $setup_environment -eq 1 ]; then
 	echo -e "$term_warn Running environment setup Not Implemneted Yet!"
 else
-	echo -e "$term_warn Invalid Argument: $setup_environment ! Skipping..."
+	echo -e "$term_warn Invalid Argument: $setup_environment ! Skipping setup_environment..."
 fi
 
-if [ $setup_ibmtmp -eq 1 ]; then
-	echo -e "$term_warn Running ibmtmp setup Not Implemneted Yet!"
+if [ $setup_ibmtpm -eq 1 ]; then
+	echo -e "$term_warn Running ibmtpm setup Not Implemneted Yet!"
 else
-	echo -e "$term_warn Invalid Argument: $setup_ibmtmp ! Skipping..."
+	echo -e "$term_warn Invalid Argument: $setup_ibmtpm ! Skipping setup_ibmtpm..."
 fi
 
 if [ $setup_socket_com -eq 1 ]; then
@@ -81,7 +82,7 @@ if [ $setup_socket_com -eq 1 ]; then
 	./setup.sh
 	cd ..
 else
-	echo -e "$term_warn Invalid Argument: $setup_socket_com ! Skipping..."
+	echo -e "$term_warn Invalid Argument: $setup_socket_com ! Skipping setup_socket_com..."
 fi
 
 echo -e "$term_notice All setup complete."
