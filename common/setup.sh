@@ -4,9 +4,6 @@ term_notice="\033[1m\033[34m[NOTICE-common/setup]\033[0m "
 term_warn="\033[1m\033[33m[WARN-common/setup]\033[0m "
 nvim_config_url="https://github.com/belongtothenight/config-files/blob/main/ubuntu_init.vim"
 nvim_dir="/home/user/.config/nvim"
-repo_url="git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git"
-git_user_email="dachuan516@gmail.com"
-git_user_name="belongtothenightj"
 
 # sub_tasks (1=Enable)
 setup_environment=0 # Not implemented
@@ -48,8 +45,6 @@ change_all_sh_mod () {
 
 update_src () {
 	echo -e "$term_notice Pulling latest repo source..."
-	git config --global user.email $git_user_email
-	git config --global user.name $git_user_name
 	git stash
 	git stash clear
 	git pull
@@ -57,7 +52,7 @@ update_src () {
 
 reload_term () {
 	echo -e "$term_notice Reloading terminal..."
-	reset
+	source ~/.bashrc
 }
 
 echo -e "$term_notice Running common setup..."
