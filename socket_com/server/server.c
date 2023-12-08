@@ -2,7 +2,6 @@
  * @file server.c
  * @brief Server program for the TPM project
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 
