@@ -1,6 +1,6 @@
 # TPM_Sharing_Scheme
  
-- Check [./doc/resources/readme.md](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/blob/main/doc/resources/readme.md) for resources used in this project.
+Refer to [```./common```](./common/) for overall installation script.
 
 ## Repo Structure
 
