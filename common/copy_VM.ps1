@@ -1,8 +1,8 @@
 $baseDir = "E:/Virtual Machines"
 $srcVM1 = "Ubuntu 64-bit 18.04 Desktop 0x12 Bak"
 $srcVM2 = "Ubuntu 64-bit 18.04 Desktop 0x13 Bak"
-$dstVM1 = "Ubuntu 64-bit 18.04 Desktop 0x19"
-$dstVM2 = "Ubuntu 64-bit 18.04 Desktop 0x20"
+$dstVM1 = "Ubuntu 64-bit 18.04 Desktop 0x1a"
+$dstVM2 = "Ubuntu 64-bit 18.04 Desktop 0x1b"
 
 # $cp_command = "cp -R -force"
 #$cp_command = "cmd /c xcopy /h /i /c /k /e /r /y"
