@@ -32,15 +32,15 @@ install_req () {
 config_nvim () {
 	echo -e "$term_notice Configuring neovim..."
 	mkdir -p $nvim_dir
-	wget $nvim_config_url -O "${nvim_dir}/init.vim"
+	wget "$nvim_config_url" -O "${nvim_dir}/init.vim"
 }
 
 change_all_sh_mod () {
 	echo -e "$term_notice Changing all .sh files to executable..."
 	chmod +x *.sh
 	chmod +x ../setup_environment/*.sh
-	chmod +x ../setup_ibmtpm/*.sh
-	chmod +x ../socket_com/*.sh
+	chmod +x ../setup_ibmtpm/setup.sh
+	chmod +x ../socket_com/setup.sh
 }
 
 update_src () {
