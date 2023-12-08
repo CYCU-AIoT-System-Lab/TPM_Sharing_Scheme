@@ -74,8 +74,6 @@ if [ $install_dependencies -eq 1 ]; then
 	sudo apt-get update
 	sudo apt-get update -y --fix-missing
 	sudo apt-get install -y doxygen graphviz
-elif [ $install_dependencies -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped installing dependencies!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped installing dependencies!"
 fi
@@ -85,8 +83,6 @@ cd "${proj_dir}/build"
 if [ $perform_clean -eq 1 ]; then
 	echo -e "${term_notice_setup}Cleaning project..."
 	rm -rf "${proj_dir}/build/*"
-elif [ $perform_clean -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped cleaning project!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped cleaning project!"
 fi
@@ -102,8 +98,6 @@ mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 if [ $compile_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Adding server compiling task..."
 	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/server)" >> "${proj_dir}/CMakeLists.txt"
-elif [ $compile_server -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped server compiling task!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped server compiling task!"
 fi
@@ -112,8 +106,6 @@ fi
 if [ $compile_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Adding client compiling task..."
 	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
-elif [ $compile_client -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped client compiling task!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped client compiling task!"
 fi
@@ -124,13 +116,12 @@ if [ $build_for_debug -eq 1 ]; then
 	cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
 	echo -e "${term_notice_setup}Building and installing project..."
 	make -j"$(nproc)" install
-elif [ $build_for_debug -eq 0 ]; then
+else
 	echo -e "${term_notice_setup}Generating makefile for release..."
 	cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
 	echo -e "${term_notice_setup}Building and installing project..."
 	make -j"$(nproc)" install
-else
-	echo -e "${term_warn_setup}Invalid Argument! Skipped generating makefile!"
+
 fi
 
 #! Run
@@ -144,8 +135,6 @@ if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Running server on new terminal..."
 	launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server"
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
-elif [ $run_server -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped running server!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running server!"
 fi
@@ -155,8 +144,6 @@ if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
 	launch_cmd="echo -e \"${term_notice_client}Starting client...\"; ./client"
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
-elif [ $run_client -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped running client!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running client!"
 fi
@@ -166,8 +153,6 @@ cd "${proj_dir}"
 if [ $generate_docs -eq 1 ]; then
 	echo -e "${term_notice_setup}Generating documentation..."
 	doxygen ./Doxyfile
-elif [ $generate_docs -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped generating documentation!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped generating documentation!"
 fi
@@ -178,8 +163,6 @@ if [ $host_docs -eq 1 ]; then
 	cd "${doc_dir}/html"
 	launch_cmd="echo -e \"${term_notice_docs}Hosting documentation...\"; python3 -m http.server --bind ${host_ip} ${host_port}"
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
-elif [ $host_docs -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped hosting documentation!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped hosting documentation!"
 fi
@@ -189,8 +172,6 @@ if [ $open_docs_in_browser -eq 1 ]; then
 	echo -e "${term_notice_setup}Opening documentation in browser..."
 	launch_cmd="firefox --new-tab -url http://${host_ip}:${host_port}"
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
-elif [ $open_docs_in_browser -eq 0 ]; then
-	echo -e "${term_notice_setup}Skipped opening documentation in browser!"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped opening documentation in browser!"
 fi

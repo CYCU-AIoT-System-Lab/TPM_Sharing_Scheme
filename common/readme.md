@@ -2,6 +2,12 @@
 
 This directory holdes common utilities for this project.
 
+## Demo Video
+
+| No. | IDate-Time          | Commit                                                                                                                                                      | Detail                                               | Demo Video                     |
+| --- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------ |
+| 1   | 2023/12/08-18:07:19 | [3a1293e33b725dbe6380b257f01aab1899bf61e0](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/3a1293e33b725dbe6380b257f01aab1899bf61e0/common) | Can install and execute ```../socket_com/setup.sh``` | <https://youtu.be/ZcaLBuhwKuw> |
+
 ## Directory Structure
 
 | No. | Item                                 | Description                                                 |
