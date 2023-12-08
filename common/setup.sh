@@ -37,7 +37,7 @@ config_nvim () {
 
 change_all_sh_mod () {
 	echo -e "$term_notice Changing all .sh files to executable..."
-	find .. -type f -iname "*.sh" -exec chmod +x {} \;
+	find .. -type f -iname "*.sh" -exec sudo chmod +x {} \;
 }
 
 update_src () {
