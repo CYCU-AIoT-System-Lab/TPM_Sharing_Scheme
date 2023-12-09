@@ -27,6 +27,7 @@ install_req () {
 	aptins "gcc"
 	aptins "make"
 	aptins "cmake"
+	aptins "valgrind"
 }
 
 config_nvim () {
