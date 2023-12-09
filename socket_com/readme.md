@@ -40,5 +40,8 @@ git stash && git stash clear && git pull && chmod +x setup.sh && ./setup.sh
 
 1. <https://stackoverflow.com/questions/6318809/how-do-i-grab-an-ini-value-within-a-shell-script>
 2. <https://devicetests.com/change-gnome-terminal-title-command-line>
+3. <https://stackoverflow.com/questions/14219092/bash-script-bin-bashm-bad-interpreter-no-such-file-or-directory>
 
 ## ToDo
+
+1. Finish socket implementation.
