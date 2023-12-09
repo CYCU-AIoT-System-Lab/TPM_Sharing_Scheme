@@ -148,7 +148,7 @@ if [ $run_client -eq 1 ]; then
 	if [ ${check_for_memory_leaks} -eq 1 ]; then
 		launch_cmd="echo -e \"${term_notice_client}Checking for memory leaks...\"; valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./client"
 	else
-		launch_cmd="echo -e \"${term_notice_client}Starting client...\"; ./client"
+		launch_cmd="echo -e \"${term_notice_client}Starting client...\"; ./client"
 	fi
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 else
