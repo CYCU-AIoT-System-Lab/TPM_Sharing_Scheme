@@ -127,6 +127,7 @@ else
 fi
 
 #! Check for memory leaks
+cd "${proj_dir}/bin"
 if [ $check_for_memory_leaks -eq 1 ]; then
 	echo -e "${term_notice_setup}Checking for memory leaks..."
 	if [ $run_server -eq 1 ]; then

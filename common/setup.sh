@@ -12,6 +12,7 @@ setup_socket_com=1
 
 install_req () {
 	aptins () {
+		echo -e "$term_notice Installing $1..."
 		sudo apt-get install -y $1
 	}
 	echo -e "$term_notice Installing required packages..."
