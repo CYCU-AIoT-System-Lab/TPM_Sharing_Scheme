@@ -126,30 +126,17 @@ else
 	make -j"$(nproc)" install
 fi
 
-#! Check for memory leaks
-cd "${proj_dir}/bin"
-if [ $check_for_memory_leaks -eq 1 ]; then
-	echo -e "${term_notice_setup}Checking for memory leaks..."
-	if [ $run_server -eq 1 ]; then
-		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./server
-	fi
-	if [ $run_client -eq 1 ]; then
-		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./client
-	fi
-else
-	echo -e "${term_warn_setup}Invalid Argument! Skipped checking for memory leaks!"
-fi
-
 #! Run
 
-# Run Client
-cd "${proj_dir}/bin"
-
-# Run Server
+#  Check for memory leaks and Run Server
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Running server on new terminal..."
-	launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server"
+	if [ ${check_for_memory_leaks} -eq 1 ]; then
+		launch_cmd="echo -e \"${term_notice_server}Checking for memory leaks...\"; valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./server"
+	else
+		launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server"
+	fi
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running server!"
@@ -158,7 +145,11 @@ fi
 # Run Client
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
-	launch_cmd="echo -e \"${term_notice_client}Starting client...\"; ./client"
+	if [ ${check_for_memory_leaks} -eq 1 ]; then
+		launch_cmd="echo -e \"${term_notice_client}Checking for memory leaks...\"; valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./client"
+	else
+		launch_cmd="echo -e \"${term_notice_client}Starting client...\"; ./client"
+	fi
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running client!"
