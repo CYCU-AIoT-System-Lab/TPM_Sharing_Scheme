@@ -1,12 +1,21 @@
 # Server Communication
 
+## Functionality
+
+| No. | Item                                         | Functionalities                                                                                                   |
+| --- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| 1.  | [```./setup.sh```](./setup.sh)               | Install requrements, clean, build, install, run, memory leak check, generate documentation, host doc, browse doc. |
+| 2.  | [```./server/server.c```](./server/server.c) | Print out message.                                                                                                |
+| 3.  | [```./client/client.c```](./client/client.c) | Print out message.                                                                                                |
+
 ## Demo
 
-| No. |      Date-Time      |                                                                             Commit                                                                              | Detail                                                 |           Demo Video           |
-| :-: | :-----------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------ | :----------------------------: |
-|  1  | 2023/12/07-19:52:02 | [33d8ed85d8d6204850d2a6763a7d6ebddee37fc3](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/33d8ed85d8d6204850d2a6763a7d6ebddee37fc3/socket_com) | Install req, clean, build, install.                    | <https://youtu.be/8Zay1Opzdgk> |
-|  2  | 2023/12/07-21:00:59 | [0ee2072329c0306d6dfa493f87cd4deb5bc3e8c2](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/0ee2072329c0306d6dfa493f87cd4deb5bc3e8c2/socket_com) | Adjust launch order.                                   | <https://youtu.be/zTvb3QRjuMI> |
-|  3  | 2023/12/07-23:12:45 | [c02cc3e3f7f36cd3964232ff4268dca5f7b374ed](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/c02cc3e3f7f36cd3964232ff4268dca5f7b374ed/socket_com) | Install req, clean, build, install, doc, host, browse. | <https://youtu.be/hjNEifu7EuQ> |
+| No. |      Date-Time      |                                                                             Commit                                                                              | Detail                                                    |           Demo Video           |
+| :-: | :-----------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------- | :----------------------------: |
+|  1  | 2023/12/07-19:52:02 | [33d8ed85d8d6204850d2a6763a7d6ebddee37fc3](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/33d8ed85d8d6204850d2a6763a7d6ebddee37fc3/socket_com) | Script add func: install req, clean, build, install, run. | <https://youtu.be/8Zay1Opzdgk> |
+|  2  | 2023/12/07-21:00:59 | [0ee2072329c0306d6dfa493f87cd4deb5bc3e8c2](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/0ee2072329c0306d6dfa493f87cd4deb5bc3e8c2/socket_com) | Script adjust launch order.                               | <https://youtu.be/zTvb3QRjuMI> |
+|  3  | 2023/12/07-23:12:45 | [c02cc3e3f7f36cd3964232ff4268dca5f7b374ed](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/c02cc3e3f7f36cd3964232ff4268dca5f7b374ed/socket_com) | Script add func: doc, host, browse.                       | <https://youtu.be/hjNEifu7EuQ> |
+|  4  | 2023/12/09-18:48:29 | [d456f29fc1effecaad1a8032d08fbac8cff3d46d](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/d456f29fc1effecaad1a8032d08fbac8cff3d46d/socket_com) | Script add func: mem leak check.                          | <https://youtu.be/mfSQhBRE4bI> |
 
 ## Dev Deploy Command
 
@@ -33,6 +42,3 @@ git stash && git stash clear && git pull && chmod +x setup.sh && ./setup.sh
 2. <https://devicetests.com/change-gnome-terminal-title-command-line>
 
 ## ToDo
-
-1. Make newly created terminal active.
-2. Reverse the order of client and server installation.
