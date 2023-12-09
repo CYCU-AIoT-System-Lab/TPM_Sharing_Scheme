@@ -28,6 +28,7 @@ install_dependencies=$(awk -F "=" '/^install_dependencies/ {gsub(/[ \t ]/, "", $
 perform_clean=$(awk -F "=" '/^perform_clean/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 build_for_debug=$(awk -F "=" '/^build_for_debug/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+check_for_memory_leaks=$(awk -F "=" '/^check_for_memory_leaks/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 generate_docs=$(awk -F "=" '/^generate_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 host_docs=$(awk -F "=" '/^host_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 host_ip=$(awk -F "=" '/^host_ip/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
@@ -39,23 +40,25 @@ open_docs_in_browser=$(awk -F "=" '/^open_docs_in_browser/ {gsub(/[ \t ]/, "", $
 compile_server=$((perform_build * run_server))
 compile_client=$((perform_build * run_client))
 build_for_debug=$((perform_build * build_for_debug))
+check_for_memory_leaks=$((perform_build * build_for_debug))
 
 # Show Options
 # -----------------------------
 echo -e "${term_notice_setup}Settings in ${conf_file}:"
-echo -e "run_server:           ${run_server}"
-echo -e "run_client:           ${run_client}"
-echo -e "install_dependencies: ${install_dependencies}"
-echo -e "perform_clean:        ${perform_clean}"
-echo -e "perform_build:        ${perform_build}"
-echo -e "build_for_debug:      ${build_for_debug}"
-echo -e "generate_docs:        ${generate_docs}"
-echo -e "host_docs:            ${host_docs}"
-echo -e "host_ip:              ${host_ip}"
-echo -e "host_port:            ${host_port}"
-echo -e "open_docs_in_browser: ${open_docs_in_browser}"
-echo -e "compile_server:       ${compile_server}"
-echo -e "compile_client:       ${compile_client}"
+echo -e "run_server:             ${run_server}"
+echo -e "run_client:             ${run_client}"
+echo -e "install_dependencies:   ${install_dependencies}"
+echo -e "perform_clean:          ${perform_clean}"
+echo -e "perform_build:          ${perform_build}"
+echo -e "build_for_debug:        ${build_for_debug}"
+echo -e "check_for_memory_leaks: ${check_for_memory_leaks}"
+echo -e "generate_docs:          ${generate_docs}"
+echo -e "host_docs:              ${host_docs}"
+echo -e "host_ip:                ${host_ip}"
+echo -e "host_port:              ${host_port}"
+echo -e "open_docs_in_browser:   ${open_docs_in_browser}"
+echo -e "compile_server:         ${compile_server}"
+echo -e "compile_client:         ${compile_client}"
 
 # Main Flow
 # -----------------------------
@@ -121,7 +124,19 @@ else
 	cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=ON
 	echo -e "${term_notice_setup}Building and installing project..."
 	make -j"$(nproc)" install
+fi
 
+#! Check for memory leaks
+if [ $check_for_memory_leaks -eq 1 ]; then
+	echo -e "${term_notice_setup}Checking for memory leaks..."
+	if [ $run_server -eq 1 ]; then
+		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./server
+	fi
+	if [ $run_client -eq 1 ]; then
+		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./client
+	fi
+else
+	echo -e "${term_warn_setup}Invalid Argument! Skipped checking for memory leaks!"
 fi
 
 #! Run
