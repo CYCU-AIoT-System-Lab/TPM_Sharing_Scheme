@@ -142,7 +142,7 @@ else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running server!"
 fi
 
-# Run Client
+# Check for memory leaks and Run Client
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
 	if [ ${check_for_memory_leaks} -eq 1 ]; then
