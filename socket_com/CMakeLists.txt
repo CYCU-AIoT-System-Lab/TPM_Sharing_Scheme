@@ -6,4 +6,4 @@ set(PROJECT_NAME "server_com")
 project(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES C)
 add_subdirectory(${CMAKE_SOURCE_DIR}/server)
 add_subdirectory(${CMAKE_SOURCE_DIR}/client)
-add_compile_options(-fsanitize=address)
+cmake -DCMAKE_BUILD_TYPE=ASAN .
