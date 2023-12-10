@@ -52,6 +52,7 @@ update_src () {
 config_apport () {
 	echo -e "$term_notice Configuring apport..."
 	ulimit -c unlimited
+	mkdir -p "~/.config/apport"
 	touch "~/.config/apport/settings"
 	echo "[main]\nunpackaged=true\n" > "~/.config/apport/settings"
 }
