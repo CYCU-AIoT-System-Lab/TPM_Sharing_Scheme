@@ -49,6 +49,13 @@ update_src () {
 	git pull
 }
 
+config_apport () {
+	echo -e "$term_notice Configuring apport..."
+	ulimit -c unlimited
+	touch "~/.config/apport/settings"
+	echo "[main]\nunpackaged=true\n" > "~/.config/apport/settings"
+}
+
 reload_term () {
 	echo -e "$term_notice Reloading terminal..."
 	source ~/.bashrc
