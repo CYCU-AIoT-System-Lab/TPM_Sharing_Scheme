@@ -14,9 +14,5 @@
 int main(int argc, char *argv[])
 {
 	printf("Hello from server!\n");
-	char *heap = malloc(10);
-	heap[10] = 1;
-	char stack[10];
-	stack[10] = 1;
 	return 0;
 }
