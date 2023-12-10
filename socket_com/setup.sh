@@ -101,6 +101,12 @@ cd "${proj_dir}/build"
 # Delete cmake subproject
 awk '!/add_subdirectory/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
 mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
+awk '!/set(CMAKE_EXE_LINKER_FLAGS' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
+mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
+if [ ${check_for_memory_leaks} -eq 1 ]; then
+	echo -e "${term_notice_setup}Adding memory leak checking flags..."
+	echo "set(CMAKE_EXE_LINKER_FLAGS \"\${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address -fno-omit-frame-pointer\")" >> "${proj_dir}/CMakeLists.txt"
+fi
 
 # Add server subproject
 if [ $compile_server -eq 1 ]; then
