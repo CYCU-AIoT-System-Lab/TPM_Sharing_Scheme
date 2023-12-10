@@ -72,11 +72,16 @@ mkdir $build_dir
 mkdir $bin_dir
 
 #! Install Dependencies
+aptins () {
+	echo -e "$term_notice_setup Installing $1..."
+	sudo apt-get install -y $1
+}
 if [ $install_dependencies -eq 1 ]; then
 	echo -e "${term_notice_setup}Installing dependencies..."
 	sudo apt-get update
 	sudo apt-get update -y --fix-missing
-	sudo apt-get install -y doxygen graphviz
+	aptins "doxygen"
+	aptins "graphviz"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped installing dependencies!"
 fi
