@@ -56,7 +56,7 @@ config_apport () {
 	ulimit -c unlimited
 	mkdir -p $apport_dir
 	touch $apport_dir/settings
-	echo "[main]\nunpackaged=true\n" > $apport_dir/settings
+	echo -e "[main]\nunpackaged=true\n" > $apport_dir/settings
 }
 
 reload_term () {
