@@ -169,7 +169,6 @@ if [ $run_client -eq 1 ]; then
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running client!"
 fi
-echo -e "${term_notice_setup}Core dumps will be generated in /var/crash"
 
 #! Generate Documentation
 cd "${proj_dir}"
