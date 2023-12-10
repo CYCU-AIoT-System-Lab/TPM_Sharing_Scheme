@@ -1,9 +1,11 @@
 #/bin/bash
 
+user="user"
 term_notice="\033[1m\033[34m[NOTICE-common/setup]\033[0m "
 term_warn="\033[1m\033[33m[WARN-common/setup]\033[0m "
 nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
-nvim_dir="/home/user/.config/nvim"
+nvim_dir="/home/${user}/.config/nvim"
+apport_dir="/home/${user}/.config/apport"
 
 # sub_tasks (1=Enable)
 setup_environment=0 # Not implemented
@@ -52,9 +54,9 @@ update_src () {
 config_apport () {
 	echo -e "$term_notice Configuring apport..."
 	ulimit -c unlimited
-	mkdir ~/.config/apport
-	touch ~/.config/apport/settings
-	echo "[main]\nunpackaged=true\n" > ~/.config/apport/settings
+	mkdir -p $apport_dir
+	touch $apport_dir/settings
+	echo "[main]\nunpackaged=true\n" > $apport_dir/settings
 }
 
 reload_term () {
