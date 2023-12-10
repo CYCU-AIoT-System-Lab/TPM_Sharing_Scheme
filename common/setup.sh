@@ -57,6 +57,8 @@ config_apport () {
 	mkdir -p $apport_dir
 	touch $apport_dir/settings
 	echo -e "[main]\nunpackaged=true\n" > $apport_dir/settings
+	rm -f "/var/crash/*"
+	sudo service whoopsie stop
 }
 
 reload_term () {
