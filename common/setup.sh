@@ -70,6 +70,7 @@ install_req
 config_nvim
 update_src
 change_all_sh_mod
+config_apport
 reload_term
 echo -e "$term_notice Common setup complete."
 
