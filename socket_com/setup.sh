@@ -133,9 +133,11 @@ cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Running server on new terminal..."
 	if [ ${check_for_memory_leaks} -eq 1 ]; then
-		launch_cmd="echo -e \"${term_notice_server}" \
-					"Checking for memory leaks...\"" \
-					"; valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./server"
+		launch_cmd1="echo -e \"${term_notice_server}"
+		launch_cmd2="Checking for memory leaks...\""
+		launch_cmd3="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./server"
+		launch_cmd4="echo -e \"${term_notice_server}Server stopped.\""
+		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
 	else
 		launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server"
 	fi
