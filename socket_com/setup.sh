@@ -116,7 +116,7 @@ mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 # Add cmake presets
 echo -e "${term_notice_setup}Adding cmake presets..."
 if [ ${check_for_memory_leaks} -eq 1 ]; then
-	echo "set(CMAKE_EXE_LINKER_FLAGS \"\${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address -fno-omit-frame-pointer\")" >> "${proj_dir}/CMakeLists.txt"
+	echo "set(CMAKE_EXE_LINKER_FLAGS \"\${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address\")" >> "${proj_dir}/CMakeLists.txt"
 fi
 echo "set(PROJECT_NAME \"${build_project_name}\")" >> "${proj_dir}/CMakeLists.txt"
 echo "project(\${PROJECT_NAME} VERSION ${build_project_version} LANGUAGES C)" >> "${proj_dir}/CMakeLists.txt"
