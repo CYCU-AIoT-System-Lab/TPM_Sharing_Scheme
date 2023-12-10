@@ -59,7 +59,7 @@ config_apport () {
 	echo -e "[main]\nunpackaged=true\n" > $apport_dir/settings
 	rm -rf /var/crash/*
 	sudo service whoopsie stop
-	echo -e "${term_notice_setup}Core dumps will be generated in /var/crash"
+	echo -e "${term_notice}Core dumps will be generated in /var/crash"
 }
 
 reload_term () {
