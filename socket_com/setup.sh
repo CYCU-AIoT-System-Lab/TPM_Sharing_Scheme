@@ -158,13 +158,11 @@ if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Running server on new terminal..."
 	if [ ${check_for_memory_leaks} -eq 1 ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Memory Leak Checking (valgrind)...\""
-		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./server"
-		launch_cmd3="echo -e \"${term_notice_server}Re-running mem leak check...\""
-		launch_cmd4="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./server"
-		launch_cmd5="echo -e \"${term_notice_server}Address Sanitizing...\""
-		launch_cmd6="./server"
-		launch_cmd7="echo -e \"${term_notice_server}Server stopped.\""
-		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}; ${launch_cmd5}; ${launch_cmd6}; ${launch_cmd7}"
+		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./server"
+		launch_cmd3="echo -e \"${term_notice_server}Address Sanitizing...\""
+		launch_cmd4="./server"
+		launch_cmd5="echo -e \"${term_notice_server}Server stopped.\""
+		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}; ${launch_cmd5}"
 	else
 		launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server"
 	fi
@@ -178,7 +176,7 @@ if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
 	if [ ${check_for_memory_leaks} -eq 1 ]; then
 		launch_cmd1="echo -e \"${term_notice_client}Memory Leak Checking (valgrind)...\""
-		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./client"
+		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./client"
 		launch_cmd3="echo -e \"${term_notice_client}Address Sanitizing...\""
 		launch_cmd4="./client"
 		launch_cmd5="echo -e \"${term_notice_client}Client stopped.\""
