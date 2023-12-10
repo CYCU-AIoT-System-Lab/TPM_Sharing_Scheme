@@ -73,7 +73,7 @@ mkdir $bin_dir
 
 #! Install Dependencies
 aptins () {
-	echo -e "$term_notice_setup Installing $1..."
+	echo -e "${term_notice_setup}Installing $1..."
 	sudo apt-get install -y $1
 }
 if [ $install_dependencies -eq 1 ]; then
