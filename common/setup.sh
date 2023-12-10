@@ -5,7 +5,7 @@ term_notice="\033[1m\033[34m[NOTICE-common/setup]\033[0m "
 term_warn="\033[1m\033[33m[WARN-common/setup]\033[0m "
 nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
 nvim_dir="/home/${user}/.config/nvim"
-apport_dir="~/.config/apport"
+apport_dir="/home/${user}/.config/apport"
 
 # sub_tasks (1=Enable)
 setup_environment=0 # Not implemented
