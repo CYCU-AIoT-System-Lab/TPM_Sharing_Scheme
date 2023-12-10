@@ -28,6 +28,8 @@ install_dependencies=$(awk -F "=" '/^install_dependencies/ {gsub(/[ \t ]/, "", $
 perform_clean=$(awk -F "=" '/^perform_clean/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 build_for_debug=$(awk -F "=" '/^build_for_debug/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+build_project_name=$(awk -F "=" '/^build_project_name/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+build_project_version=$(awk -F "=" '/^build_project_version/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 check_for_memory_leaks=$(awk -F "=" '/^check_for_memory_leaks/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 generate_docs=$(awk -F "=" '/^generate_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 host_docs=$(awk -F "=" '/^host_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
@@ -51,6 +53,8 @@ echo -e "install_dependencies:   ${install_dependencies}"
 echo -e "perform_clean:          ${perform_clean}"
 echo -e "perform_build:          ${perform_build}"
 echo -e "build_for_debug:        ${build_for_debug}"
+echo -e "build_project_name:     ${build_project_name}"
+echo -e "build_project_version:  ${build_project_version}"
 echo -e "check_for_memory_leaks: ${check_for_memory_leaks}"
 echo -e "generate_docs:          ${generate_docs}"
 echo -e "host_docs:              ${host_docs}"
@@ -98,15 +102,24 @@ fi
 #! Build
 cd "${proj_dir}/build"
 
-# Delete cmake subproject
-awk '!/add_subdirectory/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
-mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
+# Delete cmake presets
+echo -e "${term_notice_setup}Deleting cmake presets..."
 awk '!/set\(CMAKE_EXE_LINKER_FLAGS/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
 mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
+awk '!/set\(PROJECT_NAME/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
+mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
+awk '!/project\(\${PROJECT_NAME} VERSION/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
+mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
+awk '!/add_subdirectory/' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
+mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
+
+# Add cmake presets
+echo -e "${term_notice_setup}Adding cmake presets..."
 if [ ${check_for_memory_leaks} -eq 1 ]; then
-	echo -e "${term_notice_setup}Adding memory leak checking flags..."
 	echo "set(CMAKE_EXE_LINKER_FLAGS \"\${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address -fno-omit-frame-pointer\")" >> "${proj_dir}/CMakeLists.txt"
 fi
+echo "set(PROJECT_NAME \"${build_project_name}\")" >> "${proj_dir}/CMakeLists.txt"
+echo "project(\${PROJECT_NAME} VERSION ${build_project_version} LANGUAGES C)" >> "${proj_dir}/CMakeLists.txt"
 
 # Add server subproject
 if [ $compile_server -eq 1 ]; then
