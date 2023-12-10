@@ -169,10 +169,7 @@ if [ $run_client -eq 1 ]; then
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running client!"
 fi
-if [ ${check_for_memory_leaks} -eq 1 ]; then
-	echo -e "${term_notice_setup}Core dumps generated:"
-	ls -lha "/var/crash"
-fi
+echo -e "${term_notice_setup}Core dumps generated in /var/crash"
 
 #! Generate Documentation
 cd "${proj_dir}"
