@@ -1,9 +1,19 @@
 cmake_minimum_required(VERSION 3.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-implicit-function-declaration -O3 -Wno-write-strings")
-set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
 set(PROJECT_NAME "server_com")
 project(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES C)
 add_subdirectory(${CMAKE_SOURCE_DIR}/server)
 add_subdirectory(${CMAKE_SOURCE_DIR}/client)
+
+if (CMAKE_BUILD_TYPE MATCHES "Debug")
+	set(CMAKE_C_FLAGS
+		"${CMAKE_C_FLAGS} -Werror -Wno-implicit-function-declaration -Wno-write-strings -O3 -fsanitize=undefined -fsanitize=address")
+	target_link_options(${PROJECT_NAME} 
+		BEFORE PUBLIC -fsanitize=undefined PUBLIC -fsanitize=address)
+endif()
+
+if (CMAKE_BUILD_TYPE MATCHES "Release")
+	set(CMAKE_C_FLAGS
+		"${CMAKE_C_FLAGS} -Werror -Wno-implicit-function-declaration -Wno-write-strings -O3")
+endif()
