@@ -36,6 +36,7 @@ install_req () {
 	aptins "libtool"
 	aptins "autoconf"
 	aptins "unzip"
+	aptins "openssl"
 }
 
 config_nvim () {
@@ -87,12 +88,13 @@ reload_term () {
 
 echo -e "${term_notice}Running common setup..."
 echo -e "${term_notice}Current directory: $PWD"
+working_dir=$PWD
 install_req
 config_nvim
 update_src
 change_all_sh_mod
 config_apport
-build_cmake
+build_cmake # Disable this if using PI
 reload_term
 echo -e "${term_notice}Common setup complete."
 
@@ -108,6 +110,7 @@ else
 	echo -e "${term_warn}Invalid Argument: $setup_ibmtpm ! Skipping setup_ibmtpm..."
 fi
 
+cd $working_dir
 if [ $setup_socket_com -eq 1 ]; then
 	echo -e "${term_notice}Running socket_com setup..."
 	cd ../socket_com
