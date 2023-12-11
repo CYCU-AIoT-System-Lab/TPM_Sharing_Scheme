@@ -8,7 +8,7 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/client)
 
 if (CMAKE_BUILD_TYPE MATCHES "Debug")
 	set(CMAKE_C_FLAGS
-		"${CMAKE_C_FLAGS} -Werror -Wno-implicit-function-declaration -Wno-write-strings -O3 -fsanitize=undefined -fsanitize=address")
+		"${CMAKE_C_FLAGS} -Werror -Wno-implicit-function-declaration -Wno-write-strings -O3 -fsanitize=address")
 endif()
 
 if (CMAKE_BUILD_TYPE MATCHES "Release")
