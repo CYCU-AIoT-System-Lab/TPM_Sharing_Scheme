@@ -36,7 +36,7 @@ install_req () {
 	aptins "libtool"
 	aptins "autoconf"
 	aptins "unzip"
-	aptins "openssl"
+	aptins "libssl-dev"
 }
 
 config_nvim () {
