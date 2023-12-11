@@ -11,9 +11,25 @@ cmake_build="4"
 cmake_dir="/home/${user}/cmake-${cmake_ver}"
 
 # sub_tasks (1=Enable)
+install_for_pi=1
 setup_environment=0 # Not implemented
 setup_ibmtpm=0      # Not implemented
 setup_socket_com=1
+
+# Functions
+
+build_cmake () {
+	echo -e "${term_notice}Building cmake..."
+	mkdir -p $cmake_dir
+	cd $cmake_dir
+	wget "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
+	tar -xzvf "cmake-${cmake_ver}.${cmake_build}.tar.gz"
+	cd "cmake-${cmake_ver}.${cmake_build}"
+	./bootstrap
+	make -j$(nproc)
+	sudo make install
+	cmake --version
+}
 
 install_req () {
 	aptins () {
@@ -33,10 +49,13 @@ install_req () {
 	aptins "gcc"
 	aptins "make"
 	aptins "valgrind"
-	aptins "libtool"
-	aptins "autoconf"
-	aptins "unzip"
-	aptins "libssl-dev"
+	if [ ${install_for_pi} -eq 0 ]; then
+		aptins "libtool"
+		aptins "autoconf"
+		aptins "unzip"
+		aptins "libssl-dev"
+		build_cmake
+	fi
 }
 
 config_nvim () {
@@ -68,19 +87,6 @@ config_apport () {
 	echo -e "${term_notice}Core dumps will be generated in /var/crash"
 }
 
-build_cmake () {
-	echo -e "${term_notice}Building cmake..."
-	mkdir -p $cmake_dir
-	cd $cmake_dir
-	wget "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
-	tar -xzvf "cmake-${cmake_ver}.${cmake_build}.tar.gz"
-	cd "cmake-${cmake_ver}.${cmake_build}"
-	./bootstrap
-	make -j$(nproc)
-	sudo make install
-	cmake --version
-}
-
 reload_term () {
 	echo -e "${term_notice}Reloading terminal..."
 	source ~/.bashrc
@@ -94,7 +100,6 @@ config_nvim
 update_src
 change_all_sh_mod
 config_apport
-build_cmake # Disable this if using PI
 reload_term
 echo -e "${term_notice}Common setup complete."
 
