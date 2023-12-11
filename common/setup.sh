@@ -6,6 +6,9 @@ term_warn="\033[1m\033[33m[WARN-common/setup]\033[0m "
 nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
 nvim_dir="/home/${user}/.config/nvim"
 apport_dir="/home/${user}/.config/apport"
+cmake_ver="3.18"
+cmake_build="4"
+cmake_dir="/home/${user}/cmake-${cmake_ver}"
 
 # sub_tasks (1=Enable)
 setup_environment=0 # Not implemented
@@ -29,8 +32,10 @@ install_req () {
 	aptins "build-essential"
 	aptins "gcc"
 	aptins "make"
-	aptins "cmake"
 	aptins "valgrind"
+	aptins "libtool"
+	aptins "autoconf"
+	aptins "unzip"
 }
 
 config_nvim () {
@@ -62,6 +67,19 @@ config_apport () {
 	echo -e "${term_notice}Core dumps will be generated in /var/crash"
 }
 
+build_cmake () {
+	echo -e "${term_notice}Building cmake..."
+	mkdir -p $cmake_dir
+	cd $cmake_dir
+	wget "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
+	tar -xzvf "cmake-${cmake_ver}.${cmake_build}.tar.gz"
+	cd "cmake-${cmake_ver}.${cmake_build}"
+	./bootstrap
+	make -j$(nproc)
+	sudo make install
+	cmake --version
+}
+
 reload_term () {
 	echo -e "${term_notice}Reloading terminal..."
 	source ~/.bashrc
@@ -74,6 +92,7 @@ config_nvim
 update_src
 change_all_sh_mod
 config_apport
+build_cmake
 reload_term
 echo -e "${term_notice}Common setup complete."
 
