@@ -184,6 +184,7 @@ else
 fi
 
 # Check for memory leaks and Run Client
+cd "${proj_dir}/bin"
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
 	if [ ${check_tool} = "ASAN" ]; then
