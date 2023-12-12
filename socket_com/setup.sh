@@ -115,6 +115,12 @@ echo -e "${term_notice_setup}Adding cmake presets..."
 echo "set(PROJECT_NAME \"${build_project_name}\")" >> "${proj_dir}/CMakeLists.txt"
 echo "project(\${PROJECT_NAME} VERSION ${build_project_version} LANGUAGES C)" >> "${proj_dir}/CMakeLists.txt"
 
+# Replace cmake presets
+if [ ${check_tool} = "ASAN" ]; then
+	echo -e "${term_notice_setup}Replacing cmake presets..."
+	sed -i -e 's/set\(ADDITIONAL_FLAGS \"\"\)/set\(ADDITIONAL_FLAGS \"-fsanitize=address\"\)/g' "${proj_dir}/CMakeLists.txt"
+fi
+
 # Add server subproject
 if [ $compile_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Adding server compiling task..."
