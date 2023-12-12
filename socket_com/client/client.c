@@ -4,6 +4,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include "../lib/output_format.h"
 
 /**
  * @brief Main function for the client part of project
@@ -13,7 +14,9 @@
  */
 int main(int argc, char *argv[])
 {
-	printf("Hello from client!\n");
+	output_format_t pFormat;
+	init_output_format(&pFormat, "CLIENT");
+	printf("%sClient started!\n", pFormat.info);
 	return 0;
 }
 
