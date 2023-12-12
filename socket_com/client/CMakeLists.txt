@@ -12,7 +12,6 @@ target_include_directories(
 	PUBLIC
 	${SHARED_LIB_DIR}
 )
-)
 install(
 	TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION ${BINARY_DIR}
