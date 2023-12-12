@@ -68,8 +68,11 @@ check_tool_ASAN="ASAN"
 check_tool_Valgrind="Valgrind"
 check_tool_GDB="GDB"
 if [ ${check_tool} = ${check_tool_ASAN} ]; then
+	echo -e "${term_notice_docs}check_tool: Address Sanitizer (ASAN)"
 elif [ ${check_tool} = ${check_tool_Valgrind} ]; then
+	echo -e "${term_notice_docs}check_tool: Valgrind"
 elif [ ${check_tool} = ${check_tool_GDB} ]; then
+	echo -e "${term_notice_docs}check_tool: GDB"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped checking for tool!"
 fi
