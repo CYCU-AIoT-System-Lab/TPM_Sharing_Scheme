@@ -67,6 +67,12 @@ echo -e "compile_client:         ${compile_client}"
 check_tool_ASAN="ASAN"
 check_tool_Valgrind="Valgrind"
 check_tool_GDB="GDB"
+if [ ${check_tool} = ${check_tool_ASAN} ]; then
+elif [ ${check_tool} = ${check_tool_Valgrind} ]; then
+elif [ ${check_tool} = ${check_tool_GDB} ]; then
+else
+	echo -e "${term_warn_setup}Invalid Argument! Skipped checking for tool!"
+fi
 
 # Main Flow
 # -----------------------------
@@ -99,6 +105,8 @@ cd "${proj_dir}/build"
 if [ $perform_clean -eq 1 ]; then
 	echo -e "${term_notice_setup}Cleaning project..."
 	rm -rf "${proj_dir}/build/*"
+	rm -rf "${proj_dir}/bin/*"
+	rm -rf "${proj_dir}/doc/*"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped cleaning project!"
 fi
