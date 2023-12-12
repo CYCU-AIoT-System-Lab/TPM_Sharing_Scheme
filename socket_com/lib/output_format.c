@@ -52,7 +52,7 @@ output_format_t *init_output_format(char *msg)
 			msg,
 			"-WARN] ",
 			pFormat->reset);
-	pFormat->warn = strdup(buf);
+	pFormat->warnining = strdup(buf);
 	snprintf(buf,
 			sizeof(buf),
 			"%s%s%s%s%s%s",
@@ -71,5 +71,3 @@ output_format_t *init_output_format(char *msg)
 
 	return pFormat;
 }
-
-#endif // OUTPUT_FORMAT_H

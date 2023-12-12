@@ -16,6 +16,6 @@ int main(int argc, char *argv[])
 {
 	printf("Hello from server!\n");
 	output_format_t *pFormat = init_output_format("SERVER");
-	printf("%sHello from server!\n", pFormat.info);;
+	printf("%sHello from server!\n", pFormat->info);;
 	return 0;
 }

@@ -49,3 +49,5 @@ typedef struct{
  * @return output format
  */
 output_format_t *init_output_format(char *msg);
+
+#endif // OUTPUT_FORMAT_H
