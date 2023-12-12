@@ -11,11 +11,10 @@
 /// Maximum number of characters in a format buffer string
 #define char_buffer_size 256
 
-output_format_t *init_output_format(char *msg)
+void init_output_format(output_format_t *pFormat, char *msg);
 {
 	char buf[char_buffer_size];
 
-	output_format_t *pFormat;
 	// formats
 	pFormat->reset = "\033[0m";
 	pFormat->bold = "\033[1m";
@@ -69,5 +68,5 @@ output_format_t *init_output_format(char *msg)
 	pFormat->move_cursor_up = "\033[1A";
 	pFormat->delete_line = "\033[0M";
 
-	return pFormat;
+	return;
 }

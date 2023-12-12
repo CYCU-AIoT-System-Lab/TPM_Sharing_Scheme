@@ -45,9 +45,10 @@ typedef struct{
 
 /**
  * @brief Initialize output format
+ * @param pFormat output format struct
  * @param msg Message to print between brackets
- * @return output format
+ * @return void
  */
-output_format_t *init_output_format(char *msg);
+void init_output_format(output_format_t *pFormat, char *msg);
 
 #endif // OUTPUT_FORMAT_H
