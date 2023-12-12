@@ -151,12 +151,12 @@ fi
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Running server on new terminal..."
-	if [ ${check_tool} -eq "ASAN" ]; then
+	if [ ${check_tool} = "ASAN" ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Address Sanitizing...\""
 		launch_cmd2="./server"
 		launch_cmd3="echo -e \"${term_notice_server}Memory checked with Address Sanitizer.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
-	elif [ ${check_tool} -eq "Valgrind" ]; then
+	elif [ ${check_tool} = "Valgrind" ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Memory Leak Checking (valgrind)...\""
 		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./server"
 		launch_cmd3="echo -e \"${term_notice_server}Memory checked with Valgrind.\""
@@ -172,12 +172,12 @@ fi
 # Check for memory leaks and Run Client
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
-	if [ ${check_tool} -eq "ASAN" ]; then
+	if [ ${check_tool} = "ASAN" ]; then
 		launch_cmd1="echo -e \"${term_notice_client}Address Sanitizing...\""
 		launch_cmd2="./client"
 		launch_cmd3="echo -e \"${term_notice_client}Memory checked with Address Sanitizer.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
-	elif [ ${check_tool} -eq "Valgrind" ]; then
+	elif [ ${check_tool} = "Valgrind" ]; then
 		launch_cmd1="echo -e \"${term_notice_client}Memory Leak Checking (valgrind)...\""
 		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./client"
 		launch_cmd3="echo -e \"${term_notice_client}Memory checked with Valgrind.\""
