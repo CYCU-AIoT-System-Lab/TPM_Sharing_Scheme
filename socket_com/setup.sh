@@ -125,6 +125,10 @@ elif [ ${check_tool} = "Valgrind" ]; then
 else
 	echo -e "${term_notice_setup}No cmake presets to replace..."
 fi
+if [ ${build_for_debug} -ne 1 ]; then
+	echo -e "${term_notice_setup}Replacing cmake presets..."
+	sed -i "s/\"-fsanitize=address\"/\"\"/" "${proj_dir}/CMakeLists.txt"
+fi
 
 # Add server subproject
 if [ $compile_server -eq 1 ]; then
