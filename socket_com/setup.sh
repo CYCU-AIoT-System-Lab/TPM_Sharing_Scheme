@@ -30,7 +30,7 @@ perform_build=$(awk -F "=" '/^perform_build/ {gsub(/[ \t ]/, "", $2); print $2}'
 build_for_debug=$(awk -F "=" '/^build_for_debug/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 build_project_name=$(awk -F "=" '/^build_project_name/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 build_project_version=$(awk -F "=" '/^build_project_version/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
-check_for_memory_leaks=$(awk -F "=" '/^check_for_memory_leaks/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
+check_tool=$(awk -F "=" '/^check_tool/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 generate_docs=$(awk -F "=" '/^generate_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 host_docs=$(awk -F "=" '/^host_docs/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
 host_ip=$(awk -F "=" '/^host_ip/ {gsub(/[ \t ]/, "", $2); print $2}' "${conf_file}")
@@ -42,7 +42,6 @@ open_docs_in_browser=$(awk -F "=" '/^open_docs_in_browser/ {gsub(/[ \t ]/, "", $
 compile_server=$((perform_build * run_server))
 compile_client=$((perform_build * run_client))
 build_for_debug=$((perform_build * build_for_debug))
-check_for_memory_leaks=$((perform_build * build_for_debug))
 
 # Show Options
 # -----------------------------
@@ -55,7 +54,8 @@ echo -e "perform_build:          ${perform_build}"
 echo -e "build_for_debug:        ${build_for_debug}"
 echo -e "build_project_name:     ${build_project_name}"
 echo -e "build_project_version:  ${build_project_version}"
-echo -e "check_for_memory_leaks: ${check_for_memory_leaks}"
+echo -e "check_with_valgrind:    ${check_with_valgrind}"
+echo -e "check_with_ASAN:        ${check_with_ASAN}"
 echo -e "generate_docs:          ${generate_docs}"
 echo -e "host_docs:              ${host_docs}"
 echo -e "host_ip:                ${host_ip}"
@@ -151,13 +151,16 @@ fi
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Running server on new terminal..."
-	if [ ${check_for_memory_leaks} -eq 1 ]; then
+	if [ ${check_tool} -eq "ASAN" ]; then
+		launch_cmd1="echo -e \"${term_notice_server}Address Sanitizing...\""
+		launch_cmd2="./server"
+		launch_cmd3="echo -e \"${term_notice_server}Memory checked with Address Sanitizer.\""
+		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+	elif [ ${check_tool} -eq "Valgrind" ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Memory Leak Checking (valgrind)...\""
 		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./server"
-		launch_cmd3="echo -e \"${term_notice_server}Address Sanitizing...\""
-		launch_cmd4="./server"
-		launch_cmd5="echo -e \"${term_notice_server}Server stopped.\""
-		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}; ${launch_cmd5}"
+		launch_cmd3="echo -e \"${term_notice_server}Memory checked with Valgrind.\""
+		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 	else
 		launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server"
 	fi
@@ -169,13 +172,16 @@ fi
 # Check for memory leaks and Run Client
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
-	if [ ${check_for_memory_leaks} -eq 1 ]; then
+	if [ ${check_tool} -eq "ASAN" ]; then
+		launch_cmd1="echo -e \"${term_notice_client}Address Sanitizing...\""
+		launch_cmd2="./client"
+		launch_cmd3="echo -e \"${term_notice_client}Memory checked with Address Sanitizer.\""
+		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+	elif [ ${check_tool} -eq "Valgrind" ]; then
 		launch_cmd1="echo -e \"${term_notice_client}Memory Leak Checking (valgrind)...\""
 		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./client"
-		launch_cmd3="echo -e \"${term_notice_client}Address Sanitizing...\""
-		launch_cmd4="./client"
-		launch_cmd5="echo -e \"${term_notice_client}Client stopped.\""
-		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}; ${launch_cmd5}"
+		launch_cmd3="echo -e \"${term_notice_client}Memory checked with Valgrind.\""
+		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 	else
 		launch_cmd="echo -e \"${term_notice_client}Starting client...\"; ./client"
 	fi
