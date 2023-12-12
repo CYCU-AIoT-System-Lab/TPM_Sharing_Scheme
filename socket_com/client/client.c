@@ -2,6 +2,7 @@
  * @file client.c
  * @brief Client program for the TPM project
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "../lib/output_format.h"
@@ -19,4 +20,3 @@ int main(int argc, char *argv[])
 	printf("%sClient started!\n", pFormat.info);
 	return 0;
 }
-

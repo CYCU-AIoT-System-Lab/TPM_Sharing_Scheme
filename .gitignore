@@ -2,3 +2,4 @@
 optiga-tpm-explorer/
 */build/
 */bin/
+*.vim
