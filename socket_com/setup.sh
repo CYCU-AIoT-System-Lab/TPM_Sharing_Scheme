@@ -63,6 +63,11 @@ echo -e "open_docs_in_browser:   ${open_docs_in_browser}"
 echo -e "compile_server:         ${compile_server}"
 echo -e "compile_client:         ${compile_client}"
 
+# check tool options
+check_tool_ASAN="ASAN"
+check_tool_Valgrind="Valgrind"
+check_tool_GDB="GDB"
+
 # Main Flow
 # -----------------------------
 
@@ -116,13 +121,13 @@ echo "set(PROJECT_NAME \"${build_project_name}\")" >> "${proj_dir}/CMakeLists.tx
 echo "project(\${PROJECT_NAME} VERSION ${build_project_version} LANGUAGES C)" >> "${proj_dir}/CMakeLists.txt"
 
 # Replace cmake presets
-if [ ${check_tool} = "ASAN" ]; then
+if [ ${check_tool} = ${check_tool_ASAN} ]; then
 	echo -e "${term_notice_setup}Replacing cmake presets for Address Sanitizer (ASAN)..."
 	sed -i "s/\"\"/\"-fsanitize=address\"/" "${proj_dir}/CMakeLists.txt"
-elif [ ${check_tool} = "Valgrind" ]; then
+elif [ ${check_tool} = ${check_tool_Valgrind} ]; then
 	echo -e "${term_notice_setup}Replacing cmake presets for Valgrind..."
 	sed -i "s/\"-fsanitize=address\"/\"\"/" "${proj_dir}/CMakeLists.txt"
-elif [ ${check_tool} = "GDB" ]; then
+elif [ ${check_tool} = ${check_tool_GDB} ]; then
 	echo -e "${term_notice_setup}Replacing cmake presets for GDB..."
 	sed -i "s/\"-fsanitize=address\"/\"\"/" "${proj_dir}/CMakeLists.txt"
 fi
@@ -166,17 +171,17 @@ fi
 cd "${proj_dir}/bin"
 if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Running server on new terminal..."
-	if [ ${check_tool} = "ASAN" ]; then
+	if [ ${check_tool} = ${check_tool_ASAN} ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Address Sanitizing...\""
 		launch_cmd2="./server"
 		launch_cmd3="echo -e \"${term_notice_server}Memory checked with Address Sanitizer.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
-	elif [ ${check_tool} = "Valgrind" ]; then
+	elif [ ${check_tool} = ${check_tool_Valgrind} ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Memory Leak Checking (valgrind)...\""
 		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./server"
 		launch_cmd3="echo -e \"${term_notice_server}Memory checked with Valgrind.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
-	elif [ ${check_tool} = "GDB" ]; then
+	elif [ ${check_tool} = ${check_tool_GDB} ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Debugging (gdb)...\""
 		launch_cmd2="gdb -ex 'r' -ex 'bt' -ex 'cont' -ex 'quit' ./server"
 		launch_cmd3="echo -e \"${term_notice_server}Debugging done.\""
@@ -193,17 +198,17 @@ fi
 cd "${proj_dir}/bin"
 if [ $run_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Running client on new terminal..."
-	if [ ${check_tool} = "ASAN" ]; then
+	if [ ${check_tool} = ${check_tool_ASAN} ]; then
 		launch_cmd1="echo -e \"${term_notice_client}Address Sanitizing...\""
 		launch_cmd2="./client"
 		launch_cmd3="echo -e \"${term_notice_client}Memory checked with Address Sanitizer.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
-	elif [ ${check_tool} = "Valgrind" ]; then
+	elif [ ${check_tool} = ${check_tool_Valgrind} ]; then
 		launch_cmd1="echo -e \"${term_notice_client}Memory Leak Checking (valgrind)...\""
 		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./client"
 		launch_cmd3="echo -e \"${term_notice_client}Memory checked with Valgrind.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
-	elif [ ${check_tool} = "GDB" ]; then
+	elif [ ${check_tool} = ${check_tool_GDB} ]; then
 		launch_cmd1="echo -e \"${term_notice_client}Debugging (gdb)...\""
 		launch_cmd2="gdb -ex 'r' -ex 'bt' -ex 'cont' -ex 'quit' ./client"
 		launch_cmd3="echo -e \"${term_notice_client}Debugging done.\""
