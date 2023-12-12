@@ -31,6 +31,7 @@ typedef struct{
 	char *red_foreground;
 	char *green_foreground;
 	char *yellow_foreground;
+	char *blue_foreground;
 	// integrated formats
 	char *info;
 	char *success;

@@ -21,12 +21,13 @@ void init_output_format(output_format_t *pFormat, char *msg)
 	pFormat->red_foreground = "\033[31m";
 	pFormat->green_foreground = "\033[32m";
 	pFormat->yellow_foreground = "\033[33m";
+	pFormat->blue_foreground = "\033[34m";
 	// integrated formats
 	snprintf(buf,
 			sizeof(buf),
 			"%s%s%s%s%s%s",
 			pFormat->bold,
-			pFormat->green_foreground,
+			pFormat->blue_foreground,
 			"[",
 			msg,
 			"] ",
