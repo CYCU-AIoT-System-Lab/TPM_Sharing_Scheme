@@ -47,4 +47,3 @@ git stash && git stash clear && git pull && chmod +x setup.sh && ./setup.sh
 ## ToDo
 
 1. Finish socket implementation.
-2. Change "check_for_memory_leaks" option to "ASAN" and "Valgrind".
