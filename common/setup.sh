@@ -9,6 +9,8 @@ apport_dir="/home/${user}/.config/apport"
 cmake_ver="3.18"
 cmake_build="4"
 cmake_dir="/home/${user}/cmake-${cmake_ver}"
+valgrind_ver="3.22.0"
+valgrind_dir="/home/${user}/valgrind-${valgrind_ver}"
 
 # sub_tasks (1=Enable)
 install_for_pi=1
@@ -31,6 +33,18 @@ build_cmake () {
 	cmake --version
 }
 
+build_valgrind () {
+	echo -e "${term_notice}Building valgrind..."
+	mkdir -p $valgrind_dir
+	cd $valgrind_dir
+	wget "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
+	tar xvf "valgrind-${valgrind_ver}.tar.bz2"
+	cd "valgrind-${valgrind_ver}"
+	./configure
+	make -j$(nproc)
+	sudo make install
+}
+
 install_req () {
 	aptins () {
 		echo -e "${term_notice}Installing $1..."
@@ -48,7 +62,6 @@ install_req () {
 	aptins "build-essential"
 	aptins "gcc"
 	aptins "make"
-	aptins "valgrind"
 	if [ ${install_for_pi} -eq 0 ]; then
 		aptins "libtool"
 		aptins "autoconf"
@@ -56,6 +69,7 @@ install_req () {
 		aptins "libssl-dev"
 		build_cmake
 	fi
+	build_valgrind
 }
 
 config_nvim () {
