@@ -13,7 +13,7 @@ valgrind_ver="3.22.0"
 valgrind_dir="/home/${user}/valgrind-${valgrind_ver}"
 
 # sub_tasks (1=Enable)
-install_for_pi=1
+install_for_pi=0
 setup_environment=0 # Not implemented
 setup_ibmtpm=0      # Not implemented
 setup_socket_com=1
