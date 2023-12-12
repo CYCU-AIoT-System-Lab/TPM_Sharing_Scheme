@@ -68,8 +68,10 @@ install_req () {
 		aptins "unzip"
 		aptins "libssl-dev"
 		build_cmake
+		cd $working_dir
 	fi
 	build_valgrind
+	cd $working_dir
 }
 
 config_nvim () {
