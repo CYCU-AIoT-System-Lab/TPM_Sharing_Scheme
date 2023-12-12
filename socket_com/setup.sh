@@ -119,6 +119,11 @@ echo "project(\${PROJECT_NAME} VERSION ${build_project_version} LANGUAGES C)" >>
 if [ ${check_tool} = "ASAN" ]; then
 	echo -e "${term_notice_setup}Replacing cmake presets..."
 	sed -i "s/\"\"/\"-fsanitize=address\"/" "${proj_dir}/CMakeLists.txt"
+elif [ ${check_tool} = "Valgrind" ]; then
+	echo -e "${term_notice_setup}Replacing cmake presets..."
+	sed -i "s/\"-fsanitize=address\"/\"\"/" "${proj_dir}/CMakeLists.txt"
+else
+	echo -e "${term_notice_setup}No cmake presets to replace..."
 fi
 
 # Add server subproject
