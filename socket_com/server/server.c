@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 		printf("%sSocket listening!\n", pFormat.success);
 	}
 	// Main process --> client connection
-	while (True) {
+	while (1) {
 		cfd = accept(sfd, (struct sockaddr *) &caddr, &sizeof(caddr));
 		if (cfd == -1) {
 			printf("%sError accepting client!\n", pFormat.error);
