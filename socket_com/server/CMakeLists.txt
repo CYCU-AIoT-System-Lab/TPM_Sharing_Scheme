@@ -6,6 +6,7 @@ add_executable(
 	${PROJECT_NAME}
 	server.c
 	${PUBLIC_LIB_DIR}/output_format.c
+	${PUBLIC_LIB_DIR}/lib_system.c
 )
 target_include_directories(
 	${PROJECT_NAME}

@@ -6,8 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../lib/output_format.h"
-
-void exit_program(int exit_code, output_format_t pFormat);
+#include "../lib/lib_system.h"
 
 /**
  * @brief Main function for the server part of project
@@ -32,22 +31,4 @@ int main(int argc, char *argv[]) {
 	// End
 	exit_program(0, pFormat);
 	return 0;
-}
-
-/**
- * @brief Exit program with exit code and free output format
- * @param exit_code Exit code
- * @param pFormat Output format
- * @return void
- */
-void exit_program(int exit_code, output_format_t pFormat) {
-	if (exit_code == 0)
-		printf("%sExiting program with code %d\n", pFormat.success, exit_code);
-	else if (exit_code == 1)
-		printf("%sExiting program with code %d\n", pFormat.error, exit_code);
-	else
-		printf("%sExiting program with code %d\n", pFormat.warning, exit_code);
-	printf("%sServer stopped!\n", pFormat.info);
-	free_output_format(&pFormat);
-	exit(exit_code);
 }
