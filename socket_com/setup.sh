@@ -184,22 +184,22 @@ if [ $run_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Running server on new terminal..."
 	if [ ${check_tool} = ${check_tool_ASAN} ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Address Sanitizing...\""
-		launch_cmd2="./server"
+		launch_cmd2="./server ../config.ini"
 		launch_cmd3="echo -e \"${term_notice_server}Memory checked with Address Sanitizer.\""
 		launch_cmd4="echo -e \"${term_notice_server}If no output besides the program is shown, no leak is detected.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
 	elif [ ${check_tool} = ${check_tool_Valgrind} ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Memory Leak Checking (valgrind)...\""
-		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./server"
+		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./server ../config.ini"
 		launch_cmd3="echo -e \"${term_notice_server}Memory checked with Valgrind.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 	elif [ ${check_tool} = ${check_tool_GDB} ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Debugging (gdb)...\""
-		launch_cmd2="gdb -ex 'r' -ex 'bt' -ex 'cont' -ex 'quit' ./server"
+		launch_cmd2="gdb -ex 'r' -ex 'bt' -ex 'cont' -ex 'quit' ./server ../config.ini"
 		launch_cmd3="echo -e \"${term_notice_server}Debugging done.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 	else
-		launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server"
+		launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server ../config.ini"
 	fi
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 else
