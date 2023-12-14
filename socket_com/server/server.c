@@ -44,6 +44,12 @@ int main(int argc, char *argv[]) {
 	saddr.sin_family = AF_INET; // IPv4
 	saddr.sin_port = htons(80); // port 80 (TCP)
 	saddr.sin_addr.s_addr = htonl(0x7F000001); // localhost 127.0.0.1
+	if (bind(sfd, (struct sockaddr *) &saddr, sizeof(saddr)) == -1) {
+		printf("%sError binding socket!\n", pFormat.error);
+		LIB_SYSTEM_exit_program(1, pFormat);
+	} else {
+		printf("%sSocket binded!\n", pFormat.success);
+	}
 	// End
 	LIB_SYSTEM_exit_program(0, pFormat);
 	return 0;
