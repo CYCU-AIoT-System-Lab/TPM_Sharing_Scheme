@@ -57,6 +57,7 @@ install_req () {
 	aptins "iftop"
 	aptins "curl"
 	aptins "wget"
+	aptins "net-tools"
 	aptins "neovim"
 	aptins "build-essential"
 	aptins "gcc"
