@@ -71,3 +71,11 @@ void init_output_format(output_format_t *pFormat, char *msg)
 
 	return;
 }
+
+void free_output_format(output_format_t *pFormat) {
+	free(pFormat->info);
+	free(pFormat->success);
+	free(pFormat->warning);
+	free(pFormat->error);
+	return;
+}

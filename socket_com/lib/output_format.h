@@ -52,4 +52,11 @@ typedef struct{
  */
 void init_output_format(output_format_t *pFormat, char *msg);
 
+/**
+ * @brief Free memory allocated for output format
+ * @param pFormat output format struct
+ * @return void
+ */
+void free_output_format(output_format_t *pFormat);
+
 #endif // OUTPUT_FORMAT_H
