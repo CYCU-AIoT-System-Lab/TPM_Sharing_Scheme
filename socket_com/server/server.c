@@ -21,15 +21,21 @@ int main(int argc, char *argv[]) {
 	// Input Arguments
 	if (argc != 2) {
 		printf("%sUsage: %s <config file>\n", pFormat.warning, argv[0]);
-		exit_program(1);
+		exit_program(1, pFormat);
 	}
 	// Main process
 	// End
-	exit_program(0);
+	exit_program(0, pFormat);
 	return 0;
 }
 
-void exit_program(int exit_code) {
+/**
+ * @brief Exit program with exit code and free output format
+ * @param exit_code Exit code
+ * @param pFormat Output format
+ * @return void
+ */
+void exit_program(int exit_code, output_format_t pFormat) {
 	printf("Exiting program with code %d\n", exit_code);
 	printf("%sServer stopped!\n", pFormat.info);
 	free_output_format(&pFormat);
