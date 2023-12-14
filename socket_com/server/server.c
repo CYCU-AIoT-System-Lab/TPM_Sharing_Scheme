@@ -5,7 +5,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
 #include "../lib/output_format.h"
 #include "../lib/lib_system.h"
 
@@ -29,14 +31,19 @@ int main(int argc, char *argv[]) {
 		printf("%sConfig file: %s\n", pFormat.success, argv[1]);
 	}
 	// Main process
-	int sockfd, newsockfd, portno;
-	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd == -1) {
+	int sfd, cfd; // server and client file descriptors
+	struct sockaddr_in saddr, caddr; // server and client addresses
+	sfd = socket(AF_INET, SOCK_STREAM, 0); // IPv4, TCP, default protocol
+	if (sfd == -1) {
 		printf("%sError opening socket!\n", pFormat.error);
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
 		printf("%sSocket opened!\n", pFormat.success);
 	}
+	memset(&saddr, 0, sizeof(saddr)); // clear structure
+	saddr.sin_family = AF_INET; // IPv4
+	saddr.sin_port = htons(80); // port 80 (TCP)
+	saddr.sin_addr.s_addr = htonl(0x7F000001); // localhost 127.0.0.1
 	// End
 	LIB_SYSTEM_exit_program(0, pFormat);
 	return 0;
