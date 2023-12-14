@@ -14,8 +14,13 @@
  * @return 0 on success, 1 on failure
  */
 int main(int argc, char *argv[]) {
+	// Start up
 	output_format_t pFormat;
 	init_output_format(&pFormat, "CLIENT");
 	printf("%sClient started!\n", pFormat.info);
+	// Main process
+	// End
+	printf("%sClient stopped!\n", pFormat.info);
+	free_output_format(&pFormat);
 	return 0;
 }
