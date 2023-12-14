@@ -22,6 +22,7 @@ int main(int argc, char *argv[]) {
 	printf("%sServer started!\n", pFormat.info);
 	// Input Arguments
 	if (argc != 2) {
+		printf("%sInvalid number of arguments: %d!\n", pFormat.error, argc);
 		printf("%sUsage: %s <config file>\n", pFormat.error, argv[0]);
 		exit_program(1, pFormat);
 	} else {
