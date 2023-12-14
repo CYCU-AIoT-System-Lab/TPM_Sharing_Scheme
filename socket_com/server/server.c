@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 		printf("%sConfig file: %s\n", pFormat.success, argv[1]);
 	}
 	// Main process
-	int sfd, cfd; // server and client file descriptors
+	int sfd, cfd, csize; // server and client file descriptors
 	struct sockaddr_in saddr, caddr; // server and client addresses
 	// Main process --> server init
 	sfd = socket(AF_INET, SOCK_STREAM, 0); // IPv4, TCP, default protocol
@@ -62,7 +62,8 @@ int main(int argc, char *argv[]) {
 	}
 	// Main process --> client connection
 	while (1) {
-		cfd = accept(sfd, (struct sockaddr *) &caddr, sizeof(caddr));
+		csize = sizeof(caddr);
+		cfd = accept(sfd, (struct sockaddr *) &caddr, &csize);
 		if (cfd == -1) {
 			printf("%sError accepting client!\n", pFormat.error);
 			printf("%s%s\n", pFormat.error, strerror(errno));
