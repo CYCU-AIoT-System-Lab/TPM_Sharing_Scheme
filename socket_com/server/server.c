@@ -18,9 +18,20 @@ int main(int argc, char *argv[]) {
 	output_format_t pFormat;
 	init_output_format(&pFormat, "SERVER");
 	printf("%sServer started!\n", pFormat.info);
+	// Input Arguments
+	if (argc != 2) {
+		printf("%sUsage: %s <config file>\n", pFormat.warning, argv[0]);
+		exit_program(1);
+	}
 	// Main process
 	// End
+	exit_program(0);
+	return 0;
+}
+
+void exit_program(int exit_code) {
+	printf("Exiting program with code %d\n", exit_code);
 	printf("%sServer stopped!\n", pFormat.info);
 	free_output_format(&pFormat);
-	return 0;
+	exit(exit_code);
 }
