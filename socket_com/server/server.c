@@ -71,10 +71,8 @@ int main(int argc, char *argv[]) {
 			printf("%sClient accepted!\n", pFormat.success);
 		}
 		// Main process --> client communication
-		fclose(cfd);
 	}
 	// End
-	close(sfd);
 	LIB_SYSTEM_exit_program(0, pFormat);
 	return 0;
 }
