@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include "../lib/output_format.h"
@@ -46,6 +47,7 @@ int main(int argc, char *argv[]) {
 	saddr.sin_addr.s_addr = htonl(0x7F000001); // localhost 127.0.0.1
 	if (bind(sfd, (struct sockaddr *) &saddr, sizeof(saddr)) == -1) {
 		printf("%sError binding socket!\n", pFormat.error);
+		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
 		printf("%sSocket binded!\n", pFormat.success);
