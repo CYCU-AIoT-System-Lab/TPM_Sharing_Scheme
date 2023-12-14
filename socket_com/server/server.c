@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 		printf("%sSocket listening!\n", pFormat.success);
 	}
 	// Main process --> client connection
-	while (True):
+	while (True) {
 		cfd = accept(sfd, (struct sockaddr *) &caddr, &sizeof(caddr));
 		if (cfd == -1) {
 			printf("%sError accepting client!\n", pFormat.error);
@@ -72,6 +72,7 @@ int main(int argc, char *argv[]) {
 		}
 		// Main process --> client communication
 		fclose(cfd);
+	}
 	// End
 	close(sfd);
 	LIB_SYSTEM_exit_program(0, pFormat);
