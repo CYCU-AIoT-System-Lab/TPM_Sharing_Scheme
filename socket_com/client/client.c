@@ -13,8 +13,7 @@
  * @param argv Array of arguments
  * @return 0 on success, 1 on failure
  */
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 	output_format_t pFormat;
 	init_output_format(&pFormat, "CLIENT");
 	printf("%sClient started!\n", pFormat.info);
