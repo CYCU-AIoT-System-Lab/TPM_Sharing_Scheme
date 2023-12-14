@@ -186,7 +186,8 @@ if [ $run_server -eq 1 ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Address Sanitizing...\""
 		launch_cmd2="./server"
 		launch_cmd3="echo -e \"${term_notice_server}Memory checked with Address Sanitizer.\""
-		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+		launch_cmd4="echo -e \"${term_notice_server}If no output besides the program is shown, no leak is detected.\""
+		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
 	elif [ ${check_tool} = ${check_tool_Valgrind} ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Memory Leak Checking (valgrind)...\""
 		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./server"
@@ -213,7 +214,8 @@ if [ $run_client -eq 1 ]; then
 		launch_cmd1="echo -e \"${term_notice_client}Address Sanitizing...\""
 		launch_cmd2="./client"
 		launch_cmd3="echo -e \"${term_notice_client}Memory checked with Address Sanitizer.\""
-		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+		launch_cmd4="echo -e \"${term_notice_client}If no output besides the program is shown, no leak is detected.\""
+		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
 	elif [ ${check_tool} = ${check_tool_Valgrind} ]; then
 		launch_cmd1="echo -e \"${term_notice_client}Memory Leak Checking (valgrind)...\""
 		launch_cmd2="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -v ./client"

@@ -9,10 +9,10 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/client)
 
 if (CMAKE_BUILD_TYPE MATCHES "Debug")
 	set(CMAKE_C_FLAGS
-		"${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -O0 ${ADDITIONAL_FLAGS}")
+		"${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -Wall -Wextra -O0 ${ADDITIONAL_FLAGS}")
 endif()
 
 if (CMAKE_BUILD_TYPE MATCHES "Release")
 	set(CMAKE_C_FLAGS
-		"${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -O3")
+		"${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -Wall -Wextra -O3")
 endif()
