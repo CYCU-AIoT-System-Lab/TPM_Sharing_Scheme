@@ -11,7 +11,7 @@
 /// Maximum number of characters in a format buffer string
 #define char_buffer_size 256
 
-void init_output_format(output_format_t *pFormat, char *msg)
+void OUTPUT_FORMAT_init_output_format(output_format_t *pFormat, char *msg)
 {
 	char buf[char_buffer_size];
 
@@ -72,7 +72,7 @@ void init_output_format(output_format_t *pFormat, char *msg)
 	return;
 }
 
-void free_output_format(output_format_t *pFormat) {
+void OUTPUT_FORMAT_free_output_format(output_format_t *pFormat) {
 	free(pFormat->info);
 	free(pFormat->success);
 	free(pFormat->warning);

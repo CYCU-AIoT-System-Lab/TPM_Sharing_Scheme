@@ -50,13 +50,13 @@ typedef struct{
  * @param msg Message to print between brackets
  * @return void
  */
-void init_output_format(output_format_t *pFormat, char *msg);
+void OUTPUT_FORMAT_init_output_format(output_format_t *pFormat, char *msg);
 
 /**
  * @brief Free memory allocated for output format
  * @param pFormat output format struct
  * @return void
  */
-void free_output_format(output_format_t *pFormat);
+void OUTPUT_FORMAT_free_output_format(output_format_t *pFormat);
 
 #endif // OUTPUT_FORMAT_H

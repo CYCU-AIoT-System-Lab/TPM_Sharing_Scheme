@@ -17,18 +17,18 @@
 int main(int argc, char *argv[]) {
 	// Start up
 	output_format_t pFormat;
-	init_output_format(&pFormat, "SERVER");
+	OUTPUT_FORMAT_init_output_format(&pFormat, "SERVER");
 	printf("%sServer started!\n", pFormat.info);
 	// Input Arguments
 	if (argc != 2) {
 		printf("%sInvalid number of arguments: %d!\n", pFormat.error, argc);
 		printf("%sUsage: %s <config file>\n", pFormat.error, argv[0]);
-		exit_program(1, pFormat);
+		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
 		printf("%sConfig file: %s\n", pFormat.success, argv[1]);
 	}
 	// Main process
 	// End
-	exit_program(0, pFormat);
+	LIB_SYSTEM_exit_program(0, pFormat);
 	return 0;
 }

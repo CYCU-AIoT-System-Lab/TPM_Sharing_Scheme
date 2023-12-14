@@ -9,6 +9,6 @@
  * @param pFormat Output format
  * @return void
  */
-void exit_program(int exit_code, output_format_t pFormat);
+void LIB_SYSTEM_exit_program(int exit_code, output_format_t pFormat);
 
 #endif // LIB_SYSTEM_H
