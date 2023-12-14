@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 	}
 	// Main process --> client connection
 	while (1) {
-		cfd = accept(sfd, (struct sockaddr *) &caddr, sizeof(caddr));
+		cfd = accept(sfd, (struct sockaddr *) &caddr, (socklen_t *) sizeof(caddr));
 		if (cfd == -1) {
 			printf("%sError accepting client!\n", pFormat.error);
 			printf("%s%s\n", pFormat.error, strerror(errno));
