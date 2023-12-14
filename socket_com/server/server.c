@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include "../lib/output_format.h"
 
+void exit_program(int exit_code, output_format_t pFormat);
+
 /**
  * @brief Main function for the server part of project
  * @param argc Number of arguments
