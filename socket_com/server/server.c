@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
 	// Main process
 	int sfd, cfd; // server and client file descriptors
 	struct sockaddr_in saddr, caddr; // server and client addresses
+	// Main process --> server init
 	sfd = socket(AF_INET, SOCK_STREAM, 0); // IPv4, TCP, default protocol
 	if (sfd == -1) {
 		printf("%sError opening socket!\n", pFormat.error);
@@ -52,7 +53,27 @@ int main(int argc, char *argv[]) {
 	} else {
 		printf("%sSocket binded!\n", pFormat.success);
 	}
+	if (listen(sfd, 10) == -1) { // 10 is the maximum number of pending connections
+		printf("%sError listening socket!\n", pFormat.error);
+		printf("%s%s\n", pFormat.error, strerror(errno));
+		LIB_SYSTEM_exit_program(1, pFormat);
+	} else {
+		printf("%sSocket listening!\n", pFormat.success);
+	}
+	// Main process --> client connection
+	while True:
+		cfd = accept(sfd, (struct sockaddr *) &caddr, &sizeof(caddr));
+		if (cfd == -1) {
+			printf("%sError accepting client!\n", pFormat.error);
+			printf("%s%s\n", pFormat.error, strerror(errno));
+			LIB_SYSTEM_exit_program(1, pFormat);
+		} else {
+			printf("%sClient accepted!\n", pFormat.success);
+		}
+		// Main process --> client communication
+		fclose(cfd);
 	// End
+	close(sfd);
 	LIB_SYSTEM_exit_program(0, pFormat);
 	return 0;
 }
