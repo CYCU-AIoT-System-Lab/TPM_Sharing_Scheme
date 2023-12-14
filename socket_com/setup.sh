@@ -195,7 +195,7 @@ if [ $run_server -eq 1 ]; then
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 	elif [ ${check_tool} = ${check_tool_GDB} ]; then
 		launch_cmd1="echo -e \"${term_notice_server}Debugging (gdb)...\""
-		launch_cmd2="gdb -ex 'r' -ex 'bt' -ex 'cont' -ex 'quit' ./server ../config.ini"
+		launch_cmd2="gdb -ex 'r' -ex 'bt' -ex 'cont' -ex 'quit' --args ./server ../config.ini"
 		launch_cmd3="echo -e \"${term_notice_server}Debugging done.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 	else
