@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "output_format.n"
+#include "output_format.h"
 #include "lib_system.h"
 
 void exit_program(int exit_code, output_format_t pFormat) {
