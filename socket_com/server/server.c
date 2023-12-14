@@ -24,6 +24,8 @@ int main(int argc, char *argv[]) {
 	if (argc != 2) {
 		printf("%sUsage: %s <config file>\n", pFormat.error, argv[0]);
 		exit_program(1, pFormat);
+	} else {
+		printf("%sConfig file: %s\n", pFormat.success, argv[1]);
 	}
 	// Main process
 	// End
