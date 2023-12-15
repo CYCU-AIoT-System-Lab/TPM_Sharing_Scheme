@@ -11,6 +11,7 @@
 #include <netinet/in.h>
 #include "../lib/output_format.h"
 #include "../lib/lib_system.h"
+#include "../lib/signal_handler.h"
 
 /**
  * @brief Main function for the server part of project
