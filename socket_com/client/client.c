@@ -17,11 +17,10 @@
 int main(int argc, char *argv[]) {
 	// Start up
 	output_format_t pFormat;
-	init_output_format(&pFormat, "CLIENT");
+	OUTPUT_FORMAT_init_output_format(&pFormat, "CLIENT");
 	printf("%sClient started!\n", pFormat.info);
 	// Main process
 	// End
-	printf("%sClient stopped!\n", pFormat.info);
-	free_output_format(&pFormat);
+	LIB_SYSTEM_exit_program(0, pFormat);
 	return 0;
 }
