@@ -1,3 +1,8 @@
+/**
+ * @file lib_system.h
+ * @brief Exit program with exit code and free output format
+ */
+
 #ifndef LIB_SYSTEM_H
 #define LIB_SYSTEM_H
 

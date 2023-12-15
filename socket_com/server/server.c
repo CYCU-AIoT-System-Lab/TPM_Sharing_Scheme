@@ -23,6 +23,7 @@ int main(int argc, char *argv[]) {
 	output_format_t pFormat;
 	OUTPUT_FORMAT_init_output_format(&pFormat, "SERVER");
 	printf("%sServer started!\n", pFormat.info);
+	SIGNAL_HANDLER_multi_register(pFormat);
 	// Input Arguments
 	if (argc != 2) {
 		printf("%sInvalid number of arguments: %d!\n", pFormat.error, argc);

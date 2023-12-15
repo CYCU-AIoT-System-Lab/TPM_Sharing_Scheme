@@ -1,3 +1,8 @@
+/**
+ * @file lib_system.c
+ * @brief Library for system functions
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "output_format.h"
