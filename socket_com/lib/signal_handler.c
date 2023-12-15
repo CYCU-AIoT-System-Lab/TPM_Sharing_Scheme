@@ -10,7 +10,7 @@
 #include "lib_system.h"
 #include "signal_handler.h"
 
-void SIGNAL_HANDLER_sigint_handler(int signum, output_format_t pFormat) {
+__sighandler_t SIGNAL_HANDLER_sigint_handler(int signum, output_format_t pFormat) {
 	printf("%sReceived signal %d: %s\n", pFormat.warning, signum, "SIGINT");
 	LIB_SYSTEM_exit_program(0, pFormat);
 }
@@ -31,7 +31,7 @@ void SIGNAL_HANDLER_sigsegv_handler(int signum, output_format_t pFormat) {
 }
 
 void SIGNAL_HANDLER_multi_register(output_format_t pFormat) {
-	if (signal(SIGINT, (* int)SIGNAL_HANDLER_sigint_handler) == SIG_ERR) {
+	if (signal(SIGINT, SIGNAL_HANDLER_sigint_handler) == SIG_ERR) {
 		printf("%sError registering SIGINT handler!\n", pFormat.error);
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
