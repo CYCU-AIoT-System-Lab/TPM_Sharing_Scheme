@@ -90,6 +90,7 @@ doc_dir="${proj_dir}/doc"
 echo -e "${term_notice_setup}Creating directories: ${build_dir}, ${bin_dir}"
 mkdir $build_dir
 mkdir $bin_dir
+mkdir $doc_dir
 
 #! Install Dependencies
 aptins () {
