@@ -67,6 +67,9 @@ echo -e "compile_client:         ${compile_client}"
 check_tool_ASAN="ASAN"
 check_tool_Valgrind="Valgrind"
 check_tool_GDB="GDB"
+if [ ${build_for_debug} -ne 1 ]; then
+	check_tool=""
+fi
 if [ ${check_tool} = ${check_tool_ASAN} ]; then
 	echo -e "${term_notice_docs}check_tool: Address Sanitizer (ASAN)"
 elif [ ${check_tool} = ${check_tool_Valgrind} ]; then
@@ -199,7 +202,7 @@ if [ $run_server -eq 1 ]; then
 		launch_cmd3="echo -e \"${term_notice_server}Debugging done.\""
 		launch_cmd="${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 	else
-		launch_cmd="echo -e \"${term_notice_server}Starting server...\"; ./server ../config.ini"
+		launch_cmd="echo -e \"${term_notice_server}Starting server...\"; sudo ./server ../config.ini"
 	fi
 	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
 else
