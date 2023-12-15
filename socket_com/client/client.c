@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../lib/output_format.h"
+#include "../lib/lib_system.h"
 
 /**
  * @brief Main function for the client part of project
