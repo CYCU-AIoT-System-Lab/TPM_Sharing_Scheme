@@ -68,7 +68,7 @@ check_tool_ASAN="ASAN"
 check_tool_Valgrind="Valgrind"
 check_tool_GDB="GDB"
 if [ ${build_for_debug} -ne 1 ]; then
-	check_tool=""
+	check_tool="N/A"
 fi
 if [ ${check_tool} = ${check_tool_ASAN} ]; then
 	echo -e "${term_notice_docs}check_tool: Address Sanitizer (ASAN)"
