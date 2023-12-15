@@ -10,22 +10,22 @@
 #include "lib_system.h"
 #include "signal_handler.h"
 
-__sighandler_t SIGNAL_HANDLER_sigint_handler(int signum, output_format_t pFormat) {
+sighandler_t SIGNAL_HANDLER_sigint_handler(int signum, output_format_t pFormat) {
 	printf("%sReceived signal %d: %s\n", pFormat.warning, signum, "SIGINT");
 	LIB_SYSTEM_exit_program(0, pFormat);
 }
 
-void SIGNAL_HANDLER_sigterm_handler(int signum, output_format_t pFormat) {
+sighandler_t SIGNAL_HANDLER_sigterm_handler(int signum, output_format_t pFormat) {
 	printf("%sReceived signal %d: %s\n", pFormat.warning, signum, "SIGTERM");
 	LIB_SYSTEM_exit_program(0, pFormat);
 }
 
-void SIGNAL_HANDLER_sigquit_handler(int signum, output_format_t pFormat) {
+sighandler_t SIGNAL_HANDLER_sigquit_handler(int signum, output_format_t pFormat) {
 	printf("%sReceived signal %d: %s\n", pFormat.warning, signum, "SIGQUIT");
 	LIB_SYSTEM_exit_program(0, pFormat);
 }
 
-void SIGNAL_HANDLER_sigsegv_handler(int signum, output_format_t pFormat) {
+sighandler_t SIGNAL_HANDLER_sigsegv_handler(int signum, output_format_t pFormat) {
 	printf("%sReceived signal %d: %s\n", pFormat.warning, signum, "SIGSEGV");
 	LIB_SYSTEM_exit_program(0, pFormat);
 }
