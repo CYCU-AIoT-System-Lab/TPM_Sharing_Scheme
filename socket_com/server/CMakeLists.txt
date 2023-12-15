@@ -7,7 +7,6 @@ add_executable(
 	server.c
 	${PUBLIC_LIB_DIR}/output_format.c
 	${PUBLIC_LIB_DIR}/lib_system.c
-	${PUBLIC_LIB_DIR}/signal_handler.c
 )
 target_include_directories(
 	${PROJECT_NAME}

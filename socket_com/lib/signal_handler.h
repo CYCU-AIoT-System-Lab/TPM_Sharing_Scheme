@@ -6,40 +6,21 @@
 #ifndef SIGNAL_HANDLER_H
 #define SIGNAL_HANDLER_H
 
+#include <signal.h>
 #include "output_format.h"
 
 /**
- * @brief Signal handler for SIGINT
+ * @brief Signal handler
  * @param signum Signal number
- * @param pFormat Output format
  */
-sighandler_t SIGNAL_HANDLER_sigint_handler(int signum, output_format_t pFormat);
+void SIGNAL_HANDLER_signal_handler(int signum);
 
 /**
- * @brief Signal handler for SIGTERM
- * @param signum Signal number
+ * @brief Signal handler register
  * @param pFormat Output format
  */
-sighandler_t SIGNAL_HANDLER_sigterm_handler(int signum, output_format_t pFormat);
+void SIGNAL_HANDLER_register(output_format_t pFormat);
 
-/**
- * @brief Signal handler for SIGQUIT
- * @param signum Signal number
- * @param pFormat Output format
- */
-sighandler_t SIGNAL_HANDLER_sigquit_handler(int signum, output_format_t pFormat);
 
-/**
- * @brief Signal handler for SIGSEGV
- * @param signum Signal number
- * @param pFormat Output format
- */
-sighandler_t SIGNAL_HANDLER_sigsegv_handler(int signum, output_format_t pFormat);
-
-/**
- * @brief Multi signal handler register
- * @param pFormat Output format
- */
-void SIGNAL_HANDLER_multi_register(output_format_t pFormat);
 
 #endif // SIGNAL_HANDLER_H
