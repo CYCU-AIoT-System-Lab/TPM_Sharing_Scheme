@@ -15,7 +15,7 @@ void LIB_SYSTEM_exit_program(int exit_code, output_format_t pFormat) {
 		printf("%sExiting program with code %d\n", pFormat.error, exit_code);
 	else
 		printf("%sExiting program with code %d\n", pFormat.warning, exit_code);
-	printf("%sServer stopped!\n", pFormat.info);
+	printf("%sStopped!\n", pFormat.info);
 	OUTPUT_FORMAT_free_output_format(&pFormat);
 	exit(exit_code);
 }
