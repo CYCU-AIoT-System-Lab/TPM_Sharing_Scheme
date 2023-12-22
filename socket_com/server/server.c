@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
 	// Main process --> client connection
 	while (1) {
 		cfd = accept(sfd, (struct sockaddr *) &caddr, &caddr_len);
-		if (inet_ntop(AF_INET, &caddr.sin_addr.s_addr, ipv4_addr_str, INET_ADDRSTRLEN) == NULL) {
+		if (inet_ntop(AF_INET, &caddr, ipv4_addr_str, INET_ADDRSTRLEN) == NULL) {
 			printf("%sError converting address: %s\n", pFormat.error, ipv4_addr_str);
 			printf("%s%s\n", pFormat.error, strerror(errno));
 			LIB_SYSTEM_exit_program(1, pFormat);
