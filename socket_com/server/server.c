@@ -12,6 +12,8 @@
 #include "../lib/output_format.h"
 #include "../lib/lib_system.h"
 
+#define MAX_BUFFER_SIZE 1024
+
 /**
  * @brief Main function for the server part of project
  * @param argc Number of arguments
@@ -35,6 +37,7 @@ int main(int argc, char *argv[]) {
 	int sfd, cfd; // server and client file descriptors
 	struct sockaddr_in saddr, caddr; // server and client addresses
 	socklen_t caddr_len = sizeof(caddr);
+	char buffer[MAX_BUFFER_SIZE];
 	// Main process --> server init
 	sfd = socket(AF_INET, SOCK_STREAM, 0); // IPv4, TCP, default protocol
 	if (sfd == -1) {
@@ -72,6 +75,14 @@ int main(int argc, char *argv[]) {
 			printf("%sClient accepted!\n", pFormat.success);
 		}
 		// Main process --> client communication
+		ssize_t nread = recv(cfd, buffer, MAX_BUFFER_SIZE, 0);
+		if (nread > 0) {
+			printf("%sReceived %ld bytes from client!\n", pFormat.success, nread);
+			printf("%s%s\n", pFormat.success, buffer);
+		} else {
+			printf("%sError receiving data from client!\n", pFormat.error);
+			printf("%s%s\n", pFormat.error, strerror(errno));
+		}
 	}
 	// End
 	LIB_SYSTEM_exit_program(0, pFormat);
