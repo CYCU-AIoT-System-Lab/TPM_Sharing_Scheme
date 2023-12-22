@@ -58,14 +58,17 @@ int main(int argc, char *argv[]) {
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket binded to address: 0x%lx!\n", pFormat.success, (unsigned long)ipv4_addr);
+		printf("%sSocket binded to 0x%lx:0d%lu!\n", 
+				pFormat.success, 
+				(unsigned long)ipv4_addr, 
+				(unsigned long)port);
 	}
 	if (listen(sfd, 10) == -1) { // 10 is the maximum number of pending connections
 		printf("%sError listening socket!\n", pFormat.error);
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket listening on port: 0d%lu!\n", pFormat.success, (unsigned long)port);
+		printf("%sSocket listening!\n", pFormat.success);
 	}
 	// Main process --> client connection
 	while (1) {
@@ -75,7 +78,10 @@ int main(int argc, char *argv[]) {
 			printf("%s%s\n", pFormat.error, strerror(errno));
 			LIB_SYSTEM_exit_program(1, pFormat);
 		} else {
-			printf("%sClient accepted at 0x%lx:0d%lu!\n", pFormat.success, (unsigned long)ntohl(caddr.sin_addr.s_addr), (unsigned long)ntohs(caddr.sin_port));
+			printf("%sClient accepted from 0x%lx:0d%lu!\n", 
+					pFormat.success, 
+					(unsigned long)ntohl(caddr.sin_addr.s_addr), 
+					(unsigned long)ntohs(caddr.sin_port));
 		}
 		// Main process --> client communication
 		ssize_t nread = recv(cfd, buffer, MAX_BUFFER_SIZE - 1, 0);
