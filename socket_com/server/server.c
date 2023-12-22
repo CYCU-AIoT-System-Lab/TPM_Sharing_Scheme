@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 	// Start up
 	output_format_t pFormat;
 	OUTPUT_FORMAT_init_output_format(&pFormat, "SERVER");
-	printf("%sServer started!\n", pFormat.info);
+	printf("%sServer started\n", pFormat.info);
 	// Input Arguments
 	if (argc != 2) {
 		printf("%sInvalid number of arguments: %d!\n", pFormat.error, argc);
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
 		printf("%sError opening socket!\n", pFormat.error);
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket opened!\n", pFormat.success);
+		printf("%sSocket opened\n", pFormat.success);
 	}
 	memset(&saddr, 0, sizeof(saddr)); // clear structure
 	saddr.sin_family = AF_INET; // IPv4
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket binded to 0x%lx:0d%lu!\n", 
+		printf("%sSocket binded to 0x%lx:0d%lu\n", 
 				pFormat.success, 
 				(unsigned long)ipv4_addr, 
 				(unsigned long)port);
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket listening!\n", pFormat.success);
+		printf("%sSocket listening\n", pFormat.success);
 	}
 	// Main process --> client connection
 	while (1) {
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
 			printf("%s%s\n", pFormat.error, strerror(errno));
 			LIB_SYSTEM_exit_program(1, pFormat);
 		} else {
-			printf("%sClient accepted from 0x%lx:0d%lu!\n", 
+			printf("%sClient accepted from 0x%lx:0d%lu\n", 
 					pFormat.success, 
 					(unsigned long)ntohl(caddr.sin_addr.s_addr), 
 					(unsigned long)ntohs(caddr.sin_port));
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
 		// Main process --> client communication
 		ssize_t nread = recv(cfd, buffer, MAX_BUFFER_SIZE - 1, 0);
 		if (nread > 0) {
-			printf("%sReceived %ld bytes from client!\n", pFormat.success, nread);
+			printf("%sReceived %ld bytes from client\n", pFormat.success, nread);
 			buffer[nread] = '\0'; // null-terminate string
 			printf("Received MSG: %s\n", buffer);
 		} else {
@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
 			printf("%s%s\n", pFormat.error, strerror(errno));
 			LIB_SYSTEM_exit_program(1, pFormat);
 		} else {
-			printf("%sClient closed!\n", pFormat.success);
+			printf("%sClient closed\n", pFormat.success);
 		}
 	}
 	// End
