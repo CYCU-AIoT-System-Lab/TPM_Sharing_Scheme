@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <errno.h>
 #include <sys/socket.h>
@@ -57,7 +58,7 @@ int main(int argc, char *argv[]) {
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket binded to address: %lu!\n", pFormat.success, (unsigned long)ipv4_addr);
+		printf("%sSocket binded to address: %lx!\n", pFormat.success, (unsigned long)ipv4_addr);
 	}
 	if (listen(sfd, 10) == -1) { // 10 is the maximum number of pending connections
 		printf("%sError listening socket!\n", pFormat.error);
