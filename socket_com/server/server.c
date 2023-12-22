@@ -75,9 +75,10 @@ int main(int argc, char *argv[]) {
 			printf("%sClient accepted!\n", pFormat.success);
 		}
 		// Main process --> client communication
-		ssize_t nread = recv(cfd, buffer, MAX_BUFFER_SIZE, 0);
+		ssize_t nread = recv(cfd, buffer, MAX_BUFFER_SIZE - 1, 0);
 		if (nread > 0) {
 			printf("%sReceived %ld bytes from client!\n", pFormat.success, nread);
+			buffer[nread] = '\0';
 			printf("Received MSG: %s\n", buffer);
 		} else {
 			printf("%sError receiving data from client!\n", pFormat.error);
