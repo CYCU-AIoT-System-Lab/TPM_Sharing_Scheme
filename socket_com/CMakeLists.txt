@@ -10,7 +10,7 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/client)
 if (CMAKE_BUILD_TYPE MATCHES "Debug")
 	set(CMAKE_C_FLAGS
 		"${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -Wall -Wextra -O0 ${ADDITIONAL_FLAGS}")
-	target_link_options(${PROJECT_NAME} BEFORE PUBLIC -fsanitize=undefined PUBLIC "")
+	#target_link_options(${PROJECT_NAME} BEFORE PUBLIC -fsanitize=undefined PUBLIC "")
 endif()
 
 if (CMAKE_BUILD_TYPE MATCHES "Release")
