@@ -165,7 +165,6 @@ fi
 # Add client subproject
 if [ $compile_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Adding client compiling task..."
-	#echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
 	awk 'NR==8{print "add_subdirectory(${CMAKE_SOURCE_DIR}/client)"}1' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
 	mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 else

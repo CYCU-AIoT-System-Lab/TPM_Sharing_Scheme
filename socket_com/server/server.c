@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <inttypes.h>
 #include "../lib/output_format.h"
 #include "../lib/lib_system.h"
 
@@ -38,6 +39,8 @@ int main(int argc, char *argv[]) {
 	struct sockaddr_in saddr, caddr; // server and client addresses
 	socklen_t caddr_len = sizeof(caddr);
 	char buffer[MAX_BUFFER_SIZE];
+	uint16_t port = 80;
+	uint32_t ipv4_addr = 0x7F000001; // localhost 1270.0.1
 	// Main process --> server init
 	sfd = socket(AF_INET, SOCK_STREAM, 0); // IPv4, TCP, default protocol
 	if (sfd == -1) {
@@ -48,21 +51,21 @@ int main(int argc, char *argv[]) {
 	}
 	memset(&saddr, 0, sizeof(saddr)); // clear structure
 	saddr.sin_family = AF_INET; // IPv4
-	saddr.sin_port = htons(80); // port 80 (TCP)
-	saddr.sin_addr.s_addr = htonl(0x7F000001); // localhost 127.0.0.1
+	saddr.sin_port = htons(port); // port 80 (TCP)
+	saddr.sin_addr.s_addr = htonl(ipv4_addr);
 	if (bind(sfd, (struct sockaddr *) &saddr, sizeof(saddr)) == -1) {
 		printf("%sError binding socket!\n", pFormat.error);
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket binded!\n", pFormat.success);
+		printf("%sSocket binded to address: %" PRIu32 "!\n", ipv4_addr, pFormat.success);
 	}
 	if (listen(sfd, 10) == -1) { // 10 is the maximum number of pending connections
 		printf("%sError listening socket!\n", pFormat.error);
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket listening!\n", pFormat.success);
+		printf("%sSocket listening on port: %" PRIu16 "!\n", port, pFormat.success);
 	}
 	// Main process --> client connection
 	while (1) {
