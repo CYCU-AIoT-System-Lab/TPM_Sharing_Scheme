@@ -135,7 +135,7 @@ echo -e "${term_notice_setup}Adding cmake presets..."
 awk -v projn="$build_project_name" 'NR==4{print "set(PROJECT_NAME \"projn\")"}1' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
 mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 #echo "project(\${PROJECT_NAME} VERSION ${build_project_version} LANGUAGES C)" >> "${proj_dir}/CMakeLists.txt"
-awk -v projv="$build_project_version" 'NR==6{print "project(\${PROJECT_NAME} VERSION projv LANGUAGES C)"}1' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
+awk -v projv="$build_project_version" 'NR==6{print "project(${PROJECT_NAME} VERSION projv LANGUAGES C)"}1' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
 mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 
 # Replace cmake presets
