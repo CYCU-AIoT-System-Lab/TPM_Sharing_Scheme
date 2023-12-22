@@ -205,7 +205,7 @@ if [ $run_server -eq 1 ]; then
 	else
 		launch_cmd="echo -e \"${term_notice_server}Starting server...\"; sudo ./server ../config.ini"
 	fi
-	gnome-terminal -- bash -c "${launch_cmd}; exec bash"
+	gnome-terminal -- bash -c "${launch_cmd} & ; exec bash"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped running server!"
 fi
