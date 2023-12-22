@@ -2,7 +2,7 @@
 
 # Test the server with TCP requests
 ipv4="127.0.0.1"
-port="8080"
+port="80"
 
 # Generate test file
 echo "abcdefghijklmnopqrstuvwxyz" > "test.txt"
