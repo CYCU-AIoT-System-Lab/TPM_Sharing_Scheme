@@ -83,6 +83,14 @@ int main(int argc, char *argv[]) {
 			printf("%sError receiving data from client!\n", pFormat.error);
 			printf("%s%s\n", pFormat.error, strerror(errno));
 		}
+		// Main process --> client disconnection
+		if (close(cfd) == -1) {
+			printf("%sError closing client!\n", pFormat.error);
+			printf("%s%s\n", pFormat.error, strerror(errno));
+			LIB_SYSTEM_exit_program(1, pFormat);
+		} else {
+			printf("%sClient closed!\n", pFormat.success);
+		}
 	}
 	// End
 	LIB_SYSTEM_exit_program(0, pFormat);
