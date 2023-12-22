@@ -9,7 +9,6 @@
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <inttypes.h>
 #include "../lib/output_format.h"
 #include "../lib/lib_system.h"
 
@@ -58,14 +57,14 @@ int main(int argc, char *argv[]) {
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket binded to address: %" PRIu32 "!\n", ipv4_addr, pFormat.success);
+		printf("%sSocket binded to address: %lu!\n", (unsigned long)ipv4_addr, pFormat.success);
 	}
 	if (listen(sfd, 10) == -1) { // 10 is the maximum number of pending connections
 		printf("%sError listening socket!\n", pFormat.error);
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket listening on port: %" PRIu16 "!\n", port, pFormat.success);
+		printf("%sSocket listening on port: %lu!\n", (unsigned long)port, pFormat.success);
 	}
 	// Main process --> client connection
 	while (1) {
