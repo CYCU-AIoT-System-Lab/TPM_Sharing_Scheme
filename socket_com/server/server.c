@@ -43,7 +43,10 @@ int main(int argc, char *argv[]) {
 	char buffer[MAX_BUFFER_SIZE];
 	uint16_t port = 80;
 	char *ipv4_addr_str = "127.0.0.1";
-	//uint32_t ipv4_addr = 0x7F000001; // localhost 1270.0.1
+	// Main process --> server init
+	memset(&saddr, 0, sizeof(saddr)); // clear structure
+	saddr.sin_family = AF_INET; // IPv4
+	saddr.sin_port = htons(port); // port 80 (TCP)
 	s_pton = inet_pton(AF_INET, ipv4_addr_str, &saddr.sin_addr.s_addr);
 	if (s_pton <= 0) {
 		if (s_pton == 0) {
@@ -53,7 +56,6 @@ int main(int argc, char *argv[]) {
 			printf("%s%s\n", pFormat.error, strerror(errno));
 		}
 	}
-	// Main process --> server init
 	sfd = socket(AF_INET, SOCK_STREAM, 0); // IPv4, TCP, default protocol
 	if (sfd == -1) {
 		printf("%sError opening socket!\n", pFormat.error);
@@ -61,16 +63,12 @@ int main(int argc, char *argv[]) {
 	} else {
 		printf("%sSocket opened\n", pFormat.success);
 	}
-	memset(&saddr, 0, sizeof(saddr)); // clear structure
-	saddr.sin_family = AF_INET; // IPv4
-	saddr.sin_port = htons(port); // port 80 (TCP)
-	//saddr.sin_addr.s_addr = htonl(ipv4_addr);
 	if (bind(sfd, (struct sockaddr *) &saddr, sizeof(saddr)) == -1) {
 		printf("%sError binding socket!\n", pFormat.error);
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket binded to 0x%s:0d%lu\n", 
+		printf("%sSocket binded to %s:%lu\n", 
 				pFormat.success, 
 				//(unsigned long)ipv4_addr, 
 				ipv4_addr_str,
