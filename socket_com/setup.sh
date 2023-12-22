@@ -156,7 +156,6 @@ fi
 # Add server subproject
 if [ $compile_server -eq 1 ]; then
 	echo -e "${term_notice_setup}Adding server compiling task..."
-	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/server)" >> "${proj_dir}/CMakeLists.txt"
 	awk 'NR==7{print "add_subdirectory(${CMAKE_SOURCE_DIR}/server)"}1' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
 	mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 else
@@ -166,9 +165,9 @@ fi
 # Add client subproject
 if [ $compile_client -eq 1 ]; then
 	echo -e "${term_notice_setup}Adding client compiling task..."
-	echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
-	#awk "NR==7{print \"add_subdirectory\(\${CMAKE_SOURCE_DIR}/client\)\"}1" "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
-	#mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
+	#echo "add_subdirectory(\${CMAKE_SOURCE_DIR}/client)" >> "${proj_dir}/CMakeLists.txt"
+	awk 'NR==8{print "add_subdirectory(${CMAKE_SOURCE_DIR}/client)"}1' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
+	mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 else
 	echo -e "${term_warn_setup}Invalid Argument! Skipped client compiling task!"
 fi
