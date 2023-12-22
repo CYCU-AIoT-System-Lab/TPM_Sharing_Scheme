@@ -133,7 +133,7 @@ mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 # Add cmake presets
 echo -e "${term_notice_setup}Adding cmake presets..."
 #echo "set(PROJECT_NAME \"${build_project_name}\")" >> "${proj_dir}/CMakeLists.txt"
-awk -v projn=$build_project_name "NR==4{print \"set\(PROJECT_NAME \"projn\"\)}1" "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
+awk -v projn="$build_project_name" 'NR==4{print \"set\(PROJECT_NAME \"projn\"\)}1' "${proj_dir}/CMakeLists.txt" > "${proj_dir}/tmp.txt"
 cat "${proj_dir}/tmp.txt"
 mv "${proj_dir}/tmp.txt" "${proj_dir}/CMakeLists.txt"
 echo "project(\${PROJECT_NAME} VERSION ${build_project_version} LANGUAGES C)" >> "${proj_dir}/CMakeLists.txt"
