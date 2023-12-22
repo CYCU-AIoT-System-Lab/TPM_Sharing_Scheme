@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
 			printf("%s%s\n", pFormat.error, strerror(errno));
 			LIB_SYSTEM_exit_program(1, pFormat);
 		} else {
-			printf("%sClient accepted!\n", pFormat.success);
+			printf("%sClient accepted at 0x%lx:0d%lu!\n", pFormat.success, (unsigned long)caddr.sin_addr.s_addr, (unsigned long)caddr.sin_port);
 		}
 		// Main process --> client communication
 		ssize_t nread = recv(cfd, buffer, MAX_BUFFER_SIZE - 1, 0);
