@@ -10,6 +10,7 @@
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include "../lib/output_format.h"
 #include "../lib/lib_system.h"
 
@@ -36,11 +37,22 @@ int main(int argc, char *argv[]) {
 	}
 	// Main process
 	int sfd, cfd; // server and client file descriptors
+	int s_pton; // status
 	struct sockaddr_in saddr, caddr; // server and client addresses
 	socklen_t caddr_len = sizeof(caddr);
 	char buffer[MAX_BUFFER_SIZE];
 	uint16_t port = 80;
-	uint32_t ipv4_addr = 0x7F000001; // localhost 1270.0.1
+	char *ipv4_addr_str = "127.0.0.1";
+	//uint32_t ipv4_addr = 0x7F000001; // localhost 1270.0.1
+	s_pton = inet_pton(AF_INET, ipv4_addr_str, &saddr.sin_addr.s_addr);
+	if (s_pton <= 0) {
+		if (s_pton == 0) {
+			printf("%sNote in presentation format: %s\n", pFormat.error, ipv4_addr_str);
+		} else {
+			printf("%sError converting address: %s\n", pFormat.error, ipv4_addr_str);
+			printf("%s%s\n", pFormat.error, strerror(errno));
+		}
+	}
 	// Main process --> server init
 	sfd = socket(AF_INET, SOCK_STREAM, 0); // IPv4, TCP, default protocol
 	if (sfd == -1) {
@@ -52,15 +64,16 @@ int main(int argc, char *argv[]) {
 	memset(&saddr, 0, sizeof(saddr)); // clear structure
 	saddr.sin_family = AF_INET; // IPv4
 	saddr.sin_port = htons(port); // port 80 (TCP)
-	saddr.sin_addr.s_addr = htonl(ipv4_addr);
+	//saddr.sin_addr.s_addr = htonl(ipv4_addr);
 	if (bind(sfd, (struct sockaddr *) &saddr, sizeof(saddr)) == -1) {
 		printf("%sError binding socket!\n", pFormat.error);
 		printf("%s%s\n", pFormat.error, strerror(errno));
 		LIB_SYSTEM_exit_program(1, pFormat);
 	} else {
-		printf("%sSocket binded to 0x%lx:0d%lu\n", 
+		printf("%sSocket binded to 0x%s:0d%lu\n", 
 				pFormat.success, 
-				(unsigned long)ipv4_addr, 
+				//(unsigned long)ipv4_addr, 
+				ipv4_addr_str,
 				(unsigned long)port);
 	}
 	if (listen(sfd, 10) == -1) { // 10 is the maximum number of pending connections
