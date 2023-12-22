@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
 		ssize_t nread = recv(cfd, buffer, MAX_BUFFER_SIZE, 0);
 		if (nread > 0) {
 			printf("%sReceived %ld bytes from client!\n", pFormat.success, nread);
-			printf("%s%s\n", pFormat.success, buffer);
+			printf("Received MSG: %s\n", pFormat.success, buffer);
 		} else {
 			printf("%sError receiving data from client!\n", pFormat.error);
 			printf("%s%s\n", pFormat.error, strerror(errno));
