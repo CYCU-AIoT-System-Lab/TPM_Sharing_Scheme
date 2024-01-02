@@ -317,8 +317,8 @@ compile_ibmacs () {
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmacs}/acs/"
-        export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
-        export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
+        sudo export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
+        sudo export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         if [ $acsMode == 1 ]; then
             # for Server
             sudo make -f makefiletpmc clean
