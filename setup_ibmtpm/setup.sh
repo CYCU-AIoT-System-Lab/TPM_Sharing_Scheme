@@ -44,7 +44,6 @@ mysql_database="tpm2"                    # default: tpm2
 default_job_1=0                          # 0: No, 1: Yes  # default: 1
 default_job_0=0                          # 0: No, 1: Yes  # default: 0
 install_req=1               # 0: No, 1: Yes  # default: 1
-config_nvim=$default_job_1               # 0: No, 1: Yes  # default: 1
 setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
 compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
 setup_ibmswtpm_env=$default_job_1        # 0: No, 1: Yes  # default: 1
@@ -139,34 +138,6 @@ install_req () {
     sudo tar -zxf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 
 	echo_notice "setup-install_req" "Complete: install_req"
-}
-
-# Configure neovim
-# Only need to setup once (can re-run)
-config_nvim () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Configuring neovim${NC}${end_spacer}"
-
-    echo -e "${BOLD}${BLUE}Configuring neovim ......${NC}"
-    mkdir "${nvim_dir}"
-    wget "${nvim_config_url}" -O "${nvim_dir}/init.vim"
-
-    # echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
-    # sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-    # echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
-    # apt-get install -y nodejs-dev node-gyp libssl1.0-dev
-    # apt-get install -y nodejs npm
-    # source ${bashrc_dir}
-    # npm cache clean -f
-    # npm install -g n
-    # n stable
-    source ${bashrc_dir}
-
-    # Commands to install plugins and coc extensions
-    # :PlugInstall
-    # :
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Configuring neovim Complete${NC}${end_spacer}"
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
@@ -560,7 +531,6 @@ active_ACS_Demo_verify () {
 echo_notice "setup" "Running setup script ..."
 
 if [ $install_req            == 1 ]; then install_req;                 fi
-if [ $config_nvim            == 1 ]; then config_nvim;                 fi
 if [ $setup_ibmtpmtss_env    == 1 ]; then setup_ibmtpmtss_env;         fi
 if [ $compile_ibmtpmtss      == 1 ]; then compile_ibmtpmtss;           fi
 if [ $setup_ibmswtpm_env     == 1 ]; then setup_ibmswtpm_env;          fi
