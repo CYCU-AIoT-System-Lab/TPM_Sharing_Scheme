@@ -319,6 +319,8 @@ compile_ibmacs () {
         cd "${path_ibmacs}/acs/"
         export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
+        echo_warn "setup-compile_ibmacs" "$CPATH"
+        echo_warn "setup-compile_ibmacs" "$LIBRARY_PATH"
         if [ $acsMode == 1 ]; then
             # for Server
             sudo make -f makefiletpmc clean
