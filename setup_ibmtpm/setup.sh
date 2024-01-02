@@ -105,13 +105,13 @@ NC='\033[0m'
 # $1: file/unit
 # $2: message
 function echo_notice () {
-	echo -e "${BOLD}${BLUE}[NOTICE-setup_ibmtpm/$1]${NC} $2"
+    echo -e "${BOLD}${BLUE}[NOTICE-setup_ibmtpm/$1]${NC} $2"
 }
 
 # $1: file/unit
 # $2: message
 function echo_warn () {
-	echo -e "${BOLD}${ORANGE}[WARN-setup_ibmtpm/$1]${NC} $2"
+    echo -e "${BOLD}${ORANGE}[WARN-setup_ibmtpm/$1]${NC} $2"
 }
 
 # Install requirements for development, building, and testing
@@ -119,41 +119,41 @@ function echo_warn () {
 # Extract ibmtss, ibmtpm, and ibmacs
 # Only need to setup once (can re-run)
 install_req () {
-	echo_notice "setup-install_req" "Starting: install_req"
+    echo_notice "setup-install_req" "Starting: install_req"
 
-	echo_notice "setup-install_req" "Creating directories ..."
+    echo_notice "setup-install_req" "Creating directories ..."
     sudo mkdir "${path_ibmtss}"
     sudo mkdir "${path_ibmtpm}"
     sudo mkdir "${path_ibmacs}"
 
-	echo_notice "setup-install_req" "Downloading IBMTPMTSS ..."
+    echo_notice "setup-install_req" "Downloading IBMTPMTSS ..."
     sudo wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
 
-	echo_notice "setup-install_req" "Downloading IBMSWTPM ..."
+    echo_notice "setup-install_req" "Downloading IBMSWTPM ..."
     sudo wget "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
 
-	echo_notice "setup-install_req" "Downloading IBMACS ..."
+    echo_notice "setup-install_req" "Downloading IBMACS ..."
     sudo wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
-	echo_notice "setup-install_req" "Extracting IBMTPMTSS ..."
+    echo_notice "setup-install_req" "Extracting IBMTPMTSS ..."
     sudo tar -zxf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
 
-	echo_notice "setup-install_req" "Extracting IBMSWTPM ..."
+    echo_notice "setup-install_req" "Extracting IBMSWTPM ..."
     sudo tar -zxf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
 
-	echo_notice "setup-install_req" "Extracting IBMACS ..."
+    echo_notice "setup-install_req" "Extracting IBMACS ..."
     sudo tar -zxf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 
-	echo_notice "setup-install_req" "Complete: install_req"
+    echo_notice "setup-install_req" "Complete: install_req"
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
 # Can re-run to update environment variables to switch between physical TPM and software TPM
 # Only need to setup once (can re-run)
 setup_ibmtpmtss_env () {
-	echo_notice "setup-setup_ibmtpmtss_env" "Starting: setup_ibmtpmtss_env"
+    echo_notice "setup-setup_ibmtpmtss_env" "Starting: setup_ibmtpmtss_env"
 
-	echo_notice "setup-setup_ibmtpmtss_env" "Setting path env variable ..."
+    echo_notice "setup-setup_ibmtpmtss_env" "Setting path env variable ..."
     if [ $TPMMode == 1 ]; then
         # for Pysical TPM
         export TPM_INTERFACE_TYPE=dev
@@ -162,23 +162,23 @@ setup_ibmtpmtss_env () {
         export TPM_INTERFACE_TYPE=socsim
     else 
         echo -e "${BOLD}${RED}Invalid TPMMode${NC}"
-		echo_warn "setup-setup_ibmtpmtss_env" "Invalid TPMMode"
+        echo_warn "setup-setup_ibmtpmtss_env" "Invalid TPMMode"
         exit 1
     fi
     export TPM_COMMAND_PORT="${tpm_command_port}"
 
-	echo_notice "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
+    echo_notice "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
     sudo ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
 
-	echo_notice "setup-setup_ibmtpmtss_env" "Complete: setup_ibmtpmtss_env"
+    echo_notice "setup-setup_ibmtpmtss_env" "Complete: setup_ibmtpmtss_env"
 }
 
 # Compile ibmtss
 # Can be run multiple times for code adjustment
 compile_ibmtpmtss () {
-	echo_notice "setup-compile_ibmtpmtss" "Starting: compile_ibmtpmtss"
+    echo_notice "setup-compile_ibmtpmtss" "Starting: compile_ibmtpmtss"
 
-	echo_notice "setup-compile_ibmtpmtss" "Cleaning up with make ..."
+    echo_notice "setup-compile_ibmtpmtss" "Cleaning up with make ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
@@ -190,11 +190,11 @@ compile_ibmtpmtss () {
         cd "${path_ibmtss}/utils12/"
         make -f makefiletpmc clean
     else 
-		echo_warn "setup-compile_ibmtpmtss" "Invalid verMode"
+        echo_warn "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
     fi
 
-	echo_notice "setup-compile_ibmtpmtss" "Compiling IBMTSS ..."
+    echo_notice "setup-compile_ibmtpmtss" "Compiling IBMTSS ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
@@ -206,46 +206,46 @@ compile_ibmtpmtss () {
         cd "${path_ibmtss}/utils12/"
         make -f makefiletpmc
     else 
-		echo_warn "setup-compile_ibmtpmtss" "Invalid verMode"
+        echo_warn "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
     fi
 
-	echo_notice "setup-compile_ibmtpmtss" "Complete: compile_ibmtpmtss"
+    echo_notice "setup-compile_ibmtpmtss" "Complete: compile_ibmtpmtss"
 }
 
 # Create symbolic link to ibmswtpm
 # Only need to setup once (can re-run)
 setup_ibmswtpm_env () {
-	echo_notice "setup-setup_ibmswtpm_env" "Starting: setup_ibmswtpm_env"
+    echo_notice "setup-setup_ibmswtpm_env" "Starting: setup_ibmswtpm_env"
 
-	echo_notice "setup-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
+    echo_notice "setup-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
     sudo ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
 
-	echo_notice "setup-setup_ibmswtpm_env" "Complete: setup_ibmswtpm_env"
+    echo_notice "setup-setup_ibmswtpm_env" "Complete: setup_ibmswtpm_env"
 }
 
 # Compile ibmswtpm
 # Can be run multiple times for code adjustment
 compile_ibmswtpm () {
-	echo_notice "setup-compile_ibmswtpm" "Starting: compile_ibmswtpm"
+    echo_notice "setup-compile_ibmswtpm" "Starting: compile_ibmswtpm"
 
-	echo_notice "setup-compile_ibmswtpm" "Cleaning up with make ..."
+    echo_notice "setup-compile_ibmswtpm" "Cleaning up with make ..."
     cd "${path_ibmtpm}/src/"
     make clean
 
-	echo_notice "setup-compile_ibmswtpm" "Compiling IBMTPM ..."
+    echo_notice "setup-compile_ibmswtpm" "Compiling IBMTPM ..."
     cd "${path_ibmtpm}/src/"
     make
 
-	echo_notice "setup-compile_ibmswtpm" "Complete: compile_ibmswtpm"
+    echo_notice "setup-compile_ibmswtpm" "Complete: compile_ibmswtpm"
 }
 
 # Install requirements for ibmacs, create mysql database, set environment variables, link directories, and generate directory for webpage
 # Only need to setup once (can re-run)
 setup_ibmacs_env () {
-	echo_notice	"setup-setup_ibmacs_env" "Starting: setup_ibmacs_env"
+    echo_notice "setup-setup_ibmacs_env" "Starting: setup_ibmacs_env"
 
-	echo_notice "setup-setup_ibmacs_env" "Installing IBMACS dependencies ..."
+    echo_notice "setup-setup_ibmacs_env" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
         # for Server
         sudo apt-get install -y libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev
@@ -253,12 +253,12 @@ setup_ibmacs_env () {
         # for Client
         sudo apt-get install -y libjson-c-dev libssl-dev
     else 
-		echo_warn "setup-setup_ibmacs_env" "Invalid acsMode"
+        echo_warn "setup-setup_ibmacs_env" "Invalid acsMode"
         exit 1
     fi
 
     if [ $acsMode == 1 ]; then
-		echo_notice "setup-setup_ibmacs_env" "Setting database"
+        echo_notice "setup-setup_ibmacs_env" "Setting database"
         cd "${path_ibmacs}/acs/"
         sudo mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
         sudo mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_server_ip}' IDENTIFIED BY '${mysql_password}';"
@@ -266,23 +266,23 @@ setup_ibmacs_env () {
         sudo mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
     fi
 
-	echo_notice "setup-setup_ibmacs_env" "Setting include path"
+    echo_notice "setup-setup_ibmacs_env" "Setting include path"
     export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
     export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
-	echo_notice "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
+    echo_notice "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
     sudo ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
 
-	echo_notice "setup-setup_ibmacs_env" "Setting html directory"
+    echo_notice "setup-setup_ibmacs_env" "Setting html directory"
     sudo mkdir ${html_dir}
     sudo chown root ${html_dir}
     sudo chgrp root ${html_dir}
     sudo chmod 777 ${html_dir}
 
-	echo_notice "setup-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
+    echo_notice "setup-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
     sudo ln -s "${c_json_lib_dir}" "${c_json_lib_link_dir}"
 
-	echo_notice "setup-setup_ibmacs_env" "Setting include path ..."
+    echo_notice "setup-setup_ibmacs_env" "Setting include path ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmacs}/acs/"
@@ -294,19 +294,19 @@ setup_ibmacs_env () {
         export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
     else 
-		echo_warn "setup-setup_ibmacs_env" "Invalid verMode"
+        echo_warn "setup-setup_ibmacs_env" "Invalid verMode"
         exit 1
     fi
 
-	echo_notice "setup-setup_ibmacs_env" "Complete: setup_ibmacs_env"
+    echo_notice "setup-setup_ibmacs_env" "Complete: setup_ibmacs_env"
 }
 
 # Compile ibmacs
 # Can be run multiple times for code adjustment
 compile_ibmacs () {
-	echo_notice "setup-compile_ibmacs" "Starting: compile_ibmacs"
+    echo_notice "setup-compile_ibmacs" "Starting: compile_ibmacs"
 
-	echo_notice "setup-compile_ibmacs" "Compiling IBMACS and setting include path ..."
+    echo_notice "setup-compile_ibmacs" "Compiling IBMACS and setting include path ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmacs}/acs/"
@@ -330,15 +330,16 @@ compile_ibmacs () {
             sudo make -f makefiletpmc clean
             sudo make -f makefiletpmc
         else 
-			echo_warn "setup-compile_ibmacs" "Invalid acsMode"
+            echo_warn "setup-compile_ibmacs" "Invalid acsMode"
             exit 1
         fi
     else 
-		echo_warn "setup-compile_ibmacs" "Invalid verMode"
+        echo_warn "setup-compile_ibmacs" "Invalid verMode"
         exit 1
     fi
 
-	echo_notice "setup-compile_ibmacs" "Complete: compile_ibmacs"
+    echo_notice "setup-compile_ibmacs" "Complete: compile_ibmacs"
+    echo_notice "setup-compile_ibmacs" "Complete: setup_ibmacs_env"
 }
 
 # Open demo webpage with firefox
