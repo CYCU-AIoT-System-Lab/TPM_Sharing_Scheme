@@ -113,32 +113,32 @@ function echo_warn () {
 # Extract ibmtss, ibmtpm, and ibmacs
 # Only need to setup once (can re-run)
 install_req () {
-	echo_notice "setup/install_req" "Starting: install_req"
+	echo_notice "setup-install_req" "Starting: install_req"
 
-	echo_notice "setup/install_req" "Creating directories ..."
-    mkdir "${path_ibmtss}"
-    mkdir "${path_ibmtpm}"
-    mkdir "${path_ibmacs}"
+	echo_notice "setup-install_req" "Creating directories ..."
+    sudo mkdir "${path_ibmtss}"
+    sudo mkdir "${path_ibmtpm}"
+    sudo mkdir "${path_ibmacs}"
 
-	echo_notice "setup/install_req" "Downloading IBMTSS ..."
-    wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
+	echo_notice "setup-install_req" "Downloading IBMTSS ..."
+    sudo wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
 
-	echo_notice "setup/install_req" "Downloading IBMSWTPM ..."
-    wget "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
+	echo_notice "setup-install_req" "Downloading IBMSWTPM ..."
+    sudo wget "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
 
-	echo_notice "setup/install_req" "Downloading IBMACS ..."
-    wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
+	echo_notice "setup-install_req" "Downloading IBMACS ..."
+    sudo wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
-	echo_notice "setup/install_req" "Extracting IBMTSS ..."
-    tar -zxf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
+	echo_notice "setup-install_req" "Extracting IBMTSS ..."
+    sudo tar -zxf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
 
-	echo_notice "setup/install_req" "Extracting IBMSWTPM ..."
-    tar -zxf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
+	echo_notice "setup-install_req" "Extracting IBMSWTPM ..."
+    sudo tar -zxf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
 
-	echo_notice "setup/install_req" "Extracting IBMACS ..."
-    tar -zxf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
+	echo_notice "setup-install_req" "Extracting IBMACS ..."
+    sudo tar -zxf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 
-	echo_notice "setup/install_req" "Complete: install_req"
+	echo_notice "setup-install_req" "Complete: install_req"
 }
 
 # Configure neovim
