@@ -47,9 +47,9 @@ install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
 setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
 compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
 setup_ibmswtpm_env=$default_job_1        # 0: No, 1: Yes  # default: 1
-#compile_ibmswtpm=$default_job_1          # 0: No, 1: Yes  # default: 1
-compile_ibmswtpm=1          # 0: No, 1: Yes  # default: 1
-setup_ibmacs_env=$default_job_1          # 0: No, 1: Yes  # default: 1
+compile_ibmswtpm=$default_job_1          # 0: No, 1: Yes  # default: 1
+#setup_ibmacs_env=$default_job_1          # 0: No, 1: Yes  # default: 1
+setup_ibmacs_env=1          # 0: No, 1: Yes  # default: 1
 compile_ibmacs=$default_job_1            # 0: No, 1: Yes  # default: 1
 open_demo_webpage=$default_job_1         # 0: No, 1: Yes  # default: 1
 generate_CA=$default_job_0               # 0: No, 1: Yes  # default: 0 (not implemented)
@@ -237,22 +237,22 @@ compile_ibmswtpm () {
 # Install requirements for ibmacs, create mysql database, set environment variables, link directories, and generate directory for webpage
 # Only need to setup once (can re-run)
 setup_ibmacs_env () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting Up IBMACS Environment${NC}${end_spacer}"
+	echo_notice	"setup-setup_ibmacs_env" "Starting: setup_ibmacs_env"
 
-    echo -e "${BOLD}${BLUE}Installing IBMACS dependencies ......${NC}"
+	echo_notice "setup-setup_ibmacs_env" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
         # for Server
-        apt-get install -y libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev
+        sudo apt-get install -y libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev
     elif [ $acsMode == 2 ]; then
         # for Client
-        apt-get install -y libjson-c-dev libssl-dev
+        sudo apt-get install -y libjson-c-dev libssl-dev
     else 
-        echo -e "${BOLD}${RED}Invalid acsMode${NC}"
+		echo_warn "setup-setup_ibmacs_env" "Invalid acsMode"
         exit 1
     fi
 
     if [ $acsMode == 1 ]; then
-        echo -e "${BOLD}${BLUE}Setting database ......${NC}"
+		echo_notice "setup-setup_ibmacs_env" "Setting database"
         cd "${path_ibmacs}/acs/"
         mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
         mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_server_ip}' IDENTIFIED BY '${mysql_password}';"
@@ -260,23 +260,23 @@ setup_ibmacs_env () {
         mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
     fi
 
-    echo -e "${BOLD}${BLUE}Setting include path ......${NC}"
+	echo_notice "setup-setup_ibmacs_env" "Setting include path"
     export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
     export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmacs} ......${NC}"
-    ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
+	echo_notice "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
+    sudo ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
 
-    echo -e "${BOLD}${BLUE}Setting html directory ......${NC}"
+	echo_notice "setup-setup_ibmacs_env" "Setting html directory"
     mkdir ${html_dir}
     chown root ${html_dir}
     chgrp root ${html_dir}
     chmod 777 ${html_dir}
 
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${c_json_lib_dir} ......${NC}"
-    ln -s "${c_json_lib_dir}" "${c_json_lib_link_dir}"
+	echo_notice "setup-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
+    sudo ln -s "${c_json_lib_dir}" "${c_json_lib_link_dir}"
 
-    echo -e "${BOLD}${BLUE}Setting include path ......${NC}"
+	echo_notice "setup-setup_ibmacs_env" "Setting include path ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmacs}/acs/"
@@ -288,11 +288,11 @@ setup_ibmacs_env () {
         export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
     else 
-        echo -e "${BOLD}${RED}Invalid verMode${NC}"
+		echo_warn "setup-setup_ibmacs_env" "Invalid verMode"
         exit 1
     fi
 
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting Up IBMACS Environment Complete${NC}${end_spacer}"
+	echo_notice "setup-setup_ibmacs_env" "Complete: setup_ibmacs_env"
 }
 
 # Compile ibmacs
