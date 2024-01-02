@@ -162,7 +162,7 @@ setup_ibmtpmtss_env () {
     export TPM_COMMAND_PORT="${tpm_command_port}"
 
 	echo_notice "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
-    ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
+    sudo ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
 
 	echo_notice "setup-setup_ibmtpmtss_env" "Complete: setup_ibmtpmtss_env"
 }
