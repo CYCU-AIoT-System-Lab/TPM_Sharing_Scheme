@@ -210,12 +210,12 @@ compile_ibmtpmtss () {
 # Create symbolic link to ibmswtpm
 # Only need to setup once (can re-run)
 setup_ibmswtpm_env () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMSWTPM Environment${NC}${end_spacer}"
+	echo_notice "setup-setup_ibmswtpm_env" "Starting: setup_ibmswtpm_env"
 
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtpm} ......${NC}"
+	echo_notice "setup-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
     ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
 
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMSWTPM Environment Complete${NC}${end_spacer}"
+	echo_notice "setup-setup_ibmswtpm_env" "Complete: setup_ibmswtpm_env"
 }
 
 # Compile ibmswtpm
