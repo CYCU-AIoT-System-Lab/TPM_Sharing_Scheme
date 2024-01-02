@@ -49,7 +49,7 @@ install_req () {
 		echo -e "${term_notice}Installing $1..."
 		sudo apt-get install -y $1
 	}
-	echo -e "${term_notice} Installing required packages..."
+	echo -e "${term_notice}Installing required packages..."
 	sudo apt-get update
 	sudo apt-get upgrade -y
 	aptins "git"
