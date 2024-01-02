@@ -41,9 +41,9 @@ mysql_user="tpm2ACS"                     # default: tpm2ACS
 mysql_password="123456"                  # default: 123456
 mysql_database="tpm2"                    # default: tpm2
 # Param - job
-default_job_1=1                          # 0: No, 1: Yes  # default: 1
+default_job_1=0                          # 0: No, 1: Yes  # default: 1
 default_job_0=0                          # 0: No, 1: Yes  # default: 0
-install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
+install_req=1               # 0: No, 1: Yes  # default: 1
 config_nvim=$default_job_1               # 0: No, 1: Yes  # default: 1
 setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
 compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
@@ -62,16 +62,6 @@ active_ACS_Demo_Server=$default_job_1    # 0: No, 1: Yes  # default: 1
 active_ACS_Demo_Client=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't enroll)
 active_ACS_Demo_verify=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't verify)
 # ==================================================================================================
-
-BOLD='\033[1m'
-BLUE='\033[34m'
-RED='\033[31m'
-GREEN='\033[32m'
-ORANGE='\033[33m'
-NC='\033[0m'
-
-start_spacer="\n====================================================\n"
-end_spacer="\n===================================================="
 
 dn_ibmtss="ibmtss"
 dn_ibmtpm="ibmtpm"
@@ -99,54 +89,56 @@ ima_sig_log_dir="${sym_link_ibmtss}/utils/imasig.log4j"
 acs_demo_verify_imasig_log_dir="${sym_link_ibmtss}/utils/i.log4j"
 acs_demo_verify_client_log_dir="${sym_link_ibmtss}/utils/client.log4j"
 
-# Check if running as root
-if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-    echo "${BOLD}${RED}Please run with command: sudo bash setup.sh${NC}"
-    exit 1
-fi
+BOLD='\033[1m'
+BLUE='\033[34m'
+RED='\033[31m'
+GREEN='\033[32m'
+ORANGE='\033[33m'
+NC='\033[0m'
 
+# $1: file/unit
+# $2: message
+function echo_notice () {
+	echo -e "${BOLD}${BLUE}[NOTICE-setup_ibmtpm/$1]${NC} $2"
+}
 
-echo -e "${start_spacer}>>${BOLD}${GREEN}Setup${NC}${end_spacer}"
+# $1: file/unit
+# $2: message
+function echo_warn () {
+	echo -e "${BOLD}${ORANGE}[WARN-setup_ibmtpm/$1]${NC} $2"
+}
 
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
 # Extract ibmtss, ibmtpm, and ibmacs
 # Only need to setup once (can re-run)
 install_req () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Installing requirements${NC}\n====================================================\n"
+	echo_notice "setup/install_req" "Starting: install_req"
 
-    echo -e "${BOLD}${BLUE}Updating system ......${NC}"
-    apt-get update
-    apt-get upgrade -y
-
-    echo -e "${BOLD}${BLUE}Installing tools ......${NC}"
-    apt-get install -y htop iftop neovim git curl wget
-
-    echo -e "${BOLD}${BLUE}Installing IBMTPM dependencies ......${NC}"
-    apt-get install -y build-essential make gcc libssl-dev
-    # tss dependencies on ubuntu packages
-    # apt-get install -y libtss0 libtss-dev libtss2-dev libtss2-doc libtss2-esys0 libtss2-esys-3.0.2-0 libtss2-fapi1 libtss2-mu0 libtss2-policy0 libtss2-rc0 libtss2-sys1 libtss2-tcti-cmd0 libtss2-tcti-device0 libtss2-tcti-libtpms0 libtss2-tcti-mssim0 libtss2-tcti-pcap0 libtss2-tcti-spi-helper0 libtss2-tcti-swtpm0 libtss2-tcti-tabrmd-dev libtss2-tcti-tabrmd0 libtss2-tctidr0
-
-    echo -e "${BOLD}${BLUE}Creating directories ......${NC}"
+	echo_notice "setup/install_req" "Creating directories ..."
     mkdir "${path_ibmtss}"
     mkdir "${path_ibmtpm}"
     mkdir "${path_ibmacs}"
 
-    echo -e "${BOLD}${BLUE}Downloading IBMTPMTSS ......${NC}"
+	echo_notice "setup/install_req" "Downloading IBMTSS ..."
     wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
 
-    echo -e "${BOLD}${BLUE}Downloading IBMSWTPM ......${NC}"
+	echo_notice "setup/install_req" "Downloading IBMSWTPM ..."
     wget "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
 
-    echo -e "${BOLD}${BLUE}Downloading IBMACS ......${NC}"
+	echo_notice "setup/install_req" "Downloading IBMACS ..."
     wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
-    echo -e "${BOLD}${BLUE}Extracting files ......${NC}"
-    tar -zxvf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
-    tar -zxvf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
-    tar -zxvf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
+	echo_notice "setup/install_req" "Extracting IBMTSS ..."
+    tar -zxf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
 
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Installing requirements Complete${NC}${end_spacer}"
+	echo_notice "setup/install_req" "Extracting IBMSWTPM ..."
+    tar -zxf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
+
+	echo_notice "setup/install_req" "Extracting IBMACS ..."
+    tar -zxf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
+
+	echo_notice "setup/install_req" "Complete: install_req"
 }
 
 # Configure neovim
@@ -565,6 +557,8 @@ active_ACS_Demo_verify () {
     echo -e "${start_spacer}>>${BOLD}${GREEN}Verifying ACS Demo Complete${NC}${end_spacer}"
 }
 
+echo_notice "setup" "Running setup script ..."
+
 if [ $install_req            == 1 ]; then install_req;                 fi
 if [ $config_nvim            == 1 ]; then config_nvim;                 fi
 if [ $setup_ibmtpmtss_env    == 1 ]; then setup_ibmtpmtss_env;         fi
@@ -584,4 +578,4 @@ if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 
-echo -e "${start_spacer}>>${BOLD}${GREEN}Setup Complete${NC}${end_spacer}"
+echo_notice "setup" "Setup complete"

@@ -62,11 +62,11 @@ install_req () {
 	aptins "build-essential"
 	aptins "gcc"
 	aptins "make"
+	aptins "libssl-dev"
 	if [ ${install_for_pi} -eq 0 ]; then
 		aptins "libtool"
 		aptins "autoconf"
 		aptins "unzip"
-		aptins "libssl-dev"
 		build_cmake
 		cd $working_dir
 	fi
