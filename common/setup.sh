@@ -14,8 +14,8 @@ valgrind_dir="${HOME}/valgrind-${valgrind_ver}"
 # sub_tasks (1=Enable)
 install_for_pi=0
 setup_environment=0 # Not implemented
-setup_ibmtpm=0      # Not implemented
-setup_socket_com=1
+setup_ibmtpm=1
+setup_socket_com=0
 
 # Functions
 
@@ -125,8 +125,11 @@ else
 	echo -e "${term_warn}Invalid Argument: $setup_environment ! Skipping setup_environment..."
 fi
 
+cd $working_dir
 if [ $setup_ibmtpm -eq 1 ]; then
-	echo -e "${term_warn}Running ibmtpm setup Not Implemneted Yet!"
+    echo -e "${term_notice}Running ibmtpm setup..."
+    cd ../setup_ibmtpm
+    ./setup.sh
 else
 	echo -e "${term_warn}Invalid Argument: $setup_ibmtpm ! Skipping setup_ibmtpm..."
 fi
@@ -136,7 +139,6 @@ if [ $setup_socket_com -eq 1 ]; then
 	echo -e "${term_notice}Running socket_com setup..."
 	cd ../socket_com
 	./setup.sh
-	cd ..
 else
 	echo -e "${term_warn}Invalid Argument: $setup_socket_com ! Skipping setup_socket_com..."
 fi
