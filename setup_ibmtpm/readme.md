@@ -56,6 +56,7 @@ In VM terminal, adjust job settings, type ```sudo bash setup.sh```
 ## Related Sources
 
 1. [libtss packages in ubuntu](https://packages.ubuntu.com/search?keywords=libtss&searchon=names)
+2. [IBM Attestation Client Server测试](https://rlyown.github.io/2021/02/28/IBM-Attestation-Client-Server%E6%B5%8B%E8%AF%95/)
 
 ## Possible Bugs
 
