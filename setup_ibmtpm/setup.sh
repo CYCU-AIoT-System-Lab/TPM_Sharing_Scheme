@@ -43,8 +43,9 @@ mysql_database="tpm2"                    # default: tpm2
 # Param - job
 default_job_1=0                          # 0: No, 1: Yes  # default: 1
 default_job_0=0                          # 0: No, 1: Yes  # default: 0
-install_req=1               # 0: No, 1: Yes  # default: 1
-setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
+install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
+#setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
+setup_ibmtpmtss_env=1       # 0: No, 1: Yes  # default: 1
 compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
 setup_ibmswtpm_env=$default_job_1        # 0: No, 1: Yes  # default: 1
 compile_ibmswtpm=$default_job_1          # 0: No, 1: Yes  # default: 1
@@ -144,9 +145,9 @@ install_req () {
 # Can re-run to update environment variables to switch between physical TPM and software TPM
 # Only need to setup once (can re-run)
 setup_ibmtpmtss_env () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMTSS Environment${NC}${end_spacer}"
+	echo_notice "setup-setup_ibmtpmtss_env" "Starting: setup_ibmtpmtss_env"
 
-    echo -e "${BOLD}${BLUE}Setting path ......${NC}"
+	echo_notice "setup-setup_ibmtpmtss_env" "Setting path env variable ..."
     if [ $TPMMode == 1 ]; then
         # for Pysical TPM
         export TPM_INTERFACE_TYPE=dev
@@ -155,14 +156,15 @@ setup_ibmtpmtss_env () {
         export TPM_INTERFACE_TYPE=socsim
     else 
         echo -e "${BOLD}${RED}Invalid TPMMode${NC}"
+		echo_warn "setup-setup_ibmtpmtss_env" "Invalid TPMMode"
         exit 1
     fi
     export TPM_COMMAND_PORT="${tpm_command_port}"
 
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtss} ......${NC}"
+	echo_notice "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
     ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
 
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMTSS Environment Complete${NC}${end_spacer}"
+	echo_notice "setup-setup_ibmtpmtss_env" "Complete: setup_ibmtpmtss_env"
 }
 
 # Compile ibmtss
