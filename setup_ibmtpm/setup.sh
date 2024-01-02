@@ -269,9 +269,9 @@ setup_ibmacs_env () {
 
 	echo_notice "setup-setup_ibmacs_env" "Setting html directory"
     sudo mkdir ${html_dir}
-    chown root ${html_dir}
-    chgrp root ${html_dir}
-    chmod 777 ${html_dir}
+    sudo chown root ${html_dir}
+    sudo chgrp root ${html_dir}
+    sudo chmod 777 ${html_dir}
 
 	echo_notice "setup-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
     sudo ln -s "${c_json_lib_dir}" "${c_json_lib_link_dir}"
