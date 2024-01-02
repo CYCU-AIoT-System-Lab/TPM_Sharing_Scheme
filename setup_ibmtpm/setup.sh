@@ -254,10 +254,10 @@ setup_ibmacs_env () {
     if [ $acsMode == 1 ]; then
 		echo_notice "setup-setup_ibmacs_env" "Setting database"
         cd "${path_ibmacs}/acs/"
-        mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
-        mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_server_ip}' IDENTIFIED BY '${mysql_password}';"
-        mysql -Bse "GRANT ALL PRIVILEGES ON ${mysql_database}.* TO '${mysql_user}'@'${acs_demo_server_ip}';"
-        mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
+        sudo mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
+        sudo mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_server_ip}' IDENTIFIED BY '${mysql_password}';"
+        sudo mysql -Bse "GRANT ALL PRIVILEGES ON ${mysql_database}.* TO '${mysql_user}'@'${acs_demo_server_ip}';"
+        sudo mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
     fi
 
 	echo_notice "setup-setup_ibmacs_env" "Setting include path"
@@ -268,7 +268,7 @@ setup_ibmacs_env () {
     sudo ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
 
 	echo_notice "setup-setup_ibmacs_env" "Setting html directory"
-    mkdir ${html_dir}
+    sudo mkdir ${html_dir}
     chown root ${html_dir}
     chgrp root ${html_dir}
     chmod 777 ${html_dir}
