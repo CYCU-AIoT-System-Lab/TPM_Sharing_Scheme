@@ -213,7 +213,7 @@ setup_ibmswtpm_env () {
 	echo_notice "setup-setup_ibmswtpm_env" "Starting: setup_ibmswtpm_env"
 
 	echo_notice "setup-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
-    ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
+    sudo ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
 
 	echo_notice "setup-setup_ibmswtpm_env" "Complete: setup_ibmswtpm_env"
 }
