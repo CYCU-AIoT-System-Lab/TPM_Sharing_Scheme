@@ -44,9 +44,9 @@ mysql_database="tpm2"                    # default: tpm2
 default_job_1=0                          # 0: No, 1: Yes  # default: 1
 default_job_0=0                          # 0: No, 1: Yes  # default: 0
 install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
-#setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
-setup_ibmtpmtss_env=1       # 0: No, 1: Yes  # default: 1
-compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
+setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
+#compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
+compile_ibmtpmtss=1       # 0: No, 1: Yes  # default: 1
 setup_ibmswtpm_env=$default_job_1        # 0: No, 1: Yes  # default: 1
 compile_ibmswtpm=$default_job_1          # 0: No, 1: Yes  # default: 1
 setup_ibmacs_env=$default_job_1          # 0: No, 1: Yes  # default: 1
@@ -120,7 +120,7 @@ install_req () {
     sudo mkdir "${path_ibmtpm}"
     sudo mkdir "${path_ibmacs}"
 
-	echo_notice "setup-install_req" "Downloading IBMTSS ..."
+	echo_notice "setup-install_req" "Downloading IBMTPMTSS ..."
     sudo wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
 
 	echo_notice "setup-install_req" "Downloading IBMSWTPM ..."
@@ -129,7 +129,7 @@ install_req () {
 	echo_notice "setup-install_req" "Downloading IBMACS ..."
     sudo wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
-	echo_notice "setup-install_req" "Extracting IBMTSS ..."
+	echo_notice "setup-install_req" "Extracting IBMTPMTSS ..."
     sudo tar -zxf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
 
 	echo_notice "setup-install_req" "Extracting IBMSWTPM ..."
@@ -170,9 +170,9 @@ setup_ibmtpmtss_env () {
 # Compile ibmtss
 # Can be run multiple times for code adjustment
 compile_ibmtpmtss () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTSS${NC}${end_spacer}"
+	echo_notice "setup-compile_ibmtpmtss" "Starting: compile_ibmtpmtss"
 
-    echo -e "${BOLD}${BLUE}Cleaning up ......${NC}"
+	echo_notice "setup-compile_ibmtpmtss" "Cleaning up with make ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
@@ -184,11 +184,11 @@ compile_ibmtpmtss () {
         cd "${path_ibmtss}/utils12/"
         make -f makefiletpmc clean
     else 
-        echo -e "${BOLD}${RED}Invalid verMode${NC}"
+		echo_warn "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
     fi
 
-    echo -e "${BOLD}${BLUE}Compiling IBMTSS ......${NC}"
+	echo_notice "setup-compile_ibmtpmtss" "Compiling IBMTSS ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
@@ -200,11 +200,11 @@ compile_ibmtpmtss () {
         cd "${path_ibmtss}/utils12/"
         make -f makefiletpmc
     else 
-        echo -e "${BOLD}${RED}Invalid verMode${NC}"
+		echo_warn "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
     fi
 
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTSS Complete${NC}${end_spacer}"
+	echo_notice "setup-compile_ibmtpmtss" "Complete: compile_ibmtpmtss"
 }
 
 # Create symbolic link to ibmswtpm
