@@ -46,9 +46,9 @@ default_job_0=0                          # 0: No, 1: Yes  # default: 0
 install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
 setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
 compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
-#setup_ibmswtpm_env=$default_job_1        # 0: No, 1: Yes  # default: 1
-setup_ibmswtpm_env=1        # 0: No, 1: Yes  # default: 1
-compile_ibmswtpm=$default_job_1          # 0: No, 1: Yes  # default: 1
+setup_ibmswtpm_env=$default_job_1        # 0: No, 1: Yes  # default: 1
+#compile_ibmswtpm=$default_job_1          # 0: No, 1: Yes  # default: 1
+compile_ibmswtpm=1          # 0: No, 1: Yes  # default: 1
 setup_ibmacs_env=$default_job_1          # 0: No, 1: Yes  # default: 1
 compile_ibmacs=$default_job_1            # 0: No, 1: Yes  # default: 1
 open_demo_webpage=$default_job_1         # 0: No, 1: Yes  # default: 1
@@ -221,17 +221,17 @@ setup_ibmswtpm_env () {
 # Compile ibmswtpm
 # Can be run multiple times for code adjustment
 compile_ibmswtpm () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTPM${NC}${end_spacer}"
+	echo_notice "setup-compile_ibmswtpm" "Starting: compile_ibmswtpm"
 
-    echo -e "${BOLD}${BLUE}Cleaning up ......${NC}"
+	echo_notice "setup-compile_ibmswtpm" "Cleaning up with make ..."
     cd "${path_ibmtpm}/src/"
     make clean
 
-    echo -e "${BOLD}${BLUE}Compiling IBMTPM ......${NC}"
+	echo_notice "setup-compile_ibmswtpm" "Compiling IBMTPM ..."
     cd "${path_ibmtpm}/src/"
     make
 
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTPM Complete${NC}${end_spacer}"
+	echo_notice "setup-compile_ibmswtpm" "Complete: compile_ibmswtpm"
 }
 
 # Install requirements for ibmacs, create mysql database, set environment variables, link directories, and generate directory for webpage
