@@ -62,7 +62,8 @@ open_demo_webpage=1         # 0: No, 1: Yes  # default: 1
 generate_CA=$default_job_0               # 0: No, 1: Yes  # default: 0 (not implemented)
 activate_TPM_server=$default_job_0       # 0: No, 1: Yes  # default: 0
 activate_TPM_client=$default_job_0       # 0: No, 1: Yes  # default: 0
-generate_EK=$default_job_1               # 0: No, 1: Yes  # default: 1
+#generate_EK=$default_job_1               # 0: No, 1: Yes  # default: 1
+generate_EK=1               # 0: No, 1: Yes  # default: 1
 retrieve_hardware_NV=$default_job_0      # 0: No, 1: Yes  # default: 0 (not implemented)
 set_acs_sql_setting=$default_job_0       # 0: No, 1: Yes  # default: 0
 active_ACS_Demo_Server=$default_job_1    # 0: No, 1: Yes  # default: 1
@@ -344,53 +345,41 @@ generate_CA () {
 # Activate TPM Server in new terminal
 # Only need to setup once (can re-run)
 activate_TPM_server () {
-    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Start: activate_TPM_server"
-
     # apply TPMMode for ibmtss
     setup_ibmtpmtss_env
 
-    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Starting TPM simulator (server) on new temrinal ..."
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Starting TPM simulator (SWTPM/vTPM/server) on new temrinal ..."
     cd "${sym_link_ibmtpm}/src/"
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
     launch_cmd2="./tpm_server"
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
     gnome-terminal -t "TPM SERVER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
-
-    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "End: activate_TPM_server"
 }
 
 # Activate TPM Client in current terminal
 # Only need to setup once (can re-run)
 activate_TPM_client () {
-    echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Start: activate_TPM_client"
-
-    echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Starting TPM simulator (client) on new temrinal ..."
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
     cd "${sym_link_ibmtss}/utils/"
     ./powerup
     ./startup
-
-    echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "End: activate_TPM_client"
 }
 
 # Create EK certificate and key, activated TPM on new terminal
 # Only need to setup once (can re-run)
 generate_EK () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating EK${NC}${end_spacer}"
-
     activate_TPM_server
 
     activate_TPM_client
 
-    echo -e "${BOLD}${ORANGE}Backing up NVChip ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-generate_EK" "Backing up NVChip ......"
     cp "${path_NV}" "${path_NV}.bak"
 
-    echo -e "${BOLD}${ORANGE}Generating RSAEK and load into NV ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating RSAEK and load into NV ......"
     ./createekcert -rsa 2048 -cakey $RSAEK_cert -capwd rrrr -v
 
-    echo -e "${BOLD}${ORANGE}Generating ECCEK and load into NV ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating ECCEK and load into NV ......"
     ./createekcert -ecc nistp256 -cakey $ECCEK_cert -capwd rrrr -caalg ec -v
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating EK Complete${NC}${end_spacer}"
 }
 
 # Retrieve hardware NVChip
