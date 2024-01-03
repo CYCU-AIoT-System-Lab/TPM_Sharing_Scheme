@@ -183,17 +183,17 @@ setup_ibmtpmtss_env () {
 compile_ibmtpmtss () {
     echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Starting: compile_ibmtpmtss"
 
-    echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Cleaning up with make ..."
+    echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Cleaning up with make -s ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
-        make -f makefiletpm20 clean
+        make -s -f makefiletpm20 clean
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmtss}/utils/"
-        make -f makefiletpmc clean
+        make -s -f makefiletpmc clean
         cd "${path_ibmtss}/utils12/"
-        make -f makefiletpmc clean
+        make -s -f makefiletpmc clean
     else 
         echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
@@ -203,13 +203,13 @@ compile_ibmtpmtss () {
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
-        make -f makefiletpm20
+        make -s -f makefiletpm20
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmtss}/utils/"
-        make -f makefiletpmc
+        make -s -f makefiletpmc
         cd "${path_ibmtss}/utils12/"
-        make -f makefiletpmc
+        make -s -f makefiletpmc
     else 
         echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
@@ -234,9 +234,9 @@ setup_ibmswtpm_env () {
 compile_ibmswtpm () {
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Starting: compile_ibmswtpm"
 
-    echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Cleaning up with make ..."
+    echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Cleaning up with make -s ..."
     cd "${path_ibmtpm}/src/"
-    make clean
+    make -s clean
 
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Compiling IBMTPM ..."
     cd "${path_ibmtpm}/src/"
@@ -317,7 +317,7 @@ compile_ibmacs () {
         cd "${path_ibmacs}/acs/"
         export CPATH="${path_ibmtss}/utils"
         export LIBRARY_PATH="${path_ibmtss}/utils"
-        make clean
+        make -s clean
         make
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
@@ -326,14 +326,14 @@ compile_ibmacs () {
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         if [ $acsMode == 1 ]; then
             # for Server
-            sudo -E make -f makefiletpmc clean
-            sudo -E make -f makefiletpmc
+            sudo -E make -s -f makefiletpmc clean
+            sudo -E make -s -f makefiletpmc
         elif [ $acsMode == 2 ]; then
             # for Client
-            sudo -E make -f makefiletpm12 clean
-            sudo -E make -f makefiletpm12
-            sudo -E make -f makefiletpmc clean
-            sudo -E make -f makefiletpmc
+            sudo -E make -s -f makefiletpm12 clean
+            sudo -E make -s -f makefiletpm12
+            sudo -E make -s -f makefiletpmc clean
+            sudo -E make -s -f makefiletpmc
         else 
             echo_warn "setup_ibmtpm" "setup-compile_ibmacs" "Invalid acsMode"
             exit 1
