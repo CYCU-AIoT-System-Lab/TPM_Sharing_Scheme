@@ -324,7 +324,7 @@ compile_ibmacs () {
 # Can be run multiple times
 open_demo_webpage () {
     echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
-    launch_cmd1="echo \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
+    launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\n\""
     launch_cmd2="firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url}"
     gnome-terminal -- bash -c "${launch_cmd1}; ${launch_cmd2}; exec bash"
 }
