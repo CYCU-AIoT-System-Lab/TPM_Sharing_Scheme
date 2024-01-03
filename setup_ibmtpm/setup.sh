@@ -456,9 +456,7 @@ active_ACS_Demo_Server () {
     launch_cmd1="export ACS_PORT=\"${acs_port}\""
     launch_cmd2="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    sudo gnome-terminal -t "ACS SERVER" --active -- bash -c "${launch_cmd0}; ${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Server Complete${NC}${end_spacer}"
+    sudo gnome-terminal -t "ACS SERVER" --active -- bash -x -c "${launch_cmd0}; ${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
 
 # Active ACS Demo Client
