@@ -353,7 +353,8 @@ activate_TPM_server () {
     cd "${sym_link_ibmtpm}/src/"
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
     launch_cmd2="./tpm_server"
-    gnome-terminal -t "TPM SERVER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; exec bash"
+    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    gnome-terminal -t "TPM SERVER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 
     echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "End: activate_TPM_server"
 }
@@ -361,14 +362,14 @@ activate_TPM_server () {
 # Activate TPM Client in current terminal
 # Only need to setup once (can re-run)
 activate_TPM_client () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM${NC}${end_spacer}"
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Start: activate_TPM_client"
 
-    echo -e "${BOLD}${ORANGE}Starting TPM simulator (client) on new temrinal ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Starting TPM simulator (client) on new temrinal ..."
     cd "${sym_link_ibmtss}/utils/"
     ./powerup
     ./startup
 
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM Complete${NC}${end_spacer}"
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "End: activate_TPM_client"
 }
 
 # Create EK certificate and key, activated TPM on new terminal
