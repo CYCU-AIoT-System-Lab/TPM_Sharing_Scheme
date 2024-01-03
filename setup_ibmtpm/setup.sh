@@ -385,11 +385,7 @@ generate_EK () {
 # Retrieve hardware NVChip
 # Only need to setup once (can re-run)
 retrieve_hardware_NV () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Retrieving Hardware NVChip${NC}${end_spacer}"
-
-    echo -e "${BOLD}${ORANGE}Not implemented${NC}"
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Retrieving Hardware NVChip Complete${NC}${end_spacer}"
+    echo_warn "setup_ibmtpm" "setup-retrieve_hardware_NV" "Function not implemented"
 }
 
 # Set ACS MYSQL setting
