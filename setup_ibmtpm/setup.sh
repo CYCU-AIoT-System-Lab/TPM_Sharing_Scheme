@@ -391,21 +391,17 @@ retrieve_hardware_NV () {
 # Set ACS MYSQL setting
 # Only need to setup once (can re-run)
 set_acs_sql_setting () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting ACS MYSQL Setting${NC}${end_spacer}"
-
-    echo -e "${BOLD}${ORANGE}Setting ACS MYSQL Setting ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-set_acs_sql_setting" "Setting ACS MYSQL Setting ..."
     export ACS_SQL_USERID="${mysql_user}"
     export ACS_SQL_PASSWORD="${mysql_password}"
 
     if [ $force_acs_sql_setting == 1 ]; then
-        echo -e "${BOLD}${ORANGE}Forcing ACS MYSQL Setting ......${NC}"
-        cp "${html_dir}/dbconnect.php" "${html_dir}/dbconnect.php.bak"
-        sed -i "s/\$connect = new mysqli(\$acs_sql_host, \$acs_sql_userid, \$acs_sql_password, \$acs_sql_database);/\$connect = new mysqli(${acs_demo_server_ip}, ${mysql_user}, ${mysql_password}, ${mysql_database});/g" "${html_dir}/dbconnect.php"
+        echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Forcing ACS MySQL Setting ..."
+        sudo cp "${html_dir}/dbconnect.php" "${html_dir}/dbconnect.php.bak"
+        sudo sed -i "s/\$connect = new mysqli(\$acs_sql_host, \$acs_sql_userid, \$acs_sql_password, \$acs_sql_database);/\$connect = new mysqli(${acs_demo_server_ip}, ${mysql_user}, ${mysql_password}, ${mysql_database});/g" "${html_dir}/dbconnect.php"
     else
-        echo -e "${BOLD}${ORANGE}Not Forcing ACS MYSQL Setting ......${NC}"
+        echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Not Forcing ACS MySQL Setting ..."
     fi
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting ACS MYSQL Setting Complete${NC}${end_spacer}"
 }
 
 # Active ACS Demo Server
