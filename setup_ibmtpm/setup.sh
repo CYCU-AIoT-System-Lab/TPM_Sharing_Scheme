@@ -321,14 +321,14 @@ compile_ibmacs () {
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         if [ $acsMode == 1 ]; then
             # for Server
-            sudo make -f makefiletpmc clean
-            sudo make -f makefiletpmc
+            sudo -E make -f makefiletpmc clean
+            sudo -E make -f makefiletpmc
         elif [ $acsMode == 2 ]; then
             # for Client
-            sudo make -f makefiletpm12 clean
-            sudo make -f makefiletpm12
-            sudo make -f makefiletpmc clean
-            sudo make -f makefiletpmc
+            sudo -E make -f makefiletpm12 clean
+            sudo -E make -f makefiletpm12
+            sudo -E make -f makefiletpmc clean
+            sudo -E make -f makefiletpmc
         else 
             echo_warn "setup-compile_ibmacs" "Invalid acsMode"
             exit 1
