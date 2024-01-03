@@ -346,6 +346,7 @@ generate_CA () {
 # Activate TPM Server in new terminal
 # Only need to setup once (can re-run)
 activate_TPM_server () {
+    TPM_server_executed=1
     # apply TPMMode for ibmtss
     setup_ibmtpmtss_env
 
@@ -360,6 +361,7 @@ activate_TPM_server () {
 # Activate TPM Client in current terminal
 # Only need to setup once (can re-run)
 activate_TPM_client () {
+    TPM_client_executed=1
     echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
     cd "${sym_link_ibmtss}/utils/"
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Starting TPM simulator (client) on new temrinal ...\n\""
@@ -415,15 +417,21 @@ active_ACS_Demo_Server () {
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on same machine ..."
         mkdir "${tpm_data_dir}"
         export TPM_DATA_DIR="${tpm_data_dir}"
+        launch_cmd0="export TPM_DATA_DIR=\"${tpm_data_dir}\""
     elif [ $SCmachineMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on different machine ..."
+        launch_cmd0=""
     else 
         echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid SCmachineMode"
         exit 1
     fi
 
-    active_TPM_server
-    active_TPM_client
+    if [ $TPM_server_executed -ne 1 ]; then
+        active_TPM_server
+    fi
+    if [ $TPM_client_executed -ne 1 ]; then
+        active_TPM_client
+    fi
 
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
@@ -433,11 +441,11 @@ active_ACS_Demo_Server () {
     set_acs_sql_setting
 
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on new terminal ..."
-    launch_cmd1="cd ${path_ibmacs}/acs"
-    launch_cmd2=""export ACS_PORT=\"${acs_port}\"""
-    launch_cmd3="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
-    launch_cmd4="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    sudo $sudo_gflag gnome-terminal -t "ACS SERVER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
+    cd ${path_ibmacs}/acs
+    launch_cmd1="export ACS_PORT=\"${acs_port}\""
+    launch_cmd2="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
+    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    sudo gnome-terminal -t "ACS SERVER" --active -- bash -c "${launch_cmd0}; ${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 
     echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Server Complete${NC}${end_spacer}"
 }
