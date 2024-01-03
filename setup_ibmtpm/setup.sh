@@ -130,13 +130,13 @@ install_req () {
     sudo mkdir "${path_ibmacs}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMTPMTSS ..."
-    sudo wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
+    sudo wget -q --show-progress "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMSWTPM ..."
-    sudo wget "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
+    sudo wget -q --show-progress "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMACS ..."
-    sudo wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
+    sudo wget -q --show-progress "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMTPMTSS ..."
     sudo tar -zxf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
