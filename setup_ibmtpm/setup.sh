@@ -332,16 +332,12 @@ open_demo_webpage () {
 # Generate CA certificate and key
 # Only need to setup once (can re-run)
 generate_CA () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating CA${NC}${end_spacer}"
-
-    echo -e "${BOLD}${ORANGE}Function not implemented${NC}"
-    echo -e "${BOLD}${ORANGE}Refer to ${sym_link_ibmacs}/README.txt line 171 for steps.${NC}"
-    echo -e "${BOLD}${GREEN}Generated CAs in ${sym_link_ibmtss}/utils ...... ${NC}"
-    ls "${sym_link_ibmtss}/utils/"*.pem
-    echo -e "${BOLD}${GREEN}Generated CAs in ${sym_link_ibmacs} ...... ${NC}"
-    ls "${sym_link_ibmacs}/"*.pem
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating CA Complete${NC}${end_spacer}"
+    echo_warn "setup_ibmtpm" "setup-generate_CA" "Function not implemented"
+    echo_warn "setup_ibmtpm" "setup-generate_CA" "Refer to ${sym_link_ibmacs}/README.txt line 171 for steps."
+    echo_notice "setup_ibmtpm" "setup-generate_CA" "Generated CAs in ${sym_link_ibmtss}/utils ......"
+    sudo ls "${sym_link_ibmtss}/utils/"*.pem
+    echo_notice "setup_ibmtpm" "setup-generate_CA" "Generated CAs in ${sym_link_ibmacs} ......"
+    sudo ls "${sym_link_ibmacs}/"*.pem
 }
 
 # Activate TPM Server in new terminal
