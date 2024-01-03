@@ -346,6 +346,7 @@ generate_CA () {
 # Activate TPM Server in new terminal
 # Only need to setup once (can re-run)
 activate_TPM_server () {
+    TPM_server_executed=1
     # apply TPMMode for ibmtss
     setup_ibmtpmtss_env
 
@@ -360,6 +361,7 @@ activate_TPM_server () {
 # Activate TPM Client in current terminal
 # Only need to setup once (can re-run)
 activate_TPM_client () {
+    TPM_client_executed=1
     echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
     cd "${sym_link_ibmtss}/utils/"
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Starting TPM simulator (client) on new temrinal ...\n\""
@@ -421,8 +423,13 @@ active_ACS_Demo_Server () {
         echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid SCmachineMode"
         exit 1
     fi
-    activate_TPM_server
-    activate_TPM_client
+
+    if [ $TPM_server_executed -ne 1 ]; then
+        active_TPM_server
+    fi
+    if [ $TPM_client_executed -ne 1 ]; then
+        active_TPM_client
+    fi
 
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
