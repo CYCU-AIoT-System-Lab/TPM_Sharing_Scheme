@@ -126,8 +126,6 @@ echo_warn () {
 # Extract ibmtss, ibmtpm, and ibmacs
 # Only need to setup once (can re-run)
 install_req () {
-    echo_notice "setup_ibmtpm" "setup-install_req" "Starting: install_req"
-
     echo_notice "setup_ibmtpm" "setup-install_req" "Creating directories ..."
     sudo mkdir "${path_ibmtss}"
     sudo mkdir "${path_ibmtpm}"
@@ -150,16 +148,12 @@ install_req () {
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMACS ..."
     sudo tar -zxf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
-
-    echo_notice "setup_ibmtpm" "setup-install_req" "Complete: install_req"
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
 # Can re-run to update environment variables to switch between physical TPM and software TPM
 # Only need to setup once (can re-run)
 setup_ibmtpmtss_env () {
-    echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Starting: setup_ibmtpmtss_env"
-
     echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Setting path env variable ..."
     if [ $TPMMode == 1 ]; then
         # for Pysical TPM
@@ -176,15 +170,11 @@ setup_ibmtpmtss_env () {
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
     sudo ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
-
-    echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Complete: setup_ibmtpmtss_env"
 }
 
 # Compile ibmtss
 # Can be run multiple times for code adjustment
 compile_ibmtpmtss () {
-    echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Starting: compile_ibmtpmtss"
-
     echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Cleaning up with make ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
@@ -216,26 +206,18 @@ compile_ibmtpmtss () {
         echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
     fi
-
-    echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Complete: compile_ibmtpmtss"
 }
 
 # Create symbolic link to ibmswtpm
 # Only need to setup once (can re-run)
 setup_ibmswtpm_env () {
-    echo_notice "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Starting: setup_ibmswtpm_env"
-
     echo_notice "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
     sudo ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
-
-    echo_notice "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Complete: setup_ibmswtpm_env"
 }
 
 # Compile ibmswtpm
 # Can be run multiple times for code adjustment
 compile_ibmswtpm () {
-    echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Starting: compile_ibmswtpm"
-
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Cleaning up with make ..."
     cd "${path_ibmtpm}/src/"
     make $make_gflag clean
@@ -243,15 +225,11 @@ compile_ibmswtpm () {
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Compiling IBMTPM ..."
     cd "${path_ibmtpm}/src/"
     make $make_gflag
-
-    echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Complete: compile_ibmswtpm"
 }
 
 # Install requirements for ibmacs, create mysql database, set environment variables, link directories, and generate directory for webpage
 # Only need to setup once (can re-run)
 setup_ibmacs_env () {
-    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Starting: setup_ibmacs_env"
-
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
         # for Server
@@ -304,15 +282,11 @@ setup_ibmacs_env () {
         echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid verMode"
         exit 1
     fi
-
-    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Complete: setup_ibmacs_env"
 }
 
 # Compile ibmacs
 # Can be run multiple times for code adjustment
 compile_ibmacs () {
-    echo_notice "setup_ibmtpm" "setup-compile_ibmacs" "Starting: compile_ibmacs"
-
     echo_notice "setup_ibmtpm" "setup-compile_ibmacs" "Compiling IBMACS and setting include path ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
@@ -344,22 +318,16 @@ compile_ibmacs () {
         echo_warn "setup_ibmtpm" "setup-compile_ibmacs" "Invalid verMode"
         exit 1
     fi
-
-    echo_notice "setup_ibmtpm" "setup-compile_ibmacs" "Complete: compile_ibmacs"
 }
 
 # Open demo webpage with firefox
 # Can be run multiple times
 open_demo_webpage () {
-    echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening Demo Webpage"
-
     echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage ..."
     # start firefox without root on new terminal
     # command1="sudo -u ${user_name} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
     command1="firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &"
     gnome-terminal -- bash -c "${command1}; exec bash"
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}${end_spacer}"
 }
 
 # Generate CA certificate and key
