@@ -426,6 +426,17 @@ active_ACS_Demo_Server () {
         exit 1
     fi
 
+    if [ $verMode -eq 1 ]; then
+        # for TPM 2.0
+        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils\"; export LIBRARY_PATH=\"${path_ibmtss}/utils\""
+    elif [ $verMode -eq 2 ]; then
+        # for TPM 1.2 & 2.0
+        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\"; export LIBRARY_PATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\""
+    else 
+        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid verMode"
+        exit 1
+    fi
+
     if [ $TPM_server_executed -ne 1 ]; then
         active_TPM_server
     fi
