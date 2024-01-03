@@ -362,8 +362,11 @@ activate_TPM_server () {
 activate_TPM_client () {
     echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
     cd "${sym_link_ibmtss}/utils/"
-    ./powerup
-    ./startup
+    launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Starting TPM simulator (client) on new temrinal ...\n\""
+    launch_cmd2="./powerup"
+    launch_cmd3="./startup"
+    launch_cmd4="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    gnome-terminal -t "TPM CLIENT" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
 }
 
 # Create EK certificate and key, activated TPM on new terminal
