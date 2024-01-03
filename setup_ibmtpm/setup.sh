@@ -326,7 +326,7 @@ open_demo_webpage () {
     echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\n\""
     launch_cmd2="firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url}"
-    gnome-terminal -t "FIREFOX BROWSER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; exec bash"
+    gnome-terminal -t "FireFox Browser" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; sleep infinity"
 }
 
 # Generate CA certificate and key
