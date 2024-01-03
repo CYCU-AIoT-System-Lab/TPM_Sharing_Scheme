@@ -107,7 +107,6 @@ NC='\033[0m'
 # $2: unit
 # $3: message
 echo_notice () {
-    #echo -e "${BOLD}${BLUE}[NOTICE-setup_ibmtpm/$1]${NC} $2"
     echo -e "${BOLD}${BLUE}[NOTICE-$1/$2]${NC} $3"
 }
 
@@ -115,7 +114,6 @@ echo_notice () {
 # $2: unit
 # $3: message
 echo_warn () {
-    #echo -e "${BOLD}${ORANGE}[WARN-setup_ibmtpm/$1]${NC} $2"
     echo -e "${BOLD}${ORANGE}[WARN-$1/$2]${NC} $3"
 }
 
@@ -183,7 +181,7 @@ setup_ibmtpmtss_env () {
 compile_ibmtpmtss () {
     echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Starting: compile_ibmtpmtss"
 
-    echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Cleaning up with make -s ..."
+    echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Cleaning up with make ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
@@ -234,13 +232,13 @@ setup_ibmswtpm_env () {
 compile_ibmswtpm () {
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Starting: compile_ibmswtpm"
 
-    echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Cleaning up with make -s ..."
+    echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Cleaning up with make ..."
     cd "${path_ibmtpm}/src/"
     make -s clean
 
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Compiling IBMTPM ..."
     cd "${path_ibmtpm}/src/"
-    make
+    make -s
 
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Complete: compile_ibmswtpm"
 }
@@ -318,7 +316,7 @@ compile_ibmacs () {
         export CPATH="${path_ibmtss}/utils"
         export LIBRARY_PATH="${path_ibmtss}/utils"
         make -s clean
-        make
+        make -s
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmacs}/acs/"
