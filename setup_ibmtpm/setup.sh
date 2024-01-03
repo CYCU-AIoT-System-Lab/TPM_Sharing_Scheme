@@ -326,7 +326,7 @@ open_demo_webpage () {
     echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\n\""
     launch_cmd2="firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url}"
-    gnome-terminal -- bash -c "${launch_cmd1}; ${launch_cmd2}; exec bash"
+    gnome-terminal -t "FireFox Browser" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; exec bash"
 }
 
 # Generate CA certificate and key
@@ -343,17 +343,18 @@ generate_CA () {
 # Activate TPM Server in new terminal
 # Only need to setup once (can re-run)
 activate_TPM_server () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM${NC}${end_spacer}"
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Start: activate_TPM_server"
 
     # apply TPMMode for ibmtss
     setup_ibmtpmtss_env
 
-    echo -e "${BOLD}${ORANGE}Starting TPM simulator (server) on new temrinal ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Starting TPM simulator (server) on new temrinal ..."
     cd "${sym_link_ibmtpm}/src/"
-    command="echo \"starting TPM simulator (server)\"; ./tpm_server"
-    gnome-terminal -t "TPM SERVER" --active -- bash -c "${command}; exec bash"
+    launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
+    launch_cmd2="./tpm_server"
+    gnome-terminal -t "TPM SERVER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; exec bash"
 
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM Complete${NC}${end_spacer}"
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "End: activate_TPM_server"
 }
 
 # Activate TPM Client in current terminal
