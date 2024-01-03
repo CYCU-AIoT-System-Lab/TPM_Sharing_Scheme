@@ -274,7 +274,7 @@ setup_ibmacs_env () {
     sudo ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
 
     echo_notice "setup-setup_ibmacs_env" "Setting html directory"
-    sudo mkdir ${html_dir}
+    sudo mkdir -p ${html_dir}
     sudo chown root ${html_dir}
     sudo chgrp root ${html_dir}
     sudo chmod 777 ${html_dir}

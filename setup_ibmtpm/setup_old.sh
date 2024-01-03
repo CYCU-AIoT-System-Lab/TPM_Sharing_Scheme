@@ -311,7 +311,7 @@ setup_ibmacs_env () {
     ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
 
     echo -e "${BOLD}${BLUE}Setting html directory ......${NC}"
-    mkdir ${html_dir}
+    mkdir -p ${html_dir}
     chown root ${html_dir}
     chgrp root ${html_dir}
     chmod 777 ${html_dir}
