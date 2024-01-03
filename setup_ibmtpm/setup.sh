@@ -397,8 +397,8 @@ set_acs_sql_setting () {
 
     if [ $force_acs_sql_setting == 1 ]; then
         echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Forcing ACS MySQL Setting ..."
-        sudo cp "${html_dir}/dbconnect.php" "${html_dir}/dbconnect.php.bak"
-        sudo sed -i "s/\$connect = new mysqli(\$acs_sql_host, \$acs_sql_userid, \$acs_sql_password, \$acs_sql_database);/\$connect = new mysqli(${acs_demo_server_ip}, ${mysql_user}, ${mysql_password}, ${mysql_database});/g" "${html_dir}/dbconnect.php"
+        cp "${html_dir}/dbconnect.php" "${html_dir}/dbconnect.php.bak"
+        sed -i "s/\$connect = new mysqli(\$acs_sql_host, \$acs_sql_userid, \$acs_sql_password, \$acs_sql_database);/\$connect = new mysqli(${acs_demo_server_ip}, ${mysql_user}, ${mysql_password}, ${mysql_database});/g" "${html_dir}/dbconnect.php"
     else
         echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Not Forcing ACS MySQL Setting ..."
     fi
@@ -407,31 +407,31 @@ set_acs_sql_setting () {
 # Active ACS Demo Server
 # Can be run multiple times
 active_ACS_Demo_Server () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Server${NC}${end_spacer}"
-
     if [ $SCmachineMode == 1 ]; then
-        echo -e "${BOLD}${BLUE}Activating ACS Demo on same machine ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on same machine ..."
         mkdir "${tpm_data_dir}"
         export TPM_DATA_DIR="${tpm_data_dir}"
     elif [ $SCmachineMode == 2 ]; then
-        echo -e "${BOLD}${BLUE}Activating ACS Demo on different machine ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on different machine ..."
     else 
-        echo -e "${BOLD}${RED}Invalid SCmachineMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid SCmachineMode"
         exit 1
     fi
     activate_TPM_server
     activate_TPM_client
 
-    echo -e "${BOLD}${BLUE}Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
     sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
     export ACS_PORT="${acs_port}"
 
     set_acs_sql_setting
 
-    echo -e "${BOLD}${BLUE}Activating ACS Server Demo on new terminal ......${NC}"
-    command="cd ${path_ibmacs}/acs; ./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
-    gnome-terminal -t "ACS SERVER" --active -- bash -c "${command}; exec bash"
+    echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on new terminal ..."
+    launch_cmd1="cd ${path_ibmacs}/acs"
+    launch_cmd2="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
+    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    gnome-terminal -t "ACS SERVER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 
     echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Server Complete${NC}${end_spacer}"
 }
