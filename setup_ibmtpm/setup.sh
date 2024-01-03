@@ -68,6 +68,10 @@ set_acs_sql_setting=$default_job_0       # 0: No, 1: Yes  # default: 0
 active_ACS_Demo_Server=$default_job_1    # 0: No, 1: Yes  # default: 1
 active_ACS_Demo_Client=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't enroll)
 active_ACS_Demo_verify=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't verify)
+# Global Flags
+wget_gflag="-q --show-progress"
+make_gflag="-s"
+sudo_gflag="-E"
 # ==================================================================================================
 
 dn_ibmtss="ibmtss"
@@ -130,13 +134,13 @@ install_req () {
     sudo mkdir "${path_ibmacs}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMTPMTSS ..."
-    sudo wget -q --show-progress "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
+    sudo wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMSWTPM ..."
-    sudo wget -q --show-progress "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
+    sudo wget $wget_gflag "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMACS ..."
-    sudo wget -q --show-progress "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
+    sudo wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMTPMTSS ..."
     sudo tar -zxf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
@@ -185,13 +189,13 @@ compile_ibmtpmtss () {
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
-        make -s -f makefiletpm20 clean
+        make $make_gflag -f makefiletpm20 clean
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmtss}/utils/"
-        make -s -f makefiletpmc clean
+        make $make_gflag -f makefiletpmc clean
         cd "${path_ibmtss}/utils12/"
-        make -s -f makefiletpmc clean
+        make $make_gflag -f makefiletpmc clean
     else 
         echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
@@ -201,13 +205,13 @@ compile_ibmtpmtss () {
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
-        make -s -f makefiletpm20
+        make $make_gflag -f makefiletpm20
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmtss}/utils/"
-        make -s -f makefiletpmc
+        make $make_gflag -f makefiletpmc
         cd "${path_ibmtss}/utils12/"
-        make -s -f makefiletpmc
+        make $make_gflag -f makefiletpmc
     else 
         echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
@@ -234,11 +238,11 @@ compile_ibmswtpm () {
 
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Cleaning up with make ..."
     cd "${path_ibmtpm}/src/"
-    make -s clean
+    make $make_gflag clean
 
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Compiling IBMTPM ..."
     cd "${path_ibmtpm}/src/"
-    make -s
+    make $make_gflag
 
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Complete: compile_ibmswtpm"
 }
@@ -315,8 +319,8 @@ compile_ibmacs () {
         cd "${path_ibmacs}/acs/"
         export CPATH="${path_ibmtss}/utils"
         export LIBRARY_PATH="${path_ibmtss}/utils"
-        make -s clean
-        make -s
+        make $make_gflag clean
+        make $make_gflag
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmacs}/acs/"
@@ -324,14 +328,14 @@ compile_ibmacs () {
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         if [ $acsMode == 1 ]; then
             # for Server
-            sudo -E make -s -f makefiletpmc clean
-            sudo -E make -s -f makefiletpmc
+            sudo $sudo_gflag make $make_gflag -f makefiletpmc clean
+            sudo $sudo_gflag make $make_gflag -f makefiletpmc
         elif [ $acsMode == 2 ]; then
             # for Client
-            sudo -E make -s -f makefiletpm12 clean
-            sudo -E make -s -f makefiletpm12
-            sudo -E make -s -f makefiletpmc clean
-            sudo -E make -s -f makefiletpmc
+            sudo $sudo_gflag make $make_gflag -f makefiletpm12 clean
+            sudo $sudo_gflag make $make_gflag -f makefiletpm12
+            sudo $sudo_gflag make $make_gflag -f makefiletpmc clean
+            sudo $sudo_gflag make $make_gflag -f makefiletpmc
         else 
             echo_warn "setup_ibmtpm" "setup-compile_ibmacs" "Invalid acsMode"
             exit 1
