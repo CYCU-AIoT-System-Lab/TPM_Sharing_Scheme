@@ -75,6 +75,7 @@ active_ACS_Demo_verify=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't ve
 wget_gflag="-q --show-progress" # only show progress bar
 make_gflag="-s"                 # silent
 sudo_gflag="-E"                 # preserve environment variables
+bash_gflag="-x"                 # print commands and their arguments as they are executed
 # ==================================================================================================
 
 dn_ibmtss="ibmtss"
@@ -330,7 +331,7 @@ open_demo_webpage () {
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\n\""
     launch_cmd2="firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url}"
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    gnome-terminal -t "FireFox Browser" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    gnome-terminal -t "FireFox Browser" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
 
 # Generate CA certificate and key
@@ -356,7 +357,7 @@ activate_TPM_server () {
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
     launch_cmd2="./tpm_server"
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    gnome-terminal -t "TPM SERVER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    gnome-terminal -t "TPM SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
 
 # Activate TPM Client in current terminal
@@ -369,7 +370,7 @@ activate_TPM_client () {
     launch_cmd2="./powerup"
     launch_cmd3="./startup"
     launch_cmd4="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    gnome-terminal -t "TPM CLIENT" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
+    gnome-terminal -t "TPM CLIENT" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
 }
 
 # Create EK certificate and key, activated TPM on new terminal
@@ -457,7 +458,7 @@ active_ACS_Demo_Server () {
     launch_cmd1="export ACS_PORT=\"${acs_port}\"; export LD_LIBRARY_PATH=\"${path_ibmtss}/utils\""
     launch_cmd2="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    sudo gnome-terminal -t "ACS SERVER" --active -- bash -x -c "${launch_cmd0}; ${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    sudo gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd0}; ${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
 
 # Active ACS Demo Client
