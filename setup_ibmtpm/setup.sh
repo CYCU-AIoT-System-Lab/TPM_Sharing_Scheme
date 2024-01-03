@@ -68,7 +68,8 @@ retrieve_hardware_NV=$default_job_0      # 0: No, 1: Yes  # default: 0 (not impl
 set_acs_sql_setting=$default_job_0       # 0: No, 1: Yes  # default: 0
 #active_ACS_Demo_Server=$default_job_1    # 0: No, 1: Yes  # default: 1
 active_ACS_Demo_Server=1    # 0: No, 1: Yes  # default: 1
-active_ACS_Demo_Client=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't enroll)
+#active_ACS_Demo_Client=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't enroll)
+active_ACS_Demo_Client=1    # 0: No, 1: Yes  # default: 1 (can't enroll)
 active_ACS_Demo_verify=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't verify)
 # Global Flags
 wget_gflag="-q --show-progress" # only show progress bar
@@ -417,10 +418,10 @@ active_ACS_Demo_Server () {
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on same machine ..."
         mkdir "${tpm_data_dir}"
         export TPM_DATA_DIR="${tpm_data_dir}"
-        launch_cmd0="export TPM_DATA_DIR=\"${tpm_data_dir}\""
+        launch_cmd0="export TPM_DATA_DIR=\"${tpm_data_dir}\"" # may not be needed
     elif [ $SCmachineMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on different machine ..."
-        launch_cmd0=""
+        launch_cmd0="" # may not be needed
     else 
         echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid SCmachineMode"
         exit 1
@@ -428,10 +429,10 @@ active_ACS_Demo_Server () {
 
     if [ $verMode -eq 1 ]; then
         # for TPM 2.0
-        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils\"; export LIBRARY_PATH=\"${path_ibmtss}/utils\""
+        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils\"; export LIBRARY_PATH=\"${path_ibmtss}/utils\"" # may not be needed
     elif [ $verMode -eq 2 ]; then
         # for TPM 1.2 & 2.0
-        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\"; export LIBRARY_PATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\""
+        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\"; export LIBRARY_PATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\"" # may not be needed
     else 
         echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid verMode"
         exit 1
@@ -462,21 +463,17 @@ active_ACS_Demo_Server () {
 # Active ACS Demo Client
 # Can be run multiple times
 active_ACS_Demo_Client () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Client${NC}${end_spacer}"
-
     cd "${path_ibmacs}/acs"
     if [ $acsClientMode == 1 ]; then
-        echo -e "${BOLD}${BLUE}Activating ACS Client Demo on local machine ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on local machine ..."
         ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem >| ${acs_demo_client_log_dir}
     elif [ $acsClientMode == 2 ]; then
-        echo -e "${BOLD}${BLUE}Activating ACS Client Demo on remote machine ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on remote machine ..."
         ./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem >| ${acs_demo_client_log_dir}
     else 
-        echo -e "${BOLD}${RED}Invalid acsClientMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Invalid acsClientMode"
         exit 1
     fi
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Client Complete${NC}${end_spacer}"
 }
 
 # Active ACS Demo verify
