@@ -46,17 +46,17 @@ default_job_0=0                          # 0: No, 1: Yes  # default: 0
 #install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
 install_req=1               # 0: No, 1: Yes  # default: 1
 #setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
-setup_ibmtpmtss_env=1       # 0: No, 1: Yes  # default: 1
+setup_ibmtpmtss_env=0       # 0: No, 1: Yes  # default: 1
 #compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
-compile_ibmtpmtss=1         # 0: No, 1: Yes  # default: 1
+compile_ibmtpmtss=0         # 0: No, 1: Yes  # default: 1
 #setup_ibmswtpm_env=$default_job_1        # 0: No, 1: Yes  # default: 1
-setup_ibmswtpm_env=1        # 0: No, 1: Yes  # default: 1
+setup_ibmswtpm_env=0        # 0: No, 1: Yes  # default: 1
 #compile_ibmswtpm=$default_job_1          # 0: No, 1: Yes  # default: 1
-compile_ibmswtpm=1          # 0: No, 1: Yes  # default: 1
+compile_ibmswtpm=0          # 0: No, 1: Yes  # default: 1
 #setup_ibmacs_env=$default_job_1          # 0: No, 1: Yes  # default: 1
-setup_ibmacs_env=1          # 0: No, 1: Yes  # default: 1
+setup_ibmacs_env=0          # 0: No, 1: Yes  # default: 1
 #compile_ibmacs=$default_job_1            # 0: No, 1: Yes  # default: 1
-compile_ibmacs=1            # 0: No, 1: Yes  # default: 1
+compile_ibmacs=0            # 0: No, 1: Yes  # default: 1
 open_demo_webpage=$default_job_1         # 0: No, 1: Yes  # default: 1
 generate_CA=$default_job_0               # 0: No, 1: Yes  # default: 0 (not implemented)
 activate_TPM_server=$default_job_0       # 0: No, 1: Yes  # default: 0
@@ -104,13 +104,13 @@ NC='\033[0m'
 
 # $1: file/unit
 # $2: message
-function echo_notice () {
+echo_notice () {
     echo -e "${BOLD}${BLUE}[NOTICE-setup_ibmtpm/$1]${NC} $2"
 }
 
 # $1: file/unit
 # $2: message
-function echo_warn () {
+echo_warn () {
     echo -e "${BOLD}${ORANGE}[WARN-setup_ibmtpm/$1]${NC} $2"
 }
 

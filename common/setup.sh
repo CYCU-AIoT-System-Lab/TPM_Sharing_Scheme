@@ -11,10 +11,10 @@ cmake_dir="${HOME}/cmake-${cmake_ver}"
 valgrind_ver="3.22.0"
 valgrind_dir="${HOME}/valgrind-${valgrind_ver}"
 
-# sub_tasks (1=Enable)
 install_for_pi=0
+# sub_tasks (1=Enable)
 setup_environment=0 # Not implemented
-setup_ibmtpm=1
+setup_ibmtpm=0
 setup_socket_com=0
 
 # Functions

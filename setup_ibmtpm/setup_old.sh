@@ -41,9 +41,10 @@ mysql_user="tpm2ACS"                     # default: tpm2ACS
 mysql_password="123456"                  # default: 123456
 mysql_database="tpm2"                    # default: tpm2
 # Param - job
-default_job_1=1                          # 0: No, 1: Yes  # default: 1
+default_job_1=0                          # 0: No, 1: Yes  # default: 1
 default_job_0=0                          # 0: No, 1: Yes  # default: 0
-install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
+#install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
+install_req=1               # 0: No, 1: Yes  # default: 1
 config_nvim=$default_job_1               # 0: No, 1: Yes  # default: 1
 setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
 compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
