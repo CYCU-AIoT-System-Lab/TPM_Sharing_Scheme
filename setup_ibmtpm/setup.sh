@@ -434,9 +434,10 @@ active_ACS_Demo_Server () {
 
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on new terminal ..."
     launch_cmd1="cd ${path_ibmacs}/acs"
-    launch_cmd2="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
-    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    sudo $sudo_gflag gnome-terminal -t "ACS SERVER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    launch_cmd2=""export ACS_PORT=\"${acs_port}\"""
+    launch_cmd3="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
+    launch_cmd4="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    sudo $sudo_gflag gnome-terminal -t "ACS SERVER" --active -- bash -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
 
     echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Server Complete${NC}${end_spacer}"
 }
