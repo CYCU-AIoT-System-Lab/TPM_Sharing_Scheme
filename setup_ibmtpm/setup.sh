@@ -56,7 +56,7 @@ compile_ibmswtpm=1          # 0: No, 1: Yes  # default: 1
 #setup_ibmacs_env=$default_job_1          # 0: No, 1: Yes  # default: 1
 setup_ibmacs_env=1          # 0: No, 1: Yes  # default: 1
 #compile_ibmacs=$default_job_1            # 0: No, 1: Yes  # default: 1
-compile_ibmacs=0            # 0: No, 1: Yes  # default: 1
+compile_ibmacs=1            # 0: No, 1: Yes  # default: 1
 open_demo_webpage=$default_job_1         # 0: No, 1: Yes  # default: 1
 generate_CA=$default_job_0               # 0: No, 1: Yes  # default: 0 (not implemented)
 activate_TPM_server=$default_job_0       # 0: No, 1: Yes  # default: 0
@@ -319,8 +319,6 @@ compile_ibmacs () {
         cd "${path_ibmacs}/acs/"
         export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
-        echo_warn "setup-compile_ibmacs" "$CPATH"
-        echo_warn "setup-compile_ibmacs" "$LIBRARY_PATH"
         if [ $acsMode == 1 ]; then
             # for Server
             sudo make -f makefiletpmc clean
@@ -341,7 +339,6 @@ compile_ibmacs () {
     fi
 
     echo_notice "setup-compile_ibmacs" "Complete: compile_ibmacs"
-    echo_notice "setup-compile_ibmacs" "Complete: setup_ibmacs_env"
 }
 
 # Open demo webpage with firefox
