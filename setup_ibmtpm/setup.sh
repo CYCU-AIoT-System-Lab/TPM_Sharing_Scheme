@@ -243,7 +243,7 @@ setup_ibmacs_env () {
     fi
 
     if [ $acsMode == 1 ]; then
-        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting database"
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting database ..."
         cd "${path_ibmacs}/acs/"
         sudo mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
         sudo mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_server_ip}' IDENTIFIED BY '${mysql_password}';"
@@ -251,14 +251,14 @@ setup_ibmacs_env () {
         sudo mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
     fi
 
-    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting include path"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting include path ..."
     export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
     export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
     sudo ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
 
-    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting html directory"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting html directory ..."
     sudo mkdir -p ${html_dir}
     sudo chown root ${html_dir}
     sudo chgrp root ${html_dir}
@@ -323,11 +323,10 @@ compile_ibmacs () {
 # Open demo webpage with firefox
 # Can be run multiple times
 open_demo_webpage () {
-    echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage ..."
-    # start firefox without root on new terminal
-    # command1="sudo -u ${user_name} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
-    command1="firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &"
-    gnome-terminal -- bash -c "${command1}; exec bash"
+    echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
+    launch_cmd1="echo \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
+    launch_cmd2="firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &"
+    gnome-terminal -- bash -c "${launch_cmd1}; ${launch_cmd2}; exec bash"
 }
 
 # Generate CA certificate and key
