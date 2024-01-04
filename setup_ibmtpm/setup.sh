@@ -470,6 +470,7 @@ active_ACS_Demo_Client () {
         #./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem >| ${acs_demo_client_log_dir}
         echo $LD_LIBRARY_PATH
         sudo find / -iname "*libibmtpm*"
+        find / -iname "*libibmtpm*"
         sudo $sudo_gflag ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem | sudo tee ${acs_demo_client_log_dir} > /dev/null
     elif [ $acsClientMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on remote machine ..."
