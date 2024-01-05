@@ -467,8 +467,8 @@ active_ACS_Demo_Client () {
     cd "${path_ibmacs}/acs"
     if [ $acsClientMode == 1 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on local machine ..."
-        #./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem >| ${acs_demo_client_log_dir}
         setenv LD_LIBRARY_PATH "${path_ibmtss}/utils:${path_ibmtss}/utils12"
+        env | grep LD_LIBRARY_PATH
         echo $LD_LIBRARY_PATH
         sudo find / -iname "*libibmtss*"
         sudo $sudo_gflag ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem | sudo tee ${acs_demo_client_log_dir} > /dev/null
