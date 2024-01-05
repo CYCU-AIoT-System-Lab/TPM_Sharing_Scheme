@@ -83,6 +83,6 @@ parse () {
             echo "Loaded config item: $k = $v"
         fi
     done < "$1"
-    echo_notice "common" "function" "Loaded $var_cnt config items from $1"
+    echo_notice "common" "function" "Loaded ${BOLD}${GREEN}$var_cnt${END} config items from ${BOLD}${GREEN}$1${END}"
 }
 echo_notice "common" "function" "Loaded function: parse"
