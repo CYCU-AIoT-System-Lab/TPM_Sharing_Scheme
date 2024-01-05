@@ -6,7 +6,7 @@ remove_path=(
 )
 
 for i in "${remove_path[@]}"; do
-    echo "Removing $i"
+    echo "Removing content in $i"
     cd $i
     sudo rm -rf *
 done
