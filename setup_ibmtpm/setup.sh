@@ -2,7 +2,7 @@
 
 conf_file="./config.ini"
 source "../common/function.sh" # load function.sh
-parse "$conf_file" 1
+parse "$conf_file" "display"
 
 # ==================================================================================================
 ## Parameters

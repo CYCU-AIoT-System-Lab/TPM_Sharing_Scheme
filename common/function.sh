@@ -53,7 +53,7 @@ echo_notice "common" "function" "Loaded function: echo_error"
 # Function: parse config file
 # Usage: parse "config.ini"
 # Input variable: $1: config filepath
-#                 $2: v == 1 display config item
+#                 $2: "display" display config item
 parse () {
     var_cnt=0
     while read -r k e v; do
@@ -79,7 +79,7 @@ parse () {
         #declare "$k"="$v" # This is not working in function
         readonly "$k"="$v"
         var_cnt=$((var_cnt+1))
-        if [[ $2 == 1 ]]; then
+        if [[ $2 == "display" ]]; then
             echo "Loaded config item: $k = $v"
         fi
     done < "$1"
