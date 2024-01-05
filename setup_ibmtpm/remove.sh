@@ -1,3 +1,5 @@
+#!/bin/bash
+
 remove_path=(
     "/opt"
     "/var/www"
