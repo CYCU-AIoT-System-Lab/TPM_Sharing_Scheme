@@ -1,5 +1,8 @@
 #!/bin/bash
 
+conf_file="./config.ini"
+source "../common/function.sh" # load function.sh
+
 # ==================================================================================================
 # Parameters
 # Param - path
@@ -104,26 +107,26 @@ ima_sig_log_dir="${sym_link_ibmtss}/utils/imasig.log4j"
 acs_demo_verify_imasig_log_dir="${sym_link_ibmtss}/utils/i.log4j"
 acs_demo_verify_client_log_dir="${sym_link_ibmtss}/utils/client.log4j"
 
-BOLD='\033[1m'
-BLUE='\033[34m'
-RED='\033[31m'
-GREEN='\033[32m'
-ORANGE='\033[33m'
-NC='\033[0m'
-
-# $1: file
-# $2: unit
-# $3: message
-echo_notice () {
-    echo -e "${BOLD}${BLUE}[NOTICE-$1/$2]${NC} $3"
-}
-
-# $1: file
-# $2: unit
-# $3: message
-echo_warn () {
-    echo -e "${BOLD}${ORANGE}[WARN-$1/$2]${NC} $3"
-}
+#BOLD='\033[1m'
+#BLUE='\033[34m'
+#RED='\033[31m'
+#GREEN='\033[32m'
+#ORANGE='\033[33m'
+#NC='\033[0m'
+#
+## $1: file
+## $2: unit
+## $3: message
+#echo_notice () {
+#    echo -e "${BOLD}${BLUE}[NOTICE-$1/$2]${NC} $3"
+#}
+#
+## $1: file
+## $2: unit
+## $3: message
+#echo_warn () {
+#    echo -e "${BOLD}${ORANGE}[WARN-$1/$2]${NC} $3"
+#}
 
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge

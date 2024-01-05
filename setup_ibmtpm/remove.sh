@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash +x
 
 remove_path=(
     "/opt"
