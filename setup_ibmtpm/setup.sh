@@ -11,15 +11,12 @@ base_dir="/opt"                          # default: /opt
 html_dir="/var/www/html/acs"             # default: /var/www/html/acs
 c_json_lib_dir="/usr/include/json-c"     # default: /usr/include/json-c
 c_json_lib_link_dir="/usr/include/json"  # default: /usr/include/json
-nvim_dir="/home/user/.config/nvim"       # default: /home/user/.config/nvim
-bashrc_dir="/home/user/.bashrc"          # default: /home/user/.bashrc
 tpm_data_dir="/home/user/tpm2"           # default: /home/user/tpm2
 # Param - filename
 RSAEK_cert="cakey.pem"                   # default: cakey.pem
 ECCEK_cert="cakeyecc.pem"                # default: cakeyecc.pem
 # Param - url
 repo_url="https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/setup_ibmtpm/setup_ibmtpm"
-nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
 acs_demo_server_ip="localhost"           # default: localhost
 acs_demo_server_port="80"                # default: 80
 acs_demo_client_ip="localhost"           # default: localhost
@@ -106,27 +103,6 @@ acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmtss}/utils/b.log4j"
 ima_sig_log_dir="${sym_link_ibmtss}/utils/imasig.log4j"
 acs_demo_verify_imasig_log_dir="${sym_link_ibmtss}/utils/i.log4j"
 acs_demo_verify_client_log_dir="${sym_link_ibmtss}/utils/client.log4j"
-
-#BOLD='\033[1m'
-#BLUE='\033[34m'
-#RED='\033[31m'
-#GREEN='\033[32m'
-#ORANGE='\033[33m'
-#NC='\033[0m'
-#
-## $1: file
-## $2: unit
-## $3: message
-#echo_notice () {
-#    echo -e "${BOLD}${BLUE}[NOTICE-$1/$2]${NC} $3"
-#}
-#
-## $1: file
-## $2: unit
-## $3: message
-#echo_warn () {
-#    echo -e "${BOLD}${ORANGE}[WARN-$1/$2]${NC} $3"
-#}
 
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
