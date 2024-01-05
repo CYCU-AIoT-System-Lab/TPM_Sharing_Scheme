@@ -7,7 +7,8 @@ remove_path=(
 
 for i in "${remove_path[@]}"; do
     echo "Removing $i"
-    sudo rm -rf $i
+    cd $i
+    sudo rm -rf *
 done
 
 echo "Finished removing paths"
