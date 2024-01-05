@@ -67,13 +67,11 @@ parse () {
             continue
         fi
         if [[ $e != "=" ]]; then
-            echo "Error: $k is not a valid config item."
-            echo "Valid config item should be like this: key = value"
+            echo_error "common" "function" "Invalid config item, valid config item should be like this: <key> = <value>" 1
             continue
         fi
         if [[ $v == "" ]]; then
-            echo "Error: $k is empty."
-            echo "Valid config item should be like this: key = value"
+            echo_error "common" "function" "Error: $k is empty, Valid config item should be like this: <key> = <value>" 1
             continue
         fi
         #declare "$k"="$v" # This is not working in function
