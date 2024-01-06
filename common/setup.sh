@@ -36,7 +36,7 @@ build_valgrind () {
 install_req () {
 	aptins () {
         echo_notice "common" "setup" "Installing ${BOLD}${GREEN}$1${END}..."
-		sudo apt-get $apt_gflag install $1
+		sudo apt-get $apt_gflag install $1 -y
 	}
     echo_notice "common" "setup" "Installing required packages..."
 	sudo apt-get $apt_gflag update
