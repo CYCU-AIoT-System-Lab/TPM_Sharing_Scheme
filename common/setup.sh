@@ -126,7 +126,7 @@ if [ $setup_ibmtpm -eq 1 ]; then
 elif [ $setup_ibmtpm -eq 2 ]; then
     echo_notice "common" "setup" "Running ibmtpm setup..."
     cd ../setup_ibmtpm
-    ./setup.sh
+    bash ./setup.sh
 else
     echo_warn "common" "setup" "Invalid Argument: $setup_ibmtpm ! Skipping setup_ibmtpm..."
 fi
@@ -135,7 +135,7 @@ cd $working_dir
 if [ $setup_socket_com -eq 1 ]; then
     echo_notice "common" "setup" "Running socket_com setup..."
 	cd ../socket_com
-	./setup.sh
+	bash ./setup.sh
 else
     echo_warn "common" "setup" "Invalid Argument: $setup_socket_com ! Skipping setup_socket_com..."
 fi
