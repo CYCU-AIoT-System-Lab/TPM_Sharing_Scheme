@@ -14,7 +14,7 @@ valgrind_dir="${HOME}/valgrind-${valgrind_ver}"
 install_for_pi=0
 # sub_tasks (1=Enable)
 setup_environment=0 # Not implemented
-setup_ibmtpm=0
+setup_ibmtpm=1
 setup_socket_com=0
 
 # Functions
@@ -129,7 +129,7 @@ cd $working_dir
 if [ $setup_ibmtpm -eq 1 ]; then
     echo -e "${term_notice}Running ibmtpm setup..."
     cd ../setup_ibmtpm
-    ./setup.sh
+    sudo bash ./setup_sudo.sh
 else
 	echo -e "${term_warn}Invalid Argument: $setup_ibmtpm ! Skipping setup_ibmtpm..."
 fi
