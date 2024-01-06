@@ -22,8 +22,6 @@ clear_dir () {
 clear_dir $base_dir
 clear_dir "$html_dir/../"
 clear_dir $c_json_lib_dir "rmdir"
-rm $c_json_lib_link_dir
-rm $tpm_data_dir
 sudo mysql -Bse "DROP DATABASE IF EXISTS $mysql_database;"
 
 echo_notice "setup_ibmtpm" "remove" "Done"
