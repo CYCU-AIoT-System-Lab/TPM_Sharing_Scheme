@@ -388,6 +388,18 @@ active_ACS_Demo_verify () {
     fi
 }
 
+# Print out log file location
+# Can be run multiple times
+print_log_path () {
+    echo_notice "setup_ibmtpm" "setup-print_log_path" "acs_demo_server_log_dir: ${acs_demo_server_log_dir}"
+    echo_notice "setup_ibmtpm" "setup-print_log_path" "acs_demo_client_log_dir: ${acs_demo_client_log_dir}"
+    echo_notice "setup_ibmtpm" "setup-print_log_path" "swtpm_bios_log_dir: ${swtpm_bios_log_dir}"
+    echo_notice "setup_ibmtpm" "setup-print_log_path" "acs_demo_verify_tpm2bios_log_dir: ${acs_demo_verify_tpm2bios_log_dir}"
+    echo_notice "setup_ibmtpm" "setup-print_log_path" "ima_sig_log_dir: ${ima_sig_log_dir}"
+    echo_notice "setup_ibmtpm" "setup-print_log_path" "acs_demo_verify_imasig_log_dir: ${acs_demo_verify_imasig_log_dir}"
+    echo_notice "setup_ibmtpm" "setup-print_log_path" "acs_demo_verify_client_log_dir: ${acs_demo_verify_client_log_dir}"
+}
+
 echo_notice "setup_ibmtpm" "setup" "Running setup script ..."
 
 if [ $install_req            == 1 ]; then install_req;                 fi
@@ -407,5 +419,6 @@ if [ $set_acs_sql_setting    == 1 ]; then set_acs_sql_setting;         fi
 if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
+if [ $print_log_path         == 1 ]; then print_log_path;              fi
 
 echo_notice "setup_ibmtpm" "setup" "Setup complete"
