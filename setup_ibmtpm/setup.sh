@@ -229,6 +229,7 @@ compile_ibmacs () {
 # Only need to setup once (can re-run)
 code_mysql_setting () {
     echo_notice "setup_ibmtpm" "setup-code_mysql_setting" "Coding MySQL settings into ibmacs PHP code ..."
+    sed -i 's@($acs_sql_host, $acs_sql_userid, $acs_sql_password, $acs_sql_database)@'"(\"${acs_demo_server_ip}\", \"${mysql_user}\", \"${mysql_password}\", \"${mysql_database}\")"'@' "${html_dir}/dbconnect.php"
 }
 
 # Open demo webpage with firefox
