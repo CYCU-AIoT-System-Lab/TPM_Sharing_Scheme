@@ -10,6 +10,7 @@ fi
 
 # $1: directory to clear content
 # $2: clear this directory too (== "rmdir")
+# Safty check wether $1 is empty or not is needed
 clear_dir () {
     echo "Removing content in $1"
     cd $1

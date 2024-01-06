@@ -17,7 +17,7 @@ build_cmake () {
 	cd "cmake-${cmake_ver}.${cmake_build}"
 	./bootstrap
 	make $make_gflag -j$(nproc)
-	sudo make $make_gflag install
+	sudo $sudo_gflag make $make_gflag install
 	cmake --version
 }
 
@@ -30,7 +30,7 @@ build_valgrind () {
 	cd "valgrind-${valgrind_ver}"
 	./configure
 	make $make_gflag -j$(nproc)
-	sudo make $make_gflag install
+	sudo $sudo_gflag make $make_gflag install
 }
 
 install_req () {
