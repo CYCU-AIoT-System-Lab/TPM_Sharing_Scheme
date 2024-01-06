@@ -46,13 +46,13 @@ install_req () {
     sudo wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMTPMTSS ..."
-    sudo tar -zxf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
+    sudo tar $tar_gflag "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMSWTPM ..."
-    sudo tar -zxf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
+    sudo tar $tar_gflag "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMACS ..."
-    sudo tar -zxf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
+    sudo tar $tar_gflag "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss

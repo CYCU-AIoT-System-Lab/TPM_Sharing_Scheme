@@ -1,77 +1,7 @@
 #!/bin/bash
 
-# ==================================================================================================
-# Parameters
-# Param - path
-download_dir="/home/user/Downloads"      # default: /home/user/Downloads
-base_dir="/opt"                          # default: /opt
-html_dir="/var/www/html/acs"             # default: /var/www/html/acs
-c_json_lib_dir="/usr/include/json-c"     # default: /usr/include/json-c
-c_json_lib_link_dir="/usr/include/json"  # default: /usr/include/json
-nvim_dir="/home/user/.config/nvim"       # default: /home/user/.config/nvim
-bashrc_dir="/home/user/.bashrc"          # default: /home/user/.bashrc
-tpm_data_dir="/home/user/tpm2"           # default: /home/user/tpm2
-# Param - filename
-RSAEK_cert="cakey.pem"                   # default: cakey.pem
-ECCEK_cert="cakeyecc.pem"                # default: cakeyecc.pem
-# Param - url
-repo_url="https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/setup_ibmtpm/setup_ibmtpm"
-nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
-acs_demo_server_ip="localhost"           # default: localhost
-acs_demo_server_port="80"                # default: 80
-acs_demo_client_ip="localhost"           # default: localhost
-# Param - user account
-user_name="user"                         # default: user
-# Param - version
-ibmtss_ver="2.1.1"                       # default: 2.1.1
-ibmtpm_ver="1682"                        # default: 1682
-ibmacs_ver="1658"                        # default: 1658
-# Param - port
-tpm_command_port="2321"                  # default: 2321
-acs_port="2323"                          # default: 2323
-# Param - mode
-verMode=2                                # 1: TPM 2.0,      2: TPM 1.2 & 2.0      # default: 2
-TPMMode=2                                # 1: Physical TPM, 2: Software TPM       # default: 2
-acsMode=1                                # 1: Server,       2: Client             # default: 1
-SCmachineMode=1                          # 1: Same machine, 2: Different machine  # default: 1 (server and client)
-force_acs_sql_setting=0                  # 0: No,           1: Yes                # default: 0 (not tested)
-acsClientMode=1                          # 1: Local,        2: Remote             # default: 1
-# Param - mysql
-mysql_user="tpm2ACS"                     # default: tpm2ACS
-mysql_password="123456"                  # default: 123456
-mysql_database="tpm2"                    # default: tpm2
-# Param - job
-default_job_1=1                          # 0: No, 1: Yes  # default: 1
-default_job_0=0                          # 0: No, 1: Yes  # default: 0
-install_req=$default_job_1               # 0: No, 1: Yes  # default: 1
-config_nvim=$default_job_1               # 0: No, 1: Yes  # default: 1
-setup_ibmtpmtss_env=$default_job_1       # 0: No, 1: Yes  # default: 1
-compile_ibmtpmtss=$default_job_1         # 0: No, 1: Yes  # default: 1
-setup_ibmswtpm_env=$default_job_1        # 0: No, 1: Yes  # default: 1
-compile_ibmswtpm=$default_job_1          # 0: No, 1: Yes  # default: 1
-setup_ibmacs_env=$default_job_1          # 0: No, 1: Yes  # default: 1
-compile_ibmacs=$default_job_1            # 0: No, 1: Yes  # default: 1
-open_demo_webpage=$default_job_1         # 0: No, 1: Yes  # default: 1
-generate_CA=$default_job_0               # 0: No, 1: Yes  # default: 0 (not implemented)
-activate_TPM_server=$default_job_0       # 0: No, 1: Yes  # default: 0
-activate_TPM_client=$default_job_0       # 0: No, 1: Yes  # default: 0
-generate_EK=$default_job_1               # 0: No, 1: Yes  # default: 1
-retrieve_hardware_NV=$default_job_0      # 0: No, 1: Yes  # default: 0 (not implemented)
-set_acs_sql_setting=$default_job_0       # 0: No, 1: Yes  # default: 0
-active_ACS_Demo_Server=$default_job_1    # 0: No, 1: Yes  # default: 1
-active_ACS_Demo_Client=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't enroll)
-active_ACS_Demo_verify=$default_job_1    # 0: No, 1: Yes  # default: 1 (can't verify)
-# ==================================================================================================
-
-BOLD='\033[1m'
-BLUE='\033[34m'
-RED='\033[31m'
-GREEN='\033[32m'
-ORANGE='\033[33m'
-NC='\033[0m'
-
-start_spacer="\n====================================================\n"
-end_spacer="\n===================================================="
+source "../common/function.sh" # load function.sh
+parse "./config.ini" "display"
 
 dn_ibmtss="ibmtss"
 dn_ibmtpm="ibmtpm"
@@ -79,9 +9,6 @@ dn_ibmacs="ibmacs"
 fn_ibmtss="${dn_ibmtss}${ibmtss_ver}.tar.gz"
 fn_ibmtpm="${dn_ibmtpm}${ibmtpm_ver}.tar.gz"
 fn_ibmacs="${dn_ibmacs}${ibmacs_ver}.tar.gz"
-file_ibmtss="${download_dir}/${fn_ibmtss}"
-file_ibmtpm="${download_dir}/${fn_ibmtpm}"
-file_ibmacs="${download_dir}/${fn_ibmacs}"
 sym_link_ibmtss="${base_dir}/${dn_ibmtss}"
 sym_link_ibmtpm="${base_dir}/${dn_ibmtpm}"
 sym_link_ibmacs="${base_dir}/${dn_ibmacs}"
@@ -99,91 +26,40 @@ ima_sig_log_dir="${sym_link_ibmtss}/utils/imasig.log4j"
 acs_demo_verify_imasig_log_dir="${sym_link_ibmtss}/utils/i.log4j"
 acs_demo_verify_client_log_dir="${sym_link_ibmtss}/utils/client.log4j"
 
-# Check if running as root
-if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-    echo "${BOLD}${RED}Please run with command: sudo bash setup.sh${NC}"
-    exit 1
-fi
-
-
-echo -e "${start_spacer}>>${BOLD}${GREEN}Setup${NC}${end_spacer}"
-
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
 # Extract ibmtss, ibmtpm, and ibmacs
 # Only need to setup once (can re-run)
 install_req () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Installing requirements${NC}\n====================================================\n"
-
-    echo -e "${BOLD}${BLUE}Updating system ......${NC}"
-    apt-get update
-    apt-get upgrade -y
-
-    echo -e "${BOLD}${BLUE}Installing tools ......${NC}"
-    apt-get install -y htop iftop neovim git curl wget
-
-    echo -e "${BOLD}${BLUE}Installing IBMTPM dependencies ......${NC}"
-    apt-get install -y build-essential make gcc libssl-dev
-    # tss dependencies on ubuntu packages
-    # apt-get install -y libtss0 libtss-dev libtss2-dev libtss2-doc libtss2-esys0 libtss2-esys-3.0.2-0 libtss2-fapi1 libtss2-mu0 libtss2-policy0 libtss2-rc0 libtss2-sys1 libtss2-tcti-cmd0 libtss2-tcti-device0 libtss2-tcti-libtpms0 libtss2-tcti-mssim0 libtss2-tcti-pcap0 libtss2-tcti-spi-helper0 libtss2-tcti-swtpm0 libtss2-tcti-tabrmd-dev libtss2-tcti-tabrmd0 libtss2-tctidr0
-
-    echo -e "${BOLD}${BLUE}Creating directories ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-install_req" "Creating directories ..."
     mkdir "${path_ibmtss}"
     mkdir "${path_ibmtpm}"
     mkdir "${path_ibmacs}"
 
-    echo -e "${BOLD}${BLUE}Downloading IBMTPMTSS ......${NC}"
-    wget "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
+    echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMTPMTSS ..."
+    wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
 
-    echo -e "${BOLD}${BLUE}Downloading IBMSWTPM ......${NC}"
-    wget "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
+    echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMSWTPM ..."
+    wget $wget_gflag "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
 
-    echo -e "${BOLD}${BLUE}Downloading IBMACS ......${NC}"
-    wget "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
+    echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMACS ..."
+    wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
-    echo -e "${BOLD}${BLUE}Extracting files ......${NC}"
-    tar -zxvf "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
-    tar -zxvf "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
-    tar -zxvf "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
+    echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMTPMTSS ..."
+    tar $tar_gflag "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
 
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Installing requirements Complete${NC}${end_spacer}"
-}
+    echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMSWTPM ..."
+    tar $tar_gflag "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
 
-# Configure neovim
-# Only need to setup once (can re-run)
-config_nvim () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Configuring neovim${NC}${end_spacer}"
-
-    echo -e "${BOLD}${BLUE}Configuring neovim ......${NC}"
-    mkdir "${nvim_dir}"
-    wget "${nvim_config_url}" -O "${nvim_dir}/init.vim"
-
-    # echo -e "${BOLD}${BLUE}Installing vim plug ......${NC}"
-    # sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-    # echo -e "${BOLD}${BLUE}Installing nodejs ......${NC}"
-    # apt-get install -y nodejs-dev node-gyp libssl1.0-dev
-    # apt-get install -y nodejs npm
-    # source ${bashrc_dir}
-    # npm cache clean -f
-    # npm install -g n
-    # n stable
-    source ${bashrc_dir}
-
-    # Commands to install plugins and coc extensions
-    # :PlugInstall
-    # :
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Configuring neovim Complete${NC}${end_spacer}"
+    echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMACS ..."
+    tar $tar_gflag "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
 # Can re-run to update environment variables to switch between physical TPM and software TPM
 # Only need to setup once (can re-run)
 setup_ibmtpmtss_env () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMTSS Environment${NC}${end_spacer}"
-
-    echo -e "${BOLD}${BLUE}Setting path ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Setting path env variable ..."
     if [ $TPMMode == 1 ]; then
         # for Pysical TPM
         export TPM_INTERFACE_TYPE=dev
@@ -192,89 +68,74 @@ setup_ibmtpmtss_env () {
         export TPM_INTERFACE_TYPE=socsim
     else 
         echo -e "${BOLD}${RED}Invalid TPMMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Invalid TPMMode"
         exit 1
     fi
     export TPM_COMMAND_PORT="${tpm_command_port}"
 
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtss} ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
     ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMTSS Environment Complete${NC}${end_spacer}"
 }
 
 # Compile ibmtss
 # Can be run multiple times for code adjustment
 compile_ibmtpmtss () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTSS${NC}${end_spacer}"
-
-    echo -e "${BOLD}${BLUE}Cleaning up ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Cleaning up with make ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
-        make -f makefiletpm20 clean
+        make $make_gflag -f makefiletpm20 clean
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmtss}/utils/"
-        make -f makefiletpmc clean
+        make $make_gflag -f makefiletpmc clean
         cd "${path_ibmtss}/utils12/"
-        make -f makefiletpmc clean
+        make $make_gflag -f makefiletpmc clean
     else 
-        echo -e "${BOLD}${RED}Invalid verMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
     fi
 
-    echo -e "${BOLD}${BLUE}Compiling IBMTSS ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-compile_ibmtpmtss" "Compiling IBMTSS ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
-        make -f makefiletpm20
+        make $make_gflag -f makefiletpm20
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmtss}/utils/"
-        make -f makefiletpmc
+        make $make_gflag -f makefiletpmc
         cd "${path_ibmtss}/utils12/"
-        make -f makefiletpmc
+        make $make_gflag -f makefiletpmc
     else 
-        echo -e "${BOLD}${RED}Invalid verMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
     fi
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTSS Complete${NC}${end_spacer}"
 }
 
 # Create symbolic link to ibmswtpm
 # Only need to setup once (can re-run)
 setup_ibmswtpm_env () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMSWTPM Environment${NC}${end_spacer}"
-
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmtpm} ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
     ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting up IBMSWTPM Environment Complete${NC}${end_spacer}"
 }
 
 # Compile ibmswtpm
 # Can be run multiple times for code adjustment
 compile_ibmswtpm () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTPM${NC}${end_spacer}"
-
-    echo -e "${BOLD}${BLUE}Cleaning up ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Cleaning up with make ..."
     cd "${path_ibmtpm}/src/"
-    make clean
+    make $make_gflag clean
 
-    echo -e "${BOLD}${BLUE}Compiling IBMTPM ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Compiling IBMTPM ..."
     cd "${path_ibmtpm}/src/"
-    make
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMTPM Complete${NC}${end_spacer}"
+    make $make_gflag
 }
 
 # Install requirements for ibmacs, create mysql database, set environment variables, link directories, and generate directory for webpage
 # Only need to setup once (can re-run)
 setup_ibmacs_env () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting Up IBMACS Environment${NC}${end_spacer}"
-
-    echo -e "${BOLD}${BLUE}Installing IBMACS dependencies ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
         # for Server
         apt-get install -y libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev
@@ -282,12 +143,12 @@ setup_ibmacs_env () {
         # for Client
         apt-get install -y libjson-c-dev libssl-dev
     else 
-        echo -e "${BOLD}${RED}Invalid acsMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid acsMode"
         exit 1
     fi
 
     if [ $acsMode == 1 ]; then
-        echo -e "${BOLD}${BLUE}Setting database ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting database ..."
         cd "${path_ibmacs}/acs/"
         mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
         mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_server_ip}' IDENTIFIED BY '${mysql_password}';"
@@ -295,23 +156,23 @@ setup_ibmacs_env () {
         mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
     fi
 
-    echo -e "${BOLD}${BLUE}Setting include path ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting include path ..."
     export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
     export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${path_ibmacs} ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
     ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
 
-    echo -e "${BOLD}${BLUE}Setting html directory ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting html directory ..."
     mkdir -p ${html_dir}
     chown root ${html_dir}
     chgrp root ${html_dir}
     chmod 777 ${html_dir}
 
-    echo -e "${BOLD}${BLUE}Creating symbolic link to ${c_json_lib_dir} ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
     ln -s "${c_json_lib_dir}" "${c_json_lib_link_dir}"
 
-    echo -e "${BOLD}${BLUE}Setting include path ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting include path ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmacs}/acs/"
@@ -323,26 +184,22 @@ setup_ibmacs_env () {
         export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
     else 
-        echo -e "${BOLD}${RED}Invalid verMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid verMode"
         exit 1
     fi
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting Up IBMACS Environment Complete${NC}${end_spacer}"
 }
 
 # Compile ibmacs
 # Can be run multiple times for code adjustment
 compile_ibmacs () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMACS${NC}${end_spacer}"
-
-    echo -e "${BOLD}${BLUE}Compiling IBMACS and setting include path ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-compile_ibmacs" "Compiling IBMACS and setting include path ..."
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmacs}/acs/"
         export CPATH="${path_ibmtss}/utils"
         export LIBRARY_PATH="${path_ibmtss}/utils"
-        make clean
-        make
+        make $make_gflag clean
+        make $make_gflag
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmacs}/acs/"
@@ -350,184 +207,179 @@ compile_ibmacs () {
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         if [ $acsMode == 1 ]; then
             # for Server
-            make -f makefiletpmc clean
-            make -f makefiletpmc
+            $sudo_gflag make $make_gflag -f makefiletpmc clean
+            $sudo_gflag make $make_gflag -f makefiletpmc
         elif [ $acsMode == 2 ]; then
             # for Client
-            make -f makefiletpm12 clean
-            make -f makefiletpm12
-            make -f makefiletpmc clean
-            make -f makefiletpmc
+            $sudo_gflag make $make_gflag -f makefiletpm12 clean
+            $sudo_gflag make $make_gflag -f makefiletpm12
+            $sudo_gflag make $make_gflag -f makefiletpmc clean
+            $sudo_gflag make $make_gflag -f makefiletpmc
         else 
-            echo -e "${BOLD}${RED}Invalid acsMode${NC}"
+            echo_warn "setup_ibmtpm" "setup-compile_ibmacs" "Invalid acsMode"
             exit 1
         fi
     else 
-        echo -e "${BOLD}${RED}Invalid verMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-compile_ibmacs" "Invalid verMode"
         exit 1
     fi
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Compiling IBMACS Complete${NC}${end_spacer}"
 }
 
 # Open demo webpage with firefox
 # Can be run multiple times
 open_demo_webpage () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Opening Demo Webpage${NC}${end_spacer}"
-
-    echo -e "${BOLD}${BLUE}Opening demo webpage ......${NC}"
-    # start firefox without root on new terminal
-    command1="sudo -u ${user_name} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
-    gnome-terminal -t "Demo Firefox Website" -- bash -c "${command1}; exec bash"
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Opening Demo Webpage Complete${NC}${end_spacer}"
+    echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
+    launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\n\""
+    launch_cmd2="firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url}"
+    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    gnome-terminal -t "FireFox Browser" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
 
 # Generate CA certificate and key
 # Only need to setup once (can re-run)
 generate_CA () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating CA${NC}${end_spacer}"
-
-    echo -e "${BOLD}${ORANGE}Function not implemented${NC}"
-    echo -e "${BOLD}${ORANGE}Refer to ${sym_link_ibmacs}/README.txt line 171 for steps.${NC}"
-    echo -e "${BOLD}${GREEN}Generated CAs in ${sym_link_ibmtss}/utils ...... ${NC}"
+    echo_warn "setup_ibmtpm" "setup-generate_CA" "Function not implemented"
+    echo_warn "setup_ibmtpm" "setup-generate_CA" "Refer to ${sym_link_ibmacs}/README.txt line 171 for steps."
+    echo_notice "setup_ibmtpm" "setup-generate_CA" "Generated CAs in ${sym_link_ibmtss}/utils ......"
     ls "${sym_link_ibmtss}/utils/"*.pem
-    echo -e "${BOLD}${GREEN}Generated CAs in ${sym_link_ibmacs} ...... ${NC}"
+    echo_notice "setup_ibmtpm" "setup-generate_CA" "Generated CAs in ${sym_link_ibmacs} ......"
     ls "${sym_link_ibmacs}/"*.pem
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating CA Complete${NC}${end_spacer}"
 }
 
 # Activate TPM Server in new terminal
 # Only need to setup once (can re-run)
 activate_TPM_server () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM${NC}${end_spacer}"
-
+    TPM_server_executed=1
     # apply TPMMode for ibmtss
     setup_ibmtpmtss_env
 
-    echo -e "${BOLD}${ORANGE}Starting TPM simulator (server) on new temrinal ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Starting TPM simulator (SWTPM/vTPM/server) on new temrinal ..."
     cd "${sym_link_ibmtpm}/src/"
-    command="echo \"starting TPM simulator (server)\"; ./tpm_server"
-    gnome-terminal -t "TPM SERVER" --active -- bash -c "${command}; exec bash"
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM Complete${NC}${end_spacer}"
+    launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
+    launch_cmd2="./tpm_server"
+    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    gnome-terminal -t "TPM SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
 
 # Activate TPM Client in current terminal
 # Only need to setup once (can re-run)
 activate_TPM_client () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM${NC}${end_spacer}"
-
-    echo -e "${BOLD}${ORANGE}Starting TPM simulator (client) on new temrinal ......${NC}"
+    TPM_client_executed=1
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
     cd "${sym_link_ibmtss}/utils/"
-    ./powerup
-    ./startup
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating TPM Complete${NC}${end_spacer}"
+    launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Starting TPM simulator (client) on new temrinal ...\n\""
+    launch_cmd2="./powerup"
+    launch_cmd3="./startup"
+    launch_cmd4="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    gnome-terminal -t "TPM CLIENT" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
 }
 
 # Create EK certificate and key, activated TPM on new terminal
 # Only need to setup once (can re-run)
 generate_EK () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating EK${NC}${end_spacer}"
-
     activate_TPM_server
 
     activate_TPM_client
 
-    echo -e "${BOLD}${ORANGE}Backing up NVChip ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-generate_EK" "Backing up NVChip ......"
     cp "${path_NV}" "${path_NV}.bak"
 
-    echo -e "${BOLD}${ORANGE}Generating RSAEK and load into NV ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating RSAEK and load into NV ......"
     ./createekcert -rsa 2048 -cakey $RSAEK_cert -capwd rrrr -v
 
-    echo -e "${BOLD}${ORANGE}Generating ECCEK and load into NV ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating ECCEK and load into NV ......"
     ./createekcert -ecc nistp256 -cakey $ECCEK_cert -capwd rrrr -caalg ec -v
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Generating EK Complete${NC}${end_spacer}"
 }
 
 # Retrieve hardware NVChip
 # Only need to setup once (can re-run)
 retrieve_hardware_NV () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Retrieving Hardware NVChip${NC}${end_spacer}"
-
-    echo -e "${BOLD}${ORANGE}Not implemented${NC}"
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Retrieving Hardware NVChip Complete${NC}${end_spacer}"
+    echo_warn "setup_ibmtpm" "setup-retrieve_hardware_NV" "Function not implemented"
 }
 
 # Set ACS MYSQL setting
 # Only need to setup once (can re-run)
 set_acs_sql_setting () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting ACS MYSQL Setting${NC}${end_spacer}"
-
-    echo -e "${BOLD}${ORANGE}Setting ACS MYSQL Setting ......${NC}"
+    echo_notice "setup_ibmtpm" "setup-set_acs_sql_setting" "Setting ACS MYSQL Setting ..."
     export ACS_SQL_USERID="${mysql_user}"
     export ACS_SQL_PASSWORD="${mysql_password}"
 
     if [ $force_acs_sql_setting == 1 ]; then
-        echo -e "${BOLD}${ORANGE}Forcing ACS MYSQL Setting ......${NC}"
+        echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Forcing ACS MySQL Setting ..."
         cp "${html_dir}/dbconnect.php" "${html_dir}/dbconnect.php.bak"
-        sed -i "s/\$connect = new mysqli(\$acs_sql_host, \$acs_sql_userid, \$acs_sql_password, \$acs_sql_database);/\$connect = new mysqli(${acs_demo_server_ip}, ${mysql_user}, ${mysql_password}, ${mysql_database});/g" "${html_dir}/dbconnect.php"
+        sed -i 's@($acs_sql_host, $acs_sql_userid, $acs_sql_password, $acs_sql_database)@'"(\"${acs_demo_server_ip}\", \"${mysql_user}\", \"${mysql_password}\", \"${mysql_database}\")"'@' "${html_dir}/dbconnect.php"
     else
-        echo -e "${BOLD}${ORANGE}Not Forcing ACS MYSQL Setting ......${NC}"
+        echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Not Forcing ACS MySQL Setting ..."
     fi
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Setting ACS MYSQL Setting Complete${NC}${end_spacer}"
 }
 
 # Active ACS Demo Server
 # Can be run multiple times
 active_ACS_Demo_Server () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Server${NC}${end_spacer}"
-
     if [ $SCmachineMode == 1 ]; then
-        echo -e "${BOLD}${BLUE}Activating ACS Demo on same machine ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on same machine ..."
         mkdir "${tpm_data_dir}"
         export TPM_DATA_DIR="${tpm_data_dir}"
+        launch_cmd0="export TPM_DATA_DIR=\"${tpm_data_dir}\"" # may not be needed
     elif [ $SCmachineMode == 2 ]; then
-        echo -e "${BOLD}${BLUE}Activating ACS Demo on different machine ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on different machine ..."
+        launch_cmd0="" # may not be needed
     else 
-        echo -e "${BOLD}${RED}Invalid SCmachineMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid SCmachineMode"
         exit 1
     fi
-    activate_TPM_server
-    activate_TPM_client
 
-    echo -e "${BOLD}${BLUE}Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ......${NC}"
+    if [ $verMode -eq 1 ]; then
+        # for TPM 2.0
+        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils\"; export LIBRARY_PATH=\"${path_ibmtss}/utils\"" # may not be needed
+    elif [ $verMode -eq 2 ]; then
+        # for TPM 1.2 & 2.0
+        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\"; export LIBRARY_PATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\"" # may not be needed
+    else 
+        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid verMode"
+        exit 1
+    fi
+
+    if [ $TPM_server_executed -ne 1 ]; then
+        active_TPM_server
+    fi
+    if [ $TPM_client_executed -ne 1 ]; then
+        active_TPM_client
+    fi
+
+    echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
     sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
     export ACS_PORT="${acs_port}"
 
     set_acs_sql_setting
 
-    echo -e "${BOLD}${BLUE}Activating ACS Server Demo on new terminal ......${NC}"
-    command="cd ${path_ibmacs}/acs; ./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
-    gnome-terminal -t "ACS SERVER" --active -- bash -c "${command}; exec bash"
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Server Complete${NC}${end_spacer}"
+    echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on new terminal ..."
+    cd ${path_ibmacs}/acs
+    launch_cmd1="export ACS_PORT=\"${acs_port}\"; export LD_LIBRARY_PATH=\"${path_ibmtss}/utils\""
+    launch_cmd2="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
+    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd0}; ${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
 
 # Active ACS Demo Client
 # Can be run multiple times
 active_ACS_Demo_Client () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Client${NC}${end_spacer}"
-
     cd "${path_ibmacs}/acs"
     if [ $acsClientMode == 1 ]; then
-        echo -e "${BOLD}${BLUE}Activating ACS Client Demo on local machine ......${NC}"
-        ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem >| ${acs_demo_client_log_dir}
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on local machine ..."
+        setenv LD_LIBRARY_PATH "${path_ibmtss}/utils:${path_ibmtss}/utils12"
+        env | grep LD_LIBRARY_PATH
+        echo $LD_LIBRARY_PATH
+        find / -iname "*libibmtss*"
+        $sudo_gflag ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem | sudo tee ${acs_demo_client_log_dir} > /dev/null
     elif [ $acsClientMode == 2 ]; then
-        echo -e "${BOLD}${BLUE}Activating ACS Client Demo on remote machine ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on remote machine ..."
         ./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem >| ${acs_demo_client_log_dir}
     else 
-        echo -e "${BOLD}${RED}Invalid acsClientMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Invalid acsClientMode"
         exit 1
     fi
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Activating ACS Demo Client Complete${NC}${end_spacer}"
 }
 
 # Active ACS Demo verify
@@ -565,8 +417,9 @@ active_ACS_Demo_verify () {
     echo -e "${start_spacer}>>${BOLD}${GREEN}Verifying ACS Demo Complete${NC}${end_spacer}"
 }
 
+echo_notice "setup_ibmtpm" "setup" "Running setup script ..."
+
 if [ $install_req            == 1 ]; then install_req;                 fi
-if [ $config_nvim            == 1 ]; then config_nvim;                 fi
 if [ $setup_ibmtpmtss_env    == 1 ]; then setup_ibmtpmtss_env;         fi
 if [ $compile_ibmtpmtss      == 1 ]; then compile_ibmtpmtss;           fi
 if [ $setup_ibmswtpm_env     == 1 ]; then setup_ibmswtpm_env;          fi
@@ -584,4 +437,4 @@ if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 
-echo -e "${start_spacer}>>${BOLD}${GREEN}Setup Complete${NC}${end_spacer}"
+echo_notice "setup_ibmtpm" "setup" "Setup complete"
