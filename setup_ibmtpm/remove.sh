@@ -1,7 +1,12 @@
 #!/bin/bash +x
 
-source ../common/functions.sh
+source ../common/function.sh
 parse "./config.ini" "display"
+
+if [ -z ${base_dir+x} ]; then
+    echo "common/function.sh or setup_ibmtpm/config.ini is not found"
+    exit 1
+fi
 
 # $1: directory to clear content
 # $2: clear this directory too (== "rmdir")
