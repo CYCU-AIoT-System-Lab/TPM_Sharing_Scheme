@@ -307,7 +307,7 @@ set_acs_sql_setting () {
     if [ $force_acs_sql_setting == 1 ]; then
         echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Forcing ACS MySQL Setting ..."
         cp "${html_dir}/dbconnect.php" "${html_dir}/dbconnect.php.bak"
-        sed -i "s/\$connect = new mysqli(\$acs_sql_host, \$acs_sql_userid, \$acs_sql_password, \$acs_sql_database);/\$connect = new mysqli(${acs_demo_server_ip}, ${mysql_user}, ${mysql_password}, ${mysql_database});/g" "${html_dir}/dbconnect.php"
+        sed -i 's@($acs_sql_host, $acs_sql_userid, $acs_sql_password, $acs_sql_database)@'"(\"${acs_demo_server_ip}\", \"${mysql_user}\", \"${mysql_password}\", \"${mysql_database}\")"'@' "${html_dir}/dbconnect.php"
     else
         echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Not Forcing ACS MySQL Setting ..."
     fi
