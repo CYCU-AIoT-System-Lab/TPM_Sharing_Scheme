@@ -1,26 +1,18 @@
 #/bin/bash
 
-term_notice="\033[1m\033[34m[NOTICE-common/setup]\033[0m "
-term_warn="\033[1m\033[33m[WARN-common/setup]\033[0m "
-nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"
-nvim_dir="${HOME}/.config/nvim"
-apport_dir="${HOME}/.config/apport"
-cmake_ver="3.18"
-cmake_build="4"
-cmake_dir="${HOME}/cmake-${cmake_ver}"
-valgrind_ver="3.22.0"
-valgrind_dir="${HOME}/valgrind-${valgrind_ver}"
+source "./function.sh"
+parse "./config.ini" "display"
 
-install_for_pi=0
-# sub_tasks (1=Enable)
-setup_environment=0 # Not implemented
-setup_ibmtpm=1
-setup_socket_com=0
+#nvim_dir="${HOME}/.config/nvim"
+#apport_dir="${HOME}/.config/apport"
+#cmake_dir="${HOME}/cmake-${cmake_ver}"
+#valgrind_dir="${HOME}/valgrind-${valgrind_ver}"
+echo "cmake_dir: $cmake_dir"
 
 # Functions
 
 build_cmake () {
-	echo -e "${term_notice}Building cmake..."
+    echo_notice "common" "setup" "Building cmake..."
 	mkdir -p $cmake_dir
 	cd $cmake_dir
 	wget "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
@@ -33,7 +25,7 @@ build_cmake () {
 }
 
 build_valgrind () {
-	echo -e "${term_notice}Building valgrind..."
+    echo_notice "common" "setup" "Building valgrind..."
 	mkdir -p $valgrind_dir
 	cd $valgrind_dir
 	wget "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
@@ -46,10 +38,10 @@ build_valgrind () {
 
 install_req () {
 	aptins () {
-		echo -e "${term_notice}Installing $1..."
+        echo_notice "common" "setup" "Installing $1..."
 		sudo apt-get install -y $1
 	}
-	echo -e "${term_notice}Installing required packages..."
+    echo_notice "common" "setup" "Installing required packages..."
 	sudo apt-get update
 	sudo apt-get upgrade -y
 	aptins "git"
@@ -75,72 +67,76 @@ install_req () {
 }
 
 config_nvim () {
-	echo -e "${term_notice}Configuring neovim..."
+    echo_notice "common" "setup" "Configuring neovim..."
 	mkdir -p $nvim_dir
 	wget "$nvim_config_url" -O "${nvim_dir}/init.vim"
 }
 
 change_all_sh_mod () {
-	echo -e "${term_notice}Changing all .sh files to executable..."
+    echo_notice "common" "setup" "Changing all .sh files to executable..."
 	find .. -type f -iname "*.sh" -exec sudo chmod +x {} \;
 }
 
 update_src () {
-	echo -e "${term_notice}Pulling latest repo source..."
+    echo_notice "common" "setup" "Pulling latest repo source..."
 	git stash
 	git stash clear
 	git pull
 }
 
 config_apport () {
-	echo -e "${term_notice}Configuring apport..."
+    echo_notice "common" "setup" "Configuring apport..."
 	ulimit -c unlimited
 	mkdir -p $apport_dir
 	touch $apport_dir/settings
 	echo -e "[main]\nunpackaged=true\n" > $apport_dir/settings
 	rm -rf /var/crash/*
 	sudo service whoopsie stop
-	echo -e "${term_notice}Core dumps will be generated in /var/crash"
+    echo_notice "common" "setup" "Core dumps will be generated in /var/crash"
 }
 
 reload_term () {
-	echo -e "${term_notice}Reloading terminal..."
+    echo_notice "common" "setup" "Reloading terminal..."
 	source ~/.bashrc
 }
 
-echo -e "${term_notice}Running common setup..."
-echo -e "${term_notice}Current directory: $PWD"
+echo_notice "common" "setup" "Running common setup..."
+echo_notice "common" "setup" "Current directory: $PWD"
 working_dir=$PWD
-install_req
-config_nvim
-update_src
-change_all_sh_mod
-config_apport
-reload_term
-echo -e "${term_notice}Common setup complete."
+if [ $setup_mutual_req -eq 1 ]; then
+    echo_notice "common" "setup" "Running mutual setup..."
+    install_req
+    config_nvim
+    update_src
+    change_all_sh_mod
+    config_apport
+    reload_term
+else
+    echo_warn "common" "setup" "Invalid Argument: $setup_mutual_req ! Skipping mutual setup..."
+fi
 
 if [ $setup_environment -eq 1 ]; then
-	echo -e "${term_warn}Running environment setup Not Implemneted Yet!"
+    echo_warn "common" "setup" "Running environment setup Not Implemneted Yet!"
 else
-	echo -e "${term_warn}Invalid Argument: $setup_environment ! Skipping setup_environment..."
+    echo_warn "common" "setup" "Invalid Argument: $setup_environment ! Skipping setup_environment..."
 fi
 
 cd $working_dir
 if [ $setup_ibmtpm -eq 1 ]; then
-    echo -e "${term_notice}Running ibmtpm setup..."
+    echo_notice "common" "setup" "Running ibmtpm setup..."
     cd ../setup_ibmtpm
     sudo bash ./setup_sudo.sh
 else
-	echo -e "${term_warn}Invalid Argument: $setup_ibmtpm ! Skipping setup_ibmtpm..."
+    echo_warn "common" "setup" "Invalid Argument: $setup_ibmtpm ! Skipping setup_ibmtpm..."
 fi
 
 cd $working_dir
 if [ $setup_socket_com -eq 1 ]; then
-	echo -e "${term_notice}Running socket_com setup..."
+    echo_notice "common" "setup" "Running socket_com setup..."
 	cd ../socket_com
 	./setup.sh
 else
-	echo -e "${term_warn}Invalid Argument: $setup_socket_com ! Skipping setup_socket_com..."
+    echo_warn "common" "setup" "Invalid Argument: $setup_socket_com ! Skipping setup_socket_com..."
 fi
 
-echo -e "${term_notice}All setup complete."
+echo_notice "common" "setup" "All setup complete."
