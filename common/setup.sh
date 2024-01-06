@@ -1,5 +1,8 @@
 #/bin/bash
 
+# Replace all ${HOME} with $HOME
+sed -i 's@${HOME}@'"$HOME"'@' config.ini
+
 source "./function.sh"
 parse "./config.ini" "display"
 
