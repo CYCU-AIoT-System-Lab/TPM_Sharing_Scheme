@@ -360,18 +360,16 @@ active_ACS_Demo_Client () {
 # Active ACS Demo verify
 # Can be run multiple times
 active_ACS_Demo_verify () {
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Verifying ACS Demo${NC}${end_spacer}"
-
     if [ $TPMMode == 1 ]; then
         # for Pysical TPM
-        echo -e "${BOLD}${BLUE}Ignore when working with Physical TPM${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Ignore when working with Physical TPM"
     elif [ $TPMMode == 2 ]; then
         # for Software TPM
         cd "${sym_link_ibmtss}/utils/"
-        echo -e "${BOLD}${BLUE}Checking TPM2BIOS.LOG ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
         ${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v >| ${acs_demo_verify_tpm2bios_log_dir}
 
-        echo -e "${BOLD}${BLUE}Checking IMASIG.LOG ......${NC}"
+        echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking IMASIG.LOG ..."
         ${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v >| ${acs_demo_verify_imasig_log_dir}
 
         if [ $acsClientMode == 1 ]; then
@@ -381,15 +379,13 @@ active_ACS_Demo_verify () {
             # for Remote
             ${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip} >| ${acs_demo_verify_client_log_dir}
         else 
-            echo -e "${BOLD}${RED}Invalid acsClientMode${NC}"
+            echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Invalid acsClientMode"
             exit 1
         fi
     else 
-        echo -e "${BOLD}${RED}Invalid TPMMode${NC}"
+        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Invalid TPMMode"
         exit 1
     fi
-
-    echo -e "${start_spacer}>>${BOLD}${GREEN}Verifying ACS Demo Complete${NC}${end_spacer}"
 }
 
 echo_notice "setup_ibmtpm" "setup" "Running setup script ..."
