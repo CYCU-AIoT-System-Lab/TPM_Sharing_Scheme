@@ -207,14 +207,14 @@ compile_ibmacs () {
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         if [ $acsMode == 1 ]; then
             # for Server
-            $sudo_gflag make $make_gflag -f makefiletpmc clean
-            $sudo_gflag make $make_gflag -f makefiletpmc
+            make $make_gflag -f makefiletpmc clean
+            make $make_gflag -f makefiletpmc
         elif [ $acsMode == 2 ]; then
             # for Client
-            $sudo_gflag make $make_gflag -f makefiletpm12 clean
-            $sudo_gflag make $make_gflag -f makefiletpm12
-            $sudo_gflag make $make_gflag -f makefiletpmc clean
-            $sudo_gflag make $make_gflag -f makefiletpmc
+            make $make_gflag -f makefiletpm12 clean
+            make $make_gflag -f makefiletpm12
+            make $make_gflag -f makefiletpmc clean
+            make $make_gflag -f makefiletpmc
         else 
             echo_warn "setup_ibmtpm" "setup-compile_ibmacs" "Invalid acsMode"
             exit 1
@@ -230,7 +230,7 @@ compile_ibmacs () {
 open_demo_webpage () {
     echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\n\""
-    launch_cmd2="firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url}"
+    launch_cmd2="sudo -u ${user_name} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
     gnome-terminal -t "FireFox Browser" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
@@ -320,31 +320,11 @@ active_ACS_Demo_Server () {
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on same machine ..."
         mkdir "${tpm_data_dir}"
         export TPM_DATA_DIR="${tpm_data_dir}"
-        launch_cmd0="export TPM_DATA_DIR=\"${tpm_data_dir}\"" # may not be needed
     elif [ $SCmachineMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on different machine ..."
-        launch_cmd0="" # may not be needed
     else 
         echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid SCmachineMode"
         exit 1
-    fi
-
-    if [ $verMode -eq 1 ]; then
-        # for TPM 2.0
-        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils\"; export LIBRARY_PATH=\"${path_ibmtss}/utils\"" # may not be needed
-    elif [ $verMode -eq 2 ]; then
-        # for TPM 1.2 & 2.0
-        launch_cmd0="${launch_cmd0}; export CPATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\"; export LIBRARY_PATH=\"${path_ibmtss}/utils:${path_ibmtss}/utils12\"" # may not be needed
-    else 
-        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid verMode"
-        exit 1
-    fi
-
-    if [ $TPM_server_executed -ne 1 ]; then
-        active_TPM_server
-    fi
-    if [ $TPM_client_executed -ne 1 ]; then
-        active_TPM_client
     fi
 
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
@@ -356,10 +336,9 @@ active_ACS_Demo_Server () {
 
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on new terminal ..."
     cd ${path_ibmacs}/acs
-    launch_cmd1="export ACS_PORT=\"${acs_port}\"; export LD_LIBRARY_PATH=\"${path_ibmtss}/utils\""
-    launch_cmd2="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
-    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd0}; ${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    launch_cmd1="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der >| ${acs_demo_server_log_dir}"
+    launch_cmd2="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}"
 }
 
 # Active ACS Demo Client
@@ -368,11 +347,7 @@ active_ACS_Demo_Client () {
     cd "${path_ibmacs}/acs"
     if [ $acsClientMode == 1 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on local machine ..."
-        setenv LD_LIBRARY_PATH "${path_ibmtss}/utils:${path_ibmtss}/utils12"
-        env | grep LD_LIBRARY_PATH
-        echo $LD_LIBRARY_PATH
-        find / -iname "*libibmtss*"
-        $sudo_gflag ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem | sudo tee ${acs_demo_client_log_dir} > /dev/null
+        ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem >| ${acs_demo_client_log_dir}
     elif [ $acsClientMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on remote machine ..."
         ./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem >| ${acs_demo_client_log_dir}
