@@ -6,24 +6,18 @@ sed -i 's@${HOME}@'"$HOME"'@' config.ini
 source "./function.sh"
 parse "./config.ini" "display"
 
-#nvim_dir="${HOME}/.config/nvim"
-#apport_dir="${HOME}/.config/apport"
-#cmake_dir="${HOME}/cmake-${cmake_ver}"
-#valgrind_dir="${HOME}/valgrind-${valgrind_ver}"
-echo "cmake_dir: $cmake_dir"
-
 # Functions
 
 build_cmake () {
     echo_notice "common" "setup" "Building cmake..."
 	mkdir -p $cmake_dir
 	cd $cmake_dir
-	wget "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
-	tar -xzvf "cmake-${cmake_ver}.${cmake_build}.tar.gz"
+	wget $wget_gflag "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
+	tar $tar_gflag "cmake-${cmake_ver}.${cmake_build}.tar.gz"
 	cd "cmake-${cmake_ver}.${cmake_build}"
 	./bootstrap
-	make -j$(nproc)
-	sudo make install
+	make $make_gflag -j$(nproc)
+	sudo make $make_gflag install
 	cmake --version
 }
 
@@ -31,22 +25,22 @@ build_valgrind () {
     echo_notice "common" "setup" "Building valgrind..."
 	mkdir -p $valgrind_dir
 	cd $valgrind_dir
-	wget "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
-	tar xvf "valgrind-${valgrind_ver}.tar.bz2"
+	wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
+	tar $tar_gflag "valgrind-${valgrind_ver}.tar.bz2"
 	cd "valgrind-${valgrind_ver}"
 	./configure
-	make -j$(nproc)
-	sudo make install
+	make $make_gflag -j$(nproc)
+	sudo make $make_gflag install
 }
 
 install_req () {
 	aptins () {
         echo_notice "common" "setup" "Installing $1..."
-		sudo apt-get install -y $1
+		sudo apt-get $apt_gflag install $1
 	}
     echo_notice "common" "setup" "Installing required packages..."
-	sudo apt-get update
-	sudo apt-get upgrade -y
+	sudo apt-get $apt_gflag update
+	sudo apt-get $apt_gflag upgrade -y
 	aptins "git"
 	aptins "htop"
 	aptins "iftop"
@@ -72,7 +66,7 @@ install_req () {
 config_nvim () {
     echo_notice "common" "setup" "Configuring neovim..."
 	mkdir -p $nvim_dir
-	wget "$nvim_config_url" -O "${nvim_dir}/init.vim"
+	wget $wget_gflag "$nvim_config_url" -O "${nvim_dir}/init.vim"
 }
 
 change_all_sh_mod () {
