@@ -1,14 +1,24 @@
 #!/bin/bash +x
 
-remove_path=(
-    "/opt"
-    "/var/www"
-)
+source ../common/functions.sh
+parse "./config.ini" "display"
 
-for i in "${remove_path[@]}"; do
-    echo "Removing content in $i"
-    cd $i
+# $1: directory to clear content
+# $2: clear this directory too (== "rmdir")
+clear_dir () {
+    echo "Removing content in $1"
+    cd $1
     sudo rm -rf *
-done
+    if [ "$2" == "rmdir" ]; then
+        sudo rmdir $1
+    fi
+}
 
-echo "Finished removing paths"
+clear_dir $base_dir
+clear_dir "$html_dir/../"
+clear_dir $c_json_lib_dir "rmdir"
+clear_dir $c_json_lib_link_dir "rmdir"
+clear_dir $tpm_data_dir "rmdir"
+sudo mysql -Bse "DROP DATABASE IF EXISTS $mysql_database;"
+
+echo_notice "setup_ibmtpm" "remove" "Done"
