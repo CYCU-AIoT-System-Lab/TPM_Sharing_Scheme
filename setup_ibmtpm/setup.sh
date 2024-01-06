@@ -225,13 +225,6 @@ compile_ibmacs () {
     fi
 }
 
-# Code MySQL settings into ibmacs PHP code
-# Only need to setup once (can re-run)
-code_mysql_setting () {
-    echo_notice "setup_ibmtpm" "setup-code_mysql_setting" "Coding MySQL settings into ibmacs PHP code ..."
-    sed -i 's@($acs_sql_host, $acs_sql_userid, $acs_sql_password, $acs_sql_database)@'"(\"${acs_demo_server_ip}\", \"${mysql_user}\", \"${mysql_password}\", \"${mysql_database}\")"'@' "${html_dir}/dbconnect.php"
-}
-
 # Open demo webpage with firefox
 # Can be run multiple times
 open_demo_webpage () {
@@ -433,7 +426,6 @@ if [ $setup_ibmswtpm_env     == 1 ]; then setup_ibmswtpm_env;          fi
 if [ $compile_ibmswtpm       == 1 ]; then compile_ibmswtpm;            fi
 if [ $setup_ibmacs_env       == 1 ]; then setup_ibmacs_env;            fi
 if [ $compile_ibmacs         == 1 ]; then compile_ibmacs;              fi
-if [ $code_mysql_setting     == 1 ]; then code_mysql_setting;          fi
 if [ $open_demo_webpage      == 1 ]; then open_demo_webpage;           fi
 if [ $generate_CA            == 1 ]; then generate_CA;                 fi
 if [ $activate_TPM_server    == 1 ]; then activate_TPM_server;         fi
