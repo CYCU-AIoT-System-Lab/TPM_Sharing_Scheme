@@ -84,3 +84,21 @@ parse () {
     echo_notice "common" "function" "Loaded ${BOLD}${GREEN}$var_cnt${END} config items from ${BOLD}${GREEN}$1${END}"
 }
 echo_notice "common" "function" "Loaded function: parse"
+
+# Function: clear directory
+# Usage: clear_dir "directory"
+# $1: directory to clear content
+# $2: clear this directory too (== "rmdir")
+clear_dir () {
+    if [ -z "$1+x" ]; then
+        echo "clear_dir: directory is empty"
+        exit 1
+    fi
+    echo "Removing content in $1"
+    cd $1
+    sudo rm -rf *
+    if [ "$2" == "rmdir" ]; then
+        sudo rmdir $1
+    fi
+}
+echo_notice "common" "function" "Loaded function: clear_dir"
