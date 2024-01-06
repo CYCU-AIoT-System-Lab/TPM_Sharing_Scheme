@@ -123,6 +123,10 @@ if [ $setup_ibmtpm -eq 1 ]; then
     echo_notice "common" "setup" "Running ibmtpm setup..."
     cd ../setup_ibmtpm
     sudo bash ./setup_sudo.sh
+else if [ $setup_ibmtpm -eq 2 ]; then
+    echo_notice "common" "setup" "Running ibmtpm setup..."
+    cd ../setup_ibmtpm
+    ./setup.sh
 else
     echo_warn "common" "setup" "Invalid Argument: $setup_ibmtpm ! Skipping setup_ibmtpm..."
 fi
