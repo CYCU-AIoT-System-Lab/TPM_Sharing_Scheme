@@ -9,7 +9,7 @@ parse "./config.ini" "display"
 # Functions
 
 build_cmake () {
-    echo_notice "common" "setup" "Building cmake..."
+    echo_notice "common" "setup" "Building ${BOLD}${GREEN}cmake${END}..."
 	mkdir -p $cmake_dir
 	cd $cmake_dir
 	wget $wget_gflag "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
@@ -22,7 +22,7 @@ build_cmake () {
 }
 
 build_valgrind () {
-    echo_notice "common" "setup" "Building valgrind..."
+    echo_notice "common" "setup" "${BOLD}${GREEN}Building valgrind${END}..."
 	mkdir -p $valgrind_dir
 	cd $valgrind_dir
 	wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
