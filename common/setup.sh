@@ -26,7 +26,7 @@ build_valgrind () {
 	mkdir -p $valgrind_dir
 	cd $valgrind_dir
 	wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
-	tar $tar_gflag "valgrind-${valgrind_ver}.tar.bz2"
+	tar $tar_gflag "valgrind-${valgrind_ver}.tar.bz"
 	cd "valgrind-${valgrind_ver}"
 	./configure
 	make $make_gflag -j$(nproc)
