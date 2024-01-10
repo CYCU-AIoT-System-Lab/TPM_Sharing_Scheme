@@ -100,17 +100,13 @@ reload_term () {
 echo_notice "common" "setup" "Running common setup..."
 echo_notice "common" "setup" "Current directory: $PWD"
 working_dir=$PWD
-if [ $setup_mutual_req -eq 1 ]; then
-    echo_notice "common" "setup" "Running mutual setup..."
-    install_req
-    config_nvim
-    update_src
-    change_all_sh_mod
-    config_apport
-    reload_term
-else
-    echo_warn "common" "setup" "Invalid Argument: $setup_mutual_req ! Skipping mutual setup..."
-fi
+
+if [ $config_install_req       -eq 1 ]; then install_req;       fi
+if [ $config_config_nvim       -eq 1 ]; then config_nvim;       fi
+if [ $config_update_src        -eq 1 ]; then update_src;        fi
+if [ $config_change_all_sh_mod -eq 1 ]; then change_all_sh_mod; fi
+if [ $config_config_apport     -eq 1 ]; then config_apport;     fi
+if [ $config_reload_term       -eq 1 ]; then reload_term;       fi
 
 if [ $setup_environment -eq 1 ]; then
     echo_warn "common" "setup" "Running environment setup Not Implemneted Yet!"
