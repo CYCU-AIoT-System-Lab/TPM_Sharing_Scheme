@@ -400,6 +400,24 @@ print_log_path () {
     echo_notice "setup_ibmtpm" "setup-print_log_path" "acs_demo_verify_client_log_dir: ${acs_demo_verify_client_log_dir}"
 }
 
+# Open all log files in new terminal tabs
+# Can be run multiple times
+open_all_logs () {
+    newt () {
+        lcmd0="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+        lcmd1="tailling log file: $1"
+        lcmd2="tail -f $1"
+        sudo -u ${user_name} gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
+    }
+    newt "${acs_demo_server_log_dir}"
+    newt "${acs_demo_client_log_dir}"
+    newt "${swtpm_bios_log_dir}"
+    newt "${acs_demo_verify_tpm2bios_log_dir}"
+    newt "${ima_sig_log_dir}"
+    newt "${acs_demo_verify_imasig_log_dir}"
+    newt "${acs_demo_verify_client_log_dir}"
+}
+
 echo_notice "setup_ibmtpm" "setup" "Running setup script ..."
 
 if [ $install_req            == 1 ]; then install_req;                 fi
@@ -420,5 +438,6 @@ if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 if [ $print_log_path         == 1 ]; then print_log_path;              fi
+if [ $open_all_logs          == 1 ]; then open_all_logs;               fi
 
 echo_notice "setup_ibmtpm" "setup" "Setup complete"
