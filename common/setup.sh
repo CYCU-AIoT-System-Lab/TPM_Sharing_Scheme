@@ -52,6 +52,7 @@ install_req () {
 	aptins "gcc"
 	aptins "make"
 	aptins "libssl-dev"
+    aptins "moreutils"
 	if [ ${install_for_pi} -eq 0 ]; then
 		aptins "libtool"
 		aptins "autoconf"
