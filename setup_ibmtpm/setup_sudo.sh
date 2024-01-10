@@ -407,7 +407,7 @@ open_all_logs () {
         lcmd0="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
         lcmd1="tailling log file: $1"
         lcmd2="tail -f $1"
-        sudo -u ${user_name} gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
+        sudo $sudo_gflag -u ${user_name} gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
     }
     newt "${acs_demo_server_log_dir}"
     newt "${acs_demo_client_log_dir}"
