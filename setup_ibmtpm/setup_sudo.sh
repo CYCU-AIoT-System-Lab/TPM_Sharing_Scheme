@@ -405,7 +405,7 @@ print_log_path () {
 open_all_logs () {
     newt () {
         lcmd0="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-        lcmd1="tailling log file: $1"
+        lcmd1="echo \"tailling log file: $1\""
         lcmd2="tail -f $1"
         gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
     }
