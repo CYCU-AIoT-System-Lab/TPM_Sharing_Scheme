@@ -25,8 +25,8 @@ build_valgrind () {
     echo_notice "common" "setup" "Building ${BOLD}${GREEN}valgrind${END}..."
 	mkdir -p $valgrind_dir
 	cd $valgrind_dir
-	wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz"
-	tar $tar_gflag "valgrind-${valgrind_ver}.tar.bz"
+	wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
+	tar $tar_gflag "valgrind-${valgrind_ver}.tar.bz2"
 	cd "valgrind-${valgrind_ver}"
 	./configure
 	make $make_gflag -j$(nproc)
