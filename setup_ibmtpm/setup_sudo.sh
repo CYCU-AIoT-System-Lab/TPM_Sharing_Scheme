@@ -3,6 +3,7 @@
 source "../common/function.sh" # load function.sh
 parse "./config.ini" "display"
 
+current_dir=$(pwd)
 dn_ibmtss="ibmtss"
 dn_ibmtpm="ibmtpm"
 dn_ibmacs="ibmacs"
@@ -337,9 +338,10 @@ active_ACS_Demo_Server () {
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on new terminal ..."
     cd ${path_ibmacs}/acs
     #launch_cmd1="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der 2>&1 | ts \"[$log4j_time_format]\" 2>&1 &>> ${acs_demo_server_log_dir}"
-    launch_cmd1="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
-    launch_cmd2="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}"
+    launch_cmd1="source ${current_dir}/../common/function.sh"
+    launch_cmd2="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
+    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
 
 # Active ACS Demo Client
