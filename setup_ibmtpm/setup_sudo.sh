@@ -347,10 +347,10 @@ active_ACS_Demo_Client () {
     cd "${path_ibmacs}/acs"
     if [ $acsClientMode == 1 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on local machine ..."
-        ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem >| ts \"[$log4j_format]\" >| ${acs_demo_client_log_dir}
+        ./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem >| ts "[$log4j_format]" >| ${acs_demo_client_log_dir}
     elif [ $acsClientMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on remote machine ..."
-        ./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem >| ts \"[$log4j_format]\" >| ${acs_demo_client_log_dir}
+        ./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem >| ts "[$log4j_format]" >| ${acs_demo_client_log_dir}
     else 
         echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Invalid acsClientMode"
         exit 1
@@ -367,17 +367,17 @@ active_ACS_Demo_verify () {
         # for Software TPM
         cd "${sym_link_ibmtss}/utils/"
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
-        ${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v >| ts \"[$log4j_format]\" >| ${acs_demo_verify_tpm2bios_log_dir}
+        ${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v >| ts "[$log4j_format]" >| ${acs_demo_verify_tpm2bios_log_dir}
 
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking IMASIG.LOG ..."
-        ${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v >| ts \"[$log4j_format]\" >| ${acs_demo_verify_imasig_log_dir}
+        ${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v >| ts "[$log4j_format]" >| ${acs_demo_verify_imasig_log_dir}
 
         if [ $acsClientMode == 1 ]; then
             # for Local
-            ${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v >| ts \"[$log4j_format]\" >| ${acs_demo_verify_client_log_dir}
+            ${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v >| ts "[$log4j_format]" >| ${acs_demo_verify_client_log_dir}
         elif [ $acsClientMode == 2 ]; then
             # for Remote
-            ${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip} >| ts \"[$log4j_format]\" >| ${acs_demo_verify_client_log_dir}
+            ${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip} >| ts "[$log4j_format]" >| ${acs_demo_verify_client_log_dir}
         else 
             echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Invalid acsClientMode"
             exit 1
@@ -407,7 +407,7 @@ open_all_logs () {
         lcmd0="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
         lcmd1="tailling log file: $1"
         lcmd2="tail -f $1"
-        sudo $sudo_gflag -u ${user_name} gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
+        gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
     }
     newt "${acs_demo_server_log_dir}"
     newt "${acs_demo_client_log_dir}"
