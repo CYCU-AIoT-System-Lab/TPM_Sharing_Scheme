@@ -22,7 +22,7 @@ build_cmake () {
 }
 
 build_valgrind () {
-    echo_notice "common" "setup" "${BOLD}${GREEN}Building valgrind${END}..."
+    echo_notice "common" "setup" "Building ${BOLD}${GREEN}valgrind${END}..."
 	mkdir -p $valgrind_dir
 	cd $valgrind_dir
 	wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz"
