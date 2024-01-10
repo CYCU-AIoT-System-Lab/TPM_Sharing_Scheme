@@ -110,11 +110,11 @@ echo_notice "common" "function" "Loaded function: clear_dir"
 # $3: log file
 # $4: "default" or "tee"
 log_date_time () {
-    #if [ $4 == "tee" ]; then
-    #    $1 2>&1 | ts "[$2]" | tee -a $3 > /dev/null
-    #else
-    #    $1 2>&1 | ts "[$2]" 2>&1 &>> $3
-    #fi
-    $1 >| $3
+    if [ $4 == "tee" ]; then
+        $1 2>&1 | ts "[$2]" | tee -a $3 > /dev/null
+    else
+        $1 2>&1 | ts "[$2]" 2>&1 &>> $3
+    fi
+    #$1 >| $3
 }
 echo_notice "common" "function" "Loaded function: log_date_time"
