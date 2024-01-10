@@ -13,7 +13,7 @@ build_cmake () {
 	mkdir -p $cmake_dir
 	cd $cmake_dir
 	wget $wget_gflag "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
-	tar $tar_gflag "cmake-${cmake_ver}.${cmake_build}.tar.gz"
+	tar -zxf "cmake-${cmake_ver}.${cmake_build}.tar.gz"
 	cd "cmake-${cmake_ver}.${cmake_build}"
 	./bootstrap
 	make $make_gflag -j$(nproc)
@@ -26,7 +26,7 @@ build_valgrind () {
 	mkdir -p $valgrind_dir
 	cd $valgrind_dir
 	wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
-	tar $tar_gflag "valgrind-${valgrind_ver}.tar.bz2"
+	tar -xfj "valgrind-${valgrind_ver}.tar.bz2"
 	cd "valgrind-${valgrind_ver}"
 	./configure
 	make $make_gflag -j$(nproc)
