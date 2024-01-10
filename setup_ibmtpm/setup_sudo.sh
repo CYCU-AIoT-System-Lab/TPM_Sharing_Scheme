@@ -337,7 +337,6 @@ active_ACS_Demo_Server () {
 
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on new terminal ..."
     cd ${path_ibmacs}/acs
-    #launch_cmd1="./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der 2>&1 | ts \"[$log4j_time_format]\" 2>&1 &>> ${acs_demo_server_log_dir}"
     launch_cmd1="source ${current_dir}/../common/function.sh"
     launch_cmd2="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
@@ -350,11 +349,9 @@ active_ACS_Demo_Client () {
     cd "${path_ibmacs}/acs"
     if [ $acsClientMode == 1 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on local machine ..."
-        #./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem 2>&1 | ts "[$log4j_time_format]" 2>&1 &>> ${acs_demo_client_log_dir}
         log_date_time "./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem" "$log4j_time_format" "${acs_demo_client_log_dir}" "default"
     elif [ $acsClientMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on remote machine ..."
-        #./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem 2>&1 | ts "[$log4j_time_format]" 2>&1 &>> ${acs_demo_client_log_dir}
         log_date_time "./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem" "$log4j_time_format" "${acs_demo_client_log_dir}" "default"
     else 
         echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Invalid acsClientMode"
@@ -372,20 +369,16 @@ active_ACS_Demo_verify () {
         # for Software TPM
         cd "${sym_link_ibmtss}/utils/"
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
-        #${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v 2>&1 | ts "[$log4j_time_format]" 2>&1 &>> ${acs_demo_verify_tpm2bios_log_dir}
         log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
 
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking IMASIG.LOG ..."
-        #${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v 2>&1 | ts "[$log4j_time_format]" 2>&1 &>> ${acs_demo_verify_imasig_log_dir}
         log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
 
         if [ $acsClientMode == 1 ]; then
             # for Local
-            #${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v 2>&1 | ts "[$log4j_time_format]" 2>&1 &>> ${acs_demo_verify_client_log_dir}
             log_date_time "${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
         elif [ $acsClientMode == 2 ]; then
             # for Remote
-            #${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip} 2>&1 | ts "[$log4j_time_format]" 2>&1 &>> ${acs_demo_verify_client_log_dir}
             log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
         else 
             echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Invalid acsClientMode"
