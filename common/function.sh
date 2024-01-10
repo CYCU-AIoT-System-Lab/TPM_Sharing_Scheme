@@ -102,3 +102,18 @@ clear_dir () {
     fi
 }
 echo_notice "common" "function" "Loaded function: clear_dir"
+
+# Function: logging date and time from executable output to file
+# Usage: log_date_time "command to execute" "format" "log file" "method"
+# $1: command to execute
+# $2: date & time format (EX: %Y/%m/%d-%H:%M:%S)
+# $3: log file
+# $4: "default" or "tee"
+log_date_time () {
+    if [ $4 -eq "tee" ]; then
+        $1 2>&1 | ts "[$2]" | tee -a $3 > /dev/null
+    else
+        $1 2>&1 | ts "[$2]" 2>&1 &>> $3
+    fi
+}
+echo_notice "common" "function" "Loaded function: log_date_time"
