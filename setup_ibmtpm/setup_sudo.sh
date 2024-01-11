@@ -21,11 +21,11 @@ tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
 acs_demo_url="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
 acs_demo_server_log_dir="${sym_link_ibmacs}/serverenroll.log4j"
 acs_demo_client_log_dir="${sym_link_ibmacs}/clientenroll.log4j"
-swtpm_bios_log_dir="${sym_link_ibmtss}/utils/tpm2bios.log"
-acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmtss}/utils/b.log4j"
-ima_sig_log_dir="${sym_link_ibmtss}/utils/imasig.log"
-acs_demo_verify_imasig_log_dir="${sym_link_ibmtss}/utils/i.log4j"
-acs_demo_verify_client_log_dir="${sym_link_ibmtss}/utils/client.log4j"
+swtpm_bios_log_dir="${sym_link_ibmacs}/tpm2bios.log"
+acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmacs}/b.log4j"
+ima_sig_log_dir="${sym_link_ibmacs}/imasig.log"
+acs_demo_verify_imasig_log_dir="${sym_link_ibmacs}/i.log4j"
+acs_demo_verify_client_log_dir="${sym_link_ibmacs}/client.log4j"
 
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
@@ -367,7 +367,7 @@ active_ACS_Demo_verify () {
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Ignore when working with Physical TPM"
     elif [ $TPMMode == 2 ]; then
         # for Software TPM
-        cd "${sym_link_ibmtss}/utils/"
+        cd "${sym_link_ibmacs}"
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
         log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
 
