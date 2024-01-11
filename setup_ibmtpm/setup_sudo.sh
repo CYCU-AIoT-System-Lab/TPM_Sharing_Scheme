@@ -362,6 +362,7 @@ active_ACS_Demo_Client () {
 # Active ACS Demo verify
 # Can be run multiple times
 active_ACS_Demo_verify () {
+    cd "${path_ibmacs}/acs"
     if [ $TPMMode == 1 ]; then
         # for Pysical TPM
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Ignore when working with Physical TPM"
