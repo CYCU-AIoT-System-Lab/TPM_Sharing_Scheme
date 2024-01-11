@@ -2,20 +2,7 @@
 
 This directory holdes common utilities for this project.
 
-## Demo Video
-
-| No. | IDate-Time          | Commit                                                                                                                                                      | Detail                                               | Demo Video                     |
-| --- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------ |
-| 1   | 2023/12/08-18:07:19 | [3a1293e33b725dbe6380b257f01aab1899bf61e0](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/3a1293e33b725dbe6380b257f01aab1899bf61e0/common) | Can install and execute ```../socket_com/setup.sh``` | <https://youtu.be/ZcaLBuhwKuw> |
-
-## Directory Structure
-
-| No. | Item                                 | Description                                                 |
-| --- | ------------------------------------ | ----------------------------------------------------------- |
-| 1.  | [```./copy_VM.ps1```](./copy_VM.ps1) | Duplicate VM with minimum setup on Windows 11 PowerShell 7. |
-| 2.  | [```./setup.sh```](./setup.sh)       | Initial environmental setup for all subprojects.            |
-
-## Launch Setup Process in new VM
+## Install Steps
 
 1. In VM terminal, type ```ssh-keygen```, keep pressing ```enter``` till command is finished.
 2. In VM terminal, type ```cat ~/.ssh/id_rsa.pub```, copy all of the output string.
@@ -37,3 +24,24 @@ chmod +x setup.sh
 cd ..
 
 ```
+
+## Adjust Installation Components
+
+Adjust below settings in [config.ini](config.ini).
+
+- ```setup_environment = 1```: Call [setup.sh](../setup_environment/setup.sh) to perform installation.
+- ```setup_ibmtpm = 1```: Call [setup.sh](../ibmtpm/setup.sh) to perform installation.
+- ```setup_socket_com = 1```: Call [setup.sh](../socket_com/setup.sh) to perform installation.
+
+## Demo Video
+
+| No. | IDate-Time          | Commit                                                                                                                                                      | Detail                                               | Demo Video                     |
+| --- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------ |
+| 1   | 2023/12/08-18:07:19 | [3a1293e33b725dbe6380b257f01aab1899bf61e0](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/3a1293e33b725dbe6380b257f01aab1899bf61e0/common) | Can install and execute ```../socket_com/setup.sh``` | <https://youtu.be/ZcaLBuhwKuw> |
+
+## Directory Structure
+
+| No. | Item                                 | Description                                                 |
+| --- | ------------------------------------ | ----------------------------------------------------------- |
+| 1.  | [```./copy_VM.ps1```](./copy_VM.ps1) | Duplicate VM with minimum setup on Windows 11 PowerShell 7. |
+| 2.  | [```./setup.sh```](./setup.sh)       | Initial environmental setup for all subprojects.            |
