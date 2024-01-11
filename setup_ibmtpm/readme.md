@@ -13,7 +13,7 @@ Currently, ACS doesn't support TPM2.0.
 5. [setup_sudo.sh](setup_sudo.sh): Install script approach with sudo privilege, successful.
 6. [setup_sudo_old.sh](setup_sudo_old.sh): Backup of setup_sudo.sh.
 
-## Run some of the functionality of setup.sh
+## Run specific functionalities of setup.sh
 
 1. Adjust [config.ini](config.ini) to your needs.
 2. Execute ```sudo bash setup_sudo.sh```
