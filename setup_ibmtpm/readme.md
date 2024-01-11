@@ -31,10 +31,7 @@ Currently, ACS doesn't support TPM2.0.
 
 ## Possible Bugs
 
-1. Database initialize setting variable error.
-2. ACS demo setting variable error.
-3. ACS demo verification setting variable error.
-4. force_acs_sql_setting might need to be 1.
+- Only tested on Ubuntu 18.04 VM, not on physical machine.
 
 ## Progress Update
 
