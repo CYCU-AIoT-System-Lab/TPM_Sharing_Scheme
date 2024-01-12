@@ -137,4 +137,13 @@ else
     echo_warn "common" "setup" "Invalid Argument: $setup_socket_com ! Skipping setup_socket_com..."
 fi
 
+cd $working_dir
+if [ $setup_optiga -eq 1 ]; then
+    echo_notice "common" "setup" "Running optiga setup..."
+    cd ../setup_optiga
+    bash ./setup.sh
+else
+    echo_warn "common" "setup" "Invalid Argument: $setup_optiga ! Skipping setup_optiga..."
+fi
+
 echo_notice "common" "setup" "All setup complete."

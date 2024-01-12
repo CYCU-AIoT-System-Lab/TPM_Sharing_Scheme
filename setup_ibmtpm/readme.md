@@ -4,7 +4,7 @@ Scripts here is tested on Ubuntu 18.04 VM.
 
 Currently, ACS doesn't support TPM2.0.
 
-## Directory Desdescription
+## Directory Description
 
 1. [config.ini](config.ini): Configuration file for installation.
 2. [readme.md](readme.md): This file.
