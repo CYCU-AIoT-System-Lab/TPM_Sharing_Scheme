@@ -92,7 +92,7 @@ Steps:
     2. If you have no monitor, but don't want to scan IP address,
         1. Connect your Raspberry Pi to a router you can access and can check the IP address of your Raspberry Pi.
         2. Connect your PC to the router, enable hotspot on your PC, and connect your Raspberry Pi to the hotspot. (modify ```SSID``` and ```Password``` in step 4.4.3)
-    3. After getting the IP address, use tools like [VNC Viewer](https://www.realvnc.com/en/connect/download/viewer/), [TigerVNC](https://github.com/TigerVNC/tigervnc), [PuTTY](https://www.putty.org/), or SSH available on all machines.
+    3. After getting the IP address, use tools like [VNC Viewer](https://www.realvnc.com/en/connect/download/viewer/), [TigerVNC](https://github.com/TigerVNC/tigervnc), [PuTTY](https://www.putty.org/), or SSH available on all machines to connect and operate the machine; [WinSCP](https://winscp.net/eng/download.php), or SCP available on all machines to copy files/directories from/to remote.
 7. After desktop is shown on your screen, open ```Terminal``` on your Raspberry Pi, type ```sudo raspi-config```, and enable ```SSH``` and ```SPI``` in ```Interfacing Options```.
 8. In ```Terminal```, type ```sudo apt-get update; sudo apt-get upgrade -y```, then press ```Enter```.
 9. In ```Terminal```, type ```sudo reboot```, then press ```Enter```.
