@@ -15,7 +15,17 @@ All VMs are powered with VMware Workstation 17 Player and the following hardware
 
 ## Ubuntu 18.04 VM
 
-Unfinished
+Steps:
+
+1. Download the Ubuntu 18.04.06 LTS (Bionic Beaver) Desktop image from [ubuntu releases](https://releases.ubuntu.com/18.04/).
+2. Open VMware, click ```Home``` tab, then click ```Create a New Virtual Machine```.
+3. Select ```Installer disc image file (iso)```, browser to the downloaded ISO file in step 1, then click ```Next```.
+4. Type in ```Full name```, ```User name```, and ```Password```, then click ```Next```.
+5. Give the VM a name and specify a location to store the VM, then click ```Next```.
+6. In ```Maximum disk size (GB)```, specify a size for it. Minimum 20 GB is recommended. Select ```Split virtual disk into multiple files```, then click ```Next```.
+7. Click ```Customize Hardware...```, change the settings for ```Memory``` and ```Processors```, click ```Close```, then click ```Finish```.
+8. Go through the ubuntu installation process.
+9. Open ```Terminal```, type ```sudo apt-get update; sudo apt-get upgrade -y; sudo reboot```, then press ```Enter```.
 
 ## Raspbian Bullseye 2022-07-01 5.1 Kernel Debian i386 VM
 
@@ -26,7 +36,7 @@ Refer to following link for original sources:
 
 Steps:
 
-1. Download the only available ISO for Raspberry Pi OS from [Raspberry Pi Desktop for PC and Mac](https://www.raspberrypi.com/software/raspberry-pi-desktop/)
+1. Download the only available ISO for Raspberry Pi OS from [Raspberry Pi Desktop for PC and Mac](https://www.raspberrypi.com/software/raspberry-pi-desktop/).
 2. Open VMware, click ```Home``` tab, then click ```Create a New Virtual Machine```.
 3. Select ```Installer disc image file (iso)```, browser to the downloaded ISO file in step 1, then click ```Next```.
 4. In ```Guest operating system```, select ```Linux```; in ```Version```, select ```Other Linux 5.x kernel```, then click ```Next```.
