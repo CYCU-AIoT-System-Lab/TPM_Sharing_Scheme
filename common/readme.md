@@ -38,10 +38,9 @@ Adjust below settings in [config.ini](config.ini).
 1. [config.ini](config.ini): Configuration file for mutual dependencies installation.
 2. [copy_VM.ps1](copy_VM.ps1): PowerShell script for duplicating VMware VMs.
 3. [function.sh](function.sh): Common bash functions for all subprojects.
-4. [os_setup.md](os_setup.md): Guide to replicate development environment.
-5. [readme.md](readme.md): This file.
-6. [remove.sh](remove.sh): Remove installed components by [setup.sh](setup.sh) besides ones using apt.
-7. [setup.sh](setup.sh): Install mutual dependencies and invoke corresponding installation scripts in other subdirectories.
+4. [readme.md](readme.md): This file.
+5. [remove.sh](remove.sh): Remove installed components by [setup.sh](setup.sh) besides ones using apt.
+6. [setup.sh](setup.sh): Install mutual dependencies and invoke corresponding installation scripts in other subdirectories.
 
 ## Demo Video
 
