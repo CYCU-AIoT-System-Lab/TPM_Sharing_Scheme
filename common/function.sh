@@ -118,3 +118,14 @@ log_date_time () {
     #$1 >| $3
 }
 echo_notice "common" "function" "Loaded function: log_date_time"
+
+# Function: check variable is empty and exit if empty
+# Usage check_var "variable" "exit code"
+# $1: variable
+# $2: exit code
+check_var () {
+    if [ -z "$1+x" ]; then
+        echo_error "common" "function" "Error: $1 is empty" $2
+    fi
+}
+echo_notice "common" "function" "Loaded function: check_var"

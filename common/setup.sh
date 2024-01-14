@@ -6,6 +6,8 @@ sed -i 's@${HOME}@'"$HOME"'@' config.ini
 source "./function.sh"
 parse "./config.ini" "display"
 
+check_var $install_platform 1
+
 # Functions
 
 build_cmake () {
