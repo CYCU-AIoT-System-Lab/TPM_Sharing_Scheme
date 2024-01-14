@@ -134,7 +134,7 @@ cd $working_dir
 if [ $job_setup_ibmtpm -eq 1 ]; then
     echo_notice "common" "setup" "Running ibmtpm setup..."
     cd ../setup_ibmtpm
-    sudo $sudo_gflag bash ./setup_sudo.sh
+    sudo bash ./setup_sudo.sh
 elif [ $job_setup_ibmtpm -eq 2 ]; then
     echo_notice "common" "setup" "Running ibmtpm setup..."
     cd ../setup_ibmtpm
