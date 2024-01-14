@@ -42,7 +42,7 @@ echo_notice "common" "function_common" "Loaded function: load_preset"
 
 clear_preset () {
     echo_notice "common" "function_common" "Clearing preset..."
-    #unset install_platform
+    unset install_platform
     unset cmake_ver
     unset cmake_build
     unset valgrind_ver
