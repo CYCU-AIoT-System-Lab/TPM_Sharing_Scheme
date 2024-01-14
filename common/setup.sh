@@ -108,48 +108,48 @@ echo_notice "common" "setup" "Running common setup..."
 echo_notice "common" "setup" "Current directory: $PWD"
 working_dir=$PWD
 
-if [ $config_install_req       -eq 1 ]; then install_req;       fi
-if [ $config_config_nvim       -eq 1 ]; then config_nvim;       fi
-if [ $config_update_src        -eq 1 ]; then update_src;        fi
-if [ $config_change_all_sh_mod -eq 1 ]; then change_all_sh_mod; fi
-if [ $config_config_apport     -eq 1 ]; then config_apport;     fi
-if [ $config_reload_term       -eq 1 ]; then reload_term;       fi
+if [ $job_install_req       -eq 1 ]; then install_req;       fi
+if [ $job_config_nvim       -eq 1 ]; then config_nvim;       fi
+if [ $job_update_src        -eq 1 ]; then update_src;        fi
+if [ $job_change_all_sh_mod -eq 1 ]; then change_all_sh_mod; fi
+if [ $job_config_apport     -eq 1 ]; then config_apport;     fi
+if [ $job_reload_term       -eq 1 ]; then reload_term;       fi
 
-if [ $setup_environment -eq 1 ]; then
+if [ $job_setup_environment -eq 1 ]; then
     echo_warn "common" "setup" "Running environment setup Not Implemneted Yet!"
 else
-    echo_warn "common" "setup" "Invalid Argument: $setup_environment ! Skipping setup_environment..."
+    echo_warn "common" "setup" "Invalid Argument: $job_setup_environment ! Skipping setup_environment..."
 fi
 
 cd $working_dir
-if [ $setup_ibmtpm -eq 1 ]; then
+if [ $job_setup_ibmtpm -eq 1 ]; then
     echo_notice "common" "setup" "Running ibmtpm setup..."
     cd ../setup_ibmtpm
     sudo bash ./setup_sudo.sh
-elif [ $setup_ibmtpm -eq 2 ]; then
+elif [ $job_setup_ibmtpm -eq 2 ]; then
     echo_notice "common" "setup" "Running ibmtpm setup..."
     cd ../setup_ibmtpm
     bash ./setup.sh
 else
-    echo_warn "common" "setup" "Invalid Argument: $setup_ibmtpm ! Skipping setup_ibmtpm..."
+    echo_warn "common" "setup" "Invalid Argument: $job_setup_ibmtpm ! Skipping setup_ibmtpm..."
 fi
 
 cd $working_dir
-if [ $setup_socket_com -eq 1 ]; then
+if [ $job_socket_com -eq 1 ]; then
     echo_notice "common" "setup" "Running socket_com setup..."
 	cd ../socket_com
 	bash ./setup.sh
 else
-    echo_warn "common" "setup" "Invalid Argument: $setup_socket_com ! Skipping setup_socket_com..."
+    echo_warn "common" "setup" "Invalid Argument: $job_socket_com ! Skipping setup_socket_com..."
 fi
 
 cd $working_dir
-if [ $setup_optiga -eq 1 ]; then
+if [ $job_setup_optiga -eq 1 ]; then
     echo_notice "common" "setup" "Running optiga setup..."
     cd ../setup_optiga
     bash ./setup.sh
 else
-    echo_warn "common" "setup" "Invalid Argument: $setup_optiga ! Skipping setup_optiga..."
+    echo_warn "common" "setup" "Invalid Argument: $job_setup_optiga ! Skipping setup_optiga..."
 fi
 
 echo_notice "common" "setup" "All setup complete."

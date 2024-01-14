@@ -74,6 +74,12 @@ parse () {
             echo_error "common" "function" "Error: $k is empty, Valid config item should be like this: <key> = <value>" 1
             continue
         fi
+        if [ -z "${!k}" ]; then
+            :
+        else
+            echo_warn "common" "function" "Warning: $k is already set, will not overwrite it"
+            continue
+        fi
         #declare "$k"="$v" # This is not working in function
         #readonly "$k"="$v" # Can't be easily unset
         eval "$k"='$v'
