@@ -120,8 +120,7 @@ echo_notice "common" "function" "Loaded function: check_var"
 # check_var is advised to use before this function
 clear_dir () {
     echo "Removing content in $1"
-    cd $1
-    sudo rm -rf *
+    sudo rm -rf "$1/*"
     if [ "$2" == "rmdir" ]; then
         sudo rmdir $1
     fi
