@@ -116,8 +116,8 @@ echo_notice "common" "function" "Loaded function: check_var"
 # Usage: clear_dir "directory"
 # $1: directory to clear content
 # $2: clear this directory too (== "rmdir")
+# check_var is advised to use before this function
 clear_dir () {
-    check_var "1" 1
     echo "Removing content in $1"
     cd $1
     sudo rm -rf *
