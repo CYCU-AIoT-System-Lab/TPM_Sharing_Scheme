@@ -8,8 +8,9 @@
 #
 #check_var install_platform 1
 
+source "./function.sh"
 source "./function_common.sh"
-load_preset "./function.sh" "./config.ini"
+load_preset "./config.ini"
 
 # Functions
 
