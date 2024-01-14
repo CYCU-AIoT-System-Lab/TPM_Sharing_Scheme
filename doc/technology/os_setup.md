@@ -2,7 +2,9 @@
 
 Following is a guide to setup experiment environment on different OS.
 
-All VMs are powered with VMware Workstation 17 Player and the following hardware configuration:
+## Ubuntu 18.04 VM
+
+Ubuntu VMs are powered with VMware Workstation 17 Player and the following hardware configuration:
 
 1. Memory: 16 GB / 16384 MB
 2. Processors: 6
@@ -12,8 +14,6 @@ All VMs are powered with VMware Workstation 17 Player and the following hardware
 6. USB Controller: Default
 7. Sound Card: Default
 8. Display: Default
-
-## Ubuntu 18.04 VM
 
 Steps:
 
@@ -28,6 +28,17 @@ Steps:
 9. Open ```Terminal```, type ```sudo apt-get update; sudo apt-get upgrade -y; sudo reboot```, then press ```Enter```.
 
 ## Raspbian Bullseye 2022-07-01 5.1 Kernel Debian i386 VM
+
+Ubuntu VMs are powered with VMware Workstation 17 Player and the following hardware configuration:
+
+1. Memory: 8 GB / 8192 MB
+2. Processors: 4
+3. Hard Disk: 64 GB
+4. CD/DVD: Default
+5. Network Adapter: Default
+6. USB Controller: Default
+7. Sound Card: Default
+8. Display: Default
 
 Refer to following link for original sources:
 
