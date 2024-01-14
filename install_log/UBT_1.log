@@ -1,0 +1,1881 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.17.1-1ubuntu0.18).
+The following packages were automatically installed and are no longer required:
+  fonts-liberation2 fonts-opensymbol gir1.2-goa-1.0
+  gir1.2-gst-plugins-base-1.0 gir1.2-gstreamer-1.0 gir1.2-gudev-1.0
+  gir1.2-snapd-1 gir1.2-udisks-2.0 grilo-plugins-0.3-base gstreamer1.0-gtk3
+  libboost-date-time1.65.1 libboost-filesystem1.65.1 libboost-iostreams1.65.1
+  libboost-locale1.65.1 libcdr-0.1-1 libclucene-contribs1v5 libclucene-core1v5
+  libcmis-0.5-5v5 libcolamd2 libdazzle-1.0-0 libe-book-0.1-1
+  libedataserverui-1.2-2 libeot0 libepubgen-0.1-1 libetonyek-0.1-1
+  libevent-2.1-6 libexiv2-14 libfreerdp-client2-2 libfreerdp2-2 libgc1c2
+  libgee-0.8-2 libgexiv2-2 libgom-1.0-0 libgpgmepp6 libgpod-common libgpod4
+  liblangtag-common liblangtag1 liblirc-client0 liblua5.3-0 libmediaart-2.0-0
+  libmspub-0.1-1 libodfgen-0.1-1 libqqwing2v5 libraw16 librevenge-0.0-0
+  libsgutils2-2 libssh-4 libsuitesparseconfig5 libvncclient1 libwinpr2-2
+  libxapian30 libxmlsec1-nss lp-solve media-player-info python3-mako
+  python3-markupsafe syslinux syslinux-common syslinux-legacy
+  usb-creator-common
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be REMOVED:
+  fonts-liberation2 fonts-opensymbol gir1.2-goa-1.0
+  gir1.2-gst-plugins-base-1.0 gir1.2-gstreamer-1.0 gir1.2-gudev-1.0
+  gir1.2-snapd-1 gir1.2-udisks-2.0 grilo-plugins-0.3-base gstreamer1.0-gtk3
+  libboost-date-time1.65.1 libboost-filesystem1.65.1 libboost-iostreams1.65.1
+  libboost-locale1.65.1 libcdr-0.1-1 libclucene-contribs1v5 libclucene-core1v5
+  libcmis-0.5-5v5 libcolamd2 libdazzle-1.0-0 libe-book-0.1-1
+  libedataserverui-1.2-2 libeot0 libepubgen-0.1-1 libetonyek-0.1-1
+  libevent-2.1-6 libexiv2-14 libfreerdp-client2-2 libfreerdp2-2 libgc1c2
+  libgee-0.8-2 libgexiv2-2 libgom-1.0-0 libgpgmepp6 libgpod-common libgpod4
+  liblangtag-common liblangtag1 liblirc-client0 liblua5.3-0 libmediaart-2.0-0
+  libmspub-0.1-1 libodfgen-0.1-1 libqqwing2v5 libraw16 librevenge-0.0-0
+  libsgutils2-2 libssh-4 libsuitesparseconfig5 libvncclient1 libwinpr2-2
+  libxapian30 libxmlsec1-nss lp-solve media-player-info python3-mako
+  python3-markupsafe syslinux syslinux-common syslinux-legacy
+  usb-creator-common
+0 upgraded, 0 newly installed, 61 to remove and 1 not upgraded.
+After this operation, 44.7 MB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 152318 files and directories currently installed.)
+Removing fonts-liberation2 (2.00.1-7~18.04.2) ...
+Removing fonts-opensymbol (2:102.10+LibO6.0.7-0ubuntu0.18.04.13) ...
+Removing gir1.2-goa-1.0:amd64 (3.28.0-0ubuntu2.1) ...
+Removing gir1.2-gst-plugins-base-1.0:amd64 (1.14.5-0ubuntu1~18.04.3) ...
+Removing gir1.2-gstreamer-1.0:amd64 (1.14.5-0ubuntu1~18.04.2) ...
+Removing gir1.2-gudev-1.0:amd64 (1:232-2) ...
+Removing gir1.2-snapd-1:amd64 (1.58-0ubuntu0.18.04.0) ...
+Removing usb-creator-common (0.3.5ubuntu18.04.2) ...
+Removing gir1.2-udisks-2.0:amd64 (2.7.6-3ubuntu0.2) ...
+Removing grilo-plugins-0.3-base:amd64 (0.3.5-1ubuntu1) ...
+Removing gstreamer1.0-gtk3:amd64 (1.14.5-0ubuntu1~18.04.3) ...
+Removing libcmis-0.5-5v5 (0.5.1+git20160603-3build2) ...
+Removing libboost-date-time1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+Removing libboost-filesystem1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+Removing libboost-iostreams1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+Removing libboost-locale1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+Removing libcdr-0.1-1:amd64 (0.1.4-1build1) ...
+Removing libclucene-contribs1v5:amd64 (2.3.3.4+dfsg-1) ...
+Removing libclucene-core1v5:amd64 (2.3.3.4+dfsg-1) ...
+Removing lp-solve (5.5.0.15-4build1) ...
+Removing libcolamd2:amd64 (1:5.1.2-2) ...
+Removing libdazzle-1.0-0:amd64 (3.28.1-1) ...
+Removing libe-book-0.1-1:amd64 (0.1.3-1) ...
+Removing libedataserverui-1.2-2:amd64 (3.28.5-0ubuntu0.18.04.3) ...
+Removing libeot0:amd64 (0.01-5) ...
+Removing libepubgen-0.1-1:amd64 (0.1.0-2ubuntu1) ...
+Removing libetonyek-0.1-1:amd64 (0.1.7-3) ...
+Removing libevent-2.1-6:amd64 (2.1.8-stable-4build1) ...
+Removing libgexiv2-2:amd64 (0.10.8-1) ...
+Removing libexiv2-14:amd64 (0.25-3.1ubuntu0.18.04.11) ...
+Removing libfreerdp-client2-2:amd64 (2.2.0+dfsg1-0ubuntu0.18.04.4) ...
+Removing libfreerdp2-2:amd64 (2.2.0+dfsg1-0ubuntu0.18.04.4) ...
+Removing libgc1c2:amd64 (1:7.4.2-8ubuntu1) ...
+Removing libgee-0.8-2:amd64 (0.20.1-1) ...
+Removing libgom-1.0-0:amd64 (0.3.3-4) ...
+Removing libgpgmepp6:amd64 (1.10.0-1ubuntu2) ...
+Removing libgpod-common (0.8.3-11) ...
+Removing libgpod4:amd64 (0.8.3-11) ...
+Removing liblangtag1:amd64 (0.6.2-1) ...
+Removing liblangtag-common (0.6.2-1) ...
+Removing liblirc-client0:amd64 (0.10.0-2) ...
+Removing liblua5.3-0:amd64 (5.3.3-1ubuntu0.18.04.1) ...
+Removing libmediaart-2.0-0:amd64 (1.9.4-1) ...
+Removing libmspub-0.1-1:amd64 (0.1.4-1) ...
+Removing libodfgen-0.1-1:amd64 (0.1.6-2) ...
+Removing libqqwing2v5:amd64 (1.3.4-1.1) ...
+Removing libraw16:amd64 (0.18.8-1ubuntu0.4) ...
+Removing librevenge-0.0-0:amd64 (0.0.4-6ubuntu2) ...
+Removing libsgutils2-2 (1.42-2ubuntu1.18.04.2) ...
+Removing libssh-4:amd64 (0.8.0~20170825.94fa1e38-1ubuntu0.7) ...
+Removing libsuitesparseconfig5:amd64 (1:5.1.2-2) ...
+Removing libvncclient1:amd64 (0.9.11+dfsg-1ubuntu1.4) ...
+Removing libwinpr2-2:amd64 (2.2.0+dfsg1-0ubuntu0.18.04.4) ...
+Removing libxapian30:amd64 (1.4.5-1ubuntu0.1) ...
+Removing libxmlsec1-nss:amd64 (1.2.25-1build1) ...
+Removing media-player-info (23-1) ...
+Removing python3-mako (1.0.7+ds1-1ubuntu0.2) ...
+Removing python3-markupsafe (1.0-1build1) ...
+Removing syslinux (3:6.03+dfsg1-2) ...
+Removing syslinux-common (3:6.03+dfsg1-2) ...
+Removing syslinux-legacy (2:3.63+dfsg-2ubuntu9) ...
+Processing triggers for udev (237-3ubuntu10.57) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for dbus (1.12.2-1ubuntu1.4) ...
+Processing triggers for fontconfig (2.12.6-0ubuntu2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
+[1m[34m[NOTICE-common/function][0m Loaded and Activated function: load_special_chars
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_notice
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_warn
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_error
+[1m[34m[NOTICE-common/function][0m Loaded function: parse
+[1m[34m[NOTICE-common/function][0m Loaded function: clear_dir
+[1m[34m[NOTICE-common/function][0m Loaded function: log_date_time
+Loaded config item: install_platform = 1
+Loaded config item: cmake_ver = 3.18
+Loaded config item: cmake_build = 4
+Loaded config item: valgrind_ver = 3.22.0
+Loaded config item: nvim_config_url = https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim
+Loaded config item: nvim_dir = /home/user/.config/nvim
+Loaded config item: apport_dir = /home/user/.config/apport
+Loaded config item: cmake_dir = /home/user/Documents/cmake
+Loaded config item: valgrind_dir = /home/user/Documents/valgrind
+Loaded config item: wget_gflag = -q --show-progress
+Loaded config item: make_gflag = -s
+Loaded config item: sudo_gflag = -E
+Loaded config item: apt_gflag = -q
+Loaded config item: config_install_req = 1
+Loaded config item: config_config_nvim = 1
+Loaded config item: config_update_src = 1
+Loaded config item: config_change_all_sh_mod = 1
+Loaded config item: config_config_apport = 1
+Loaded config item: config_reload_term = 1
+Loaded config item: setup_environment = 0
+Loaded config item: setup_ibmtpm = 1
+Loaded config item: setup_socket_com = 0
+Loaded config item: setup_optiga = 0
+[1m[34m[NOTICE-common/function][0m Loaded [1m[32m23[0m config items from [1m[32m./config.ini[0m
+[1m[34m[NOTICE-common/setup][0m Running common setup...
+[1m[34m[NOTICE-common/setup][0m Current directory: /home/user/TPM_Sharing_Scheme/common
+[1m[34m[NOTICE-common/setup][0m Installing required packages...
+Hit:1 http://us.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://us.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:3 http://us.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu bionic-security InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+The following packages have been kept back:
+  ubuntu-advantage-tools
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mgit[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.17.1-1ubuntu0.18).
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mhtop[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  htop
+0 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 80.0 kB of archives.
+After this operation, 221 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 htop amd64 2.1.0-3 [80.0 kB]
+Fetched 80.0 kB in 9s (8,731 B/s)
+Selecting previously unselected package htop.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 151303 files and directories currently installed.)
+Preparing to unpack .../htop_2.1.0-3_amd64.deb ...
+Unpacking htop (2.1.0-3) ...
+Setting up htop (2.1.0-3) ...
+Processing triggers for desktop-file-utils (0.23-1ubuntu3.18.04.2) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for gnome-menus (3.13.3-11ubuntu1.1) ...
+Processing triggers for mime-support (3.60ubuntu1) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32miftop[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  iftop
+0 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 36.0 kB of archives.
+After this operation, 91.1 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 iftop amd64 1.0~pre4-4 [36.0 kB]
+Fetched 36.0 kB in 6s (5,598 B/s)
+Selecting previously unselected package iftop.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 151312 files and directories currently installed.)
+Preparing to unpack .../iftop_1.0~pre4-4_amd64.deb ...
+Unpacking iftop (1.0~pre4-4) ...
+Setting up iftop (1.0~pre4-4) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mcurl[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libcurl4
+The following NEW packages will be installed:
+  curl libcurl4
+0 upgraded, 2 newly installed, 0 to remove and 1 not upgraded.
+Need to get 379 kB of archives.
+After this operation, 1,059 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libcurl4 amd64 7.58.0-2ubuntu3.24 [221 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 curl amd64 7.58.0-2ubuntu3.24 [159 kB]
+Fetched 379 kB in 4s (88.8 kB/s)
+Selecting previously unselected package libcurl4:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 151318 files and directories currently installed.)
+Preparing to unpack .../libcurl4_7.58.0-2ubuntu3.24_amd64.deb ...
+Unpacking libcurl4:amd64 (7.58.0-2ubuntu3.24) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../curl_7.58.0-2ubuntu3.24_amd64.deb ...
+Unpacking curl (7.58.0-2ubuntu3.24) ...
+Setting up libcurl4:amd64 (7.58.0-2ubuntu3.24) ...
+Setting up curl (7.58.0-2ubuntu3.24) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mwget[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+wget is already the newest version (1.19.4-1ubuntu2.2).
+wget set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mnet-tools[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  net-tools
+0 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 194 kB of archives.
+After this operation, 803 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 net-tools amd64 1.60+git20161116.90da8a0-1ubuntu1 [194 kB]
+Fetched 194 kB in 4s (46.0 kB/s)
+Selecting previously unselected package net-tools.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 151331 files and directories currently installed.)
+Preparing to unpack .../net-tools_1.60+git20161116.90da8a0-1ubuntu1_amd64.deb ...
+Unpacking net-tools (1.60+git20161116.90da8a0-1ubuntu1) ...
+Setting up net-tools (1.60+git20161116.90da8a0-1ubuntu1) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mneovim[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  javascript-common libjemalloc1 libjs-jquery libjs-sphinxdoc libjs-underscore
+  libluajit-5.1-2 libluajit-5.1-common libmsgpackc2 libpython-stdlib
+  libtermkey1 libunibilium4 libuv1 libvterm0 neovim-runtime python
+  python-concurrent.futures python-greenlet python-minimal python-msgpack
+  python-neovim python-six python-trollius python2.7 python2.7-minimal
+  python3-greenlet python3-msgpack python3-neovim xsel
+Suggested packages:
+  apache2 | lighttpd | httpd ctags vim-scripts python-doc python-tk
+  python-greenlet-doc python-greenlet-dev python-greenlet-dbg python2.7-doc
+  binfmt-support python3-greenlet-dbg
+The following NEW packages will be installed:
+  javascript-common libjemalloc1 libjs-jquery libjs-sphinxdoc libjs-underscore
+  libluajit-5.1-2 libluajit-5.1-common libmsgpackc2 libpython-stdlib
+  libtermkey1 libunibilium4 libuv1 libvterm0 neovim neovim-runtime python
+  python-concurrent.futures python-greenlet python-minimal python-msgpack
+  python-neovim python-six python-trollius python2.7 python2.7-minimal
+  python3-greenlet python3-msgpack python3-neovim xsel
+0 upgraded, 29 newly installed, 0 to remove and 1 not upgraded.
+Need to get 7,012 kB of archives.
+After this operation, 28.9 MB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 python2.7-minimal amd64 2.7.17-1~18.04ubuntu1.11 [1,294 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 python-minimal amd64 2.7.15~rc1-1 [28.1 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 python2.7 amd64 2.7.17-1~18.04ubuntu1.11 [248 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libpython-stdlib amd64 2.7.15~rc1-1 [7,620 B]
+Get:5 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 python amd64 2.7.15~rc1-1 [140 kB]
+Get:6 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 javascript-common all 11 [6,066 B]
+Get:7 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libjs-jquery all 3.2.1-1 [152 kB]
+Get:8 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libjs-underscore all 1.8.3~dfsg-1ubuntu0.1 [60.4 kB]
+Get:9 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libjs-sphinxdoc all 1.6.7-1ubuntu1 [85.6 kB]
+Get:10 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 libluajit-5.1-common all 2.1.0~beta3+dfsg-5.1 [44.3 kB]
+Get:11 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 libluajit-5.1-2 amd64 2.1.0~beta3+dfsg-5.1 [227 kB]
+Get:12 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 libunibilium4 amd64 2.0.0-2 [22.2 kB]
+Get:13 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libuv1 amd64 1.18.0-3 [64.4 kB]
+Get:14 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 python-concurrent.futures all 3.2.0-1 [34.2 kB]
+Get:15 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 python-msgpack amd64 0.5.6-1 [73.5 kB]
+Get:16 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 python-greenlet amd64 0.4.12-2 [18.0 kB]
+Get:17 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 python-six all 1.11.0-2 [11.3 kB]
+Get:18 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 python-trollius all 2.1~b1-5 [83.9 kB]
+Get:19 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 python-neovim all 0.2.0-1 [28.9 kB]
+Get:20 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 python3-msgpack amd64 0.5.6-1 [73.5 kB]
+Get:21 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 python3-greenlet amd64 0.4.12-2 [15.2 kB]
+Get:22 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 python3-neovim all 0.2.0-1 [29.0 kB]
+Get:23 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 xsel amd64 1.2.0-4 [19.0 kB]
+Get:24 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 libjemalloc1 amd64 3.6.0-11 [82.4 kB]
+Get:25 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 libmsgpackc2 amd64 2.1.5-1 [14.3 kB]
+Get:26 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 libtermkey1 amd64 0.20-3 [18.4 kB]
+Get:27 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 libvterm0 amd64 0~bzr715-1 [28.3 kB]
+Get:28 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 neovim-runtime all 0.2.2-3 [3,047 kB]
+Get:29 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 neovim amd64 0.2.2-3 [1,056 kB]
+Fetched 7,012 kB in 47s (151 kB/s)
+Selecting previously unselected package python2.7-minimal.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 151379 files and directories currently installed.)
+Preparing to unpack .../python2.7-minimal_2.7.17-1~18.04ubuntu1.11_amd64.deb ...
+Unpacking python2.7-minimal (2.7.17-1~18.04ubuntu1.11) ...
+Selecting previously unselected package python-minimal.
+Preparing to unpack .../python-minimal_2.7.15~rc1-1_amd64.deb ...
+Unpacking python-minimal (2.7.15~rc1-1) ...
+Selecting previously unselected package python2.7.
+Preparing to unpack .../python2.7_2.7.17-1~18.04ubuntu1.11_amd64.deb ...
+Unpacking python2.7 (2.7.17-1~18.04ubuntu1.11) ...
+Selecting previously unselected package libpython-stdlib:amd64.
+Preparing to unpack .../libpython-stdlib_2.7.15~rc1-1_amd64.deb ...
+Unpacking libpython-stdlib:amd64 (2.7.15~rc1-1) ...
+Setting up python2.7-minimal (2.7.17-1~18.04ubuntu1.11) ...
+Linking and byte-compiling packages for runtime python2.7...
+Setting up python-minimal (2.7.15~rc1-1) ...
+Selecting previously unselected package python.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 151436 files and directories currently installed.)
+Preparing to unpack .../00-python_2.7.15~rc1-1_amd64.deb ...
+Unpacking python (2.7.15~rc1-1) ...
+Selecting previously unselected package javascript-common.
+Preparing to unpack .../01-javascript-common_11_all.deb ...
+Unpacking javascript-common (11) ...
+Selecting previously unselected package libjs-jquery.
+Preparing to unpack .../02-libjs-jquery_3.2.1-1_all.deb ...
+Unpacking libjs-jquery (3.2.1-1) ...
+Selecting previously unselected package libjs-underscore.
+Preparing to unpack .../03-libjs-underscore_1.8.3~dfsg-1ubuntu0.1_all.deb ...
+Unpacking libjs-underscore (1.8.3~dfsg-1ubuntu0.1) ...
+Selecting previously unselected package libjs-sphinxdoc.
+Preparing to unpack .../04-libjs-sphinxdoc_1.6.7-1ubuntu1_all.deb ...
+Unpacking libjs-sphinxdoc (1.6.7-1ubuntu1) ...
+Selecting previously unselected package libluajit-5.1-common.
+Preparing to unpack .../05-libluajit-5.1-common_2.1.0~beta3+dfsg-5.1_all.deb ...
+Unpacking libluajit-5.1-common (2.1.0~beta3+dfsg-5.1) ...
+Selecting previously unselected package libluajit-5.1-2:amd64.
+Preparing to unpack .../06-libluajit-5.1-2_2.1.0~beta3+dfsg-5.1_amd64.deb ...
+Unpacking libluajit-5.1-2:amd64 (2.1.0~beta3+dfsg-5.1) ...
+Selecting previously unselected package libunibilium4:amd64.
+Preparing to unpack .../07-libunibilium4_2.0.0-2_amd64.deb ...
+Unpacking libunibilium4:amd64 (2.0.0-2) ...
+Selecting previously unselected package libuv1:amd64.
+Preparing to unpack .../08-libuv1_1.18.0-3_amd64.deb ...
+Unpacking libuv1:amd64 (1.18.0-3) ...
+Selecting previously unselected package python-concurrent.futures.
+Preparing to unpack .../09-python-concurrent.futures_3.2.0-1_all.deb ...
+Unpacking python-concurrent.futures (3.2.0-1) ...
+Selecting previously unselected package python-msgpack.
+Preparing to unpack .../10-python-msgpack_0.5.6-1_amd64.deb ...
+Unpacking python-msgpack (0.5.6-1) ...
+Selecting previously unselected package python-greenlet.
+Preparing to unpack .../11-python-greenlet_0.4.12-2_amd64.deb ...
+Unpacking python-greenlet (0.4.12-2) ...
+Selecting previously unselected package python-six.
+Preparing to unpack .../12-python-six_1.11.0-2_all.deb ...
+Unpacking python-six (1.11.0-2) ...
+Selecting previously unselected package python-trollius.
+Preparing to unpack .../13-python-trollius_2.1~b1-5_all.deb ...
+Unpacking python-trollius (2.1~b1-5) ...
+Selecting previously unselected package python-neovim.
+Preparing to unpack .../14-python-neovim_0.2.0-1_all.deb ...
+Unpacking python-neovim (0.2.0-1) ...
+Selecting previously unselected package python3-msgpack.
+Preparing to unpack .../15-python3-msgpack_0.5.6-1_amd64.deb ...
+Unpacking python3-msgpack (0.5.6-1) ...
+Selecting previously unselected package python3-greenlet.
+Preparing to unpack .../16-python3-greenlet_0.4.12-2_amd64.deb ...
+Unpacking python3-greenlet (0.4.12-2) ...
+Selecting previously unselected package python3-neovim.
+Preparing to unpack .../17-python3-neovim_0.2.0-1_all.deb ...
+Unpacking python3-neovim (0.2.0-1) ...
+Selecting previously unselected package xsel.
+Preparing to unpack .../18-xsel_1.2.0-4_amd64.deb ...
+Unpacking xsel (1.2.0-4) ...
+Selecting previously unselected package libjemalloc1.
+Preparing to unpack .../19-libjemalloc1_3.6.0-11_amd64.deb ...
+Unpacking libjemalloc1 (3.6.0-11) ...
+Selecting previously unselected package libmsgpackc2:amd64.
+Preparing to unpack .../20-libmsgpackc2_2.1.5-1_amd64.deb ...
+Unpacking libmsgpackc2:amd64 (2.1.5-1) ...
+Selecting previously unselected package libtermkey1:amd64.
+Preparing to unpack .../21-libtermkey1_0.20-3_amd64.deb ...
+Unpacking libtermkey1:amd64 (0.20-3) ...
+Selecting previously unselected package libvterm0:amd64.
+Preparing to unpack .../22-libvterm0_0~bzr715-1_amd64.deb ...
+Unpacking libvterm0:amd64 (0~bzr715-1) ...
+Selecting previously unselected package neovim-runtime.
+Preparing to unpack .../23-neovim-runtime_0.2.2-3_all.deb ...
+Unpacking neovim-runtime (0.2.2-3) ...
+Selecting previously unselected package neovim.
+Preparing to unpack .../24-neovim_0.2.2-3_amd64.deb ...
+Unpacking neovim (0.2.2-3) ...
+Setting up libjs-jquery (3.2.1-1) ...
+Setting up libluajit-5.1-common (2.1.0~beta3+dfsg-5.1) ...
+Setting up libjs-underscore (1.8.3~dfsg-1ubuntu0.1) ...
+Setting up python3-greenlet (0.4.12-2) ...
+Setting up libjemalloc1 (3.6.0-11) ...
+Setting up neovim-runtime (0.2.2-3) ...
+Setting up libuv1:amd64 (1.18.0-3) ...
+Setting up libunibilium4:amd64 (2.0.0-2) ...
+Setting up python3-msgpack (0.5.6-1) ...
+Setting up libtermkey1:amd64 (0.20-3) ...
+Setting up python2.7 (2.7.17-1~18.04ubuntu1.11) ...
+Setting up libjs-sphinxdoc (1.6.7-1ubuntu1) ...
+Setting up libpython-stdlib:amd64 (2.7.15~rc1-1) ...
+Setting up libvterm0:amd64 (0~bzr715-1) ...
+Setting up libluajit-5.1-2:amd64 (2.1.0~beta3+dfsg-5.1) ...
+Setting up xsel (1.2.0-4) ...
+Setting up javascript-common (11) ...
+Setting up python3-neovim (0.2.0-1) ...
+Setting up libmsgpackc2:amd64 (2.1.5-1) ...
+Setting up python (2.7.15~rc1-1) ...
+Setting up python-msgpack (0.5.6-1) ...
+Setting up python-six (1.11.0-2) ...
+Setting up neovim (0.2.2-3) ...
+update-alternatives: using /usr/bin/ex.nvim to provide /usr/bin/ex (ex) in auto mode
+update-alternatives: using /usr/bin/rvim.nvim to provide /usr/bin/rvim (rvim) in auto mode
+update-alternatives: using /usr/bin/rview.nvim to provide /usr/bin/rview (rview) in auto mode
+update-alternatives: using /usr/bin/nvim to provide /usr/bin/vi (vi) in auto mode
+update-alternatives: using /usr/bin/nvim to provide /usr/bin/vim (vim) in auto mode
+update-alternatives: using /usr/bin/view.nvim to provide /usr/bin/view (view) in auto mode
+update-alternatives: using /usr/bin/vimdiff.nvim to provide /usr/bin/vimdiff (vimdiff) in auto mode
+Setting up python-greenlet (0.4.12-2) ...
+Setting up python-concurrent.futures (3.2.0-1) ...
+Setting up python-trollius (2.1~b1-5) ...
+Setting up python-neovim (0.2.0-1) ...
+Processing triggers for desktop-file-utils (0.23-1ubuntu3.18.04.2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for gnome-menus (3.13.3-11ubuntu1.1) ...
+Processing triggers for mime-support (3.60ubuntu1) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mbuild-essential[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  dpkg-dev fakeroot g++ g++-7 gcc gcc-7 libalgorithm-diff-perl
+  libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan4 libatomic1
+  libc-dev-bin libc6-dev libcilkrts5 libfakeroot libgcc-7-dev libitm1 liblsan0
+  libmpx2 libquadmath0 libstdc++-7-dev libtsan0 libubsan0 linux-libc-dev make
+  manpages-dev
+Suggested packages:
+  debian-keyring g++-multilib g++-7-multilib gcc-7-doc libstdc++6-7-dbg
+  gcc-multilib autoconf automake libtool flex bison gcc-doc gcc-7-multilib
+  gcc-7-locales libgcc1-dbg libgomp1-dbg libitm1-dbg libatomic1-dbg
+  libasan4-dbg liblsan0-dbg libtsan0-dbg libubsan0-dbg libcilkrts5-dbg
+  libmpx2-dbg libquadmath0-dbg glibc-doc libstdc++-7-doc make-doc
+The following NEW packages will be installed:
+  build-essential dpkg-dev fakeroot g++ g++-7 gcc gcc-7 libalgorithm-diff-perl
+  libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan4 libatomic1
+  libc-dev-bin libc6-dev libcilkrts5 libfakeroot libgcc-7-dev libitm1 liblsan0
+  libmpx2 libquadmath0 libstdc++-7-dev libtsan0 libubsan0 linux-libc-dev make
+  manpages-dev
+0 upgraded, 27 newly installed, 0 to remove and 1 not upgraded.
+Need to get 30.8 MB of archives.
+After this operation, 121 MB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libc-dev-bin amd64 2.27-3ubuntu1.6 [71.9 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 linux-libc-dev amd64 4.15.0-213.224 [983 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libc6-dev amd64 2.27-3ubuntu1.6 [2,587 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libitm1 amd64 8.4.0-1ubuntu1~18.04 [27.9 kB]
+Get:5 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libatomic1 amd64 8.4.0-1ubuntu1~18.04 [9,192 B]
+Get:6 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libasan4 amd64 7.5.0-3ubuntu1~18.04 [358 kB]
+Get:7 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 liblsan0 amd64 8.4.0-1ubuntu1~18.04 [133 kB]
+Get:8 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libtsan0 amd64 8.4.0-1ubuntu1~18.04 [288 kB]
+Get:9 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libubsan0 amd64 7.5.0-3ubuntu1~18.04 [126 kB]
+Get:10 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libcilkrts5 amd64 7.5.0-3ubuntu1~18.04 [42.5 kB]
+Get:11 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libmpx2 amd64 8.4.0-1ubuntu1~18.04 [11.6 kB]
+Get:12 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libquadmath0 amd64 8.4.0-1ubuntu1~18.04 [134 kB]
+Get:13 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libgcc-7-dev amd64 7.5.0-3ubuntu1~18.04 [2,378 kB]
+Get:14 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 gcc-7 amd64 7.5.0-3ubuntu1~18.04 [9,381 kB]
+Get:15 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 gcc amd64 4:7.4.0-1ubuntu2.3 [5,184 B]
+Get:16 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libstdc++-7-dev amd64 7.5.0-3ubuntu1~18.04 [1,471 kB]
+Get:17 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 g++-7 amd64 7.5.0-3ubuntu1~18.04 [9,697 kB]
+Get:18 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 g++ amd64 4:7.4.0-1ubuntu2.3 [1,568 B]
+Get:19 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 make amd64 4.1-9.1ubuntu1 [154 kB]
+Get:20 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 dpkg-dev all 1.19.0.5ubuntu2.4 [607 kB]
+Get:21 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 build-essential amd64 12.4ubuntu1 [4,758 B]
+Get:22 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libfakeroot amd64 1.22-2ubuntu1 [25.9 kB]
+Get:23 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 fakeroot amd64 1.22-2ubuntu1 [62.3 kB]
+Get:24 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libalgorithm-diff-perl all 1.19.03-1 [47.6 kB]
+Get:25 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libalgorithm-diff-xs-perl amd64 0.04-5 [11.1 kB]
+Get:26 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libalgorithm-merge-perl all 0.08-3 [12.0 kB]
+Get:27 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 manpages-dev all 4.15-1 [2,217 kB]
+Fetched 30.8 MB in 49s (624 kB/s)
+Selecting previously unselected package libc-dev-bin.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 153249 files and directories currently installed.)
+Preparing to unpack .../00-libc-dev-bin_2.27-3ubuntu1.6_amd64.deb ...
+Unpacking libc-dev-bin (2.27-3ubuntu1.6) ...
+Selecting previously unselected package linux-libc-dev:amd64.
+Preparing to unpack .../01-linux-libc-dev_4.15.0-213.224_amd64.deb ...
+Unpacking linux-libc-dev:amd64 (4.15.0-213.224) ...
+Selecting previously unselected package libc6-dev:amd64.
+Preparing to unpack .../02-libc6-dev_2.27-3ubuntu1.6_amd64.deb ...
+Unpacking libc6-dev:amd64 (2.27-3ubuntu1.6) ...
+Selecting previously unselected package libitm1:amd64.
+Preparing to unpack .../03-libitm1_8.4.0-1ubuntu1~18.04_amd64.deb ...
+Unpacking libitm1:amd64 (8.4.0-1ubuntu1~18.04) ...
+Selecting previously unselected package libatomic1:amd64.
+Preparing to unpack .../04-libatomic1_8.4.0-1ubuntu1~18.04_amd64.deb ...
+Unpacking libatomic1:amd64 (8.4.0-1ubuntu1~18.04) ...
+Selecting previously unselected package libasan4:amd64.
+Preparing to unpack .../05-libasan4_7.5.0-3ubuntu1~18.04_amd64.deb ...
+Unpacking libasan4:amd64 (7.5.0-3ubuntu1~18.04) ...
+Selecting previously unselected package liblsan0:amd64.
+Preparing to unpack .../06-liblsan0_8.4.0-1ubuntu1~18.04_amd64.deb ...
+Unpacking liblsan0:amd64 (8.4.0-1ubuntu1~18.04) ...
+Selecting previously unselected package libtsan0:amd64.
+Preparing to unpack .../07-libtsan0_8.4.0-1ubuntu1~18.04_amd64.deb ...
+Unpacking libtsan0:amd64 (8.4.0-1ubuntu1~18.04) ...
+Selecting previously unselected package libubsan0:amd64.
+Preparing to unpack .../08-libubsan0_7.5.0-3ubuntu1~18.04_amd64.deb ...
+Unpacking libubsan0:amd64 (7.5.0-3ubuntu1~18.04) ...
+Selecting previously unselected package libcilkrts5:amd64.
+Preparing to unpack .../09-libcilkrts5_7.5.0-3ubuntu1~18.04_amd64.deb ...
+Unpacking libcilkrts5:amd64 (7.5.0-3ubuntu1~18.04) ...
+Selecting previously unselected package libmpx2:amd64.
+Preparing to unpack .../10-libmpx2_8.4.0-1ubuntu1~18.04_amd64.deb ...
+Unpacking libmpx2:amd64 (8.4.0-1ubuntu1~18.04) ...
+Selecting previously unselected package libquadmath0:amd64.
+Preparing to unpack .../11-libquadmath0_8.4.0-1ubuntu1~18.04_amd64.deb ...
+Unpacking libquadmath0:amd64 (8.4.0-1ubuntu1~18.04) ...
+Selecting previously unselected package libgcc-7-dev:amd64.
+Preparing to unpack .../12-libgcc-7-dev_7.5.0-3ubuntu1~18.04_amd64.deb ...
+Unpacking libgcc-7-dev:amd64 (7.5.0-3ubuntu1~18.04) ...
+Selecting previously unselected package gcc-7.
+Preparing to unpack .../13-gcc-7_7.5.0-3ubuntu1~18.04_amd64.deb ...
+Unpacking gcc-7 (7.5.0-3ubuntu1~18.04) ...
+Selecting previously unselected package gcc.
+Preparing to unpack .../14-gcc_4%3a7.4.0-1ubuntu2.3_amd64.deb ...
+Unpacking gcc (4:7.4.0-1ubuntu2.3) ...
+Selecting previously unselected package libstdc++-7-dev:amd64.
+Preparing to unpack .../15-libstdc++-7-dev_7.5.0-3ubuntu1~18.04_amd64.deb ...
+Unpacking libstdc++-7-dev:amd64 (7.5.0-3ubuntu1~18.04) ...
+Selecting previously unselected package g++-7.
+Preparing to unpack .../16-g++-7_7.5.0-3ubuntu1~18.04_amd64.deb ...
+Unpacking g++-7 (7.5.0-3ubuntu1~18.04) ...
+Selecting previously unselected package g++.
+Preparing to unpack .../17-g++_4%3a7.4.0-1ubuntu2.3_amd64.deb ...
+Unpacking g++ (4:7.4.0-1ubuntu2.3) ...
+Selecting previously unselected package make.
+Preparing to unpack .../18-make_4.1-9.1ubuntu1_amd64.deb ...
+Unpacking make (4.1-9.1ubuntu1) ...
+Selecting previously unselected package dpkg-dev.
+Preparing to unpack .../19-dpkg-dev_1.19.0.5ubuntu2.4_all.deb ...
+Unpacking dpkg-dev (1.19.0.5ubuntu2.4) ...
+Selecting previously unselected package build-essential.
+Preparing to unpack .../20-build-essential_12.4ubuntu1_amd64.deb ...
+Unpacking build-essential (12.4ubuntu1) ...
+Selecting previously unselected package libfakeroot:amd64.
+Preparing to unpack .../21-libfakeroot_1.22-2ubuntu1_amd64.deb ...
+Unpacking libfakeroot:amd64 (1.22-2ubuntu1) ...
+Selecting previously unselected package fakeroot.
+Preparing to unpack .../22-fakeroot_1.22-2ubuntu1_amd64.deb ...
+Unpacking fakeroot (1.22-2ubuntu1) ...
+Selecting previously unselected package libalgorithm-diff-perl.
+Preparing to unpack .../23-libalgorithm-diff-perl_1.19.03-1_all.deb ...
+Unpacking libalgorithm-diff-perl (1.19.03-1) ...
+Selecting previously unselected package libalgorithm-diff-xs-perl.
+Preparing to unpack .../24-libalgorithm-diff-xs-perl_0.04-5_amd64.deb ...
+Unpacking libalgorithm-diff-xs-perl (0.04-5) ...
+Selecting previously unselected package libalgorithm-merge-perl.
+Preparing to unpack .../25-libalgorithm-merge-perl_0.08-3_all.deb ...
+Unpacking libalgorithm-merge-perl (0.08-3) ...
+Selecting previously unselected package manpages-dev.
+Preparing to unpack .../26-manpages-dev_4.15-1_all.deb ...
+Unpacking manpages-dev (4.15-1) ...
+Setting up libquadmath0:amd64 (8.4.0-1ubuntu1~18.04) ...
+Setting up libatomic1:amd64 (8.4.0-1ubuntu1~18.04) ...
+Setting up make (4.1-9.1ubuntu1) ...
+Setting up libasan4:amd64 (7.5.0-3ubuntu1~18.04) ...
+Setting up libcilkrts5:amd64 (7.5.0-3ubuntu1~18.04) ...
+Setting up libubsan0:amd64 (7.5.0-3ubuntu1~18.04) ...
+Setting up libtsan0:amd64 (8.4.0-1ubuntu1~18.04) ...
+Setting up linux-libc-dev:amd64 (4.15.0-213.224) ...
+Setting up liblsan0:amd64 (8.4.0-1ubuntu1~18.04) ...
+Setting up libmpx2:amd64 (8.4.0-1ubuntu1~18.04) ...
+Setting up dpkg-dev (1.19.0.5ubuntu2.4) ...
+Setting up libfakeroot:amd64 (1.22-2ubuntu1) ...
+Setting up libalgorithm-diff-perl (1.19.03-1) ...
+Setting up libc-dev-bin (2.27-3ubuntu1.6) ...
+Setting up manpages-dev (4.15-1) ...
+Setting up libc6-dev:amd64 (2.27-3ubuntu1.6) ...
+Setting up libitm1:amd64 (8.4.0-1ubuntu1~18.04) ...
+Setting up fakeroot (1.22-2ubuntu1) ...
+update-alternatives: using /usr/bin/fakeroot-sysv to provide /usr/bin/fakeroot (fakeroot) in auto mode
+Setting up libgcc-7-dev:amd64 (7.5.0-3ubuntu1~18.04) ...
+Setting up libstdc++-7-dev:amd64 (7.5.0-3ubuntu1~18.04) ...
+Setting up libalgorithm-merge-perl (0.08-3) ...
+Setting up libalgorithm-diff-xs-perl (0.04-5) ...
+Setting up gcc-7 (7.5.0-3ubuntu1~18.04) ...
+Setting up g++-7 (7.5.0-3ubuntu1~18.04) ...
+Setting up gcc (4:7.4.0-1ubuntu2.3) ...
+Setting up g++ (4:7.4.0-1ubuntu2.3) ...
+update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+Setting up build-essential (12.4ubuntu1) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mgcc[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+gcc is already the newest version (4:7.4.0-1ubuntu2.3).
+gcc set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mmake[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+make is already the newest version (4.1-9.1ubuntu1).
+make set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mlibssl-dev[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Suggested packages:
+  libssl-doc
+The following NEW packages will be installed:
+  libssl-dev
+0 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 1,568 kB of archives.
+After this operation, 7,854 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libssl-dev amd64 1.1.1-1ubuntu2.1~18.04.23 [1,568 kB]
+Fetched 1,568 kB in 43s (36.5 kB/s)
+Selecting previously unselected package libssl-dev:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 158267 files and directories currently installed.)
+Preparing to unpack .../libssl-dev_1.1.1-1ubuntu2.1~18.04.23_amd64.deb ...
+Unpacking libssl-dev:amd64 (1.1.1-1ubuntu2.1~18.04.23) ...
+Setting up libssl-dev:amd64 (1.1.1-1ubuntu2.1~18.04.23) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mmoreutils[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Suggested packages:
+  libtime-duration-perl
+The following NEW packages will be installed:
+  moreutils
+0 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 57.7 kB of archives.
+After this operation, 203 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 moreutils amd64 0.60-1 [57.7 kB]
+Fetched 57.7 kB in 1s (54.1 kB/s)
+Selecting previously unselected package moreutils.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 158384 files and directories currently installed.)
+Preparing to unpack .../moreutils_0.60-1_amd64.deb ...
+Unpacking moreutils (0.60-1) ...
+Setting up moreutils (0.60-1) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+[1m[34m[NOTICE-common/setup][0m Building [1m[32mvalgrind[0m...
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking whether ln -s works... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking how to run the C preprocessor... gcc -E
+checking for g++... g++
+checking whether the compiler supports GNU C++... yes
+checking whether g++ accepts -g... yes
+checking for g++ option to enable C++11 features... none needed
+checking dependency style of g++... gcc3
+checking for ranlib... ranlib
+checking for gcc-ranlib... /usr/bin/gcc-ranlib
+checking for a sed that does not truncate output... /bin/sed
+checking for gsha256sum... no
+checking for sha256sum... sha256sum
+checking for ar... /usr/bin/ar
+checking for gcc-ar... /usr/bin/gcc-ar
+checking for perl... /usr/bin/perl
+checking for gdb... /usr/bin/gdb
+checking dependency style of gcc... gcc3
+checking for diff -u... yes
+checking for a supported version of gcc... ok (7)
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking for a supported CPU... ok (x86_64)
+checking for a 64-bit only build... no
+checking for a 32-bit only build... no
+checking for a supported OS... ok (linux-gnu)
+checking for the kernel version... 2.6 or later (5.4.0-150-generic)
+checking for 32 bit build support... no
+checking for a supported CPU/OS combination... ok (amd64-linux)
+checking for use as an inner Valgrind... no
+checking for using the undefined behaviour sanitiser... no
+checking where gdb scripts are installed... ${exec_prefix}/libexec/valgrind
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for sys/time.h... yes
+checking for sys/param.h... yes
+checking for features.h... yes
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking whether pthread_create needs libpthread... yes
+checking the glibc version... 2.27 family
+checking for AT_FDCWD... yes
+checking for stpncpy... yes
+checking for PTRACE_GETREGS... yes
+checking for CLOCK_MONOTONIC... yes
+checking for Elf32_Chdr... yes
+checking for Elf64_Chdr... yes
+checking for pthread_rwlock_t... yes
+checking for clockid_t... yes
+checking for PTHREAD_MUTEX_ADAPTIVE_NP... yes
+checking for PTHREAD_MUTEX_ERRORCHECK_NP... yes
+checking for PTHREAD_MUTEX_RECURSIVE_NP... yes
+checking for PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP... yes
+checking for pthread_mutex_t.__m_kind... no
+checking for pthread_mutex_t.__data.__kind... yes
+checking if AT_HWCAP contains the altivec indicator... no
+checking if AT_HWCAP contains the vsx indicator... no
+checking if AT_HWCAP contains the dfp indicator... no
+checking if AT_HWCAP contains the arch_2_05 indicator... no
+checking if AT_HWCAP contains the arch_2_06 indicator... no
+checking if AT_HWCAP contains the arch_2_07 indicator... no
+checking if AT_HWCAP contains the arch_3_00 indicator... no
+checking if AT_HWCAP contains the arch_3_1 indicator... no
+checking if AT_HWCAP contains the htm indicator... no
+checking if AT_HWCAP contains the mma indicator... no
+checking that assembler knows ISA 2.07 instructions ... no
+checking for Altivec support in the compiler ... no
+checking for VSX compiler flag support... no
+checking for VSX support in the assembler ... no
+checking that assembler knows DFP... no
+checking that compiler knows -mhard-dfp switch... no
+checking that compiler knows DFP datatypes... yes
+checking if compiler accepts the -mhtm flag... no
+checking if compiler can find the htm builtins... no
+checking that assembler knows ISA 3.00 ... no
+checking that assembler knows xscvhpdp ... no
+checking that assembler knows darn instruction ... no
+checking that assembler knows ISA 3.1 ... no
+checking for pthread_create@GLIBC2.0()... no
+checking for dlinfo RTLD_DI_TLS_MODID... yes
+checking for eventfd()... yes
+checking that C++ compiler can compile C++17 code... yes
+checking that C++ compiler can include <thread> header file... yes
+checking that C++ compiler can include <condition_variable> header file... yes
+checking that C++ compiler can use std::shared_timed_mutex... yes
+checking that C++ compiler can use std::timed_mutex... yes
+checking for struct user_regs_struct... yes
+checking for __NR_membarrier... yes
+checking if gcc accepts -m32... yes
+checking if gcc accepts -m64... yes
+checking if gcc accepts -march=octeon... no
+checking if gcc accepts -march=octeon2... no
+checking if gcc accepts -mmsa... no
+checking if gcc is producing mips n32 binaries... no
+checking if gcc is producing mips n64 binaries... no
+checking if gcc accepts -mmmx... yes
+checking if gcc accepts -msse... yes
+checking if gcc accepts -mpreferred-stack-boundary=2 -m32... yes
+checking if gcc accepts -mlong-double-128... yes
+checking for using the link time optimisation... no
+checking if gcc accepts -Wmemset-transposed-args... yes
+checking if gcc accepts -Wnonnull... yes
+checking if gcc accepts -Woverflow... yes
+checking if gcc accepts -Wpointer-sign... yes
+checking if gcc accepts -Wuninitialized... yes
+checking if gcc accepts -Wmaybe-uninitialized... yes
+checking if gcc accepts -Wunused-function... yes
+checking if gcc accepts -Wstatic-local-in-inline... no
+checking if gcc accepts -Wmismatched-new-delete... no
+checking if gcc accepts -Winfinite-recursion... no
+checking if gcc accepts -Wexpansion-to-defined... yes
+checking if gcc accepts -Wunused-variable... yes
+checking if gcc accepts -Wunused-but-set-variable... yes
+checking if gcc accepts -Wnon-power-of-two-alignment... no
+checking if gcc accepts -Wsign-compare... yes
+checking if gcc accepts -Wstringop-overflow... yes
+checking if gcc accepts -Wstringop-overread... no
+checking if gcc accepts -Wstringop-truncation... no
+checking if gcc accepts -Wformat-overflow... yes
+checking if gcc accepts -Wuse-after-free... no
+checking if gcc accepts -Wfree-nonheap-object... yes
+checking if gcc accepts -Wfortify-source... no
+checking if gcc accepts -Wbuiltin-memcpy-chk-size... no
+checking if gcc accepts -Wincompatible-pointer-types-discards-qualifiers... no
+checking if gcc accepts -Wsuspicious-bzero... no
+checking if gcc accepts -Wattributes... yes
+checking if gcc accepts -Walloc-size-larger-than=1677216... yes
+checking if gcc accepts -Wwrite-strings... yes
+checking if gcc accepts -Wempty-body... yes
+checking if gcc accepts -Wformat... yes
+checking if gcc accepts -Wformat-signedness... yes
+checking if gcc accepts -Wcast-qual... yes
+checking if gcc accepts -Wold-style-declaration... yes
+checking if gcc accepts -Wignored-qualifiers... yes
+checking if gcc accepts -Wmissing-parameter-type... yes
+checking if gcc accepts -Wlogical-op... yes
+checking if gcc accepts -Wenum-conversion... no
+checking if gcc accepts -Wimplicit-fallthrough=2... yes
+checking if gcc accepts -Wformat-security... yes
+checking if gcc accepts -Wextra or -W... -Wextra
+checking if g++ accepts -faligned-new... yes
+checking if g++ accepts -fsized-deallocation... yes
+checking if g++ supports aligned new and delete... yes
+checking if gcc accepts -fno-stack-protector... yes
+checking if gcc accepts -finline-functions... yes
+checking if gcc accepts -fno-ipa-icf... yes
+checking if gcc accepts --param inline-unit-growth... yes
+checking if gcc accepts -gdwarf-4 -fdebug-types-section... yes
+checking if gcc accepts -g -gz=zlib... yes
+checking if gcc accepts -g -gz=zlib-gnu... yes
+checking if gcc accepts nested functions... yes
+checking if gcc accepts the 'p' constraint in asm statements... yes
+checking if gcc accepts -pie... yes
+checking if gcc accepts -ansi... yes
+checking if gcc accepts -no-pie... yes
+checking if the linker accepts -Wl,--image-base... no
+checking if the linker accepts -Wl,-Ttext-segment... yes
+configure: ld --image-base or -Ttext-segment used, no need to strip build-id NOTEs.
+checking if ppc32/64 as supports mtocrf/mfocrf... no
+checking if ppc32/64 asm supports phased out floating point instructions... no
+checking if amd64 assembler supports fxsave64/fxrstor64... yes
+checking if x86/amd64 assembler speaks SSE3... yes
+checking if x86/amd64 assembler speaks SSSE3... yes
+checking if x86/amd64 assembler supports 'pclmulqdq'... yes
+checking if x86/amd64 assembler supports 'vpclmulqdq'... yes
+checking if x86/amd64 assembler supports FMA4 'vfmaddpd'... yes
+checking if x86/amd64 assembler supports 'lzcnt'... yes
+checking if x86/amd64 assembler supports 'loopnel'... yes
+checking if x86/amd64 assembler supports 'addr32'... yes
+checking if x86/amd64 assembler speaks SSE4.2... yes
+checking if x86/amd64 assembler speaks AVX... yes
+checking if x86/amd64 assembler speaks AVX2... yes
+checking if x86/amd64 assembler speaks TSX... yes
+checking if x86/amd64 assembler speaks BMI1 and BMI2... yes
+checking if x86/amd64 assembler speaks FMA... yes
+checking if amd64 assembler knows the MPX instructions... yes
+checking if amd64 assembler knows the ADX instructions... yes
+checking if amd64 assembler knows the RDRAND instruction... yes
+checking if amd64 assembler knows the RDSEED instruction... yes
+checking if amd64 assembler knows the F16C instructions... yes
+checking if x86/amd64 assembler knows the MOVBE insn... yes
+checking if gcc supports the ifunc attribute... yes
+checking if gcc supports the armv8 crc feature flag... no
+checking if gcc supports the armv81 feature flag and assembler supports v8.1 instructions... no
+checking if gcc supports the armv82 feature flag and assembler supports v8.2 instructions... no
+checking for TLS support... yes
+checking for asm/unistd.h... yes
+checking for endian.h... yes
+checking for mqueue.h... yes
+checking for sys/endian.h... no
+checking for sys/epoll.h... yes
+checking for sys/eventfd.h... yes
+checking for sys/klog.h... yes
+checking for sys/poll.h... yes
+checking for sys/prctl.h... yes
+checking for sys/signal.h... yes
+checking for sys/signalfd.h... yes
+checking for sys/syscall.h... yes
+checking for sys/sysnvl.h... no
+checking for sys/time.h... (cached) yes
+checking for sys/types.h... (cached) yes
+checking if <linux/futex.h> is usable... yes
+checking for uid_t in sys/types.h... yes
+checking for off_t... yes
+checking for size_t... yes
+checking for struct statx... no
+checking for working memcmp... yes
+checking for getpagesize... yes
+checking for working mmap... yes
+checking for pthread_create in -lpthread... yes
+checking for clock_gettime in -lrt... yes
+checking for aligned_alloc... yes
+checking for clock_gettime... yes
+checking for copy_file_range... yes
+checking for epoll_create... yes
+checking for epoll_pwait... yes
+checking for getaddrinfo... yes
+checking for klogctl... yes
+checking for mallinfo... yes
+checking for memchr... yes
+checking for memfd_create... yes
+checking for memset... yes
+checking for mkdir... yes
+checking for mremap... yes
+checking for pipe2... yes
+checking for ppoll... yes
+checking for preadv... yes
+checking for preadv2... yes
+checking for process_vm_readv... yes
+checking for process_vm_writev... yes
+checking for pthread_barrier_init... yes
+checking for pthread_condattr_setclock... yes
+checking for pthread_mutex_timedlock... yes
+checking for pthread_rwlock_timedrdlock... yes
+checking for pthread_rwlock_timedwrlock... yes
+checking for pthread_setname_np... yes
+checking for pthread_spin_lock... yes
+checking for pthread_yield... yes
+checking for pwritev... yes
+checking for pwritev2... yes
+checking for rawmemchr... yes
+checking for readlinkat... yes
+checking for semtimedop... yes
+checking for setcontext... yes
+checking for signalfd... yes
+checking for sigwaitinfo... yes
+checking for strchr... yes
+checking for strdup... yes
+checking for strpbrk... yes
+checking for strrchr... yes
+checking for strstr... yes
+checking for swapcontext... yes
+checking for syscall... yes
+checking for utimensat... yes
+checking for mempcpy... yes
+checking for stpncpy... yes
+checking for strchrnul... yes
+checking for memrchr... yes
+checking for strndup... yes
+checking for close_range... no
+checking for wcsncpy... yes
+checking for mpicc... mpicc
+checking primary target for usable MPI2-compliant C compiler and mpi.h... no
+checking secondary target for usable MPI2-compliant C compiler and mpi.h... no
+checking for boost... no
+checking for OpenMP... yes
+checking for __builtin_popcount()... yes
+checking for __builtin_clz()... yes
+checking for __builtin_ctz()... yes
+checking if gcc supports __sync_add_and_fetch for the primary target... yes
+checking if gcc supports __sync_add_and_fetch on uint64_t for all targets... yes
+checking if platform has openat2 syscall... checking if g++ supports __sync_add_and_fetch... yes
+checking if libstdc++ supports annotating shared pointers... yes
+checking for AT_GNU_LIBC_C17_ALIGNED_ALLOC... no
+checking for thrd_create()... no
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating VEX/Makefile
+config.status: creating valgrind.spec
+config.status: creating valgrind.pc
+config.status: creating glibc-2.X.supp
+config.status: creating glibc-2.X-helgrind.supp
+config.status: creating glibc-2.X-drd.supp
+config.status: creating include/valgrind.h
+config.status: creating docs/Makefile
+config.status: creating docs/xml/vg-entities.xml
+config.status: creating tests/Makefile
+config.status: creating tests/vg_regtest
+config.status: creating perf/Makefile
+config.status: creating perf/vg_perf
+config.status: creating gdbserver_tests/Makefile
+config.status: creating gdbserver_tests/solaris/Makefile
+config.status: creating include/Makefile
+config.status: creating auxprogs/Makefile
+config.status: creating mpi/Makefile
+config.status: creating coregrind/Makefile
+config.status: creating memcheck/Makefile
+config.status: creating memcheck/tests/Makefile
+config.status: creating memcheck/tests/common/Makefile
+config.status: creating memcheck/tests/amd64/Makefile
+config.status: creating memcheck/tests/x86/Makefile
+config.status: creating memcheck/tests/linux/Makefile
+config.status: creating memcheck/tests/linux/debuginfod-check.vgtest
+config.status: creating memcheck/tests/darwin/Makefile
+config.status: creating memcheck/tests/solaris/Makefile
+config.status: creating memcheck/tests/freebsd/Makefile
+config.status: creating memcheck/tests/amd64-linux/Makefile
+config.status: creating memcheck/tests/arm64-linux/Makefile
+config.status: creating memcheck/tests/x86-linux/Makefile
+config.status: creating memcheck/tests/amd64-solaris/Makefile
+config.status: creating memcheck/tests/x86-solaris/Makefile
+config.status: creating memcheck/tests/amd64-freebsd/Makefile
+config.status: creating memcheck/tests/x86-freebsd/Makefile
+config.status: creating memcheck/tests/ppc32/Makefile
+config.status: creating memcheck/tests/ppc64/Makefile
+config.status: creating memcheck/tests/s390x/Makefile
+config.status: creating memcheck/tests/mips32/Makefile
+config.status: creating memcheck/tests/mips64/Makefile
+config.status: creating memcheck/tests/vbit-test/Makefile
+config.status: creating cachegrind/Makefile
+config.status: creating cachegrind/tests/Makefile
+config.status: creating cachegrind/tests/x86/Makefile
+config.status: creating cachegrind/cg_annotate
+config.status: creating cachegrind/cg_diff
+config.status: creating cachegrind/cg_merge
+config.status: creating callgrind/Makefile
+config.status: creating callgrind/callgrind_annotate
+config.status: creating callgrind/callgrind_control
+config.status: creating callgrind/tests/Makefile
+config.status: creating helgrind/Makefile
+config.status: creating helgrind/tests/Makefile
+config.status: creating drd/Makefile
+config.status: creating drd/scripts/download-and-build-splash2
+config.status: creating drd/tests/Makefile
+config.status: creating massif/Makefile
+config.status: creating massif/tests/Makefile
+config.status: creating massif/ms_print
+config.status: creating dhat/Makefile
+config.status: creating dhat/tests/Makefile
+config.status: creating lackey/Makefile
+config.status: creating lackey/tests/Makefile
+config.status: creating none/Makefile
+config.status: creating none/tests/Makefile
+config.status: creating none/tests/scripts/Makefile
+config.status: creating none/tests/amd64/Makefile
+config.status: creating none/tests/ppc32/Makefile
+config.status: creating none/tests/ppc64/Makefile
+config.status: creating none/tests/x86/Makefile
+config.status: creating none/tests/arm/Makefile
+config.status: creating none/tests/arm64/Makefile
+config.status: creating none/tests/s390x/Makefile
+config.status: creating none/tests/mips32/Makefile
+config.status: creating none/tests/mips64/Makefile
+config.status: creating none/tests/nanomips/Makefile
+config.status: creating none/tests/linux/Makefile
+config.status: creating none/tests/darwin/Makefile
+config.status: creating none/tests/solaris/Makefile
+config.status: creating none/tests/freebsd/Makefile
+config.status: creating none/tests/amd64-linux/Makefile
+config.status: creating none/tests/x86-linux/Makefile
+config.status: creating none/tests/amd64-darwin/Makefile
+config.status: creating none/tests/x86-darwin/Makefile
+config.status: creating none/tests/amd64-solaris/Makefile
+config.status: creating none/tests/x86-solaris/Makefile
+config.status: creating none/tests/x86-freebsd/Makefile
+config.status: creating exp-bbv/Makefile
+config.status: creating exp-bbv/tests/Makefile
+config.status: creating exp-bbv/tests/x86/Makefile
+config.status: creating exp-bbv/tests/x86-linux/Makefile
+config.status: creating exp-bbv/tests/amd64-linux/Makefile
+config.status: creating exp-bbv/tests/ppc32-linux/Makefile
+config.status: creating exp-bbv/tests/arm-linux/Makefile
+config.status: creating shared/Makefile
+config.status: creating solaris/Makefile
+config.status: creating coregrind/link_tool_exe_linux
+config.status: creating coregrind/link_tool_exe_freebsd
+config.status: creating coregrind/link_tool_exe_darwin
+config.status: creating coregrind/link_tool_exe_solaris
+config.status: creating tests/filter_stderr_basic
+config.status: creating tests/filter_discards
+config.status: creating memcheck/tests/filter_stderr
+config.status: creating memcheck/tests/filter_dw4
+config.status: creating memcheck/tests/filter_overlaperror
+config.status: creating memcheck/tests/x86/filter_pushfpopf
+config.status: creating gdbserver_tests/filter_gdb
+config.status: creating gdbserver_tests/filter_memcheck_monitor
+config.status: creating gdbserver_tests/filter_stderr
+config.status: creating gdbserver_tests/filter_vgdb
+config.status: creating drd/tests/filter_stderr
+config.status: creating drd/tests/filter_error_count
+config.status: creating drd/tests/filter_error_summary
+config.status: creating drd/tests/filter_stderr_and_thread_no_and_offset
+config.status: creating drd/tests/filter_thread_no
+config.status: creating drd/tests/filter_xml_and_thread_no
+config.status: creating helgrind/tests/filter_stderr
+config.status: creating config.h
+config.status: executing depfiles commands
+
+                    Version: 3.22.0
+         Maximum build arch: amd64
+         Primary build arch: amd64
+       Secondary build arch: 
+                   Build OS: linux
+     Link Time Optimisation: no
+       Primary build target: AMD64_LINUX
+     Secondary build target: 
+           Platform variant: vanilla
+      Primary -DVGPV string: -DVGPV_amd64_linux_vanilla=1
+         Default supp files: ./xfree-3.supp ./xfree-4.supp glibc-2.X-drd.supp glibc-2.X-helgrind.supp glibc-2.X.supp 
+
+Making all in include
+Making all in VEX
+Making all in coregrind
+Making all in .
+Making all in memcheck
+Making all in .
+Making all in tests
+Making all in .
+Making all in amd64
+Making all in linux
+Making all in amd64-linux
+Making all in cachegrind
+Making all in .
+Making all in tests
+Making all in .
+Making all in callgrind
+Making all in .
+Making all in tests
+Making all in .
+Making all in helgrind
+Making all in .
+Making all in tests
+Making all in drd
+Making all in .
+Making all in tests
+Making all in massif
+Making all in .
+Making all in tests
+Making all in dhat
+Making all in .
+Making all in tests
+Making all in lackey
+Making all in .
+Making all in tests
+Making all in none
+Making all in .
+Making all in tests
+Making all in .
+Making all in scripts
+Making all in amd64
+Making all in linux
+Making all in amd64-linux
+Making all in exp-bbv
+Making all in .
+Making all in tests
+Making all in .
+Making all in amd64-linux
+Making all in shared
+Making all in tests
+Making all in perf
+Making all in gdbserver_tests
+Making all in .
+Making all in memcheck/tests/vbit-test
+Making all in auxprogs
+Making all in mpi
+Making all in solaris
+Making all in docs
+Making install in include
+ /bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644  pub_tool_basics.h pub_tool_basics_asm.h pub_tool_addrinfo.h pub_tool_aspacehl.h pub_tool_aspacemgr.h pub_tool_clientstate.h pub_tool_clreq.h pub_tool_deduppoolalloc.h pub_tool_debuginfo.h pub_tool_errormgr.h pub_tool_execontext.h pub_tool_gdbserver.h pub_tool_guest.h pub_tool_poolalloc.h pub_tool_hashtable.h pub_tool_libcbase.h pub_tool_libcassert.h pub_tool_libcfile.h pub_tool_libcprint.h pub_tool_libcproc.h pub_tool_libcsetjmp.h pub_tool_libcsignal.h pub_tool_machine.h pub_tool_mallocfree.h pub_tool_options.h pub_tool_oset.h pub_tool_rangemap.h pub_tool_redir.h pub_tool_replacemalloc.h pub_tool_seqmatch.h pub_tool_signals.h pub_tool_sparsewa.h pub_tool_stacktrace.h pub_tool_threadstate.h pub_tool_tooliface.h pub_tool_transtab.h pub_tool_vki.h pub_tool_vkiscnums.h pub_tool_vkiscnums_asm.h pub_tool_wordfm.h '/usr/local/include/valgrind/.'
+ /bin/mkdir -p '/usr/local/include/valgrind/vki'
+ /usr/bin/install -c -m 644  vki/vki-linux.h vki/vki-freebsd.h vki/vki-darwin.h vki/vki-solaris.h vki/vki-solaris-repcache.h vki/vki-machine-types-amd64-freebsd.h vki/vki-machine-types-x86-freebsd.h vki/vki-posixtypes-amd64-linux.h vki/vki-posixtypes-arm64-linux.h vki/vki-posixtypes-ppc32-linux.h vki/vki-posixtypes-ppc64-linux.h vki/vki-posixtypes-x86-linux.h vki/vki-posixtypes-arm-linux.h vki/vki-posixtypes-s390x-linux.h vki/vki-posixtypes-mips32-linux.h vki/vki-posixtypes-mips64-linux.h vki/vki-posixtypes-nanomips-linux.h vki/vki-amd64-linux.h vki/vki-arm64-linux.h vki/vki-ppc32-linux.h vki/vki-ppc64-linux.h vki/vki-x86-linux.h vki/vki-amd64-freebsd.h vki/vki-x86-freebsd.h vki/vki-arm-linux.h vki/vki-s390x-linux.h vki/vki-mips32-linux.h vki/vki-mips64-linux.h vki/vki-nanomips-linux.h vki/vki-scnums-amd64-linux.h vki/vki-scnums-arm64-linux.h vki/vki-scnums-ppc32-linux.h vki/vki-scnums-ppc64-linux.h vki/vki-scnums-x86-linux.h vki/vki-scnums-freebsd.h vki/vki-scnums-arm-linux.h vki/vki-scnums-s390x-linux.h vki/vki-scnums-mips32-linux.h vki/vki-scnums-mips64-linux.h vki/vki-scnums-nanomips-linux.h '/usr/local/include/valgrind/vki'
+ /bin/mkdir -p '/usr/local/include/valgrind/vki'
+ /usr/bin/install -c -m 644  vki/vki-scnums-darwin.h vki/vki-scnums-solaris.h vki/vki-scnums-shared-linux.h vki/vki-scnums-32bit-linux.h vki/vki-xen.h vki/vki-xen-domctl.h vki/vki-xen-evtchn.h vki/vki-xen-gnttab.h vki/vki-xen-hvm.h vki/vki-xen-memory.h vki/vki-xen-mmuext.h vki/vki-xen-physdev.h vki/vki-xen-schedop.h vki/vki-xen-sysctl.h vki/vki-xen-tmem.h vki/vki-xen-version.h vki/vki-xen-xsm.h vki/vki-xen-x86.h vki/vki-linux-drm.h vki/vki-linux-io_uring.h '/usr/local/include/valgrind/vki'
+ /usr/bin/install -c -m 644  pub_tool_xarray.h pub_tool_xtree.h pub_tool_xtmemory.h valgrind.h '/usr/local/include/valgrind/.'
+Making install in VEX
+ /bin/mkdir -p '/usr/local/lib/valgrind'
+ /usr/bin/install -c -m 644  libvex-amd64-linux.a libvexmultiarch-amd64-linux.a '/usr/local/lib/valgrind'
+ ( cd '/usr/local/lib/valgrind' && ranlib libvex-amd64-linux.a )
+ ( cd '/usr/local/lib/valgrind' && ranlib libvexmultiarch-amd64-linux.a )
+ /bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 pub/libvex.h pub/libvex_basictypes.h pub/libvex_emnote.h pub/libvex_guest_offsets.h pub/libvex_guest_x86.h pub/libvex_guest_amd64.h pub/libvex_guest_ppc32.h pub/libvex_guest_ppc64.h pub/libvex_guest_arm.h pub/libvex_guest_arm64.h pub/libvex_guest_s390x.h pub/libvex_guest_mips32.h pub/libvex_guest_mips64.h pub/libvex_s390x_common.h pub/libvex_ir.h pub/libvex_trc_values.h pub/libvex_inner.h '/usr/local/include/valgrind'
+Making install in coregrind
+ /bin/mkdir -p '/usr/local/bin'
+  /usr/bin/install -c valgrind vgdb '/usr/local/bin'
+ /bin/mkdir -p '/usr/local/lib/valgrind'
+ /usr/bin/install -c -m 644  libcoregrind-amd64-linux.a libgcc-sup-amd64-linux.a libreplacemalloc_toolpreload-amd64-linux.a '/usr/local/lib/valgrind'
+ ( cd '/usr/local/lib/valgrind' && ranlib libcoregrind-amd64-linux.a )
+ ( cd '/usr/local/lib/valgrind' && ranlib libgcc-sup-amd64-linux.a )
+ ( cd '/usr/local/lib/valgrind' && ranlib libreplacemalloc_toolpreload-amd64-linux.a )
+ /bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/valgrind-monitor.py m_gdbserver/valgrind-monitor-def.py '/usr/local/libexec/valgrind'
+ /bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/32bit-core-valgrind-s1.xml m_gdbserver/32bit-core-valgrind-s2.xml m_gdbserver/32bit-core.xml m_gdbserver/32bit-linux-valgrind-s1.xml m_gdbserver/32bit-linux-valgrind-s2.xml m_gdbserver/32bit-linux.xml m_gdbserver/32bit-sse-valgrind-s1.xml m_gdbserver/32bit-sse-valgrind-s2.xml m_gdbserver/32bit-sse.xml m_gdbserver/64bit-avx-valgrind-s2.xml m_gdbserver/64bit-avx-valgrind-s1.xml m_gdbserver/64bit-avx.xml m_gdbserver/64bit-core-valgrind-s1.xml m_gdbserver/64bit-core-valgrind-s2.xml m_gdbserver/64bit-core.xml m_gdbserver/64bit-linux-valgrind-s1.xml m_gdbserver/64bit-linux-valgrind-s2.xml m_gdbserver/64bit-linux.xml m_gdbserver/64bit-sse-valgrind-s1.xml m_gdbserver/64bit-sse-valgrind-s2.xml m_gdbserver/64bit-sse.xml m_gdbserver/amd64-avx-coresse-valgrind.xml m_gdbserver/amd64-avx-coresse.xml m_gdbserver/amd64-avx-linux-valgrind.xml m_gdbserver/amd64-avx-linux.xml m_gdbserver/amd64-coresse-valgrind.xml m_gdbserver/amd64-linux-valgrind.xml m_gdbserver/arm-core-valgrind-s1.xml m_gdbserver/arm-core-valgrind-s2.xml m_gdbserver/arm-core.xml m_gdbserver/arm-vfpv3-valgrind-s1.xml m_gdbserver/arm-vfpv3-valgrind-s2.xml m_gdbserver/arm-vfpv3.xml m_gdbserver/arm-with-vfpv3-valgrind.xml m_gdbserver/arm-with-vfpv3.xml m_gdbserver/i386-coresse-valgrind.xml m_gdbserver/i386-linux-valgrind.xml m_gdbserver/power64-core-valgrind-s1.xml m_gdbserver/power64-core-valgrind-s2.xml m_gdbserver/power64-core.xml '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/power64-core2-valgrind-s1.xml m_gdbserver/power64-core2-valgrind-s2.xml m_gdbserver/power64-linux-valgrind-s1.xml m_gdbserver/power64-linux-valgrind-s2.xml m_gdbserver/power64-linux.xml m_gdbserver/power-altivec-valgrind-s1.xml m_gdbserver/power-altivec-valgrind-s2.xml m_gdbserver/power-altivec.xml m_gdbserver/power-vsx-valgrind-s1.xml m_gdbserver/power-vsx-valgrind-s2.xml m_gdbserver/power-vsx.xml m_gdbserver/power-core-valgrind-s1.xml m_gdbserver/power-core-valgrind-s2.xml m_gdbserver/power-core.xml m_gdbserver/power-fpu-valgrind-s1.xml m_gdbserver/power-fpu-valgrind-s2.xml m_gdbserver/power-fpu.xml m_gdbserver/power-linux-valgrind-s1.xml m_gdbserver/power-linux-valgrind-s2.xml m_gdbserver/power-linux.xml m_gdbserver/powerpc-altivec32l-valgrind.xml m_gdbserver/powerpc-altivec32l.xml m_gdbserver/powerpc-altivec64l-valgrind.xml m_gdbserver/powerpc-altivec64l.xml m_gdbserver/s390-acr-valgrind-s1.xml m_gdbserver/s390-acr-valgrind-s2.xml m_gdbserver/s390-acr.xml m_gdbserver/s390-fpr-valgrind-s1.xml m_gdbserver/s390-fpr-valgrind-s2.xml m_gdbserver/s390-fpr.xml m_gdbserver/s390x-core64-valgrind-s1.xml m_gdbserver/s390x-core64-valgrind-s2.xml m_gdbserver/s390x-core64.xml m_gdbserver/s390x-generic-valgrind.xml m_gdbserver/s390x-generic.xml m_gdbserver/s390x-linux64-valgrind-s1.xml m_gdbserver/s390x-linux64-valgrind-s2.xml m_gdbserver/s390x-linux64.xml m_gdbserver/s390-vx-valgrind-s1.xml m_gdbserver/s390-vx-valgrind-s2.xml '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/s390-vx.xml m_gdbserver/s390x-vx-linux-valgrind.xml m_gdbserver/s390x-vx-linux.xml m_gdbserver/mips-cp0-valgrind-s1.xml m_gdbserver/mips-cp0-valgrind-s2.xml m_gdbserver/mips-cp0.xml m_gdbserver/mips-cpu-valgrind-s1.xml m_gdbserver/mips-cpu-valgrind-s2.xml m_gdbserver/mips-cpu.xml m_gdbserver/mips-linux.xml m_gdbserver/mips-linux-valgrind.xml m_gdbserver/mips-fpu-valgrind-s1.xml m_gdbserver/mips-fpu-valgrind-s2.xml m_gdbserver/mips-fpu.xml m_gdbserver/mips64-cp0-valgrind-s1.xml m_gdbserver/mips64-cp0-valgrind-s2.xml m_gdbserver/mips64-cp0.xml m_gdbserver/mips64-cpu-valgrind-s1.xml m_gdbserver/mips64-cpu-valgrind-s2.xml m_gdbserver/mips64-cpu.xml m_gdbserver/mips64-linux.xml m_gdbserver/mips64-linux-valgrind.xml m_gdbserver/mips64-fpu-valgrind-s1.xml m_gdbserver/mips64-fpu-valgrind-s2.xml m_gdbserver/mips64-fpu.xml '/usr/local/libexec/valgrind'
+Making install in .
+ /bin/mkdir -p '/usr/local/lib/pkgconfig'
+ /usr/bin/install -c -m 644 valgrind.pc '/usr/local/lib/pkgconfig'
+ /bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 config.h '/usr/local/include/valgrind'
+ /bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 default.supp '/usr/local/libexec/valgrind'
+Making install in memcheck
+Making install in .
+ /bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 memcheck.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in .
+Making install in amd64
+Making install in linux
+Making install in amd64-linux
+Making install in cachegrind
+Making install in .
+ /bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c cg_annotate cg_diff cg_merge '/usr/local/bin'
+ /bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 cachegrind.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in .
+Making install in callgrind
+Making install in .
+ /bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c callgrind_annotate callgrind_control '/usr/local/bin'
+ /bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 callgrind.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in .
+Making install in helgrind
+Making install in .
+ /bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 helgrind.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in drd
+Making install in .
+ /bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 drd.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in massif
+Making install in .
+ /bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c ms_print '/usr/local/bin'
+Making install in tests
+Making install in dhat
+Making install in .
+ /bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 dh_view.html dh_view.css dh_view.js '/usr/local/libexec/valgrind'
+ /bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 dhat.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in lackey
+Making install in .
+Making install in tests
+Making install in none
+Making install in .
+Making install in tests
+Making install in .
+Making install in scripts
+Making install in amd64
+Making install in linux
+Making install in amd64-linux
+Making install in exp-bbv
+Making install in .
+Making install in tests
+Making install in .
+Making install in amd64-linux
+Making install in shared
+Making install in tests
+Making install in perf
+Making install in gdbserver_tests
+Making install in .
+Making install in memcheck/tests/vbit-test
+Making install in auxprogs
+ /bin/mkdir -p '/usr/local/bin'
+  /usr/bin/install -c valgrind-listener valgrind-di-server '/usr/local/bin'
+Making install in mpi
+ /bin/mkdir -p '/usr/local/lib/valgrind'
+Making install in solaris
+Making install in docs
+[1m[34m[NOTICE-common/setup][0m Configuring neovim...
+[1m[34m[NOTICE-common/setup][0m Pulling latest repo source...
+Saved working directory and index state WIP on main: 7fe14a9 Create ssh_setup.md
+Already up to date.
+[1m[34m[NOTICE-common/setup][0m Changing all .sh files to executable...
+[1m[34m[NOTICE-common/setup][0m Configuring apport...
+[1m[34m[NOTICE-common/setup][0m Core dumps will be generated in /var/crash
+[1m[34m[NOTICE-common/setup][0m Reloading terminal...
+[1m[33m[WARN-common/setup][0m Invalid Argument: 0 ! Skipping setup_environment...
+[1m[34m[NOTICE-common/setup][0m Running ibmtpm setup...
+[1m[34m[NOTICE-common/function][0m Loaded and Activated function: load_special_chars
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_notice
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_warn
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_error
+[1m[34m[NOTICE-common/function][0m Loaded function: parse
+[1m[34m[NOTICE-common/function][0m Loaded function: clear_dir
+[1m[34m[NOTICE-common/function][0m Loaded function: log_date_time
+Loaded config item: install_platform = 1
+Loaded config item: base_dir = /opt
+Loaded config item: html_dir = /var/www/html/acs
+Loaded config item: c_json_lib_dir = /usr/include/json-c
+Loaded config item: c_json_lib_link_dir = /usr/include/json
+Loaded config item: tpm_data_dir = /home/user/tpm2
+Loaded config item: RSAEK_cert = cakey.pem
+Loaded config item: ECCEK_cert = cakeyecc.pem
+Loaded config item: repo_url = https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/main/setup_ibmtpm
+Loaded config item: acs_demo_server_ip = localhost
+Loaded config item: acs_demo_server_port = 80
+Loaded config item: acs_demo_client_ip = localhost
+Loaded config item: tpm_command_port = 2321
+Loaded config item: acs_port = 2323
+Loaded config item: user_name = user
+Loaded config item: ibmtss_ver = 2.1.1
+Loaded config item: ibmtpm_ver = 1682
+Loaded config item: ibmacs_ver = 1658
+Loaded config item: verMode = 2
+Loaded config item: TPMMode = 2
+Loaded config item: acsMode = 1
+Loaded config item: SCmachineMode = 1
+Loaded config item: force_acs_sql_setting = 1
+Loaded config item: acsClientMode = 1
+Loaded config item: mysql_user = tpm2ACS
+Loaded config item: mysql_password = 123456
+Loaded config item: mysql_database = tpm2
+Loaded config item: log4j_time_format = %Y/%m/%d-%H:%M:%S
+Loaded config item: log4j_line_number = 100
+Loaded config item: wget_gflag = -q --show-progress
+Loaded config item: make_gflag = -s
+Loaded config item: sudo_gflag = -E
+Loaded config item: bash_gflag = -x
+Loaded config item: tar_gflag = -zxf
+Loaded config item: install_req = 1
+Loaded config item: setup_ibmtpmtss_env = 1
+Loaded config item: compile_ibmtpmtss = 1
+Loaded config item: setup_ibmswtpm_env = 1
+Loaded config item: compile_ibmswtpm = 1
+Loaded config item: setup_ibmacs_env = 1
+Loaded config item: compile_ibmacs = 1
+Loaded config item: open_demo_webpage = 1
+Loaded config item: generate_CA = 0
+Loaded config item: activate_TPM_server = 0
+Loaded config item: activate_TPM_client = 0
+Loaded config item: generate_EK = 1
+Loaded config item: retrieve_hardware_NV = 0
+Loaded config item: set_acs_sql_setting = 1
+Loaded config item: active_ACS_Demo_Server = 1
+Loaded config item: active_ACS_Demo_Client = 1
+Loaded config item: active_ACS_Demo_verify = 1
+Loaded config item: print_log_path = 1
+Loaded config item: open_all_logs = 1
+[1m[34m[NOTICE-common/function][0m Loaded [1m[32m53[0m config items from [1m[32m./config.ini[0m
+[1m[34m[NOTICE-setup_ibmtpm/setup][0m Running setup script ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Creating directories ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Downloading IBMTPMTSS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Downloading IBMSWTPM ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Downloading IBMACS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Extracting IBMTPMTSS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Extracting IBMSWTPM ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Extracting IBMACS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmtpmtss_env][0m Setting path env variable ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmtpmtss_env][0m Creating symbolic link to /opt/ibmtss2.1.1 ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmtpmtss][0m Cleaning up with make ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmtpmtss][0m Compiling IBMTSS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmswtpm_env][0m Creating symbolic link to /opt/ibmtpm1682 ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmswtpm][0m Cleaning up with make ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmswtpm][0m Compiling IBMTPM ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Installing IBMACS dependencies ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libssl-dev is already the newest version (1.1.1-1ubuntu2.1~18.04.23).
+The following additional packages will be installed:
+  apache2-bin apache2-data apache2-utils autoconf automake autopoint
+  autotools-dev debhelper dh-autoreconf dh-strip-nondeterminism libaio1
+  libapache2-mod-php7.2 libapr1 libaprutil1 libaprutil1-dbd-sqlite3
+  libaprutil1-ldap libarchive-cpio-perl libevent-core-2.1-6
+  libfile-stripnondeterminism-perl libhtml-template-perl libltdl-dev
+  liblua5.2-0 libmail-sendmail-perl libmysqlclient20 libpcre16-3 libpcre3-dev
+  libpcre32-3 libpcrecpp0v5 libsigsegv2 libsys-hostname-long-perl libtool m4
+  mysql-client-5.7 mysql-client-core-5.7 mysql-common mysql-server-5.7
+  mysql-server-core-5.7 php-common php-pear php-xml php7.2 php7.2-cli
+  php7.2-common php7.2-dev php7.2-json php7.2-mysql php7.2-opcache
+  php7.2-readline php7.2-xml pkg-php-tools po-debconf shtool zlib1g-dev
+Suggested packages:
+  apache2-doc apache2-suexec-pristine | apache2-suexec-custom autoconf-archive
+  gnu-standards autoconf-doc dh-make dwz libipc-sharedcache-perl libtool-doc
+  gfortran | fortran95-compiler gcj-jdk m4-doc mailx tinyca dh-php
+  libmail-box-perl
+The following NEW packages will be installed:
+  apache2 apache2-bin apache2-data apache2-utils autoconf automake autopoint
+  autotools-dev debhelper dh-autoreconf dh-strip-nondeterminism libaio1
+  libapache2-mod-php7.2 libapr1 libaprutil1 libaprutil1-dbd-sqlite3
+  libaprutil1-ldap libarchive-cpio-perl libevent-core-2.1-6
+  libfile-stripnondeterminism-perl libhtml-template-perl libjson-c-dev
+  libltdl-dev liblua5.2-0 libmail-sendmail-perl libmysqlclient-dev
+  libmysqlclient20 libpcre16-3 libpcre3-dev libpcre32-3 libpcrecpp0v5
+  libsigsegv2 libsys-hostname-long-perl libtool m4 mysql-client-5.7
+  mysql-client-core-5.7 mysql-common mysql-server mysql-server-5.7
+  mysql-server-core-5.7 php php-common php-dev php-mysql php-pear php-xml
+  php7.2 php7.2-cli php7.2-common php7.2-dev php7.2-json php7.2-mysql
+  php7.2-opcache php7.2-readline php7.2-xml pkg-php-tools po-debconf shtool
+  zlib1g-dev
+0 upgraded, 60 newly installed, 0 to remove and 1 not upgraded.
+Need to get 32.2 MB of archives.
+After this operation, 213 MB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libapr1 amd64 1.6.3-2 [90.9 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libaprutil1 amd64 1.6.1-2ubuntu0.1 [84.6 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libaprutil1-dbd-sqlite3 amd64 1.6.1-2ubuntu0.1 [10.6 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libaprutil1-ldap amd64 1.6.1-2ubuntu0.1 [8,752 B]
+Get:5 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 liblua5.2-0 amd64 5.2.4-1.1build1 [108 kB]
+Get:6 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 apache2-bin amd64 2.4.29-1ubuntu4.27 [1,071 kB]
+Get:7 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 apache2-utils amd64 2.4.29-1ubuntu4.27 [83.3 kB]
+Get:8 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 apache2-data all 2.4.29-1ubuntu4.27 [160 kB]
+Get:9 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 apache2 amd64 2.4.29-1ubuntu4.27 [95.1 kB]
+Get:10 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 mysql-common all 5.8+1.0.4 [7,308 B]
+Get:11 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libaio1 amd64 0.3.110-5ubuntu0.1 [6,476 B]
+Get:12 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 mysql-client-core-5.7 amd64 5.7.42-0ubuntu0.18.04.1 [6,752 kB]
+Get:13 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 mysql-client-5.7 amd64 5.7.42-0ubuntu0.18.04.1 [2,028 kB]
+Get:14 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 mysql-server-core-5.7 amd64 5.7.42-0ubuntu0.18.04.1 [7,542 kB]
+Get:15 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libevent-core-2.1-6 amd64 2.1.8-stable-4build1 [85.9 kB]
+Get:16 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 mysql-server-5.7 amd64 5.7.42-0ubuntu0.18.04.1 [3,011 kB]
+Get:17 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libsigsegv2 amd64 2.12-1 [14.7 kB]
+Get:18 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 m4 amd64 1.4.18-1 [197 kB]
+Get:19 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 autoconf all 2.69-11 [322 kB]
+Get:20 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 autotools-dev all 20180224.1 [39.6 kB]
+Get:21 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 automake all 1:1.15.1-3ubuntu2 [509 kB]
+Get:22 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 autopoint all 0.19.8.1-6ubuntu0.3 [426 kB]
+Get:23 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libtool all 2.4.6-2 [194 kB]
+Get:24 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 dh-autoreconf all 17 [15.8 kB]
+Get:25 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libfile-stripnondeterminism-perl all 0.040-1.1~build1 [13.8 kB]
+Get:26 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 dh-strip-nondeterminism all 0.040-1.1~build1 [5,208 B]
+Get:27 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 po-debconf all 1.0.20 [232 kB]
+Get:28 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 debhelper all 11.1.6ubuntu2 [902 kB]
+Get:29 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 php-common all 1:60ubuntu1 [12.1 kB]
+Get:30 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php7.2-common amd64 7.2.24-0ubuntu0.18.04.17 [891 kB]
+Get:31 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php7.2-json amd64 7.2.24-0ubuntu0.18.04.17 [18.9 kB]
+Get:32 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php7.2-opcache amd64 7.2.24-0ubuntu0.18.04.17 [166 kB]
+Get:33 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php7.2-readline amd64 7.2.24-0ubuntu0.18.04.17 [12.2 kB]
+Get:34 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php7.2-cli amd64 7.2.24-0ubuntu0.18.04.17 [1,410 kB]
+Get:35 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libapache2-mod-php7.2 amd64 7.2.24-0ubuntu0.18.04.17 [1,352 kB]
+Get:36 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libarchive-cpio-perl all 0.10-1 [9,644 B]
+Get:37 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libhtml-template-perl all 2.97-1 [59.0 kB]
+Get:38 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libltdl-dev amd64 2.4.6-2 [162 kB]
+Get:39 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libsys-hostname-long-perl all 1.5-1 [11.7 kB]
+Get:40 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 libmail-sendmail-perl all 0.80-1 [22.6 kB]
+Get:41 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libmysqlclient20 amd64 5.7.42-0ubuntu0.18.04.1 [730 kB]
+Get:42 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 zlib1g-dev amd64 1:1.2.11.dfsg-0ubuntu2.2 [176 kB]
+Get:43 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libmysqlclient-dev amd64 5.7.42-0ubuntu0.18.04.1 [1,078 kB]
+Get:44 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libpcre16-3 amd64 2:8.39-9ubuntu0.1 [147 kB]
+Get:45 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libpcre32-3 amd64 2:8.39-9ubuntu0.1 [138 kB]
+Get:46 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libpcrecpp0v5 amd64 2:8.39-9ubuntu0.1 [15.3 kB]
+Get:47 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libpcre3-dev amd64 2:8.39-9ubuntu0.1 [536 kB]
+Get:48 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 mysql-server all 5.7.42-0ubuntu0.18.04.1 [9,944 B]
+Get:49 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php7.2 all 7.2.24-0ubuntu0.18.04.17 [9,248 B]
+Get:50 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 php all 1:7.2+60ubuntu1 [3,084 B]
+Get:51 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 shtool all 2.0.8-9 [121 kB]
+Get:52 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php7.2-dev amd64 7.2.24-0ubuntu0.18.04.17 [555 kB]
+Get:53 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 php-dev all 1:7.2+60ubuntu1 [3,116 B]
+Get:54 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php7.2-mysql amd64 7.2.24-0ubuntu0.18.04.17 [117 kB]
+Get:55 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 php-mysql all 1:7.2+60ubuntu1 [2,004 B]
+Get:56 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php7.2-xml amd64 7.2.24-0ubuntu0.18.04.17 [108 kB]
+Get:57 http://us.archive.ubuntu.com/ubuntu bionic/universe amd64 php-xml all 1:7.2+60ubuntu1 [2,024 B]
+Get:58 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 php-pear all 1:1.10.5+submodules+notgz-1ubuntu1.18.04.4 [284 kB]
+Get:59 http://us.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libjson-c-dev amd64 0.12.1-1.3ubuntu0.3 [31.9 kB]
+Get:60 http://us.archive.ubuntu.com/ubuntu bionic/main amd64 pkg-php-tools all 1.35ubuntu1 [27.8 kB]
+Preconfiguring packages ...
+Fetched 32.2 MB in 37s (874 kB/s)
+Selecting previously unselected package libapr1:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 158418 files and directories currently installed.)
+Preparing to unpack .../00-libapr1_1.6.3-2_amd64.deb ...
+Unpacking libapr1:amd64 (1.6.3-2) ...
+Selecting previously unselected package libaprutil1:amd64.
+Preparing to unpack .../01-libaprutil1_1.6.1-2ubuntu0.1_amd64.deb ...
+Unpacking libaprutil1:amd64 (1.6.1-2ubuntu0.1) ...
+Selecting previously unselected package libaprutil1-dbd-sqlite3:amd64.
+Preparing to unpack .../02-libaprutil1-dbd-sqlite3_1.6.1-2ubuntu0.1_amd64.deb ...
+Unpacking libaprutil1-dbd-sqlite3:amd64 (1.6.1-2ubuntu0.1) ...
+Selecting previously unselected package libaprutil1-ldap:amd64.
+Preparing to unpack .../03-libaprutil1-ldap_1.6.1-2ubuntu0.1_amd64.deb ...
+Unpacking libaprutil1-ldap:amd64 (1.6.1-2ubuntu0.1) ...
+Selecting previously unselected package liblua5.2-0:amd64.
+Preparing to unpack .../04-liblua5.2-0_5.2.4-1.1build1_amd64.deb ...
+Unpacking liblua5.2-0:amd64 (5.2.4-1.1build1) ...
+Selecting previously unselected package apache2-bin.
+Preparing to unpack .../05-apache2-bin_2.4.29-1ubuntu4.27_amd64.deb ...
+Unpacking apache2-bin (2.4.29-1ubuntu4.27) ...
+Selecting previously unselected package apache2-utils.
+Preparing to unpack .../06-apache2-utils_2.4.29-1ubuntu4.27_amd64.deb ...
+Unpacking apache2-utils (2.4.29-1ubuntu4.27) ...
+Selecting previously unselected package apache2-data.
+Preparing to unpack .../07-apache2-data_2.4.29-1ubuntu4.27_all.deb ...
+Unpacking apache2-data (2.4.29-1ubuntu4.27) ...
+Selecting previously unselected package apache2.
+Preparing to unpack .../08-apache2_2.4.29-1ubuntu4.27_amd64.deb ...
+Unpacking apache2 (2.4.29-1ubuntu4.27) ...
+Selecting previously unselected package mysql-common.
+Preparing to unpack .../09-mysql-common_5.8+1.0.4_all.deb ...
+Unpacking mysql-common (5.8+1.0.4) ...
+Selecting previously unselected package libaio1:amd64.
+Preparing to unpack .../10-libaio1_0.3.110-5ubuntu0.1_amd64.deb ...
+Unpacking libaio1:amd64 (0.3.110-5ubuntu0.1) ...
+Selecting previously unselected package mysql-client-core-5.7.
+Preparing to unpack .../11-mysql-client-core-5.7_5.7.42-0ubuntu0.18.04.1_amd64.deb ...
+Unpacking mysql-client-core-5.7 (5.7.42-0ubuntu0.18.04.1) ...
+Selecting previously unselected package mysql-client-5.7.
+Preparing to unpack .../12-mysql-client-5.7_5.7.42-0ubuntu0.18.04.1_amd64.deb ...
+Unpacking mysql-client-5.7 (5.7.42-0ubuntu0.18.04.1) ...
+Selecting previously unselected package mysql-server-core-5.7.
+Preparing to unpack .../13-mysql-server-core-5.7_5.7.42-0ubuntu0.18.04.1_amd64.deb ...
+Unpacking mysql-server-core-5.7 (5.7.42-0ubuntu0.18.04.1) ...
+Selecting previously unselected package libevent-core-2.1-6:amd64.
+Preparing to unpack .../14-libevent-core-2.1-6_2.1.8-stable-4build1_amd64.deb ...
+Unpacking libevent-core-2.1-6:amd64 (2.1.8-stable-4build1) ...
+Setting up mysql-common (5.8+1.0.4) ...
+update-alternatives: using /etc/mysql/my.cnf.fallback to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+Selecting previously unselected package mysql-server-5.7.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 159290 files and directories currently installed.)
+Preparing to unpack .../00-mysql-server-5.7_5.7.42-0ubuntu0.18.04.1_amd64.deb ...
+Unpacking mysql-server-5.7 (5.7.42-0ubuntu0.18.04.1) ...
+Selecting previously unselected package libsigsegv2:amd64.
+Preparing to unpack .../01-libsigsegv2_2.12-1_amd64.deb ...
+Unpacking libsigsegv2:amd64 (2.12-1) ...
+Selecting previously unselected package m4.
+Preparing to unpack .../02-m4_1.4.18-1_amd64.deb ...
+Unpacking m4 (1.4.18-1) ...
+Selecting previously unselected package autoconf.
+Preparing to unpack .../03-autoconf_2.69-11_all.deb ...
+Unpacking autoconf (2.69-11) ...
+Selecting previously unselected package autotools-dev.
+Preparing to unpack .../04-autotools-dev_20180224.1_all.deb ...
+Unpacking autotools-dev (20180224.1) ...
+Selecting previously unselected package automake.
+Preparing to unpack .../05-automake_1%3a1.15.1-3ubuntu2_all.deb ...
+Unpacking automake (1:1.15.1-3ubuntu2) ...
+Selecting previously unselected package autopoint.
+Preparing to unpack .../06-autopoint_0.19.8.1-6ubuntu0.3_all.deb ...
+Unpacking autopoint (0.19.8.1-6ubuntu0.3) ...
+Selecting previously unselected package libtool.
+Preparing to unpack .../07-libtool_2.4.6-2_all.deb ...
+Unpacking libtool (2.4.6-2) ...
+Selecting previously unselected package dh-autoreconf.
+Preparing to unpack .../08-dh-autoreconf_17_all.deb ...
+Unpacking dh-autoreconf (17) ...
+Selecting previously unselected package libfile-stripnondeterminism-perl.
+Preparing to unpack .../09-libfile-stripnondeterminism-perl_0.040-1.1~build1_all.deb ...
+Unpacking libfile-stripnondeterminism-perl (0.040-1.1~build1) ...
+Selecting previously unselected package dh-strip-nondeterminism.
+Preparing to unpack .../10-dh-strip-nondeterminism_0.040-1.1~build1_all.deb ...
+Unpacking dh-strip-nondeterminism (0.040-1.1~build1) ...
+Selecting previously unselected package po-debconf.
+Preparing to unpack .../11-po-debconf_1.0.20_all.deb ...
+Unpacking po-debconf (1.0.20) ...
+Selecting previously unselected package debhelper.
+Preparing to unpack .../12-debhelper_11.1.6ubuntu2_all.deb ...
+Unpacking debhelper (11.1.6ubuntu2) ...
+Selecting previously unselected package php-common.
+Preparing to unpack .../13-php-common_1%3a60ubuntu1_all.deb ...
+Unpacking php-common (1:60ubuntu1) ...
+Selecting previously unselected package php7.2-common.
+Preparing to unpack .../14-php7.2-common_7.2.24-0ubuntu0.18.04.17_amd64.deb ...
+Unpacking php7.2-common (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package php7.2-json.
+Preparing to unpack .../15-php7.2-json_7.2.24-0ubuntu0.18.04.17_amd64.deb ...
+Unpacking php7.2-json (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package php7.2-opcache.
+Preparing to unpack .../16-php7.2-opcache_7.2.24-0ubuntu0.18.04.17_amd64.deb ...
+Unpacking php7.2-opcache (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package php7.2-readline.
+Preparing to unpack .../17-php7.2-readline_7.2.24-0ubuntu0.18.04.17_amd64.deb ...
+Unpacking php7.2-readline (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package php7.2-cli.
+Preparing to unpack .../18-php7.2-cli_7.2.24-0ubuntu0.18.04.17_amd64.deb ...
+Unpacking php7.2-cli (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package libapache2-mod-php7.2.
+Preparing to unpack .../19-libapache2-mod-php7.2_7.2.24-0ubuntu0.18.04.17_amd64.deb ...
+Unpacking libapache2-mod-php7.2 (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package libarchive-cpio-perl.
+Preparing to unpack .../20-libarchive-cpio-perl_0.10-1_all.deb ...
+Unpacking libarchive-cpio-perl (0.10-1) ...
+Selecting previously unselected package libhtml-template-perl.
+Preparing to unpack .../21-libhtml-template-perl_2.97-1_all.deb ...
+Unpacking libhtml-template-perl (2.97-1) ...
+Selecting previously unselected package libltdl-dev:amd64.
+Preparing to unpack .../22-libltdl-dev_2.4.6-2_amd64.deb ...
+Unpacking libltdl-dev:amd64 (2.4.6-2) ...
+Selecting previously unselected package libsys-hostname-long-perl.
+Preparing to unpack .../23-libsys-hostname-long-perl_1.5-1_all.deb ...
+Unpacking libsys-hostname-long-perl (1.5-1) ...
+Selecting previously unselected package libmail-sendmail-perl.
+Preparing to unpack .../24-libmail-sendmail-perl_0.80-1_all.deb ...
+Unpacking libmail-sendmail-perl (0.80-1) ...
+Selecting previously unselected package libmysqlclient20:amd64.
+Preparing to unpack .../25-libmysqlclient20_5.7.42-0ubuntu0.18.04.1_amd64.deb ...
+Unpacking libmysqlclient20:amd64 (5.7.42-0ubuntu0.18.04.1) ...
+Selecting previously unselected package zlib1g-dev:amd64.
+Preparing to unpack .../26-zlib1g-dev_1%3a1.2.11.dfsg-0ubuntu2.2_amd64.deb ...
+Unpacking zlib1g-dev:amd64 (1:1.2.11.dfsg-0ubuntu2.2) ...
+Selecting previously unselected package libmysqlclient-dev.
+Preparing to unpack .../27-libmysqlclient-dev_5.7.42-0ubuntu0.18.04.1_amd64.deb ...
+Unpacking libmysqlclient-dev (5.7.42-0ubuntu0.18.04.1) ...
+Selecting previously unselected package libpcre16-3:amd64.
+Preparing to unpack .../28-libpcre16-3_2%3a8.39-9ubuntu0.1_amd64.deb ...
+Unpacking libpcre16-3:amd64 (2:8.39-9ubuntu0.1) ...
+Selecting previously unselected package libpcre32-3:amd64.
+Preparing to unpack .../29-libpcre32-3_2%3a8.39-9ubuntu0.1_amd64.deb ...
+Unpacking libpcre32-3:amd64 (2:8.39-9ubuntu0.1) ...
+Selecting previously unselected package libpcrecpp0v5:amd64.
+Preparing to unpack .../30-libpcrecpp0v5_2%3a8.39-9ubuntu0.1_amd64.deb ...
+Unpacking libpcrecpp0v5:amd64 (2:8.39-9ubuntu0.1) ...
+Selecting previously unselected package libpcre3-dev:amd64.
+Preparing to unpack .../31-libpcre3-dev_2%3a8.39-9ubuntu0.1_amd64.deb ...
+Unpacking libpcre3-dev:amd64 (2:8.39-9ubuntu0.1) ...
+Selecting previously unselected package mysql-server.
+Preparing to unpack .../32-mysql-server_5.7.42-0ubuntu0.18.04.1_all.deb ...
+Unpacking mysql-server (5.7.42-0ubuntu0.18.04.1) ...
+Selecting previously unselected package php7.2.
+Preparing to unpack .../33-php7.2_7.2.24-0ubuntu0.18.04.17_all.deb ...
+Unpacking php7.2 (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package php.
+Preparing to unpack .../34-php_1%3a7.2+60ubuntu1_all.deb ...
+Unpacking php (1:7.2+60ubuntu1) ...
+Selecting previously unselected package shtool.
+Preparing to unpack .../35-shtool_2.0.8-9_all.deb ...
+Unpacking shtool (2.0.8-9) ...
+Selecting previously unselected package php7.2-dev.
+Preparing to unpack .../36-php7.2-dev_7.2.24-0ubuntu0.18.04.17_amd64.deb ...
+Unpacking php7.2-dev (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package php-dev.
+Preparing to unpack .../37-php-dev_1%3a7.2+60ubuntu1_all.deb ...
+Unpacking php-dev (1:7.2+60ubuntu1) ...
+Selecting previously unselected package php7.2-mysql.
+Preparing to unpack .../38-php7.2-mysql_7.2.24-0ubuntu0.18.04.17_amd64.deb ...
+Unpacking php7.2-mysql (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package php-mysql.
+Preparing to unpack .../39-php-mysql_1%3a7.2+60ubuntu1_all.deb ...
+Unpacking php-mysql (1:7.2+60ubuntu1) ...
+Selecting previously unselected package php7.2-xml.
+Preparing to unpack .../40-php7.2-xml_7.2.24-0ubuntu0.18.04.17_amd64.deb ...
+Unpacking php7.2-xml (7.2.24-0ubuntu0.18.04.17) ...
+Selecting previously unselected package php-xml.
+Preparing to unpack .../41-php-xml_1%3a7.2+60ubuntu1_all.deb ...
+Unpacking php-xml (1:7.2+60ubuntu1) ...
+Selecting previously unselected package php-pear.
+Preparing to unpack .../42-php-pear_1%3a1.10.5+submodules+notgz-1ubuntu1.18.04.4_all.deb ...
+Unpacking php-pear (1:1.10.5+submodules+notgz-1ubuntu1.18.04.4) ...
+Selecting previously unselected package libjson-c-dev:amd64.
+Preparing to unpack .../43-libjson-c-dev_0.12.1-1.3ubuntu0.3_amd64.deb ...
+Unpacking libjson-c-dev:amd64 (0.12.1-1.3ubuntu0.3) ...
+Selecting previously unselected package pkg-php-tools.
+Preparing to unpack .../44-pkg-php-tools_1.35ubuntu1_all.deb ...
+Unpacking pkg-php-tools (1.35ubuntu1) ...
+Setting up libapr1:amd64 (1.6.3-2) ...
+Setting up libevent-core-2.1-6:amd64 (2.1.8-stable-4build1) ...
+Setting up libhtml-template-perl (2.97-1) ...
+Setting up libltdl-dev:amd64 (2.4.6-2) ...
+Setting up po-debconf (1.0.20) ...
+Setting up libsigsegv2:amd64 (2.12-1) ...
+Setting up shtool (2.0.8-9) ...
+Setting up libarchive-cpio-perl (0.10-1) ...
+Setting up apache2-data (2.4.29-1ubuntu4.27) ...
+Setting up m4 (1.4.18-1) ...
+Setting up libsys-hostname-long-perl (1.5-1) ...
+Setting up libmail-sendmail-perl (0.80-1) ...
+Setting up libaio1:amd64 (0.3.110-5ubuntu0.1) ...
+Setting up autotools-dev (20180224.1) ...
+Setting up libaprutil1:amd64 (1.6.1-2ubuntu0.1) ...
+Setting up php-common (1:60ubuntu1) ...
+Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /lib/systemd/system/phpsessionclean.timer.
+Setting up libjson-c-dev:amd64 (0.12.1-1.3ubuntu0.3) ...
+Setting up libpcrecpp0v5:amd64 (2:8.39-9ubuntu0.1) ...
+Setting up libpcre32-3:amd64 (2:8.39-9ubuntu0.1) ...
+Setting up libmysqlclient20:amd64 (5.7.42-0ubuntu0.18.04.1) ...
+Setting up liblua5.2-0:amd64 (5.2.4-1.1build1) ...
+Setting up libpcre16-3:amd64 (2:8.39-9ubuntu0.1) ...
+Setting up mysql-client-core-5.7 (5.7.42-0ubuntu0.18.04.1) ...
+Setting up autopoint (0.19.8.1-6ubuntu0.3) ...
+Setting up libaprutil1-ldap:amd64 (1.6.1-2ubuntu0.1) ...
+Setting up zlib1g-dev:amd64 (1:1.2.11.dfsg-0ubuntu2.2) ...
+Setting up libfile-stripnondeterminism-perl (0.040-1.1~build1) ...
+Setting up libtool (2.4.6-2) ...
+Setting up libpcre3-dev:amd64 (2:8.39-9ubuntu0.1) ...
+Setting up php7.2-common (7.2.24-0ubuntu0.18.04.17) ...
+
+Creating config file /etc/php/7.2/mods-available/calendar.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/ctype.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/exif.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/fileinfo.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/ftp.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/gettext.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/iconv.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/pdo.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/phar.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/posix.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/shmop.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/sockets.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/sysvmsg.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/sysvsem.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/sysvshm.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/tokenizer.ini with new version
+Setting up libmysqlclient-dev (5.7.42-0ubuntu0.18.04.1) ...
+Setting up libaprutil1-dbd-sqlite3:amd64 (1.6.1-2ubuntu0.1) ...
+Setting up mysql-server-core-5.7 (5.7.42-0ubuntu0.18.04.1) ...
+Setting up apache2-utils (2.4.29-1ubuntu4.27) ...
+Setting up apache2-bin (2.4.29-1ubuntu4.27) ...
+Setting up autoconf (2.69-11) ...
+Setting up php7.2-readline (7.2.24-0ubuntu0.18.04.17) ...
+
+Creating config file /etc/php/7.2/mods-available/readline.ini with new version
+Setting up automake (1:1.15.1-3ubuntu2) ...
+update-alternatives: using /usr/bin/automake-1.15 to provide /usr/bin/automake (automake) in auto mode
+Setting up php7.2-json (7.2.24-0ubuntu0.18.04.17) ...
+
+Creating config file /etc/php/7.2/mods-available/json.ini with new version
+Setting up mysql-client-5.7 (5.7.42-0ubuntu0.18.04.1) ...
+Setting up php7.2-opcache (7.2.24-0ubuntu0.18.04.17) ...
+
+Creating config file /etc/php/7.2/mods-available/opcache.ini with new version
+Setting up php7.2-mysql (7.2.24-0ubuntu0.18.04.17) ...
+
+Creating config file /etc/php/7.2/mods-available/mysqlnd.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/mysqli.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/pdo_mysql.ini with new version
+Setting up php7.2-xml (7.2.24-0ubuntu0.18.04.17) ...
+
+Creating config file /etc/php/7.2/mods-available/dom.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/simplexml.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/wddx.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/xml.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/xmlreader.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/xmlwriter.ini with new version
+
+Creating config file /etc/php/7.2/mods-available/xsl.ini with new version
+Setting up apache2 (2.4.29-1ubuntu4.27) ...
+Enabling module mpm_event.
+Enabling module authz_core.
+Enabling module authz_host.
+Enabling module authn_core.
+Enabling module auth_basic.
+Enabling module access_compat.
+Enabling module authn_file.
+Enabling module authz_user.
+Enabling module alias.
+Enabling module dir.
+Enabling module autoindex.
+Enabling module env.
+Enabling module mime.
+Enabling module negotiation.
+Enabling module setenvif.
+Enabling module filter.
+Enabling module deflate.
+Enabling module status.
+Enabling module reqtimeout.
+Enabling conf charset.
+Enabling conf localized-error-pages.
+Enabling conf other-vhosts-access-log.
+Enabling conf security.
+Enabling conf serve-cgi-bin.
+Enabling site 000-default.
+Created symlink /etc/systemd/system/multi-user.target.wants/apache2.service → /lib/systemd/system/apache2.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/apache-htcacheclean.service → /lib/systemd/system/apache-htcacheclean.service.
+Setting up php-xml (1:7.2+60ubuntu1) ...
+Setting up php7.2-cli (7.2.24-0ubuntu0.18.04.17) ...
+update-alternatives: using /usr/bin/php7.2 to provide /usr/bin/php (php) in auto mode
+update-alternatives: using /usr/bin/phar7.2 to provide /usr/bin/phar (phar) in auto mode
+update-alternatives: using /usr/bin/phar.phar7.2 to provide /usr/bin/phar.phar (phar.phar) in auto mode
+
+Creating config file /etc/php/7.2/cli/php.ini with new version
+Setting up php-pear (1:1.10.5+submodules+notgz-1ubuntu1.18.04.4) ...
+Setting up mysql-server-5.7 (5.7.42-0ubuntu0.18.04.1) ...
+update-alternatives: using /etc/mysql/mysql.cnf to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+Renaming removed key_buffer and myisam-recover options (if present)
+Created symlink /etc/systemd/system/multi-user.target.wants/mysql.service → /lib/systemd/system/mysql.service.
+Setting up libapache2-mod-php7.2 (7.2.24-0ubuntu0.18.04.17) ...
+
+Creating config file /etc/php/7.2/apache2/php.ini with new version
+Module mpm_event disabled.
+Enabling module mpm_prefork.
+apache2_switch_mpm Switch to prefork
+apache2_invoke: Enable module php7.2
+Setting up php-mysql (1:7.2+60ubuntu1) ...
+Setting up php7.2-dev (7.2.24-0ubuntu0.18.04.17) ...
+update-alternatives: using /usr/bin/php-config7.2 to provide /usr/bin/php-config (php-config) in auto mode
+update-alternatives: using /usr/bin/phpize7.2 to provide /usr/bin/phpize (phpize) in auto mode
+Setting up php-dev (1:7.2+60ubuntu1) ...
+Setting up mysql-server (5.7.42-0ubuntu0.18.04.1) ...
+Setting up php7.2 (7.2.24-0ubuntu0.18.04.17) ...
+Setting up php (1:7.2+60ubuntu1) ...
+Setting up dh-autoreconf (17) ...
+Setting up dh-strip-nondeterminism (0.040-1.1~build1) ...
+Setting up debhelper (11.1.6ubuntu2) ...
+Setting up pkg-php-tools (1.35ubuntu1) ...
+Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
+Processing triggers for systemd (237-3ubuntu10.57) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for ufw (0.36-0ubuntu0.18.04.2) ...
+Processing triggers for ureadahead (0.100.0-21) ...
+Processing triggers for install-info (6.5.0.dfsg.1-2) ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Setting database ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Setting include path ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Creating symbolic link to /opt/ibmacs1658 ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Setting html directory ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Creating symbolic link to /usr/include/json-c ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Setting include path ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmacs][0m Compiling IBMACS and setting include path ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-open_demo_webpage][0m Opening demo webpage with new terminal ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmtpmtss_env][0m Setting path env variable ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmtpmtss_env][0m Creating symbolic link to /opt/ibmtss2.1.1 ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-activate_TPM_server][0m Starting TPM simulator (SWTPM/vTPM/server) on new temrinal ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-activate_TPM_client][0m Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-generate_EK][0m Backing up NVChip ......
+[1m[34m[NOTICE-setup_ibmtpm/setup-generate_EK][0m Generating RSAEK and load into NV ......
+ createprimary: RSA public key length 256
+ c3 b9 34 7d 1d ad 2a 02 20 2c ec 88 b1 0c 6d d5 
+ 61 f1 8c bf e2 0c 43 1e 78 b7 39 f7 9c e4 1a 0e 
+ 21 10 3c 23 09 bd 8f 11 65 ea 5b f5 31 3c 28 bc 
+ 18 2b 30 ab 08 f5 af 24 c3 d1 1d 6d b8 eb 5e 57 
+ b6 21 89 12 73 ed 43 43 a0 d4 dc b5 5c d4 cb 36 
+ b8 06 eb 3b 94 db b2 ca 9a 8f 95 55 96 48 58 50 
+ 8e 35 b2 f5 b4 20 c4 a7 67 0f 7e a5 d6 28 c8 0d 
+ ad 97 f5 f0 9d 66 c9 07 0b a1 f2 fc 00 4e f8 30 
+ 74 a7 d3 7e d2 0d 4b 9b 9f 72 b6 70 76 3f 69 0b 
+ 26 46 02 4a 25 3b 73 4e 42 54 9d 97 e6 7d 3c 9c 
+ e7 95 d9 60 a9 de 84 ba 23 7b 3c 6e 82 ea 2a 62 
+ 6c 54 d9 6c 62 b0 7c fb d3 f7 49 e1 53 bd 60 7c 
+ c4 70 0a 1c 30 a1 9b 54 fb 65 da ac 43 32 45 f8 
+ 35 0a e8 64 51 11 52 a4 ec a7 26 48 e0 43 a7 ee 
+ 13 ae 11 c2 ee ae 37 6b e0 8a c1 33 89 52 17 e6 
+ fd 4f b2 6e 28 4f ea c7 7e f9 65 56 41 0d b3 3d 
+startCertificate: Adding certificate serial number
+startCertificate: Adding certificate issuer
+startCertificate: Adding certificate validity
+startCertificate: Adding certificate subject
+addCertKeyRsa: add public key to certificate
+addCertSignatureRoot: Signing the certificate
+addCertSignatureRoot: Verifying the certificate
+convertX509ToDer: Serializing certificate
+defineEKCertIndex: certificate length 835
+readNvBufferMax: TPM max read/write: 1024
+readNvBufferMax: combined max read/write: 1024
+storeEkCertificate: writing 835 bytes to 01c00002
+storeEkCertificate: success
+[1m[34m[NOTICE-setup_ibmtpm/setup-generate_EK][0m Generating ECCEK and load into NV ......
+ createprimary: ECC public key x length 32
+ 5a bd fc 95 eb 53 e4 aa f6 b2 d9 1c 29 b3 2a da 
+ be 07 83 9d 80 f9 a7 b9 02 85 a2 9b 5a db 34 fb 
+ createprimary: ECC public key y length 32
+ 5e 9d 08 2b ef b9 93 71 1f bf b6 05 92 1e 0e 66 
+ 2f 22 31 7e 89 68 24 6b 72 b4 e8 e5 59 8e 10 64 
+startCertificate: Adding certificate serial number
+startCertificate: Adding certificate issuer
+startCertificate: Adding certificate validity
+startCertificate: Adding certificate subject
+addCertSignatureRoot: Signing the certificate
+addCertSignatureRoot: Verifying the certificate
+convertX509ToDer: Serializing certificate
+defineEKCertIndex: certificate length 439
+readNvBufferMax: TPM max read/write: 1024
+readNvBufferMax: combined max read/write: 1024
+storeEkCertificate: writing 439 bytes to 01c0000a
+storeEkCertificate: success
+[1m[34m[NOTICE-setup_ibmtpm/setup-set_acs_sql_setting][0m Setting ACS MYSQL Setting ...
+[1m[33m[WARN-setup_ibmtpm/setup-set_acs_sql_setting][0m Forcing ACS MySQL Setting ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_Server][0m Activating ACS Demo on same machine ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_Server][0m Replacing path in /opt/ibmtss/utils/certificates/rootcerts.txt ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-set_acs_sql_setting][0m Setting ACS MYSQL Setting ...
+[1m[33m[WARN-setup_ibmtpm/setup-set_acs_sql_setting][0m Forcing ACS MySQL Setting ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_Server][0m Activating ACS Demo on new terminal ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_Client][0m Activating ACS Demo on local machine ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_verify][0m Checking TPM2BIOS.LOG ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_verify][0m Checking IMASIG.LOG ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_server_log_dir: /opt/ibmacs/serverenroll.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_client_log_dir: /opt/ibmacs/clientenroll.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m swtpm_bios_log_dir: /opt/ibmacs/tpm2bios.log
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_verify_tpm2bios_log_dir: /opt/ibmacs/b.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m ima_sig_log_dir: /opt/ibmacs/imasig.log
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_verify_imasig_log_dir: /opt/ibmacs/i.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_verify_client_log_dir: /opt/ibmacs/client.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup][0m Setup complete
+[1m[33m[WARN-common/setup][0m Invalid Argument: 0 ! Skipping setup_socket_com...
+[1m[33m[WARN-common/setup][0m Invalid Argument: 0 ! Skipping setup_optiga...
+[1m[34m[NOTICE-common/setup][0m All setup complete.

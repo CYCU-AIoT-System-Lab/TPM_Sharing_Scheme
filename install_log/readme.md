@@ -4,7 +4,8 @@ Log recorded with command ```bash install_TPM.sh | tee x.log > /dev/null```
 
 ## Ubuntu 18.04 VM
 
-Empty
+1. [UBT_1.log](UBT_1.log): common + setup_ibmtpm
+    - PASS
 
 ## Raspbian Bullseye 2022-07-01 5.1 Kernel Debian i386 VM
 
