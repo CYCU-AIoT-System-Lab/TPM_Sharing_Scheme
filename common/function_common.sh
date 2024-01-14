@@ -32,10 +32,10 @@ load_preset () {
     check_var job_change_all_sh_mod 1
     check_var job_config_apport 1
     check_var job_reload_term 1
-    check_var job_environment 1
-    check_var job_ibmtpm 1
+    check_var job_setup_environment 1
+    check_var job_setup_ibmtpm 1
     check_var job_socket_com 1
-    check_var job_optiga 1
+    check_var job_setup_optiga 1
 }
 echo_notice "common" "function_common" "Loaded function: load_preset"
 
@@ -60,9 +60,9 @@ clear_preset () {
     unset job_change_all_sh_mod
     unset job_config_apport
     unset job_reload_term
-    unset job_environment
-    unset job_ibmtpm
+    unset job_setup_environment
+    unset job_setup_ibmtpm
     unset job_socket_com
-    unset job_optiga
+    unset job_setup_optiga
 }
 echo_notice "common" "function_common" "Loaded function: clear_preset"
