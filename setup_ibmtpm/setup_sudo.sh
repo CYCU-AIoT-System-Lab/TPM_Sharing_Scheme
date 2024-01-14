@@ -1,7 +1,8 @@
 #!/bin/bash
 
-source "../common/function.sh" # load function.sh
-parse "./config.ini" "display"
+source "../common/function.sh"
+source "./function_ibmtpm.sh"
+load_preset "./config.ini"
 
 current_dir=$(pwd)
 dn_ibmtss="ibmtss"
@@ -442,5 +443,7 @@ if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 if [ $print_log_path         == 1 ]; then print_log_path;              fi
 if [ $open_all_logs          == 1 ]; then open_all_logs;               fi
+
+clear_preset
 
 echo_notice "setup_ibmtpm" "setup" "Setup complete"
