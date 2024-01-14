@@ -1,5 +1,7 @@
+#!/bin/bash +x
+
 source "./function.sh"
-sed -i 's@${HOME}@'"$HOME"'@' config.ini
+sed -i 's@${HOME}@'"$HOME"'@' config.ini # replace ${HOME} with $HOME
 parse "./config.ini" "display"
 
 check_var apport_dir 1
@@ -10,7 +12,7 @@ echo_notice "common" "remove" "Var check done"
 clear_dir $apport_dir "rmdir"
 clear_dir $cmake_dir "rmdir"
 clear_dir $valgrind_dir "rmdir"
-echo_notice "common" "remove" "Clear dir done"
+echo_notice "common" "remove" "Clear done"
 
 unset apport_dir
 unset cmake_dir
