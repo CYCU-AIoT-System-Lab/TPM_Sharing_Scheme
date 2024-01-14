@@ -36,6 +36,7 @@ load_preset () {
     check_var job_setup_ibmtpm 1
     check_var job_socket_com 1
     check_var job_setup_optiga 1
+    check_var job_enable_ssh 1
 }
 echo_notice "common" "function_common" "Loaded function: load_preset"
 
@@ -64,5 +65,6 @@ clear_preset () {
     unset job_setup_ibmtpm
     unset job_socket_com
     unset job_setup_optiga
+    unset job_enable_ssh
 }
 echo_notice "common" "function_common" "Loaded function: clear_preset"

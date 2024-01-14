@@ -132,3 +132,9 @@ clear_dir () {
     fi
 }
 echo_notice "common" "function" "Loaded function: clear_dir"
+
+aptins () {
+    echo_notice "common" "setup" "Installing ${BOLD}${GREEN}$1${END}..."
+    sudo apt-get $apt_gflag install $1 -y
+}
+echo_notice "common" "function" "Loaded function: aptins"

@@ -40,10 +40,6 @@ build_valgrind () {
 }
 
 install_req () {
-	aptins () {
-        echo_notice "common" "setup" "Installing ${BOLD}${GREEN}$1${END}..."
-		sudo apt-get $apt_gflag install $1 -y
-	}
     echo_notice "common" "setup" "Installing required packages..."
 	sudo apt-get $apt_gflag update
 	sudo apt-get $apt_gflag upgrade -y
@@ -104,6 +100,18 @@ reload_term () {
 	source ~/.bashrc
 }
 
+enable_ssh () {
+    if [ $install_platform -eq 1 ]; then
+        echo_notice "common" "setup" "Enabling ssh..."
+        aptins "openssh-server"
+        sudo systemctl enable ssh
+        sudo systemctl start ssh
+        sudo ufw allow ssh
+    else
+        echo_warn "common" "setup" "Invalid Argument: $install_platform ! Skipping enable_ssh..."
+    fi
+}
+
 echo_notice "common" "setup" "Running common setup..."
 echo_notice "common" "setup" "Current directory: $PWD"
 working_dir=$PWD
@@ -114,6 +122,7 @@ if [ $job_update_src        -eq 1 ]; then update_src;        fi
 if [ $job_change_all_sh_mod -eq 1 ]; then change_all_sh_mod; fi
 if [ $job_config_apport     -eq 1 ]; then config_apport;     fi
 if [ $job_reload_term       -eq 1 ]; then reload_term;       fi
+if [ $job_enable_ssh        -eq 1 ]; then enable_ssh;        fi
 
 if [ $job_setup_environment -eq 1 ]; then
     echo_warn "common" "setup" "Running environment setup Not Implemneted Yet!"
