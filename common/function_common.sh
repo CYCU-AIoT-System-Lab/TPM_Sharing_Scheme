@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Function: include env to config file, load config, var check
-# Usage: source "./function.sh" "config.ini"
+# Usage: source "config.ini"
 # Input variable: $1: config.ini
 load_preset () {
     echo_notice "common" "setup" "Env var to config file..."
