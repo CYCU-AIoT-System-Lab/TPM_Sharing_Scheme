@@ -85,24 +85,6 @@ parse () {
 }
 echo_notice "common" "function" "Loaded function: parse"
 
-# Function: clear directory
-# Usage: clear_dir "directory"
-# $1: directory to clear content
-# $2: clear this directory too (== "rmdir")
-clear_dir () {
-    if [ -z "$1+x" ]; then
-        echo "clear_dir: directory is empty"
-        exit 1
-    fi
-    echo "Removing content in $1"
-    cd $1
-    sudo rm -rf *
-    if [ "$2" == "rmdir" ]; then
-        sudo rmdir $1
-    fi
-}
-echo_notice "common" "function" "Loaded function: clear_dir"
-
 # Function: logging date and time from executable output to file
 # Usage: log_date_time "command to execute" "format" "log file" "method"
 # $1: command to execute
@@ -125,7 +107,22 @@ echo_notice "common" "function" "Loaded function: log_date_time"
 # $2: exit code
 check_var () {
     if [ -z "${!1}" ]; then
-        echo_error "common" "function" "Error: $1 is empty" $2
+        echo_error "common" "function" "Error: variable $1 is empty! Check your config.ini file." $2
     fi
 }
 echo_notice "common" "function" "Loaded function: check_var"
+
+# Function: clear directory
+# Usage: clear_dir "directory"
+# $1: directory to clear content
+# $2: clear this directory too (== "rmdir")
+clear_dir () {
+    check_var "1" 1
+    echo "Removing content in $1"
+    cd $1
+    sudo rm -rf *
+    if [ "$2" == "rmdir" ]; then
+        sudo rmdir $1
+    fi
+}
+echo_notice "common" "function" "Loaded function: clear_dir"
