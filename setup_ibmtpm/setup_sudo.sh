@@ -140,10 +140,10 @@ setup_ibmacs_env () {
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
         # for Server
-        apt-get install -y libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev
+        aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
     elif [ $acsMode == 2 ]; then
         # for Client
-        apt-get install -y libjson-c-dev libssl-dev
+        aptins "libjson-c-dev libssl-dev"
     else 
         echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid acsMode"
         exit 1
