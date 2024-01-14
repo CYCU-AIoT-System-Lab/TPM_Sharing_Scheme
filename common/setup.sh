@@ -1,13 +1,5 @@
 #/bin/bash
 
-# Replace all ${HOME} with $HOME
-#sed -i 's@${HOME}@'"$HOME"'@' config.ini
-#
-#source "./function.sh"
-#parse "./config.ini" "display"
-#
-#check_var install_platform 1
-
 source "./function.sh"
 source "./function_common.sh"
 load_preset "./config.ini"
@@ -160,5 +152,7 @@ if [ $job_setup_optiga -eq 1 ]; then
 else
     echo_warn "common" "setup" "Invalid Argument: $job_setup_optiga ! Skipping setup_optiga..."
 fi
+
+clear_preset
 
 echo_notice "common" "setup" "All setup complete."

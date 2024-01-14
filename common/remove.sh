@@ -1,20 +1,44 @@
 #!/bin/bash +x
 
 source "./function.sh"
-sed -i 's@${HOME}@'"$HOME"'@' config.ini # replace ${HOME} with $HOME
-parse "./config.ini" "display"
-
-check_var apport_dir 1
-check_var cmake_dir 1
-check_var valgrind_dir 1
-echo_notice "common" "remove" "Var check done"
+source "./function_common.sh"
+load_preset "./config.ini"
 
 clear_dir $apport_dir "rmdir"
 clear_dir $cmake_dir "rmdir"
 clear_dir $valgrind_dir "rmdir"
 echo_notice "common" "remove" "Clear done"
 
-unset apport_dir
-unset cmake_dir
-unset valgrind_dir
-echo_notice "common" "remove" "Unset var done"
+if [ ${job_setup_environment} -eq 1 ]; then
+    echo_notice "common" "remove" "Running environment setup Not Implemneted Yet!"
+    cd ../setup_environment
+    bash ./remove.sh
+else
+    echo_warn "common" "remove" "Invalid Argument: $job_setup_environment ! Skipping setup_environment..."
+fi
+
+if [ ${job_setup_ibmtpm} -eq 1 ]; then
+    echo_notice "common" "remove" "Running ibmtpm setup..."
+    cd ../setup_ibmtpm
+    bash ./remove.sh
+else
+    echo_warn "common" "remove" "Invalid Argument: $job_setup_ibmtpm ! Skipping setup_ibmtpm..."
+fi
+
+if [ ${job_socket_com} -eq 1 ]; then
+    echo_notice "common" "remove" "Running socket_com setup..."
+    cd ../socket_com
+    bash ./remove.sh
+else
+    echo_warn "common" "remove" "Invalid Argument: $job_socket_com ! Skipping setup_socket_com..."
+fi
+
+if [ ${job_setup_optiga} -eq 1 ]; then
+    echo_notice "common" "remove" "Running optiga setup..."
+    cd ../setup_optiga
+    bash ./remove.sh
+else
+    echo_warn "common" "remove" "Invalid Argument: $job_setup_optiga ! Skipping setup_optiga..."
+fi
+
+clear_preset
