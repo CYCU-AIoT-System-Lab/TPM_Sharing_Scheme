@@ -1,12 +1,15 @@
 #/bin/bash
 
 # Replace all ${HOME} with $HOME
-sed -i 's@${HOME}@'"$HOME"'@' config.ini
+#sed -i 's@${HOME}@'"$HOME"'@' config.ini
+#
+#source "./function.sh"
+#parse "./config.ini" "display"
+#
+#check_var install_platform 1
 
-source "./function.sh"
-parse "./config.ini" "display"
-
-check_var install_platform 1
+source "./function_common.sh"
+load_preset "./function.sh" "./config.ini"
 
 # Functions
 

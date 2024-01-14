@@ -7,13 +7,13 @@ file_name="function"
 # Usage: load_special_chars
 # No input variable
 load_special_chars () {
-    readonly BOLD="\033[1m"
-    readonly BLUE="\033[34m"
-    readonly RED="\033[31m"
-    readonly GREEN="\033[32m"
-    readonly YELLOW="\033[33m"
-    readonly END="\033[0m"
-    readonly CLEAR_LINE="\033[2K"
+    eval BOLD="\033[1m"
+    eval BLUE="\033[34m"
+    eval RED="\033[31m"
+    eval GREEN="\033[32m"
+    eval YELLOW="\033[33m"
+    eval END="\033[0m"
+    eval CLEAR_LINE="\033[2K"
 }
 load_special_chars
 echo -e "${BOLD}${BLUE}[NOTICE-${dir_name}/${file_name}]${END} Loaded and Activated function: load_special_chars"
