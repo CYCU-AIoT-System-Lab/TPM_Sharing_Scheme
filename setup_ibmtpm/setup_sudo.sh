@@ -140,7 +140,13 @@ setup_ibmacs_env () {
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
         # for Server
-        aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
+        if [ $install_platform -eq 1 ]; then
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
+        elif [ $install_platform -eq 2 ] -a [ $install_platform -eq 3 ]; then
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadbclient-dev libssl-dev"
+        else
+            echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
+        fi
     elif [ $acsMode == 2 ]; then
         # for Client
         aptins "libjson-c-dev libssl-dev"
@@ -150,6 +156,7 @@ setup_ibmacs_env () {
     fi
 
     if [ $acsMode == 1 ]; then
+        # https://stackoverflow.com/questions/24270733/automate-mysql-secure-installation-with-echo-command-via-a-shell-script
         echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting database ..."
         cd "${path_ibmacs}/acs/"
         mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
