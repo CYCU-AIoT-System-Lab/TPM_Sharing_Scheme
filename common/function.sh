@@ -119,7 +119,7 @@ echo_notice "common" "function" "Loaded function: check_var"
 # $2: clear this directory too (== "rmdir")
 # check_var is advised to use before this function
 clear_dir () {
-    echo "Removing content in $1"
+    echo "Removing content in ${!1}"
     cd $1
     sudo rm -rf *
     if [ "$2" == "rmdir" ]; then
