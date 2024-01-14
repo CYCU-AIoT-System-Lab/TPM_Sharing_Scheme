@@ -6,6 +6,8 @@ Log recorded with command ```bash install_TPM.sh | tee x.log > /dev/null```
 
 1. [UBT_1.log](UBT_1.log): common + setup_ibmtpm
     - PASS
+2. [UBT_2.log](UBT_2.log): common + setup_ibmtpm: Implemented var set/unset check, platform dependent var accross different subdirectories.
+    - PASS
 
 ## Raspbian Bullseye 2022-07-01 5.1 Kernel Debian i386 VM
 
