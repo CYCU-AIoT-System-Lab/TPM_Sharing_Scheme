@@ -75,7 +75,8 @@ parse () {
             continue
         fi
         #declare "$k"="$v" # This is not working in function
-        readonly "$k"="$v"
+        #readonly "$k"="$v" # Can't be easily unset
+        printf -v "$k" "$v"
         var_cnt=$((var_cnt+1))
         if [[ $2 == "display" ]]; then
             echo "Loaded config item: $k = $v"
