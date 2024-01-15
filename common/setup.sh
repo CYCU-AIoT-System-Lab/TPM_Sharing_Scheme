@@ -159,7 +159,7 @@ cd $working_dir
 if [ $job_socket_com -eq 1 ]; then
     echo_notice "common" "setup" "Running socket_com setup..."
 	cd ../socket_com
-	bash ./setup.sh
+	install_platform=$install_platform bash ./setup.sh
 else
     echo_warn "common" "setup" "Invalid Argument: $job_socket_com ! Skipping setup_socket_com..."
 fi
@@ -168,7 +168,7 @@ cd $working_dir
 if [ $job_setup_optiga -eq 1 ]; then
     echo_notice "common" "setup" "Running optiga setup..."
     cd ../setup_optiga
-    bash ./setup.sh
+    install_platform=$install_platform bash ./setup.sh
 else
     echo_warn "common" "setup" "Invalid Argument: $job_setup_optiga ! Skipping setup_optiga..."
 fi

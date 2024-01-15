@@ -2,7 +2,7 @@
 
 source "../common/function.sh"
 source "./function_optiga.sh"
-load_preset "../config.ini"
+load_preset "./config.ini"
 
 echo_notice "common" "setup" "Cloning optiga-tpm-explorer..."
 git clone "$optiga_url"
