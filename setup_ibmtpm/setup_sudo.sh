@@ -27,6 +27,7 @@ acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmacs}/b.log4j"
 ima_sig_log_dir="${sym_link_ibmacs}/imasig.log"
 acs_demo_verify_imasig_log_dir="${sym_link_ibmacs}/i.log4j"
 acs_demo_verify_client_log_dir="${sym_link_ibmacs}/client.log4j"
+MariaDB_dir="${HOME}/MariaDB"
 
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
@@ -143,13 +144,11 @@ setup_ibmacs_env () {
         if [ $install_platform -eq 1 ]; then
             aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
         elif [ $install_platform -eq 2 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
+            #aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
             # aptins "libmariadb-dev"
-            #aptins "libjson-c-dev apache2 php php-dev php-mysql libmariadb3 libmariadb-dev libssl-dev"
         elif [ $install_platform -eq 3 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
+            #aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
             # aptins "libmariadb-dev"
-            #aptins "libjson-c-dev apache2 php php-dev php-mysql libmariadb3 libmariadb-dev libssl-dev"
         else
             echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
         fi
@@ -159,6 +158,33 @@ setup_ibmacs_env () {
     else 
         echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid acsMode"
         exit 1
+    fi
+
+    if [ $install_platform -eq 1 ]; then
+        :
+    elif [ $install_platform -eq 2 ]; then
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Adding stdbool.h to IBMACS/acs/commonjson.c"
+        sed -i '39 i #include <stdbool.h>' "${path_ibmacs}/acs/commonjson.c"
+
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing \"FALSE\" with \"false\" in IBMACS/acs/commonjson.c"
+        sed -i 's/FALSE/false/g' "${path_ibmacs}/acs/commonjson.c"
+
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing all mysql/mysql.h with mariadb/mysql.h in all files"
+        for file in $(grep -rl "mysql/mysql.h" "${path_ibmacs}/acs/"); do
+            sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
+        done
+
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Compiling MariaDB from source ..."
+        cd "$MariaDB_dir"
+        git clone https://github.com/MariaDB/mariadb-connector-c.git
+        mkdir build && cd build
+        cmake ../mariadb-connector-c/ -DCMAKE_INSTALL_PREFIX=/usr
+        make -j$(nproc) $make_gflag
+        sudo make install $make_gflag
+    elif [ $install_platform -eq 3 ]; then
+        :
+    else
+        echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
     fi
 
     if [ $acsMode == 1 ]; then
@@ -201,23 +227,6 @@ setup_ibmacs_env () {
     else 
         echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid verMode"
         exit 1
-    fi
-
-    if [ $install_platform -eq 1 ]; then
-        :
-    elif [ $install_platform -eq 2 ]; then
-        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Adding stdbool.h to IBMACS/acs/commonjson.c"
-        sed -i '39 i #include <stdbool.h>' "${path_ibmacs}/acs/commonjson.c"
-        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing \"FALSE\" with \"false\" in IBMACS/acs/commonjson.c"
-        sed -i 's/FALSE/false/g' "${path_ibmacs}/acs/commonjson.c"
-        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing all mysql/mysql.h with mariadb/mysql.h in all files"
-        for file in $(grep -rl "mysql/mysql.h" "${path_ibmacs}/acs/"); do
-            sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
-        done
-    elif [ $install_platform -eq 3 ]; then
-        :
-    else
-        echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
     fi
 }
 
