@@ -143,9 +143,13 @@ setup_ibmacs_env () {
         if [ $install_platform -eq 1 ]; then
             aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
         elif [ $install_platform -eq 2 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libmariadb-dev libssl-dev"
+            #aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
+            # aptins "libmariadb-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql libmariadb3 libmariadb-dev libssl-dev"
         elif [ $install_platform -eq 3 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libmariadb-dev libssl-dev"
+            #aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
+            # aptins "libmariadb-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql libmariadb3 libmariadb-dev libssl-dev"
         else
             echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
         fi
@@ -202,10 +206,14 @@ setup_ibmacs_env () {
     if [ $install_platform -eq 1 ]; then
         :
     elif [ $install_platform -eq 2 ]; then
-        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Add stdbool.h to IBMACS/acs/commonjson.c"
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Adding stdbool.h to IBMACS/acs/commonjson.c"
         sed -i '39 i #include <stdbool.h>' "${path_ibmacs}/acs/commonjson.c"
-        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replace \"FALSE\" with \"false\" in IBMACS/acs/commonjson.c"
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing \"FALSE\" with \"false\" in IBMACS/acs/commonjson.c"
         sed -i 's/FALSE/false/g' "${path_ibmacs}/acs/commonjson.c"
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing all mysql/mysql.h with mysql.h in all files"
+        for file in $(grep -rl "mysql/mysql.h" "${path_ibmacs}/acs/"); do
+            sed -i 's/mysql\/mysql.h/mysql.h/g' $file
+        done
     elif [ $install_platform -eq 3 ]; then
         :
     else
