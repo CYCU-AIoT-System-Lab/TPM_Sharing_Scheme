@@ -18,7 +18,7 @@ else
 fi
 
 if [ ${job_setup_ibmtpm} -eq 1 ]; then
-    echo_notice "common" "remove" "Running ibmtpm setup..."
+    echo_notice "common" "remove" "Running ibmtpm remove..."
     cd ../setup_ibmtpm
     install_platform=$install_platform bash ./remove.sh
 else
@@ -26,7 +26,7 @@ else
 fi
 
 if [ ${job_socket_com} -eq 1 ]; then
-    echo_notice "common" "remove" "Running socket_com setup..."
+    echo_notice "common" "remove" "Running socket_com remove..."
     cd ../socket_com
     install_platform=$install_platform bash ./remove.sh
 else
@@ -34,7 +34,7 @@ else
 fi
 
 if [ ${job_setup_optiga} -eq 1 ]; then
-    echo_notice "common" "remove" "Running optiga setup..."
+    echo_notice "common" "remove" "Running optiga remove..."
     cd ../setup_optiga
     install_platform=$install_platform bash ./remove.sh
 else

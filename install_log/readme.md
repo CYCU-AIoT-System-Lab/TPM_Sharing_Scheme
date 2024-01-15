@@ -103,6 +103,10 @@ Log recorded with command ```bash install_TPM.sh | tee x.log > /dev/null```
     - L6130: TSS_RC_NO_CONNECTION - Failure connecting to lower layer
     - Unknown terminal status. (unrecorded)
     - L8197: Listing './working_space/restore_to_default'... . Log stopped, system rebooted
+2. [RPI6_2.log](RPI6_2.log): common + setup_optiga:
+    - Implement common subdirectory structure: config.ini + function_<name>.sh + remove.sh + setup.sh
+    - Removed auto reboot
+    - PASS on Raspberry Pi 4B without TPM chip
 
 ## Jetson Nano
 

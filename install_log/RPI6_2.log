@@ -1,0 +1,2454 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.30.2-1+deb11u2).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/function][0m Loaded and Activated function: load_special_chars
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_notice
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_warn
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_error
+[1m[34m[NOTICE-common/function][0m Loaded function: parse
+[1m[34m[NOTICE-common/function][0m Loaded function: log_date_time
+[1m[34m[NOTICE-common/function][0m Loaded function: check_var
+[1m[34m[NOTICE-common/function][0m Loaded function: clear_dir
+[1m[34m[NOTICE-common/function][0m Loaded function: aptins
+[1m[34m[NOTICE-common/function_common][0m Loaded function: load_preset
+[1m[34m[NOTICE-common/function_common][0m Loaded function: clear_preset
+[1m[34m[NOTICE-common/function_common][0m Env var to config file...
+[1m[34m[NOTICE-common/function_common][0m Loading config file...
+Loaded config item: install_platform = 3
+Loaded config item: cmake_ver = 3.18
+Loaded config item: cmake_build = 4
+Loaded config item: valgrind_ver = 3.22.0
+Loaded config item: nvim_config_url = https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim
+Loaded config item: nvim_dir = /home/user/.config/nvim
+Loaded config item: apport_dir = /home/user/.config/apport
+Loaded config item: cmake_dir = /home/user/Documents/cmake
+Loaded config item: valgrind_dir = /home/user/Documents/valgrind
+Loaded config item: wget_gflag = -q --show-progress
+Loaded config item: make_gflag = -s
+Loaded config item: sudo_gflag = -E
+Loaded config item: apt_gflag = -q
+Loaded config item: job_install_req = 1
+Loaded config item: job_config_nvim = 1
+Loaded config item: job_update_src = 1
+Loaded config item: job_change_all_sh_mod = 1
+Loaded config item: job_config_apport = 1
+Loaded config item: job_enable_ssh = 1
+Loaded config item: job_enable_pi_spi = 1
+Loaded config item: job_reload_term = 1
+Loaded config item: job_setup_environment = 0
+Loaded config item: job_setup_ibmtpm = 0
+Loaded config item: job_socket_com = 0
+Loaded config item: job_setup_optiga = 1
+[1m[34m[NOTICE-common/function][0m Loaded [1m[32m25[0m config items from [1m[32m./config.ini[0m
+[1m[34m[NOTICE-common/function_common][0m Checking var...
+[1m[34m[NOTICE-common/setup][0m Running common setup...
+[1m[34m[NOTICE-common/setup][0m Current directory: /home/user/TPM_Sharing_Scheme/common
+[1m[34m[NOTICE-common/setup][0m Installing required packages...
+Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:4 http://archive.raspberrypi.org/debian bullseye InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mgit[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.30.2-1+deb11u2).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mhtop[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+htop is already the newest version (3.0.5-7).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32miftop[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+iftop is already the newest version (1.0~pre4-7).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mcurl[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (7.74.0-1.3+deb11u11).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mwget[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+wget is already the newest version (1.21-1+deb11u1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mnet-tools[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+net-tools is already the newest version (1.60+git20181103.0eebece-1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mneovim[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+neovim is already the newest version (0.4.4-1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mbuild-essential[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+build-essential is already the newest version (12.9).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mgcc[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+gcc is already the newest version (4:10.2.1-1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mmake[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+make is already the newest version (4.3-4.1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mlibssl-dev[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libssl-dev is already the newest version (1.1.1w-0+deb11u1+rpt1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mmoreutils[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+moreutils is already the newest version (0.65-1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Building [1m[32mvalgrind[0m...
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking whether ln -s works... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking how to run the C preprocessor... gcc -E
+checking for g++... g++
+checking whether the compiler supports GNU C++... yes
+checking whether g++ accepts -g... yes
+checking for g++ option to enable C++11 features... none needed
+checking dependency style of g++... gcc3
+checking for ranlib... ranlib
+checking for gcc-ranlib... /usr/bin/gcc-ranlib
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for gsha256sum... no
+checking for sha256sum... sha256sum
+checking for ar... /usr/bin/ar
+checking for gcc-ar... /usr/bin/gcc-ar
+checking for perl... /usr/bin/perl
+checking for gdb... /usr/bin/gdb
+checking dependency style of gcc... gcc3
+checking for diff -u... yes
+checking for a supported version of gcc... ok (10)
+checking build system type... aarch64-unknown-linux-gnu
+checking host system type... aarch64-unknown-linux-gnu
+checking for a supported CPU... ok (aarch64)
+checking for a 64-bit only build... no
+checking for a 32-bit only build... no
+checking for a supported OS... ok (linux-gnu)
+checking for the kernel version... 2.6 or later (6.1.21-v8+)
+checking for 32 bit build support... no
+checking for a supported CPU/OS combination... ok (arm64-linux)
+checking for use as an inner Valgrind... no
+checking for using the undefined behaviour sanitiser... no
+checking where gdb scripts are installed... ${exec_prefix}/libexec/valgrind
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for sys/time.h... yes
+checking for sys/param.h... yes
+checking for features.h... yes
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking whether pthread_create needs libpthread... yes
+checking the glibc version... 2.31 family
+checking for AT_FDCWD... yes
+checking for stpncpy... yes
+checking for PTRACE_GETREGS... no
+checking for CLOCK_MONOTONIC... yes
+checking for Elf32_Chdr... yes
+checking for Elf64_Chdr... yes
+checking for pthread_rwlock_t... yes
+checking for clockid_t... yes
+checking for PTHREAD_MUTEX_ADAPTIVE_NP... yes
+checking for PTHREAD_MUTEX_ERRORCHECK_NP... yes
+checking for PTHREAD_MUTEX_RECURSIVE_NP... yes
+checking for PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP... yes
+checking for pthread_mutex_t.__m_kind... no
+checking for pthread_mutex_t.__data.__kind... yes
+checking if AT_HWCAP contains the altivec indicator... no
+checking if AT_HWCAP contains the vsx indicator... no
+checking if AT_HWCAP contains the dfp indicator... no
+checking if AT_HWCAP contains the arch_2_05 indicator... no
+checking if AT_HWCAP contains the arch_2_06 indicator... no
+checking if AT_HWCAP contains the arch_2_07 indicator... no
+checking if AT_HWCAP contains the arch_3_00 indicator... no
+checking if AT_HWCAP contains the arch_3_1 indicator... no
+checking if AT_HWCAP contains the htm indicator... no
+checking if AT_HWCAP contains the mma indicator... no
+checking that assembler knows ISA 2.07 instructions ... no
+checking for Altivec support in the compiler ... no
+checking for VSX compiler flag support... no
+checking for VSX support in the assembler ... no
+checking that assembler knows DFP... no
+checking that compiler knows -mhard-dfp switch... no
+checking that compiler knows DFP datatypes... no
+checking if compiler accepts the -mhtm flag... no
+checking if compiler can find the htm builtins... no
+checking that assembler knows ISA 3.00 ... no
+checking that assembler knows xscvhpdp ... no
+checking that assembler knows darn instruction ... no
+checking that assembler knows ISA 3.1 ... no
+checking for pthread_create@GLIBC2.0()... no
+checking for dlinfo RTLD_DI_TLS_MODID... yes
+checking for eventfd()... yes
+checking that C++ compiler can compile C++17 code... yes
+checking that C++ compiler can include <thread> header file... yes
+checking that C++ compiler can include <condition_variable> header file... yes
+checking that C++ compiler can use std::shared_timed_mutex... yes
+checking that C++ compiler can use std::timed_mutex... yes
+checking for struct user_regs_struct... yes
+checking for __NR_membarrier... yes
+checking if gcc accepts -m32... no
+checking if gcc accepts -m64... no
+checking if gcc accepts -march=octeon... no
+checking if gcc accepts -march=octeon2... no
+checking if gcc accepts -mmsa... no
+checking if gcc is producing mips n32 binaries... no
+checking if gcc is producing mips n64 binaries... no
+checking if gcc accepts -mmmx... no
+checking if gcc accepts -msse... no
+checking if gcc accepts -mpreferred-stack-boundary=2 -m32... no
+checking if gcc accepts -mlong-double-128... no
+checking for using the link time optimisation... no
+checking if gcc accepts -Wmemset-transposed-args... yes
+checking if gcc accepts -Wnonnull... yes
+checking if gcc accepts -Woverflow... yes
+checking if gcc accepts -Wpointer-sign... yes
+checking if gcc accepts -Wuninitialized... yes
+checking if gcc accepts -Wmaybe-uninitialized... yes
+checking if gcc accepts -Wunused-function... yes
+checking if gcc accepts -Wstatic-local-in-inline... no
+checking if gcc accepts -Wmismatched-new-delete... no
+checking if gcc accepts -Winfinite-recursion... no
+checking if gcc accepts -Wexpansion-to-defined... yes
+checking if gcc accepts -Wunused-variable... yes
+checking if gcc accepts -Wunused-but-set-variable... yes
+checking if gcc accepts -Wnon-power-of-two-alignment... no
+checking if gcc accepts -Wsign-compare... yes
+checking if gcc accepts -Wstringop-overflow... yes
+checking if gcc accepts -Wstringop-overread... no
+checking if gcc accepts -Wstringop-truncation... yes
+checking if gcc accepts -Wformat-overflow... yes
+checking if gcc accepts -Wuse-after-free... no
+checking if gcc accepts -Wfree-nonheap-object... yes
+checking if gcc accepts -Wfortify-source... no
+checking if gcc accepts -Wbuiltin-memcpy-chk-size... no
+checking if gcc accepts -Wincompatible-pointer-types-discards-qualifiers... no
+checking if gcc accepts -Wsuspicious-bzero... no
+checking if gcc accepts -Wattributes... yes
+checking if gcc accepts -Walloc-size-larger-than=1677216... yes
+checking if gcc accepts -Wwrite-strings... yes
+checking if gcc accepts -Wempty-body... yes
+checking if gcc accepts -Wformat... yes
+checking if gcc accepts -Wformat-signedness... yes
+checking if gcc accepts -Wcast-qual... yes
+checking if gcc accepts -Wold-style-declaration... yes
+checking if gcc accepts -Wignored-qualifiers... yes
+checking if gcc accepts -Wmissing-parameter-type... yes
+checking if gcc accepts -Wlogical-op... yes
+checking if gcc accepts -Wenum-conversion... yes
+checking if gcc accepts -Wimplicit-fallthrough=2... yes
+checking if gcc accepts -Wformat-security... yes
+checking if gcc accepts -Wextra or -W... -Wextra
+checking if g++ accepts -faligned-new... yes
+checking if g++ accepts -fsized-deallocation... yes
+checking if g++ supports aligned new and delete... yes
+checking if gcc accepts -fno-stack-protector... yes
+checking if gcc accepts -finline-functions... yes
+checking if gcc accepts -fno-ipa-icf... yes
+checking if gcc accepts --param inline-unit-growth... yes
+checking if gcc accepts -gdwarf-4 -fdebug-types-section... yes
+checking if gcc accepts -g -gz=zlib... yes
+checking if gcc accepts -g -gz=zlib-gnu... yes
+checking if gcc accepts nested functions... yes
+checking if gcc accepts the 'p' constraint in asm statements... no
+checking if gcc accepts -pie... yes
+checking if gcc accepts -ansi... yes
+checking if gcc accepts -no-pie... yes
+checking if the linker accepts -Wl,--image-base... no
+checking if the linker accepts -Wl,-Ttext-segment... yes
+configure: ld --image-base or -Ttext-segment used, no need to strip build-id NOTEs.
+checking if ppc32/64 as supports mtocrf/mfocrf... no
+checking if ppc32/64 asm supports phased out floating point instructions... no
+checking if amd64 assembler supports fxsave64/fxrstor64... no
+checking if x86/amd64 assembler speaks SSE3... no
+checking if x86/amd64 assembler speaks SSSE3... no
+checking if x86/amd64 assembler supports 'pclmulqdq'... no
+checking if x86/amd64 assembler supports 'vpclmulqdq'... no
+checking if x86/amd64 assembler supports FMA4 'vfmaddpd'... no
+checking if x86/amd64 assembler supports 'lzcnt'... no
+checking if x86/amd64 assembler supports 'loopnel'... no
+checking if x86/amd64 assembler supports 'addr32'... no
+checking if x86/amd64 assembler speaks SSE4.2... no
+checking if x86/amd64 assembler speaks AVX... no
+checking if x86/amd64 assembler speaks AVX2... no
+checking if x86/amd64 assembler speaks TSX... no
+checking if x86/amd64 assembler speaks BMI1 and BMI2... no
+checking if x86/amd64 assembler speaks FMA... no
+checking if amd64 assembler knows the MPX instructions... no
+checking if amd64 assembler knows the ADX instructions... no
+checking if amd64 assembler knows the RDRAND instruction... no
+checking if amd64 assembler knows the RDSEED instruction... no
+checking if amd64 assembler knows the F16C instructions... no
+checking if x86/amd64 assembler knows the MOVBE insn... no
+checking if gcc supports the ifunc attribute... yes
+checking if gcc supports the armv8 crc feature flag... yes
+checking if gcc supports the armv81 feature flag and assembler supports v8.1 instructions... yes
+checking if gcc supports the armv82 feature flag and assembler supports v8.2 instructions... yes
+checking for TLS support... yes
+checking for asm/unistd.h... yes
+checking for endian.h... yes
+checking for mqueue.h... yes
+checking for sys/endian.h... no
+checking for sys/epoll.h... yes
+checking for sys/eventfd.h... yes
+checking for sys/klog.h... yes
+checking for sys/poll.h... yes
+checking for sys/prctl.h... yes
+checking for sys/signal.h... yes
+checking for sys/signalfd.h... yes
+checking for sys/syscall.h... yes
+checking for sys/sysnvl.h... no
+checking for sys/time.h... (cached) yes
+checking for sys/types.h... (cached) yes
+checking if <linux/futex.h> is usable... yes
+checking for uid_t in sys/types.h... yes
+checking for off_t... yes
+checking for size_t... yes
+checking for struct statx... yes
+checking for working memcmp... yes
+checking for getpagesize... yes
+checking for working mmap... yes
+checking for pthread_create in -lpthread... yes
+checking for clock_gettime in -lrt... yes
+checking for aligned_alloc... yes
+checking for clock_gettime... yes
+checking for copy_file_range... yes
+checking for epoll_create... yes
+checking for epoll_pwait... yes
+checking for getaddrinfo... yes
+checking for klogctl... yes
+checking for mallinfo... yes
+checking for memchr... yes
+checking for memfd_create... yes
+checking for memset... yes
+checking for mkdir... yes
+checking for mremap... yes
+checking for pipe2... yes
+checking for ppoll... yes
+checking for preadv... yes
+checking for preadv2... yes
+checking for process_vm_readv... yes
+checking for process_vm_writev... yes
+checking for pthread_barrier_init... yes
+checking for pthread_condattr_setclock... yes
+checking for pthread_mutex_timedlock... yes
+checking for pthread_rwlock_timedrdlock... yes
+checking for pthread_rwlock_timedwrlock... yes
+checking for pthread_setname_np... yes
+checking for pthread_spin_lock... yes
+checking for pthread_yield... yes
+checking for pwritev... yes
+checking for pwritev2... yes
+checking for rawmemchr... yes
+checking for readlinkat... yes
+checking for semtimedop... yes
+checking for setcontext... yes
+checking for signalfd... yes
+checking for sigwaitinfo... yes
+checking for strchr... yes
+checking for strdup... yes
+checking for strpbrk... yes
+checking for strrchr... yes
+checking for strstr... yes
+checking for swapcontext... yes
+checking for syscall... yes
+checking for utimensat... yes
+checking for mempcpy... yes
+checking for stpncpy... yes
+checking for strchrnul... yes
+checking for memrchr... yes
+checking for strndup... yes
+checking for close_range... no
+checking for wcsncpy... yes
+checking for mpicc... mpicc
+checking primary target for usable MPI2-compliant C compiler and mpi.h... no
+checking secondary target for usable MPI2-compliant C compiler and mpi.h... no
+checking for boost... no
+checking for OpenMP... yes
+checking for __builtin_popcount()... yes
+checking for __builtin_clz()... yes
+checking for __builtin_ctz()... yes
+checking if gcc supports __sync_add_and_fetch for the primary target... yes
+checking if gcc supports __sync_add_and_fetch on uint64_t for all targets... yes
+checking if platform has openat2 syscall... checking if g++ supports __sync_add_and_fetch... yes
+checking if libstdc++ supports annotating shared pointers... yes
+checking for AT_GNU_LIBC_C17_ALIGNED_ALLOC... no
+checking for thrd_create()... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating VEX/Makefile
+config.status: creating valgrind.spec
+config.status: creating valgrind.pc
+config.status: creating glibc-2.X.supp
+config.status: creating glibc-2.X-helgrind.supp
+config.status: creating glibc-2.X-drd.supp
+config.status: creating include/valgrind.h
+config.status: creating docs/Makefile
+config.status: creating docs/xml/vg-entities.xml
+config.status: creating tests/Makefile
+config.status: creating tests/vg_regtest
+config.status: creating perf/Makefile
+config.status: creating perf/vg_perf
+config.status: creating gdbserver_tests/Makefile
+config.status: creating gdbserver_tests/solaris/Makefile
+config.status: creating include/Makefile
+config.status: creating auxprogs/Makefile
+config.status: creating mpi/Makefile
+config.status: creating coregrind/Makefile
+config.status: creating memcheck/Makefile
+config.status: creating memcheck/tests/Makefile
+config.status: creating memcheck/tests/common/Makefile
+config.status: creating memcheck/tests/amd64/Makefile
+config.status: creating memcheck/tests/x86/Makefile
+config.status: creating memcheck/tests/linux/Makefile
+config.status: creating memcheck/tests/linux/debuginfod-check.vgtest
+config.status: creating memcheck/tests/darwin/Makefile
+config.status: creating memcheck/tests/solaris/Makefile
+config.status: creating memcheck/tests/freebsd/Makefile
+config.status: creating memcheck/tests/amd64-linux/Makefile
+config.status: creating memcheck/tests/arm64-linux/Makefile
+config.status: creating memcheck/tests/x86-linux/Makefile
+config.status: creating memcheck/tests/amd64-solaris/Makefile
+config.status: creating memcheck/tests/x86-solaris/Makefile
+config.status: creating memcheck/tests/amd64-freebsd/Makefile
+config.status: creating memcheck/tests/x86-freebsd/Makefile
+config.status: creating memcheck/tests/ppc32/Makefile
+config.status: creating memcheck/tests/ppc64/Makefile
+config.status: creating memcheck/tests/s390x/Makefile
+config.status: creating memcheck/tests/mips32/Makefile
+config.status: creating memcheck/tests/mips64/Makefile
+config.status: creating memcheck/tests/vbit-test/Makefile
+config.status: creating cachegrind/Makefile
+config.status: creating cachegrind/tests/Makefile
+config.status: creating cachegrind/tests/x86/Makefile
+config.status: creating cachegrind/cg_annotate
+config.status: creating cachegrind/cg_diff
+config.status: creating cachegrind/cg_merge
+config.status: creating callgrind/Makefile
+config.status: creating callgrind/callgrind_annotate
+config.status: creating callgrind/callgrind_control
+config.status: creating callgrind/tests/Makefile
+config.status: creating helgrind/Makefile
+config.status: creating helgrind/tests/Makefile
+config.status: creating drd/Makefile
+config.status: creating drd/scripts/download-and-build-splash2
+config.status: creating drd/tests/Makefile
+config.status: creating massif/Makefile
+config.status: creating massif/tests/Makefile
+config.status: creating massif/ms_print
+config.status: creating dhat/Makefile
+config.status: creating dhat/tests/Makefile
+config.status: creating lackey/Makefile
+config.status: creating lackey/tests/Makefile
+config.status: creating none/Makefile
+config.status: creating none/tests/Makefile
+config.status: creating none/tests/scripts/Makefile
+config.status: creating none/tests/amd64/Makefile
+config.status: creating none/tests/ppc32/Makefile
+config.status: creating none/tests/ppc64/Makefile
+config.status: creating none/tests/x86/Makefile
+config.status: creating none/tests/arm/Makefile
+config.status: creating none/tests/arm64/Makefile
+config.status: creating none/tests/s390x/Makefile
+config.status: creating none/tests/mips32/Makefile
+config.status: creating none/tests/mips64/Makefile
+config.status: creating none/tests/nanomips/Makefile
+config.status: creating none/tests/linux/Makefile
+config.status: creating none/tests/darwin/Makefile
+config.status: creating none/tests/solaris/Makefile
+config.status: creating none/tests/freebsd/Makefile
+config.status: creating none/tests/amd64-linux/Makefile
+config.status: creating none/tests/x86-linux/Makefile
+config.status: creating none/tests/amd64-darwin/Makefile
+config.status: creating none/tests/x86-darwin/Makefile
+config.status: creating none/tests/amd64-solaris/Makefile
+config.status: creating none/tests/x86-solaris/Makefile
+config.status: creating none/tests/x86-freebsd/Makefile
+config.status: creating exp-bbv/Makefile
+config.status: creating exp-bbv/tests/Makefile
+config.status: creating exp-bbv/tests/x86/Makefile
+config.status: creating exp-bbv/tests/x86-linux/Makefile
+config.status: creating exp-bbv/tests/amd64-linux/Makefile
+config.status: creating exp-bbv/tests/ppc32-linux/Makefile
+config.status: creating exp-bbv/tests/arm-linux/Makefile
+config.status: creating shared/Makefile
+config.status: creating solaris/Makefile
+config.status: creating coregrind/link_tool_exe_linux
+config.status: creating coregrind/link_tool_exe_freebsd
+config.status: creating coregrind/link_tool_exe_darwin
+config.status: creating coregrind/link_tool_exe_solaris
+config.status: creating tests/filter_stderr_basic
+config.status: creating tests/filter_discards
+config.status: creating memcheck/tests/filter_stderr
+config.status: creating memcheck/tests/filter_dw4
+config.status: creating memcheck/tests/filter_overlaperror
+config.status: creating memcheck/tests/x86/filter_pushfpopf
+config.status: creating gdbserver_tests/filter_gdb
+config.status: creating gdbserver_tests/filter_memcheck_monitor
+config.status: creating gdbserver_tests/filter_stderr
+config.status: creating gdbserver_tests/filter_vgdb
+config.status: creating drd/tests/filter_stderr
+config.status: creating drd/tests/filter_error_count
+config.status: creating drd/tests/filter_error_summary
+config.status: creating drd/tests/filter_stderr_and_thread_no_and_offset
+config.status: creating drd/tests/filter_thread_no
+config.status: creating drd/tests/filter_xml_and_thread_no
+config.status: creating helgrind/tests/filter_stderr
+config.status: creating config.h
+config.status: executing depfiles commands
+
+                    Version: 3.22.0
+         Maximum build arch: arm64
+         Primary build arch: arm64
+       Secondary build arch: 
+                   Build OS: linux
+     Link Time Optimisation: no
+       Primary build target: ARM64_LINUX
+     Secondary build target: 
+           Platform variant: vanilla
+      Primary -DVGPV string: -DVGPV_arm64_linux_vanilla=1
+         Default supp files: ./xfree-3.supp ./xfree-4.supp glibc-2.X-drd.supp glibc-2.X-helgrind.supp glibc-2.X.supp 
+
+Making all in include
+Making all in VEX
+Making all in coregrind
+Making all in .
+Making all in memcheck
+Making all in .
+Making all in tests
+Making all in .
+Making all in linux
+Making all in arm64-linux
+Making all in cachegrind
+Making all in .
+Making all in tests
+Making all in .
+Making all in callgrind
+Making all in .
+Making all in tests
+Making all in .
+Making all in helgrind
+Making all in .
+Making all in tests
+Making all in drd
+Making all in .
+Making all in tests
+Making all in massif
+Making all in .
+Making all in tests
+Making all in dhat
+Making all in .
+Making all in tests
+Making all in lackey
+Making all in .
+Making all in tests
+Making all in none
+Making all in .
+Making all in tests
+Making all in .
+Making all in scripts
+Making all in arm64
+Making all in linux
+Making all in exp-bbv
+Making all in .
+Making all in tests
+Making all in .
+Making all in shared
+Making all in tests
+Making all in perf
+Making all in gdbserver_tests
+Making all in .
+Making all in memcheck/tests/vbit-test
+Making all in auxprogs
+Making all in mpi
+Making all in solaris
+Making all in docs
+Making install in include
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644  pub_tool_basics.h pub_tool_basics_asm.h pub_tool_addrinfo.h pub_tool_aspacehl.h pub_tool_aspacemgr.h pub_tool_clientstate.h pub_tool_clreq.h pub_tool_deduppoolalloc.h pub_tool_debuginfo.h pub_tool_errormgr.h pub_tool_execontext.h pub_tool_gdbserver.h pub_tool_guest.h pub_tool_poolalloc.h pub_tool_hashtable.h pub_tool_libcbase.h pub_tool_libcassert.h pub_tool_libcfile.h pub_tool_libcprint.h pub_tool_libcproc.h pub_tool_libcsetjmp.h pub_tool_libcsignal.h pub_tool_machine.h pub_tool_mallocfree.h pub_tool_options.h pub_tool_oset.h pub_tool_rangemap.h pub_tool_redir.h pub_tool_replacemalloc.h pub_tool_seqmatch.h pub_tool_signals.h pub_tool_sparsewa.h pub_tool_stacktrace.h pub_tool_threadstate.h pub_tool_tooliface.h pub_tool_transtab.h pub_tool_vki.h pub_tool_vkiscnums.h pub_tool_vkiscnums_asm.h pub_tool_wordfm.h '/usr/local/include/valgrind/.'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind/vki'
+ /usr/bin/install -c -m 644  vki/vki-linux.h vki/vki-freebsd.h vki/vki-darwin.h vki/vki-solaris.h vki/vki-solaris-repcache.h vki/vki-machine-types-amd64-freebsd.h vki/vki-machine-types-x86-freebsd.h vki/vki-posixtypes-amd64-linux.h vki/vki-posixtypes-arm64-linux.h vki/vki-posixtypes-ppc32-linux.h vki/vki-posixtypes-ppc64-linux.h vki/vki-posixtypes-x86-linux.h vki/vki-posixtypes-arm-linux.h vki/vki-posixtypes-s390x-linux.h vki/vki-posixtypes-mips32-linux.h vki/vki-posixtypes-mips64-linux.h vki/vki-posixtypes-nanomips-linux.h vki/vki-amd64-linux.h vki/vki-arm64-linux.h vki/vki-ppc32-linux.h vki/vki-ppc64-linux.h vki/vki-x86-linux.h vki/vki-amd64-freebsd.h vki/vki-x86-freebsd.h vki/vki-arm-linux.h vki/vki-s390x-linux.h vki/vki-mips32-linux.h vki/vki-mips64-linux.h vki/vki-nanomips-linux.h vki/vki-scnums-amd64-linux.h vki/vki-scnums-arm64-linux.h vki/vki-scnums-ppc32-linux.h vki/vki-scnums-ppc64-linux.h vki/vki-scnums-x86-linux.h vki/vki-scnums-freebsd.h vki/vki-scnums-arm-linux.h vki/vki-scnums-s390x-linux.h vki/vki-scnums-mips32-linux.h vki/vki-scnums-mips64-linux.h vki/vki-scnums-nanomips-linux.h '/usr/local/include/valgrind/vki'
+ /usr/bin/install -c -m 644  pub_tool_xarray.h pub_tool_xtree.h pub_tool_xtmemory.h valgrind.h '/usr/local/include/valgrind/.'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind/vki'
+ /usr/bin/install -c -m 644  vki/vki-scnums-darwin.h vki/vki-scnums-solaris.h vki/vki-scnums-shared-linux.h vki/vki-scnums-32bit-linux.h vki/vki-xen.h vki/vki-xen-domctl.h vki/vki-xen-evtchn.h vki/vki-xen-gnttab.h vki/vki-xen-hvm.h vki/vki-xen-memory.h vki/vki-xen-mmuext.h vki/vki-xen-physdev.h vki/vki-xen-schedop.h vki/vki-xen-sysctl.h vki/vki-xen-tmem.h vki/vki-xen-version.h vki/vki-xen-xsm.h vki/vki-xen-x86.h vki/vki-linux-drm.h vki/vki-linux-io_uring.h '/usr/local/include/valgrind/vki'
+Making install in VEX
+ /usr/bin/mkdir -p '/usr/local/lib/valgrind'
+ /usr/bin/install -c -m 644  libvex-arm64-linux.a libvexmultiarch-arm64-linux.a '/usr/local/lib/valgrind'
+ ( cd '/usr/local/lib/valgrind' && ranlib libvex-arm64-linux.a )
+ ( cd '/usr/local/lib/valgrind' && ranlib libvexmultiarch-arm64-linux.a )
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 pub/libvex.h pub/libvex_basictypes.h pub/libvex_emnote.h pub/libvex_guest_offsets.h pub/libvex_guest_x86.h pub/libvex_guest_amd64.h pub/libvex_guest_ppc32.h pub/libvex_guest_ppc64.h pub/libvex_guest_arm.h pub/libvex_guest_arm64.h pub/libvex_guest_s390x.h pub/libvex_guest_mips32.h pub/libvex_guest_mips64.h pub/libvex_s390x_common.h pub/libvex_ir.h pub/libvex_trc_values.h pub/libvex_inner.h '/usr/local/include/valgrind'
+Making install in coregrind
+ /usr/bin/mkdir -p '/usr/local/bin'
+  /usr/bin/install -c valgrind vgdb '/usr/local/bin'
+ /usr/bin/mkdir -p '/usr/local/lib/valgrind'
+ /usr/bin/install -c -m 644  libcoregrind-arm64-linux.a libgcc-sup-arm64-linux.a libreplacemalloc_toolpreload-arm64-linux.a '/usr/local/lib/valgrind'
+ ( cd '/usr/local/lib/valgrind' && ranlib libcoregrind-arm64-linux.a )
+ ( cd '/usr/local/lib/valgrind' && ranlib libgcc-sup-arm64-linux.a )
+ ( cd '/usr/local/lib/valgrind' && ranlib libreplacemalloc_toolpreload-arm64-linux.a )
+ /usr/bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/valgrind-monitor.py m_gdbserver/valgrind-monitor-def.py '/usr/local/libexec/valgrind'
+ /usr/bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/32bit-core-valgrind-s1.xml m_gdbserver/32bit-core-valgrind-s2.xml m_gdbserver/32bit-core.xml m_gdbserver/32bit-linux-valgrind-s1.xml m_gdbserver/32bit-linux-valgrind-s2.xml m_gdbserver/32bit-linux.xml m_gdbserver/32bit-sse-valgrind-s1.xml m_gdbserver/32bit-sse-valgrind-s2.xml m_gdbserver/32bit-sse.xml m_gdbserver/64bit-avx-valgrind-s2.xml m_gdbserver/64bit-avx-valgrind-s1.xml m_gdbserver/64bit-avx.xml m_gdbserver/64bit-core-valgrind-s1.xml m_gdbserver/64bit-core-valgrind-s2.xml m_gdbserver/64bit-core.xml m_gdbserver/64bit-linux-valgrind-s1.xml m_gdbserver/64bit-linux-valgrind-s2.xml m_gdbserver/64bit-linux.xml m_gdbserver/64bit-sse-valgrind-s1.xml m_gdbserver/64bit-sse-valgrind-s2.xml m_gdbserver/64bit-sse.xml m_gdbserver/amd64-avx-coresse-valgrind.xml m_gdbserver/amd64-avx-coresse.xml m_gdbserver/amd64-avx-linux-valgrind.xml m_gdbserver/amd64-avx-linux.xml m_gdbserver/amd64-coresse-valgrind.xml m_gdbserver/amd64-linux-valgrind.xml m_gdbserver/arm-core-valgrind-s1.xml m_gdbserver/arm-core-valgrind-s2.xml m_gdbserver/arm-core.xml m_gdbserver/arm-vfpv3-valgrind-s1.xml m_gdbserver/arm-vfpv3-valgrind-s2.xml m_gdbserver/arm-vfpv3.xml m_gdbserver/arm-with-vfpv3-valgrind.xml m_gdbserver/arm-with-vfpv3.xml m_gdbserver/i386-coresse-valgrind.xml m_gdbserver/i386-linux-valgrind.xml m_gdbserver/power64-core-valgrind-s1.xml m_gdbserver/power64-core-valgrind-s2.xml m_gdbserver/power64-core.xml '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/power64-core2-valgrind-s1.xml m_gdbserver/power64-core2-valgrind-s2.xml m_gdbserver/power64-linux-valgrind-s1.xml m_gdbserver/power64-linux-valgrind-s2.xml m_gdbserver/power64-linux.xml m_gdbserver/power-altivec-valgrind-s1.xml m_gdbserver/power-altivec-valgrind-s2.xml m_gdbserver/power-altivec.xml m_gdbserver/power-vsx-valgrind-s1.xml m_gdbserver/power-vsx-valgrind-s2.xml m_gdbserver/power-vsx.xml m_gdbserver/power-core-valgrind-s1.xml m_gdbserver/power-core-valgrind-s2.xml m_gdbserver/power-core.xml m_gdbserver/power-fpu-valgrind-s1.xml m_gdbserver/power-fpu-valgrind-s2.xml m_gdbserver/power-fpu.xml m_gdbserver/power-linux-valgrind-s1.xml m_gdbserver/power-linux-valgrind-s2.xml m_gdbserver/power-linux.xml m_gdbserver/powerpc-altivec32l-valgrind.xml m_gdbserver/powerpc-altivec32l.xml m_gdbserver/powerpc-altivec64l-valgrind.xml m_gdbserver/powerpc-altivec64l.xml m_gdbserver/s390-acr-valgrind-s1.xml m_gdbserver/s390-acr-valgrind-s2.xml m_gdbserver/s390-acr.xml m_gdbserver/s390-fpr-valgrind-s1.xml m_gdbserver/s390-fpr-valgrind-s2.xml m_gdbserver/s390-fpr.xml m_gdbserver/s390x-core64-valgrind-s1.xml m_gdbserver/s390x-core64-valgrind-s2.xml m_gdbserver/s390x-core64.xml m_gdbserver/s390x-generic-valgrind.xml m_gdbserver/s390x-generic.xml m_gdbserver/s390x-linux64-valgrind-s1.xml m_gdbserver/s390x-linux64-valgrind-s2.xml m_gdbserver/s390x-linux64.xml m_gdbserver/s390-vx-valgrind-s1.xml m_gdbserver/s390-vx-valgrind-s2.xml '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/s390-vx.xml m_gdbserver/s390x-vx-linux-valgrind.xml m_gdbserver/s390x-vx-linux.xml m_gdbserver/mips-cp0-valgrind-s1.xml m_gdbserver/mips-cp0-valgrind-s2.xml m_gdbserver/mips-cp0.xml m_gdbserver/mips-cpu-valgrind-s1.xml m_gdbserver/mips-cpu-valgrind-s2.xml m_gdbserver/mips-cpu.xml m_gdbserver/mips-linux.xml m_gdbserver/mips-linux-valgrind.xml m_gdbserver/mips-fpu-valgrind-s1.xml m_gdbserver/mips-fpu-valgrind-s2.xml m_gdbserver/mips-fpu.xml m_gdbserver/mips64-cp0-valgrind-s1.xml m_gdbserver/mips64-cp0-valgrind-s2.xml m_gdbserver/mips64-cp0.xml m_gdbserver/mips64-cpu-valgrind-s1.xml m_gdbserver/mips64-cpu-valgrind-s2.xml m_gdbserver/mips64-cpu.xml m_gdbserver/mips64-linux.xml m_gdbserver/mips64-linux-valgrind.xml m_gdbserver/mips64-fpu-valgrind-s1.xml m_gdbserver/mips64-fpu-valgrind-s2.xml m_gdbserver/mips64-fpu.xml '/usr/local/libexec/valgrind'
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/lib/pkgconfig'
+ /usr/bin/install -c -m 644 valgrind.pc '/usr/local/lib/pkgconfig'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 config.h '/usr/local/include/valgrind'
+ /usr/bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 default.supp '/usr/local/libexec/valgrind'
+Making install in memcheck
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 memcheck.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in .
+Making install in linux
+Making install in arm64-linux
+Making install in cachegrind
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c cg_annotate cg_diff cg_merge '/usr/local/bin'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 cachegrind.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in .
+Making install in callgrind
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c callgrind_annotate callgrind_control '/usr/local/bin'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 callgrind.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in .
+Making install in helgrind
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 helgrind.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in drd
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 drd.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in massif
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c ms_print '/usr/local/bin'
+Making install in tests
+Making install in dhat
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 dh_view.html dh_view.css dh_view.js '/usr/local/libexec/valgrind'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 dhat.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in lackey
+Making install in .
+Making install in tests
+Making install in none
+Making install in .
+Making install in tests
+Making install in .
+Making install in scripts
+Making install in arm64
+Making install in linux
+Making install in exp-bbv
+Making install in .
+Making install in tests
+Making install in .
+Making install in shared
+Making install in tests
+Making install in perf
+Making install in gdbserver_tests
+Making install in .
+Making install in memcheck/tests/vbit-test
+Making install in auxprogs
+ /usr/bin/mkdir -p '/usr/local/bin'
+  /usr/bin/install -c valgrind-listener valgrind-di-server '/usr/local/bin'
+Making install in mpi
+ /usr/bin/mkdir -p '/usr/local/lib/valgrind'
+Making install in solaris
+Making install in docs
+[1m[34m[NOTICE-common/setup][0m Configuring neovim...
+[1m[34m[NOTICE-common/setup][0m Pulling latest repo source...
+Saved working directory and index state WIP on main: 757b4c7 Fix config file path problem
+Already up to date.
+[1m[34m[NOTICE-common/setup][0m Changing all .sh files to executable...
+[1m[34m[NOTICE-common/setup][0m Configuring apport...
+[1m[34m[NOTICE-common/setup][0m Core dumps will be generated in /var/crash
+[1m[34m[NOTICE-common/setup][0m Enabling ssh...
+[1m[34m[NOTICE-common/setup][0m Enabling spi with /boot/config.txt ...
+[1m[34m[NOTICE-common/setup][0m Reloading terminal...
+[1m[33m[WARN-common/setup][0m Invalid Argument: 0 ! Skipping setup_environment...
+[1m[33m[WARN-common/setup][0m Invalid Argument: 0 ! Skipping setup_ibmtpm...
+[1m[33m[WARN-common/setup][0m Invalid Argument: 0 ! Skipping setup_socket_com...
+[1m[34m[NOTICE-common/setup][0m Running optiga setup...
+[1m[34m[NOTICE-common/function][0m Loaded and Activated function: load_special_chars
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_notice
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_warn
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_error
+[1m[34m[NOTICE-common/function][0m Loaded function: parse
+[1m[34m[NOTICE-common/function][0m Loaded function: log_date_time
+[1m[34m[NOTICE-common/function][0m Loaded function: check_var
+[1m[34m[NOTICE-common/function][0m Loaded function: clear_dir
+[1m[34m[NOTICE-common/function][0m Loaded function: aptins
+[1m[34m[NOTICE-common/function_optiga][0m Loaded function: load_preset
+[1m[34m[NOTICE-common/function_optiga][0m Loaded function: clear_preset
+[1m[34m[NOTICE-common/function_optiga][0m Loading config file...
+[1m[33m[WARN-common/function][0m Warning: install_platform is already set, will not overwrite it
+Loaded config item: optiga_url = https://github.com/Infineon/optiga-tpm-explorer.git
+[1m[34m[NOTICE-common/function][0m Loaded [1m[32m1[0m config items from [1m[32m./config.ini[0m
+[1m[34m[NOTICE-common/function_optiga][0m Checking var...
+[1m[34m[NOTICE-common/setup][0m Cloning optiga-tpm-explorer...
+[1m[34m[NOTICE-common/setup][0m Cancelling auto reboot...
+[1m[34m[NOTICE-common/setup][0m Running optiga-tpm-explorer installation script...
+Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:4 http://archive.raspberrypi.org/debian bullseye InRelease
+Reading package lists...
+Building dependency tree...
+Reading state information...
+All packages are up to date.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+autoconf is already the newest version (2.69-14).
+autoconf-archive is already the newest version (20190106-2.1).
+automake is already the newest version (1:1.16.3-2).
+awscli is already the newest version (1.19.1-1).
+build-essential is already the newest version (12.9).
+libcmocka-dev is already the newest version (1.1.5-2).
+libcmocka0 is already the newest version (1.1.5-2).
+doxygen is already the newest version (1.9.1-1).
+gcc is already the newest version (4:10.2.1-1).
+git is already the newest version (1:2.30.2-1+deb11u2).
+libglib2.0-dev is already the newest version (2.66.8-1).
+iproute2 is already the newest version (5.10.0-4).
+libjson-c-dev is already the newest version (0.15-2+deb11u1).
+libgcrypt20-dev is already the newest version (1.8.7-6).
+libtool is already the newest version (2.4.6-15).
+libyaml-dev is already the newest version (0.2.2-1).
+pandoc is already the newest version (2.9.2.1-1+deb11u1).
+pkg-config is already the newest version (0.29.2-1).
+procps is already the newest version (2:3.3.17-5).
+libsqlite3-dev is already the newest version (3.34.1-3).
+uthash-dev is already the newest version (2.1.0-1).
+uuid-dev is already the newest version (2.36.1-8+deb11u1).
+wxpython-tools is already the newest version (4.0.7+dfsg-10).
+libcurl4-gnutls-dev is already the newest version (7.74.0-1.3+deb11u11).
+libssl-dev is already the newest version (1.1.1w-0+deb11u1+rpt1).
+python3-pip is already the newest version (20.3.4-4+rpt1+deb11u1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Requirement already satisfied: PyPubSub in /home/user/.local/lib/python3.9/site-packages (4.0.3)
+Generating file lists: src_vars.mk
+libtoolize: putting auxiliary files in '.'.
+libtoolize: linking file './ltmain.sh'
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking build system type... aarch64-unknown-linux-gnu
+checking host system type... aarch64-unknown-linux-gnu
+checking whether to enable debugging... no
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking dependency style of g++... gcc3
+checking whether ln -s works... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking the maximum length of command line arguments... 1572864
+checking how to convert aarch64-unknown-linux-gnu file names to aarch64-unknown-linux-gnu format... func_convert_file_noop
+checking how to convert aarch64-unknown-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking how to run the C++ preprocessor... g++ -E
+checking for ld used by g++... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking whether the g++ linker (/usr/bin/ld) supports shared libraries... yes
+checking for g++ option to produce PIC... -fPIC -DPIC
+checking if g++ PIC flag -fPIC -DPIC works... yes
+checking if g++ static flag -static works... yes
+checking if g++ supports -c -o file.o... yes
+checking if g++ supports -c -o file.o... (cached) yes
+checking whether the g++ linker (/usr/bin/ld) supports shared libraries... yes
+checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking for library containing dlopen... -ldl
+checking for dlerror... yes
+checking for shl_load... no
+checking for shl_load in -ldld... no
+checking for dld_link in -ldld... no
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for strndup... yes
+checking for reallocarray... yes
+checking for libcrypto >= 1.1.0... yes
+checking for EVP_sm3 in -lcrypto... yes
+checking for json-c... yes
+checking for libcurl... yes
+checking libtpms/tpm_library.h usability... no
+checking libtpms/tpm_library.h presence... no
+checking for libtpms/tpm_library.h... no
+checking for valgrind... valgrind
+checking for Valgrind tool memcheck... yes
+checking for Valgrind tool helgrind... yes
+checking for Valgrind tool drd... yes
+checking for Valgrind tool sgcheck... no
+checking if LD -Wl,--version-script works... yes
+checking whether C compiler accepts -O2... yes
+checking whether C compiler accepts -Werror... yes
+checking whether to add -D_FORTIFY_SOURCE=2 to CPPFLAGS... yes
+checking whether C compiler accepts -std=c99... yes
+checking whether C compiler accepts -Wall... yes
+checking whether C compiler accepts -Wextra... yes
+checking whether C compiler accepts -Wformat-security... yes
+checking whether C compiler accepts -fstack-protector-all... yes
+checking whether C compiler accepts -fpic... yes
+checking whether C compiler accepts -fPIC... yes
+checking whether C compiler accepts -Wno-missing-braces... yes
+checking whether C compiler accepts -Wstrict-overflow=5... yes
+checking whether the linker accepts -Wl,--no-undefined... yes
+checking whether the linker accepts -Wl,-z,noexecstack... yes
+checking whether the linker accepts -Wl,-z,now... yes
+checking whether the linker accepts -Wl,-z,relro... yes
+checking for systemd-sysusers... yes
+checking for systemd-tmpfiles... yes
+checking for useradd... yes
+checking for groupadd... yes
+checking for adduser... yes
+checking for addgroup... yes
+checking for doxygen... /usr/bin/doxygen
+checking for perl... /usr/bin/perl
+checking whether to build with code coverage support... no
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating Doxyfile
+config.status: creating lib/tss2-sys.pc
+config.status: creating lib/tss2-esys.pc
+config.status: creating lib/tss2-mu.pc
+config.status: creating lib/tss2-tcti-device.pc
+config.status: creating lib/tss2-tcti-mssim.pc
+config.status: creating lib/tss2-tcti-swtpm.pc
+config.status: creating lib/tss2-tcti-libtpms.pc
+config.status: creating lib/tss2-tcti-pcap.pc
+config.status: creating lib/tss2-rc.pc
+config.status: creating lib/tss2-tctildr.pc
+config.status: creating lib/tss2-fapi.pc
+config.status: creating lib/tss2-tcti-cmd.pc
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+
+    tpm2-tss 3.2.0
+    esys:               yes
+    fapi:               yes
+    tctidefaultmodule:  libtss2-tcti-default.so
+    tctidefaultconfig:  
+    unit:               no
+    integration:        no
+    testing backend:    
+    fuzzing:            none
+    debug:              no
+    maxloglevel:        trace
+    doxygen:            1 
+    crypto backend:     ossl
+    sysconfdir:         ${prefix}/etc
+    localstatedir:      ${prefix}/var
+    runstatedir:        ${localstatedir}/run
+    sysusersdir:        ${prefix}/etc/sysusers.d
+    tmpfilesdir:        ${prefix}/etc/tmpfiles.d
+    userstatedir:       $HOME/.local/share
+
+git.mk: Generating .gitignore
+make  all-am
+make[1]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss'
+ cd . && /bin/bash /home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss/missing automake-1.16 --foreign Makefile
+ cd . && /bin/bash ./config.status Makefile depfiles
+config.status: creating Makefile
+config.status: executing depfiles commands
+  CC       src/tss2-tcti/tss2_esys_libtss2_esys_la-tctildr.lo
+  CC       src/tss2-tcti/tss2_esys_libtss2_esys_la-tctildr-dl.lo
+  GEN      man/man3/Tss2_Tcti_Cmd_Init.3
+  GEN      man/man3/Tss2_Tcti_Device_Init.3
+  GEN      man/man3/Tss2_Tcti_Mssim_Init.3
+  GEN      man/man3/Tss2_TctiLdr_Finalize.3
+  GEN      man/man3/Tss2_TctiLdr_FreeInfo.3
+  GEN      man/man3/Tss2_TctiLdr_GetInfo.3
+  GEN      man/man3/Tss2_TctiLdr_Initialize.3
+  DXGEN  Doxyfile
+  GEN      man/man5/fapi-config.5
+  GEN      man/man5/fapi-profile.5
+  GEN      man/man7/tss2-tcti-device.7
+  GEN      man/man7/tss2-tcti-swtpm.7
+  GEN      man/man7/tss2-tcti-mssim.7
+  GEN      man/man7/tss2-tcti-cmd.7
+  GEN      man/man7/tss2-tctildr.7
+  GEN      fapi-config.json
+  GEN      tpm2-tss-fapi.conf
+  CC       src/tss2-mu/base-types.lo
+  CC       src/tss2-mu/tpm2b-types.lo
+  CC       src/tss2-mu/tpma-types.lo
+  CC       src/tss2-mu/tpml-types.lo
+  CC       src/tss2-mu/tpms-types.lo
+  CC       src/tss2-mu/tpmt-types.lo
+  CC       src/tss2-mu/tpmu-types.lo
+  CC       src/util/io.lo
+  CC       src/util/key-value-parse.lo
+  CC       src/util/log.lo
+  CC       src/tss2-tcti/libtss2_tctildr_la-tctildr.lo
+  CC       src/tss2-tcti/libtss2_tctildr_la-tctildr-dl.lo
+  CC       src/tss2-tcti/tcti-common.lo
+  CC       src/tss2-tcti/tcti-device.lo
+  CC       src/tss2-tcti/tcti-swtpm.lo
+  CC       src/tss2-tcti/tcti-mssim.lo
+  CC       src/tss2-tcti/tcti-pcap-builder.lo
+  CC       src/tss2-tcti/tcti-pcap.lo
+  CC       src/tss2-tcti/tcti-cmd.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ACT_SetTimeout.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_AC_GetCapability.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_AC_Send.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ActivateCredential.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Certify.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_CertifyCreation.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_CertifyX509.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ChangeEPS.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ChangePPS.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Clear.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ClearControl.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ClockRateAdjust.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ClockSet.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Commit.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ContextLoad.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ContextSave.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Create.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_CreateLoaded.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_CreatePrimary.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_DictionaryAttackLockReset.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_DictionaryAttackParameters.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Duplicate.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ECC_Parameters.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ECDH_KeyGen.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ECDH_ZGen.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EC_Ephemeral.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EncryptDecrypt.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EncryptDecrypt2.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EventSequenceComplete.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EvictControl.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Execute.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_FieldUpgradeData.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_FieldUpgradeStart.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Finalize.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_FirmwareRead.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_FlushContext.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetCommandAuditDigest.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetCapability.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetCommandCode.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetContextSize.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetCpBuffer.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetDecryptParam.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetEncryptParam.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetRandom.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetRpBuffer.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetRspAuths.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetSessionAuditDigest.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetTctiContext.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetTestResult.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetTime.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HMAC.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HMAC_Start.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Hash.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HashSequenceStart.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HierarchyChangeAuth.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HierarchyControl.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Import.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_IncrementalSelfTest.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Initialize.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Load.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_LoadExternal.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_MakeCredential.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Certify.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_ChangeAuth.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_DefineSpace.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Extend.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_GlobalWriteLock.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Increment.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Read.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_ReadLock.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_ReadPublic.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_SetBits.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_UndefineSpace.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_UndefineSpaceSpecial.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Write.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_WriteLock.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ObjectChangeAuth.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Allocate.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Event.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Extend.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Read.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Reset.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_SetAuthPolicy.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_SetAuthValue.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PP_Commands.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyAuthValue.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyAuthorize.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyAuthorizeNV.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyCommandCode.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyCounterTimer.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyCpHash.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyDuplicationSelect.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyGetDigest.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyLocality.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyNV.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyNameHash.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyNvWritten.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyOR.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyPCR.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyPassword.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyPhysicalPresence.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyRestart.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicySecret.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicySigned.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyTemplate.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyTicket.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Policy_AC_SendSelect.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Quote.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_RSA_Decrypt.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_RSA_Encrypt.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ReadClock.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ReadPublic.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Rewrap.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SelfTest.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SequenceComplete.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SequenceUpdate.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetAlgorithmSet.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetCmdAuths.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetCommandCodeAuditStatus.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetDecryptParam.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetEncryptParam.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetPrimaryPolicy.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Shutdown.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Sign.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_StartAuthSession.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Startup.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_StirRandom.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_TestParms.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Unseal.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Vendor_TCG_Test.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_VerifySignature.lo
+  CC       src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ZGen_2Phase.lo
+  CC       src/tss2-sys/libtss2_sys_la-sysapi_util.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ACT_SetTimeout.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ActivateCredential.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Certify.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_CertifyCreation.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_CertifyX509.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ChangeEPS.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ChangePPS.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Clear.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ClearControl.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ClockRateAdjust.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ClockSet.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Commit.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ContextLoad.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ContextSave.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Create.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_CreateLoaded.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_CreatePrimary.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_DictionaryAttackLockReset.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_DictionaryAttackParameters.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Duplicate.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ECC_Parameters.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ECDH_KeyGen.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ECDH_ZGen.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_EC_Ephemeral.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_EncryptDecrypt.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_EncryptDecrypt2.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_EventSequenceComplete.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_EvictControl.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_FieldUpgradeData.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_FieldUpgradeStart.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_FirmwareRead.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_FlushContext.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_GetCapability.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_GetCommandAuditDigest.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_GetRandom.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_GetSessionAuditDigest.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_GetTestResult.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_GetTime.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_HMAC.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_HMAC_Start.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Hash.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_HashSequenceStart.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_HierarchyChangeAuth.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_HierarchyControl.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Import.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_IncrementalSelfTest.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Load.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_LoadExternal.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_MakeCredential.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_Certify.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_ChangeAuth.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_DefineSpace.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_Extend.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_GlobalWriteLock.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_Increment.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_Read.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_ReadLock.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_ReadPublic.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_SetBits.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_UndefineSpace.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_UndefineSpaceSpecial.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_Write.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_NV_WriteLock.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ObjectChangeAuth.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Allocate.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Event.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Extend.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Read.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Reset.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PCR_SetAuthPolicy.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PCR_SetAuthValue.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PP_Commands.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyAuthValue.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyAuthorize.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyAuthorizeNV.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyCommandCode.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyCounterTimer.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyCpHash.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyDuplicationSelect.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyGetDigest.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyLocality.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyNV.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyNameHash.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyNvWritten.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyOR.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyPCR.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyPassword.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyPhysicalPresence.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyRestart.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicySecret.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicySigned.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyTemplate.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_PolicyTicket.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Quote.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_RSA_Decrypt.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_RSA_Encrypt.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ReadClock.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ReadPublic.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Rewrap.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_SelfTest.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_SequenceComplete.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_SequenceUpdate.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_SetAlgorithmSet.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_SetCommandCodeAuditStatus.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_SetPrimaryPolicy.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Shutdown.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Sign.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_StartAuthSession.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Startup.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_StirRandom.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_TestParms.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Unseal.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_Vendor_TCG_Test.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_VerifySignature.lo
+  CC       src/tss2-esys/api/libtss2_esys_la-Esys_ZGen_2Phase.lo
+  CC       src/tss2-esys/libtss2_esys_la-esys_context.lo
+  CC       src/tss2-esys/libtss2_esys_la-esys_crypto.lo
+  CC       src/tss2-esys/libtss2_esys_la-esys_free.lo
+  CC       src/tss2-esys/libtss2_esys_la-esys_iutil.lo
+  CC       src/tss2-esys/libtss2_esys_la-esys_mu.lo
+  CC       src/tss2-esys/libtss2_esys_la-esys_tr.lo
+  CC       src/tss2-esys/libtss2_esys_la-esys_crypto_ossl.lo
+  CC       src/tss2-rc/tss2_rc.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_AuthorizePolicy.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_ChangeAuth.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_CreateKey.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_CreateNv.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_CreateSeal.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Decrypt.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Delete.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Encrypt.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_ExportKey.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_ExportPolicy.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Finalize.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Free.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetAppData.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetCertificate.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetDescription.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetEsysBlob.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetInfo.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetPlatformCertificates.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetPollHandles.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetRandom.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetTcti.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetTpmBlobs.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Import.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Initialize.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_List.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvExtend.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvIncrement.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvRead.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvSetBits.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvWrite.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_PcrExtend.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_PcrRead.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Provision.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Quote.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_SetAppData.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_SetCertificate.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_SetDescription.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Sign.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_Unseal.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_VerifyQuote.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_VerifySignature.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-Fapi_WriteAuthorizeNV.lo
+  CC       src/tss2-fapi/api/libtss2_fapi_la-fapi_callback.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-fapi_crypto.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-fapi_util.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_config.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_eventlog.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_get_intl_cert.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_helpers.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_io.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_json_deserialize.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_json_serialize.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_keystore.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_policy.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_policy_calculate.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_policy_callbacks.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_policy_execute.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_policy_instantiate.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_policy_json_deserialize.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_policy_json_serialize.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_policy_store.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_policyutil_execute.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-ifapi_profiles.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-tpm_json_deserialize.lo
+  CC       src/tss2-fapi/libtss2_fapi_la-tpm_json_serialize.lo
+  CCLD     libutil.la
+  CCLD     src/tss2-rc/libtss2-rc.la
+  CCLD     src/tss2-mu/libtss2-mu.la
+  CCLD     src/tss2-tcti/libtss2-tctildr.la
+  CCLD     src/tss2-tcti/libtss2-tcti-device.la
+  CCLD     src/tss2-tcti/libtss2-tcti-swtpm.la
+  CCLD     src/tss2-tcti/libtss2-tcti-mssim.la
+  CCLD     src/tss2-tcti/libtss2-tcti-pcap.la
+  CCLD     src/tss2-tcti/libtss2-tcti-cmd.la
+  CCLD     src/tss2-sys/libtss2-sys.la
+  CCLD     src/tss2-esys/libtss2-esys.la
+  CCLD     src/tss2-fapi/libtss2-fapi.la
+make[1]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss'
+make[1]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss'
+ /usr/bin/mkdir -p '/usr/local/lib'
+ /bin/bash ./libtool   --mode=install /usr/bin/install -c   src/tss2-mu/libtss2-mu.la src/tss2-tcti/libtss2-tctildr.la src/tss2-tcti/libtss2-tcti-device.la src/tss2-tcti/libtss2-tcti-swtpm.la src/tss2-tcti/libtss2-tcti-mssim.la src/tss2-tcti/libtss2-tcti-pcap.la src/tss2-tcti/libtss2-tcti-cmd.la src/tss2-sys/libtss2-sys.la src/tss2-esys/libtss2-esys.la src/tss2-rc/libtss2-rc.la src/tss2-fapi/libtss2-fapi.la '/usr/local/lib'
+libtool: install: /usr/bin/install -c src/tss2-mu/.libs/libtss2-mu.so.0.0.0 /usr/local/lib/libtss2-mu.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-mu.so.0.0.0 libtss2-mu.so.0 || { rm -f libtss2-mu.so.0 && ln -s libtss2-mu.so.0.0.0 libtss2-mu.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-mu.so.0.0.0 libtss2-mu.so || { rm -f libtss2-mu.so && ln -s libtss2-mu.so.0.0.0 libtss2-mu.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-mu/.libs/libtss2-mu.lai /usr/local/lib/libtss2-mu.la
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tctildr.so.0.0.0 /usr/local/lib/libtss2-tctildr.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tctildr.so.0.0.0 libtss2-tctildr.so.0 || { rm -f libtss2-tctildr.so.0 && ln -s libtss2-tctildr.so.0.0.0 libtss2-tctildr.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tctildr.so.0.0.0 libtss2-tctildr.so || { rm -f libtss2-tctildr.so && ln -s libtss2-tctildr.so.0.0.0 libtss2-tctildr.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tctildr.lai /usr/local/lib/libtss2-tctildr.la
+libtool: install: (cd /home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss; /bin/bash "/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss/libtool"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -DINTERNALBUILD=1 -Wl,--version-script=./lib/tss2-tcti-device.map -o src/tss2-tcti/libtss2-tcti-device.la -rpath /usr/local/lib src/tss2-tcti/tcti-common.lo src/tss2-tcti/tcti-device.lo src/tss2-mu/libtss2-mu.la libutil.la )
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-device.so.0.0.0T /usr/local/lib/libtss2-tcti-device.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-device.so.0.0.0 libtss2-tcti-device.so.0 || { rm -f libtss2-tcti-device.so.0 && ln -s libtss2-tcti-device.so.0.0.0 libtss2-tcti-device.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-device.so.0.0.0 libtss2-tcti-device.so || { rm -f libtss2-tcti-device.so && ln -s libtss2-tcti-device.so.0.0.0 libtss2-tcti-device.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-device.lai /usr/local/lib/libtss2-tcti-device.la
+libtool: install: (cd /home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss; /bin/bash "/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss/libtool"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -DINTERNALBUILD=1 -Wl,--version-script=./lib/tss2-tcti-swtpm.map -o src/tss2-tcti/libtss2-tcti-swtpm.la -rpath /usr/local/lib src/tss2-tcti/tcti-common.lo src/tss2-tcti/tcti-swtpm.lo src/tss2-mu/libtss2-mu.la libutil.la )
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-swtpm.so.0.0.0T /usr/local/lib/libtss2-tcti-swtpm.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-swtpm.so.0.0.0 libtss2-tcti-swtpm.so.0 || { rm -f libtss2-tcti-swtpm.so.0 && ln -s libtss2-tcti-swtpm.so.0.0.0 libtss2-tcti-swtpm.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-swtpm.so.0.0.0 libtss2-tcti-swtpm.so || { rm -f libtss2-tcti-swtpm.so && ln -s libtss2-tcti-swtpm.so.0.0.0 libtss2-tcti-swtpm.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-swtpm.lai /usr/local/lib/libtss2-tcti-swtpm.la
+libtool: install: (cd /home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss; /bin/bash "/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss/libtool"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -DINTERNALBUILD=1 -Wl,--version-script=./lib/tss2-tcti-mssim.map -o src/tss2-tcti/libtss2-tcti-mssim.la -rpath /usr/local/lib src/tss2-tcti/tcti-common.lo src/tss2-tcti/tcti-mssim.lo src/tss2-mu/libtss2-mu.la libutil.la )
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-mssim.so.0.0.0T /usr/local/lib/libtss2-tcti-mssim.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-mssim.so.0.0.0 libtss2-tcti-mssim.so.0 || { rm -f libtss2-tcti-mssim.so.0 && ln -s libtss2-tcti-mssim.so.0.0.0 libtss2-tcti-mssim.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-mssim.so.0.0.0 libtss2-tcti-mssim.so || { rm -f libtss2-tcti-mssim.so && ln -s libtss2-tcti-mssim.so.0.0.0 libtss2-tcti-mssim.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-mssim.lai /usr/local/lib/libtss2-tcti-mssim.la
+libtool: install: (cd /home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss; /bin/bash "/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss/libtool"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -DINTERNALBUILD=1 -Wl,--version-script=./lib/tss2-tcti-pcap.map -o src/tss2-tcti/libtss2-tcti-pcap.la -rpath /usr/local/lib src/tss2-tcti/tcti-common.lo src/tss2-tcti/tcti-pcap-builder.lo src/tss2-tcti/tcti-pcap.lo src/tss2-tcti/libtss2-tctildr.la src/tss2-mu/libtss2-mu.la libutil.la )
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-pcap.so.0.0.0T /usr/local/lib/libtss2-tcti-pcap.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-pcap.so.0.0.0 libtss2-tcti-pcap.so.0 || { rm -f libtss2-tcti-pcap.so.0 && ln -s libtss2-tcti-pcap.so.0.0.0 libtss2-tcti-pcap.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-pcap.so.0.0.0 libtss2-tcti-pcap.so || { rm -f libtss2-tcti-pcap.so && ln -s libtss2-tcti-pcap.so.0.0.0 libtss2-tcti-pcap.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-pcap.lai /usr/local/lib/libtss2-tcti-pcap.la
+libtool: install: (cd /home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss; /bin/bash "/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss/libtool"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -DINTERNALBUILD=1 -Wl,--version-script=./lib/tss2-tcti-cmd.map -o src/tss2-tcti/libtss2-tcti-cmd.la -rpath /usr/local/lib src/tss2-tcti/tcti-common.lo src/tss2-tcti/tcti-cmd.lo libutil.la src/tss2-mu/libtss2-mu.la )
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-cmd.so.0.0.0T /usr/local/lib/libtss2-tcti-cmd.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-cmd.so.0.0.0 libtss2-tcti-cmd.so.0 || { rm -f libtss2-tcti-cmd.so.0 && ln -s libtss2-tcti-cmd.so.0.0.0 libtss2-tcti-cmd.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-cmd.so.0.0.0 libtss2-tcti-cmd.so || { rm -f libtss2-tcti-cmd.so && ln -s libtss2-tcti-cmd.so.0.0.0 libtss2-tcti-cmd.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-cmd.lai /usr/local/lib/libtss2-tcti-cmd.la
+libtool: install: (cd /home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss; /bin/bash "/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss/libtool"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -DINTERNALBUILD=1 -I./src/tss2-sys -Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,now -Wl,-z,relro -Wl,--version-script=./lib/tss2-sys.map -version-info 1:0:0 -o src/tss2-sys/libtss2-sys.la -rpath /usr/local/lib src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ACT_SetTimeout.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_AC_GetCapability.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_AC_Send.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ActivateCredential.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Certify.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_CertifyCreation.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_CertifyX509.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ChangeEPS.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ChangePPS.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Clear.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ClearControl.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ClockRateAdjust.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ClockSet.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Commit.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ContextLoad.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ContextSave.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Create.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_CreateLoaded.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_CreatePrimary.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_DictionaryAttackLockReset.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_DictionaryAttackParameters.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Duplicate.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ECC_Parameters.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ECDH_KeyGen.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ECDH_ZGen.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EC_Ephemeral.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EncryptDecrypt.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EncryptDecrypt2.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EventSequenceComplete.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_EvictControl.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Execute.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_FieldUpgradeData.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_FieldUpgradeStart.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Finalize.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_FirmwareRead.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_FlushContext.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetCapability.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetCommandAuditDigest.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetCommandCode.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetContextSize.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetCpBuffer.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetDecryptParam.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetEncryptParam.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetRandom.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetRpBuffer.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetRspAuths.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetSessionAuditDigest.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetTctiContext.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetTestResult.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_GetTime.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HMAC.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HMAC_Start.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Hash.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HashSequenceStart.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HierarchyChangeAuth.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_HierarchyControl.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Import.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_IncrementalSelfTest.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Initialize.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Load.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_LoadExternal.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_MakeCredential.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Certify.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_ChangeAuth.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_DefineSpace.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Extend.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_GlobalWriteLock.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Increment.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Read.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_ReadLock.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_ReadPublic.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_SetBits.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_UndefineSpace.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_UndefineSpaceSpecial.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_Write.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_NV_WriteLock.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ObjectChangeAuth.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Allocate.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Event.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Extend.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Read.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_Reset.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_SetAuthPolicy.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PCR_SetAuthValue.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PP_Commands.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyAuthValue.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyAuthorize.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyAuthorizeNV.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyCommandCode.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyCounterTimer.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyCpHash.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyDuplicationSelect.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyGetDigest.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyLocality.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyNV.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyNameHash.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyNvWritten.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyOR.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyPCR.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyPassword.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyPhysicalPresence.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyRestart.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicySecret.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicySigned.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyTemplate.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_PolicyTicket.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Policy_AC_SendSelect.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Quote.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_RSA_Decrypt.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_RSA_Encrypt.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ReadClock.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ReadPublic.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Rewrap.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SelfTest.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SequenceComplete.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SequenceUpdate.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetAlgorithmSet.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetCmdAuths.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetCommandCodeAuditStatus.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetDecryptParam.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetEncryptParam.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_SetPrimaryPolicy.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Shutdown.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Sign.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_StartAuthSession.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Startup.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_StirRandom.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_TestParms.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Unseal.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_Vendor_TCG_Test.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_VerifySignature.lo src/tss2-sys/api/libtss2_sys_la-Tss2_Sys_ZGen_2Phase.lo src/tss2-sys/libtss2_sys_la-sysapi_util.lo src/tss2-mu/libtss2-mu.la libutil.la )
+libtool: install: /usr/bin/install -c src/tss2-sys/.libs/libtss2-sys.so.1.0.0T /usr/local/lib/libtss2-sys.so.1.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-sys.so.1.0.0 libtss2-sys.so.1 || { rm -f libtss2-sys.so.1 && ln -s libtss2-sys.so.1.0.0 libtss2-sys.so.1; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-sys.so.1.0.0 libtss2-sys.so || { rm -f libtss2-sys.so && ln -s libtss2-sys.so.1.0.0 libtss2-sys.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-sys/.libs/libtss2-sys.lai /usr/local/lib/libtss2-sys.la
+libtool: install: (cd /home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss; /bin/bash "/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss/libtool"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -DINTERNALBUILD=1 -I./src/tss2-esys -Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,now -Wl,-z,relro -lcrypto -Wl,--version-script=./lib/tss2-esys.map -o src/tss2-esys/libtss2-esys.la -rpath /usr/local/lib src/tss2-esys/api/libtss2_esys_la-Esys_ACT_SetTimeout.lo src/tss2-esys/api/libtss2_esys_la-Esys_ActivateCredential.lo src/tss2-esys/api/libtss2_esys_la-Esys_Certify.lo src/tss2-esys/api/libtss2_esys_la-Esys_CertifyCreation.lo src/tss2-esys/api/libtss2_esys_la-Esys_CertifyX509.lo src/tss2-esys/api/libtss2_esys_la-Esys_ChangeEPS.lo src/tss2-esys/api/libtss2_esys_la-Esys_ChangePPS.lo src/tss2-esys/api/libtss2_esys_la-Esys_Clear.lo src/tss2-esys/api/libtss2_esys_la-Esys_ClearControl.lo src/tss2-esys/api/libtss2_esys_la-Esys_ClockRateAdjust.lo src/tss2-esys/api/libtss2_esys_la-Esys_ClockSet.lo src/tss2-esys/api/libtss2_esys_la-Esys_Commit.lo src/tss2-esys/api/libtss2_esys_la-Esys_ContextLoad.lo src/tss2-esys/api/libtss2_esys_la-Esys_ContextSave.lo src/tss2-esys/api/libtss2_esys_la-Esys_Create.lo src/tss2-esys/api/libtss2_esys_la-Esys_CreateLoaded.lo src/tss2-esys/api/libtss2_esys_la-Esys_CreatePrimary.lo src/tss2-esys/api/libtss2_esys_la-Esys_DictionaryAttackLockReset.lo src/tss2-esys/api/libtss2_esys_la-Esys_DictionaryAttackParameters.lo src/tss2-esys/api/libtss2_esys_la-Esys_Duplicate.lo src/tss2-esys/api/libtss2_esys_la-Esys_ECC_Parameters.lo src/tss2-esys/api/libtss2_esys_la-Esys_ECDH_KeyGen.lo src/tss2-esys/api/libtss2_esys_la-Esys_ECDH_ZGen.lo src/tss2-esys/api/libtss2_esys_la-Esys_EC_Ephemeral.lo src/tss2-esys/api/libtss2_esys_la-Esys_EncryptDecrypt.lo src/tss2-esys/api/libtss2_esys_la-Esys_EncryptDecrypt2.lo src/tss2-esys/api/libtss2_esys_la-Esys_EventSequenceComplete.lo src/tss2-esys/api/libtss2_esys_la-Esys_EvictControl.lo src/tss2-esys/api/libtss2_esys_la-Esys_FieldUpgradeData.lo src/tss2-esys/api/libtss2_esys_la-Esys_FieldUpgradeStart.lo src/tss2-esys/api/libtss2_esys_la-Esys_FirmwareRead.lo src/tss2-esys/api/libtss2_esys_la-Esys_FlushContext.lo src/tss2-esys/api/libtss2_esys_la-Esys_GetCapability.lo src/tss2-esys/api/libtss2_esys_la-Esys_GetCommandAuditDigest.lo src/tss2-esys/api/libtss2_esys_la-Esys_GetRandom.lo src/tss2-esys/api/libtss2_esys_la-Esys_GetSessionAuditDigest.lo src/tss2-esys/api/libtss2_esys_la-Esys_GetTestResult.lo src/tss2-esys/api/libtss2_esys_la-Esys_GetTime.lo src/tss2-esys/api/libtss2_esys_la-Esys_HMAC.lo src/tss2-esys/api/libtss2_esys_la-Esys_HMAC_Start.lo src/tss2-esys/api/libtss2_esys_la-Esys_Hash.lo src/tss2-esys/api/libtss2_esys_la-Esys_HashSequenceStart.lo src/tss2-esys/api/libtss2_esys_la-Esys_HierarchyChangeAuth.lo src/tss2-esys/api/libtss2_esys_la-Esys_HierarchyControl.lo src/tss2-esys/api/libtss2_esys_la-Esys_Import.lo src/tss2-esys/api/libtss2_esys_la-Esys_IncrementalSelfTest.lo src/tss2-esys/api/libtss2_esys_la-Esys_Load.lo src/tss2-esys/api/libtss2_esys_la-Esys_LoadExternal.lo src/tss2-esys/api/libtss2_esys_la-Esys_MakeCredential.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_Certify.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_ChangeAuth.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_DefineSpace.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_Extend.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_GlobalWriteLock.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_Increment.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_Read.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_ReadLock.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_ReadPublic.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_SetBits.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_UndefineSpace.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_UndefineSpaceSpecial.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_Write.lo src/tss2-esys/api/libtss2_esys_la-Esys_NV_WriteLock.lo src/tss2-esys/api/libtss2_esys_la-Esys_ObjectChangeAuth.lo src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Allocate.lo src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Event.lo src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Extend.lo src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Read.lo src/tss2-esys/api/libtss2_esys_la-Esys_PCR_Reset.lo src/tss2-esys/api/libtss2_esys_la-Esys_PCR_SetAuthPolicy.lo src/tss2-esys/api/libtss2_esys_la-Esys_PCR_SetAuthValue.lo src/tss2-esys/api/libtss2_esys_la-Esys_PP_Commands.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyAuthValue.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyAuthorize.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyAuthorizeNV.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyCommandCode.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyCounterTimer.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyCpHash.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyDuplicationSelect.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyGetDigest.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyLocality.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyNV.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyNameHash.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyNvWritten.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyOR.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyPCR.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyPassword.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyPhysicalPresence.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyRestart.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicySecret.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicySigned.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyTemplate.lo src/tss2-esys/api/libtss2_esys_la-Esys_PolicyTicket.lo src/tss2-esys/api/libtss2_esys_la-Esys_Quote.lo src/tss2-esys/api/libtss2_esys_la-Esys_RSA_Decrypt.lo src/tss2-esys/api/libtss2_esys_la-Esys_RSA_Encrypt.lo src/tss2-esys/api/libtss2_esys_la-Esys_ReadClock.lo src/tss2-esys/api/libtss2_esys_la-Esys_ReadPublic.lo src/tss2-esys/api/libtss2_esys_la-Esys_Rewrap.lo src/tss2-esys/api/libtss2_esys_la-Esys_SelfTest.lo src/tss2-esys/api/libtss2_esys_la-Esys_SequenceComplete.lo src/tss2-esys/api/libtss2_esys_la-Esys_SequenceUpdate.lo src/tss2-esys/api/libtss2_esys_la-Esys_SetAlgorithmSet.lo src/tss2-esys/api/libtss2_esys_la-Esys_SetCommandCodeAuditStatus.lo src/tss2-esys/api/libtss2_esys_la-Esys_SetPrimaryPolicy.lo src/tss2-esys/api/libtss2_esys_la-Esys_Shutdown.lo src/tss2-esys/api/libtss2_esys_la-Esys_Sign.lo src/tss2-esys/api/libtss2_esys_la-Esys_StartAuthSession.lo src/tss2-esys/api/libtss2_esys_la-Esys_Startup.lo src/tss2-esys/api/libtss2_esys_la-Esys_StirRandom.lo src/tss2-esys/api/libtss2_esys_la-Esys_TestParms.lo src/tss2-esys/api/libtss2_esys_la-Esys_Unseal.lo src/tss2-esys/api/libtss2_esys_la-Esys_Vendor_TCG_Test.lo src/tss2-esys/api/libtss2_esys_la-Esys_VerifySignature.lo src/tss2-esys/api/libtss2_esys_la-Esys_ZGen_2Phase.lo src/tss2-esys/libtss2_esys_la-esys_context.lo src/tss2-esys/libtss2_esys_la-esys_crypto.lo src/tss2-esys/libtss2_esys_la-esys_free.lo src/tss2-esys/libtss2_esys_la-esys_iutil.lo src/tss2-esys/libtss2_esys_la-esys_mu.lo src/tss2-esys/libtss2_esys_la-esys_tr.lo src/tss2-esys/libtss2_esys_la-esys_crypto_ossl.lo src/tss2-tcti/tss2_esys_libtss2_esys_la-tctildr.lo src/tss2-tcti/tss2_esys_libtss2_esys_la-tctildr-dl.lo src/tss2-sys/libtss2-sys.la src/tss2-mu/libtss2-mu.la libutil.la -ldl )
+libtool: install: /usr/bin/install -c src/tss2-esys/.libs/libtss2-esys.so.0.0.0T /usr/local/lib/libtss2-esys.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-esys.so.0.0.0 libtss2-esys.so.0 || { rm -f libtss2-esys.so.0 && ln -s libtss2-esys.so.0.0.0 libtss2-esys.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-esys.so.0.0.0 libtss2-esys.so || { rm -f libtss2-esys.so && ln -s libtss2-esys.so.0.0.0 libtss2-esys.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-esys/.libs/libtss2-esys.lai /usr/local/lib/libtss2-esys.la
+libtool: install: /usr/bin/install -c src/tss2-rc/.libs/libtss2-rc.so.0.0.0 /usr/local/lib/libtss2-rc.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-rc.so.0.0.0 libtss2-rc.so.0 || { rm -f libtss2-rc.so.0 && ln -s libtss2-rc.so.0.0.0 libtss2-rc.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-rc.so.0.0.0 libtss2-rc.so || { rm -f libtss2-rc.so && ln -s libtss2-rc.so.0.0.0 libtss2-rc.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-rc/.libs/libtss2-rc.lai /usr/local/lib/libtss2-rc.la
+libtool: install: (cd /home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss; /bin/bash "/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss/libtool"  --silent --tag CC --mode=relink gcc -I./src -I./include/tss2 -I./test/fuzz/tcti -O2 -std=c99 -Wall -Wextra -Wformat-security -fstack-protector-all -fpic -fPIC -Wno-missing-braces -Wstrict-overflow=5 -DINTERNALBUILD=1 -I./src/tss2-fapi -I/usr/include/json-c -I/usr/include/aarch64-linux-gnu -Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,now -Wl,-z,relro -lcrypto -ljson-c -lcurl -Wl,--version-script=./lib/tss2-fapi.map -version-info 1:0:0 -o src/tss2-fapi/libtss2-fapi.la -rpath /usr/local/lib src/tss2-fapi/api/libtss2_fapi_la-Fapi_AuthorizePolicy.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_ChangeAuth.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_CreateKey.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_CreateNv.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_CreateSeal.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Decrypt.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Delete.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Encrypt.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_ExportKey.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_ExportPolicy.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Finalize.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Free.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetAppData.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetCertificate.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetDescription.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetEsysBlob.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetInfo.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetPlatformCertificates.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetPollHandles.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetRandom.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetTcti.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_GetTpmBlobs.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Import.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Initialize.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_List.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvExtend.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvIncrement.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvRead.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvSetBits.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_NvWrite.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_PcrExtend.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_PcrRead.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Provision.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Quote.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_SetAppData.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_SetCertificate.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_SetDescription.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Sign.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_Unseal.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_VerifyQuote.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_VerifySignature.lo src/tss2-fapi/api/libtss2_fapi_la-Fapi_WriteAuthorizeNV.lo src/tss2-fapi/api/libtss2_fapi_la-fapi_callback.lo src/tss2-fapi/libtss2_fapi_la-fapi_crypto.lo src/tss2-fapi/libtss2_fapi_la-fapi_util.lo src/tss2-fapi/libtss2_fapi_la-ifapi_config.lo src/tss2-fapi/libtss2_fapi_la-ifapi_eventlog.lo src/tss2-fapi/libtss2_fapi_la-ifapi_get_intl_cert.lo src/tss2-fapi/libtss2_fapi_la-ifapi_helpers.lo src/tss2-fapi/libtss2_fapi_la-ifapi_io.lo src/tss2-fapi/libtss2_fapi_la-ifapi_json_deserialize.lo src/tss2-fapi/libtss2_fapi_la-ifapi_json_serialize.lo src/tss2-fapi/libtss2_fapi_la-ifapi_keystore.lo src/tss2-fapi/libtss2_fapi_la-ifapi_policy.lo src/tss2-fapi/libtss2_fapi_la-ifapi_policy_calculate.lo src/tss2-fapi/libtss2_fapi_la-ifapi_policy_callbacks.lo src/tss2-fapi/libtss2_fapi_la-ifapi_policy_execute.lo src/tss2-fapi/libtss2_fapi_la-ifapi_policy_instantiate.lo src/tss2-fapi/libtss2_fapi_la-ifapi_policy_json_deserialize.lo src/tss2-fapi/libtss2_fapi_la-ifapi_policy_json_serialize.lo src/tss2-fapi/libtss2_fapi_la-ifapi_policy_store.lo src/tss2-fapi/libtss2_fapi_la-ifapi_policyutil_execute.lo src/tss2-fapi/libtss2_fapi_la-ifapi_profiles.lo src/tss2-fapi/libtss2_fapi_la-tpm_json_deserialize.lo src/tss2-fapi/libtss2_fapi_la-tpm_json_serialize.lo src/tss2-sys/libtss2-sys.la src/tss2-mu/libtss2-mu.la src/tss2-esys/libtss2-esys.la libutil.la src/tss2-tcti/libtss2-tctildr.la )
+libtool: install: /usr/bin/install -c src/tss2-fapi/.libs/libtss2-fapi.so.1.0.0T /usr/local/lib/libtss2-fapi.so.1.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-fapi.so.1.0.0 libtss2-fapi.so.1 || { rm -f libtss2-fapi.so.1 && ln -s libtss2-fapi.so.1.0.0 libtss2-fapi.so.1; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-fapi.so.1.0.0 libtss2-fapi.so || { rm -f libtss2-fapi.so && ln -s libtss2-fapi.so.1.0.0 libtss2-fapi.so; }; })
+libtool: install: /usr/bin/install -c src/tss2-fapi/.libs/libtss2-fapi.lai /usr/local/lib/libtss2-fapi.la
+libtool: install: /usr/bin/install -c src/tss2-mu/.libs/libtss2-mu.a /usr/local/lib/libtss2-mu.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-mu.a
+libtool: install: ranlib /usr/local/lib/libtss2-mu.a
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tctildr.a /usr/local/lib/libtss2-tctildr.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-tctildr.a
+libtool: install: ranlib /usr/local/lib/libtss2-tctildr.a
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-device.a /usr/local/lib/libtss2-tcti-device.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-tcti-device.a
+libtool: install: ranlib /usr/local/lib/libtss2-tcti-device.a
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-swtpm.a /usr/local/lib/libtss2-tcti-swtpm.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-tcti-swtpm.a
+libtool: install: ranlib /usr/local/lib/libtss2-tcti-swtpm.a
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-mssim.a /usr/local/lib/libtss2-tcti-mssim.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-tcti-mssim.a
+libtool: install: ranlib /usr/local/lib/libtss2-tcti-mssim.a
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-pcap.a /usr/local/lib/libtss2-tcti-pcap.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-tcti-pcap.a
+libtool: install: ranlib /usr/local/lib/libtss2-tcti-pcap.a
+libtool: install: /usr/bin/install -c src/tss2-tcti/.libs/libtss2-tcti-cmd.a /usr/local/lib/libtss2-tcti-cmd.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-tcti-cmd.a
+libtool: install: ranlib /usr/local/lib/libtss2-tcti-cmd.a
+libtool: install: /usr/bin/install -c src/tss2-sys/.libs/libtss2-sys.a /usr/local/lib/libtss2-sys.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-sys.a
+libtool: install: ranlib /usr/local/lib/libtss2-sys.a
+libtool: install: /usr/bin/install -c src/tss2-esys/.libs/libtss2-esys.a /usr/local/lib/libtss2-esys.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-esys.a
+libtool: install: ranlib /usr/local/lib/libtss2-esys.a
+libtool: install: /usr/bin/install -c src/tss2-rc/.libs/libtss2-rc.a /usr/local/lib/libtss2-rc.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-rc.a
+libtool: install: ranlib /usr/local/lib/libtss2-rc.a
+libtool: install: /usr/bin/install -c src/tss2-fapi/.libs/libtss2-fapi.a /usr/local/lib/libtss2-fapi.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-fapi.a
+libtool: install: ranlib /usr/local/lib/libtss2-fapi.a
+libtool: finish: PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/sbin" ldconfig -n /usr/local/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/local/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+ /usr/bin/mkdir -p '/usr/local/etc/tpm2-tss'
+ /usr/bin/install -c -m 644 fapi-config.json '/usr/local/etc/tpm2-tss'
+ /usr/bin/mkdir -p '/usr/local/etc/tpm2-tss/fapi-profiles'
+ /usr/bin/install -c -m 644 dist/fapi-profiles/P_RSA2048SHA256.json dist/fapi-profiles/P_ECCP256SHA256.json '/usr/local/etc/tpm2-tss/fapi-profiles'
+ /usr/bin/mkdir -p '/usr/local/share/man/man3'
+ /usr/bin/install -c -m 644 man/man3/Tss2_Tcti_Cmd_Init.3 man/man3/Tss2_Tcti_Device_Init.3 man/man3/Tss2_Tcti_Mssim_Init.3 man/man3/Tss2_TctiLdr_Finalize.3 man/man3/Tss2_TctiLdr_FreeInfo.3 man/man3/Tss2_TctiLdr_GetInfo.3 man/man3/Tss2_TctiLdr_Initialize.3 doxygen-doc/man/ESYS_CONTEXT.3 doxygen-doc/man/ESYS_TR.3 doxygen-doc/man/ESYS_TR_defines.3 doxygen-doc/man/Esys_ActivateCredential.3 doxygen-doc/man/Esys_Certify.3 doxygen-doc/man/Esys_CertifyCreation.3 doxygen-doc/man/Esys_ChangeEPS.3 doxygen-doc/man/Esys_ChangePPS.3 doxygen-doc/man/Esys_Clear.3 doxygen-doc/man/Esys_ClearControl.3 doxygen-doc/man/Esys_ClockRateAdjust.3 doxygen-doc/man/Esys_ClockSet.3 doxygen-doc/man/Esys_Commit.3 doxygen-doc/man/Esys_ContextLoad.3 doxygen-doc/man/Esys_ContextSave.3 doxygen-doc/man/Esys_Create.3 doxygen-doc/man/Esys_CreatePrimary.3 doxygen-doc/man/Esys_DictionaryAttackLockReset.3 doxygen-doc/man/Esys_DictionaryAttackParameters.3 doxygen-doc/man/Esys_Duplicate.3 doxygen-doc/man/Esys_ECC_Parameters.3 doxygen-doc/man/Esys_ECDH_KeyGen.3 doxygen-doc/man/Esys_ECDH_ZGen.3 doxygen-doc/man/Esys_EC_Ephemeral.3 doxygen-doc/man/Esys_EncryptDecrypt.3 doxygen-doc/man/Esys_EventSequenceComplete.3 doxygen-doc/man/Esys_EvictControl.3 doxygen-doc/man/Esys_FlushContext.3 doxygen-doc/man/Esys_GetCapability.3 doxygen-doc/man/Esys_GetCommandAuditDigest.3 doxygen-doc/man/Esys_GetRandom.3 doxygen-doc/man/Esys_GetSessionAuditDigest.3 doxygen-doc/man/Esys_GetTestResult.3 '/usr/local/share/man/man3'
+ /usr/bin/install -c -m 644 doxygen-doc/man/Esys_GetTime.3 doxygen-doc/man/Esys_Hash.3 doxygen-doc/man/Esys_HashSequenceStart.3 doxygen-doc/man/Esys_HierarchyChangeAuth.3 doxygen-doc/man/Esys_HierarchyControl.3 doxygen-doc/man/Esys_HMAC.3 doxygen-doc/man/Esys_HMAC_Start.3 doxygen-doc/man/Esys_Import.3 doxygen-doc/man/Esys_IncrementalSelfTest.3 doxygen-doc/man/Esys_Load.3 doxygen-doc/man/Esys_LoadExternal.3 doxygen-doc/man/Esys_MakeCredential.3 doxygen-doc/man/Esys_NV_Certify.3 doxygen-doc/man/Esys_NV_ChangeAuth.3 doxygen-doc/man/Esys_NV_DefineSpace.3 doxygen-doc/man/Esys_NV_Extend.3 doxygen-doc/man/Esys_NV_GlobalWriteLock.3 doxygen-doc/man/Esys_NV_Increment.3 doxygen-doc/man/Esys_NV_Read.3 doxygen-doc/man/Esys_NV_ReadLock.3 doxygen-doc/man/Esys_NV_ReadPublic.3 doxygen-doc/man/Esys_NV_SetBits.3 doxygen-doc/man/Esys_NV_UndefineSpace.3 doxygen-doc/man/Esys_NV_UndefineSpaceSpecial.3 doxygen-doc/man/Esys_NV_Write.3 doxygen-doc/man/Esys_NV_WriteLock.3 doxygen-doc/man/Esys_ObjectChangeAuth.3 doxygen-doc/man/Esys_PCR_Allocate.3 doxygen-doc/man/Esys_PCR_Event.3 doxygen-doc/man/Esys_PCR_Extend.3 doxygen-doc/man/Esys_PCR_Read.3 doxygen-doc/man/Esys_PCR_Reset.3 doxygen-doc/man/Esys_PCR_SetAuthPolicy.3 doxygen-doc/man/Esys_PCR_SetAuthValue.3 doxygen-doc/man/Esys_PolicyAuthorize.3 doxygen-doc/man/Esys_PolicyAuthValue.3 doxygen-doc/man/Esys_PolicyCommandCode.3 doxygen-doc/man/Esys_PolicyCounterTimer.3 doxygen-doc/man/Esys_PolicyCpHash.3 doxygen-doc/man/Esys_PolicyDuplicationSelect.3 '/usr/local/share/man/man3'
+ /usr/bin/install -c -m 644 doxygen-doc/man/Esys_PolicyGetDigest.3 doxygen-doc/man/Esys_PolicyLocality.3 doxygen-doc/man/Esys_PolicyNameHash.3 doxygen-doc/man/Esys_PolicyNV.3 doxygen-doc/man/Esys_PolicyNvWritten.3 doxygen-doc/man/Esys_PolicyOR.3 doxygen-doc/man/Esys_PolicyPassword.3 doxygen-doc/man/Esys_PolicyPCR.3 doxygen-doc/man/Esys_PolicyPhysicalPresence.3 doxygen-doc/man/Esys_PolicyRestart.3 doxygen-doc/man/Esys_PolicySecret.3 doxygen-doc/man/Esys_PolicySigned.3 doxygen-doc/man/Esys_PolicyTicket.3 doxygen-doc/man/Esys_PP_Commands.3 doxygen-doc/man/Esys_Quote.3 doxygen-doc/man/Esys_ReadClock.3 doxygen-doc/man/Esys_ReadPublic.3 doxygen-doc/man/Esys_Rewrap.3 doxygen-doc/man/Esys_RSA_Decrypt.3 doxygen-doc/man/Esys_RSA_Encrypt.3 doxygen-doc/man/Esys_SelfTest.3 doxygen-doc/man/Esys_SequenceComplete.3 doxygen-doc/man/Esys_SequenceUpdate.3 doxygen-doc/man/Esys_SetAlgorithmSet.3 doxygen-doc/man/Esys_SetCommandCodeAuditStatus.3 doxygen-doc/man/Esys_SetPrimaryPolicy.3 doxygen-doc/man/Esys_Shutdown.3 doxygen-doc/man/Esys_Sign.3 doxygen-doc/man/Esys_StartAuthSession.3 doxygen-doc/man/Esys_Startup.3 doxygen-doc/man/Esys_StirRandom.3 doxygen-doc/man/Esys_TestParms.3 doxygen-doc/man/Esys_Unseal.3 doxygen-doc/man/Esys_Vendor_TCG_Test.3 doxygen-doc/man/Esys_VerifySignature.3 doxygen-doc/man/Esys_ZGen_2Phase.3 doxygen-doc/man/Fapi_AuthorizePolicy.3 doxygen-doc/man/Fapi_ChangeAuth.3 doxygen-doc/man/Fapi_CreateKey.3 doxygen-doc/man/Fapi_CreateNv.3 '/usr/local/share/man/man3'
+ /usr/bin/install -c -m 644 doxygen-doc/man/Fapi_CreateSeal.3 doxygen-doc/man/Fapi_Decrypt.3 doxygen-doc/man/Fapi_Delete.3 doxygen-doc/man/Fapi_Encrypt.3 doxygen-doc/man/Fapi_ExportKey.3 doxygen-doc/man/Fapi_ExportPolicy.3 doxygen-doc/man/Fapi_Finalize.3 doxygen-doc/man/Fapi_Free.3 doxygen-doc/man/Fapi_GetAppData.3 doxygen-doc/man/Fapi_GetCertificate.3 doxygen-doc/man/Fapi_GetDescription.3 doxygen-doc/man/Fapi_GetInfo.3 doxygen-doc/man/Fapi_GetPlatformCertificates.3 doxygen-doc/man/Fapi_GetPollHandles.3 doxygen-doc/man/Fapi_GetRandom.3 doxygen-doc/man/Fapi_GetTcti.3 doxygen-doc/man/Fapi_GetTpmBlobs.3 doxygen-doc/man/Fapi_Import.3 doxygen-doc/man/Fapi_Initialize.3 doxygen-doc/man/Fapi_List.3 doxygen-doc/man/Fapi_NvExtend.3 doxygen-doc/man/Fapi_NvIncrement.3 doxygen-doc/man/Fapi_NvRead.3 doxygen-doc/man/Fapi_NvSetBits.3 doxygen-doc/man/Fapi_NvWrite.3 doxygen-doc/man/Fapi_PcrExtend.3 doxygen-doc/man/Fapi_PcrRead.3 doxygen-doc/man/Fapi_Provision.3 doxygen-doc/man/Fapi_Quote.3 doxygen-doc/man/Fapi_SetAppData.3 doxygen-doc/man/Fapi_SetAuthCB.3 doxygen-doc/man/Fapi_SetBranchCB.3 doxygen-doc/man/Fapi_SetCertificate.3 doxygen-doc/man/Fapi_SetDescription.3 doxygen-doc/man/Fapi_SetSignCB.3 doxygen-doc/man/Fapi_Sign.3 doxygen-doc/man/FapiTestgroup.3 doxygen-doc/man/Fapi_Unseal.3 doxygen-doc/man/Fapi_VerifyQuote.3 doxygen-doc/man/Fapi_VerifySignature.3 '/usr/local/share/man/man3'
+ /usr/bin/install -c -m 644 doxygen-doc/man/Fapi_WriteAuthorizeNv.3 '/usr/local/share/man/man3'
+ /usr/bin/mkdir -p '/usr/local/share/man/man5'
+ /usr/bin/install -c -m 644 man/man5/fapi-config.5 man/man5/fapi-profile.5 '/usr/local/share/man/man5'
+ /usr/bin/mkdir -p '/usr/local/share/man/man7'
+ /usr/bin/install -c -m 644 man/man7/tss2-tcti-device.7 man/man7/tss2-tcti-swtpm.7 man/man7/tss2-tcti-mssim.7 man/man7/tss2-tcti-cmd.7 man/man7/tss2-tctildr.7 '/usr/local/share/man/man7'
+ /usr/bin/mkdir -p '/usr/local/lib/pkgconfig'
+ /usr/bin/install -c -m 644 lib/tss2-mu.pc lib/tss2-tctildr.pc lib/tss2-tcti-device.pc lib/tss2-tcti-swtpm.pc lib/tss2-tcti-mssim.pc lib/tss2-tcti-pcap.pc lib/tss2-tcti-cmd.pc lib/tss2-sys.pc lib/tss2-esys.pc lib/tss2-rc.pc lib/tss2-fapi.pc '/usr/local/lib/pkgconfig'
+ /usr/bin/mkdir -p '/usr/local/etc/sysusers.d'
+ /usr/bin/install -c -m 644 dist/sysusers.d/tpm2-tss.conf '/usr/local/etc/sysusers.d'
+ /usr/bin/mkdir -p '/usr/local/etc/tmpfiles.d'
+ /usr/bin/install -c -m 644 tpm2-tss-fapi.conf '/usr/local/etc/tmpfiles.d'
+ /usr/bin/mkdir -p '/usr/local/include/tss2'
+ /usr/bin/install -c -m 644 ./include/tss2/tss2_common.h ./include/tss2/tss2_tcti.h ./include/tss2/tss2_tpm2_types.h ./include/tss2/tss2_mu.h ./include/tss2/tss2_tctildr.h ./include/tss2/tss2_tcti_device.h ./include/tss2/tss2_tcti_swtpm.h ./include/tss2/tss2_tcti_mssim.h ./include/tss2/tss2_tcti_pcap.h ./include/tss2/tss2_tcti_cmd.h ./include/tss2/tss2_sys.h ./include/tss2/tss2_esys.h ./include/tss2/tss2_rc.h ./include/tss2/tss2_fapi.h '/usr/local/include/tss2'
+ /usr/bin/mkdir -p '/etc/udev/rules.d'
+ /usr/bin/install -c -m 644 dist/tpm-udev.rules '/etc/udev/rules.d'
+make  install-data-hook
+make[2]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss'
+systemd-sysusers /usr/local/etc/sysusers.d/tpm2-tss.conf
+systemd-tmpfiles --create /usr/local/etc/tmpfiles.d/tpm2-tss-fapi.conf
+call check_fapi_dirs
+if [ ! -z "" ]; then \
+	mv /etc/udev/rules.d/tpm-udev.rules /etc/udev/rules.d/tpm-udev.rules; \
+fi
+make[2]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss'
+make[1]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss'
+Generating file lists: src_vars.mk
+libtoolize: putting auxiliary files in '.'.
+libtoolize: linking file './ltmain.sh'
+Generating file lists: src_vars.mk
+checking whether to enable debugging... no
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether ln -s works... yes
+checking build system type... aarch64-unknown-linux-gnu
+checking host system type... aarch64-unknown-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking the maximum length of command line arguments... 1572864
+checking how to convert aarch64-unknown-linux-gnu file names to aarch64-unknown-linux-gnu format... func_convert_file_noop
+checking how to convert aarch64-unknown-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking for gawk... no
+checking for mawk... mawk
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking whether make sets $(MAKE)... yes
+checking whether make supports the include directive... yes (GNU style)
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
+checking whether make supports nested variables... (cached) yes
+checking whether to build with code coverage support... no
+checking for pandoc... yes
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for tss2-fapi... yes
+checking for tss2-fapi >= 3.0... yes
+checking for tss2-esys >= 3.0.0... yes
+checking for tss2-tctildr... yes
+checking for tss2-mu... yes
+checking for tss2-rc... yes
+checking for tss2-sys... yes
+checking for libcrypto >= 1.1.0... yes
+checking for libcurl... yes
+checking for efivar... no
+checking efivar/efivar.h usability... no
+checking efivar/efivar.h presence... no
+checking for efivar/efivar.h... no
+checking whether C compiler accepts -Wall... yes
+checking whether C compiler accepts -Wextra... yes
+checking whether C compiler accepts -Wformat... yes
+checking whether C compiler accepts -Wformat-security... yes
+checking whether C compiler accepts -Wstack-protector... yes
+checking whether C compiler accepts -fstack-protector-all... yes
+checking whether C compiler accepts -Wstrict-overflow=5... yes
+checking whether C compiler accepts -O2... yes
+checking whether C compiler accepts -Werror... yes
+checking whether to add -D_FORTIFY_SOURCE=2 to CPPFLAGS... yes
+checking whether C compiler accepts -fPIC... yes
+checking whether the linker accepts -shared... yes
+checking whether C compiler accepts -fPIE... yes
+checking whether the linker accepts -pie... yes
+checking whether the linker accepts -Wl,-z,relro... yes
+checking whether the linker accepts -Wl,-z,now... yes
+checking whether C compiler accepts -D_GNU_SOURCE... yes
+checking whether C compiler accepts -std=gnu99... yes
+checking whether C compiler accepts -Wstringop-overflow=4... yes
+checking whether C compiler accepts -Wstringop-truncation... yes
+checking whether C compiler accepts -Wduplicated-branches... yes
+checking whether C compiler accepts -Wduplicated-cond... yes
+checking whether C compiler accepts -Wbool-compare... yes
+checking whether C compiler accepts -fdata-sections... yes
+checking whether C compiler accepts -ffunction-sections... yes
+checking whether the linker accepts -Wl,--gc-sections... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating lib/config.h
+config.status: executing libtool commands
+config.status: executing depfiles commands
+
+    - tpm2-tools: 5.2
+    - Man pages: yes
+    - Unit tests: no
+    
+
+  GEN      man/man1/tpm2_activatecredential.1
+  GEN      man/man1/tpm2_certifyX509certutil.1
+  GEN      man/man1/tpm2_certify.1
+  GEN      man/man1/tpm2_changeauth.1
+  GEN      man/man1/tpm2_changeeps.1
+  GEN      man/man1/tpm2_changepps.1
+  GEN      man/man1/tpm2_checkquote.1
+  GEN      man/man1/tpm2_clear.1
+  GEN      man/man1/tpm2_clearcontrol.1
+  GEN      man/man1/tpm2_clockrateadjust.1
+  GEN      man/man1/tpm2_create.1
+  GEN      man/man1/tpm2_createak.1
+  GEN      man/man1/tpm2_createek.1
+  GEN      man/man1/tpm2_createpolicy.1
+  GEN      man/man1/tpm2_setprimarypolicy.1
+  GEN      man/man1/tpm2_createprimary.1
+  GEN      man/man1/tpm2_dictionarylockout.1
+  GEN      man/man1/tpm2_duplicate.1
+  GEN      man/man1/tpm2_getcap.1
+  GEN      man/man1/tpm2_encryptdecrypt.1
+  GEN      man/man1/tpm2_eventlog.1
+  GEN      man/man1/tpm2_evictcontrol.1
+  GEN      man/man1/tpm2_flushcontext.1
+  GEN      man/man1/tpm2_getekcertificate.1
+  GEN      man/man1/tpm2_getrandom.1
+  GEN      man/man1/tpm2_gettestresult.1
+  GEN      man/man1/tpm2_gettime.1
+  GEN      man/man1/tpm2_hierarchycontrol.1
+  GEN      man/man1/tpm2_hash.1
+  GEN      man/man1/tpm2_hmac.1
+  GEN      man/man1/tpm2_import.1
+  GEN      man/man1/tpm2_incrementalselftest.1
+  GEN      man/man1/tpm2_load.1
+  GEN      man/man1/tpm2_loadexternal.1
+  GEN      man/man1/tpm2_makecredential.1
+  GEN      man/man1/tpm2_nvdefine.1
+  GEN      man/man1/tpm2_nvextend.1
+  GEN      man/man1/tpm2_nvincrement.1
+  GEN      man/man1/tpm2_nvreadpublic.1
+  GEN      man/man1/tpm2_nvread.1
+  GEN      man/man1/tpm2_nvreadlock.1
+  GEN      man/man1/tpm2_nvundefine.1
+  GEN      man/man1/tpm2_nvwrite.1
+  GEN      man/man1/tpm2_nvwritelock.1
+  GEN      man/man1/tpm2_nvsetbits.1
+  GEN      man/man1/tpm2_pcrallocate.1
+  GEN      man/man1/tpm2_pcrevent.1
+  GEN      man/man1/tpm2_pcrextend.1
+  GEN      man/man1/tpm2_pcrread.1
+  GEN      man/man1/tpm2_pcrreset.1
+  GEN      man/man1/tpm2_policypcr.1
+  GEN      man/man1/tpm2_policyrestart.1
+  GEN      man/man1/tpm2_policycommandcode.1
+  GEN      man/man1/tpm2_policyduplicationselect.1
+  GEN      man/man1/tpm2_policynvwritten.1
+  GEN      man/man1/tpm2_policylocality.1
+  GEN      man/man1/tpm2_policyauthorize.1
+  GEN      man/man1/tpm2_policyauthorizenv.1
+  GEN      man/man1/tpm2_policynv.1
+  GEN      man/man1/tpm2_policycountertimer.1
+  GEN      man/man1/tpm2_policyor.1
+  GEN      man/man1/tpm2_policynamehash.1
+  GEN      man/man1/tpm2_policytemplate.1
+  GEN      man/man1/tpm2_policycphash.1
+  GEN      man/man1/tpm2_policypassword.1
+  GEN      man/man1/tpm2_policysigned.1
+  GEN      man/man1/tpm2_policyticket.1
+  GEN      man/man1/tpm2_policyauthvalue.1
+  GEN      man/man1/tpm2_policysecret.1
+  GEN      man/man1/tpm2_print.1
+  GEN      man/man1/tpm2_quote.1
+  GEN      man/man1/tpm2_rc_decode.1
+  GEN      man/man1/tpm2_readclock.1
+  GEN      man/man1/tpm2_readpublic.1
+  GEN      man/man1/tpm2_rsadecrypt.1
+  GEN      man/man1/tpm2_rsaencrypt.1
+  GEN      man/man1/tpm2_send.1
+  GEN      man/man1/tpm2_selftest.1
+  GEN      man/man1/tpm2_setclock.1
+  GEN      man/man1/tpm2_shutdown.1
+  GEN      man/man1/tpm2_sign.1
+  GEN      man/man1/tpm2_certifycreation.1
+  GEN      man/man1/tpm2_nvcertify.1
+  GEN      man/man1/tpm2_startauthsession.1
+  GEN      man/man1/tpm2_startup.1
+  GEN      man/man1/tpm2_stirrandom.1
+  GEN      man/man1/tpm2_testparms.1
+  GEN      man/man1/tpm2_unseal.1
+  GEN      man/man1/tpm2_verifysignature.1
+  GEN      man/man1/tpm2_setcommandauditstatus.1
+  GEN      man/man1/tpm2_getcommandauditdigest.1
+  GEN      man/man1/tpm2_getsessionauditdigest.1
+  GEN      man/man1/tpm2_geteccparameters.1
+  GEN      man/man1/tpm2_ecephemeral.1
+  GEN      man/man1/tpm2_commit.1
+  GEN      man/man1/tpm2_ecdhkeygen.1
+  GEN      man/man1/tpm2_ecdhzgen.1
+  GEN      man/man1/tpm2_zgen2phase.1
+  GEN      man/man1/tpm2_sessionconfig.1
+  GEN      man/man1/tpm2_getpolicydigest.1
+  GEN      man/man1/tpm2.1
+  GEN      man/man1/tss2_list.1
+  GEN      man/man1/tss2_changeauth.1
+  GEN      man/man1/tss2_delete.1
+  GEN      man/man1/tss2_import.1
+  GEN      man/man1/tss2_decrypt.1
+  GEN      man/man1/tss2_encrypt.1
+  GEN      man/man1/tss2_getinfo.1
+  GEN      man/man1/tss2_nvread.1
+  GEN      man/man1/tss2_createnv.1
+  GEN      man/man1/tss2_nvextend.1
+  GEN      man/man1/tss2_nvincrement.1
+  GEN      man/man1/tss2_nvsetbits.1
+  GEN      man/man1/tss2_nvwrite.1
+  GEN      man/man1/tss2_createkey.1
+  GEN      man/man1/tss2_createseal.1
+  GEN      man/man1/tss2_getcertificate.1
+  GEN      man/man1/tss2_getplatformcertificates.1
+  GEN      man/man1/tss2_gettpmblobs.1
+  GEN      man/man1/tss2_getappdata.1
+  GEN      man/man1/tss2_setappdata.1
+  GEN      man/man1/tss2_setcertificate.1
+  GEN      man/man1/tss2_exportkey.1
+  GEN      man/man1/tss2_sign.1
+  GEN      man/man1/tss2_verifysignature.1
+  GEN      man/man1/tss2_verifyquote.1
+  GEN      man/man1/tss2_getdescription.1
+  GEN      man/man1/tss2_setdescription.1
+  GEN      man/man1/tss2_pcrextend.1
+  GEN      man/man1/tss2_quote.1
+  GEN      man/man1/tss2_pcrread.1
+  GEN      man/man1/tss2_provision.1
+  GEN      man/man1/tss2_authorizepolicy.1
+  GEN      man/man1/tss2_exportpolicy.1
+  GEN      man/man1/tss2_unseal.1
+  GEN      man/man1/tss2_getrandom.1
+  GEN      man/man1/tss2_writeauthorizenv.1
+  CC       tools/fapi/tss2-tss2_template.o
+  CC       tools/fapi/tss2-tss2_decrypt.o
+  CC       tools/fapi/tss2-tss2_encrypt.o
+  CC       tools/fapi/tss2-tss2_list.o
+  CC       tools/fapi/tss2-tss2_changeauth.o
+  CC       tools/fapi/tss2-tss2_delete.o
+  CC       tools/fapi/tss2-tss2_import.o
+  CC       tools/fapi/tss2-tss2_getinfo.o
+  CC       tools/fapi/tss2-tss2_createkey.o
+  CC       tools/fapi/tss2-tss2_createseal.o
+  CC       tools/fapi/tss2-tss2_exportkey.o
+  CC       tools/fapi/tss2-tss2_getcertificate.o
+  CC       tools/fapi/tss2-tss2_getplatformcertificates.o
+  CC       tools/fapi/tss2-tss2_gettpmblobs.o
+  CC       tools/fapi/tss2-tss2_getappdata.o
+  CC       tools/fapi/tss2-tss2_setappdata.o
+  CC       tools/fapi/tss2-tss2_setcertificate.o
+  CC       tools/fapi/tss2-tss2_sign.o
+  CC       tools/fapi/tss2-tss2_verifysignature.o
+  CC       tools/fapi/tss2-tss2_verifyquote.o
+  CC       tools/fapi/tss2-tss2_createnv.o
+  CC       tools/fapi/tss2-tss2_nvextend.o
+  CC       tools/fapi/tss2-tss2_nvincrement.o
+  CC       tools/fapi/tss2-tss2_nvread.o
+  CC       tools/fapi/tss2-tss2_nvsetbits.o
+  CC       tools/fapi/tss2-tss2_nvwrite.o
+  CC       tools/fapi/tss2-tss2_getdescription.o
+  CC       tools/fapi/tss2-tss2_pcrextend.o
+  CC       tools/fapi/tss2-tss2_setdescription.o
+  CC       tools/fapi/tss2-tss2_quote.o
+  CC       tools/fapi/tss2-tss2_pcrread.o
+  CC       tools/fapi/tss2-tss2_exportpolicy.o
+  CC       tools/fapi/tss2-tss2_authorizepolicy.o
+  CC       tools/fapi/tss2-tss2_provision.o
+  CC       tools/fapi/tss2-tss2_getrandom.o
+  CC       tools/fapi/tss2-tss2_unseal.o
+  CC       tools/fapi/tss2-tss2_writeauthorizenv.o
+  CC       lib/libcommon_a-files.o
+  CC       lib/libcommon_a-log.o
+  CC       lib/libcommon_a-object.o
+  CC       lib/libcommon_a-pcr.o
+  CC       lib/libcommon_a-tool_rc.o
+  CC       lib/libcommon_a-tpm2.o
+  CC       lib/libcommon_a-tpm2_alg_util.o
+  CC       lib/libcommon_a-tpm2_attr_util.o
+  CC       lib/libcommon_a-tpm2_auth_util.o
+  CC       lib/libcommon_a-tpm2_capability.o
+  CC       lib/libcommon_a-tpm2_cc_util.o
+  CC       lib/libcommon_a-tpm2_convert.o
+  CC       lib/libcommon_a-tpm2_ctx_mgmt.o
+  CC       lib/libcommon_a-tpm2_errata.o
+  CC       lib/libcommon_a-tpm2_eventlog.o
+  CC       lib/libcommon_a-tpm2_eventlog_yaml.o
+  CC       lib/libcommon_a-tpm2_hash.o
+  CC       lib/libcommon_a-tpm2_hierarchy.o
+  CC       lib/libcommon_a-tpm2_identity_util.o
+  CC       lib/libcommon_a-tpm2_kdfa.o
+  CC       lib/libcommon_a-tpm2_kdfe.o
+  CC       lib/libcommon_a-tpm2_openssl.o
+  CC       lib/libcommon_a-tpm2_options.o
+  CC       lib/libcommon_a-tpm2_policy.o
+  CC       lib/libcommon_a-tpm2_session.o
+  CC       lib/libcommon_a-tpm2_tool_output.o
+  CC       lib/libcommon_a-tpm2_util.o
+  CC       tools/tpm2-tpm2_tool.o
+  CC       tools/misc/tpm2-tpm2_certifyX509certutil.o
+  CC       tools/misc/tpm2-tpm2_checkquote.o
+  CC       tools/misc/tpm2-tpm2_eventlog.o
+  CC       tools/misc/tpm2-tpm2_print.o
+  CC       tools/misc/tpm2-tpm2_rc_decode.o
+  CC       tools/tpm2-tpm2_activatecredential.o
+  CC       tools/tpm2-tpm2_certify.o
+  CC       tools/tpm2-tpm2_changeauth.o
+  CC       tools/tpm2-tpm2_changeeps.o
+  CC       tools/tpm2-tpm2_changepps.o
+  CC       tools/tpm2-tpm2_clear.o
+  CC       tools/tpm2-tpm2_clearcontrol.o
+  CC       tools/tpm2-tpm2_clockrateadjust.o
+  CC       tools/tpm2-tpm2_create.o
+  CC       tools/tpm2-tpm2_createak.o
+  CC       tools/tpm2-tpm2_createek.o
+  CC       tools/tpm2-tpm2_createpolicy.o
+  CC       tools/tpm2-tpm2_setprimarypolicy.o
+  CC       tools/tpm2-tpm2_createprimary.o
+  CC       tools/tpm2-tpm2_dictionarylockout.o
+  CC       tools/tpm2-tpm2_duplicate.o
+  CC       tools/tpm2-tpm2_getcap.o
+  CC       tools/tpm2-tpm2_gettestresult.o
+  CC       tools/tpm2-tpm2_encryptdecrypt.o
+  CC       tools/tpm2-tpm2_evictcontrol.o
+  CC       tools/tpm2-tpm2_flushcontext.o
+  CC       tools/tpm2-tpm2_getekcertificate.o
+  CC       tools/tpm2-tpm2_getrandom.o
+  CC       tools/tpm2-tpm2_gettime.o
+  CC       tools/tpm2-tpm2_hash.o
+  CC       tools/tpm2-tpm2_hierarchycontrol.o
+  CC       tools/tpm2-tpm2_hmac.o
+  CC       tools/tpm2-tpm2_import.o
+  CC       tools/tpm2-tpm2_incrementalselftest.o
+  CC       tools/tpm2-tpm2_load.o
+  CC       tools/tpm2-tpm2_loadexternal.o
+  CC       tools/tpm2-tpm2_makecredential.o
+  CC       tools/tpm2-tpm2_nvdefine.o
+  CC       tools/tpm2-tpm2_nvextend.o
+  CC       tools/tpm2-tpm2_nvincrement.o
+  CC       tools/tpm2-tpm2_nvreadpublic.o
+  CC       tools/tpm2-tpm2_nvread.o
+  CC       tools/tpm2-tpm2_nvreadlock.o
+  CC       tools/tpm2-tpm2_nvundefine.o
+  CC       tools/tpm2-tpm2_nvwrite.o
+  CC       tools/tpm2-tpm2_nvwritelock.o
+  CC       tools/tpm2-tpm2_nvsetbits.o
+  CC       tools/tpm2-tpm2_pcrallocate.o
+  CC       tools/tpm2-tpm2_pcrevent.o
+  CC       tools/tpm2-tpm2_pcrextend.o
+  CC       tools/tpm2-tpm2_pcrreset.o
+  CC       tools/tpm2-tpm2_pcrread.o
+  CC       tools/tpm2-tpm2_policypcr.o
+  CC       tools/tpm2-tpm2_policyauthorize.o
+  CC       tools/tpm2-tpm2_policyauthorizenv.o
+  CC       tools/tpm2-tpm2_policynv.o
+  CC       tools/tpm2-tpm2_policycountertimer.o
+  CC       tools/tpm2-tpm2_policyor.o
+  CC       tools/tpm2-tpm2_policynamehash.o
+  CC       tools/tpm2-tpm2_policytemplate.o
+  CC       tools/tpm2-tpm2_policycphash.o
+  CC       tools/tpm2-tpm2_policypassword.o
+  CC       tools/tpm2-tpm2_policysigned.o
+  CC       tools/tpm2-tpm2_policyticket.o
+  CC       tools/tpm2-tpm2_policyauthvalue.o
+  CC       tools/tpm2-tpm2_policysecret.o
+  CC       tools/tpm2-tpm2_policyrestart.o
+  CC       tools/tpm2-tpm2_policycommandcode.o
+  CC       tools/tpm2-tpm2_policynvwritten.o
+  CC       tools/tpm2-tpm2_policyduplicationselect.o
+  CC       tools/tpm2-tpm2_policylocality.o
+  CC       tools/tpm2-tpm2_quote.o
+  CC       tools/tpm2-tpm2_readclock.o
+  CC       tools/tpm2-tpm2_readpublic.o
+  CC       tools/tpm2-tpm2_rsadecrypt.o
+  CC       tools/tpm2-tpm2_rsaencrypt.o
+  CC       tools/tpm2-tpm2_send.o
+  CC       tools/tpm2-tpm2_selftest.o
+  CC       tools/tpm2-tpm2_setclock.o
+  CC       tools/tpm2-tpm2_shutdown.o
+  CC       tools/tpm2-tpm2_sign.o
+  CC       tools/tpm2-tpm2_certifycreation.o
+  CC       tools/tpm2-tpm2_nvcertify.o
+  CC       tools/tpm2-tpm2_startauthsession.o
+  CC       tools/tpm2-tpm2_startup.o
+  CC       tools/tpm2-tpm2_stirrandom.o
+  CC       tools/tpm2-tpm2_testparms.o
+  CC       tools/tpm2-tpm2_unseal.o
+  CC       tools/tpm2-tpm2_verifysignature.o
+  CC       tools/tpm2-tpm2_setcommandauditstatus.o
+  CC       tools/tpm2-tpm2_getcommandauditdigest.o
+  CC       tools/tpm2-tpm2_getsessionauditdigest.o
+  CC       tools/tpm2-tpm2_geteccparameters.o
+  CC       tools/tpm2-tpm2_ecephemeral.o
+  CC       tools/tpm2-tpm2_commit.o
+  CC       tools/tpm2-tpm2_ecdhkeygen.o
+  CC       tools/tpm2-tpm2_ecdhzgen.o
+  CC       tools/tpm2-tpm2_zgen2phase.o
+  CC       tools/tpm2-tpm2_sessionconfig.o
+  CC       tools/tpm2-tpm2_getpolicydigest.o
+  AR       lib/libcommon.a
+  CCLD     tools/fapi/tss2
+  CCLD     tools/tpm2
+(CDPATH="${ZSH_VERSION+.}:" && cd . && /bin/bash '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tools/missing' autoheader)
+rm -f lib/stamp-h1
+touch lib/config.h.in
+cd . && /bin/bash ./config.status lib/config.h
+config.status: creating lib/config.h
+config.status: lib/config.h is unchanged
+make[1]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tools'
+ /usr/bin/mkdir -p '/usr/local/bin'
+  /bin/bash ./libtool   --mode=install /usr/bin/install -c tools/fapi/tss2 tools/tpm2 '/usr/local/bin'
+libtool: install: /usr/bin/install -c tools/fapi/tss2 /usr/local/bin/tss2
+libtool: install: /usr/bin/install -c tools/tpm2 /usr/local/bin/tpm2
+make  install-exec-hook
+make[2]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tools'
+for tool in tpm2_certifyX509certutil tpm2_checkquote tpm2_eventlog tpm2_print tpm2_rc_decode tpm2_activatecredential tpm2_certify tpm2_changeauth tpm2_changeeps tpm2_changepps tpm2_clear tpm2_clearcontrol tpm2_clockrateadjust tpm2_create tpm2_createak tpm2_createek tpm2_createpolicy tpm2_setprimarypolicy tpm2_createprimary tpm2_dictionarylockout tpm2_duplicate tpm2_getcap tpm2_gettestresult tpm2_encryptdecrypt tpm2_evictcontrol tpm2_flushcontext tpm2_getekcertificate tpm2_getrandom tpm2_gettime tpm2_hash tpm2_hierarchycontrol tpm2_hmac tpm2_import tpm2_incrementalselftest tpm2_load tpm2_loadexternal tpm2_makecredential tpm2_nvdefine tpm2_nvextend tpm2_nvincrement tpm2_nvreadpublic tpm2_nvread tpm2_nvreadlock tpm2_nvundefine tpm2_nvwrite tpm2_nvwritelock tpm2_nvsetbits tpm2_pcrallocate tpm2_pcrevent tpm2_pcrextend tpm2_pcrread tpm2_pcrreset tpm2_policypcr tpm2_policyauthorize tpm2_policyauthorizenv tpm2_policynv tpm2_policycountertimer tpm2_policyor tpm2_policynamehash tpm2_policytemplate tpm2_policycphash tpm2_policypassword tpm2_policysigned tpm2_policyticket tpm2_policyauthvalue tpm2_policysecret tpm2_policyrestart tpm2_policycommandcode tpm2_policynvwritten tpm2_policyduplicationselect tpm2_policylocality tpm2_quote tpm2_readclock tpm2_readpublic tpm2_rsadecrypt tpm2_rsaencrypt tpm2_send tpm2_selftest tpm2_setclock tpm2_shutdown tpm2_sign tpm2_certifycreation tpm2_nvcertify tpm2_startauthsession tpm2_startup tpm2_stirrandom tpm2_testparms tpm2_unseal tpm2_verifysignature tpm2_setcommandauditstatus tpm2_getcommandauditdigest tpm2_getsessionauditdigest tpm2_geteccparameters tpm2_ecephemeral tpm2_commit tpm2_ecdhkeygen tpm2_ecdhzgen tpm2_zgen2phase tpm2_sessionconfig tpm2_getpolicydigest ; do \
+	ln -s -f \
+	"tpm2" \
+	"/usr/local/bin/$tool" ; \
+done
+for tool in tss2_decrypt tss2_encrypt tss2_list tss2_changeauth tss2_delete tss2_import tss2_getinfo tss2_createkey tss2_createseal tss2_exportkey tss2_getcertificate tss2_getplatformcertificates tss2_gettpmblobs tss2_getappdata tss2_setappdata tss2_setcertificate tss2_sign tss2_verifysignature tss2_verifyquote tss2_createnv tss2_nvextend tss2_nvincrement tss2_nvread tss2_nvsetbits tss2_nvwrite tss2_getdescription tss2_setdescription tss2_pcrextend tss2_quote tss2_pcrread tss2_authorizepolicy tss2_exportpolicy tss2_import tss2_provision tss2_getrandom tss2_unseal tss2_writeauthorizenv ; do \
+	ln -s -f \
+	"tss2" \
+	"/usr/local/bin/$tool" ; \
+done
+make[2]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tools'
+ /usr/bin/mkdir -p '/usr/share/bash-completion/completions'
+ /usr/bin/install -c -m 644 dist/bash-completion/tpm2-tools/tpm2_completion.bash dist/bash-completion/tpm2-tools/tss2_decrypt dist/bash-completion/tpm2-tools/tss2_encrypt dist/bash-completion/tpm2-tools/tss2_list dist/bash-completion/tpm2-tools/tss2_changeauth dist/bash-completion/tpm2-tools/tss2_delete dist/bash-completion/tpm2-tools/tss2_import dist/bash-completion/tpm2-tools/tss2_getinfo dist/bash-completion/tpm2-tools/tss2_createkey dist/bash-completion/tpm2-tools/tss2_createseal dist/bash-completion/tpm2-tools/tss2_exportkey dist/bash-completion/tpm2-tools/tss2_getcertificate dist/bash-completion/tpm2-tools/tss2_getplatformcertificates dist/bash-completion/tpm2-tools/tss2_gettpmblobs dist/bash-completion/tpm2-tools/tss2_setcertificate dist/bash-completion/tpm2-tools/tss2_getappdata dist/bash-completion/tpm2-tools/tss2_setappdata dist/bash-completion/tpm2-tools/tss2_sign dist/bash-completion/tpm2-tools/tss2_verifysignature dist/bash-completion/tpm2-tools/tss2_verifyquote dist/bash-completion/tpm2-tools/tss2_createnv dist/bash-completion/tpm2-tools/tss2_nvextend dist/bash-completion/tpm2-tools/tss2_nvincrement dist/bash-completion/tpm2-tools/tss2_nvread dist/bash-completion/tpm2-tools/tss2_nvsetbits dist/bash-completion/tpm2-tools/tss2_nvwrite dist/bash-completion/tpm2-tools/tss2_getdescription dist/bash-completion/tpm2-tools/tss2_setdescription dist/bash-completion/tpm2-tools/tss2_pcrextend dist/bash-completion/tpm2-tools/tss2_quote dist/bash-completion/tpm2-tools/tss2_pcrread dist/bash-completion/tpm2-tools/tss2_authorizepolicy dist/bash-completion/tpm2-tools/tss2_exportpolicy dist/bash-completion/tpm2-tools/tss2_provision dist/bash-completion/tpm2-tools/tss2_getrandom dist/bash-completion/tpm2-tools/tss2_unseal dist/bash-completion/tpm2-tools/tss2_writeauthorizenv dist/bash-completion/tpm2-tools/tss2 '/usr/share/bash-completion/completions'
+ /usr/bin/mkdir -p '/usr/local/share/man/man1'
+ /usr/bin/install -c -m 644 man/man1/tpm2_activatecredential.1 man/man1/tpm2_certify.1 man/man1/tpm2_certifyX509certutil.1 man/man1/tpm2_changeauth.1 man/man1/tpm2_changeeps.1 man/man1/tpm2_changepps.1 man/man1/tpm2_checkquote.1 man/man1/tpm2_clear.1 man/man1/tpm2_clearcontrol.1 man/man1/tpm2_clockrateadjust.1 man/man1/tpm2_create.1 man/man1/tpm2_createak.1 man/man1/tpm2_createek.1 man/man1/tpm2_createpolicy.1 man/man1/tpm2_setprimarypolicy.1 man/man1/tpm2_createprimary.1 man/man1/tpm2_dictionarylockout.1 man/man1/tpm2_duplicate.1 man/man1/tpm2_getcap.1 man/man1/tpm2_encryptdecrypt.1 man/man1/tpm2_eventlog.1 man/man1/tpm2_evictcontrol.1 man/man1/tpm2_flushcontext.1 man/man1/tpm2_getekcertificate.1 man/man1/tpm2_getrandom.1 man/man1/tpm2_gettestresult.1 man/man1/tpm2_gettime.1 man/man1/tpm2_hierarchycontrol.1 man/man1/tpm2_hash.1 man/man1/tpm2_hmac.1 man/man1/tpm2_import.1 man/man1/tpm2_incrementalselftest.1 man/man1/tpm2_load.1 man/man1/tpm2_loadexternal.1 man/man1/tpm2_makecredential.1 man/man1/tpm2_nvdefine.1 man/man1/tpm2_nvextend.1 man/man1/tpm2_nvincrement.1 man/man1/tpm2_nvreadpublic.1 man/man1/tpm2_nvread.1 '/usr/local/share/man/man1'
+ /usr/bin/install -c -m 644 man/man1/tpm2_nvreadlock.1 man/man1/tpm2_nvundefine.1 man/man1/tpm2_nvwrite.1 man/man1/tpm2_nvwritelock.1 man/man1/tpm2_nvsetbits.1 man/man1/tpm2_pcrallocate.1 man/man1/tpm2_pcrevent.1 man/man1/tpm2_pcrextend.1 man/man1/tpm2_pcrread.1 man/man1/tpm2_pcrreset.1 man/man1/tpm2_policypcr.1 man/man1/tpm2_policyrestart.1 man/man1/tpm2_policycommandcode.1 man/man1/tpm2_policynvwritten.1 man/man1/tpm2_policyduplicationselect.1 man/man1/tpm2_policylocality.1 man/man1/tpm2_policyauthorize.1 man/man1/tpm2_policyauthorizenv.1 man/man1/tpm2_policynv.1 man/man1/tpm2_policycountertimer.1 man/man1/tpm2_policyor.1 man/man1/tpm2_policynamehash.1 man/man1/tpm2_policytemplate.1 man/man1/tpm2_policycphash.1 man/man1/tpm2_policypassword.1 man/man1/tpm2_policysigned.1 man/man1/tpm2_policyticket.1 man/man1/tpm2_policyauthvalue.1 man/man1/tpm2_policysecret.1 man/man1/tpm2_print.1 man/man1/tpm2_quote.1 man/man1/tpm2_rc_decode.1 man/man1/tpm2_readclock.1 man/man1/tpm2_readpublic.1 man/man1/tpm2_rsadecrypt.1 man/man1/tpm2_rsaencrypt.1 man/man1/tpm2_send.1 man/man1/tpm2_selftest.1 man/man1/tpm2_setclock.1 man/man1/tpm2_shutdown.1 '/usr/local/share/man/man1'
+ /usr/bin/install -c -m 644 man/man1/tpm2_sign.1 man/man1/tpm2_certifycreation.1 man/man1/tpm2_nvcertify.1 man/man1/tpm2_startauthsession.1 man/man1/tpm2_startup.1 man/man1/tpm2_stirrandom.1 man/man1/tpm2_testparms.1 man/man1/tpm2_unseal.1 man/man1/tpm2_verifysignature.1 man/man1/tpm2_setcommandauditstatus.1 man/man1/tpm2_getcommandauditdigest.1 man/man1/tpm2_getsessionauditdigest.1 man/man1/tpm2_geteccparameters.1 man/man1/tpm2_ecephemeral.1 man/man1/tpm2_commit.1 man/man1/tpm2_ecdhkeygen.1 man/man1/tpm2_ecdhzgen.1 man/man1/tpm2_zgen2phase.1 man/man1/tpm2_sessionconfig.1 man/man1/tpm2_getpolicydigest.1 man/man1/tpm2.1 man/man1/tss2_list.1 man/man1/tss2_changeauth.1 man/man1/tss2_delete.1 man/man1/tss2_import.1 man/man1/tss2_decrypt.1 man/man1/tss2_encrypt.1 man/man1/tss2_getinfo.1 man/man1/tss2_createnv.1 man/man1/tss2_nvread.1 man/man1/tss2_nvextend.1 man/man1/tss2_nvincrement.1 man/man1/tss2_nvsetbits.1 man/man1/tss2_nvwrite.1 man/man1/tss2_createkey.1 man/man1/tss2_createseal.1 man/man1/tss2_getcertificate.1 man/man1/tss2_getplatformcertificates.1 man/man1/tss2_gettpmblobs.1 man/man1/tss2_getappdata.1 '/usr/local/share/man/man1'
+ /usr/bin/install -c -m 644 man/man1/tss2_setappdata.1 man/man1/tss2_setcertificate.1 man/man1/tss2_exportkey.1 man/man1/tss2_sign.1 man/man1/tss2_verifysignature.1 man/man1/tss2_verifyquote.1 man/man1/tss2_getdescription.1 man/man1/tss2_setdescription.1 man/man1/tss2_pcrextend.1 man/man1/tss2_quote.1 man/man1/tss2_pcrread.1 man/man1/tss2_provision.1 man/man1/tss2_authorizepolicy.1 man/man1/tss2_exportpolicy.1 man/man1/tss2_unseal.1 man/man1/tss2_import.1 man/man1/tss2_getrandom.1 man/man1/tss2_writeauthorizenv.1 '/usr/local/share/man/man1'
+make  install-data-hook
+make[2]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tools'
+cd /usr/share/bash-completion/completions && \
+for tool in tools/fapi/tss2 tools/tpm2; do \
+	[ "${tool}" = "${tool#tools/fapi/*}" ] && ln -s -f tpm2_completion.bash ${tool##*/}; \
+done
+make[2]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tools'
+make[1]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tools'
+libtoolize: putting auxiliary files in '.'.
+libtoolize: linking file './ltmain.sh'
+checking whether to enable debugging... no
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether ln -s works... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking build system type... aarch64-unknown-linux-gnu
+checking host system type... aarch64-unknown-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking the maximum length of command line arguments... 1572864
+checking how to convert aarch64-unknown-linux-gnu file names to aarch64-unknown-linux-gnu format... func_convert_file_noop
+checking how to convert aarch64-unknown-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking for gawk... no
+checking for mawk... mawk
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking whether make sets $(MAKE)... yes
+checking whether make supports the include directive... yes (GNU style)
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
+checking whether make supports nested variables... (cached) yes
+checking whether gcc is Clang... no
+checking whether pthreads work with "-pthread" and "-lpthread"... yes
+checking for joinable pthread attribute... PTHREAD_CREATE_JOINABLE
+checking whether more special flags are required for pthreads... no
+checking for PTHREAD_PRIO_INHERIT... yes
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for library containing dlopen... -ldl
+checking for gio-unix-2.0... yes
+checking for glib-2.0... yes
+checking for gobject-2.0... yes
+checking for tss2-sys >= 2.4.0... yes
+checking for tss2-mu... yes
+checking for tss2-tctildr... yes
+checking for tss2-rc... yes
+checking for gdbus-codegen... gdbus-codegen
+checking whether to build with code coverage support... no
+checking whether C compiler accepts -Werror... yes
+checking whether to add -D_FORTIFY_SOURCE=2 to CPPFLAGS... yes
+checking whether C compiler accepts -O2... yes
+checking whether C compiler accepts -Wall... yes
+checking whether C compiler accepts -Wextra... yes
+checking whether C compiler accepts -std=gnu99... yes
+checking whether C compiler accepts -Wformat... yes
+checking whether C compiler accepts -Wformat-security... yes
+checking whether C compiler accepts -Wno-missing-braces... yes
+checking whether C compiler accepts -fdata-sections... yes
+checking whether C compiler accepts -ffunction-sections... yes
+checking whether the linker accepts -fstack-protector-all... yes
+checking whether C compiler accepts -fpic... yes
+checking whether C compiler accepts -fPIC... yes
+checking whether C compiler accepts -Wstrict-overflow=5... yes
+checking whether the linker accepts -Wl,--gc-sections... yes
+checking whether the linker accepts -Wl,--no-undefined... yes
+checking whether the linker accepts -Wl,-z,noexecstack... yes
+checking whether the linker accepts -Wl,-z,now... yes
+checking whether the linker accepts -Wl,-z,relro... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating dist/tss2-tcti-tabrmd.pc
+config.status: creating dist/tpm2-abrmd.service
+config.status: creating dist/tpm2-abrmd.preset
+config.status: executing libtool commands
+config.status: executing depfiles commands
+  GEN      src/tabrmd-generated.h
+make  all-am
+make[1]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-abrmd'
+  GEN      man/man3/Tss2_Tcti_Tabrmd_Init.3
+  GEN      man/man7/tss2-tcti-tabrmd.7
+  GEN      man/man8/tpm2-abrmd.8
+  CC       src/tabrmd.o
+  GEN      man/man3/Tss2_Tcti_Tabrmd_Init.3
+  GEN      man/man7/tss2-tcti-tabrmd.7
+  GEN      man/man8/tpm2-abrmd.8
+  CC       src/libutil_la-tpm2.lo
+  CC       src/libutil_la-command-attrs.lo
+  CC       src/libutil_la-command-source.lo
+  CC       src/libutil_la-connection.lo
+  CC       src/libutil_la-connection-manager.lo
+  CC       src/libutil_la-control-message.lo
+  CC       src/libutil_la-handle-map-entry.lo
+  CC       src/libutil_la-handle-map.lo
+  CC       src/libutil_la-ipc-frontend.lo
+  CC       src/libutil_la-ipc-frontend-dbus.lo
+  CC       src/libutil_la-logging.lo
+  CC       src/libutil_la-message-queue.lo
+  CC       src/libutil_la-random.lo
+  CC       src/libutil_la-resource-manager-session.lo
+  CC       src/libutil_la-resource-manager.lo
+  CC       src/libutil_la-response-sink.lo
+  CC       src/libutil_la-session-entry-state-enum.lo
+  CC       src/libutil_la-session-entry.lo
+  CC       src/libutil_la-session-list.lo
+  CC       src/libutil_la-sink-interface.lo
+  CC       src/libutil_la-source-interface.lo
+  CC       src/libutil_la-tabrmd-error.lo
+  CC       src/libutil_la-tabrmd-generated.lo
+  CC       src/libutil_la-tabrmd-init.lo
+  CC       src/libutil_la-tabrmd-options.lo
+  CC       src/libutil_la-tcti.lo
+  CC       src/libutil_la-thread.lo
+  CC       src/libutil_la-tpm2-command.lo
+  CC       src/libutil_la-tpm2-header.lo
+  CC       src/libutil_la-tpm2-response.lo
+  CC       src/libutil_la-util.lo
+  CC       src/tcti-tabrmd.lo
+  CCLD     src/libutil.la
+  CCLD     src/tpm2-abrmd
+  CCLD     src/libtss2-tcti-tabrmd.la
+make[1]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-abrmd'
+make  install-am
+make[1]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-abrmd'
+make[2]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-abrmd'
+ /usr/bin/mkdir -p '/usr/local/lib'
+ /bin/bash ./libtool   --mode=install /usr/bin/install -c   src/libtss2-tcti-tabrmd.la '/usr/local/lib'
+libtool: install: /usr/bin/install -c src/.libs/libtss2-tcti-tabrmd.so.0.0.0 /usr/local/lib/libtss2-tcti-tabrmd.so.0.0.0
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-tabrmd.so.0.0.0 libtss2-tcti-tabrmd.so.0 || { rm -f libtss2-tcti-tabrmd.so.0 && ln -s libtss2-tcti-tabrmd.so.0.0.0 libtss2-tcti-tabrmd.so.0; }; })
+libtool: install: (cd /usr/local/lib && { ln -s -f libtss2-tcti-tabrmd.so.0.0.0 libtss2-tcti-tabrmd.so || { rm -f libtss2-tcti-tabrmd.so && ln -s libtss2-tcti-tabrmd.so.0.0.0 libtss2-tcti-tabrmd.so; }; })
+libtool: install: /usr/bin/install -c src/.libs/libtss2-tcti-tabrmd.lai /usr/local/lib/libtss2-tcti-tabrmd.la
+libtool: install: /usr/bin/install -c src/.libs/libtss2-tcti-tabrmd.a /usr/local/lib/libtss2-tcti-tabrmd.a
+libtool: install: chmod 644 /usr/local/lib/libtss2-tcti-tabrmd.a
+libtool: install: ranlib /usr/local/lib/libtss2-tcti-tabrmd.a
+libtool: finish: PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/sbin" ldconfig -n /usr/local/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/local/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+ /usr/bin/mkdir -p '/usr/local/sbin'
+  /bin/bash ./libtool   --mode=install /usr/bin/install -c src/tpm2-abrmd '/usr/local/sbin'
+libtool: install: /usr/bin/install -c src/tpm2-abrmd /usr/local/sbin/tpm2-abrmd
+ /usr/bin/mkdir -p '/etc/dbus-1/system.d'
+ /usr/bin/install -c -m 644 dist/tpm2-abrmd.conf '/etc/dbus-1/system.d'
+ /usr/bin/mkdir -p '/usr/local/share/dbus-1/system-services'
+ /usr/bin/install -c -m 644 dist/com.intel.tss2.Tabrmd.service '/usr/local/share/dbus-1/system-services'
+ /usr/bin/mkdir -p '/usr/local/include/tss2'
+ /usr/bin/install -c -m 644 ./src/include/tss2-tcti-tabrmd.h '/usr/local/include/tss2'
+ /usr/bin/mkdir -p '/usr/local/share/man/man3'
+ /usr/bin/install -c -m 644 man/man3/Tss2_Tcti_Tabrmd_Init.3 '/usr/local/share/man/man3'
+ /usr/bin/mkdir -p '/usr/local/share/man/man7'
+ /usr/bin/install -c -m 644 man/man7/tss2-tcti-tabrmd.7 '/usr/local/share/man/man7'
+ /usr/bin/mkdir -p '/usr/local/share/man/man8'
+ /usr/bin/install -c -m 644 man/man8/tpm2-abrmd.8 '/usr/local/share/man/man8'
+ /usr/bin/mkdir -p '/usr/local/lib/pkgconfig'
+ /usr/bin/install -c -m 644 dist/tss2-tcti-tabrmd.pc '/usr/local/lib/pkgconfig'
+ /usr/bin/mkdir -p '/usr/local/lib/systemd/system-preset'
+ /usr/bin/install -c -m 644 dist/tpm2-abrmd.preset '/usr/local/lib/systemd/system-preset'
+ /usr/bin/mkdir -p '/usr/local/lib/systemd/system'
+ /usr/bin/install -c -m 644 dist/tpm2-abrmd.service '/usr/local/lib/systemd/system'
+make[2]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-abrmd'
+make[1]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-abrmd'
+libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, 'build-aux'.
+libtoolize: linking file 'build-aux/ltmain.sh'
+checking build system type... aarch64-unknown-linux-gnu
+checking host system type... aarch64-unknown-linux-gnu
+checking target system type... aarch64-unknown-linux-gnu
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking whether to enable maintainer-specific portions of Makefiles... yes
+checking whether to enable debugging... info
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking for gcc option to accept ISO C99... none needed
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert aarch64-unknown-linux-gnu file names to aarch64-unknown-linux-gnu format... func_convert_file_noop
+checking how to convert aarch64-unknown-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking whether ln -s works... yes
+checking whether C compiler accepts -std=c99... yes
+checking whether C compiler accepts -Wall... yes
+checking whether C compiler accepts -Wextra... yes
+checking whether C compiler accepts -Wformat-security... yes
+checking whether C compiler accepts -Werror... yes
+checking whether C compiler accepts -fstack-protector-all... yes
+checking whether C compiler accepts -fpic... yes
+checking whether C compiler accepts -fPIC... yes
+checking whether C compiler accepts -Wno-missing-braces... yes
+checking whether the linker accepts -Wl,--no-undefined... yes
+checking whether the linker accepts -Wl,-z,noexecstack... yes
+checking whether the linker accepts -Wl,-z,now... yes
+checking whether the linker accepts -Wl,-z,relro... yes
+checking whether to build with code coverage support... no
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.25... yes
+checking for libcrypto >= 1.0.2g... yes
+checking for tss2-esys >= 2.3... yes
+checking for tss2-mu... yes
+checking for tss2-tctildr... yes
+checking for pandoc... /usr/bin/pandoc
+checking for expect... no
+checking for valgrind... valgrind
+checking for Valgrind tool memcheck... yes
+checking for Valgrind tool helgrind... yes
+checking for Valgrind tool drd... yes
+checking for Valgrind tool sgcheck... no
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+
+tpm2-tss-engine 1.1.0
+    man-pages:      /usr/bin/pandoc
+    enginesdir:     /usr/lib/aarch64-linux-gnu/engines-1.1
+    completionsdir: /usr/share/bash-completion/completions
+    device:         
+
+  GEN      man/man1/tpm2tss-genkey.1
+  GEN      man/man3/tpm2tss_tpm2data_write.3
+  GEN      man/man3/tpm2tss_rsa_makekey.3
+  GEN      man/man3/tpm2tss_rsa_genkey.3
+  GEN      man/man3/tpm2tss_ecc_makekey.3
+  GEN      man/man3/tpm2tss_ecc_genkey.3
+  GEN      man/man3/tpm2tss_ecc_getappdata.3
+  GEN      man/man3/tpm2tss_tpm2data_read.3
+  CC       src/tpm2tss_genkey-tpm2tss-genkey.o
+  CC       src/libtpm2tss_la-tpm2-tss-engine.lo
+  CC       src/libtpm2tss_la-tpm2-tss-engine-common.lo
+  CC       src/libtpm2tss_la-tpm2-tss-engine-err.lo
+  CC       src/libtpm2tss_la-tpm2-tss-engine-ecc.lo
+  CC       src/libtpm2tss_la-tpm2-tss-engine-rand.lo
+  CC       src/libtpm2tss_la-tpm2-tss-engine-rsa.lo
+  GEN      man/man3/tpm2tss_ecc_setappdata.3
+  CCLD     libtpm2tss.la
+  CCLD     tpm2tss-genkey
+make[1]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss-engine'
+ /usr/bin/mkdir -p '/usr/local/bin'
+  /bin/bash ./libtool   --mode=install /usr/bin/install -c tpm2tss-genkey '/usr/local/bin'
+libtool: install: /usr/bin/install -c .libs/tpm2tss-genkey /usr/local/bin/tpm2tss-genkey
+([ -e /usr/lib/aarch64-linux-gnu/engines-1.1 ] || \
+         /usr/bin/mkdir -p /usr/lib/aarch64-linux-gnu/engines-1.1)
+make  install-exec-hook
+make[2]: Entering directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss-engine'
+(cd /usr/lib/aarch64-linux-gnu/engines-1.1 && \
+         ln -s -f libtpm2tss.so tpm2tss.so)
+make[2]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss-engine'
+ /usr/bin/mkdir -p '/usr/share/bash-completion/completions'
+ /usr/bin/install -c -m 644 bash-completion/tpm2tss-genkey '/usr/share/bash-completion/completions'
+ /usr/bin/mkdir -p '/usr/local/include'
+ /usr/bin/install -c -m 644 include/tpm2-tss-engine.h '/usr/local/include'
+ /usr/bin/mkdir -p '/usr/local/share/man/man1'
+ /usr/bin/install -c -m 644 man/man1/tpm2tss-genkey.1 '/usr/local/share/man/man1'
+ /usr/bin/mkdir -p '/usr/local/share/man/man3'
+ /usr/bin/install -c -m 644 man/man3/tpm2tss_tpm2data_write.3 man/man3/tpm2tss_rsa_makekey.3 man/man3/tpm2tss_rsa_genkey.3 man/man3/tpm2tss_ecc_makekey.3 man/man3/tpm2tss_ecc_genkey.3 man/man3/tpm2tss_ecc_getappdata.3 man/man3/tpm2tss_tpm2data_read.3 man/man3/tpm2tss_ecc_setappdata.3 '/usr/local/share/man/man3'
+ /usr/bin/mkdir -p '/usr/lib/aarch64-linux-gnu/engines-1.1'
+ /bin/bash ./libtool   --mode=install /usr/bin/install -c   libtpm2tss.la '/usr/lib/aarch64-linux-gnu/engines-1.1'
+libtool: install: /usr/bin/install -c .libs/libtpm2tss.so /usr/lib/aarch64-linux-gnu/engines-1.1/libtpm2tss.so
+libtool: install: /usr/bin/install -c .libs/libtpm2tss.lai /usr/lib/aarch64-linux-gnu/engines-1.1/libtpm2tss.la
+libtool: install: /usr/bin/install -c .libs/libtpm2tss.a /usr/lib/aarch64-linux-gnu/engines-1.1/libtpm2tss.a
+libtool: install: chmod 644 /usr/lib/aarch64-linux-gnu/engines-1.1/libtpm2tss.a
+libtool: install: ranlib /usr/lib/aarch64-linux-gnu/engines-1.1/libtpm2tss.a
+libtool: finish: PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin" ldconfig -n /usr/lib/aarch64-linux-gnu/engines-1.1
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/lib/aarch64-linux-gnu/engines-1.1
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+make[1]: Leaving directory '/home/user/TPM_Sharing_Scheme/setup_optiga/optiga-tpm-explorer/tpm2-tss-engine'
+Listing '.'...
+Listing './aws_tpm20'...
+Listing './aws_tpm20/aws_iot_src'...
+Listing './aws_tpm20/aws_iot_src/protocol'...
+Listing './aws_tpm20/aws_iot_src/protocol/mqtt'...
+Listing './aws_tpm20/aws_iot_src/protocol/mqtt/aws_iot_embedded_client_wrapper'...
+Listing './aws_tpm20/aws_iot_src/protocol/mqtt/aws_iot_embedded_client_wrapper/platform_linux'...
+Listing './aws_tpm20/aws_iot_src/protocol/mqtt/aws_iot_embedded_client_wrapper/platform_linux/common'...
+Listing './aws_tpm20/aws_iot_src/protocol/mqtt/aws_iot_embedded_client_wrapper/platform_linux/mbedtls'...
+Listing './aws_tpm20/aws_iot_src/protocol/mqtt/aws_iot_embedded_client_wrapper/platform_linux/openssl'...
+Listing './aws_tpm20/aws_iot_src/shadow'...
+Listing './aws_tpm20/aws_iot_src/utils'...
+Listing './aws_tpm20/aws_mqtt_embedded_client_lib'...
+Listing './aws_tpm20/aws_mqtt_embedded_client_lib/MQTTClient-C'...
+Listing './aws_tpm20/aws_mqtt_embedded_client_lib/MQTTClient-C/src'...
+Listing './aws_tpm20/aws_mqtt_embedded_client_lib/MQTTPacket'...
+Listing './aws_tpm20/aws_mqtt_embedded_client_lib/MQTTPacket/src'...
+Listing './aws_tpm20/docs'...
+Listing './aws_tpm20/docs/html'...
+Listing './aws_tpm20/docs/html/search'...
+Listing './aws_tpm20/sample_apps'...
+Listing './aws_tpm20/sample_apps/eHealthTPM3'...
+Listing './images'...
+Compiling './images.py'...
+Compiling './info_dialogs.py'...
+Compiling './main.py'...
+Compiling './misc_dialogs.py'...
+Compiling './shell_util.py'...
+Compiling './tab1_setup.py'...
+Compiling './tab2_crypto.py'...
+Compiling './tab3_engine.py'...
+Compiling './tab4_policy.py'...
+Compiling './tab5_attest.py'...
+Compiling './tab6_cloud.py'...
+Listing './working_space'...
+Listing './working_space/restore_to_default'...
+[1m[34m[NOTICE-common/setup][0m Reboot to finish installation
+[1m[34m[NOTICE-common/function_optiga][0m Clearing preset...
+[1m[34m[NOTICE-common/function_common][0m Clearing preset...
+[1m[34m[NOTICE-common/setup][0m All setup complete.
