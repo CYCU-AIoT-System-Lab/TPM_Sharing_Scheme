@@ -212,7 +212,7 @@ setup_ibmacs_env () {
         sed -i 's/FALSE/false/g' "${path_ibmacs}/acs/commonjson.c"
         echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing all mysql/mysql.h with mariadb/mysql.h in all files"
         for file in $(grep -rl "mysql/mysql.h" "${path_ibmacs}/acs/"); do
-            sed -i 's/mysql\/mysql.h/mysql.h/g' $file
+            sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
         done
     elif [ $install_platform -eq 3 ]; then
         :
