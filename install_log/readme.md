@@ -37,6 +37,19 @@ Log recorded with command ```bash install_TPM.sh | tee x.log > /dev/null```
     - Bash: ./setup_sudo.sh: line 353 / 423: gnome-terminal: command not found
     - Bash: common/remove.sh: Failed to remove apport: Directory not empty
     - Bash: setup_ibmtpm/remove.sh: sudo: mysql: command not found
+3. [RPI5_3.log](RPI5_3.log): common + setup_ibmtpm
+    - L868: TSS_Socket_Open: Error on connect to localhost:2321
+    - L869: TSS_Socket_Open: client connect: error 111 Connection refused
+    - L870: createprimary: failed, rc 000b0008
+    - L871: TSS_RC_NO_CONNECTION - Failure connecting to lower layer
+    - L873: TSS_Socket_Open: Error on connect to localhost:2321
+    - L874: TSS_Socket_Open: client connect: error 111 Connection refused
+    - L875: createprimary: failed, rc 000b0008
+    - L876: TSS_RC_NO_CONNECTION - Failure connecting to lower layer
+    - Compiling: clientenroll.c:57:10: fatal error: mysql/mysql.h: No such file or directory
+    - Bash: ./setup_sudo.sh: line 353 / 423: gnome-terminal: command not found
+    - (not tested) Bash: common/remove.sh: Failed to remove apport: Directory not empty
+    - (not tested) Bash: setup_ibmtpm/remove.sh: sudo: mysql: command not found
 
 ## Raspbian Bullseye 2023-05-03 6.x Kernal Debian arm64
 
