@@ -198,6 +198,17 @@ setup_ibmacs_env () {
         echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid verMode"
         exit 1
     fi
+
+    if [ $install_platform -eq 1 ]; then
+        :
+    elif [ $install_platform -eq 2 ]; then
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Add stdbool.h to IBMACS/acs/commonjson.c"
+        sed -i '39 i #include <stdbool.h>' "${path_ibmacs}/acs/commonjson.c"
+    elif [ $install_platform -eq 3 ]; then
+        :
+    else
+        echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
+    fi
 }
 
 # Compile ibmacs

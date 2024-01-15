@@ -35,6 +35,8 @@ Log recorded with command ```bash install_TPM.sh | tee x.log > /dev/null```
     - L873: TSS_RC_NO_CONNECTION - Failure connecting to lower layer
     - Compiling: clientenroll.c:57:10: fatal error: json/json.h: No such file or directory
     - Bash: ./setup_sudo.sh: line 353 / 423: gnome-terminal: command not found
+    - Bash: common/remove.sh: Failed to remove apport: Directory not empty
+    - Bash: setup_ibmtpm/remove.sh: sudo: mysql: command not found
 
 ## Raspbian Bullseye 2023-05-03 6.x Kernal Debian arm64
 
