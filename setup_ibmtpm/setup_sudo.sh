@@ -144,13 +144,15 @@ setup_ibmacs_env () {
         if [ $install_platform -eq 1 ]; then
             aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
         elif [ $install_platform -eq 2 ]; then
-            #aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
             # aptins "libmariadb-dev"
-            aptins "libjson-c-dev apache2 php php-dev php-mysql libssl-dev"
+            #aptins "libjson-c-dev apache2 php php-dev php-mysql libssl-dev"
         elif [ $install_platform -eq 3 ]; then
-            #aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
             # aptins "libmariadb-dev"
-            aptins "libjson-c-dev apache2 php php-dev php-mysql libssl-dev"
+            #aptins "libjson-c-dev apache2 php php-dev php-mysql libssl-dev"
+        elif [ $install_platform -eq 4 ]; then
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
         else
             echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
         fi
@@ -162,6 +164,7 @@ setup_ibmacs_env () {
         exit 1
     fi
 
+    # ACS source platform adaption
     if [ $install_platform -eq 1 ]; then
         :
     elif [ $install_platform -eq 2 ]; then
@@ -176,13 +179,13 @@ setup_ibmacs_env () {
             sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
         done
 
-        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Compiling MariaDB from source ..."
-        cd "$MariaDB_dir"
-        git clone https://github.com/MariaDB/mariadb-connector-c.git
-        mkdir build && cd build
-        cmake ../mariadb-connector-c/ -DCMAKE_INSTALL_PREFIX=/usr
-        make -j$(nproc) $make_gflag
-        sudo make install $make_gflag
+        #echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Compiling MariaDB from source ..."
+        #cd "$MariaDB_dir"
+        #git clone https://github.com/MariaDB/mariadb-connector-c.git
+        #mkdir build && cd build
+        #cmake ../mariadb-connector-c/ -DCMAKE_INSTALL_PREFIX=/usr
+        #make -j$(nproc) $make_gflag
+        #sudo make install $make_gflag
     elif [ $install_platform -eq 3 ]; then
         :
     else
