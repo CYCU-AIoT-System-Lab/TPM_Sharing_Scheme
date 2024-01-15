@@ -1,10 +1,18 @@
 #!/bin/bash
 
-git_url="https://github.com/Infineon/optiga-tpm-explorer.git"
+source "../common/function.sh"
+source "./function_optiga.sh"
+load_preset "../config.ini"
 
-git clone $git_url
-cd optiga-tpm-explorer
+echo_notice "common" "setup" "Cloning optiga-tpm-explorer..."
+git clone "$optiga_url"
+
+echo_notice "common" "setup" "Cancelling auto reboot..."
+cd ./optiga-tpm-explorer
 sed -i 's/sudo reboot/#sudo reboot/g' ./installation_script.sh
+
+echo_notice "common" "setup" "Running optiga-tpm-explorer installation script..."
 bash ./installation_script.sh
 
-echo "Reboot to finish installation"
+echo_notice "common" "setup" "Reboot to finish installation"
+clear_preset

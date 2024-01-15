@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# common/function.sh is required to be sourced before using functions in this file
+
+# Usage: source "config.ini"
+# Input variable: $1: config.ini
+load_preset () {
+    #echo_notice "common" "function_optiga" "Env var to config file..."
+    #sed -i 's@${HOME}@'"$HOME"'@' "$1" # replace ${HOME} with $HOME
+    
+    echo_notice "common" "function_optiga" "Loading config file..."
+    parse "$1" "display"
+
+    echo_notice "common" "function_optiga" "Checking var..."
+    check_var install_platform 1
+    check_var optiga_url 1
+}
+echo_notice "common" "function_optiga" "Loaded function: load_preset"
+
+clear_preset () {
+    echo_notice "common" "function_optiga" "Clearing preset..."
+    unset install_platform
+    unset optiga_url
+}
+echo_notice "common" "function_optiga" "Loaded function: clear_preset"
