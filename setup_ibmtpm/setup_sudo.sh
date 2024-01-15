@@ -143,9 +143,9 @@ setup_ibmacs_env () {
         if [ $install_platform -eq 1 ]; then
             aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
         elif [ $install_platform -eq 2 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadbclient-dev libssl-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev libssl-dev"
         elif [ $install_platform -eq 3 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadbclient-dev libssl-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev libssl-dev"
         else
             echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
         fi

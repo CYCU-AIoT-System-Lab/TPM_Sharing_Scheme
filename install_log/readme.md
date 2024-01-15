@@ -23,6 +23,18 @@ Log recorded with command ```bash install_TPM.sh | tee x.log > /dev/null```
     - L6133: createprimary: failed, rc 000b0008
     - L6134: TSS_RC_NO_CONNECTION - Failure connecting to lower layer
     - L8196: Listing './working_space/restore_to_default'... . Log stopped, system rebooted
+2. [RPI5_2.log](RPI5_2.log): common + setup_ibmtpm: Replace libmysqlclient-dev and mysql-server
+    - L844: Package libmariadbclient-dev is not available, but is referred to by another package.
+    - L865: TSS_Socket_Open: Error on connect to localhost:2321
+    - L866: TSS_Socket_Open: client connect: error 111 Connection refused
+    - L867: createprimary: failed, rc 000b0008
+    - L868: TSS_RC_NO_CONNECTION - Failure connecting to lower layer
+    - L870: TSS_Socket_Open: Error on connect to localhost:2321
+    - L871: TSS_Socket_Open: client connect: error 111 Connection refused
+    - L872: createprimary: failed, rc 000b0008
+    - L873: TSS_RC_NO_CONNECTION - Failure connecting to lower layer
+    - Compiling: clientenroll.c:57:10: fatal error: json/json.h: No such file or directory
+    - Bash: ./setup_sudo.sh: line 353 / 423: gnome-terminal: command not found
 
 ## Raspbian Bullseye 2023-05-03 6.x Kernal Debian arm64
 
