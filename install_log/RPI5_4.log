@@ -1,0 +1,1054 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.30.2-1+deb11u2).
+The following packages were automatically installed and are no longer required:
+  libopengl0 libre2-9 sse3-support
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be REMOVED:
+  libopengl0 libre2-9 sse3-support
+0 upgraded, 0 newly installed, 3 to remove and 2 not upgraded.
+After this operation, 733 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 162790 files and directories currently installed.)
+Removing libopengl0:i386 (1.3.2-1) ...
+Removing libre2-9:i386 (20210201+dfsg-1) ...
+Removing sse3-support (6) ...
+Processing triggers for libc-bin (2.31-13+deb11u7) ...
+[1m[34m[NOTICE-common/function][0m Loaded and Activated function: load_special_chars
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_notice
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_warn
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_error
+[1m[34m[NOTICE-common/function][0m Loaded function: parse
+[1m[34m[NOTICE-common/function][0m Loaded function: log_date_time
+[1m[34m[NOTICE-common/function][0m Loaded function: check_var
+[1m[34m[NOTICE-common/function][0m Loaded function: clear_dir
+[1m[34m[NOTICE-common/function][0m Loaded function: aptins
+[1m[34m[NOTICE-common/function_common][0m Loaded function: load_preset
+[1m[34m[NOTICE-common/function_common][0m Loaded function: clear_preset
+[1m[34m[NOTICE-common/function_common][0m Env var to config file...
+[1m[34m[NOTICE-common/function_common][0m Loading config file...
+Loaded config item: install_platform = 2
+Loaded config item: cmake_ver = 3.18
+Loaded config item: cmake_build = 4
+Loaded config item: valgrind_ver = 3.22.0
+Loaded config item: nvim_config_url = https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim
+Loaded config item: nvim_dir = /home/user/.config/nvim
+Loaded config item: apport_dir = /home/user/.config/apport
+Loaded config item: cmake_dir = /home/user/Documents/cmake
+Loaded config item: valgrind_dir = /home/user/Documents/valgrind
+Loaded config item: wget_gflag = -q --show-progress
+Loaded config item: make_gflag = -s
+Loaded config item: sudo_gflag = -E
+Loaded config item: apt_gflag = -q
+Loaded config item: job_install_req = 1
+Loaded config item: job_config_nvim = 1
+Loaded config item: job_update_src = 1
+Loaded config item: job_change_all_sh_mod = 1
+Loaded config item: job_config_apport = 1
+Loaded config item: job_enable_ssh = 1
+Loaded config item: job_reload_term = 1
+Loaded config item: job_setup_environment = 0
+Loaded config item: job_setup_ibmtpm = 1
+Loaded config item: job_socket_com = 0
+Loaded config item: job_setup_optiga = 0
+[1m[34m[NOTICE-common/function][0m Loaded [1m[32m24[0m config items from [1m[32m./config.ini[0m
+[1m[34m[NOTICE-common/function_common][0m Checking var...
+[1m[34m[NOTICE-common/setup][0m Running common setup...
+[1m[34m[NOTICE-common/setup][0m Current directory: /home/user/TPM_Sharing_Scheme/common
+[1m[34m[NOTICE-common/setup][0m Installing required packages...
+Hit:1 http://deb.debian.org/debian bullseye InRelease
+Hit:2 http://deb.debian.org/debian-security bullseye-security InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:4 http://archive.raspberrypi.org/debian bullseye InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+The following packages have been kept back:
+  linux-headers-amd64:amd64 linux-image-amd64:amd64
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mgit[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.30.2-1+deb11u2).
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mhtop[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+htop is already the newest version (3.0.5-7).
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32miftop[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libpcap0.8
+The following NEW packages will be installed:
+  iftop libpcap0.8
+0 upgraded, 2 newly installed, 0 to remove and 2 not upgraded.
+Need to get 212 kB of archives.
+After this operation, 505 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main i386 libpcap0.8 i386 1.10.0-2 [166 kB]
+Get:2 http://deb.debian.org/debian bullseye/main i386 iftop i386 1.0~pre4-7 [45.3 kB]
+Fetched 212 kB in 2s (90.7 kB/s)
+Selecting previously unselected package libpcap0.8:i386.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 162773 files and directories currently installed.)
+Preparing to unpack .../libpcap0.8_1.10.0-2_i386.deb ...
+Unpacking libpcap0.8:i386 (1.10.0-2) ...
+Selecting previously unselected package iftop.
+Preparing to unpack .../iftop_1.0~pre4-7_i386.deb ...
+Unpacking iftop (1.0~pre4-7) ...
+Setting up libpcap0.8:i386 (1.10.0-2) ...
+Setting up iftop (1.0~pre4-7) ...
+Processing triggers for man-db (2.9.4-2) ...
+Processing triggers for libc-bin (2.31-13+deb11u7) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mcurl[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (7.74.0-1.3+deb11u11).
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mwget[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+wget is already the newest version (1.21-1+deb11u1).
+wget set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mnet-tools[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+net-tools is already the newest version (1.60+git20181103.0eebece-1).
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mneovim[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libmsgpackc2 libtermkey1 libunibilium4 libvterm0 lua-luv neovim-runtime
+  python3-greenlet python3-msgpack python3-neovim python3-pynvim
+Suggested packages:
+  ctags vim-scripts python-greenlet-doc python-greenlet-dev
+  python3-greenlet-dbg
+The following NEW packages will be installed:
+  libmsgpackc2 libtermkey1 libunibilium4 libvterm0 lua-luv neovim
+  neovim-runtime python3-greenlet python3-msgpack python3-neovim
+  python3-pynvim
+0 upgraded, 11 newly installed, 0 to remove and 2 not upgraded.
+Need to get 5,374 kB of archives.
+After this operation, 23.8 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main i386 libmsgpackc2 i386 3.3.0-4 [23.6 kB]
+Get:2 http://deb.debian.org/debian bullseye/main i386 libunibilium4 i386 2.1.0-1 [23.5 kB]
+Get:3 http://deb.debian.org/debian bullseye/main i386 libtermkey1 i386 0.22-1 [19.6 kB]
+Get:4 http://deb.debian.org/debian bullseye/main i386 libvterm0 i386 0.1.4-1 [31.5 kB]
+Get:5 http://deb.debian.org/debian bullseye/main i386 lua-luv i386 1.36.0-0-1 [93.2 kB]
+Get:6 http://deb.debian.org/debian bullseye/main i386 neovim-runtime all 0.4.4-1 [3,501 kB]
+Get:7 http://deb.debian.org/debian bullseye/main i386 neovim i386 0.4.4-1 [1,556 kB]
+Get:8 http://deb.debian.org/debian bullseye/main i386 python3-greenlet i386 0.4.17-1+b1 [17.8 kB]
+Get:9 http://deb.debian.org/debian bullseye/main i386 python3-msgpack i386 1.0.0-6+b1 [71.7 kB]
+Get:10 http://deb.debian.org/debian bullseye/main i386 python3-pynvim all 0.4.2-1 [32.4 kB]
+Get:11 http://deb.debian.org/debian bullseye/main i386 python3-neovim all 0.4.2-1 [4,236 B]
+Fetched 5,374 kB in 2s (2,159 kB/s)
+Selecting previously unselected package libmsgpackc2:i386.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 162790 files and directories currently installed.)
+Preparing to unpack .../00-libmsgpackc2_3.3.0-4_i386.deb ...
+Unpacking libmsgpackc2:i386 (3.3.0-4) ...
+Selecting previously unselected package libunibilium4:i386.
+Preparing to unpack .../01-libunibilium4_2.1.0-1_i386.deb ...
+Unpacking libunibilium4:i386 (2.1.0-1) ...
+Selecting previously unselected package libtermkey1:i386.
+Preparing to unpack .../02-libtermkey1_0.22-1_i386.deb ...
+Unpacking libtermkey1:i386 (0.22-1) ...
+Selecting previously unselected package libvterm0:i386.
+Preparing to unpack .../03-libvterm0_0.1.4-1_i386.deb ...
+Unpacking libvterm0:i386 (0.1.4-1) ...
+Selecting previously unselected package lua-luv:i386.
+Preparing to unpack .../04-lua-luv_1.36.0-0-1_i386.deb ...
+Unpacking lua-luv:i386 (1.36.0-0-1) ...
+Selecting previously unselected package neovim-runtime.
+Preparing to unpack .../05-neovim-runtime_0.4.4-1_all.deb ...
+Unpacking neovim-runtime (0.4.4-1) ...
+Selecting previously unselected package neovim.
+Preparing to unpack .../06-neovim_0.4.4-1_i386.deb ...
+Unpacking neovim (0.4.4-1) ...
+Selecting previously unselected package python3-greenlet.
+Preparing to unpack .../07-python3-greenlet_0.4.17-1+b1_i386.deb ...
+Unpacking python3-greenlet (0.4.17-1+b1) ...
+Selecting previously unselected package python3-msgpack.
+Preparing to unpack .../08-python3-msgpack_1.0.0-6+b1_i386.deb ...
+Unpacking python3-msgpack (1.0.0-6+b1) ...
+Selecting previously unselected package python3-pynvim.
+Preparing to unpack .../09-python3-pynvim_0.4.2-1_all.deb ...
+Unpacking python3-pynvim (0.4.2-1) ...
+Selecting previously unselected package python3-neovim.
+Preparing to unpack .../10-python3-neovim_0.4.2-1_all.deb ...
+Unpacking python3-neovim (0.4.2-1) ...
+Setting up libunibilium4:i386 (2.1.0-1) ...
+Setting up neovim-runtime (0.4.4-1) ...
+Setting up libmsgpackc2:i386 (3.3.0-4) ...
+Setting up libvterm0:i386 (0.1.4-1) ...
+Setting up lua-luv:i386 (1.36.0-0-1) ...
+Setting up python3-greenlet (0.4.17-1+b1) ...
+Setting up libtermkey1:i386 (0.22-1) ...
+Setting up python3-msgpack (1.0.0-6+b1) ...
+Setting up neovim (0.4.4-1) ...
+update-alternatives: using /usr/libexec/neovim/ex to provide /usr/bin/ex (ex) in auto mode
+update-alternatives: using /usr/libexec/neovim/rvim to provide /usr/bin/rvim (rvim) in auto mode
+update-alternatives: using /usr/libexec/neovim/rview to provide /usr/bin/rview (rview) in auto mode
+update-alternatives: using /usr/bin/nvim to provide /usr/bin/vi (vi) in auto mode
+update-alternatives: using /usr/bin/nvim to provide /usr/bin/vim (vim) in auto mode
+update-alternatives: using /usr/libexec/neovim/view to provide /usr/bin/view (view) in auto mode
+update-alternatives: using /usr/libexec/neovim/vimdiff to provide /usr/bin/vimdiff (vimdiff) in auto mode
+Setting up python3-pynvim (0.4.2-1) ...
+Setting up python3-neovim (0.4.2-1) ...
+Processing triggers for desktop-file-utils (0.26-1) ...
+Processing triggers for gnome-menus (3.36.0-1) ...
+Processing triggers for libc-bin (2.31-13+deb11u7) ...
+Processing triggers for man-db (2.9.4-2) ...
+Processing triggers for mailcap (3.69) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mbuild-essential[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+build-essential is already the newest version (12.9).
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mgcc[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+gcc is already the newest version (4:10.2.1-1).
+gcc set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mmake[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+make is already the newest version (4.3-4.1).
+make set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mlibssl-dev[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Suggested packages:
+  libssl-doc
+The following NEW packages will be installed:
+  libssl-dev
+0 upgraded, 1 newly installed, 0 to remove and 2 not upgraded.
+Need to get 1,852 kB of archives.
+After this operation, 7,099 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main i386 libssl-dev i386 1.1.1w-0+deb11u1 [1,852 kB]
+Fetched 1,852 kB in 1s (2,247 kB/s)
+Selecting previously unselected package libssl-dev:i386.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 164387 files and directories currently installed.)
+Preparing to unpack .../libssl-dev_1.1.1w-0+deb11u1_i386.deb ...
+Unpacking libssl-dev:i386 (1.1.1w-0+deb11u1) ...
+Setting up libssl-dev:i386 (1.1.1w-0+deb11u1) ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mmoreutils[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl
+The following NEW packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl moreutils
+0 upgraded, 4 newly installed, 0 to remove and 2 not upgraded.
+Need to get 229 kB of archives.
+After this operation, 658 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main i386 libio-pty-perl i386 1:1.15-2 [37.8 kB]
+Get:2 http://deb.debian.org/debian bullseye/main i386 libipc-run-perl all 20200505.0-1 [102 kB]
+Get:3 http://deb.debian.org/debian bullseye/main i386 libtime-duration-perl all 1.21-1 [13.7 kB]
+Get:4 http://deb.debian.org/debian bullseye/main i386 moreutils i386 0.65-1 [75.7 kB]
+Fetched 229 kB in 0s (1,103 kB/s)
+Selecting previously unselected package libio-pty-perl.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 164504 files and directories currently installed.)
+Preparing to unpack .../libio-pty-perl_1%3a1.15-2_i386.deb ...
+Unpacking libio-pty-perl (1:1.15-2) ...
+Selecting previously unselected package libipc-run-perl.
+Preparing to unpack .../libipc-run-perl_20200505.0-1_all.deb ...
+Unpacking libipc-run-perl (20200505.0-1) ...
+Selecting previously unselected package libtime-duration-perl.
+Preparing to unpack .../libtime-duration-perl_1.21-1_all.deb ...
+Unpacking libtime-duration-perl (1.21-1) ...
+Selecting previously unselected package moreutils.
+Preparing to unpack .../moreutils_0.65-1_i386.deb ...
+Unpacking moreutils (0.65-1) ...
+Setting up libio-pty-perl (1:1.15-2) ...
+Setting up libipc-run-perl (20200505.0-1) ...
+Setting up libtime-duration-perl (1.21-1) ...
+Setting up moreutils (0.65-1) ...
+Processing triggers for man-db (2.9.4-2) ...
+[1m[34m[NOTICE-common/setup][0m Building [1m[32mvalgrind[0m...
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking whether ln -s works... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking how to run the C preprocessor... gcc -E
+checking for g++... g++
+checking whether the compiler supports GNU C++... yes
+checking whether g++ accepts -g... yes
+checking for g++ option to enable C++11 features... none needed
+checking dependency style of g++... gcc3
+checking for ranlib... ranlib
+checking for gcc-ranlib... /usr/bin/gcc-ranlib
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for gsha256sum... no
+checking for sha256sum... sha256sum
+checking for ar... /usr/bin/ar
+checking for gcc-ar... /usr/bin/gcc-ar
+checking for perl... /usr/bin/perl
+checking for gdb... /usr/bin/gdb
+checking dependency style of gcc... gcc3
+checking for diff -u... yes
+checking for a supported version of gcc... ok (10)
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking for a supported CPU... ok (i686)
+checking for a 64-bit only build... no
+checking for a 32-bit only build... no
+checking for a supported OS... ok (linux-gnu)
+checking for the kernel version... 2.6 or later (5.10.0-15-amd64)
+checking for a supported CPU/OS combination... ok (x86-linux)
+checking for use as an inner Valgrind... no
+checking for using the undefined behaviour sanitiser... no
+checking where gdb scripts are installed... ${exec_prefix}/libexec/valgrind
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for sys/time.h... yes
+checking for sys/param.h... yes
+checking for features.h... yes
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking whether pthread_create needs libpthread... yes
+checking the glibc version... 2.31 family
+checking for AT_FDCWD... yes
+checking for stpncpy... yes
+checking for PTRACE_GETREGS... yes
+checking for CLOCK_MONOTONIC... yes
+checking for Elf32_Chdr... yes
+checking for Elf64_Chdr... yes
+checking for pthread_rwlock_t... yes
+checking for clockid_t... yes
+checking for PTHREAD_MUTEX_ADAPTIVE_NP... yes
+checking for PTHREAD_MUTEX_ERRORCHECK_NP... yes
+checking for PTHREAD_MUTEX_RECURSIVE_NP... yes
+checking for PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP... yes
+checking for pthread_mutex_t.__m_kind... no
+checking for pthread_mutex_t.__data.__kind... yes
+checking if AT_HWCAP contains the altivec indicator... no
+checking if AT_HWCAP contains the vsx indicator... no
+checking if AT_HWCAP contains the dfp indicator... no
+checking if AT_HWCAP contains the arch_2_05 indicator... no
+checking if AT_HWCAP contains the arch_2_06 indicator... no
+checking if AT_HWCAP contains the arch_2_07 indicator... no
+checking if AT_HWCAP contains the arch_3_00 indicator... no
+checking if AT_HWCAP contains the arch_3_1 indicator... no
+checking if AT_HWCAP contains the htm indicator... no
+checking if AT_HWCAP contains the mma indicator... no
+checking that assembler knows ISA 2.07 instructions ... no
+checking for Altivec support in the compiler ... no
+checking for VSX compiler flag support... no
+checking for VSX support in the assembler ... no
+checking that assembler knows DFP... no
+checking that compiler knows -mhard-dfp switch... no
+checking that compiler knows DFP datatypes... yes
+checking if compiler accepts the -mhtm flag... no
+checking if compiler can find the htm builtins... no
+checking that assembler knows ISA 3.00 ... no
+checking that assembler knows xscvhpdp ... no
+checking that assembler knows darn instruction ... no
+checking that assembler knows ISA 3.1 ... no
+checking for pthread_create@GLIBC2.0()... no
+checking for dlinfo RTLD_DI_TLS_MODID... yes
+checking for eventfd()... yes
+checking that C++ compiler can compile C++17 code... yes
+checking that C++ compiler can include <thread> header file... yes
+checking that C++ compiler can include <condition_variable> header file... yes
+checking that C++ compiler can use std::shared_timed_mutex... yes
+checking that C++ compiler can use std::timed_mutex... yes
+checking for struct user_regs_struct... yes
+checking for __NR_membarrier... yes
+checking if gcc accepts -m32... yes
+checking if gcc accepts -m64... yes
+checking if gcc accepts -march=octeon... no
+checking if gcc accepts -march=octeon2... no
+checking if gcc accepts -mmsa... no
+checking if gcc is producing mips n32 binaries... no
+checking if gcc is producing mips n64 binaries... no
+checking if gcc accepts -mmmx... yes
+checking if gcc accepts -msse... yes
+checking if gcc accepts -mpreferred-stack-boundary=2 -m32... yes
+checking if gcc accepts -mlong-double-128... yes
+checking for using the link time optimisation... no
+checking if gcc accepts -Wmemset-transposed-args... yes
+checking if gcc accepts -Wnonnull... yes
+checking if gcc accepts -Woverflow... yes
+checking if gcc accepts -Wpointer-sign... yes
+checking if gcc accepts -Wuninitialized... yes
+checking if gcc accepts -Wmaybe-uninitialized... yes
+checking if gcc accepts -Wunused-function... yes
+checking if gcc accepts -Wstatic-local-in-inline... no
+checking if gcc accepts -Wmismatched-new-delete... no
+checking if gcc accepts -Winfinite-recursion... no
+checking if gcc accepts -Wexpansion-to-defined... yes
+checking if gcc accepts -Wunused-variable... yes
+checking if gcc accepts -Wunused-but-set-variable... yes
+checking if gcc accepts -Wnon-power-of-two-alignment... no
+checking if gcc accepts -Wsign-compare... yes
+checking if gcc accepts -Wstringop-overflow... yes
+checking if gcc accepts -Wstringop-overread... no
+checking if gcc accepts -Wstringop-truncation... yes
+checking if gcc accepts -Wformat-overflow... yes
+checking if gcc accepts -Wuse-after-free... no
+checking if gcc accepts -Wfree-nonheap-object... yes
+checking if gcc accepts -Wfortify-source... no
+checking if gcc accepts -Wbuiltin-memcpy-chk-size... no
+checking if gcc accepts -Wincompatible-pointer-types-discards-qualifiers... no
+checking if gcc accepts -Wsuspicious-bzero... no
+checking if gcc accepts -Wattributes... yes
+checking if gcc accepts -Walloc-size-larger-than=1677216... yes
+checking if gcc accepts -Wwrite-strings... yes
+checking if gcc accepts -Wempty-body... yes
+checking if gcc accepts -Wformat... yes
+checking if gcc accepts -Wformat-signedness... yes
+checking if gcc accepts -Wcast-qual... yes
+checking if gcc accepts -Wold-style-declaration... yes
+checking if gcc accepts -Wignored-qualifiers... yes
+checking if gcc accepts -Wmissing-parameter-type... yes
+checking if gcc accepts -Wlogical-op... yes
+checking if gcc accepts -Wenum-conversion... yes
+checking if gcc accepts -Wimplicit-fallthrough=2... yes
+checking if gcc accepts -Wformat-security... yes
+checking if gcc accepts -Wextra or -W... -Wextra
+checking if g++ accepts -faligned-new... yes
+checking if g++ accepts -fsized-deallocation... yes
+checking if g++ supports aligned new and delete... yes
+checking if gcc accepts -fno-stack-protector... yes
+checking if gcc accepts -finline-functions... yes
+checking if gcc accepts -fno-ipa-icf... yes
+checking if gcc accepts --param inline-unit-growth... yes
+checking if gcc accepts -gdwarf-4 -fdebug-types-section... yes
+checking if gcc accepts -g -gz=zlib... yes
+checking if gcc accepts -g -gz=zlib-gnu... yes
+checking if gcc accepts nested functions... yes
+checking if gcc accepts the 'p' constraint in asm statements... yes
+checking if gcc accepts -pie... yes
+checking if gcc accepts -ansi... yes
+checking if gcc accepts -no-pie... yes
+checking if the linker accepts -Wl,--image-base... no
+checking if the linker accepts -Wl,-Ttext-segment... yes
+configure: ld --image-base or -Ttext-segment used, no need to strip build-id NOTEs.
+checking if ppc32/64 as supports mtocrf/mfocrf... no
+checking if ppc32/64 asm supports phased out floating point instructions... no
+checking if amd64 assembler supports fxsave64/fxrstor64... no
+checking if x86/amd64 assembler speaks SSE3... yes
+checking if x86/amd64 assembler speaks SSSE3... yes
+checking if x86/amd64 assembler supports 'pclmulqdq'... no
+checking if x86/amd64 assembler supports 'vpclmulqdq'... yes
+checking if x86/amd64 assembler supports FMA4 'vfmaddpd'... no
+checking if x86/amd64 assembler supports 'lzcnt'... no
+checking if x86/amd64 assembler supports 'loopnel'... yes
+checking if x86/amd64 assembler supports 'addr32'... no
+checking if x86/amd64 assembler speaks SSE4.2... no
+checking if x86/amd64 assembler speaks AVX... no
+checking if x86/amd64 assembler speaks AVX2... no
+checking if x86/amd64 assembler speaks TSX... no
+checking if x86/amd64 assembler speaks BMI1 and BMI2... no
+checking if x86/amd64 assembler speaks FMA... no
+checking if amd64 assembler knows the MPX instructions... no
+checking if amd64 assembler knows the ADX instructions... no
+checking if amd64 assembler knows the RDRAND instruction... no
+checking if amd64 assembler knows the RDSEED instruction... no
+checking if amd64 assembler knows the F16C instructions... no
+checking if x86/amd64 assembler knows the MOVBE insn... no
+checking if gcc supports the ifunc attribute... yes
+checking if gcc supports the armv8 crc feature flag... no
+checking if gcc supports the armv81 feature flag and assembler supports v8.1 instructions... no
+checking if gcc supports the armv82 feature flag and assembler supports v8.2 instructions... no
+checking for TLS support... yes
+checking for asm/unistd.h... yes
+checking for endian.h... yes
+checking for mqueue.h... yes
+checking for sys/endian.h... no
+checking for sys/epoll.h... yes
+checking for sys/eventfd.h... yes
+checking for sys/klog.h... yes
+checking for sys/poll.h... yes
+checking for sys/prctl.h... yes
+checking for sys/signal.h... yes
+checking for sys/signalfd.h... yes
+checking for sys/syscall.h... yes
+checking for sys/sysnvl.h... no
+checking for sys/time.h... (cached) yes
+checking for sys/types.h... (cached) yes
+checking if <linux/futex.h> is usable... yes
+checking for uid_t in sys/types.h... yes
+checking for off_t... yes
+checking for size_t... yes
+checking for struct statx... yes
+checking for working memcmp... yes
+checking for getpagesize... yes
+checking for working mmap... yes
+checking for pthread_create in -lpthread... yes
+checking for clock_gettime in -lrt... yes
+checking for aligned_alloc... yes
+checking for clock_gettime... yes
+checking for copy_file_range... yes
+checking for epoll_create... yes
+checking for epoll_pwait... yes
+checking for getaddrinfo... yes
+checking for klogctl... yes
+checking for mallinfo... yes
+checking for memchr... yes
+checking for memfd_create... yes
+checking for memset... yes
+checking for mkdir... yes
+checking for mremap... yes
+checking for pipe2... yes
+checking for ppoll... yes
+checking for preadv... yes
+checking for preadv2... yes
+checking for process_vm_readv... yes
+checking for process_vm_writev... yes
+checking for pthread_barrier_init... yes
+checking for pthread_condattr_setclock... yes
+checking for pthread_mutex_timedlock... yes
+checking for pthread_rwlock_timedrdlock... yes
+checking for pthread_rwlock_timedwrlock... yes
+checking for pthread_setname_np... yes
+checking for pthread_spin_lock... yes
+checking for pthread_yield... yes
+checking for pwritev... yes
+checking for pwritev2... yes
+checking for rawmemchr... yes
+checking for readlinkat... yes
+checking for semtimedop... yes
+checking for setcontext... yes
+checking for signalfd... yes
+checking for sigwaitinfo... yes
+checking for strchr... yes
+checking for strdup... yes
+checking for strpbrk... yes
+checking for strrchr... yes
+checking for strstr... yes
+checking for swapcontext... yes
+checking for syscall... yes
+checking for utimensat... yes
+checking for mempcpy... yes
+checking for stpncpy... yes
+checking for strchrnul... yes
+checking for memrchr... yes
+checking for strndup... yes
+checking for close_range... no
+checking for wcsncpy... yes
+checking for mpicc... mpicc
+checking primary target for usable MPI2-compliant C compiler and mpi.h... no
+checking secondary target for usable MPI2-compliant C compiler and mpi.h... no
+checking for boost... no
+checking for OpenMP... yes
+checking for __builtin_popcount()... yes
+checking for __builtin_clz()... yes
+checking for __builtin_ctz()... yes
+checking if gcc supports __sync_add_and_fetch for the primary target... yes
+checking if gcc supports __sync_add_and_fetch on uint64_t for all targets... yes
+checking if platform has openat2 syscall... checking if g++ supports __sync_add_and_fetch... yes
+checking if libstdc++ supports annotating shared pointers... yes
+checking for AT_GNU_LIBC_C17_ALIGNED_ALLOC... no
+checking for thrd_create()... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating VEX/Makefile
+config.status: creating valgrind.spec
+config.status: creating valgrind.pc
+config.status: creating glibc-2.X.supp
+config.status: creating glibc-2.X-helgrind.supp
+config.status: creating glibc-2.X-drd.supp
+config.status: creating include/valgrind.h
+config.status: creating docs/Makefile
+config.status: creating docs/xml/vg-entities.xml
+config.status: creating tests/Makefile
+config.status: creating tests/vg_regtest
+config.status: creating perf/Makefile
+config.status: creating perf/vg_perf
+config.status: creating gdbserver_tests/Makefile
+config.status: creating gdbserver_tests/solaris/Makefile
+config.status: creating include/Makefile
+config.status: creating auxprogs/Makefile
+config.status: creating mpi/Makefile
+config.status: creating coregrind/Makefile
+config.status: creating memcheck/Makefile
+config.status: creating memcheck/tests/Makefile
+config.status: creating memcheck/tests/common/Makefile
+config.status: creating memcheck/tests/amd64/Makefile
+config.status: creating memcheck/tests/x86/Makefile
+config.status: creating memcheck/tests/linux/Makefile
+config.status: creating memcheck/tests/linux/debuginfod-check.vgtest
+config.status: creating memcheck/tests/darwin/Makefile
+config.status: creating memcheck/tests/solaris/Makefile
+config.status: creating memcheck/tests/freebsd/Makefile
+config.status: creating memcheck/tests/amd64-linux/Makefile
+config.status: creating memcheck/tests/arm64-linux/Makefile
+config.status: creating memcheck/tests/x86-linux/Makefile
+config.status: creating memcheck/tests/amd64-solaris/Makefile
+config.status: creating memcheck/tests/x86-solaris/Makefile
+config.status: creating memcheck/tests/amd64-freebsd/Makefile
+config.status: creating memcheck/tests/x86-freebsd/Makefile
+config.status: creating memcheck/tests/ppc32/Makefile
+config.status: creating memcheck/tests/ppc64/Makefile
+config.status: creating memcheck/tests/s390x/Makefile
+config.status: creating memcheck/tests/mips32/Makefile
+config.status: creating memcheck/tests/mips64/Makefile
+config.status: creating memcheck/tests/vbit-test/Makefile
+config.status: creating cachegrind/Makefile
+config.status: creating cachegrind/tests/Makefile
+config.status: creating cachegrind/tests/x86/Makefile
+config.status: creating cachegrind/cg_annotate
+config.status: creating cachegrind/cg_diff
+config.status: creating cachegrind/cg_merge
+config.status: creating callgrind/Makefile
+config.status: creating callgrind/callgrind_annotate
+config.status: creating callgrind/callgrind_control
+config.status: creating callgrind/tests/Makefile
+config.status: creating helgrind/Makefile
+config.status: creating helgrind/tests/Makefile
+config.status: creating drd/Makefile
+config.status: creating drd/scripts/download-and-build-splash2
+config.status: creating drd/tests/Makefile
+config.status: creating massif/Makefile
+config.status: creating massif/tests/Makefile
+config.status: creating massif/ms_print
+config.status: creating dhat/Makefile
+config.status: creating dhat/tests/Makefile
+config.status: creating lackey/Makefile
+config.status: creating lackey/tests/Makefile
+config.status: creating none/Makefile
+config.status: creating none/tests/Makefile
+config.status: creating none/tests/scripts/Makefile
+config.status: creating none/tests/amd64/Makefile
+config.status: creating none/tests/ppc32/Makefile
+config.status: creating none/tests/ppc64/Makefile
+config.status: creating none/tests/x86/Makefile
+config.status: creating none/tests/arm/Makefile
+config.status: creating none/tests/arm64/Makefile
+config.status: creating none/tests/s390x/Makefile
+config.status: creating none/tests/mips32/Makefile
+config.status: creating none/tests/mips64/Makefile
+config.status: creating none/tests/nanomips/Makefile
+config.status: creating none/tests/linux/Makefile
+config.status: creating none/tests/darwin/Makefile
+config.status: creating none/tests/solaris/Makefile
+config.status: creating none/tests/freebsd/Makefile
+config.status: creating none/tests/amd64-linux/Makefile
+config.status: creating none/tests/x86-linux/Makefile
+config.status: creating none/tests/amd64-darwin/Makefile
+config.status: creating none/tests/x86-darwin/Makefile
+config.status: creating none/tests/amd64-solaris/Makefile
+config.status: creating none/tests/x86-solaris/Makefile
+config.status: creating none/tests/x86-freebsd/Makefile
+config.status: creating exp-bbv/Makefile
+config.status: creating exp-bbv/tests/Makefile
+config.status: creating exp-bbv/tests/x86/Makefile
+config.status: creating exp-bbv/tests/x86-linux/Makefile
+config.status: creating exp-bbv/tests/amd64-linux/Makefile
+config.status: creating exp-bbv/tests/ppc32-linux/Makefile
+config.status: creating exp-bbv/tests/arm-linux/Makefile
+config.status: creating shared/Makefile
+config.status: creating solaris/Makefile
+config.status: creating coregrind/link_tool_exe_linux
+config.status: creating coregrind/link_tool_exe_freebsd
+config.status: creating coregrind/link_tool_exe_darwin
+config.status: creating coregrind/link_tool_exe_solaris
+config.status: creating tests/filter_stderr_basic
+config.status: creating tests/filter_discards
+config.status: creating memcheck/tests/filter_stderr
+config.status: creating memcheck/tests/filter_dw4
+config.status: creating memcheck/tests/filter_overlaperror
+config.status: creating memcheck/tests/x86/filter_pushfpopf
+config.status: creating gdbserver_tests/filter_gdb
+config.status: creating gdbserver_tests/filter_memcheck_monitor
+config.status: creating gdbserver_tests/filter_stderr
+config.status: creating gdbserver_tests/filter_vgdb
+config.status: creating drd/tests/filter_stderr
+config.status: creating drd/tests/filter_error_count
+config.status: creating drd/tests/filter_error_summary
+config.status: creating drd/tests/filter_stderr_and_thread_no_and_offset
+config.status: creating drd/tests/filter_thread_no
+config.status: creating drd/tests/filter_xml_and_thread_no
+config.status: creating helgrind/tests/filter_stderr
+config.status: creating config.h
+config.status: executing depfiles commands
+
+                    Version: 3.22.0
+         Maximum build arch: x86
+         Primary build arch: x86
+       Secondary build arch: 
+                   Build OS: linux
+     Link Time Optimisation: no
+       Primary build target: X86_LINUX
+     Secondary build target: 
+           Platform variant: vanilla
+      Primary -DVGPV string: -DVGPV_x86_linux_vanilla=1
+         Default supp files: ./xfree-3.supp ./xfree-4.supp glibc-2.X-drd.supp glibc-2.X-helgrind.supp glibc-2.X.supp 
+
+Making all in include
+Making all in VEX
+Making all in coregrind
+Making all in .
+Making all in memcheck
+Making all in .
+Making all in tests
+Making all in .
+Making all in x86
+Making all in linux
+Making all in x86-linux
+Making all in cachegrind
+Making all in .
+Making all in tests
+Making all in .
+Making all in x86
+Making all in callgrind
+Making all in .
+Making all in tests
+Making all in .
+Making all in helgrind
+Making all in .
+Making all in tests
+Making all in drd
+Making all in .
+Making all in tests
+Making all in massif
+Making all in .
+Making all in tests
+Making all in dhat
+Making all in .
+Making all in tests
+Making all in lackey
+Making all in .
+Making all in tests
+Making all in none
+Making all in .
+Making all in tests
+Making all in .
+Making all in scripts
+Making all in x86
+Making all in linux
+Making all in x86-linux
+Making all in exp-bbv
+Making all in .
+Making all in tests
+Making all in .
+Making all in x86
+Making all in x86-linux
+Making all in shared
+Making all in tests
+Making all in perf
+Making all in gdbserver_tests
+Making all in .
+Making all in memcheck/tests/vbit-test
+Making all in auxprogs
+Making all in mpi
+Making all in solaris
+Making all in docs
+Making install in include
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644  pub_tool_basics.h pub_tool_basics_asm.h pub_tool_addrinfo.h pub_tool_aspacehl.h pub_tool_aspacemgr.h pub_tool_clientstate.h pub_tool_clreq.h pub_tool_deduppoolalloc.h pub_tool_debuginfo.h pub_tool_errormgr.h pub_tool_execontext.h pub_tool_gdbserver.h pub_tool_guest.h pub_tool_poolalloc.h pub_tool_hashtable.h pub_tool_libcbase.h pub_tool_libcassert.h pub_tool_libcfile.h pub_tool_libcprint.h pub_tool_libcproc.h pub_tool_libcsetjmp.h pub_tool_libcsignal.h pub_tool_machine.h pub_tool_mallocfree.h pub_tool_options.h pub_tool_oset.h pub_tool_rangemap.h pub_tool_redir.h pub_tool_replacemalloc.h pub_tool_seqmatch.h pub_tool_signals.h pub_tool_sparsewa.h pub_tool_stacktrace.h pub_tool_threadstate.h pub_tool_tooliface.h pub_tool_transtab.h pub_tool_vki.h pub_tool_vkiscnums.h pub_tool_vkiscnums_asm.h pub_tool_wordfm.h '/usr/local/include/valgrind/.'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind/vki'
+ /usr/bin/install -c -m 644  vki/vki-linux.h vki/vki-freebsd.h vki/vki-darwin.h vki/vki-solaris.h vki/vki-solaris-repcache.h vki/vki-machine-types-amd64-freebsd.h vki/vki-machine-types-x86-freebsd.h vki/vki-posixtypes-amd64-linux.h vki/vki-posixtypes-arm64-linux.h vki/vki-posixtypes-ppc32-linux.h vki/vki-posixtypes-ppc64-linux.h vki/vki-posixtypes-x86-linux.h vki/vki-posixtypes-arm-linux.h vki/vki-posixtypes-s390x-linux.h vki/vki-posixtypes-mips32-linux.h vki/vki-posixtypes-mips64-linux.h vki/vki-posixtypes-nanomips-linux.h vki/vki-amd64-linux.h vki/vki-arm64-linux.h vki/vki-ppc32-linux.h vki/vki-ppc64-linux.h vki/vki-x86-linux.h vki/vki-amd64-freebsd.h vki/vki-x86-freebsd.h vki/vki-arm-linux.h vki/vki-s390x-linux.h vki/vki-mips32-linux.h vki/vki-mips64-linux.h vki/vki-nanomips-linux.h vki/vki-scnums-amd64-linux.h vki/vki-scnums-arm64-linux.h vki/vki-scnums-ppc32-linux.h vki/vki-scnums-ppc64-linux.h vki/vki-scnums-x86-linux.h vki/vki-scnums-freebsd.h vki/vki-scnums-arm-linux.h vki/vki-scnums-s390x-linux.h vki/vki-scnums-mips32-linux.h vki/vki-scnums-mips64-linux.h vki/vki-scnums-nanomips-linux.h '/usr/local/include/valgrind/vki'
+ /usr/bin/install -c -m 644  pub_tool_xarray.h pub_tool_xtree.h pub_tool_xtmemory.h valgrind.h '/usr/local/include/valgrind/.'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind/vki'
+ /usr/bin/install -c -m 644  vki/vki-scnums-darwin.h vki/vki-scnums-solaris.h vki/vki-scnums-shared-linux.h vki/vki-scnums-32bit-linux.h vki/vki-xen.h vki/vki-xen-domctl.h vki/vki-xen-evtchn.h vki/vki-xen-gnttab.h vki/vki-xen-hvm.h vki/vki-xen-memory.h vki/vki-xen-mmuext.h vki/vki-xen-physdev.h vki/vki-xen-schedop.h vki/vki-xen-sysctl.h vki/vki-xen-tmem.h vki/vki-xen-version.h vki/vki-xen-xsm.h vki/vki-xen-x86.h vki/vki-linux-drm.h vki/vki-linux-io_uring.h '/usr/local/include/valgrind/vki'
+Making install in VEX
+ /usr/bin/mkdir -p '/usr/local/lib/valgrind'
+ /usr/bin/install -c -m 644  libvex-x86-linux.a libvexmultiarch-x86-linux.a '/usr/local/lib/valgrind'
+ ( cd '/usr/local/lib/valgrind' && ranlib libvex-x86-linux.a )
+ ( cd '/usr/local/lib/valgrind' && ranlib libvexmultiarch-x86-linux.a )
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 pub/libvex.h pub/libvex_basictypes.h pub/libvex_emnote.h pub/libvex_guest_offsets.h pub/libvex_guest_x86.h pub/libvex_guest_amd64.h pub/libvex_guest_ppc32.h pub/libvex_guest_ppc64.h pub/libvex_guest_arm.h pub/libvex_guest_arm64.h pub/libvex_guest_s390x.h pub/libvex_guest_mips32.h pub/libvex_guest_mips64.h pub/libvex_s390x_common.h pub/libvex_ir.h pub/libvex_trc_values.h pub/libvex_inner.h '/usr/local/include/valgrind'
+Making install in coregrind
+ /usr/bin/mkdir -p '/usr/local/bin'
+  /usr/bin/install -c valgrind vgdb '/usr/local/bin'
+ /usr/bin/mkdir -p '/usr/local/lib/valgrind'
+ /usr/bin/install -c -m 644  libcoregrind-x86-linux.a libgcc-sup-x86-linux.a libreplacemalloc_toolpreload-x86-linux.a '/usr/local/lib/valgrind'
+ ( cd '/usr/local/lib/valgrind' && ranlib libcoregrind-x86-linux.a )
+ ( cd '/usr/local/lib/valgrind' && ranlib libgcc-sup-x86-linux.a )
+ ( cd '/usr/local/lib/valgrind' && ranlib libreplacemalloc_toolpreload-x86-linux.a )
+ /usr/bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/valgrind-monitor.py m_gdbserver/valgrind-monitor-def.py '/usr/local/libexec/valgrind'
+ /usr/bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/32bit-core-valgrind-s1.xml m_gdbserver/32bit-core-valgrind-s2.xml m_gdbserver/32bit-core.xml m_gdbserver/32bit-linux-valgrind-s1.xml m_gdbserver/32bit-linux-valgrind-s2.xml m_gdbserver/32bit-linux.xml m_gdbserver/32bit-sse-valgrind-s1.xml m_gdbserver/32bit-sse-valgrind-s2.xml m_gdbserver/32bit-sse.xml m_gdbserver/64bit-avx-valgrind-s2.xml m_gdbserver/64bit-avx-valgrind-s1.xml m_gdbserver/64bit-avx.xml m_gdbserver/64bit-core-valgrind-s1.xml m_gdbserver/64bit-core-valgrind-s2.xml m_gdbserver/64bit-core.xml m_gdbserver/64bit-linux-valgrind-s1.xml m_gdbserver/64bit-linux-valgrind-s2.xml m_gdbserver/64bit-linux.xml m_gdbserver/64bit-sse-valgrind-s1.xml m_gdbserver/64bit-sse-valgrind-s2.xml m_gdbserver/64bit-sse.xml m_gdbserver/amd64-avx-coresse-valgrind.xml m_gdbserver/amd64-avx-coresse.xml m_gdbserver/amd64-avx-linux-valgrind.xml m_gdbserver/amd64-avx-linux.xml m_gdbserver/amd64-coresse-valgrind.xml m_gdbserver/amd64-linux-valgrind.xml m_gdbserver/arm-core-valgrind-s1.xml m_gdbserver/arm-core-valgrind-s2.xml m_gdbserver/arm-core.xml m_gdbserver/arm-vfpv3-valgrind-s1.xml m_gdbserver/arm-vfpv3-valgrind-s2.xml m_gdbserver/arm-vfpv3.xml m_gdbserver/arm-with-vfpv3-valgrind.xml m_gdbserver/arm-with-vfpv3.xml m_gdbserver/i386-coresse-valgrind.xml m_gdbserver/i386-linux-valgrind.xml m_gdbserver/power64-core-valgrind-s1.xml m_gdbserver/power64-core-valgrind-s2.xml m_gdbserver/power64-core.xml '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/power64-core2-valgrind-s1.xml m_gdbserver/power64-core2-valgrind-s2.xml m_gdbserver/power64-linux-valgrind-s1.xml m_gdbserver/power64-linux-valgrind-s2.xml m_gdbserver/power64-linux.xml m_gdbserver/power-altivec-valgrind-s1.xml m_gdbserver/power-altivec-valgrind-s2.xml m_gdbserver/power-altivec.xml m_gdbserver/power-vsx-valgrind-s1.xml m_gdbserver/power-vsx-valgrind-s2.xml m_gdbserver/power-vsx.xml m_gdbserver/power-core-valgrind-s1.xml m_gdbserver/power-core-valgrind-s2.xml m_gdbserver/power-core.xml m_gdbserver/power-fpu-valgrind-s1.xml m_gdbserver/power-fpu-valgrind-s2.xml m_gdbserver/power-fpu.xml m_gdbserver/power-linux-valgrind-s1.xml m_gdbserver/power-linux-valgrind-s2.xml m_gdbserver/power-linux.xml m_gdbserver/powerpc-altivec32l-valgrind.xml m_gdbserver/powerpc-altivec32l.xml m_gdbserver/powerpc-altivec64l-valgrind.xml m_gdbserver/powerpc-altivec64l.xml m_gdbserver/s390-acr-valgrind-s1.xml m_gdbserver/s390-acr-valgrind-s2.xml m_gdbserver/s390-acr.xml m_gdbserver/s390-fpr-valgrind-s1.xml m_gdbserver/s390-fpr-valgrind-s2.xml m_gdbserver/s390-fpr.xml m_gdbserver/s390x-core64-valgrind-s1.xml m_gdbserver/s390x-core64-valgrind-s2.xml m_gdbserver/s390x-core64.xml m_gdbserver/s390x-generic-valgrind.xml m_gdbserver/s390x-generic.xml m_gdbserver/s390x-linux64-valgrind-s1.xml m_gdbserver/s390x-linux64-valgrind-s2.xml m_gdbserver/s390x-linux64.xml m_gdbserver/s390-vx-valgrind-s1.xml m_gdbserver/s390-vx-valgrind-s2.xml '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 m_gdbserver/s390-vx.xml m_gdbserver/s390x-vx-linux-valgrind.xml m_gdbserver/s390x-vx-linux.xml m_gdbserver/mips-cp0-valgrind-s1.xml m_gdbserver/mips-cp0-valgrind-s2.xml m_gdbserver/mips-cp0.xml m_gdbserver/mips-cpu-valgrind-s1.xml m_gdbserver/mips-cpu-valgrind-s2.xml m_gdbserver/mips-cpu.xml m_gdbserver/mips-linux.xml m_gdbserver/mips-linux-valgrind.xml m_gdbserver/mips-fpu-valgrind-s1.xml m_gdbserver/mips-fpu-valgrind-s2.xml m_gdbserver/mips-fpu.xml m_gdbserver/mips64-cp0-valgrind-s1.xml m_gdbserver/mips64-cp0-valgrind-s2.xml m_gdbserver/mips64-cp0.xml m_gdbserver/mips64-cpu-valgrind-s1.xml m_gdbserver/mips64-cpu-valgrind-s2.xml m_gdbserver/mips64-cpu.xml m_gdbserver/mips64-linux.xml m_gdbserver/mips64-linux-valgrind.xml m_gdbserver/mips64-fpu-valgrind-s1.xml m_gdbserver/mips64-fpu-valgrind-s2.xml m_gdbserver/mips64-fpu.xml '/usr/local/libexec/valgrind'
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/lib/pkgconfig'
+ /usr/bin/install -c -m 644 valgrind.pc '/usr/local/lib/pkgconfig'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 config.h '/usr/local/include/valgrind'
+ /usr/bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 default.supp '/usr/local/libexec/valgrind'
+Making install in memcheck
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 memcheck.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in .
+Making install in x86
+Making install in linux
+Making install in x86-linux
+Making install in cachegrind
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c cg_annotate cg_diff cg_merge '/usr/local/bin'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 cachegrind.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in .
+Making install in x86
+Making install in callgrind
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c callgrind_annotate callgrind_control '/usr/local/bin'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 callgrind.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in .
+Making install in helgrind
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 helgrind.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in drd
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 drd.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in massif
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c ms_print '/usr/local/bin'
+Making install in tests
+Making install in dhat
+Making install in .
+ /usr/bin/mkdir -p '/usr/local/libexec/valgrind'
+ /usr/bin/install -c -m 644 dh_view.html dh_view.css dh_view.js '/usr/local/libexec/valgrind'
+ /usr/bin/mkdir -p '/usr/local/include/valgrind'
+ /usr/bin/install -c -m 644 dhat.h '/usr/local/include/valgrind'
+Making install in tests
+Making install in lackey
+Making install in .
+Making install in tests
+Making install in none
+Making install in .
+Making install in tests
+Making install in .
+Making install in scripts
+Making install in x86
+Making install in linux
+Making install in x86-linux
+Making install in exp-bbv
+Making install in .
+Making install in tests
+Making install in .
+Making install in x86
+Making install in x86-linux
+Making install in shared
+Making install in tests
+Making install in perf
+Making install in gdbserver_tests
+Making install in .
+Making install in memcheck/tests/vbit-test
+Making install in auxprogs
+ /usr/bin/mkdir -p '/usr/local/bin'
+  /usr/bin/install -c valgrind-listener valgrind-di-server '/usr/local/bin'
+Making install in mpi
+ /usr/bin/mkdir -p '/usr/local/lib/valgrind'
+Making install in solaris
+Making install in docs
+[1m[34m[NOTICE-common/setup][0m Configuring neovim...
+[1m[34m[NOTICE-common/setup][0m Pulling latest repo source...
+Saved working directory and index state WIP on main: c2c60e4 Update setup_sudo.sh
+Already up to date.
+[1m[34m[NOTICE-common/setup][0m Changing all .sh files to executable...
+[1m[34m[NOTICE-common/setup][0m Configuring apport...
+[1m[34m[NOTICE-common/setup][0m Core dumps will be generated in /var/crash
+[1m[34m[NOTICE-common/setup][0m Enabling ssh...
+[1m[34m[NOTICE-common/setup][0m Reloading terminal...
+[1m[33m[WARN-common/setup][0m Invalid Argument: 0 ! Skipping setup_environment...
+[1m[34m[NOTICE-common/setup][0m Running ibmtpm setup...
+[1m[34m[NOTICE-common/function][0m Loaded and Activated function: load_special_chars
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_notice
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_warn
+[1m[34m[NOTICE-common/function][0m Loaded function: echo_error
+[1m[34m[NOTICE-common/function][0m Loaded function: parse
+[1m[34m[NOTICE-common/function][0m Loaded function: log_date_time
+[1m[34m[NOTICE-common/function][0m Loaded function: check_var
+[1m[34m[NOTICE-common/function][0m Loaded function: clear_dir
+[1m[34m[NOTICE-common/function][0m Loaded function: aptins
+[1m[34m[NOTICE-common/function_ibmtpm][0m Loaded function: load_preset
+[1m[34m[NOTICE-common/function_ibmtpm][0m Loaded function: clear_preset
+[1m[34m[NOTICE-common/function_common][0m Loading config file...
+[1m[33m[WARN-common/function][0m Warning: install_platform is already set, will not overwrite it
+Loaded config item: base_dir = /opt
+Loaded config item: html_dir = /var/www/html/acs
+Loaded config item: c_json_lib_dir = /usr/include/json-c
+Loaded config item: c_json_lib_link_dir = /usr/include/json
+Loaded config item: tpm_data_dir = /home/user/tpm2
+Loaded config item: RSAEK_cert = cakey.pem
+Loaded config item: ECCEK_cert = cakeyecc.pem
+Loaded config item: repo_url = https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/main/setup_ibmtpm
+Loaded config item: acs_demo_server_ip = localhost
+Loaded config item: acs_demo_server_port = 80
+Loaded config item: acs_demo_client_ip = localhost
+Loaded config item: tpm_command_port = 2321
+Loaded config item: acs_port = 2323
+Loaded config item: user_name = user
+Loaded config item: ibmtss_ver = 2.1.1
+Loaded config item: ibmtpm_ver = 1682
+Loaded config item: ibmacs_ver = 1658
+Loaded config item: verMode = 2
+Loaded config item: TPMMode = 2
+Loaded config item: acsMode = 1
+Loaded config item: SCmachineMode = 1
+Loaded config item: force_acs_sql_setting = 1
+Loaded config item: acsClientMode = 1
+Loaded config item: mysql_user = tpm2ACS
+Loaded config item: mysql_password = 123456
+Loaded config item: mysql_database = tpm2
+Loaded config item: log4j_time_format = %Y/%m/%d-%H:%M:%S
+Loaded config item: log4j_line_number = 100
+Loaded config item: wget_gflag = -q --show-progress
+Loaded config item: make_gflag = -s
+Loaded config item: sudo_gflag = -E
+Loaded config item: bash_gflag = -x
+Loaded config item: tar_gflag = -zxf
+Loaded config item: install_req = 1
+Loaded config item: setup_ibmtpmtss_env = 1
+Loaded config item: compile_ibmtpmtss = 1
+Loaded config item: setup_ibmswtpm_env = 1
+Loaded config item: compile_ibmswtpm = 1
+Loaded config item: setup_ibmacs_env = 1
+Loaded config item: compile_ibmacs = 1
+Loaded config item: open_demo_webpage = 1
+Loaded config item: generate_CA = 0
+Loaded config item: activate_TPM_server = 0
+Loaded config item: activate_TPM_client = 0
+Loaded config item: generate_EK = 1
+Loaded config item: retrieve_hardware_NV = 0
+Loaded config item: set_acs_sql_setting = 1
+Loaded config item: active_ACS_Demo_Server = 1
+Loaded config item: active_ACS_Demo_Client = 1
+Loaded config item: active_ACS_Demo_verify = 1
+Loaded config item: print_log_path = 1
+Loaded config item: open_all_logs = 1
+[1m[34m[NOTICE-common/function][0m Loaded [1m[32m52[0m config items from [1m[32m./config.ini[0m
+[1m[34m[NOTICE-common/function_common][0m Checking var...
+[1m[34m[NOTICE-setup_ibmtpm/setup][0m Running setup script ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Creating directories ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Downloading IBMTPMTSS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Downloading IBMSWTPM ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Downloading IBMACS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Extracting IBMTPMTSS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Extracting IBMSWTPM ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-install_req][0m Extracting IBMACS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmtpmtss_env][0m Setting path env variable ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmtpmtss_env][0m Creating symbolic link to /opt/ibmtss2.1.1 ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmtpmtss][0m Cleaning up with make ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmtpmtss][0m Compiling IBMTSS ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmswtpm_env][0m Creating symbolic link to /opt/ibmtpm1682 ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmswtpm][0m Cleaning up with make ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmswtpm][0m Compiling IBMTPM ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Installing IBMACS dependencies ...
+[1m[34m[NOTICE-common/setup][0m Installing [1m[32mlibjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev[0m...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libssl-dev is already the newest version (1.1.1w-0+deb11u1).
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ libmariadb-dev : Conflicts: libmariadb-dev:amd64 but 1:10.5.21-0+deb11u1 is to be installed
+ libmariadb-dev:amd64 : Conflicts: libmariadb-dev but 1:10.5.21-0+deb11u1 is to be installed
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Adding stdbool.h to IBMACS/acs/commonjson.c
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Replacing "FALSE" with "false" in IBMACS/acs/commonjson.c
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Replacing all mysql/mysql.h with mariadb/mysql.h in all files
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Setting database ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Setting include path ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Creating symbolic link to /opt/ibmacs1658 ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Setting html directory ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Creating symbolic link to /usr/include/json-c ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmacs_env][0m Setting include path ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-compile_ibmacs][0m Compiling IBMACS and setting include path ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-open_demo_webpage][0m Opening demo webpage with new terminal ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmtpmtss_env][0m Setting path env variable ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-setup_ibmtpmtss_env][0m Creating symbolic link to /opt/ibmtss2.1.1 ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-activate_TPM_server][0m Starting TPM simulator (SWTPM/vTPM/server) on new temrinal ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-activate_TPM_client][0m Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-generate_EK][0m Backing up NVChip ......
+[1m[34m[NOTICE-setup_ibmtpm/setup-generate_EK][0m Generating RSAEK and load into NV ......
+TSS_Socket_Open: Error on connect to localhost:2321
+TSS_Socket_Open: client connect: error 111 Connection refused
+createprimary: failed, rc 000b0008
+TSS_RC_NO_CONNECTION - Failure connecting to lower layer
+[1m[34m[NOTICE-setup_ibmtpm/setup-generate_EK][0m Generating ECCEK and load into NV ......
+TSS_Socket_Open: Error on connect to localhost:2321
+TSS_Socket_Open: client connect: error 111 Connection refused
+createprimary: failed, rc 000b0008
+TSS_RC_NO_CONNECTION - Failure connecting to lower layer
+[1m[34m[NOTICE-setup_ibmtpm/setup-set_acs_sql_setting][0m Setting ACS MYSQL Setting ...
+[1m[33m[WARN-setup_ibmtpm/setup-set_acs_sql_setting][0m Forcing ACS MySQL Setting ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_Server][0m Activating ACS Demo on same machine ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_Server][0m Replacing path in /opt/ibmtss/utils/certificates/rootcerts.txt ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-set_acs_sql_setting][0m Setting ACS MYSQL Setting ...
+[1m[33m[WARN-setup_ibmtpm/setup-set_acs_sql_setting][0m Forcing ACS MySQL Setting ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_Server][0m Activating ACS Demo on new terminal ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_Client][0m Activating ACS Demo on local machine ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_verify][0m Checking TPM2BIOS.LOG ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-active_ACS_Demo_verify][0m Checking IMASIG.LOG ...
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_server_log_dir: /opt/ibmacs/serverenroll.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_client_log_dir: /opt/ibmacs/clientenroll.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m swtpm_bios_log_dir: /opt/ibmacs/tpm2bios.log
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_verify_tpm2bios_log_dir: /opt/ibmacs/b.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m ima_sig_log_dir: /opt/ibmacs/imasig.log
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_verify_imasig_log_dir: /opt/ibmacs/i.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup-print_log_path][0m acs_demo_verify_client_log_dir: /opt/ibmacs/client.log4j
+[1m[34m[NOTICE-setup_ibmtpm/setup][0m Setup complete
+[1m[33m[WARN-common/setup][0m Invalid Argument: 0 ! Skipping setup_socket_com...
+[1m[33m[WARN-common/setup][0m Invalid Argument: 0 ! Skipping setup_optiga...
+[1m[34m[NOTICE-common/function_common][0m Clearing preset...
+[1m[34m[NOTICE-common/setup][0m All setup complete.

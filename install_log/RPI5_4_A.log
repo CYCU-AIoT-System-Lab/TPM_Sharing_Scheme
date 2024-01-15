@@ -1,0 +1,74 @@
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+# github.com:22 SSH-2.0-babeld-8e18a363
+# github.com:22 SSH-2.0-babeld-8e18a363
+# github.com:22 SSH-2.0-babeld-8e18a363
+# github.com:22 SSH-2.0-babeld-8e18a363
+# github.com:22 SSH-2.0-babeld-8e18a363
+Cloning into 'TPM_Sharing_Scheme'...
+Warning: Permanently added the ECDSA host key for IP address '20.27.177.113' to the list of known hosts.
+remote: Enumerating objects: 3395, done.
+remote: Counting objects: 100% (1257/1257), done.
+remote: Compressing objects: 100% (498/498), done.
+remote: Total 3395 (delta 849), reused 1163 (delta 757), pack-reused 2138
+Receiving objects: 100% (3395/3395), 4.67 MiB | 913.00 KiB/s, done.
+Resolving deltas: 100% (2246/2246), done.
+valgrind-3.22.0.tar.bz2       100%[===============================================>]  15.80M   521KB/s    in 34s     
+/usr/bin/ar: `u' modifier ignored since `D' is the default (see `U')
+/usr/bin/ar: `u' modifier ignored since `D' is the default (see `U')
+/usr/bin/ar: `u' modifier ignored since `D' is the default (see `U')
+/usr/bin/ar: `u' modifier ignored since `D' is the default (see `U')
+/usr/bin/ar: `u' modifier ignored since `D' is the default (see `U')
+/usr/bin/ar: `u' modifier ignored since `D' is the default (see `U')
+/home/user/.config/nvim/init. 100%[===============================================>]     412  --.-KB/s    in 0s      
+hint: Pulling without specifying how to reconcile divergent branches is
+hint: discouraged. You can squelch this message by running one of the following
+hint: commands sometime before your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+Failed to stop whoopsie.service: Unit whoopsie.service not loaded.
+Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable ssh
+Created symlink /etc/systemd/system/sshd.service → /lib/systemd/system/ssh.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ssh.service → /lib/systemd/system/ssh.service.
+/opt/ibmtss2.1.1/ibmtss2.1.1. 100%[===============================================>]   1.21M  2.09MB/s    in 0.6s    
+/opt/ibmtpm1682/ibmtpm1682.ta 100%[===============================================>] 624.12K  2.42MB/s    in 0.3s    
+/opt/ibmacs1658/ibmacs1658.ta 100%[===============================================>] 649.29K  1.16MB/s    in 0.5s    
+/usr/bin/ld: ../utils/cryptoutils.o:/opt/ibmtss2.1.1/utils/cryptoutils.c:118: multiple definition of `tssUtilsVerbose'; nvreadvalueauth.o:/opt/ibmtss2.1.1/utils12/nvreadvalueauth.c:56: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [makefiletpmc:175: nvreadvalueauth] Error 1
+E: Unable to correct problems, you have held broken packages.
+./setup_sudo.sh: line 199: mysql: command not found
+./setup_sudo.sh: line 200: mysql: command not found
+./setup_sudo.sh: line 201: mysql: command not found
+./setup_sudo.sh: line 202: mysql: command not found
+clientenroll.c:57:10: fatal error: json/json.h: No such file or directory
+   57 | #include <json/json.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+make: *** [makefile-common:181: clientenroll.o] Error 1
+./setup_sudo.sh: line 281: gnome-terminal: command not found
+./setup_sudo.sh: line 307: gnome-terminal: command not found
+./setup_sudo.sh: line 320: gnome-terminal: command not found
+cp: cannot stat '/opt/ibmtpm/src/NVChip': No such file or directory
+cp: cannot stat '/var/www/html/acs/dbconnect.php': No such file or directory
+sed: can't read /var/www/html/acs/dbconnect.php: No such file or directory
+cp: cannot stat '/var/www/html/acs/dbconnect.php': No such file or directory
+sed: can't read /var/www/html/acs/dbconnect.php: No such file or directory
+./setup_sudo.sh: line 388: gnome-terminal: command not found
+./setup_sudo.sh: line 458: gnome-terminal: command not found
+./setup_sudo.sh: line 458: gnome-terminal: command not found
+./setup_sudo.sh: line 458: gnome-terminal: command not found
+./setup_sudo.sh: line 458: gnome-terminal: command not found
+./setup_sudo.sh: line 458: gnome-terminal: command not found
+./setup_sudo.sh: line 458: gnome-terminal: command not found
+./setup_sudo.sh: line 458: gnome-terminal: command not found
+
