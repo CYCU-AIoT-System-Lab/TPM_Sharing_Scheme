@@ -99,6 +99,14 @@ enable_ssh () {
         sudo systemctl enable ssh
         sudo systemctl start ssh
         sudo ufw allow ssh
+    elif [ $install_platform -eq 2 ]; then
+        echo_notice "common" "setup" "Enabling ssh..."
+        sudo systemctl enable ssh
+        sudo systemctl start ssh
+    elif [ $install_platform -eq 3 ]; then
+        echo_notice "common" "setup" "Enabling ssh..."
+        sudo systemctl enable ssh
+        sudo systemctl start ssh
     else
         echo_warn "common" "setup" "Invalid Argument: $install_platform ! Skipping enable_ssh..."
     fi
