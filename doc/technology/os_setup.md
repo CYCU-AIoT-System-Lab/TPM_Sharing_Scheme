@@ -29,7 +29,7 @@ Steps:
 
 ## Raspbian Bullseye 2022-07-01 5.1 Kernel Debian i386 VM
 
-Ubuntu VMs are powered with VMware Workstation 17 Player and the following hardware configuration:
+Ubuntu VMs are powered with VMware Workstation 17 Player and the following hardware configuration: (larger number makes the VM lag a lot)
 
 1. Memory: 8 GB / 8192 MB
 2. Processors: 4
@@ -39,6 +39,8 @@ Ubuntu VMs are powered with VMware Workstation 17 Player and the following hardw
 6. USB Controller: Default
 7. Sound Card: Default
 8. Display: Default
+
+Opening new tab in terminal will cause the VM to freeze.
 
 Refer to following link for original sources:
 
