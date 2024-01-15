@@ -204,6 +204,8 @@ setup_ibmacs_env () {
     elif [ $install_platform -eq 2 ]; then
         echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Add stdbool.h to IBMACS/acs/commonjson.c"
         sed -i '39 i #include <stdbool.h>' "${path_ibmacs}/acs/commonjson.c"
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replace \"FALSE\" with \"false\" in IBMACS/acs/commonjson.c"
+        sed -i 's/FALSE/false/g' "${path_ibmacs}/acs/commonjson.c"
     elif [ $install_platform -eq 3 ]; then
         :
     else
