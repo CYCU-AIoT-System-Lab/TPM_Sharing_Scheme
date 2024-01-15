@@ -112,6 +112,17 @@ enable_ssh () {
     fi
 }
 
+enable_pi_spi () {
+    if [ $install_platform -eq 3 ]; then
+        hardware_config="/boot/config.txt"
+        echo_notice "common" "setup" "Enabling spi with ${hardware_config} ..."
+        sudo sed -i 's/dtparam=spi=off/dtparam=spi=on/g' $hardware_config
+        sudo sed -i 's/#dtparam=spi=on/dtparam=spi=on/g' $hardware_config
+    else
+        echo_warn "common" "setup" "Invalid Argument: $install_platform ! Skipping enable_pi_spi..."
+    fi
+}
+
 echo_notice "common" "setup" "Running common setup..."
 echo_notice "common" "setup" "Current directory: $PWD"
 working_dir=$PWD
@@ -122,6 +133,7 @@ if [ $job_update_src        -eq 1 ]; then update_src;        fi
 if [ $job_change_all_sh_mod -eq 1 ]; then change_all_sh_mod; fi
 if [ $job_config_apport     -eq 1 ]; then config_apport;     fi
 if [ $job_enable_ssh        -eq 1 ]; then enable_ssh;        fi
+if [ $job_enable_pi_spi     -eq 1 ]; then enable_pi_spi;     fi
 if [ $job_reload_term       -eq 1 ]; then reload_term;       fi
 
 if [ $job_setup_environment -eq 1 ]; then
