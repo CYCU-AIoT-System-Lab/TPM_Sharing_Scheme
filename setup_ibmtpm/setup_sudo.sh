@@ -276,7 +276,7 @@ compile_ibmacs () {
 open_demo_webpage () {
     echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\n\""
-    launch_cmd2="sudo -u ${user_name} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
+    launch_cmd2="sudo -u ${USER} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
     gnome-terminal -t "FireFox Browser" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
 }
