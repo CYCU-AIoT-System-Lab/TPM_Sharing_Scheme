@@ -25,6 +25,7 @@ elif [ $install_platform -eq 4 ]; then
     sudo bash -c "echo -e \"\n# Enable TPM\ndtoverlay=tpm-slb9670\" $boot_config"
 else
     echo_warn "setup_optiga" "setup" "Invalid install_platform: $install_platform, skipping TPM enabling..."
+fi
 
 echo_notice "setup_optiga" "setup" "Running optiga-tpm-explorer installation script..."
 bash ./installation_script.sh
