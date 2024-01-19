@@ -47,7 +47,7 @@ install_req () {
 	aptins "make"
 	aptins "libssl-dev"
     aptins "moreutils"
-	if [ ${install_platform} -eq 1 ]; then
+	if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ]; then
 		aptins "libtool"
 		aptins "autoconf"
 		aptins "unzip"
@@ -93,17 +93,13 @@ reload_term () {
 }
 
 enable_ssh () {
-    if [ $install_platform -eq 1 ]; then
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         echo_notice "common" "setup" "Enabling ssh..."
         aptins "openssh-server"
         sudo systemctl enable ssh
         sudo systemctl start ssh
         sudo ufw allow ssh
-    elif [ $install_platform -eq 2 ]; then
-        echo_notice "common" "setup" "Enabling ssh..."
-        sudo systemctl enable ssh
-        sudo systemctl start ssh
-    elif [ $install_platform -eq 3 ]; then
+    elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
         echo_notice "common" "setup" "Enabling ssh..."
         sudo systemctl enable ssh
         sudo systemctl start ssh
@@ -118,6 +114,8 @@ enable_pi_spi () {
         echo_notice "common" "setup" "Enabling spi with ${hardware_config} ..."
         sudo sed -i 's/dtparam=spi=off/dtparam=spi=on/g' $hardware_config
         sudo sed -i 's/#dtparam=spi=on/dtparam=spi=on/g' $hardware_config
+    elif [ $install_platform -eq 4 ]; then
+        echo_notice "common" "setup" "SPI is one by default in this platform"
     else
         echo_warn "common" "setup" "Invalid Argument: $install_platform ! Skipping enable_pi_spi..."
     fi

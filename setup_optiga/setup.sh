@@ -11,13 +11,20 @@ echo_notice "setup_optiga" "setup" "Cancelling auto reboot..."
 cd ./optiga-tpm-explorer
 sed -i 's/sudo reboot/#sudo reboot/g' ./installation_script.sh
 
-boot_config="/boot/config.txt"
-echo_notice "setup_optiga" "setup" "Configuring $boot_config..."
-sudo sed -i '70 i \
+if [ $install_platform -eq 3 ]; then
+    boot_config="/boot/config.txt"
+    echo_notice "setup_optiga" "setup" "Configuring $boot_config..."
+    sudo sed -i '70 i \
 
-' $boot_config
-sudo sed -i '71 i # Enable TPM' $boot_config
-sudo sed -i '72 i dtoverlay=tpm-slb9670' $boot_config
+    ' $boot_config
+    sudo sed -i '71 i # Enable TPM' $boot_config
+    sudo sed -i '72 i dtoverlay=tpm-slb9670' $boot_config
+elif [ $install_platform -eq 4 ]; then
+    boot_config="/boot/firmware/config.txt"
+    echo_notice "setup_optiga" "setup" "Configuring $boot_config..."
+    sudo bash -c "echo -e \"\n# Enable TPM\ndtoverlay=tpm-slb9670\" $boot_config"
+else
+    echo_warn "setup_optiga" "setup" "Invalid install_platform: $install_platform, skipping TPM enabling..."
 
 echo_notice "setup_optiga" "setup" "Running optiga-tpm-explorer installation script..."
 bash ./installation_script.sh

@@ -135,6 +135,6 @@ echo_notice "common" "function" "Loaded function: clear_dir"
 
 aptins () {
     echo_notice "common" "setup" "Installing ${BOLD}${GREEN}$1${END}..."
-    sudo apt-get $apt_gflag install $1 -y
+    sudo apt-get $apt_gflag -o DPkg::Lock::Timeout=300 install $1 -y
 }
 echo_notice "common" "function" "Loaded function: aptins"
