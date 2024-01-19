@@ -110,6 +110,10 @@ Steps:
 8. In ```Terminal```, type ```sudo apt-get update; sudo apt-get upgrade -y```, then press ```Enter```.
 9. In ```Terminal```, type ```sudo reboot```, then press ```Enter```.
 
+## Raspbian Bullseye 2023-05-03 6.x Kernal Debian arm64 on Raspbery Pi 4 B
+
+Unfinished
+
 ## Jetson Nano
 
 Unfinished
