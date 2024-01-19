@@ -11,6 +11,7 @@ This directory holdes common utilities for this project.
 
 ```bash
 #!/bin/bash
+sudo apt-get update
 sudo apt-get install -y git
 sudo apt autoremove -y
 ssh-keyscan github.com >> ~/.ssh/known_hosts
