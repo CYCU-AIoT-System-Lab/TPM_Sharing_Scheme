@@ -134,13 +134,13 @@ if [ $job_enable_ssh        -eq 1 ]; then enable_ssh;        fi
 if [ $job_enable_pi_spi     -eq 1 ]; then enable_pi_spi;     fi
 if [ $job_reload_term       -eq 1 ]; then reload_term;       fi
 
+param_string="install_platform=$install_platform"
+
 if [ $job_setup_environment -eq 1 ]; then
     echo_warn "common" "setup" "Running environment setup Not Implemneted Yet!"
 else
     echo_warn "common" "setup" "Invalid Argument: $job_setup_environment ! Skipping setup_environment..."
 fi
-
-param_string="install_platform=$install_platform"
 
 cd $working_dir
 if [ $job_setup_ibmtpm -eq 1 ]; then
