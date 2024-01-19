@@ -140,11 +140,14 @@ else
     echo_warn "common" "setup" "Invalid Argument: $job_setup_environment ! Skipping setup_environment..."
 fi
 
+param_string="install_platform=$install_platform"
+
 cd $working_dir
 if [ $job_setup_ibmtpm -eq 1 ]; then
     echo_notice "common" "setup" "Running ibmtpm setup..."
     cd ../setup_ibmtpm
-    sudo install_platform=$install_platform bash ./setup_sudo.sh
+    #sudo install_platform=$install_platform bash ./setup_sudo.sh
+    sudo $param_string bash ./setup_sudo.sh
 elif [ $job_setup_ibmtpm -eq 2 ]; then
     echo_notice "common" "setup" "Running ibmtpm setup..."
     cd ../setup_ibmtpm
@@ -157,7 +160,8 @@ cd $working_dir
 if [ $job_socket_com -eq 1 ]; then
     echo_notice "common" "setup" "Running socket_com setup..."
 	cd ../socket_com
-	install_platform=$install_platform bash ./setup.sh
+	#install_platform=$install_platform bash ./setup.sh
+	$param_string bash ./setup.sh
 else
     echo_warn "common" "setup" "Invalid Argument: $job_socket_com ! Skipping setup_socket_com..."
 fi
@@ -166,7 +170,8 @@ cd $working_dir
 if [ $job_setup_optiga -eq 1 ]; then
     echo_notice "common" "setup" "Running optiga setup..."
     cd ../setup_optiga
-    install_platform=$install_platform bash ./setup.sh
+    #install_platform=$install_platform bash ./setup.sh
+	$param_string bash ./setup.sh
 else
     echo_warn "common" "setup" "Invalid Argument: $job_setup_optiga ! Skipping setup_optiga..."
 fi
