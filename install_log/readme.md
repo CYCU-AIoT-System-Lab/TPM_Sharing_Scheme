@@ -1,6 +1,6 @@
 # Install Log
 
-Log recorded with command ```bash install_TPM.sh | tee x.log > /dev/null```
+Log recorded with command ```bash install_TPM.sh 2>&1 | tee x.log > /dev/null``` (pipe STDOUT(1) and STDERR(2) with tee to log)
 
 ## Ubuntu 18.04 VM
 
