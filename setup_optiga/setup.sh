@@ -22,7 +22,7 @@ if [ $install_platform -eq 3 ]; then
 elif [ $install_platform -eq 4 ]; then
     boot_config="/boot/firmware/config.txt"
     echo_notice "setup_optiga" "setup" "Configuring $boot_config..."
-    sudo bash -c "echo -e \"\n# Enable TPM\ndtoverlay=tpm-slb9670\" $boot_config"
+    sudo bash -c "echo -e \"\n# Enable TPM\ndtoverlay=tpm-slb9670\" >> $boot_config"
 else
     echo_warn "setup_optiga" "setup" "Invalid install_platform: $install_platform, skipping TPM enabling..."
 fi
