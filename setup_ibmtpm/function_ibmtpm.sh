@@ -3,12 +3,12 @@
 # common/function.sh is required to be sourced before using functions in this file
 
 load_preset () {
-    #echo_notice "common" "function_common" "Env var to config file..."
+    #echo_notice "setup_ibmtpm" "function_common" "Env var to config file..."
     
-    echo_notice "common" "function_common" "Loading config file..."
+    echo_notice "setup_ibmtpm" "function_common" "Loading config file..."
     parse "$1" "display"
 
-    echo_notice "common" "function_common" "Checking var..."
+    echo_notice "setup_ibmtpm" "function_common" "Checking var..."
     exit_code=1
     check_var install_platform $exit_code
     check_var base_dir $exit_code
@@ -24,7 +24,6 @@ load_preset () {
     check_var acs_demo_client_ip $exit_code
     check_var tpm_command_port $exit_code
     check_var acs_port $exit_code
-    check_var user_name $exit_code
     check_var ibmtss_ver $exit_code
     check_var ibmtpm_ver $exit_code
     check_var ibmacs_ver $exit_code
@@ -64,7 +63,7 @@ load_preset () {
     check_var print_log_path $exit_code
     check_var open_all_logs $exit_code
 }
-echo_notice "common" "function_ibmtpm" "Loaded function: load_preset"
+echo_notice "setup_ibmtpm" "function_ibmtpm" "Loaded function: load_preset"
 
 clear_preset () {
     unset install_platform
@@ -81,7 +80,6 @@ clear_preset () {
     unset acs_demo_client_ip
     unset tpm_command_port
     unset acs_port
-    unset user_name
     unset ibmtss_ver
     unset ibmtpm_ver
     unset ibmacs_ver
@@ -121,4 +119,4 @@ clear_preset () {
     unset print_log_path
     unset open_all_logs
 }
-echo_notice "common" "function_ibmtpm" "Loaded function: clear_preset"
+echo_notice "setup_ibmtpm" "function_ibmtpm" "Loaded function: clear_preset"
