@@ -9,10 +9,10 @@ git clone "$optiga_url"
 
 echo_notice "setup_optiga" "setup" "Cancelling auto reboot..."
 cd ./optiga-tpm-explorer
-sed -i 's/sudo reboot/#sudo reboot/g' ./installation_script.sh
+sed -i 's/sudo reboot/#sudo reboot/g' ./installation_script.sh # Disable auto reboot
 
-echo_notice "setup_optiga" "setup" "Adjusting openssl version..."
-sudo apt purge openssl-dev
+echo_notice "setup_optiga" "setup" "Remove default libssl-dev installation..."
+sed -i 's/libssl-dev//g' ./installation_script.sh
 
 if [ $install_platform -eq 3 ]; then
     boot_config="/boot/config.txt"

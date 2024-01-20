@@ -31,6 +31,28 @@ build_valgrind () {
     sudo $sudo_gflag make $make_gflag install
 }
 
+build_libssl () {
+    libssl_dir="/opt/openssl"
+    libssl_build="openssl-1.1.1w.tar.gz"
+    libssl_build_name="$(basename $libssl_build .tar.gz)"
+    libssl_path_load_sh="/etc/profile.d/openssl.sh"
+    sudo mkdir $libssl_dir
+    cd $libssl_dir
+    sudo wget "https://www.openssl.org/source/${libssl_build}"
+    sudo tar xfz $libssl_build --directory $libssl_dir
+    export LD_LIBRARY_PATH="/opt/openssl/lib"
+    cd "${libssl_dir}/${libssl_build_name}"
+    sudo ./config --prefix=$libssl_dir --openssldir="${libssl_dir}/ssl"
+    sudo make -j$(nproc)
+    sudo make test -j$(nproc)
+    sudo make install -j$(nproc)
+    cd /usr/bin
+    sudo mv openssl openssl.old
+    sudo bash -c "echo -e \"#!/bin/sh\nexport PATH=${libssl_dir}/bin:${PATH}\nexport LD_LIBRARY_PATH=${libssl_dir}/bin:${LD_LIBRARY_PATH}\" >> ${libssl_path_load_sh}"
+    sudo chmod +x ${libssl_path_load_sh}
+    source ${libssl_path_load_sh}
+}
+
 install_req () {
     echo_notice "common" "setup" "Installing required packages..."
     sudo apt-get $apt_gflag update
@@ -54,6 +76,7 @@ install_req () {
         aptins "autoconf"
         aptins "unzip"
         build_cmake
+        build_libssl
         cd $working_dir
     fi
     build_valgrind
