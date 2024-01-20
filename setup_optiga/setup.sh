@@ -11,6 +11,9 @@ echo_notice "setup_optiga" "setup" "Cancelling auto reboot..."
 cd ./optiga-tpm-explorer
 sed -i 's/sudo reboot/#sudo reboot/g' ./installation_script.sh
 
+echo_notice "setup_optiga" "setup" "Adjusting openssl version..."
+sudo apt purge openssl-dev
+
 if [ $install_platform -eq 3 ]; then
     boot_config="/boot/config.txt"
     echo_notice "setup_optiga" "setup" "Configuring $boot_config..."

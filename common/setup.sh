@@ -45,7 +45,7 @@ install_req () {
 	aptins "build-essential"
 	aptins "gcc"
 	aptins "make"
-	aptins "libssl-dev"
+	#aptins "libssl-dev" # Version 
     aptins "moreutils"
 	if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ]; then
 		aptins "libtool"
