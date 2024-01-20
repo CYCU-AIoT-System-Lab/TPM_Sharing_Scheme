@@ -76,6 +76,7 @@ install_req () {
         aptins "autoconf"
         aptins "unzip"
         build_cmake
+        sudo apt-get purge libssl-dev
         build_libssl
         cd $working_dir
     fi
