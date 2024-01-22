@@ -278,7 +278,11 @@ open_demo_webpage () {
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\n\""
     launch_cmd2="sudo -u ${USER} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    gnome-terminal -t "FireFox Browser" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+        gnome-terminal -t "FireFox Browser" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    else
+        lxterminal -t "FireFox Browser" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    fi
 }
 
 # Generate CA certificate and key
@@ -304,7 +308,11 @@ activate_TPM_server () {
     launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
     launch_cmd2="./tpm_server"
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    gnome-terminal -t "TPM SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+        gnome-terminal -t "TPM SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    else
+        lxterminal -t "TPM SERVER" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    fi
 }
 
 # Activate TPM Client in current terminal
@@ -317,7 +325,11 @@ activate_TPM_client () {
     launch_cmd2="./powerup"
     launch_cmd3="./startup"
     launch_cmd4="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    gnome-terminal -t "TPM CLIENT" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+        gnome-terminal -t "TPM CLIENT" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
+    else
+        lxterminal -t "TPM CLIENT" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
+    fi
 }
 
 # Create EK certificate and key, activated TPM on new terminal
@@ -385,7 +397,11 @@ active_ACS_Demo_Server () {
     launch_cmd1="source ${current_dir}/../common/function.sh"
     launch_cmd2="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+        gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    else
+        lxterminal -t "ACS SERVER" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+    fi
 }
 
 # Active ACS Demo Client
@@ -455,7 +471,11 @@ open_all_logs () {
         lcmd0="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
         lcmd1="echo \"tailling log file: $1\""
         lcmd2="tail -f $1 -n $2"
-        gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
+        if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+            gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
+        else
+            lxterminal -t "$(basename -- $1)" -e "${lcmd1}; ${lcmd2}; ${lcmd0}"
+        fi
     }
     newt "${acs_demo_server_log_dir}" ${log4j_line_number}
     newt "${acs_demo_client_log_dir}" ${log4j_line_number}
