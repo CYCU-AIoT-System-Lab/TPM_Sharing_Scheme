@@ -147,11 +147,11 @@ echo_notice "common" "function" "Loaded function: aptins"
 # $1: tab name  (ex: "Brower Tab")
 # $2: bash flag (ex: "-x", can be empty "")
 # $3: command   (ex: "firefox")
-# $4: finish action (ex: "1": sleep infinitly, "2": exec bash)
+# $4: finish action (ex: 1: sleep infinitly, 2: exec bash)
 newGterm () {
-    if [ "$4" == "1" ]; then
+    if [ $4 == 1 ]; then
         gnome-terminal -t "$1" --active -- bash $2 -c "$3; echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    elif [ "$4" == "2" ]; then
+    elif [ $4 == 2 ]; then
         gnome-terminal -t "$1" --active -- bash $2 -c "$3; exec bash"
     else
         echo_error "common" "function" "Error: Invalid finish action, should be 1 or 2" 1
@@ -163,11 +163,11 @@ echo_notice "common" "function" "Loaded function: newGterm"
 # Usage: newLXterm "tab_name" "command" "finish action"
 # $1: tab name  (ex: "Brower Tab")
 # $2: command   (ex: "firefox")
-# $3: finish action (ex: "1": sleep infinitly, "2": exec bash)
+# $3: finish action (ex: 1: sleep infinitly, 2: exec bash)
 newLXterm () {
-    if [ "$3" == "1" ]; then
+    if [ $3 == 1 ]; then
         lxterminal -t "$1" -e "$2; echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    elif [ "$3" == "2" ]; then
+    elif [ $3 == 2 ]; then
         lxterminal -t "$1" -e "$2; exec bash"
     else
         echo_error "common" "function" "Error: Invalid finish action, should be 1 or 2" 1
