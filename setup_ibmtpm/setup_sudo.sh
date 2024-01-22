@@ -309,15 +309,15 @@ activate_TPM_server () {
     # apply TPMMode for ibmtss
     setup_ibmtpmtss_env
 
-    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Starting TPM simulator (SWTPM/vTPM/server) on new temrinal ..."
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
     cd "${sym_link_ibmtpm}/src/"
-    launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
-    launch_cmd2="./tpm_server"
-    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    lc1="source ${current_dir}/../common/function.sh"
+    lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
+    lc3="./tpm_server"
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-        gnome-terminal -t "TPM SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+        newGterm "TPM SERVER" "$bash_gflag" "$lc1; $lc2; $lc3" 1
     else
-        lxterminal -t "TPM SERVER" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}" &
+        newLXterm "TPM SERVER" "$lc1; $lc2; $lc3" 1
     fi
 }
 
@@ -327,15 +327,16 @@ activate_TPM_client () {
     TPM_client_executed=1
     echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
     cd "${sym_link_ibmtss}/utils/"
-    launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Starting TPM simulator (client) on new temrinal ...\n\""
-    launch_cmd2="./powerup"
-    launch_cmd3="./startup"
-    launch_cmd4="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    lc1="source ${current_dir}/../common/function.sh"
+    lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Starting TPM simulator (client) on new temrinal ...\n\""
+    lc3="./powerup"
+    lc4="./startup"
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-        gnome-terminal -t "TPM CLIENT" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
+        newGterm "TPM CLIENT" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
     else
-        lxterminal -t "TPM CLIENT" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}" &
+        newLXterm "TPM CLIENT" "$lc1; $lc2; $lc3; $lc4" 1
     fi
+
 }
 
 # Create EK certificate and key, activated TPM on new terminal
@@ -400,13 +401,13 @@ active_ACS_Demo_Server () {
 
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on new terminal ..."
     cd ${path_ibmacs}/acs
-    launch_cmd1="source ${current_dir}/../common/function.sh"
-    launch_cmd2="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
-    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+    lc1="source ${current_dir}/../common/function.sh"
+    lc2="echo_notice \"setup_ibmtpm\" \"setup-active_ACS_Demo_Server\" \"Activating ACS Demo ...\""
+    lc3="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-        gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+        newGterm "ACS SERVER" "$bash_gflag" "$lc1; $lc2; $lc3" 1
     else
-        lxterminal -t "ACS SERVER" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}" &
+        newLXterm "ACS SERVER" "$lc1; $lc2; $lc3" 1
     fi
 }
 
@@ -474,13 +475,12 @@ print_log_path () {
 # Can be run multiple times
 open_all_logs () {
     newt () {
-        lcmd0="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-        lcmd1="echo \"tailling log file: $1\""
-        lcmd2="tail -f $1 -n $2"
+        lc1="echo \"tailling log file: $1\""
+        lc2="tail -f $1 -n $2"
         if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-            gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
+            newGterm "$(basename -- $1)" "$bash_gflag" "$lc1; $lc2" 1
         else
-            lxterminal -t "$(basename -- $1)" -e "${lcmd1}; ${lcmd2}; ${lcmd0}" &
+            newLXterm "$(basename -- $1)" "$lc1; $lc2" 1
         fi
     }
     newt "${acs_demo_server_log_dir}" ${log4j_line_number}
