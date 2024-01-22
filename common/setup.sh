@@ -8,26 +8,26 @@ load_preset "./config.ini"
 
 build_cmake () {
     echo_notice "common" "setup" "Building ${BOLD}${GREEN}cmake${END}..."
-    mkdir -p $cmake_dir
+    sudo mkdir -p $cmake_dir
     cd $cmake_dir
-    wget $wget_gflag "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
-    tar -zxf "cmake-${cmake_ver}.${cmake_build}.tar.gz"
+    sudo wget $wget_gflag "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
+    sudo tar -zxf "cmake-${cmake_ver}.${cmake_build}.tar.gz"
     cd "cmake-${cmake_ver}.${cmake_build}"
-    ./bootstrap
-    make $make_gflag -j$(nproc)
+    sudo ./bootstrap
+    sudo make $make_gflag -j$(nproc)
     sudo $sudo_gflag make $make_gflag install -j$(nproc)
     cmake --version
 }
 
 build_valgrind () {
     echo_notice "common" "setup" "Building ${BOLD}${GREEN}valgrind${END}..."
-    mkdir -p $valgrind_dir
+    sudo mkdir -p $valgrind_dir
     cd $valgrind_dir
-    wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
-    tar xfj "valgrind-${valgrind_ver}.tar.bz2"
+    sudo wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
+    sudo tar xfj "valgrind-${valgrind_ver}.tar.bz2"
     cd "valgrind-${valgrind_ver}"
-    ./configure
-    make $make_gflag -j$(nproc)
+    sudo ./configure
+    sudo make $make_gflag -j$(nproc)
     sudo $sudo_gflag make $make_gflag install
 }
 
