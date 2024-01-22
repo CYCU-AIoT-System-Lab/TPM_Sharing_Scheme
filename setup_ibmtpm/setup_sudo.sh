@@ -301,7 +301,7 @@ open_demo_webpage () {
         newGterm "FireFox Browser" "$bash_gflag" "$lc1; $lc2; $lc3" 1
     else
         lc3="sudo -u $user bash -c \"chromium-browser --new-window -url ${acs_demo_url} --new-window -url ${repo_url} &\""
-        newLxterm "Chromium Browser" "$lc1; $lc2; $lc3" 1
+        newLXterm "Chromium Browser" "$lc1; $lc2; $lc3" 1
     fi
 }
 
