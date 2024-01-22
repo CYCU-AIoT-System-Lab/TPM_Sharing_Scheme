@@ -475,12 +475,13 @@ print_log_path () {
 # Can be run multiple times
 open_all_logs () {
     newt () {
-        lc1="echo \"tailling log file: $1\""
-        lc2="tail -f $1 -n $2"
+        lc1="source ${current_dir}/../common/function.sh"
+        lc2="echo_notice \"setup_ibmtpm\" \"setup-open_all_logs\" \"tailling log file: $1\""
+        lc3="tail -f $1 -n $2"
         if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-            newGterm "$(basename -- $1)" "$bash_gflag" "$lc1; $lc2" 1
+            newGterm "$(basename -- $1)" "$bash_gflag" "$lc1; $lc2; $lc3" 1
         else
-            newLXterm "$(basename -- $1)" "$lc1; $lc2" 1
+            newLXterm "$(basename -- $1)" "$lc1; $lc2; $lc3" 1
         fi
     }
     newt "${acs_demo_server_log_dir}" ${log4j_line_number}
