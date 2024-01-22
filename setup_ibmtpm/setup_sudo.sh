@@ -144,13 +144,18 @@ setup_ibmacs_env () {
         if [ $install_platform -eq 1 ]; then
             aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
         elif [ $install_platform -eq 2 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat libssl-dev"
             # aptins "libmariadb-dev"
             #aptins "libjson-c-dev apache2 php php-dev php-mysql libssl-dev"
         elif [ $install_platform -eq 3 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat:amd64 libmariadb-dev:amd64 libmariadb-dev-compat libssl-dev"
-            # aptins "libmariadb-dev"
-            #aptins "libjson-c-dev apache2 php php-dev php-mysql libssl-dev"
+            aptins "libjson-c-dev"
+            aptins "apache2"
+            aptins "php"
+            aptins "php-dev"
+            aptins "php-mysql"
+            aptins "mariadb-server"
+            aptins "libmariadb-dev"
+            aptins "libmariadb-dev-compat"
         elif [ $install_platform -eq 4 ]; then
             aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
         else
