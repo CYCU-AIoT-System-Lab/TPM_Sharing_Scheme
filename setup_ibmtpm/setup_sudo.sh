@@ -285,7 +285,7 @@ open_demo_webpage () {
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         gnome-terminal -t "FireFox Browser" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
     else
-        lxterminal -t "FireFox Browser" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+        lxterminal -t "FireFox Browser" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}" &
     fi
 }
 
@@ -315,7 +315,7 @@ activate_TPM_server () {
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         gnome-terminal -t "TPM SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
     else
-        lxterminal -t "TPM SERVER" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+        lxterminal -t "TPM SERVER" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}" &
     fi
 }
 
@@ -332,7 +332,7 @@ activate_TPM_client () {
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         gnome-terminal -t "TPM CLIENT" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
     else
-        lxterminal -t "TPM CLIENT" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}"
+        lxterminal -t "TPM CLIENT" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}; ${launch_cmd4}" &
     fi
 }
 
@@ -404,7 +404,7 @@ active_ACS_Demo_Server () {
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         gnome-terminal -t "ACS SERVER" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
     else
-        lxterminal -t "ACS SERVER" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
+        lxterminal -t "ACS SERVER" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}" &
     fi
 }
 
@@ -478,7 +478,7 @@ open_all_logs () {
         if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
             gnome-terminal -t "$(basename -- $1)" --active -- bash $bash_gflag -c "${lcmd1}; ${lcmd2}; ${lcmd0}"
         else
-            lxterminal -t "$(basename -- $1)" -e "${lcmd1}; ${lcmd2}; ${lcmd0}"
+            lxterminal -t "$(basename -- $1)" -e "${lcmd1}; ${lcmd2}; ${lcmd0}" &
         fi
     }
     newt "${acs_demo_server_log_dir}" ${log4j_line_number}
