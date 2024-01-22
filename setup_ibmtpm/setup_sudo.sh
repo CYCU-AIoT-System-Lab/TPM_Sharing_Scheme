@@ -279,7 +279,7 @@ open_demo_webpage () {
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         launch_cmd2="sudo -u ${USER} bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
     else
-        launch_cmd2="sudo -u ${USER} bash -c \"chromium-browser --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
+        launch_cmd2="sudo -u ${USER} bash -c \"chromium-browser --new-window -url ${acs_demo_url} --new-window -url ${repo_url} &\""
     fi
     launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
