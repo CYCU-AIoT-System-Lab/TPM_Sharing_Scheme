@@ -172,7 +172,7 @@ setup_ibmacs_env () {
     # ACS source platform adaption
     if [ $install_platform -eq 1 ]; then
         :
-    elif [ $install_platform -eq 2 ]; then
+    elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
         echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Adding stdbool.h to IBMACS/acs/commonjson.c"
         sed -i '39 i #include <stdbool.h>' "${path_ibmacs}/acs/commonjson.c"
 
@@ -183,16 +183,6 @@ setup_ibmacs_env () {
         for file in $(grep -rl "mysql/mysql.h" "${path_ibmacs}/acs/"); do
             sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
         done
-
-        #echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Compiling MariaDB from source ..."
-        #cd "$MariaDB_dir"
-        #git clone https://github.com/MariaDB/mariadb-connector-c.git
-        #mkdir build && cd build
-        #cmake ../mariadb-connector-c/ -DCMAKE_INSTALL_PREFIX=/usr
-        #make -j$(nproc) $make_gflag
-        #sudo make install $make_gflag
-    elif [ $install_platform -eq 3 ]; then
-        :
     else
         echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
     fi
