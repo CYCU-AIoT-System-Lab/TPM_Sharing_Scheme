@@ -292,6 +292,17 @@ open_demo_webpage () {
     else
         lxterminal -t "Chromium Browser" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}" &
     fi
+
+    echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
+    lc1="source ${current_dir}/../common/function.sh"
+    lc2="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+        lc3="sudo -u $user bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
+        newGterm "FireFox Browser" "$bash_gflag" "$lc1; $lc2; $lc3" 1
+    else
+        lc3="sudo -u $user bash -c \"chromium-browser --new-window -url ${acs_demo_url} --new-window -url ${repo_url} &\""
+        newLxterm "Chromium Browser" "$lc1; $lc2; $lc3" 1
+    fi
 }
 
 # Generate CA certificate and key
