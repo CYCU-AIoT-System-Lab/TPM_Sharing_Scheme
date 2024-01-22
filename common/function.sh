@@ -133,8 +133,44 @@ clear_dir () {
 }
 echo_notice "common" "function" "Loaded function: clear_dir"
 
+# Function: install package with apt-get
+# Usage: aptins "package name"
+# $1: package name
 aptins () {
     echo_notice "common" "setup" "Installing ${BOLD}${GREEN}$1${END}..."
     sudo apt-get $apt_gflag -o DPkg::Lock::Timeout=300 install $1 -y
 }
 echo_notice "common" "function" "Loaded function: aptins"
+
+# Function: open new gnome-terminal and execute command
+# Usage: newGterm "tab_name" "bash flag" "command" "finish action"
+# $1: tab name  (ex: "Brower Tab")
+# $2: bash flag (ex: "-x", can be empty "")
+# $3: command   (ex: "firefox")
+# $4: finish action (ex: "1": sleep infinitly, "2": exec bash)
+newGterm () {
+    if [ "$4" == "1" ]; then
+        gnome-terminal -t "$1" --active -- bash $2 -c "$3; sleep infinity"
+    elif [ "$4" == "2" ]; then
+        gnome-terminal -t "$1" --active -- bash $2 -c "$3; exec bash"
+    else
+        echo_error "common" "function" "Error: Invalid finish action, should be 1 or 2" 1
+    fi
+}
+echo_notice "common" "function" "Loaded function: newGterm"
+
+# Function: open new lxterminal and execute command
+# Usage: newLXterm "tab_name" "command" "finish action"
+# $1: tab name  (ex: "Brower Tab")
+# $2: command   (ex: "firefox")
+# $3: finish action (ex: "1": sleep infinitly, "2": exec bash)
+newLXterm () {
+    if [ "$3" == "1" ]; then
+        lxterminal -t "$1" -e "$2; sleep infinity"
+    elif [ "$3" == "2" ]; then
+        lxterminal -t "$1" -e "$2; exec bash"
+    else
+        echo_error "common" "function" "Error: Invalid finish action, should be 1 or 2" 1
+    fi
+}
+echo_notice "common" "function" "Loaded function: newLXterm"
