@@ -11,6 +11,7 @@ load_preset () {
     echo_notice "setup_ibmtpm" "function_common" "Checking var..."
     exit_code=1
     check_var install_platform $exit_code
+    check_var user $exit_code
     check_var base_dir $exit_code
     check_var html_dir $exit_code
     check_var c_json_lib_dir $exit_code
@@ -67,6 +68,7 @@ echo_notice "setup_ibmtpm" "function_ibmtpm" "Loaded function: load_preset"
 
 clear_preset () {
     unset install_platform
+    unset user
     unset base_dir
     unset html_dir
     unset c_json_lib_dir
