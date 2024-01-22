@@ -166,9 +166,9 @@ echo_notice "common" "function" "Loaded function: newGterm"
 # $3: finish action (ex: 1: sleep infinitly, 2: exec bash)
 newLXterm () {
     if [ $3 == 1 ]; then
-        lxterminal -t "$1" -e "$2; echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+        lxterminal -t "$1" -e "$2; echo -e \"\nctrl+c to exit\n\"; sleep infinity" &
     elif [ $3 == 2 ]; then
-        lxterminal -t "$1" -e "$2; exec bash"
+        lxterminal -t "$1" -e "$2; exec bash" &
     else
         echo_error "common" "function" "Error: Invalid finish action, should be 1 or 2" 1
     fi
