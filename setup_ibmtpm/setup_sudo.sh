@@ -280,20 +280,6 @@ compile_ibmacs () {
 # Can be run multiple times
 open_demo_webpage () {
     echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
-    launch_cmd1="echo -e \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\n\""
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-        launch_cmd2="sudo -u $user bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
-    else
-        launch_cmd2="sudo -u $user bash -c \"chromium-browser --new-window -url ${acs_demo_url} --new-window -url ${repo_url} &\""
-    fi
-    launch_cmd3="echo -e \"\nctrl+c to exit\n\"; sleep infinity"
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-        gnome-terminal -t "FireFox Browser" --active -- bash $bash_gflag -c "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}"
-    else
-        lxterminal -t "Chromium Browser" -e "${launch_cmd1}; ${launch_cmd2}; ${launch_cmd3}" &
-    fi
-
-    echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
     lc1="source ${current_dir}/../common/function.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
