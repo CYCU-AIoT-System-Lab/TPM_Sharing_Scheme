@@ -2,6 +2,7 @@
 
 dir_name="common"
 file_name="function"
+verbose=0 # 0: no verbose, 1: verbose
 
 # Function: load terminal special characters
 # Usage: load_special_chars
@@ -16,7 +17,9 @@ load_special_chars () {
     readonly CLEAR_LINE="\033[2K"
 }
 load_special_chars
-echo -e "${BOLD}${BLUE}[NOTICE-${dir_name}/${file_name}]${END} Loaded and Activated function: load_special_chars"
+if [ $verbose == 1 ]; then
+    echo -e "${BOLD}${BLUE}[NOTICE-${dir_name}/${file_name}]${END} Loaded and Activated function: load_special_chars"
+fi
 
 # Function: notice message
 # Usage: echo_notice "filename" "unit" "message"
@@ -26,7 +29,9 @@ echo -e "${BOLD}${BLUE}[NOTICE-${dir_name}/${file_name}]${END} Loaded and Activa
 echo_notice () {
     echo -e "${BOLD}${BLUE}[NOTICE-$1/$2]${END} $3"
 }
-echo_notice "common" "function" "Loaded function: echo_notice"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: echo_notice"
+fi
 
 # Function: warn message
 # Usage: echo_warn "filename" "unit" "message"
@@ -36,7 +41,9 @@ echo_notice "common" "function" "Loaded function: echo_notice"
 echo_warn () {
     echo -e "${BOLD}${YELLOW}[WARN-$1/$2]${END} $3"
 }
-echo_notice "common" "function" "Loaded function: echo_warn"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: echo_warn"
+fi
 
 # Function: error message
 # Usage: echo_error "filename" "unit" "message" "exit code"
@@ -48,7 +55,9 @@ echo_error () {
     echo -e "${BOLD}${RED}[ERROR-$1/$2]${END} $3"
     exit $4
 }
-echo_notice "common" "function" "Loaded function: echo_error"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: echo_error"
+fi
 
 # Function: parse config file
 # Usage: parse "config.ini"
@@ -90,7 +99,9 @@ parse () {
     done < "$1"
     echo_notice "common" "function" "Loaded ${BOLD}${GREEN}$var_cnt${END} config items from ${BOLD}${GREEN}$1${END}"
 }
-echo_notice "common" "function" "Loaded function: parse"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: parse"
+fi
 
 # Function: logging date and time from executable output to file
 # Usage: log_date_time "command to execute" "format" "log file" "method"
@@ -106,7 +117,9 @@ log_date_time () {
     fi
     #$1 >| $3
 }
-echo_notice "common" "function" "Loaded function: log_date_time"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: log_date_time"
+fi
 
 # Function: check variable is empty and exit if empty
 # Usage check_var "variable" "exit code"
@@ -117,7 +130,9 @@ check_var () {
         echo_error "common" "function" "Error: variable $1 is empty! Check your config.ini file." $2
     fi
 }
-echo_notice "common" "function" "Loaded function: check_var"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: check_var"
+fi
 
 # Function: clear directory
 # Usage: clear_dir "directory"
@@ -131,7 +146,9 @@ clear_dir () {
         sudo rmdir $1
     fi
 }
-echo_notice "common" "function" "Loaded function: clear_dir"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: clear_dir"
+fi
 
 # Function: install package with apt-get
 # Usage: aptins "package name"
@@ -140,7 +157,9 @@ aptins () {
     echo_notice "common" "setup" "Installing ${BOLD}${GREEN}$1${END}..."
     sudo apt-get $apt_gflag -o DPkg::Lock::Timeout=300 install $1 -y
 }
-echo_notice "common" "function" "Loaded function: aptins"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: aptins"
+fi
 
 # Function: open new gnome-terminal and execute command
 # Usage: newGterm "tab_name" "bash flag" "command" "finish action"
@@ -157,7 +176,9 @@ newGterm () {
         echo_error "common" "function" "Error: Invalid finish action, should be 1 or 2" 1
     fi
 }
-echo_notice "common" "function" "Loaded function: newGterm"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: newGterm"
+fi
 
 # Function: open new lxterminal and execute command
 # Usage: newLXterm "tab_name" "command" "finish action"
@@ -173,4 +194,6 @@ newLXterm () {
         echo_error "common" "function" "Error: Invalid finish action, should be 1 or 2" 1
     fi
 }
-echo_notice "common" "function" "Loaded function: newLXterm"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: newLXterm"
+fi
