@@ -2,6 +2,8 @@
 
 # common/function.sh is required to be sourced before using functions in this file
 
+verbose=0 # 0: no verbose, 1: verbose
+
 # Usage: source "config.ini"
 # Input variable: $1: config.ini
 load_preset () {
@@ -15,11 +17,15 @@ load_preset () {
     check_var install_platform 1
     check_var optiga_url 1
 }
-echo_notice "setup_optiga" "function_optiga" "Loaded function: load_preset"
+if [ $verbose == 1 ]; then
+    echo_notice "setup_optiga" "function_optiga" "Loaded function: load_preset"
+fi
 
 clear_preset () {
     echo_notice "setup_optiga" "function_optiga" "Clearing preset..."
     unset install_platform
     unset optiga_url
 }
-echo_notice "setup_optiga" "function_optiga" "Loaded function: clear_preset"
+if [ $verbose == 1 ]; then
+    echo_notice "setup_optiga" "function_optiga" "Loaded function: clear_preset"
+fi

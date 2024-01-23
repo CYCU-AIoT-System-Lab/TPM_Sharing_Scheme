@@ -2,6 +2,8 @@
 
 # common/function.sh is required to be sourced before using functions in this file
 
+verbose=0 # 0: no verbose, 1: verbose
+
 # Function: include env to config file, load config, var check
 # Usage: source "config.ini"
 # Input variable: $1: config.ini
@@ -39,7 +41,9 @@ load_preset () {
     check_var job_enable_ssh 1
     check_var job_enable_pi_spi 1
 }
-echo_notice "common" "function_common" "Loaded function: load_preset"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function_common" "Loaded function: load_preset"
+fi
 
 clear_preset () {
     echo_notice "common" "function_common" "Clearing preset..."
@@ -69,4 +73,6 @@ clear_preset () {
     unset job_enable_ssh
     unset job_enable_pi_spi
 }
-echo_notice "common" "function_common" "Loaded function: clear_preset"
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function_common" "Loaded function: clear_preset"
+fi

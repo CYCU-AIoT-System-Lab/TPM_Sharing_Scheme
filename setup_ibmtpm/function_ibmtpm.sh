@@ -2,6 +2,8 @@
 
 # common/function.sh is required to be sourced before using functions in this file
 
+verbose=0 # 0: no verbose, 1: verbose
+
 load_preset () {
     #echo_notice "setup_ibmtpm" "function_common" "Env var to config file..."
     
@@ -64,7 +66,9 @@ load_preset () {
     check_var print_log_path $exit_code
     check_var open_all_logs $exit_code
 }
-echo_notice "setup_ibmtpm" "function_ibmtpm" "Loaded function: load_preset"
+if [ $verbose == 1 ]; then
+    echo_notice "setup_ibmtpm" "function_ibmtpm" "Loaded function: load_preset"
+fi
 
 clear_preset () {
     unset install_platform
@@ -121,4 +125,6 @@ clear_preset () {
     unset print_log_path
     unset open_all_logs
 }
-echo_notice "setup_ibmtpm" "function_ibmtpm" "Loaded function: clear_preset"
+if [ $verbose == 1 ]; then
+    echo_notice "setup_ibmtpm" "function_ibmtpm" "Loaded function: clear_preset"
+fi
