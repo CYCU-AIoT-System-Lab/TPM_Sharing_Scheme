@@ -270,7 +270,7 @@ compile_ibmacs () {
 # Can be run multiple times
 open_demo_webpage () {
     echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
-    lc1="source ${current_dir}/../common/function.sh"
+    lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         lc3="sudo -u $user bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
@@ -301,7 +301,7 @@ activate_TPM_server () {
 
     echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
     cd "${sym_link_ibmtpm}/src/"
-    lc1="source ${current_dir}/../common/function.sh"
+    lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
     lc3="./tpm_server"
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
@@ -317,7 +317,7 @@ activate_TPM_client () {
     TPM_client_executed=1
     echo_notice "setup_ibmtpm" "setup-activate_TPM_client" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
     cd "${sym_link_ibmtss}/utils/"
-    lc1="source ${current_dir}/../common/function.sh"
+    lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Starting TPM simulator (client) on new temrinal ...\n\""
     lc3="./powerup"
     lc4="./startup"
@@ -391,7 +391,7 @@ active_ACS_Demo_Server () {
 
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on new terminal ..."
     cd ${path_ibmacs}/acs
-    lc1="source ${current_dir}/../common/function.sh"
+    lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-active_ACS_Demo_Server\" \"Activating ACS Demo ...\""
     lc3="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
@@ -465,7 +465,7 @@ print_log_path () {
 # Can be run multiple times
 open_all_logs () {
     newt () {
-        lc1="source ${current_dir}/../common/function.sh"
+        lc1="source ${current_dir}/../common/functions.sh"
         lc2="echo_notice \"setup_ibmtpm\" \"setup-open_all_logs\" \"tailling log file: $1\""
         lc3="tail -f $1 -n $2"
         if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
