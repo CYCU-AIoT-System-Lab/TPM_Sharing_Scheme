@@ -28,7 +28,7 @@ build_valgrind () {
     cd "valgrind-${valgrind_ver}"
     sudo ./configure
     sudo make $make_gflag -j$(nproc)
-    sudo $sudo_gflag make $make_gflag install
+    sudo $sudo_gflag make $make_gflag install -j$(nproc)
 }
 
 build_libssl () {
