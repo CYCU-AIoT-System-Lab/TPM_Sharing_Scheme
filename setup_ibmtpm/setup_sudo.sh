@@ -29,6 +29,19 @@ acs_demo_verify_imasig_log_dir="${sym_link_ibmacs}/i.log4j"
 acs_demo_verify_client_log_dir="${sym_link_ibmacs}/client.log4j"
 MariaDB_dir="${HOME}/MariaDB"
 
+# Check file exist and remove it
+# Usage: cfer "file" "message1" "message2" "message3"
+# Input variable: $1: file name
+#                 $2: message1
+#                 $3: message2
+#                 $4: message3
+cfer () {
+    if [ -f "$1" ]; then
+        echo_notice "$2" "$3" "$4"
+        rm "$1"
+    fi
+}
+
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
 # Extract ibmtss, ibmtpm, and ibmacs
@@ -77,6 +90,7 @@ setup_ibmtpmtss_env () {
     export TPM_COMMAND_PORT="${tpm_command_port}"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
+    cfer "${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Removing old symbolic link ..."
     ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
 }
 
@@ -120,6 +134,7 @@ compile_ibmtpmtss () {
 # Only need to setup once (can re-run)
 setup_ibmswtpm_env () {
     echo_notice "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
+    cfer "${base_dir}/ibmtpm" "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Removing old symbolic link ..."
     ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
 }
 
@@ -202,6 +217,7 @@ setup_ibmacs_env () {
     export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
+    cfer "${base_dir}/ibmacs" "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
     ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting html directory ..."
@@ -211,6 +227,7 @@ setup_ibmacs_env () {
     chmod 777 ${html_dir}
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
+    cfer "${c_json_lib_link_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env" "Removing old symbolic link ..."
     ln -s "${c_json_lib_dir}" "${c_json_lib_link_dir}"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting include path ..."
