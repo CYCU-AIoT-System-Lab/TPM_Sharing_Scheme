@@ -141,8 +141,8 @@ fi
 # check_var is advised to use before this function
 clear_dir () {
     echo "Removing content in $1"
-    sudo rm -rf "$1/*"
-    sudo rm -rf "$1/[^.]*" # remove hidden files
+    sudo rm -rf "$1/"*
+    sudo rm -rf "$1/[^.]"* # remove hidden files
     if [ "$2" == "rmdir" ]; then
         sudo rmdir $1
     fi
