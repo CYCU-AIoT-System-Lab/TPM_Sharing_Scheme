@@ -10,7 +10,7 @@ load_preset () {
     sed -i 's@${HOME}@'"$HOME"'@' "$1" # replace ${HOME} with $HOME
 
     echo_notice "common" "function_common" "Loading config file..."
-    parse "$1" "display"
+    parse "$1" ""
 
     echo_notice "common" "function_common" "Checking var..."
     check_var install_platform 1

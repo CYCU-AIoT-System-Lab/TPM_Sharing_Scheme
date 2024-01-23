@@ -9,7 +9,7 @@ load_preset () {
     #sed -i 's@${HOME}@'"$HOME"'@' "$1" # replace ${HOME} with $HOME
     
     echo_notice "setup_optiga" "function_optiga" "Loading config file..."
-    parse "$1" "display"
+    parse "$1" ""
 
     echo_notice "setup_optiga" "function_optiga" "Checking var..."
     check_var install_platform 1

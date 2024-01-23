@@ -6,7 +6,7 @@ load_preset () {
     #echo_notice "setup_ibmtpm" "function_common" "Env var to config file..."
     
     echo_notice "setup_ibmtpm" "function_common" "Loading config file..."
-    parse "$1" "display"
+    parse "$1" ""
 
     echo_notice "setup_ibmtpm" "function_common" "Checking var..."
     exit_code=1
