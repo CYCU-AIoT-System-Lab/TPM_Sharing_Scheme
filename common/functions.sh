@@ -215,6 +215,7 @@ cfer () {
     elif [ -L "$1" ]; then
         echo_notice "$2" "$3" "$4"
         sudo unlink "$1"
+        sudo rm "$1"
     fi
 }
 if [ $verbose == 1 ]; then
