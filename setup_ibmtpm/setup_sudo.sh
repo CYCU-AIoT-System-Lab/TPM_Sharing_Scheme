@@ -103,13 +103,13 @@ compile_ibmtpmtss () {
     if [ $verMode == 1 ]; then
         # for TPM 2.0
         cd "${path_ibmtss}/utils/"
-        make $make_gflag -f makefiletpm20
+        make $make_gflag -f makefiletpm20 -j$(nproc)
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmtss}/utils/"
-        make $make_gflag -f makefiletpmc
+        make $make_gflag -f makefiletpmc -j$(nproc)
         cd "${path_ibmtss}/utils12/"
-        make $make_gflag -f makefiletpmc
+        make $make_gflag -f makefiletpmc -j$(nproc)
     else 
         echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
         exit 1
@@ -132,7 +132,7 @@ compile_ibmswtpm () {
 
     echo_notice "setup_ibmtpm" "setup-compile_ibmswtpm" "Compiling IBMTPM ..."
     cd "${path_ibmtpm}/src/"
-    make $make_gflag
+    make $make_gflag -j$(nproc)
 }
 
 # Install requirements for ibmacs, create mysql database, set environment variables, link directories, and generate directory for webpage
@@ -240,7 +240,7 @@ compile_ibmacs () {
         export CPATH="${path_ibmtss}/utils"
         export LIBRARY_PATH="${path_ibmtss}/utils"
         make $make_gflag clean
-        make $make_gflag
+        make $make_gflag -j$(nproc)
     elif [ $verMode == 2 ]; then
         # for TPM 1.2 & 2.0
         cd "${path_ibmacs}/acs/"
@@ -249,13 +249,13 @@ compile_ibmacs () {
         if [ $acsMode == 1 ]; then
             # for Server
             make $make_gflag -f makefiletpmc clean
-            make $make_gflag -f makefiletpmc
+            make $make_gflag -f makefiletpmc -j$(nproc)
         elif [ $acsMode == 2 ]; then
             # for Client
             make $make_gflag -f makefiletpm12 clean
-            make $make_gflag -f makefiletpm12
+            make $make_gflag -f makefiletpm12 -j$(nproc)
             make $make_gflag -f makefiletpmc clean
-            make $make_gflag -f makefiletpmc
+            make $make_gflag -f makefiletpmc -j$(nproc)
         else 
             echo_warn "setup_ibmtpm" "setup-compile_ibmacs" "Invalid acsMode"
             exit 1
