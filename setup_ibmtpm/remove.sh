@@ -1,6 +1,6 @@
 #!/bin/bash +x
 
-source "../common/function.sh"
+source "../common/functions.sh"
 source "./function_ibmtpm.sh"
 load_preset "./config.ini"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "../common/function.sh"
+source "../common/functions.sh"
 source "./function_optiga.sh"
 load_preset "./config.ini"
 

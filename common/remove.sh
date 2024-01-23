@@ -1,6 +1,6 @@
 #!/bin/bash +x
 
-source "./function.sh"
+source "./functions.sh"
 source "./function_common.sh"
 load_preset "./config.ini"
 
