@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dir_name="common"
-file_name="function"
+file_name="functions"
 verbose=0 # 0: no verbose, 1: verbose
 
 # Function: load terminal special characters
