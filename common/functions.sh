@@ -142,6 +142,7 @@ fi
 clear_dir () {
     echo "Removing content in $1"
     sudo rm -rf "$1/*"
+    sudo rm -rf "$1/[^.]*" # remove hidden files
     if [ "$2" == "rmdir" ]; then
         sudo rmdir $1
     fi
@@ -196,4 +197,20 @@ newLXterm () {
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: newLXterm"
+fi
+
+# Check file exist and remove it
+# Usage: cfer "file" "message1" "message2" "message3"
+# Input variable: $1: file name
+#                 $2: message1
+#                 $3: message2
+#                 $4: message3
+cfer () {
+    if [ -f "$1" ]; then
+        echo_notice "$2" "$3" "$4"
+        rm "$1"
+    fi
+}
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded function: cfer"
 fi

@@ -29,19 +29,6 @@ acs_demo_verify_imasig_log_dir="${sym_link_ibmacs}/i.log4j"
 acs_demo_verify_client_log_dir="${sym_link_ibmacs}/client.log4j"
 MariaDB_dir="${HOME}/MariaDB"
 
-# Check file exist and remove it
-# Usage: cfer "file" "message1" "message2" "message3"
-# Input variable: $1: file name
-#                 $2: message1
-#                 $3: message2
-#                 $4: message3
-cfer () {
-    if [ -f "$1" ]; then
-        echo_notice "$2" "$3" "$4"
-        rm "$1"
-    fi
-}
-
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
 # Extract ibmtss, ibmtpm, and ibmacs
