@@ -209,6 +209,15 @@ cfer () {
     if [ -f "$1" ]; then
         echo_notice "$2" "$3" "$4"
         rm "$1"
+    elif [ -d "$1" ]; then
+        echo_notice "$2" "$3" "$4"
+        rmdir "$1"
+    elif [ -L "$1" ]; then
+        echo_notice "$2" "$3" "$4"
+        unlink "$1"
+    else
+        :
+    fi
     fi
 }
 if [ $verbose == 1 ]; then
