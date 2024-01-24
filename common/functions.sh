@@ -59,6 +59,75 @@ if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: echo_error"
 fi
 
+# Function: error handling
+# Usage: Add the following lines to the beginning of the script
+# 1. set -eE -o functrace
+# 2. trap 'failure "$LINENO" "$BASH_COMMAND" "$FUNCNAME" "$BASH_SOURCE"' ERR
+set -eE -o functrace
+failure () {
+    local line_no=$1
+    local bash_cmd=$2
+    local bash_fun=$3
+    local bash_src=$4
+    echo_error "common" "function" "Error: source: $BOLD$bash_src$END, $BOLD$bash_fun$END has failed at line $BOLD$line_no$END, command: $BOLD$bash_cmd$END" 1
+}
+trap 'failure "$LINENO" "$BASH_COMMAND" "$FUNCNAME" "$BASH_SOURCE"' ERR
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded and Activated function: failure"
+fi
+
+# Function: continue execution when error occurs
+# Usage: err_conti_exec "command string" "message 1" "message 2"
+# Input variable: $1: command string (ex: "sudo apt-get update && echo "update done")
+#                 $2: message 1
+#                 $3: message 2
+err_conti_exec () {
+    $1 || true
+    echo_warn "$2" "$3" "Warning: \"$1\" failed, but continue execution..."
+}
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded and Activated function: err_conti_exec"
+fi
+
+# Function: exit execution when error occurs
+# Usage: err_exit_exec "command string" "message 1" "message 2" exit code
+# Input variable: $1: command string (ex: "sudo apt-get update && echo "update done")
+#                 $2: message 1
+#                 $3: message 2
+#                 $4: exit code
+err_exit_exec () {
+    $1 || exit $2
+    echo_error "$2" "$3" "Error: \"$1\" failed, exit execution..." $4
+}
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded and Activated function: err_exit_exec"
+fi
+
+# Function: retry execution when error occurs
+# Usage: err_retry_exec "command string" "interval in second" "retry times" "message 1" "message 2" "exit code
+# Input variable: $1: command string (ex: "sudo apt-get update && echo "update done")
+#                 $2: interval in second (ex: 5, true to skip interval)
+#                 $3: retry times (ex: 3)
+#                 $4: message 1
+#                 $5: message 2
+#                 $6: exit code
+err_retry_exec () {
+    local retry_cnt=0
+    until
+        $1
+    do
+        retry_cnt=$((retry_cnt+1))
+        if [ $retry_cnt -eq $3 ]; then
+            echo_error "$4" "$5" "Error: \"$1\" failed after $3 retries" $6
+        fi
+        echo_warn "$4" "$5" "Warning: \"$1\" failed, retrying in $2 seconds..."
+        sleep $2
+    done
+}
+if [ $verbose == 1 ]; then
+    echo_notice "common" "function" "Loaded and Activated function: err_retry_exec"
+fi
+
 # Function: parse config file
 # Usage: parse "config.ini"
 # Input variable: $1: config filepath
@@ -156,7 +225,7 @@ fi
 # $1: package name
 aptins () {
     echo_notice "common" "setup" "Installing ${BOLD}${GREEN}$1${END}..."
-    sudo apt-get $apt_gflag -o DPkg::Lock::Timeout=300 install $1 -y
+    err_retry_exec "sudo apt-get $apt_gflag -o DPkg::Lock::Timeout=300 install $1 -y" 1 5 "common" "functions_aptins" 1
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: aptins"
