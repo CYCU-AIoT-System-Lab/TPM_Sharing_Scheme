@@ -205,14 +205,10 @@ fi
 # Function: clear directory
 # Usage: clear_dir "directory"
 # $1: directory to clear content
-# $2: clear this directory too (== "rmdir")
 # check_var is advised to use before this function
 clear_dir () {
     echo "Removing content in $1"
     err_conti_exec "sudo rm -rf $1/" "common" "functions_clear_dir"
-    if [ "$2" == "rmdir" ]; then
-        err_conti_exec "sudo rmdir $1" "common" "functions_clear_dir"
-    fi
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: clear_dir"

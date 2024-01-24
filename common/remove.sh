@@ -4,9 +4,9 @@ source "./functions.sh"
 source "./function_common.sh"
 load_preset "./config.ini"
 
-clear_dir $apport_dir "rmdir"
-clear_dir $cmake_dir "rmdir"
-clear_dir $valgrind_dir "rmdir"
+clear_dir $apport_dir
+clear_dir $cmake_dir
+clear_dir $valgrind_dir
 echo_notice "common" "remove" "Clear done"
 
 if [ ${job_setup_environment} -eq 1 ]; then
