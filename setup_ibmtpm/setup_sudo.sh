@@ -81,7 +81,7 @@ setup_ibmtpmtss_env () {
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
     cfer "${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Removing old symbolic link ..."
-    ln -s "${path_ibmtss}" "${base_dir}/ibmtss"
+    err_conti_exec "ln -s ${path_ibmtss} ${base_dir}/ibmtss"
 }
 
 # Compile ibmtss
@@ -125,7 +125,7 @@ compile_ibmtpmtss () {
 setup_ibmswtpm_env () {
     echo_notice "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
     cfer "${base_dir}/ibmtpm" "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Removing old symbolic link ..."
-    ln -s "${path_ibmtpm}" "${base_dir}/ibmtpm"
+    err_conti_exec "ln -s ${path_ibmtpm} ${base_dir}/ibmtpm"
 }
 
 # Compile ibmswtpm
@@ -208,7 +208,7 @@ setup_ibmacs_env () {
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
     cfer "${base_dir}/ibmacs" "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
-    ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
+    err_conti_exec "ln -s ${path_ibmacs}/acs ${base_dir}/ibmacs"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting html directory ..."
     err_conti_exec "mkdir -p ${html_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env"
@@ -218,7 +218,7 @@ setup_ibmacs_env () {
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
     cfer "${c_json_lib_link_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env" "Removing old symbolic link ..."
-    ln -s "${c_json_lib_dir}" "${c_json_lib_link_dir}"
+    err_conti_exec "ln -s ${c_json_lib_dir} ${c_json_lib_link_dir}"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting include path ..."
     if [ $verMode == 1 ]; then
