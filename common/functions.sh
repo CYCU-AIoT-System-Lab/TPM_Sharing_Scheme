@@ -210,7 +210,6 @@ fi
 clear_dir () {
     echo "Removing content in $1"
     err_conti_exec "sudo rm -rf $1/" "common" "functions_clear_dir"
-    err_conti_exec "sudo rm -rf $1/[^.]*" "common" "functions_clear_dir" # remove hidden files
     if [ "$2" == "rmdir" ]; then
         err_conti_exec "sudo rmdir $1" "common" "functions_clear_dir"
     fi
