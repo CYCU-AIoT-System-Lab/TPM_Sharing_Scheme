@@ -63,6 +63,7 @@ fi
 # Usage: Add the following lines to the beginning of the script
 # 1. set -eE -o functrace
 # 2. trap 'failure "$LINENO" "$BASH_COMMAND" "$FUNCNAME" "$BASH_SOURCE"' ERR
+# Source: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
 set -eE -o functrace
 failure () {
     local line_no=$1
@@ -82,7 +83,9 @@ fi
 #                 $2: message 1
 #                 $3: message 2
 err_conti_exec () {
-    $1 || true
+    set +e
+    $1
+    set -e
     echo_warn "$2" "$3" "Warning: \"$1\" failed, but continue execution..."
 }
 if [ $verbose == 1 ]; then
@@ -96,6 +99,7 @@ fi
 #                 $3: message 2
 #                 $4: exit code
 err_exit_exec () {
+    set -e
     $1 || exit $2
     echo_error "$2" "$3" "Error: \"$1\" failed, exit execution..." $4
 }
