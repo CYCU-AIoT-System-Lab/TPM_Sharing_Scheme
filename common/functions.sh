@@ -213,11 +213,13 @@ fi
 # check_var is advised to use before this function
 clear_dir () {
     echo "Removing content in $1"
+    set +e
     sudo rm -rf "$1/"*
     sudo rm -rf "$1/[^.]"* # remove hidden files
     if [ "$2" == "rmdir" ]; then
         sudo rmdir $1
     fi
+    set -e
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: clear_dir"
@@ -278,6 +280,7 @@ fi
 #                 $3: message2
 #                 $4: message3
 cfer () {
+    set +e
     if [ -f "$1" ]; then
         echo_notice "$2" "$3" "$4"
         sudo rm "$1"
@@ -289,6 +292,7 @@ cfer () {
         sudo unlink "$1"
         sudo rm "$1"
     fi
+    set -e
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: cfer"
