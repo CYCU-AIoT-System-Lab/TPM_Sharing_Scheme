@@ -306,7 +306,7 @@ activate_TPM_server () {
     # apply TPMMode for ibmtss
     setup_ibmtpmtss_env
 
-    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
+    echo_notice "setup_ibmtpm" "setup-activate_TPM_server" "Starting TPM simulator (server) on new temrinal ..."
     cd "${sym_link_ibmtpm}/src/"
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
