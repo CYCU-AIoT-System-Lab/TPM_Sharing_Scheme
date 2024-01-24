@@ -96,7 +96,7 @@ fi
 #                 $3: message 2
 #                 $4: exit code
 err_exit_exec () {
-    $1 || echo_warn "$2" "$3" "Error: \"$1\" failed, but continue execution..." $4; exit $2;
+    $1 || echo_warn "$2" "$3" "Error: \"$1\" failed, but continue execution..." $4; exit $2
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded and Activated function: err_exit_exec"
