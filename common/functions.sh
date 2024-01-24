@@ -64,7 +64,7 @@ fi
 # 1. set -eE -o functrace
 # 2. trap 'failure "$LINENO" "$BASH_COMMAND" "$FUNCNAME" "$BASH_SOURCE"' ERR
 # Source: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
-set -eE -o functrace
+set -eE -o functrace # need to be just before trap (this location)
 failure () {
     local line_no=$1
     local bash_cmd=$2
