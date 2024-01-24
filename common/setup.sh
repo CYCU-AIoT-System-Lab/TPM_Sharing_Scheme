@@ -80,7 +80,7 @@ install_req () {
     else
         aptins "libssl-dev"
     fi
-    build_valgrind
+    #build_valgrind
     cd $working_dir
 }
 
