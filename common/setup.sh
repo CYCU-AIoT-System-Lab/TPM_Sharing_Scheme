@@ -99,7 +99,7 @@ update_src () {
     echo_notice "common" "setup" "Pulling latest repo source..."
     git stash
     git stash clear
-    git pull
+    err_retry_exec "git pull" 1 5 "common" "setup" 1
 }
 
 config_apport () {
