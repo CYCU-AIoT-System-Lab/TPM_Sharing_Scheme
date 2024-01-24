@@ -83,7 +83,7 @@ fi
 #                 $2: message 1
 #                 $3: message 2
 err_conti_exec () {
-    $1 || echo_warn "$2" "$3" "Warning: \"$1\" failed, but continue execution..."
+    ${1@Q} || echo_warn "$2" "$3" "Warning: \"${1@Q}\" failed, but continue execution..."
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded and Activated function: err_conti_exec"
@@ -96,8 +96,7 @@ fi
 #                 $3: message 2
 #                 $4: exit code
 err_exit_exec () {
-    $1 || echo_error "$2" "$3" "Error: \"$1\" failed, exit execution..." $4; exit $2
-}
+    ${1@Q} || echo_warn "$2" "$3" "Error: \"${1@Q}\" failed, but continue execution..." $4; exit $2
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded and Activated function: err_exit_exec"
 fi
@@ -113,13 +112,13 @@ fi
 err_retry_exec () {
     local retry_cnt=0
     until
-        $1
+        ${1@Q}
     do
         retry_cnt=$((retry_cnt+1))
         if [ $retry_cnt -eq $3 ]; then
-            echo_error "$4" "$5" "Error: \"$1\" failed after $3 retries" $6
+            echo_error "$4" "$5" "Error: \"${1@Q}\" failed after $3 retries" $6
         fi
-        echo_warn "$4" "$5" "Warning: \"$1\" failed, retrying in $2 seconds..."
+        echo_warn "$4" "$5" "Warning: \"${1@Q}\" failed, retrying in $2 seconds..."
         sleep $2
     done
 }
@@ -208,11 +207,11 @@ fi
 # $2: clear this directory too (== "rmdir")
 # check_var is advised to use before this function
 clear_dir () {
-    echo "Removing content in $1"
-    err_conti_exec "sudo rm -rf $1/*" "common" "functions_clear_dir"
-    err_conti_exec "sudo rm -rf $1/[^.]*" "common" "functions_clear_dir" # remove hidden files
+    echo "Removing content in ${1@Q}"
+    err_conti_exec "sudo rm -rf ${1@Q}/*" "common" "functions_clear_dir"
+    err_conti_exec "sudo rm -rf ${1@Q}/[^.]*" "common" "functions_clear_dir" # remove hidden files
     if [ "$2" == "rmdir" ]; then
-        err_conti_exec "sudo rmdir $1" "common" "functions_clear_dir"
+        err_conti_exec "sudo rmdir ${1@Q}" "common" "functions_clear_dir"
     fi
 }
 if [ $verbose == 1 ]; then
@@ -274,16 +273,16 @@ fi
 #                 $3: message2
 #                 $4: message3
 cfer () {
-    if [ -f "$1" ]; then
+    if [ -f "${1@Q}" ]; then
         echo_notice "$2" "$3" "$4"
-        err_conti_exec "sudo rm $1" "common" "functions_cfer"
-    elif [ -d "$1" ]; then
+        err_conti_exec "sudo rm ${1@Q}" "common" "functions_cfer"
+    elif [ -d "${1@Q}" ]; then
         echo_notice "$2" "$3" "$4"
-        err_conti_exec "sudo rmdir $1" "common" "functions_cfer"
-    elif [ -L "$1" ]; then
+        err_conti_exec "sudo rmdir ${1@Q}" "common" "functions_cfer"
+    elif [ -L "${1@Q}" ]; then
         echo_notice "$2" "$3" "$4"
-        sudo unlink "$1"
-        err_conti_exec "sudo rm $1" "common" "functions_cfer"
+        sudo unlink "${1@Q}"
+        err_conti_exec "sudo rm ${1@Q}" "common" "functions_cfer"
     fi
 }
 if [ $verbose == 1 ]; then
