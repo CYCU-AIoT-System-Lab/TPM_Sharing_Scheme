@@ -40,13 +40,16 @@ install_req () {
     err_conti_exec "mkdir ${path_ibmacs}" "setup_ibmtpm" "setup-install_req"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMTPMTSS ..."
-    err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download\" -O ${path_ibmtss}/${fn_ibmtss}" "setup_ibmtpm" "setup-install_req"
+    #err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download\" -O ${path_ibmtss}/${fn_ibmtss}" "setup_ibmtpm" "setup-install_req"
+    wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMSWTPM ..."
-    err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download\" -O ${path_ibmtpm}/${fn_ibmtpm}" "setup_ibmtpm" "setup-install_req"
+    #err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download\" -O ${path_ibmtpm}/${fn_ibmtpm}" "setup_ibmtpm" "setup-install_req"
+    wget $wget_gflag "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMACS ..."
-    err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download\" -O ${path_ibmacs}/${fn_ibmacs}" "setup_ibmtpm" "setup-install_req"
+    #err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download\" -O ${path_ibmacs}/${fn_ibmacs}" "setup_ibmtpm" "setup-install_req"
+    wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMTPMTSS ..."
     tar $tar_gflag "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
