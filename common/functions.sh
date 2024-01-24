@@ -277,13 +277,13 @@ cfer () {
     if [ -f "$1" ]; then
         echo_notice "$2" "$3" "$4"
         err_conti_exec "sudo rm $1" "common" "functions_cfer"
-    elif [ -d "$1" ]; then
-        echo_notice "$2" "$3" "$4"
-        err_conti_exec "sudo rmdir $1" "common" "functions_cfer"
     elif [ -L "$1" ]; then
         echo_notice "$2" "$3" "$4"
         sudo unlink "$1"
         err_conti_exec "sudo rm $1" "common" "functions_cfer"
+    elif [ -d "$1" ]; then
+        echo_notice "$2" "$3" "$4"
+        err_conti_exec "sudo rmdir $1" "common" "functions_cfer"
     fi
 }
 if [ $verbose == 1 ]; then
