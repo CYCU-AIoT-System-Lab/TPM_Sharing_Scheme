@@ -209,13 +209,11 @@ fi
 # check_var is advised to use before this function
 clear_dir () {
     echo "Removing content in $1"
-    set +e
-    err_conti_exec "sudo rm -rf \"$1/\"*" "common" "functions_clear_dir"
-    err_conti_exec "sudo rm -rf \"$1/[^.]\"*" "common" "functions_clear_dir" # remove hidden files
+    err_conti_exec "sudo rm -rf $1/*" "common" "functions_clear_dir"
+    err_conti_exec "sudo rm -rf $1/[^.]*" "common" "functions_clear_dir" # remove hidden files
     if [ "$2" == "rmdir" ]; then
         err_conti_exec "sudo rmdir $1" "common" "functions_clear_dir"
     fi
-    set -e
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: clear_dir"
@@ -278,14 +276,14 @@ fi
 cfer () {
     if [ -f "$1" ]; then
         echo_notice "$2" "$3" "$4"
-        err_conti_exec "sudo rm \"$1\"" "common" "functions_cfer"
+        err_conti_exec "sudo rm $1" "common" "functions_cfer"
     elif [ -d "$1" ]; then
         echo_notice "$2" "$3" "$4"
-        err_conti_exec "sudo rmdir \"$1\"" "common" "functions_cfer"
+        err_conti_exec "sudo rmdir $1" "common" "functions_cfer"
     elif [ -L "$1" ]; then
         echo_notice "$2" "$3" "$4"
         sudo unlink "$1"
-        err_conti_exec "sudo rm \"$1\"" "common" "functions_cfer"
+        err_conti_exec "sudo rm $1" "common" "functions_cfer"
     fi
 }
 if [ $verbose == 1 ]; then
