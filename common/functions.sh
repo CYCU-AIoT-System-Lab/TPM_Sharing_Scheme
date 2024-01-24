@@ -83,9 +83,7 @@ fi
 #                 $2: message 1
 #                 $3: message 2
 err_conti_exec () {
-    set +e
     $1 || echo_warn "$2" "$3" "Warning: \"$1\" failed, but continue execution..."
-    set -e
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded and Activated function: err_conti_exec"
@@ -98,7 +96,6 @@ fi
 #                 $3: message 2
 #                 $4: exit code
 err_exit_exec () {
-    set -e
     $1 || echo_error "$2" "$3" "Error: \"$1\" failed, exit execution..." $4; exit $2
 }
 if [ $verbose == 1 ]; then
@@ -115,7 +112,6 @@ fi
 #                 $6: exit code
 err_retry_exec () {
     local retry_cnt=0
-    set +e
     until
         $1
     do
@@ -214,10 +210,10 @@ fi
 clear_dir () {
     echo "Removing content in $1"
     set +e
-    sudo rm -rf "$1/"*
-    sudo rm -rf "$1/[^.]"* # remove hidden files
+    err_conti_exec "sudo rm -rf \"$1/\"*" "common" "functions_clear_dir"
+    err_conti_exec "sudo rm -rf \"$1/[^.]\"*" "common" "functions_clear_dir" # remove hidden files
     if [ "$2" == "rmdir" ]; then
-        sudo rmdir $1
+        err_conti_exec "sudo rmdir $1" "common" "functions_clear_dir"
     fi
     set -e
 }
@@ -280,19 +276,17 @@ fi
 #                 $3: message2
 #                 $4: message3
 cfer () {
-    set +e
     if [ -f "$1" ]; then
         echo_notice "$2" "$3" "$4"
-        sudo rm "$1"
+        err_conti_exec "sudo rm \"$1\"" "common" "functions_cfer"
     elif [ -d "$1" ]; then
         echo_notice "$2" "$3" "$4"
-        sudo rmdir "$1"
+        err_conti_exec "sudo rmdir \"$1\"" "common" "functions_cfer"
     elif [ -L "$1" ]; then
         echo_notice "$2" "$3" "$4"
         sudo unlink "$1"
-        sudo rm "$1"
+        err_conti_exec "sudo rm \"$1\"" "common" "functions_cfer"
     fi
-    set -e
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: cfer"
