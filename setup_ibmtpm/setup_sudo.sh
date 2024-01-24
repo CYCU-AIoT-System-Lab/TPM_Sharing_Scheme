@@ -35,9 +35,9 @@ MariaDB_dir="${HOME}/MariaDB"
 # Only need to setup once (can re-run)
 install_req () {
     echo_notice "setup_ibmtpm" "setup-install_req" "Creating directories ..."
-    err_conti_exec "mkdir \"${path_ibmtss}\"" "setup_ibmtpm" "setup-install_req"
-    err_conti_exec "mkdir \"${path_ibmtpm}\"" "setup_ibmtpm" "setup-install_req"
-    err_conti_exec "mkdir \"${path_ibmacs}\"" "setup_ibmtpm" "setup-install_req"
+    err_conti_exec "mkdir ${path_ibmtss}" "setup_ibmtpm" "setup-install_req"
+    err_conti_exec "mkdir ${path_ibmtpm}" "setup_ibmtpm" "setup-install_req"
+    err_conti_exec "mkdir ${path_ibmacs}" "setup_ibmtpm" "setup-install_req"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMTPMTSS ..."
     err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download\" -O \"${path_ibmtss}/${fn_ibmtss}\"" "setup_ibmtpm" "setup-install_req"
@@ -377,7 +377,7 @@ set_acs_sql_setting () {
 active_ACS_Demo_Server () {
     if [ $SCmachineMode == 1 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on same machine ..."
-        err_conti_exec "mkdir \"${tpm_data_dir}\"" "setup_ibmtpm" "setup-active_ACS_Demo_Server"
+        err_conti_exec "mkdir ${tpm_data_dir}" "setup_ibmtpm" "setup-active_ACS_Demo_Server"
         export TPM_DATA_DIR="${tpm_data_dir}"
     elif [ $SCmachineMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on different machine ..."
