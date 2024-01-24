@@ -117,6 +117,7 @@ fi
 #                 $6: exit code
 err_retry_exec () {
     local retry_cnt=0
+    set +e
     until
         $1
     do
