@@ -344,7 +344,7 @@ generate_EK () {
     activate_TPM_client
 
     echo_notice "setup_ibmtpm" "setup-generate_EK" "Backing up NVChip ......"
-    cp "${path_NV}" "${path_NV}.bak"
+    err_retry_exec "cp ${path_NV} ${path_NV}.bak" 1 5 "setup_ibmtpm" "setup-generate_EK"
 
     echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating RSAEK and load into NV ......"
     ./createekcert -rsa 2048 -cakey $RSAEK_cert -capwd rrrr -v
