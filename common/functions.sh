@@ -118,7 +118,7 @@ err_retry_exec () {
         if [ $retry_cnt -eq $3 ]; then
             echo_error "$4" "$5" "Error: \"$1\" failed after $3 retries" $6
         fi
-        echo_warn "$4" "$5" "Warning: \"${1@Q}\" failed, retrying in $2 seconds..."
+        echo_warn "$4" "$5" "Warning: \"$1\" failed, retrying in $2 seconds..."
         sleep $2
     done
 }
