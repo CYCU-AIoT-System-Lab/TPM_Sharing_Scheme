@@ -35,9 +35,9 @@ MariaDB_dir="${HOME}/MariaDB"
 # Only need to setup once (can re-run)
 install_req () {
     echo_notice "setup_ibmtpm" "setup-install_req" "Creating directories ..."
-    mkdir "${path_ibmtss}"
-    mkdir "${path_ibmtpm}"
-    mkdir "${path_ibmacs}"
+    err_conti_exec "mkdir \"${path_ibmtss}\"" "setup_ibmtpm" "setup-install_req"
+    err_conti_exec "mkdir \"${path_ibmtpm}\"" "setup_ibmtpm" "setup-install_req"
+    err_conti_exec "mkdir \"${path_ibmacs}\"" "setup_ibmtpm" "setup-install_req"
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Downloading IBMTPMTSS ..."
     wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
@@ -208,7 +208,7 @@ setup_ibmacs_env () {
     ln -s "${path_ibmacs}/acs" "${base_dir}/ibmacs"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting html directory ..."
-    mkdir -p ${html_dir}
+    err_conti_exec "mkdir -p ${html_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env"
     chown root ${html_dir}
     chgrp root ${html_dir}
     chmod 777 ${html_dir}
@@ -377,7 +377,7 @@ set_acs_sql_setting () {
 active_ACS_Demo_Server () {
     if [ $SCmachineMode == 1 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on same machine ..."
-        mkdir "${tpm_data_dir}"
+        err_conti_exec "mkdir \"${tpm_data_dir}\"" "setup_ibmtpm" "setup-active_ACS_Demo_Server"
         export TPM_DATA_DIR="${tpm_data_dir}"
     elif [ $SCmachineMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Activating ACS Demo on different machine ..."

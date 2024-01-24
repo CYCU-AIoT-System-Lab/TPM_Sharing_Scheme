@@ -8,7 +8,7 @@ load_preset "./config.ini"
 
 build_cmake () {
     echo_notice "common" "setup" "Building ${BOLD}${GREEN}cmake${END}..."
-    sudo mkdir -p $cmake_dir
+    err_conti_exec "sudo mkdir -p $cmake_dir" "common" "setup_build_cmake"
     cd $cmake_dir
     sudo wget $wget_gflag "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
     sudo tar -zxf "cmake-${cmake_ver}.${cmake_build}.tar.gz"
@@ -21,7 +21,7 @@ build_cmake () {
 
 build_valgrind () {
     echo_notice "common" "setup" "Building ${BOLD}${GREEN}valgrind${END}..."
-    sudo mkdir -p $valgrind_dir
+    err_conti_exec "sudo mkdir -p $valgrind_dir" "common" "setup_build_valgrind"
     cd $valgrind_dir
     sudo wget $wget_gflag "https://sourceware.org/pub/valgrind/valgrind-${valgrind_ver}.tar.bz2"
     sudo tar xfj "valgrind-${valgrind_ver}.tar.bz2"
@@ -36,7 +36,7 @@ build_libssl () {
     libssl_build="openssl-1.1.1w.tar.gz"
     libssl_build_name="$(basename $libssl_build .tar.gz)"
     libssl_path_load_sh="/etc/profile.d/openssl.sh"
-    sudo mkdir $libssl_dir
+    err_conti_exec "sudo mkdir $libssl_dir" "common" "setup_build_libssl"
     cd $libssl_dir
     sudo wget "https://www.openssl.org/source/${libssl_build}"
     sudo tar xfz $libssl_build --directory $libssl_dir
@@ -86,7 +86,7 @@ install_req () {
 
 config_nvim () {
     echo_notice "common" "setup" "Configuring neovim..."
-    mkdir -p $nvim_dir
+    err_conti_exec "mkdir -p $nvim_dir" "common" "setup_config_nvim"
     wget $wget_gflag "$nvim_config_url" -O "${nvim_dir}/init.vim"
 }
 
@@ -105,7 +105,7 @@ update_src () {
 config_apport () {
     echo_notice "common" "setup" "Configuring apport..."
     ulimit -c unlimited
-    mkdir -p $apport_dir
+    err_conti_exec "mkdir -p $apport_dir" "common" "setup_config_apport"
     touch $apport_dir/settings
     echo -e "[main]\nunpackaged=true\n" > $apport_dir/settings
     rm -rf /var/crash/*
