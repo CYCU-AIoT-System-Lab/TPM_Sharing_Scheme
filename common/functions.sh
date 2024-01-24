@@ -84,9 +84,8 @@ fi
 #                 $3: message 2
 err_conti_exec () {
     set +e
-    $1
+    $1 || echo_warn "$2" "$3" "Warning: \"$1\" failed, but continue execution..."
     set -e
-    echo_warn "$2" "$3" "Warning: \"$1\" failed, but continue execution..."
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded and Activated function: err_conti_exec"
@@ -100,8 +99,7 @@ fi
 #                 $4: exit code
 err_exit_exec () {
     set -e
-    $1 || exit $2
-    echo_error "$2" "$3" "Error: \"$1\" failed, exit execution..." $4
+    $1 || echo_error "$2" "$3" "Error: \"$1\" failed, exit execution..." $4; exit $2
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded and Activated function: err_exit_exec"
