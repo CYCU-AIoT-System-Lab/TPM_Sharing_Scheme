@@ -493,7 +493,7 @@ open_all_logs () {
         newt "${acs_demo_verify_client_log_dir}" ${log4j_line_number}
     elif [ $1 == 2 ]; then
         lc1="source ${current_dir}/../common/functions.sh"
-        lc2="tmux"
+        lc2="sudo -u $user tmux"
         if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
             newGterm "ACS LOGS" "$bash_gflag" "$lc1; $lc2" 1
         else
@@ -504,7 +504,6 @@ open_all_logs () {
         }
         tssession=$user
         tmux -2 new-session -d -s $tssession
-        #tmux new-session -d -s $tssession
         tmux new-window -t $tssession:1 -n 'log4j'
         tmux split-window -h
         tmux split-window -h
@@ -535,7 +534,6 @@ open_all_logs () {
         tmux send-keys 'htop' Enter
         tmux select-window -t $tssession:1
         tmux -2 attach-session -t $tssession
-        #tmux attach-session -t $tssession
     else
         echo_warn "setup_ibmtpm" "setup-open_all_logs" "Invalid input"
         exit 1
