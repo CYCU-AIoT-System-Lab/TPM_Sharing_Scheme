@@ -70,6 +70,7 @@ install_req () {
     aptins "gcc"
     aptins "make"
     aptins "moreutils"
+    aptins "tmux"
     if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ]; then
         aptins "libtool"
         aptins "autoconf"
