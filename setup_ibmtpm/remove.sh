@@ -13,6 +13,7 @@ cfer "${base_dir}/ibmtss" "setup_ibmtpm" "remove" "Removing old ibmtss symbolic 
 cfer "${base_dir}/ibmtpm" "setup_ibmtpm" "remove" "Removing old ibmtpm symbolic link ..."
 cfer "${base_dir}/ibmacs" "setup_ibmtpm" "remove" "Removing old ibmacs symbolic link ..."
 sudo mysql -Bse "DROP DATABASE IF EXISTS $mysql_database;"
+sudo mysql -Bse "DROP DATABASE IF EXISTS machines;"
 echo_notice "setup_ibmtpm" "remove" "Clear done"
 
 clear_preset
