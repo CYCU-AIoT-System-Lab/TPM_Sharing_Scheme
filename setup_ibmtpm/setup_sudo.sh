@@ -207,7 +207,7 @@ setup_ibmacs_env () {
     export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
-    cfer "${base_dir}/ibmacs" "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
+    cfer "${sym_link_ibmacs}" "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
     err_conti_exec "ln -s ${path_ibmacs}/acs ${base_dir}/ibmacs" "setup_ibmtpm" "setup-setup_ibmacs_env"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting html directory ..."
