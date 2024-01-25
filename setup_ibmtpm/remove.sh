@@ -9,9 +9,9 @@ clear_dir "$tpm_data_dir"
 clear_dir "${base_dir}/ibmacs${ibmacs_ver}"
 clear_dir "${base_dir}/ibmtpm${ibmtpm_ver}"
 clear_dir "${base_dir}/ibmtss${ibmtss_ver}"
-cfer "${base_dir}/ibmtss" "setup_ibmtpm" "remove" "Removing old ibmtss symbolic link ..."
-cfer "${base_dir}/ibmtpm" "setup_ibmtpm" "remove" "Removing old ibmtpm symbolic link ..."
-cfer "${base_dir}/ibmacs" "setup_ibmtpm" "remove" "Removing old ibmacs symbolic link ..."
+#cfer "${base_dir}/ibmtss" "setup_ibmtpm" "remove" "Removing old ibmtss symbolic link ..." # Already removed 
+#cfer "${base_dir}/ibmtpm" "setup_ibmtpm" "remove" "Removing old ibmtpm symbolic link ..." # Already removed
+#cfer "${base_dir}/ibmacs" "setup_ibmtpm" "remove" "Removing old ibmacs symbolic link ..." # Already removed
 sudo mysql -Bse "DROP DATABASE IF EXISTS $mysql_database;"
 sudo mysql -Bse "DROP DATABASE IF EXISTS machines;"
 
