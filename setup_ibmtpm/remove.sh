@@ -4,7 +4,7 @@ source "../common/functions.sh"
 source "./function_ibmtpm.sh"
 load_preset "./config.ini"
 
-clear_dir "$html_dir/../"
+clear_dir "$(basename -- $html_dir)"
 clear_dir "$tpm_data_dir"
 clear_dir "${base_dir}/ibmacs${ibmacs_ver}"
 clear_dir "${base_dir}/ibmtpm${ibmtpm_ver}"
