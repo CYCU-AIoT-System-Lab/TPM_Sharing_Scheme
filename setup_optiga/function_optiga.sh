@@ -7,13 +7,19 @@ verbose=0 # 0: no verbose, 1: verbose
 # Usage: source "config.ini"
 # Input variable: $1: config.ini
 load_preset () {
-    #echo_notice "setup_optiga" "function_optiga" "Env var to config file..."
+    #if [ $verbose == 1 ]; then
+        #echo_notice "setup_optiga" "function_optiga" "Env var to config file..."
+    #fi
     #sed -i 's@${HOME}@'"$HOME"'@' "$1" # replace ${HOME} with $HOME
     
-    echo_notice "setup_optiga" "function_optiga" "Loading config file..."
+    if [ $verbose == 1 ]; then
+        echo_notice "setup_optiga" "function_optiga" "Loading config file..."
+    fi
     parse "$1" ""
 
-    echo_notice "setup_optiga" "function_optiga" "Checking var..."
+    if [ $verbose == 1 ]; then
+        echo_notice "setup_optiga" "function_optiga" "Checking var..."
+    fi
     check_var install_platform 1
     check_var optiga_url 1
 }
@@ -22,7 +28,9 @@ if [ $verbose == 1 ]; then
 fi
 
 clear_preset () {
-    echo_notice "setup_optiga" "function_optiga" "Clearing preset..."
+    if [ $verbose == 1 ]; then
+        echo_notice "setup_optiga" "function_optiga" "Clearing preset..."
+    fi
     unset install_platform
     unset optiga_url
 }

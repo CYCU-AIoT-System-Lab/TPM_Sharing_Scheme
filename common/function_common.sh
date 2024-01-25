@@ -8,13 +8,19 @@ verbose=0 # 0: no verbose, 1: verbose
 # Usage: source "config.ini"
 # Input variable: $1: config.ini
 load_preset () {
-    echo_notice "common" "function_common" "Env var to config file..."
+    if [ $verbose == 1 ]; then
+        echo_notice "common" "function_common" "Env var to config file..."
+    fi
     sed -i 's@${HOME}@'"$HOME"'@' "$1" # replace ${HOME} with $HOME
 
-    echo_notice "common" "function_common" "Loading config file..."
+    if [ $verbose == 1 ]; then
+        echo_notice "common" "function_common" "Loading config file..."
+    fi
     parse "$1" ""
 
-    echo_notice "common" "function_common" "Checking var..."
+    if [ $verbose == 1 ]; then
+        echo_notice "common" "function_common" "Checking var..."
+    fi
     check_var install_platform 1
     check_var cmake_ver 1
     check_var cmake_build 1
@@ -46,7 +52,9 @@ if [ $verbose == 1 ]; then
 fi
 
 clear_preset () {
-    echo_notice "common" "function_common" "Clearing preset..."
+    if [ $verbose == 1 ]; then
+        echo_notice "common" "function_common" "Clearing preset..."
+    fi
     unset install_platform
     unset cmake_ver
     unset cmake_build
