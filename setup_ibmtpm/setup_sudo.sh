@@ -470,24 +470,76 @@ print_log_path () {
 
 # Open all log files in new terminal tabs
 # Can be run multiple times
+# Usage: open_all_logs <mod_num>
+# Input $1: 1 - open in terminal, 2 - open in tmux
 open_all_logs () {
-    newt () {
+    if [ $1 == 1 ]; then
+        newt () {
+            lc1="source ${current_dir}/../common/functions.sh"
+            lc2="echo_notice \"setup_ibmtpm\" \"setup-open_all_logs\" \"tailling log file: $1\""
+            lc3="tail -f $1 -n $2"
+            if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+                newGterm "$(basename -- $1)" "$bash_gflag" "$lc1; $lc2; $lc3" 1
+            else
+                newLXterm "$(basename -- $1)" "$lc1; $lc2; $lc3" 1
+            fi
+        }
+        newt "${acs_demo_server_log_dir}" ${log4j_line_number}
+        newt "${acs_demo_client_log_dir}" ${log4j_line_number}
+        newt "${swtpm_bios_log_dir}" ${log4j_line_number}
+        newt "${acs_demo_verify_tpm2bios_log_dir}" ${log4j_line_number}
+        newt "${ima_sig_log_dir}" ${log4j_line_number}
+        newt "${acs_demo_verify_imasig_log_dir}" ${log4j_line_number}
+        newt "${acs_demo_verify_client_log_dir}" ${log4j_line_number}
+    elif [ $1 == 2 ]; then
         lc1="source ${current_dir}/../common/functions.sh"
-        lc2="echo_notice \"setup_ibmtpm\" \"setup-open_all_logs\" \"tailling log file: $1\""
-        lc3="tail -f $1 -n $2"
+        lc2="tmux"
         if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-            newGterm "$(basename -- $1)" "$bash_gflag" "$lc1; $lc2; $lc3" 1
+            newGterm "ACS LOGS" "$bash_gflag" "$lc1; $lc2" 1
         else
-            newLXterm "$(basename -- $1)" "$lc1; $lc2; $lc3" 1
+            newLXterm "ACS LOGS" "$lc1; $lc2" 1
         fi
-    }
-    newt "${acs_demo_server_log_dir}" ${log4j_line_number}
-    newt "${acs_demo_client_log_dir}" ${log4j_line_number}
-    newt "${swtpm_bios_log_dir}" ${log4j_line_number}
-    newt "${acs_demo_verify_tpm2bios_log_dir}" ${log4j_line_number}
-    newt "${ima_sig_log_dir}" ${log4j_line_number}
-    newt "${acs_demo_verify_imasig_log_dir}" ${log4j_line_number}
-    newt "${acs_demo_verify_client_log_dir}" ${log4j_line_number}
+        settitle () {
+            printf '\033]2;%s\033\\' "$1"
+        }
+        tssession=$user
+        tmux -2 new-session -d -s $tssession
+        #tmux new-session -d -s $tssession
+        tmux new-window -t $tssession:1 -n 'log4j'
+        tmux split-window -h
+        tmux split-window -h
+        tmux select-layout even-horizontal
+        tmux select-pane -t 2
+        tmux split-window -v
+        tmux select-pane -t 1
+        tmux split-window -v
+        tmux select-pane -t 0
+        tmux split-window -v
+        tmux select-pane -t 0
+        settitle "ACS Demo Server"
+        tmux send-keys 'htop' Enter
+        tmux select-pane -t 1
+        settitle "ACS Demo Client"
+        tmux send-keys 'htop' Enter
+        tmux select-pane -t 2
+        settitle "SWTPM BIOS"
+        tmux send-keys 'htop' Enter
+        tmux select-pane -t 3
+        settitle "ACS Demo verify TPM2BIOS"
+        tmux send-keys 'htop' Enter
+        tmux select-pane -t 4
+        settitle "IMASIG"
+        tmux send-keys 'htop' Enter
+        tmux select-pane -t 5
+        settitle "ACS Demo verify IMASIG"
+        tmux send-keys 'htop' Enter
+        tmux select-window -t $tssession:1
+        tmux -2 attach-session -t $tssession
+        #tmux attach-session -t $tssession
+    else
+        echo_warn "setup_ibmtpm" "setup-open_all_logs" "Invalid input"
+        exit 1
+    fi
 }
 
 echo_notice "setup_ibmtpm" "setup" "Running setup script ..."
@@ -510,7 +562,7 @@ if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 if [ $print_log_path         == 1 ]; then print_log_path;              fi
-if [ $open_all_logs          == 1 ]; then open_all_logs;               fi
+if [ $open_all_logs          == 1 ]; then open_all_logs 2;             fi
 
 clear_preset
 
