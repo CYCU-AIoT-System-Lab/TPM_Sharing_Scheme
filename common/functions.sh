@@ -233,7 +233,7 @@ fi
 # $4: finish action (ex: 1: sleep infinitly, 2: exec bash)
 newGterm () {
     if [ $4 == 1 ]; then
-        gnome-terminal -t "$1" --active -- bash $2 -c "$3; echo -e \"\nctrl+c to exit\n\"; sleep infinity"
+        gnome-terminal -t "$1" --active -- bash $2 -c "$3; echo -e \"\nprogram terminated\nctrl+c to exit\n\"; sleep infinity"
     elif [ $4 == 2 ]; then
         gnome-terminal -t "$1" --active -- bash $2 -c "$3; exec bash"
     else
@@ -251,7 +251,7 @@ fi
 # $3: finish action (ex: 1: sleep infinitly, 2: exec bash)
 newLXterm () {
     if [ $3 == 1 ]; then
-        lxterminal -t "$1" -e "$2; echo -e \"\nctrl+c to exit\n\"; sleep infinity" &
+        lxterminal -t "$1" -e "$2; echo -e \"\nprogram terminated\nctrl+c to exit\n\"; sleep infinity" &
     elif [ $3 == 2 ]; then
         lxterminal -t "$1" -e "$2; exec bash" &
     else
