@@ -346,6 +346,7 @@ generate_EK () {
     echo_notice "setup_ibmtpm" "setup-generate_EK" "Backing up NVChip ......"
     err_retry_exec "cp ${path_NV} ${path_NV}.bak" 1 5 "setup_ibmtpm" "setup-generate_EK"
 
+    cd "${sym_link_ibmtss}/utils/"
     echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating RSAEK and load into NV ......"
     ./createekcert -rsa 2048 -cakey $RSAEK_cert -capwd rrrr -v
 
@@ -561,7 +562,7 @@ if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 if [ $print_log_path         == 1 ]; then print_log_path;              fi
-if [ $open_all_logs          == 1 ]; then open_all_logs 1;             fi
+if [ $open_all_logs          == 1 ]; then open_all_logs 2;             fi
 
 clear_preset
 
