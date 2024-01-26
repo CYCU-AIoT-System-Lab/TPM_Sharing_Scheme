@@ -81,7 +81,6 @@ setup_ibmtpmtss_env () {
     export TPM_COMMAND_PORT="${tpm_command_port}"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
-    cfer "${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Removing old symbolic link ..."
     err_conti_exec "ln -s ${path_ibmtss} ${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
@@ -132,7 +131,6 @@ compile_ibmtpmtss () {
 # Only need to setup once (can re-run)
 setup_ibmswtpm_env () {
     echo_notice "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
-    cfer "${base_dir}/ibmtpm" "setup_ibmtpm" "setup-setup_ibmswtpm_env" "Removing old symbolic link ..."
     err_conti_exec "ln -s ${path_ibmtpm} ${base_dir}/ibmtpm" "setup_ibmtpm" "setup-setup_ibmswtpm_env"
 }
 
@@ -191,11 +189,6 @@ setup_ibmacs_env () {
 
         echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing \"FALSE\" with \"false\" in IBMACS/acs/commonjson.c"
         sed -i 's/FALSE/false/g' "${path_ibmacs}/acs/commonjson.c"
-
-        #echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing all mysql/mysql.h with mariadb/mysql.h in all files"
-        #for file in $(grep -rl "mysql/mysql.h" "${path_ibmacs}/acs/"); do
-        #    sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
-        #done
     else
         echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
     fi
@@ -215,7 +208,6 @@ setup_ibmacs_env () {
     export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
-    cfer "${sym_link_ibmacs}" "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
     err_conti_exec "ln -s ${path_ibmacs}/acs ${base_dir}/ibmacs" "setup_ibmtpm" "setup-setup_ibmacs_env"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting html directory ..."
@@ -225,7 +217,6 @@ setup_ibmacs_env () {
     chmod 777 ${html_dir}
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
-    cfer "${c_json_lib_link_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env" "Removing old symbolic link ..."
     err_conti_exec "ln -s ${c_json_lib_dir} ${c_json_lib_link_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env"
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting include path ..."
