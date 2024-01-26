@@ -5,7 +5,7 @@ source "./function_optiga.sh"
 load_preset "./config.ini"
 
 echo_notice "setup_optiga" "setup" "Cloning optiga-tpm-explorer..."
-err_exit_exec "git clone \"$optiga_url\"" 1 5 "setup_optiga" "setup" 1
+err_exit_exec "git clone $optiga_url" 1 5 "setup_optiga" "setup" 1
 
 echo_notice "setup_optiga" "setup" "Cancelling auto reboot..."
 cd ./optiga-tpm-explorer
