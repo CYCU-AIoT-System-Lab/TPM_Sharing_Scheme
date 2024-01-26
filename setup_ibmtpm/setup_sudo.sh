@@ -19,7 +19,8 @@ path_ibmtpm="${sym_link_ibmtpm}${ibmtpm_ver}"
 path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
 path_NV="${sym_link_ibmtpm}/src/NVChip"
 tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
-acs_demo_url="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
+acs_demo_url_A="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
+acs_demo_url_B="${acs_demo_server_ip}/acs"
 acs_demo_server_log_dir="${sym_link_ibmacs}/serverenroll.log4j"
 acs_demo_client_log_dir="${sym_link_ibmacs}/clientenroll.log4j"
 swtpm_bios_log_dir="${sym_link_ibmacs}/tpm2bios.log"
@@ -280,10 +281,10 @@ open_demo_webpage () {
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-        lc3="sudo -u $user bash -c \"firefox --new-tab -url ${acs_demo_url} --new-tab -url ${repo_url} &\""
+        lc3="sudo -u $user bash -c \"firefox --new-tab -url ${acs_demo_url_A} --new-tab -url ${repo_url} &\""
         newGterm "FireFox Browser" "$bash_gflag" "$lc1; $lc2; $lc3" 1
     else
-        lc3="sudo -u $user bash -c \"chromium-browser --new-window -url ${acs_demo_url} --new-window -url ${repo_url} &\""
+        lc3="sudo -u $user bash -c \"chromium-browser --new-window ${acs_demo_url_B} ${repo_url} &\""
         newLXterm "Chromium Browser" "$lc1; $lc2; $lc3" 1
     fi
 }
