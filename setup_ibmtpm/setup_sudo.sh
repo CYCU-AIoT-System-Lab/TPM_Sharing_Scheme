@@ -161,8 +161,9 @@ setup_ibmacs_env () {
             aptins "php-dev"
             aptins "php-mysql"
             aptins "mariadb-server"
-            aptins "libmariadb-dev"
+            #aptins "libmariadb-dev"
             aptins "libmariadb-dev-compat"
+            #aptins "libmariadb-dev-compat:armhf"
         elif [ $install_platform -eq 4 ]; then
             aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
         else
@@ -185,6 +186,11 @@ setup_ibmacs_env () {
 
         echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing \"FALSE\" with \"false\" in IBMACS/acs/commonjson.c"
         sed -i 's/FALSE/false/g' "${path_ibmacs}/acs/commonjson.c"
+
+        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing all mysql/mysql.h with mariadb/mysql.h in all files"
+        for file in $(grep -rl "mysql/mysql.h" "${path_ibmacs}/acs/"); do
+            sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
+        done
     else
         echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
     fi
@@ -195,7 +201,7 @@ setup_ibmacs_env () {
         cd "${path_ibmacs}/acs/"
         mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
         mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_server_ip}' IDENTIFIED BY '${mysql_password}';"
-        mysql -Bse "GRANT ALL PRIVILEGES ON ${mysql_database}.* TO '${mysql_user}'@'${acs_demo_server_ip}';"
+        mysql -Bse "GRANT ALL ON ${mysql_database}.* TO '${mysql_user}'@'${acs_demo_server_ip}';"
         mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
     fi
 
