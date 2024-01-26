@@ -33,5 +33,5 @@ fi
 echo_notice "setup_optiga" "setup" "Running optiga-tpm-explorer installation script..."
 bash ./installation_script.sh
 
-echo_notice "setup_optiga" "setup" "Reboot to finish installation"
+echo_notice "setup_optiga" "setup" "${RED}${BOLD}Reboot to finish installation${END}"
 clear_preset
