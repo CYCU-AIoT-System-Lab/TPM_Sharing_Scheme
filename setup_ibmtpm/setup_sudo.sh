@@ -563,7 +563,7 @@ if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 if [ $print_log_path         == 1 ]; then print_log_path;              fi
-if [ $open_all_logs          == 1 ]; then open_all_logs 2;             fi
+if [ $open_all_logs          == 1 ]; then open_all_logs 1;             fi
 
 clear_preset
 
