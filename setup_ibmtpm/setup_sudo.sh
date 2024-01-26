@@ -153,10 +153,9 @@ setup_ibmacs_env () {
     if [ $acsMode == 1 ]; then
         # for Server
         if [ $install_platform -eq 1 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
         elif [ $install_platform -eq 2 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat libssl-dev"
-            # aptins "libmariadb-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat"
             #aptins "libjson-c-dev apache2 php php-dev php-mysql libssl-dev"
         elif [ $install_platform -eq 3 ]; then
             aptins "libjson-c-dev"
@@ -168,13 +167,13 @@ setup_ibmacs_env () {
             aptins "libmariadb-dev"
             aptins "libmariadb-dev-compat"
         elif [ $install_platform -eq 4 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev libssl-dev"
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
         else
             echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
         fi
     elif [ $acsMode == 2 ]; then
         # for Client
-        aptins "libjson-c-dev libssl-dev"
+        aptins "libjson-c-dev"
     else 
         echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid acsMode"
         exit 1
