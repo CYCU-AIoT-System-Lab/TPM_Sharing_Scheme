@@ -62,7 +62,7 @@ load_preset () {
     check_var activate_TPM_server $exit_code
     check_var activate_TPM_client $exit_code
     check_var generate_EK $exit_code
-    check_var retrieve_hardware_NV $exit_code
+    check_var retrieve_hardware_EK $exit_code
     check_var set_acs_sql_setting $exit_code
     check_var active_ACS_Demo_Server $exit_code
     check_var active_ACS_Demo_Client $exit_code
@@ -122,7 +122,7 @@ clear_preset () {
     unset activate_TPM_server
     unset activate_TPM_client
     unset generate_EK
-    unset retrieve_hardware_NV
+    unset retrieve_hardware_EK
     unset set_acs_sql_setting
     unset active_ACS_Demo_Server
     unset active_ACS_Demo_Client
