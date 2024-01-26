@@ -355,8 +355,11 @@ generate_EK () {
 
 # Retrieve hardware NVChip
 # Only need to setup once (can re-run)
-retrieve_hardware_NV () {
-    echo_warn "setup_ibmtpm" "setup-retrieve_hardware_NV" "Function not implemented"
+retrieve_hardware_EK () {
+    echo_warn "setup_ibmtpm" "setup-retrieve_hardware_EK" "Retrieve hardware EK from NVChip ......"
+    cd "${sym_link_ibmtss}/utils/"
+    nvread -ha 01c00002 | awk 'NR==1 {next} {print}' | xxd -r -ps | base64 | sed -e '1i -----BEGIN CERTIFICATE-----' -e '$a -----END CERTIFICATE-----' > VMW_EK_CACERT.pem
+    nvread -ha 01c0000a | awk 'NR==1 {next} {print}' | xxd -r -ps | base64 | sed -e '1i -----BEGIN CERTIFICATE-----' -e '$a -----END CERTIFICATE-----' > VMW_EKECC_CACERT.pem
 }
 
 # Set ACS MYSQL setting
@@ -551,7 +554,7 @@ if [ $generate_CA            == 1 ]; then generate_CA;                 fi
 if [ $activate_TPM_server    == 1 ]; then activate_TPM_server;         fi
 if [ $activate_TPM_client    == 1 ]; then activate_TPM_client;         fi
 if [ $generate_EK            == 1 ]; then generate_EK;                 fi
-if [ $retrieve_hardware_NV   == 1 ]; then retrieve_hardware_NV;        fi
+if [ $retrieve_hardware_EK   == 1 ]; then retrieve_hardware_EK;        fi
 if [ $set_acs_sql_setting    == 1 ]; then set_acs_sql_setting;         fi
 if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
