@@ -492,6 +492,7 @@ open_all_logs () {
         newt "${acs_demo_verify_imasig_log_dir}" ${log4j_line_number}
         newt "${acs_demo_verify_client_log_dir}" ${log4j_line_number}
     elif [ $1 == 2 ]; then
+        tmux kill-server
         lc1="source ${current_dir}/../common/functions.sh"
         lc2="sudo -u $user tmux"
         if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
@@ -503,7 +504,7 @@ open_all_logs () {
             printf '\033]2;%s\033\\' "$1"
         }
         tssession=$user
-        tmux -2 new-session -d -s $tssession
+        err_conti_exec "tmux -2 new-session -d -s $tssession" "setup_ibmtpm" "setup-open_all_logs"
         tmux new-window -t $tssession:1 -n 'log4j'
         tmux split-window -h
         tmux split-window -h
@@ -560,7 +561,7 @@ if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
 if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
 if [ $print_log_path         == 1 ]; then print_log_path;              fi
-if [ $open_all_logs          == 1 ]; then open_all_logs 2;             fi
+if [ $open_all_logs          == 1 ]; then open_all_logs 1;             fi
 
 clear_preset
 
