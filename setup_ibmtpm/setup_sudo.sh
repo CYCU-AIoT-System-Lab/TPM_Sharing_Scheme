@@ -347,10 +347,10 @@ generate_EK () {
 
     cd "${sym_link_ibmtss}/utils/"
     echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating RSAEK and load into NV ......"
-    ./createekcert -rsa 2048 -cakey $RSAEK_cert -capwd rrrr -vv
+    ./createekcert -rsa 2048 -cakey cakey.pem -capwd rrrr -vv
 
     echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating ECCEK and load into NV ......"
-    ./createekcert -ecc nistp256 -cakey $ECCEK_cert -capwd rrrr -caalg ec -vv
+    ./createekcert -ecc nistp256 -cakey cakeyecc.pem -capwd rrrr -caalg ec -vv
 }
 
 # Retrieve hardware NVChip

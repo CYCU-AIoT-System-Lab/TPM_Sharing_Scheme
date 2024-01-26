@@ -25,8 +25,6 @@ load_preset () {
     check_var c_json_lib_dir $exit_code
     check_var c_json_lib_link_dir $exit_code
     check_var tpm_data_dir $exit_code
-    check_var RSAEK_cert $exit_code
-    check_var ECCEK_cert $exit_code
     check_var repo_url $exit_code
     check_var acs_demo_server_ip $exit_code
     check_var acs_demo_server_port $exit_code
@@ -87,8 +85,6 @@ clear_preset () {
     unset c_json_lib_dir
     unset c_json_lib_link_dir
     unset tpm_data_dir
-    unset RSAEK_cert
-    unset ECCEK_cert
     unset repo_url
     unset acs_demo_server_ip
     unset acs_demo_server_port
