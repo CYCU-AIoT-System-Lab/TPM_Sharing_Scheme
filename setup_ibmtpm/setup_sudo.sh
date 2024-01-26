@@ -154,10 +154,7 @@ setup_ibmacs_env () {
         # for Server
         if [ $install_platform -eq 1 ]; then
             aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
-        elif [ $install_platform -eq 2 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mariadb-server libmariadb-dev-compat"
-            #aptins "libjson-c-dev apache2 php php-dev php-mysql libssl-dev"
-        elif [ $install_platform -eq 3 ]; then
+        elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
             aptins "libjson-c-dev"
             aptins "apache2"
             aptins "php"
