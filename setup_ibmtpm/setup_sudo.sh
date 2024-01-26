@@ -194,7 +194,7 @@ setup_ibmacs_env () {
     fi
 
     if [ $acsMode == 1 ]; then
-        # https://stackoverflow.com/questions/24270733/automate-mysql-secure-installation-with-echo-command-via-a-shell-script
+        # https://stackoverflow.com/questions/24270733/automate-mysql-secure-installation-with-echo-command-vvia-a-shell-script
         echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Setting database ..."
         cd "${path_ibmacs}/acs/"
         mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
@@ -349,10 +349,10 @@ generate_EK () {
 
     cd "${sym_link_ibmtss}/utils/"
     echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating RSAEK and load into NV ......"
-    ./createekcert -rsa 2048 -cakey $RSAEK_cert -capwd rrrr -v
+    ./createekcert -rsa 2048 -cakey $RSAEK_cert -capwd rrrr -vv
 
     echo_notice "setup_ibmtpm" "setup-generate_EK" "Generating ECCEK and load into NV ......"
-    ./createekcert -ecc nistp256 -cakey $ECCEK_cert -capwd rrrr -caalg ec -v
+    ./createekcert -ecc nistp256 -cakey $ECCEK_cert -capwd rrrr -caalg ec -vv
 }
 
 # Retrieve hardware NVChip
@@ -402,7 +402,7 @@ active_ACS_Demo_Server () {
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-active_ACS_Demo_Server\" \"Activating ACS Demo ...\""
     lc3="export ACS_PORT=${acs_port}"
-    lc4="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
+    lc4="log_date_time \"./server -vv -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         newGterm "ACS SERVER" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
     else
@@ -416,10 +416,10 @@ active_ACS_Demo_Client () {
     cd "${path_ibmacs}/acs"
     if [ $acsClientMode == 1 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on local machine ..."
-        log_date_time "./clientenroll -alg rsa -v -ho ${acs_demo_server_ip} -co akcert.pem" "$log4j_time_format" "${acs_demo_client_log_dir}" "default"
+        log_date_time "./clientenroll -alg rsa -vv -ho ${acs_demo_server_ip} -co akcert.pem" "$log4j_time_format" "${acs_demo_client_log_dir}" "default"
     elif [ $acsClientMode == 2 ]; then
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Activating ACS Demo on remote machine ..."
-        log_date_time "./clientenroll -alg ec -v -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem" "$log4j_time_format" "${acs_demo_client_log_dir}" "default"
+        log_date_time "./clientenroll -alg ec -vv -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem" "$log4j_time_format" "${acs_demo_client_log_dir}" "default"
     else 
         echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Invalid acsClientMode"
         exit 1
@@ -437,17 +437,17 @@ active_ACS_Demo_verify () {
         # for Software TPM
         cd "${sym_link_ibmacs}"
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
-        log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
+        log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -vv" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
 
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking IMASIG.LOG ..."
-        log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
+        log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -vv" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
 
         if [ $acsClientMode == 1 ]; then
             # for Local
-            log_date_time "${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
+            log_date_time "${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
         elif [ $acsClientMode == 2 ]; then
             # for Remote
-            log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -v -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
+            log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
         else 
             echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Invalid acsClientMode"
             exit 1
