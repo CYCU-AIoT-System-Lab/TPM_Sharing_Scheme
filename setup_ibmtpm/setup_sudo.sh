@@ -394,7 +394,6 @@ active_ACS_Demo_Server () {
     echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
     sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
-    export ACS_PORT="${acs_port}"
 
     set_acs_sql_setting
 
@@ -402,11 +401,12 @@ active_ACS_Demo_Server () {
     cd ${path_ibmacs}/acs
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-active_ACS_Demo_Server\" \"Activating ACS Demo ...\""
-    lc3="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
+    lc3="export ACS_PORT=${acs_port}"
+    lc4="log_date_time \"./server -v -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-        newGterm "ACS SERVER" "$bash_gflag" "$lc1; $lc2; $lc3" 1
+        newGterm "ACS SERVER" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
     else
-        newLXterm "ACS SERVER" "$lc1; $lc2; $lc3" 1
+        newLXterm "ACS SERVER" "$lc1; $lc2; $lc3; $lc4" 1
     fi
 }
 
