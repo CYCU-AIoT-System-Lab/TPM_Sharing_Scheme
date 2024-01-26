@@ -28,7 +28,7 @@ acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmacs}/b.log4j"
 ima_sig_log_dir="${sym_link_ibmacs}/imasig.log"
 acs_demo_verify_imasig_log_dir="${sym_link_ibmacs}/i.log4j"
 acs_demo_verify_client_log_dir="${sym_link_ibmacs}/client.log4j"
-MariaDB_dir="${HOME}/MariaDB"
+#MariaDB_dir="${HOME}/MariaDB"
 
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
@@ -83,6 +83,10 @@ setup_ibmtpmtss_env () {
     echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
     cfer "${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Removing old symbolic link ..."
     err_conti_exec "ln -s ${path_ibmtss} ${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env"
+
+    echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
+    cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
+    sed -i "s/\/home\/kgold\/tss2/\/${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
 }
 
 # Compile ibmtss
@@ -390,10 +394,6 @@ active_ACS_Demo_Server () {
         echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid SCmachineMode"
         exit 1
     fi
-
-    echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
-    cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
-    sed -i "s/\/home\/kgold\/tss2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
 
     set_acs_sql_setting
 
