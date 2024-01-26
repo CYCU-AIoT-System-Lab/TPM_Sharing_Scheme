@@ -185,10 +185,10 @@ setup_ibmacs_env () {
         echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing \"FALSE\" with \"false\" in IBMACS/acs/commonjson.c"
         sed -i 's/FALSE/false/g' "${path_ibmacs}/acs/commonjson.c"
 
-        echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing all mysql/mysql.h with mariadb/mysql.h in all files"
-        for file in $(grep -rl "mysql/mysql.h" "${path_ibmacs}/acs/"); do
-            sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
-        done
+        #echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Replacing all mysql/mysql.h with mariadb/mysql.h in all files"
+        #for file in $(grep -rl "mysql/mysql.h" "${path_ibmacs}/acs/"); do
+        #    sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
+        #done
     else
         echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
     fi
@@ -437,10 +437,10 @@ active_ACS_Demo_verify () {
         # for Software TPM
         cd "${sym_link_ibmacs}"
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
-        log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -vv" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
+        log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
 
         echo_notice "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Checking IMASIG.LOG ..."
-        log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -vv" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
+        log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
 
         if [ $acsClientMode == 1 ]; then
             # for Local
