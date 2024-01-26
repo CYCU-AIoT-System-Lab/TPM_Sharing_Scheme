@@ -86,6 +86,9 @@ setup_ibmtpmtss_env () {
 
     echo_notice "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
+    # 2.0.1
+    # sed -i "s/\/home\/kgold\/tss2/\/${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
+    # 1.6.0
     sed -i "s/\/gsa\/yktgsa\/home\/k\/g\/kgold\/tpm2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
 }
 
