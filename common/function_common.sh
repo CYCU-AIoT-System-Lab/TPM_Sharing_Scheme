@@ -4,22 +4,25 @@
 
 verbose=0 # 0: no verbose, 1: verbose
 
+dirname="common"
+filename="function_common"
+
 # Function: include env to config file, load config, var check
 # Usage: source "config.ini"
 # Input variable: $1: config.ini
 load_preset () {
     if [ $verbose == 1 ]; then
-        echo_notice "common" "function_common" "Env var to config file..."
+        echo_notice "${dirname}" "${filename}" "Env var to config file..."
     fi
     sed -i 's@${HOME}@'"$HOME"'@' "$1" # replace ${HOME} with $HOME
 
     if [ $verbose == 1 ]; then
-        echo_notice "common" "function_common" "Loading config file..."
+        echo_notice "${dirname}" "${filename}" "Loading config file..."
     fi
     parse "$1" ""
 
     if [ $verbose == 1 ]; then
-        echo_notice "common" "function_common" "Checking var..."
+        echo_notice "${dirname}" "${filename}" "Checking var..."
     fi
     check_var install_platform 1
     check_var cmake_ver 1
@@ -48,12 +51,12 @@ load_preset () {
     check_var job_enable_pi_spi 1
 }
 if [ $verbose == 1 ]; then
-    echo_notice "common" "function_common" "Loaded function: load_preset"
+    echo_notice "${dirname}" "${filename}" "Loaded function: load_preset"
 fi
 
 clear_preset () {
     if [ $verbose == 1 ]; then
-        echo_notice "common" "function_common" "Clearing preset..."
+        echo_notice "${dirname}" "${filename}" "Clearing preset..."
     fi
     unset install_platform
     unset cmake_ver
@@ -82,5 +85,5 @@ clear_preset () {
     unset job_enable_pi_spi
 }
 if [ $verbose == 1 ]; then
-    echo_notice "common" "function_common" "Loaded function: clear_preset"
+    echo_notice "${dirname}" "${filename}" "Loaded function: clear_preset"
 fi

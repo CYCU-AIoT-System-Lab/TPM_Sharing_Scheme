@@ -5,18 +5,21 @@
 verbose=0 # 0: no verbose, 1: verbose
 exit_code=1
 
+dirname="setup_ibmtpm"
+filename="function_ibmtpm"
+
 load_preset () {
     #if [ $verbose == 1 ]; then
-    #    echo_notice "setup_ibmtpm" "function_common" "Env var to config file..."
+    #    echo_notice "${dirname}" "${filename}" "Env var to config file..."
     #fi
 
     if [ $verbose == 1 ]; then
-        echo_notice "setup_ibmtpm" "function_common" "Loading config file..."
+        echo_notice "${dirname}" "${filename}" "Loading config file..."
     fi
     parse "$1" ""
 
     if [ $verbose == 1 ]; then
-        echo_notice "setup_ibmtpm" "function_common" "Checking var..."
+        echo_notice "${dirname}" "${filename}" "Checking var..."
     fi
     check_var install_platform $exit_code
     check_var user $exit_code

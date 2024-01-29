@@ -87,7 +87,7 @@ install_req () {
         # for Client
         aptins "libjson-c-dev"
     else 
-        echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid acsMode"
+        echo_warn "${dirname}" "${filename}-setup_ibmacs_env" "Invalid acsMode"
         exit 1
     fi
 }
@@ -105,7 +105,7 @@ setup_ibmtpmtss_env () {
         export TPM_INTERFACE_TYPE=socsim
     else 
         echo -e "${BOLD}${RED}Invalid TPMMode${NC}"
-        echo_warn "setup_ibmtpm" "setup-setup_ibmtpmtss_env" "Invalid TPMMode"
+        echo_warn "${dirname}" "${filename}-setup_ibmtpmtss_env" "Invalid TPMMode"
         exit 1
     fi
     export TPM_COMMAND_PORT="${tpm_command_port}"
@@ -136,7 +136,7 @@ compile_ibmtpmtss () {
         cd "${path_ibmtss}/utils12/"
         make $make_gflag -f makefiletpmc clean
     else 
-        echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
+        echo_warn "${dirname}" "${filename}-compile_ibmtpmtss" "Invalid verMode"
         exit 1
     fi
 
@@ -152,7 +152,7 @@ compile_ibmtpmtss () {
         cd "${path_ibmtss}/utils12/"
         make $make_gflag -f makefiletpmc -j$(nproc)
     else 
-        echo_warn "setup_ibmtpm" "setup-compile_ibmtpmtss" "Invalid verMode"
+        echo_warn "${dirname}" "${filename}-compile_ibmtpmtss" "Invalid verMode"
         exit 1
     fi
 }
@@ -235,7 +235,7 @@ setup_ibmacs_env () {
         export CPATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
         export LIBRARY_PATH="${path_ibmtss}/utils:${path_ibmtss}/utils12"
     else 
-        echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid verMode"
+        echo_warn "${dirname}" "${filename}-setup_ibmacs_env" "Invalid verMode"
         exit 1
     fi
 }
@@ -267,11 +267,11 @@ compile_ibmacs () {
             make $make_gflag -f makefiletpmc clean
             make $make_gflag -f makefiletpmc -j$(nproc)
         else 
-            echo_warn "setup_ibmtpm" "setup-compile_ibmacs" "Invalid acsMode"
+            echo_warn "${dirname}" "${filename}-compile_ibmacs" "Invalid acsMode"
             exit 1
         fi
     else 
-        echo_warn "setup_ibmtpm" "setup-compile_ibmacs" "Invalid verMode"
+        echo_warn "${dirname}" "${filename}-compile_ibmacs" "Invalid verMode"
         exit 1
     fi
 }
@@ -298,8 +298,8 @@ open_demo_webpage () {
 # Generate CA certificate and key
 # Only need to setup once (can re-run)
 generate_CA () {
-    echo_warn "setup_ibmtpm" "setup-generate_CA" "Function not implemented"
-    echo_warn "setup_ibmtpm" "setup-generate_CA" "Refer to ${sym_link_ibmacs}/README.txt line 171 for steps."
+    echo_warn "${dirname}" "${filename}-generate_CA" "Function not implemented"
+    echo_warn "${dirname}" "${filename}-generate_CA" "Refer to ${sym_link_ibmacs}/README.txt line 171 for steps."
     echo_notice "${dirname}" "${filename}-generate_CA" "Generated CAs in ${sym_link_ibmtss}/utils ......"
     ls "${sym_link_ibmtss}/utils/"*.pem
     echo_notice "${dirname}" "${filename}-generate_CA" "Generated CAs in ${sym_link_ibmacs} ......"
@@ -378,11 +378,11 @@ set_acs_sql_setting () {
     export ACS_SQL_PASSWORD="${mysql_password}"
 
     if [ $force_acs_sql_setting == 1 ]; then
-        echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Forcing ACS MySQL Setting ..."
+        echo_warn "${dirname}" "${filename}-set_acs_sql_setting" "Forcing ACS MySQL Setting ..."
         cp "${html_dir}/dbconnect.php" "${html_dir}/dbconnect.php.bak"
         sed -i 's@($acs_sql_host, $acs_sql_userid, $acs_sql_password, $acs_sql_database)@'"(\"${acs_demo_server_ip}\", \"${mysql_user}\", \"${mysql_password}\", \"${mysql_database}\")"'@' "${html_dir}/dbconnect.php"
     else
-        echo_warn "setup_ibmtpm" "setup-set_acs_sql_setting" "Not Forcing ACS MySQL Setting ..."
+        echo_warn "${dirname}" "${filename}-set_acs_sql_setting" "Not Forcing ACS MySQL Setting ..."
     fi
 }
 
@@ -396,7 +396,7 @@ active_ACS_Demo_Server () {
     elif [ $SCmachineMode == 2 ]; then
         echo_notice "${dirname}" "${filename}-active_ACS_Demo_Server" "Activating ACS Demo on different machine ..."
     else 
-        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Server" "Invalid SCmachineMode"
+        echo_warn "${dirname}" "${filename}-active_ACS_Demo_Server" "Invalid SCmachineMode"
         exit 1
     fi
 
@@ -426,7 +426,7 @@ active_ACS_Demo_Client () {
         echo_notice "${dirname}" "${filename}-active_ACS_Demo_Client" "Activating ACS Demo on remote machine ..."
         log_date_time "./clientenroll -alg ec -vv -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem" "$log4j_time_format" "${acs_demo_client_log_dir}" "default"
     else 
-        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_Client" "Invalid acsClientMode"
+        echo_warn "${dirname}" "${filename}-active_ACS_Demo_Client" "Invalid acsClientMode"
         exit 1
     fi
 }
@@ -454,11 +454,11 @@ active_ACS_Demo_verify () {
             # for Remote
             log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
         else 
-            echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Invalid acsClientMode"
+            echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid acsClientMode"
             exit 1
         fi
     else 
-        echo_warn "setup_ibmtpm" "setup-active_ACS_Demo_verify" "Invalid TPMMode"
+        echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid TPMMode"
         exit 1
     fi
 }
@@ -543,7 +543,7 @@ open_all_logs () {
         tmux select-window -t $tssession:1
         tmux -2 attach-session -t $tssession
     else
-        echo_warn "setup_ibmtpm" "setup-open_all_logs" "Invalid input"
+        echo_warn "${dirname}" "${filename}-open_all_logs" "Invalid input"
         exit 1
     fi
 }
