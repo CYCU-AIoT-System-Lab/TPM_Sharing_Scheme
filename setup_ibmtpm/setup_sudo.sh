@@ -60,6 +60,34 @@ install_req () {
 
     echo_notice "setup_ibmtpm" "setup-install_req" "Extracting IBMACS ..."
     tar $tar_gflag "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
+
+    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Installing IBMACS dependencies ..."
+    if [ $acsMode == 1 ]; then
+        # for Server
+        if [ $install_platform -eq 1 ]; then
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
+        elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
+            aptins "libjson-c-dev"
+            aptins "apache2"
+            aptins "php"
+            aptins "php-dev"
+            aptins "php-mysql"
+            aptins "mariadb-server"
+            #aptins "libmariadb-dev"
+            aptins "libmariadb-dev-compat"
+            #aptins "libmariadb-dev-compat:armhf"
+        elif [ $install_platform -eq 4 ]; then
+            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
+        else
+            echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
+        fi
+    elif [ $acsMode == 2 ]; then
+        # for Client
+        aptins "libjson-c-dev"
+    else 
+        echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid acsMode"
+        exit 1
+    fi
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
@@ -149,34 +177,6 @@ compile_ibmswtpm () {
 # Install requirements for ibmacs, create mysql database, set environment variables, link directories, and generate directory for webpage
 # Only need to setup once (can re-run)
 setup_ibmacs_env () {
-    echo_notice "setup_ibmtpm" "setup-setup_ibmacs_env" "Installing IBMACS dependencies ..."
-    if [ $acsMode == 1 ]; then
-        # for Server
-        if [ $install_platform -eq 1 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
-        elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
-            aptins "libjson-c-dev"
-            aptins "apache2"
-            aptins "php"
-            aptins "php-dev"
-            aptins "php-mysql"
-            aptins "mariadb-server"
-            #aptins "libmariadb-dev"
-            aptins "libmariadb-dev-compat"
-            #aptins "libmariadb-dev-compat:armhf"
-        elif [ $install_platform -eq 4 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
-        else
-            echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
-        fi
-    elif [ $acsMode == 2 ]; then
-        # for Client
-        aptins "libjson-c-dev"
-    else 
-        echo_warn "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid acsMode"
-        exit 1
-    fi
-
     # ACS source platform adaption
     if [ $install_platform -eq 1 ]; then
         :
@@ -278,14 +278,16 @@ compile_ibmacs () {
 # Can be run multiple times
 open_demo_webpage () {
     echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "Opening demo webpage with new terminal ..."
+    echo_notice "setup_ibmtpm" "setup-open_demo_webpage" "If website is displaying ${RED}${BOLD}fatal error${END} or ${RED}${BOLD}mysqli related error${END}, please ${RED}${BOLD}reboot${END}!"
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
+    lc3="echo_notice setup_ibmtpm setup-open_demo_webpage If website is displaying ${RED}${BOLD}fatal error${END} or ${RED}${BOLD}mysqli related error${END}, please ${RED}${BOLD}reboot${END}!"
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
-        lc3="sudo -u $user bash -c \"firefox --new-tab -url ${acs_demo_url_A} --new-tab -url ${repo_url} &\""
-        newGterm "FireFox Browser" "$bash_gflag" "$lc1; $lc2; $lc3" 1
+        lc4="sudo -u $user bash -c \"firefox --new-tab -url ${acs_demo_url_A} --new-tab -url ${repo_url} &\""
+        newGterm "FireFox Browser" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
     else
-        lc3="sudo -u $user bash -c \"chromium-browser --new-window ${acs_demo_url_B} ${repo_url} &\""
-        newLXterm "Chromium Browser" "$lc1; $lc2; $lc3" 1
+        lc4="sudo -u $user bash -c \"chromium-browser --new-window ${acs_demo_url_B} ${repo_url} &\""
+        newLXterm "Chromium Browser" "$lc1; $lc2; $lc3; $lc4" 1
     fi
 }
 
