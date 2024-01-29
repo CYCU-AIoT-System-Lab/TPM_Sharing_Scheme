@@ -360,7 +360,7 @@ generate_EK () {
 # Retrieve hardware NVChip
 # Only need to setup once (can re-run)
 retrieve_hardware_EK () {
-    echo_warn "setup_ibmtpm" "setup-retrieve_hardware_EK" "Retrieve hardware EK from NVChip ......"
+    echo_notice "setup_ibmtpm" "setup-retrieve_hardware_EK" "Retrieve hardware EK from NVChip ......"
     cd "${sym_link_ibmtss}/utils/"
     ./nvread -ha 01c00002 | awk 'NR==1 {next} {print}' | xxd -r -ps | base64 | sed -e '1i -----BEGIN CERTIFICATE-----' -e '$a -----END CERTIFICATE-----' > VMW_EK_CACERT.pem
     ./nvread -ha 01c0000a | awk 'NR==1 {next} {print}' | xxd -r -ps | base64 | sed -e '1i -----BEGIN CERTIFICATE-----' -e '$a -----END CERTIFICATE-----' > VMW_EKECC_CACERT.pem
