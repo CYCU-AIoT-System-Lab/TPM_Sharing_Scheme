@@ -282,7 +282,7 @@ open_demo_webpage () {
     echo_notice "${dirname}" "${filename}-open_demo_webpage" "Restarting apache2 to reload all functionalities ..."
     sudo systemctl restart apache2.service
     echo_notice "${dirname}" "${filename}-open_demo_webpage" "Opening demo webpage with new terminal ..."
-    echo_notice "${dirname}" "${filename}-open_demo_webpage" "If website is displaying ${RED}${BOLD}fatal error${END} or ${RED}${BOLD}mysqli related error${END}, please ${RED}${BOLD}reboot${END}!"
+    echo_notice "${dirname}" "${filename}-open_demo_webpage" "If website is displaying ${RED}${BOLD}fatal error${END} or ${RED}${BOLD}mysqli related error${END}, please execute ${RED}${BOLD}sudo systemctl restart apache2.service${END}!"
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
     lc3="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"If website is displaying ${RED}${BOLD}fatal error${END} or ${RED}${BOLD}mysqli related error${END}, please ${RED}${BOLD}reboot${END}!\""
