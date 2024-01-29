@@ -361,10 +361,10 @@ generate_EK () {
     ./createekcert -ecc nistp256 -cakey cakeyecc.pem -capwd rrrr -caalg ec -vv
 }
 
-# Retrieve hardware NVChip
+# Retrieve NVChip
 # Only need to setup once (can re-run)
-retrieve_hardware_EK () {
-    echo_notice "${dirname}" "${filename}-retrieve_hardware_EK" "Retrieve hardware EK from NVChip ......"
+retrieve_EK () {
+    echo_notice "${dirname}" "${filename}-retrieve_EK" "Retrieve EK from NVChip ......"
     cd "${sym_link_ibmtss}/utils/"
     ./nvread -ha 01c00002 | awk 'NR==1 {next} {print}' | xxd -r -ps | base64 | sed -e '1i -----BEGIN CERTIFICATE-----' -e '$a -----END CERTIFICATE-----' > VMW_EK_CACERT.pem
     ./nvread -ha 01c0000a | awk 'NR==1 {next} {print}' | xxd -r -ps | base64 | sed -e '1i -----BEGIN CERTIFICATE-----' -e '$a -----END CERTIFICATE-----' > VMW_EKECC_CACERT.pem
@@ -562,7 +562,7 @@ if [ $generate_CA            == 1 ]; then generate_CA;                 fi
 if [ $activate_TPM_server    == 1 ]; then activate_TPM_server;         fi
 if [ $activate_TPM_client    == 1 ]; then activate_TPM_client;         fi
 if [ $generate_EK            == 1 ]; then generate_EK;                 fi
-if [ $retrieve_hardware_EK   == 1 ]; then retrieve_hardware_EK;        fi
+if [ $retrieve_EK            == 1 ]; then retrieve_EK;                 fi
 if [ $set_acs_sql_setting    == 1 ]; then set_acs_sql_setting;         fi
 if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
 if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
