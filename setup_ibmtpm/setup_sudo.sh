@@ -346,9 +346,15 @@ activate_TPM_client () {
 # Create EK certificate and key, activated TPM on new terminal
 # Only need to setup once (can re-run)
 generate_EK () {
-    activate_TPM_server
-
-    activate_TPM_client
+    if [ $TPMMode == 1 ]; then
+        echo_notice "${dirname}" "${filename}-generate_EK" "Skipping SWTPM (vTPM) activation ..."
+    elif [ $TPMMode == 2 ]; then
+        activate_TPM_server
+        activate_TPM_client
+    else
+        echo_warn "${dirname}" "${filename}-generate_EK" "Invalid TPMMode"
+        exit 1
+    fi
 
     echo_notice "${dirname}" "${filename}-generate_EK" "Backing up NVChip ......"
     err_retry_exec "cp ${path_NV} ${path_NV}.bak" 1 5 "setup_ibmtpm" "setup-generate_EK"
@@ -496,8 +502,8 @@ open_all_logs () {
         newt "${swtpm_bios_log_dir}" ${log4j_line_number}
         newt "${acs_demo_verify_tpm2bios_log_dir}" ${log4j_line_number}
         newt "${ima_sig_log_dir}" ${log4j_line_number}
-        newt "${acs_demo_verify_imasig_log_dir}" ${log4j_line_number}
-        newt "${acs_demo_verify_client_log_dir}" ${log4j_line_number}
+        newt "${acs_demo_verify_imasig_log_dir}" ${log4j_line_number} # Gibberish
+        newt "${acs_demo_verify_client_log_dir}" ${log4j_line_number} # Gibberish
     elif [ $1 == 2 ]; then
         tmux kill-server
         lc1="source ${current_dir}/../common/functions.sh"
