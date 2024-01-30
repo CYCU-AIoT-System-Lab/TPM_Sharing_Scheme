@@ -285,7 +285,7 @@ open_demo_webpage () {
     echo_notice "${dirname}" "${filename}-open_demo_webpage" "If website is displaying ${YELLOW}${BOLD}fatal error${END} or ${YELLOW}${BOLD}mysqli related error${END}, please execute ${YELLOW}${BOLD}sudo systemctl restart apache2.service${END}!"
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
-    lc3="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"If website is displaying ${RED}${BOLD}fatal error${END} or ${RED}${BOLD}mysqli related error${END}, please ${RED}${BOLD}reboot${END}!\""
+    lc3="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"If website is displaying ${YELLOW}${BOLD}fatal error${END} or ${YELLOW}${BOLD}mysqli related error${END}, please execute ${YELLOW}${BOLD}sudo systemctl restart apache2.service${END}!\""
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         lc4="sudo -u $user bash -c \"firefox --new-tab -url ${acs_demo_url_A} --new-tab -url ${repo_url} &\""
         newGterm "FireFox Browser" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
