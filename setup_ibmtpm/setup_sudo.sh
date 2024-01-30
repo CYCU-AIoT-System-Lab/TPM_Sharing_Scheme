@@ -345,26 +345,27 @@ activate_TPM_client () {
 
 # Create EK certificate and key, activated TPM on new terminal
 # Only need to setup once (can re-run)
+# Only for SWTPM/vTPM
 generate_EK () {
     if [ $TPMMode == 1 ]; then
-        echo_notice "${dirname}" "${filename}-generate_EK" "Skipping SWTPM (vTPM) activation ..."
+        echo_notice "${dirname}" "${filename}-generate_EK" "TPMMode is 1, skip generating EK"
     elif [ $TPMMode == 2 ]; then
         activate_TPM_server
         activate_TPM_client
+
+        echo_notice "${dirname}" "${filename}-generate_EK" "Backing up NVChip ......"
+        err_retry_exec "cp ${path_NV} ${path_NV}.bak" 1 5 "setup_ibmtpm" "setup-generate_EK"
+
+        cd "${sym_link_ibmtss}/utils/"
+        echo_notice "${dirname}" "${filename}-generate_EK" "Generating RSAEK and load into NV ......"
+        ./createekcert -rsa 2048 -cakey cakey.pem -capwd rrrr -vv
+
+        echo_notice "${dirname}" "${filename}-generate_EK" "Generating ECCEK and load into NV ......"
+        ./createekcert -ecc nistp256 -cakey cakeyecc.pem -capwd rrrr -caalg ec -vv
     else
         echo_warn "${dirname}" "${filename}-generate_EK" "Invalid TPMMode"
         exit 1
     fi
-
-    echo_notice "${dirname}" "${filename}-generate_EK" "Backing up NVChip ......"
-    err_retry_exec "cp ${path_NV} ${path_NV}.bak" 1 5 "setup_ibmtpm" "setup-generate_EK"
-
-    cd "${sym_link_ibmtss}/utils/"
-    echo_notice "${dirname}" "${filename}-generate_EK" "Generating RSAEK and load into NV ......"
-    ./createekcert -rsa 2048 -cakey cakey.pem -capwd rrrr -vv
-
-    echo_notice "${dirname}" "${filename}-generate_EK" "Generating ECCEK and load into NV ......"
-    ./createekcert -ecc nistp256 -cakey cakeyecc.pem -capwd rrrr -caalg ec -vv
 }
 
 # Retrieve NVChip
