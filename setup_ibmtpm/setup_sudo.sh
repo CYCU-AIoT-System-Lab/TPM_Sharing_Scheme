@@ -43,16 +43,16 @@ install_req () {
     err_conti_exec "mkdir ${path_ibmacs}" "setup_ibmtpm" "setup-install_req"
 
     echo_notice "${dirname}" "${filename}-install_req" "Downloading IBMTPMTSS ..."
-    #err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download\" -O ${path_ibmtss}/${fn_ibmtss}" "setup_ibmtpm" "setup-install_req"
-    wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
+    err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download -O ${path_ibmtss}/${fn_ibmtss}" 1 5 "setup_ibmtpm" "setup-install_req"
+    #wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
 
     echo_notice "${dirname}" "${filename}-install_req" "Downloading IBMSWTPM ..."
-    #err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download\" -O ${path_ibmtpm}/${fn_ibmtpm}" "setup_ibmtpm" "setup-install_req"
-    wget $wget_gflag "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
+    err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download -O ${path_ibmtpm}/${fn_ibmtpm}" 1 5 "setup_ibmtpm" "setup-install_req"
+    #wget $wget_gflag "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
 
     echo_notice "${dirname}" "${filename}-install_req" "Downloading IBMACS ..."
-    #err_conti_exec "wget $wget_gflag \"https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download\" -O ${path_ibmacs}/${fn_ibmacs}" "setup_ibmtpm" "setup-install_req"
-    wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
+    err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download -O ${path_ibmacs}/${fn_ibmacs}" 1 5 "setup_ibmtpm" "setup-install_req"
+    #wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
     echo_notice "${dirname}" "${filename}-install_req" "Extracting IBMTPMTSS ..."
     tar $tar_gflag "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
@@ -127,10 +127,14 @@ setup_ibmtpmtss_env () {
 
     echo_notice "${dirname}" "${filename}-setup_ibmtpmtss_env" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
-    # 2.0.1
-    # sed -i "s/\/home\/kgold\/tss2/\/${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
-    # 1.6.0
-    sed -i "s/\/gsa\/yktgsa\/home\/k\/g\/kgold\/tpm2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
+    if [ $ibmtss_ver -eq "2.0.1" ]; then
+        sed -i "s/\/home\/kgold\/tss2/\/${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
+    elif [ $ibmtss_ver -eq "1.6.0" ]; then
+        sed -i "s/\/gsa\/yktgsa\/home\/k\/g\/kgold\/tpm2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
+    else
+        echo_warn "${dirname}" "${filename}-setup_ibmtpmtss_env" "Not supported ibmtss_ver"
+        exit 1
+    fi
 }
 
 # Compile ibmtss
