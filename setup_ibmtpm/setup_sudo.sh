@@ -24,6 +24,7 @@ path_NV="${sym_link_ibmtpm}/src/NVChip"
 tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
 acs_demo_url_A="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
 acs_demo_url_B="${acs_demo_server_ip}/acs"
+tpm2_nvread="/usr/local/bin/tpm2_nvread" # Required setup_optiga installed
 acs_demo_server_log_dir="${sym_link_ibmacs}/serverenroll.log4j"
 acs_demo_client_log_dir="${sym_link_ibmacs}/clientenroll.log4j"
 swtpm_bios_log_dir="${sym_link_ibmacs}/tpm2bios.log"
@@ -92,6 +93,11 @@ install_req () {
         echo_warn "${dirname}" "${filename}-setup_ibmacs_env" "Invalid acsMode"
         exit 1
     fi
+
+    echo_notice "${dirname}" "${filename}-setup_install_req" "Retrieving Infineon TPM9670 CA number ..."
+    ${tpm2_nvread} 0x1c00002 -o "/home/${user}/ekcert.der"
+    sudo chmod 777 "/home/${user}/ekcert.der"
+    sudo xxd "/home/${user}/ekcert.der" > "/home/${user}/ekcert.txt"
 
     echo_notice "${dirname}" "${filename}-setup_install_req" "Retrieving Infineon TPM9670 CA ..."
     wget $wget_gflag "https://pki.infineon.com/OptigaRsaMfrCA${tpm_ca}/OptigaRsaMfrCA${tpm_ca}.crt" -P "${tss_cert_rootcert_dir}"
