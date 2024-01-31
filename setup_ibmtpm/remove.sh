@@ -12,7 +12,7 @@ clear_dir "${base_dir}/ibmtss${ibmtss_ver}"
 cfer "${base_dir}/ibmtss" "setup_ibmtpm" "remove" "Removing old ibmtss symbolic link ..."
 cfer "${base_dir}/ibmtpm" "setup_ibmtpm" "remove" "Removing old ibmtpm symbolic link ..."
 cfer "${base_dir}/ibmacs" "setup_ibmtpm" "remove" "Removing old ibmacs symbolic link ..."
-cfer "${c_json_lib_link_dir}" "setup_ibmtpm" "remove" "Removing old c_json_lib symbolic link ..."
+cfer "${c_json_lib_lin_linkk_dir}" "setup_ibmtpm" "remove" "Removing old c_json_lib symbolic link ..."
 sudo mysql -Bse "DROP DATABASE IF EXISTS $mysql_database;"
 sudo mysql -Bse "DROP DATABASE IF EXISTS machines;"
 
