@@ -123,6 +123,8 @@ setup_ibmtpmtss_env () {
     export TPM_COMMAND_PORT="${tpm_command_port}"
 
     echo_notice "${dirname}" "${filename}-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
+    echo "${path_ibmtss}"
+    echo "${base_dir}/ibmtss"
     err_conti_exec "ln -s ${path_ibmtss} ${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env"
 
     echo_notice "${dirname}" "${filename}-setup_ibmtpmtss_env" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
