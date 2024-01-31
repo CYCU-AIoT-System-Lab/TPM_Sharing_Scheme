@@ -37,6 +37,7 @@ load_preset () {
     check_var ibmtss_ver $exit_code
     check_var ibmtpm_ver $exit_code
     check_var ibmacs_ver $exit_code
+    check_var tpm_ca $exit_code
     check_var verMode $exit_code
     check_var TPMMode $exit_code
     check_var acsMode $exit_code
@@ -97,6 +98,7 @@ clear_preset () {
     unset ibmtss_ver
     unset ibmtpm_ver
     unset ibmacs_ver
+    unset tpm_ca
     unset verMode
     unset TPMMode
     unset acsMode

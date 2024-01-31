@@ -63,7 +63,7 @@ install_req () {
     echo_notice "${dirname}" "${filename}-install_req" "Extracting IBMACS ..."
     tar $tar_gflag "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 
-    echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Installing IBMACS dependencies ..."
+    echo_notice "${dirname}" "${filename}-setup_install_req" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
         # for Server
         if [ $install_platform -eq 1 ]; then
@@ -90,6 +90,18 @@ install_req () {
         echo_warn "${dirname}" "${filename}-setup_ibmacs_env" "Invalid acsMode"
         exit 1
     fi
+
+    echo_notice "${dirname}" "${filename}-setup_install_req" "Retrieving Infineon TPM9670 CA ..."
+    wget $wget_gflag "https://pki.infineon.com/OptigaRsaMfrCA${tpm_ca}/OptigaRsaMfrCA${tpm_ca}.crt" -P "${tss_cert_rootcert_dir}"
+    wget $wget_gflag "https://pki.infineon.com/OptigaEccMfrCA${tpm_ca}/OptigaEccMfrCA${tpm_ca}.crt" -P "${tss_cert_rootcert_dir}"
+
+    echo_notice "${dirname}" "${filename}-setup_install_req" "Converting CA from CRT to PEM ..."
+    openssl x509 -in "${tss_cert_rootcert_dir}/OptigaRsaMfrCA${tpm_ca}.crt" -inform der -outform pem -out "${tss_cert_rootcert_dir}/OptigaRsaMfrCA${tpm_ca}.pem"
+    openssl x509 -in "${tss_cert_rootcert_dir}/OptigaEccMfrCA${tpm_ca}.crt" -inform der -outform pem -out "${tss_cert_rootcert_dir}/OptigaEccMfrCA${tpm_ca}.pem"
+
+    echo_notice "${dirname}" "${filename}-setup_install_req" "Appending new CA to rootcerts.txt ..."
+    echo "${tss_cert_rootcert_dir}/OptigaRsaMfrCA${tpm_ca}.pem" >> "${tss_cert_rootcert_dir}/rootcerts.txt"
+    echo "${tss_cert_rootcert_dir}/OptigaEccMfrCA${tpm_ca}.pem" >> "${tss_cert_rootcert_dir}/rootcerts.txt"
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
