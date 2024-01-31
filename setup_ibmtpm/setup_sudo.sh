@@ -44,24 +44,26 @@ install_req () {
 
     echo_notice "${dirname}" "${filename}-install_req" "Downloading IBMTPMTSS ..."
     err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download -O ${path_ibmtss}/${fn_ibmtss}" 1 5 "setup_ibmtpm" "setup-install_req"
-    #wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download" -O "${path_ibmtss}/${fn_ibmtss}"
-
     echo_notice "${dirname}" "${filename}-install_req" "Downloading IBMSWTPM ..."
     err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download -O ${path_ibmtpm}/${fn_ibmtpm}" 1 5 "setup_ibmtpm" "setup-install_req"
-    #wget $wget_gflag "https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download" -O "${path_ibmtpm}/${fn_ibmtpm}"
-
     echo_notice "${dirname}" "${filename}-install_req" "Downloading IBMACS ..."
     err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download -O ${path_ibmacs}/${fn_ibmacs}" 1 5 "setup_ibmtpm" "setup-install_req"
-    #wget $wget_gflag "https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download" -O "${path_ibmacs}/${fn_ibmacs}"
 
     echo_notice "${dirname}" "${filename}-install_req" "Extracting IBMTPMTSS ..."
     tar $tar_gflag "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
-
     echo_notice "${dirname}" "${filename}-install_req" "Extracting IBMSWTPM ..."
     tar $tar_gflag "${path_ibmtpm}/${fn_ibmtpm}" -C ${path_ibmtpm}
-
     echo_notice "${dirname}" "${filename}-install_req" "Extracting IBMACS ..."
     tar $tar_gflag "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
+
+    echo_notice "${dirname}" "${filename}-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
+    err_conti_exec "ln -s ${path_ibmtss} ${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env"
+    echo_notice "${dirname}" "${filename}-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
+    err_conti_exec "ln -s ${path_ibmtpm} ${base_dir}/ibmtpm" "setup_ibmtpm" "setup-setup_ibmswtpm_env"
+    echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
+    err_conti_exec "ln -s ${path_ibmacs}/acs ${base_dir}/ibmacs" "setup_ibmtpm" "setup-setup_ibmacs_env"
+    echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
+    err_conti_exec "ln -s ${c_json_lib_dir} ${c_json_lib_link_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env"
 
     echo_notice "${dirname}" "${filename}-setup_install_req" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
@@ -122,11 +124,6 @@ setup_ibmtpmtss_env () {
     fi
     export TPM_COMMAND_PORT="${tpm_command_port}"
 
-    echo_notice "${dirname}" "${filename}-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
-    echo "${path_ibmtss}"
-    echo "${base_dir}/ibmtss"
-    err_conti_exec "ln -s ${path_ibmtss} ${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env"
-
     echo_notice "${dirname}" "${filename}-setup_ibmtpmtss_env" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
     if [ $ibmtss_ver == "2.0.1" ]; then
@@ -178,8 +175,7 @@ compile_ibmtpmtss () {
 # Create symbolic link to ibmswtpm
 # Only need to setup once (can re-run)
 setup_ibmswtpm_env () {
-    echo_notice "${dirname}" "${filename}-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
-    err_conti_exec "ln -s ${path_ibmtpm} ${base_dir}/ibmtpm" "setup_ibmtpm" "setup-setup_ibmswtpm_env"
+    :
 }
 
 # Compile ibmswtpm
@@ -229,17 +225,11 @@ setup_ibmacs_env () {
     export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
     export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
-    echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
-    err_conti_exec "ln -s ${path_ibmacs}/acs ${base_dir}/ibmacs" "setup_ibmtpm" "setup-setup_ibmacs_env"
-
     echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Setting html directory ..."
     err_conti_exec "mkdir -p ${html_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env"
     chown root ${html_dir}
     chgrp root ${html_dir}
     chmod 777 ${html_dir}
-
-    echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
-    err_conti_exec "ln -s ${c_json_lib_dir} ${c_json_lib_link_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env"
 
     echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Setting include path ..."
     if [ $verMode == 1 ]; then
