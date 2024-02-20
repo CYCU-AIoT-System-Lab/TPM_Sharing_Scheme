@@ -21,6 +21,8 @@ unfinished
 2. [OPTIGA TPM 2.0 Explorer User Guide](https://github.com/Infineon/optiga-tpm-explorer/blob/python3_dev/User%20Guide.md)
 3. [OPTIGA TPM](https://github.com/Infineon/optiga-tpm)
 4. [OPTIGA TPM 2.0 Explorer](https://github.com/Infineon/optiga-tpm-explorer)
+5. https://community.infineon.com/t5/OPTIGA-TPM/Root-Certificates-for-OPTIGA-TPM/td-p/378221
+6. https://community.infineon.com/t5/OPTIGA-TPM/How-to-Fully-Restore-TPM9670/td-p/695607
 
 ## Progress Update
 

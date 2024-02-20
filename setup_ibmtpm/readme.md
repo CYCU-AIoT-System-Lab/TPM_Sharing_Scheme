@@ -35,6 +35,7 @@ Currently, ACS doesn't support TPM2.0.
 1. [libtss packages in ubuntu](https://packages.ubuntu.com/search?keywords=libtss&searchon=names)
 2. [IBM Attestation Client Server测试](https://rlyown.github.io/2021/02/28/IBM-Attestation-Client-Server%E6%B5%8B%E8%AF%95/)
 3. [记一次双系统配置TPM的过程](https://rlyown.github.io/2021/05/29/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%8F%8C%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AETPM%E7%9A%84%E8%BF%87%E7%A8%8B/#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99)
+4. https://github.com/kgoldman/ibmtss/issues/10
 
 ## Possible Bugs
 
