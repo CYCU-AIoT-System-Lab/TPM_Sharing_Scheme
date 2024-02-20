@@ -48,6 +48,10 @@ install_req () {
         echo_notice "${dirname}" "${filename}-download_optiga_CA" "Converting CA $1 from CRT to PEM ..."
         openssl x509 -in "${tss_cert_rootcert_dir}/OptigaRsaMfrCA$1.crt" -inform der -outform pem -out "${tss_cert_rootcert_dir}/OptigaRsaMfrCA$1.pem"
         openssl x509 -in "${tss_cert_rootcert_dir}/OptigaEccMfrCA$1.crt" -inform der -outform pem -out "${tss_cert_rootcert_dir}/OptigaEccMfrCA$1.pem"
+
+        echo_notice "${dirname}" "${filename}-download_optiga_CA" "Removing CA $1 CRT ..."
+        rm "${tss_cert_rootcert_dir}/OptigaRsaMfrCA$1.crt"
+        rm "${tss_cert_rootcert_dir}/OptigaEccMfrCA$1.crt"
     }
 
     echo_notice "${dirname}" "${filename}-install_req" "Creating directories ..."
