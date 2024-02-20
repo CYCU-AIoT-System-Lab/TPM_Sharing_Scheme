@@ -110,6 +110,7 @@ install_req () {
     for i in $(seq -f "%03g" 0 070); do
         err_conti_exec "download_optiga_CA $i" & # parallel execution
     done
+    wait
     # download_optiga_CA 042
 }
 
