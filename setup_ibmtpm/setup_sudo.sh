@@ -455,48 +455,21 @@ active_ACS_Demo_Client () {
 # Active ACS Demo verify
 # Can be run multiple times
 active_ACS_Demo_verify () {
-    cd "${path_ibmacs}/acs"
-    if [ $TPMMode == 1 ]; then
-        # for Pysical TPM
-        #echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Ignore when working with Physical TPM"
-        cd "${sym_link_ibmacs}"
-        echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
-        log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
+    cd "${sym_link_ibmacs}"
+    echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
+    log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
 
-        echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking IMASIG.LOG (it can take a few minutes) ..."
-        log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
+    echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking IMASIG.LOG (it can take a few minutes) ..."
+    log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
 
-        if [ $acsClientMode == 1 ]; then
-            # for Local
-            log_date_time "${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
-        elif [ $acsClientMode == 2 ]; then
-            # for Remote
-            log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
-        else 
-            echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid acsClientMode"
-            exit 1
-        fi
-    elif [ $TPMMode == 2 ]; then
-        # for Software TPM
-        cd "${sym_link_ibmacs}"
-        echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
-        log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
-
-        echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking IMASIG.LOG (it can take a few minutes) ..."
-        log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
-
-        if [ $acsClientMode == 1 ]; then
-            # for Local
-            log_date_time "${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
-        elif [ $acsClientMode == 2 ]; then
-            # for Remote
-            log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
-        else 
-            echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid acsClientMode"
-            exit 1
-        fi
+    if [ $acsClientMode == 1 ]; then
+        # for Local
+        log_date_time "${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
+    elif [ $acsClientMode == 2 ]; then
+        # for Remote
+        log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
     else 
-        echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid TPMMode"
+        echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid acsClientMode"
         exit 1
     fi
 }
