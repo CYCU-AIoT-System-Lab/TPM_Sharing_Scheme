@@ -8,24 +8,24 @@ This directory holdes common utilities for this project.
 2. In VM terminal, type ```cat ~/.ssh/id_rsa.pub```, copy all of the output string.
 3. In browser, go to <https://github.com/settings/ssh/new>, type the name of this key in title, and paste copied RSA public key in.
 4. In VM terminal, copy the following code into a local bash file and execute it without privilege.
-
-```bash
-#!/bin/bash
-sudo apt-get update
-sudo apt-get install -y git
-sudo apt autoremove -y
-ssh-keyscan github.com >> ~/.ssh/known_hosts
-git config --global user.email "dachuan516@gmail.com"
-git config --global user.name  "belongtothenight"
-git config --global core.compression 0
-git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git
-cd TPM_Sharing_Scheme
-cd common
-chmod +x setup.sh
-./setup.sh
-cd ..
-
-```
+    ```bash
+    #!/bin/bash
+    sudo apt-get update
+    sudo apt-get install -y git
+    sudo apt autoremove -y
+    ssh-keyscan github.com >> ~/.ssh/known_hosts
+    git config --global user.email "dachuan516@gmail.com"
+    git config --global user.name  "belongtothenight"
+    git config --global core.compression 0
+    git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git
+    cd TPM_Sharing_Scheme
+    cd common
+    chmod +x setup.sh
+    ./setup.sh
+    cd ..
+    ```
+5. After the script is finished, and showed "Reboot", reboot.
+6. Edit ```/common/config.ini``` to disable ```setup_optiga``` and enable other components you want to install, and execute ```/common/setup.sh``` again.
 
 ## Adjust Installation Components
 
