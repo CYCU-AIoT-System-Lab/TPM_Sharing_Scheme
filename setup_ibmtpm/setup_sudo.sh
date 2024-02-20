@@ -118,6 +118,7 @@ install_req () {
     for i in $(seq -f "%03g" 0 070); do
         err_conti_exec "download_optiga_CA $i"
     done
+    # download_optiga_CA 042
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
@@ -140,14 +141,8 @@ setup_ibmtpmtss_env () {
 
     echo_notice "${dirname}" "${filename}-setup_ibmtpmtss_env" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
-    if [ $ibmtss_ver == "2.0.1" ]; then
-        sed -i "s/\/home\/kgold\/tss2/\/${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
-    elif [ $ibmtss_ver == "1.6.0" ]; then
-        sed -i "s/\/gsa\/yktgsa\/home\/k\/g\/kgold\/tpm2/\\${base_dir}\/${dn_ibmtss}/g" "${tss_cert_rootcert_dir}/rootcerts.txt"
-    else
-        echo_warn "${dirname}" "${filename}-setup_ibmtpmtss_env" "Not supported ibmtss_ver"
-        exit 1
-    fi
+    ls | ts "${tss_cert_rootcert_dir}/" > "${tss_cert_rootcert_dir}/rootcerts.txt"
+    sed -i "s/ //g" "${tss_cert_rootcert_dir}/rootcerts.txt" # remove space
 }
 
 # Compile ibmtss
