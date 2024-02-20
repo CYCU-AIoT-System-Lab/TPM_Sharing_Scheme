@@ -114,7 +114,9 @@ install_req () {
         exit 1
     fi
 
-    download_optiga_CA 042
+    for i in $(seq 0 999); do
+        download_optiga_CA $i
+    done
 }
 
 # Set environment variables for ibmtss, and create symbolic link to ibmtss
