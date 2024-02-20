@@ -219,7 +219,7 @@ setup_ibmacs_env () {
         mysql -Bse "CREATE DATABASE IF NOT EXISTS ${mysql_database};"
         mysql -Bse "CREATE USER IF NOT EXISTS '${mysql_user}'@'${acs_demo_server_ip}' IDENTIFIED BY '${mysql_password}';"
         mysql -Bse "GRANT ALL ON ${mysql_database}.* TO '${mysql_user}'@'${acs_demo_server_ip}';"
-        err_conti_exec "mysql -D ${mysql_database} < ${path_ibmacs}/acs/dbinit.sql"
+        mysql -D ${mysql_database} < "${path_ibmacs}/acs/dbinit.sql"
     fi
 
     echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Setting include path ..."
