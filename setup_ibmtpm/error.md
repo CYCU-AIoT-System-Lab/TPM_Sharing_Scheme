@@ -6,3 +6,7 @@
 2. Execute ```/common/remove.sh```
 3. Reboot
 4. Execute ```/common/setup.sh```
+5. Execute ```tpm2_clear -c p```
+6. Execute ```/common/remove.sh```
+7. Reboot
+8. Execute ```/common/setup.sh```
