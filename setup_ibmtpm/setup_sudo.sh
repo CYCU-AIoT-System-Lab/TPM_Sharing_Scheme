@@ -114,7 +114,7 @@ install_req () {
         exit 1
     fi
 
-    for i in $(seq 0 999); do
+    for i in $(seq -f "%03g" 0 999); do
         err_conti_exec "download_optiga_CA $i"
     done
 }
