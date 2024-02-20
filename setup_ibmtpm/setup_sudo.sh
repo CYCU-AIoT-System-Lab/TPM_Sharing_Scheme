@@ -108,7 +108,7 @@ install_req () {
 
     # Brute force all available CA from Infineon website
     for i in $(seq -f "%03g" 0 070); do
-        err_conti_exec "download_optiga_CA $i"
+        err_conti_exec "download_optiga_CA $i" & # parallel execution
     done
     # download_optiga_CA 042
 }
