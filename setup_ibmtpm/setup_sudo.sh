@@ -41,20 +41,20 @@ install_req () {
     # Download CA from Infineon website
     # Argument 1: CA number
     download_optiga_CA () {
-        echo_notice "${dirname}" "${filename}-download_optiga_CA" "Retrieving Infineon TPM9670 CA number ..."
-        ${tpm2_nvread} 0x1c00002 -o "/home/${user}/ekcert.der"
-        sudo chmod 777 "/home/${user}/ekcert.der"
-        sudo xxd "/home/${user}/ekcert.der" > "/home/${user}/ekcert.txt"
+        #echo_notice "${dirname}" "${filename}-download_optiga_CA" "Retrieving Infineon TPM9670 CA number ..."
+        #${tpm2_nvread} 0x1c00002 -o "/home/${user}/ekcert.der"
+        #sudo chmod 777 "/home/${user}/ekcert.der"
+        #sudo xxd "/home/${user}/ekcert.der" > "/home/${user}/ekcert.txt"
 
-        echo_notice "${dirname}" "${filename}-download_optiga_CA" "Retrieving Infineon TPM9670 CA ..."
+        echo_notice "${dirname}" "${filename}-download_optiga_CA" "Retrieving Infineon TPM9670 CA $1 ..."
         wget $wget_gflag "https://pki.infineon.com/OptigaRsaMfrCA$1/OptigaRsaMfrCA$1.crt" -P "${tss_cert_rootcert_dir}"
         wget $wget_gflag "https://pki.infineon.com/OptigaEccMfrCA$1/OptigaEccMfrCA$1.crt" -P "${tss_cert_rootcert_dir}"
 
-        echo_notice "${dirname}" "${filename}-download_optiga_CA" "Converting CA from CRT to PEM ..."
+        echo_notice "${dirname}" "${filename}-download_optiga_CA" "Converting CA $1 from CRT to PEM ..."
         openssl x509 -in "${tss_cert_rootcert_dir}/OptigaRsaMfrCA$1.crt" -inform der -outform pem -out "${tss_cert_rootcert_dir}/OptigaRsaMfrCA$1.pem"
         openssl x509 -in "${tss_cert_rootcert_dir}/OptigaEccMfrCA$1.crt" -inform der -outform pem -out "${tss_cert_rootcert_dir}/OptigaEccMfrCA$1.pem"
 
-        echo_notice "${dirname}" "${filename}-download_optiga_CA" "Appending new CA to rootcerts.txt ..."
+        echo_notice "${dirname}" "${filename}-download_optiga_CA" "Appending new CA $1 to rootcerts.txt ..."
         echo "${tss_cert_rootcert_dir}/OptigaRsaMfrCA$1.pem" >> "${tss_cert_rootcert_dir}/rootcerts.txt"
         echo "${tss_cert_rootcert_dir}/OptigaEccMfrCA$1.pem" >> "${tss_cert_rootcert_dir}/rootcerts.txt"
     }
@@ -114,22 +114,6 @@ install_req () {
         exit 1
     fi
 
-    #echo_notice "${dirname}" "${filename}-setup_install_req" "Retrieving Infineon TPM9670 CA number ..."
-    #${tpm2_nvread} 0x1c00002 -o "/home/${user}/ekcert.der"
-    #sudo chmod 777 "/home/${user}/ekcert.der"
-    #sudo xxd "/home/${user}/ekcert.der" > "/home/${user}/ekcert.txt"
-
-    #echo_notice "${dirname}" "${filename}-setup_install_req" "Retrieving Infineon TPM9670 CA ..."
-    #wget $wget_gflag "https://pki.infineon.com/OptigaRsaMfrCA${tpm_ca}/OptigaRsaMfrCA${tpm_ca}.crt" -P "${tss_cert_rootcert_dir}"
-    #wget $wget_gflag "https://pki.infineon.com/OptigaEccMfrCA${tpm_ca}/OptigaEccMfrCA${tpm_ca}.crt" -P "${tss_cert_rootcert_dir}"
-
-    #echo_notice "${dirname}" "${filename}-setup_install_req" "Converting CA from CRT to PEM ..."
-    #openssl x509 -in "${tss_cert_rootcert_dir}/OptigaRsaMfrCA${tpm_ca}.crt" -inform der -outform pem -out "${tss_cert_rootcert_dir}/OptigaRsaMfrCA${tpm_ca}.pem"
-    #openssl x509 -in "${tss_cert_rootcert_dir}/OptigaEccMfrCA${tpm_ca}.crt" -inform der -outform pem -out "${tss_cert_rootcert_dir}/OptigaEccMfrCA${tpm_ca}.pem"
-
-    #echo_notice "${dirname}" "${filename}-setup_install_req" "Appending new CA to rootcerts.txt ..."
-    #echo "${tss_cert_rootcert_dir}/OptigaRsaMfrCA${tpm_ca}.pem" >> "${tss_cert_rootcert_dir}/rootcerts.txt"
-    #echo "${tss_cert_rootcert_dir}/OptigaEccMfrCA${tpm_ca}.pem" >> "${tss_cert_rootcert_dir}/rootcerts.txt"
     download_optiga_CA 042
 }
 
