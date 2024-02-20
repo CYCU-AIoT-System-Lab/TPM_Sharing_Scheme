@@ -138,7 +138,7 @@ setup_ibmtpmtss_env () {
 
     echo_notice "${dirname}" "${filename}-setup_ibmtpmtss_env" "Replacing path in ${tss_cert_rootcert_dir}/rootcerts.txt ..."
     cp "${tss_cert_rootcert_dir}/rootcerts.txt" "${tss_cert_rootcert_dir}/rootcerts.txt.bak"
-    ls ${tss_cert_rootcert_dir} > "${tss_cert_rootcert_dir}/rootcerts.txt"
+    ls ${tss_cert_rootcert_dir} -I *.txt* > "${tss_cert_rootcert_dir}/rootcerts.txt"
     sed -i -e "s_.*_${tss_cert_rootcert_dir}/&_" "${tss_cert_rootcert_dir}/rootcerts.txt"
 }
 
