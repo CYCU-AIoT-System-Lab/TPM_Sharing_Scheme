@@ -475,6 +475,7 @@ active_ACS_Demo_verify () {
         else 
             echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid acsClientMode"
             exit 1
+        fi
     elif [ $TPMMode == 2 ]; then
         # for Software TPM
         cd "${sym_link_ibmacs}"
