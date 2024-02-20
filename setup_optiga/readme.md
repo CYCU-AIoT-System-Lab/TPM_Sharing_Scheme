@@ -13,7 +13,7 @@ Before setup, be sure to enable SPI with ```sudo raspi-config``` and reboot your
 
 ## Installing Tools
 
-unfinished
+Refers to related sources 1 and 2 for more information.
 
 ## Related Sources
 
@@ -23,7 +23,3 @@ unfinished
 4. [OPTIGA TPM 2.0 Explorer](https://github.com/Infineon/optiga-tpm-explorer)
 5. https://community.infineon.com/t5/OPTIGA-TPM/Root-Certificates-for-OPTIGA-TPM/td-p/378221
 6. https://community.infineon.com/t5/OPTIGA-TPM/How-to-Fully-Restore-TPM9670/td-p/695607
-
-## Progress Update
-
-unfinished
