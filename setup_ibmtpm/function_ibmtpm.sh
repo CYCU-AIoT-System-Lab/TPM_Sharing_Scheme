@@ -42,7 +42,6 @@ load_preset () {
     check_var acsMode $exit_code
     check_var SCmachineMode $exit_code
     check_var force_acs_sql_setting $exit_code
-    check_var acsClientMode $exit_code
     check_var mysql_user $exit_code
     check_var mysql_password $exit_code
     check_var mysql_database $exit_code
@@ -102,7 +101,6 @@ clear_preset () {
     unset acsMode
     unset SCmachineMode
     unset force_acs_sql_setting
-    unset acsClientMode
     unset mysql_user
     unset mysql_password
     unset mysql_database
