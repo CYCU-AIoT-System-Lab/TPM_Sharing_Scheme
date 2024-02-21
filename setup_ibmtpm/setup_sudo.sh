@@ -440,14 +440,14 @@ active_ACS_Demo_Server () {
 # Can be run multiple times
 active_ACS_Demo_Client () {
     cd "${path_ibmacs}/acs"
-    if [ $acsClientMode == 1 ]; then
+    if [ $SCmachineMode == 1 ]; then
         echo_notice "${dirname}" "${filename}-active_ACS_Demo_Client" "Activating ACS Demo on local machine ..."
         log_date_time "./clientenroll -alg rsa -vv -ho ${acs_demo_server_ip} -co akcert.pem" "$log4j_time_format" "${acs_demo_client_log_dir}" "default"
-    elif [ $acsClientMode == 2 ]; then
+    elif [ $SCmachineMode == 2 ]; then
         echo_notice "${dirname}" "${filename}-active_ACS_Demo_Client" "Activating ACS Demo on remote machine ..."
         log_date_time "./clientenroll -alg ec -vv -ho ${acs_demo_server_ip} -ma ${acs_demo_client_ip} -co akeccert.pem" "$log4j_time_format" "${acs_demo_client_log_dir}" "default"
     else 
-        echo_warn "${dirname}" "${filename}-active_ACS_Demo_Client" "Invalid acsClientMode"
+        echo_warn "${dirname}" "${filename}-active_ACS_Demo_Client" "Invalid SCmachineMode"
         exit 1
     fi
 }
@@ -462,14 +462,14 @@ active_ACS_Demo_verify () {
     echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking IMASIG.LOG (it can take a few minutes) ..."
     log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
 
-    if [ $acsClientMode == 1 ]; then
+    if [ $SCmachineMode == 1 ]; then
         # for Local
         log_date_time "${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
-    elif [ $acsClientMode == 2 ]; then
+    elif [ $SCmachineMode == 2 ]; then
         # for Remote
         log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
     else 
-        echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid acsClientMode"
+        echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid SCmachineMode"
         exit 1
     fi
 }
