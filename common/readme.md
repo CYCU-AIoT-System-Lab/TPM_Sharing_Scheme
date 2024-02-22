@@ -31,9 +31,21 @@ This directory holdes common utilities for this project.
 
 Adjust below settings in [config.ini](config.ini).
 
-- ```setup_environment = 1```: Call [setup.sh](../setup_environment/setup.sh) to perform installation.
-- ```setup_ibmtpm = 1```: Call [setup.sh](../ibmtpm/setup.sh) to perform installation.
-- ```setup_socket_com = 1```: Call [setup.sh](../socket_com/setup.sh) to perform installation.
+1. Set ```setup_optiga = 0```
+- ```setup_environment```
+    2. Set ```setup_environment = 1```: (deprecated)
+    3. [setup.sh](./setup.sh) to perform installation.
+- ```setup_ibmtpm```
+    2. Set ```setup_ibmtpm = 1```
+    3. Rename one of the following configuration files to ```config.ini```
+        - [../setup_ibmtpm/config_dTPM_local.ini](../setup_ibmtpm/config_dTPM_local.ini)
+        - [../setup_ibmtpm/config_vTPM_local.ini](../setup_ibmtpm/config_vTPM_local.ini)
+        - [../setup_ibmtpm/config_RA_server.ini](../setup_ibmtpm/config_RA_server.ini)
+        - [../setup_ibmtpm/config_RA_client.ini](../setup_ibmtpm/config_RA_client.ini)
+    4. [setup.sh](./setup.sh) to perform installation.
+- ```socket_com```
+    2. Set ```setup_socket_com = 1```
+    3. [setup.sh](./setup.sh) to perform installation.
 
 ## Directory Structure
 
