@@ -38,10 +38,12 @@ Adjust below settings in [config.ini](config.ini).
 - ```setup_ibmtpm```
     2. Set ```setup_ibmtpm = 1```
     3. Rename one of the following configuration files to ```config.ini```
-        - [../setup_ibmtpm/config_dTPM_local.ini](../setup_ibmtpm/config_dTPM_local.ini)
-        - [../setup_ibmtpm/config_vTPM_local.ini](../setup_ibmtpm/config_vTPM_local.ini)
-        - [../setup_ibmtpm/config_RA_server.ini](../setup_ibmtpm/config_RA_server.ini)
-        - [../setup_ibmtpm/config_RA_client.ini](../setup_ibmtpm/config_RA_client.ini)
+        - [../setup_ibmtpm/config_dTPM_local.ini](../setup_ibmtpm/config_dTPM_local.ini): ACS local dTPM.
+        - [../setup_ibmtpm/config_vTPM_local.ini](../setup_ibmtpm/config_vTPM_local.ini): ACS local vTPM.
+        - [../setup_ibmtpm/config_RA_server.ini](../setup_ibmtpm/config_RA_server.ini): ACS Remote Attestation server.
+            3.1. Set ```acs_demo_client_ip = <client_machine_ip>```
+        - [../setup_ibmtpm/config_RA_client.ini](../setup_ibmtpm/config_RA_client.ini): ACS Remote Attestation client.
+            3-1. Set ```acs_demo_server_ip = <server_machine_ip>```
     4. [setup.sh](./setup.sh) to perform installation.
 - ```socket_com```
     2. Set ```setup_socket_com = 1```
