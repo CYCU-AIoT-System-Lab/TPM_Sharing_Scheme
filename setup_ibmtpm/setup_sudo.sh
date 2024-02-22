@@ -85,8 +85,14 @@ install_req () {
     echo_notice "${dirname}" "${filename}-setup_install_req" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
         # for Server
-        if [ $install_platform -eq 1 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
+        if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+            aptins "libjson-c-dev"
+            aptins "apache2"
+            aptins "php"
+            aptins "php-dev"
+            aptins "php-mysql"
+            aptins "mysql-server"
+            aptins "libmysqlclient-dev"
         elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
             aptins "libjson-c-dev"
             aptins "apache2"
@@ -94,17 +100,23 @@ install_req () {
             aptins "php-dev"
             aptins "php-mysql"
             aptins "mariadb-server"
-            #aptins "libmariadb-dev"
             aptins "libmariadb-dev-compat"
-            #aptins "libmariadb-dev-compat:armhf"
-        elif [ $install_platform -eq 4 ]; then
-            aptins "libjson-c-dev apache2 php php-dev php-mysql mysql-server libmysqlclient-dev"
         else
             echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
         fi
     elif [ $acsMode == 2 ]; then
         # for Client
         aptins "libjson-c-dev"
+        # following dependencies are not required officially, but required for this script
+        if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+            aptins "mysql-server"
+            aptins "libmysqlclient-dev"
+        elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
+            aptins "mariadb-server"
+            aptins "libmariadb-dev-compat"
+        else
+            echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
+        fi
     else 
         echo_warn "${dirname}" "${filename}-setup_ibmacs_env" "Invalid acsMode"
         exit 1
