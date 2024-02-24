@@ -1,8 +1,17 @@
 # SD Card Fix
 
-Be really careful when using Diskpart; it is extremely easy to lose an entire disk of data.
+Be really careful when using Diskpart; it is extremely easy to lose an entire disk of data.  
+Always backup your data on not-connected drive/machine.
 
-## General Cases
+## SD card can't be recognized after loaded with Jetson Nano Image
+
+1. Use [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) to format with default settings.
+2. Right-click on the disk (Windows File Explorer) to format to NTFS format with default settings.
+3. Use [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) to format with default settings.
+
+## Out of Method Method
+
+:bangbang:Proceed with caution:bangbang: Make sure selected drive is correct!
 
 Sometimes, when SD card flashing is interrupted, Windows File Explorer will show that it requires formatting but can't be formatted after you click it. The following steps will fix this issue: (If the optimization needed notification appears, click ```cancel```)
 
@@ -20,9 +29,3 @@ Original sources:
 
 1. [Format SD Card (Microsoft Community)](https://answers.microsoft.com/en-us/windows/forum/all/format-sd-card/8177d725-b12d-4d1c-a799-efcb3df3c53f)
 2. [How to Install Ubuntu on MicroSD (ask Ubuntu)](https://askubuntu.com/questions/1126409/how-to-install-ubuntu-on-microsd)
-
-## SD card can't be recognized after loaded with Jetson Nano Image
-
-1. Use [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) to format with default settings.
-2. Right-click on the disk (Windows File Explorer) to format to NTFS format with default settings.
-3. Use [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) to format with default settings.
