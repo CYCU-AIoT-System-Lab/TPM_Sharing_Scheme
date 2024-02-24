@@ -2,6 +2,7 @@
 
 Be really careful when using Diskpart; it is extremely easy to lose an entire disk of data.  
 Always backup your data on not-connected drive/machine.  
+Disk Manager is also a good place to check whether SD card is detected by Windows.  
 
 :bangbang:Proceed with caution:bangbang: Make sure selected drive is correct!
 
