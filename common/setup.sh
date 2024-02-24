@@ -35,8 +35,7 @@ build_valgrind () {
 }
 
 build_libssl () {
-    libssl_dir="/opt/openssl"
-    libssl_build="openssl-1.1.1w.tar.gz"
+    libssl_build="openssl-${libssl_ver}.tar.gz"
     libssl_build_name="$(basename $libssl_build .tar.gz)"
     libssl_path_load_sh="/etc/profile.d/openssl.sh"
     err_conti_exec "sudo mkdir $libssl_dir" "common" "setup_build_libssl"

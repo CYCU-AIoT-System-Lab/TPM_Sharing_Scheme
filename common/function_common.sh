@@ -28,11 +28,13 @@ load_preset () {
     check_var cmake_ver 1
     check_var cmake_build 1
     check_var valgrind_ver 1
+    check_var libssl_ver 1
     check_var nvim_config_url 1
     check_var nvim_dir 1
     check_var apport_dir 1
     check_var cmake_dir 1
     check_var valgrind_dir 1
+    check_var libssl_dir 1
     check_var wget_gflag 1
     check_var make_gflag 1
     check_var sudo_gflag 1
@@ -63,11 +65,13 @@ clear_preset () {
     unset cmake_ver
     unset cmake_build
     unset valgrind_ver
+    unset libssl_ver
     unset nvim_config_url
     unset nvim_dir
     unset apport_dir
     unset cmake_dir
     unset valgrind_dir
+    unset libssl_dir
     unset wget_gflag
     unset make_gflag
     unset sudo_gflag
