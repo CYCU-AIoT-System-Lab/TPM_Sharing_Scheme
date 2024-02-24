@@ -8,5 +8,6 @@ git config --global user.name  "belongtothenight"
 git config --global core.compression 0
 git clone git@github.com:CYCU-AIoT-System-Lab/TPM_Sharing_Scheme.git
 chmod +x ./TPM_Sharing_Scheme/common/setup.sh
-echo "cd ./TPM_Sharing_Scheme/common"
-echo "./setup.sh"
+echo ""
+echo "EXECUTE: cd ./TPM_Sharing_Scheme/common"
+echo "EXECUTE: ./setup.sh"
