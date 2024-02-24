@@ -85,7 +85,7 @@ install_req () {
     echo_notice "${dirname}" "${filename}-setup_install_req" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
         # for Server
-        if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+        if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
             aptins "libjson-c-dev"
             aptins "apache2"
             aptins "php"
@@ -108,7 +108,7 @@ install_req () {
         # for Client
         aptins "libjson-c-dev"
         # following dependencies are not required officially, but required for this script
-        if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+        if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
             aptins "mysql-server"
             aptins "libmysqlclient-dev"
         elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
@@ -212,7 +212,7 @@ compile_ibmswtpm () {
 # Only need to setup once (can re-run)
 setup_ibmacs_env () {
     # ACS source platform adaption
-    if [ $install_platform -eq 1 ]; then
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
         :
     elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
         echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Adding stdbool.h to IBMACS/acs/commonjson.c"
@@ -312,7 +312,7 @@ open_demo_webpage () {
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"Opening demo webpage with new terminal ...\""
     lc3="echo_notice \"setup_ibmtpm\" \"setup-open_demo_webpage\" \"If website is displaying ${YELLOW}${BOLD}fatal error${END} or ${YELLOW}${BOLD}mysqli related error${END}, please execute ${YELLOW}${BOLD}sudo systemctl restart apache2.service${END}!\""
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
         lc4="sudo -u $user bash -c \"firefox --new-tab -url ${acs_demo_url_A} --new-tab -url ${repo_url} &\""
         newGterm "FireFox Browser" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
     else
@@ -344,7 +344,7 @@ activate_TPM_server () {
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
     lc3="./tpm_server"
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 1 ]; then
         newGterm "TPM SERVER" "$bash_gflag" "$lc1; $lc2; $lc3" 1
     else
         newLXterm "TPM SERVER" "$lc1; $lc2; $lc3" 1
@@ -361,7 +361,7 @@ activate_TPM_client () {
     lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Starting TPM simulator (client) on new temrinal ...\n\""
     lc3="./powerup"
     lc4="./startup"
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
         newGterm "TPM CLIENT" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
     else
         newLXterm "TPM CLIENT" "$lc1; $lc2; $lc3; $lc4" 1
@@ -441,7 +441,7 @@ active_ACS_Demo_Server () {
     lc2="echo_notice \"setup_ibmtpm\" \"setup-active_ACS_Demo_Server\" \"Activating ACS Demo ...\""
     lc3="export ACS_PORT=${acs_port}"
     lc4="log_date_time \"./server -vv -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
         newGterm "ACS SERVER" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
     else
         newLXterm "ACS SERVER" "$lc1; $lc2; $lc3; $lc4" 1
@@ -508,7 +508,7 @@ open_all_logs () {
             lc1="source ${current_dir}/../common/functions.sh"
             lc2="echo_notice \"setup_ibmtpm\" \"setup-open_all_logs\" \"tailling log file: $1\""
             lc3="tail -f $1 -n $2"
-            if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+            if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
                 newGterm "$(basename -- $1)" "$bash_gflag" "$lc1; $lc2; $lc3" 1
             else
                 newLXterm "$(basename -- $1)" "$lc1; $lc2; $lc3" 1
@@ -525,7 +525,7 @@ open_all_logs () {
         tmux kill-server
         lc1="source ${current_dir}/../common/functions.sh"
         lc2="sudo -u $user tmux"
-        if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+        if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
             newGterm "ACS LOGS" "$bash_gflag" "$lc1; $lc2" 1
         else
             newLXterm "ACS LOGS" "$lc1; $lc2" 1
