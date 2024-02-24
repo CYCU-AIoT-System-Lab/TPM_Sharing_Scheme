@@ -62,7 +62,8 @@ install_req () {
     sudo apt-get $apt_gflag upgrade -y
     aptins "git"
     aptins "htop"
-    aptins "plocate"
+    #aptins "s-tui"
+    #aptins "plocate"
     aptins "iftop"
     aptins "curl"
     aptins "wget"
