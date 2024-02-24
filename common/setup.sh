@@ -74,7 +74,7 @@ install_req () {
     aptins "make"
     aptins "moreutils"
     aptins "tmux"
-    if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ]; then
+    if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ] || [ ${install_platform} -eq 5 ]; then
         aptins "libtool"
         aptins "autoconf"
         aptins "unzip"
@@ -123,7 +123,7 @@ reload_term () {
 }
 
 enable_ssh () {
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ ${install_platform} -eq 5 ]; then
         echo_notice "${dirname}" "${filename}" "Enabling ssh..."
         aptins "openssh-server"
         sudo systemctl enable ssh
@@ -146,6 +146,8 @@ enable_pi_spi () {
         sudo sed -i 's/#dtparam=spi=on/dtparam=spi=on/g' $hardware_config
     elif [ $install_platform -eq 4 ]; then
         echo_notice "${dirname}" "${filename}" "SPI is one by default in this platform"
+    elif [ $install_platform -eq 5 ]; then
+        echo_notice "${dirname}" "${filename}" "SPI is skipped in this platform"
     else
         echo_warn "${dirname}" "${filename}" "Invalid Argument: $install_platform ! Skipping enable_pi_spi..."
     fi
