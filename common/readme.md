@@ -23,7 +23,7 @@ This directory holdes common utilities for this project.
     cd common
     chmod +x setup.sh
     ```
-    github.com/CYCU-AIoT-System_lab/TPM_Sharing_Scheme/blob/main/common/setup_repo.sh?plain=1
+    [github.com/CYCU-AIoT-System_lab/TPM_Sharing_Scheme/blob/main/common/setup_repo.sh?plain=1](github.com/CYCU-AIoT-System_lab/TPM_Sharing_Scheme/blob/main/common/setup_repo.sh?plain=1)
 5. After the script is finished, set [./config.ini](./config.ini) item ```install_platform``` to your platform.
 6. Execute [./setup.sh](./setup.sh).
 7. After the script is finished, and showed "Reboot", reboot.
