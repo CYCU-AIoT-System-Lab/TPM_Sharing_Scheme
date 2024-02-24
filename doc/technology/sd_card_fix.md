@@ -1,6 +1,10 @@
 # SD Card Fix
 
-Sometimes when SD cards flashing is interrupted, Windows File Explorer will shows that it requires formatting, but can't be formatted after you click it. The following steps will fix this issue: (If the optimization needed notification appeared, click ```cancel```)
+Be really careful when using Diskpart; it is extremely easy to lose an entire disk of data.
+
+## General Cases
+
+Sometimes, when SD card flashing is interrupted, Windows File Explorer will show that it requires formatting but can't be formatted after you click it. The following steps will fix this issue: (If the optimization needed notification appears, click ```cancel```)
 
 1. Open Windows Terminal (Command Prompt, PowerShell, etc.).
 2. Type ```diskpart``` and press Enter.
@@ -16,3 +20,9 @@ Original sources:
 
 1. [Format SD Card (Microsoft Community)](https://answers.microsoft.com/en-us/windows/forum/all/format-sd-card/8177d725-b12d-4d1c-a799-efcb3df3c53f)
 2. [How to Install Ubuntu on MicroSD (ask Ubuntu)](https://askubuntu.com/questions/1126409/how-to-install-ubuntu-on-microsd)
+
+## SD card can't be recognized after loaded with Jetson Nano Image
+
+1. Use [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) to format with default settings.
+2. Right-click on the disk (Windows File Explorer) to format to NTFS format with default settings.
+3. Use [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) to format with default settings.
