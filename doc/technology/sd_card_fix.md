@@ -1,7 +1,9 @@
 # SD Card Fix
 
 Be really careful when using Diskpart; it is extremely easy to lose an entire disk of data.  
-Always backup your data on not-connected drive/machine.
+Always backup your data on not-connected drive/machine.  
+
+:bangbang:Proceed with caution:bangbang: Make sure selected drive is correct!
 
 ## SD card can't be recognized after loaded with Jetson Nano Image
 
@@ -10,8 +12,6 @@ Always backup your data on not-connected drive/machine.
 3. Use [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) to format with default settings.
 
 ## Out of Method Method
-
-:bangbang:Proceed with caution:bangbang: Make sure selected drive is correct!
 
 Sometimes, when SD card flashing is interrupted, Windows File Explorer will show that it requires formatting but can't be formatted after you click it. The following steps will fix this issue: (If the optimization needed notification appears, click ```cancel```)
 
