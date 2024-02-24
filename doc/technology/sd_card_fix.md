@@ -1,4 +1,4 @@
-# SD Card Fix
+# SD Card Fix (Windows)
 
 Be really careful when using Diskpart; it is extremely easy to lose an entire disk of data.  
 Always backup your data on not-connected drive/machine.  
@@ -39,3 +39,7 @@ Original sources:
 
 1. [Format SD Card (Microsoft Community)](https://answers.microsoft.com/en-us/windows/forum/all/format-sd-card/8177d725-b12d-4d1c-a799-efcb3df3c53f)
 2. [How to Install Ubuntu on MicroSD (ask Ubuntu)](https://askubuntu.com/questions/1126409/how-to-install-ubuntu-on-microsd)
+
+## Nothing Works
+
+Sometimes, following any steps online just creates more errors. The solution to this: RESTART YOUR COMPUTER (without fast startup)
