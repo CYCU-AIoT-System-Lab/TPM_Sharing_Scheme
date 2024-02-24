@@ -123,13 +123,13 @@ reload_term () {
 }
 
 enable_ssh () {
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ ${install_platform} -eq 5 ]; then
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ]; then
         echo_notice "${dirname}" "${filename}" "Enabling ssh..."
         aptins "openssh-server"
         sudo systemctl enable ssh
         sudo systemctl start ssh
         sudo ufw allow ssh
-    elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ]; then
+    elif [ $install_platform -eq 2 ] || [ $install_platform -eq 3 ] || [ ${install_platform} -eq 5 ]; then
         echo_notice "${dirname}" "${filename}" "Enabling ssh..."
         sudo systemctl enable ssh
         sudo systemctl start ssh
