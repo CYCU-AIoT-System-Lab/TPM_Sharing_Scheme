@@ -49,7 +49,7 @@ build_libssl () {
     sudo make test -j$(nproc)
     sudo make install -j$(nproc)
     cd /usr/bin
-    sudo mv openssl openssl.old
+    err_conti_exec "sudo mv openssl openssl.old" "${dirname}" "${filename}"
     sudo bash -c "echo -e \"#!/bin/sh\nexport PATH=${libssl_dir}/bin:${PATH}\nexport LD_LIBRARY_PATH=${libssl_dir}/lib:${LD_LIBRARY_PATH}\" >> ${libssl_path_load_sh}"
     sudo chmod +x ${libssl_path_load_sh}
     source ${libssl_path_load_sh}
