@@ -84,11 +84,8 @@ install_req () {
 }
 
 compile_req () {
-    if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ]; then
+    if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ] || [ ${install_platform} -eq 5 ]; then
         build_libssl
-        build_cmake
-        cd $working_dir
-    elif [ ${install_platform} -eq 5 ]; then
         build_cmake
         cd $working_dir
     fi
