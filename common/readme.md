@@ -5,10 +5,10 @@ This directory holdes common utilities for this project.
 ## Install Steps
 
 0. Setup OS, refer to [../doc/technology/os_setup.md](../doc/technology/os_setup.md).
-1. In VM terminal, type ```ssh-keygen```, keep pressing ```enter``` till command is finished.
-2. In VM terminal, type ```cat ~/.ssh/id_rsa.pub```, copy all of the output string.
+1. In terminal, type ```ssh-keygen```, keep pressing ```enter``` till command is finished.
+2. In terminal, type ```cat ~/.ssh/id_rsa.pub```, copy all of the output string.
 3. In browser, go to <https://github.com/settings/ssh/new>, type the name of this key in title, and paste copied RSA public key in.
-4. In VM terminal, copy the following code into a local bash file and execute it without privilege.
+4. In terminal, copy the following code into a local bash file and execute it without privilege.
     ```bash
     #!/bin/bash
     sudo apt-get update
