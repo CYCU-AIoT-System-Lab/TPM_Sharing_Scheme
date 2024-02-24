@@ -38,6 +38,7 @@ load_preset () {
     check_var sudo_gflag 1
     check_var apt_gflag 1
     check_var job_install_req 1
+    check_var job_compile_req 1
     check_var job_config_nvim 1
     check_var job_update_src 1
     check_var job_change_all_sh_mod 1
@@ -72,6 +73,7 @@ clear_preset () {
     unset sudo_gflag
     unset apt_gflag
     unset job_install_req
+    unset job_compile_req
     unset job_config_nvim
     unset job_update_src
     unset job_change_all_sh_mod
