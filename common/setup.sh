@@ -16,7 +16,7 @@ build_cmake () {
     sudo wget $wget_gflag "https://cmake.org/files/v${cmake_ver}/cmake-${cmake_ver}.${cmake_build}.tar.gz"
     sudo tar -zxf "cmake-${cmake_ver}.${cmake_build}.tar.gz"
     cd "cmake-${cmake_ver}.${cmake_build}"
-    sudo ./bootstrap
+    sudo ./bootstrap --parallel=$(nproc)
     sudo make $make_gflag -j$(nproc)
     sudo $sudo_gflag make $make_gflag install -j$(nproc)
     cmake --version
