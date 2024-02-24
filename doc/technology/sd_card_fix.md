@@ -6,6 +6,10 @@ Disk Manager is also a good place to check whether SD card is detected by Window
 
 :bangbang:Proceed with caution:bangbang: Make sure selected drive is correct!
 
+## General Approach
+
+Use image writing tools like [Raspberry Pi Imager](https://www.raspberrypi.com/software/) or [balenaEtcher](https://etcher.balena.io/) to write a image to your SD card, they can sometimes recovers.
+
 ## SD card can't be recognized after loaded with Jetson Nano Image
 
 1. Use [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) to format with default settings.
