@@ -22,11 +22,11 @@ This directory holdes common utilities for this project.
     cd TPM_Sharing_Scheme
     cd common
     chmod +x setup.sh
-    ./setup.sh
-    cd ..
     ```
-5. After the script is finished, and showed "Reboot", reboot.
-6. Edit ```/common/config.ini``` to disable ```setup_optiga``` and enable other components you want to install, and execute ```/common/setup.sh``` again.
+5. After the script is finished, set [./config.ini](./config.ini) item ```install_platform``` to your platform.
+6. Execute [./setup.sh](./setup.sh).
+7. After the script is finished, and showed "Reboot", reboot.
+8. Edit ```/common/config.ini``` to disable ```setup_optiga``` and enable other components you want to install, and execute ```/common/setup.sh``` again.
 
 ## Adjust Installation Components - setup_environment
 
