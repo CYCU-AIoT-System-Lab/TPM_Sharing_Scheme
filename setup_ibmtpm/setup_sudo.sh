@@ -55,16 +55,16 @@ install_req () {
     }
 
     echo_notice "${dirname}" "${filename}-install_req" "Creating directories ..."
-    err_conti_exec "mkdir ${path_ibmtss}" "setup_ibmtpm" "setup-install_req"
-    err_conti_exec "mkdir ${path_ibmtpm}" "setup_ibmtpm" "setup-install_req"
-    err_conti_exec "mkdir ${path_ibmacs}" "setup_ibmtpm" "setup-install_req"
+    err_conti_exec "mkdir ${path_ibmtss}" "${dirname}" "setup-install_req"
+    err_conti_exec "mkdir ${path_ibmtpm}" "${dirname}" "setup-install_req"
+    err_conti_exec "mkdir ${path_ibmacs}" "${dirname}" "setup-install_req"
 
     echo_notice "${dirname}" "${filename}-install_req" "Downloading IBMTPMTSS ..."
-    err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download -O ${path_ibmtss}/${fn_ibmtss}" 1 5 "setup_ibmtpm" "setup-install_req"
+    err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmtpm20tss/files/${fn_ibmtss}/download -O ${path_ibmtss}/${fn_ibmtss}" 1 5 "${dirname}" "setup-install_req"
     echo_notice "${dirname}" "${filename}-install_req" "Downloading IBMSWTPM ..."
-    err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download -O ${path_ibmtpm}/${fn_ibmtpm}" 1 5 "setup_ibmtpm" "setup-install_req"
+    err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmswtpm2/files/${fn_ibmtpm}/download -O ${path_ibmtpm}/${fn_ibmtpm}" 1 5 "${dirname}" "setup-install_req"
     echo_notice "${dirname}" "${filename}-install_req" "Downloading IBMACS ..."
-    err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download -O ${path_ibmacs}/${fn_ibmacs}" 1 5 "setup_ibmtpm" "setup-install_req"
+    err_retry_exec "wget $wget_gflag https://sourceforge.net/projects/ibmtpm20acs/files/${fn_ibmacs}/download -O ${path_ibmacs}/${fn_ibmacs}" 1 5 "${dirname}" "setup-install_req"
 
     echo_notice "${dirname}" "${filename}-install_req" "Extracting IBMTPMTSS ..."
     tar $tar_gflag "${path_ibmtss}/${fn_ibmtss}" -C ${path_ibmtss}
@@ -74,13 +74,13 @@ install_req () {
     tar $tar_gflag "${path_ibmacs}/${fn_ibmacs}" -C ${path_ibmacs}
 
     echo_notice "${dirname}" "${filename}-setup_ibmtpmtss_env" "Creating symbolic link to ${path_ibmtss} ..."
-    err_conti_exec "ln -s ${path_ibmtss} ${base_dir}/ibmtss" "setup_ibmtpm" "setup-setup_ibmtpmtss_env"
+    err_conti_exec "ln -s ${path_ibmtss} ${base_dir}/ibmtss" "${dirname}" "setup-setup_ibmtpmtss_env"
     echo_notice "${dirname}" "${filename}-setup_ibmswtpm_env" "Creating symbolic link to ${path_ibmtpm} ..."
-    err_conti_exec "ln -s ${path_ibmtpm} ${base_dir}/ibmtpm" "setup_ibmtpm" "setup-setup_ibmswtpm_env"
+    err_conti_exec "ln -s ${path_ibmtpm} ${base_dir}/ibmtpm" "${dirname}" "setup-setup_ibmswtpm_env"
     echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Creating symbolic link to ${path_ibmacs} ..."
-    err_conti_exec "ln -s ${path_ibmacs}/acs ${base_dir}/ibmacs" "setup_ibmtpm" "setup-setup_ibmacs_env"
+    err_conti_exec "ln -s ${path_ibmacs}/acs ${base_dir}/ibmacs" "${dirname}" "setup-setup_ibmacs_env"
     echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Creating symbolic link to ${c_json_lib_dir} ..."
-    err_conti_exec "ln -s ${c_json_lib_dir} ${c_json_lib_link_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env"
+    err_conti_exec "ln -s ${c_json_lib_dir} ${c_json_lib_link_dir}" "${dirname}" "setup-setup_ibmacs_env"
 
     echo_notice "${dirname}" "${filename}-setup_install_req" "Installing IBMACS dependencies ..."
     if [ $acsMode == 1 ]; then
@@ -102,7 +102,7 @@ install_req () {
             aptins "mariadb-server"
             aptins "libmariadb-dev-compat"
         else
-            echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
+            echo_error "${dirname}" "setup-setup_ibmacs_env" "Invalid install_platform" 1
         fi
     elif [ $acsMode == 2 ]; then
         # for Client
@@ -115,7 +115,7 @@ install_req () {
             aptins "mariadb-server"
             aptins "libmariadb-dev-compat"
         else
-            echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
+            echo_error "${dirname}" "setup-setup_ibmacs_env" "Invalid install_platform" 1
         fi
     else 
         echo_warn "${dirname}" "${filename}-setup_ibmacs_env" "Invalid acsMode"
@@ -226,7 +226,7 @@ setup_ibmacs_env () {
         #    sed -i 's/mysql\/mysql.h/mariadb\/mysql.h/g' $file
         #done
     else
-        echo_error "setup_ibmtpm" "setup-setup_ibmacs_env" "Invalid install_platform" 1
+        echo_error "${dirname}" "setup-setup_ibmacs_env" "Invalid install_platform" 1
     fi
 
     if [ $acsMode == 1 ]; then
@@ -244,7 +244,7 @@ setup_ibmacs_env () {
     export PATH="${PATH}:${path_ibmtss}/utils:${path_ibmtss}/utils12"
 
     echo_notice "${dirname}" "${filename}-setup_ibmacs_env" "Setting html directory ..."
-    err_conti_exec "mkdir -p ${html_dir}" "setup_ibmtpm" "setup-setup_ibmacs_env"
+    err_conti_exec "mkdir -p ${html_dir}" "${dirname}" "setup-setup_ibmacs_env"
     chown root ${html_dir}
     chgrp root ${html_dir}
     chmod 777 ${html_dir}
@@ -380,7 +380,7 @@ generate_EK () {
         activate_TPM_client
 
         echo_notice "${dirname}" "${filename}-generate_EK" "Backing up NVChip ......"
-        err_retry_exec "cp ${path_NV} ${path_NV}.bak" 1 5 "setup_ibmtpm" "setup-generate_EK"
+        err_retry_exec "cp ${path_NV} ${path_NV}.bak" 1 5 "${dirname}" "setup-generate_EK"
 
         cd "${sym_link_ibmtss}/utils/"
         echo_notice "${dirname}" "${filename}-generate_EK" "Generating RSAEK and load into NV ......"
@@ -424,7 +424,7 @@ set_acs_sql_setting () {
 active_ACS_Demo_Server () {
     if [ $SCmachineMode == 1 ]; then
         echo_notice "${dirname}" "${filename}-active_ACS_Demo_Server" "Activating ACS Demo on same machine ..."
-        err_conti_exec "mkdir ${tpm_data_dir}" "setup_ibmtpm" "setup-active_ACS_Demo_Server"
+        err_conti_exec "mkdir ${tpm_data_dir}" "${dirname}" "setup-active_ACS_Demo_Server"
         export TPM_DATA_DIR="${tpm_data_dir}"
     elif [ $SCmachineMode == 2 ]; then
         echo_notice "${dirname}" "${filename}-active_ACS_Demo_Server" "Activating ACS Demo on different machine ..."
@@ -534,7 +534,7 @@ open_all_logs () {
             printf '\033]2;%s\033\\' "$1"
         }
         tssession=$user
-        err_conti_exec "tmux -2 new-session -d -s $tssession" "setup_ibmtpm" "setup-open_all_logs"
+        err_conti_exec "tmux -2 new-session -d -s $tssession" "${dirname}" "setup-open_all_logs"
         tmux new-window -t $tssession:1 -n 'log4j'
         tmux split-window -h
         tmux split-window -h
