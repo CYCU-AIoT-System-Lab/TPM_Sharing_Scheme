@@ -79,7 +79,7 @@ fi
 
 # Function: continue execution when error occurs
 # Usage: err_conti_exec "command string" "message 1" "message 2"
-# Input variable: $1: command string (ex: "sudo apt-get update && echo "update done")
+# Input variable: $1: command string (ex: "sudo apt update && echo "update done")
 #                 $2: message 1
 #                 $3: message 2
 err_conti_exec () {
@@ -91,7 +91,7 @@ fi
 
 # Function: exit execution when error occurs
 # Usage: err_exit_exec "command string" "message 1" "message 2" exit code
-# Input variable: $1: command string (ex: "sudo apt-get update && echo "update done")
+# Input variable: $1: command string (ex: "sudo apt update && echo "update done")
 #                 $2: message 1
 #                 $3: message 2
 #                 $4: exit code
@@ -104,7 +104,7 @@ fi
 
 # Function: retry execution when error occurs
 # Usage: err_retry_exec "command string" "interval in second" "retry times" "message 1" "message 2" "exit code
-# Input variable: $1: command string (ex: "sudo apt-get update && echo "update done")
+# Input variable: $1: command string (ex: "sudo apt update && echo "update done")
 #                 $2: interval in second (ex: 5, true to skip interval)
 #                 $3: retry times (ex: 3)
 #                 $4: message 1
@@ -214,12 +214,12 @@ if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: clear_dir"
 fi
 
-# Function: install package with apt-get
+# Function: install package with apt
 # Usage: aptins "package name"
 # $1: package name
 aptins () {
     echo_notice "common" "setup" "Installing ${BOLD}${GREEN}$1${END}..."
-    err_retry_exec "sudo apt-get $apt_gflag -o DPkg::Lock::Timeout=300 install $1 -y" 1 5 "common" "functions_aptins" 1
+    err_retry_exec "sudo apt $apt_gflag -o DPkg::Lock::Timeout=300 install $1 -y" 1 5 "common" "functions_aptins" 1
 }
 if [ $verbose == 1 ]; then
     echo_notice "common" "function" "Loaded function: aptins"
