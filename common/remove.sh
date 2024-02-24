@@ -8,8 +8,14 @@ dirname="common"
 filename="remove"
 
 clear_dir $apport_dir
-clear_dir $cmake_dir
-clear_dir $valgrind_dir
+
+if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ] || [ ${install_platform} -eq 5 ]; then
+    clear_dir $cmake_dir
+    clear_dir $valgrind_dir
+    clear_dir /opt/openssl
+else
+    :
+fi
 
 if [ ${job_setup_environment} -eq 1 ]; then
     echo_notice "${dirname}" "${filename}" "Running environment setup Not Implemneted Yet!"
