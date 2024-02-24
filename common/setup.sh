@@ -169,10 +169,10 @@ if [ $job_enable_ssh        -eq 1 ]; then enable_ssh;        fi
 if [ $job_enable_pi_spi     -eq 1 ]; then enable_pi_spi;     fi
 if [ $job_update_src        -eq 1 ]; then update_src;        fi
 if [ $job_change_all_sh_mod -eq 1 ]; then change_all_sh_mod; fi
-if [ $job_install_req       -eq 1 ]; then install_req;       fi
-if [ $job_compile_req       -eq 1 ]; then compile_req;       fi
 if [ $job_config_nvim       -eq 1 ]; then config_nvim;       fi
 if [ $job_config_apport     -eq 1 ]; then config_apport;     fi
+if [ $job_install_req       -eq 1 ]; then install_req;       fi
+if [ $job_compile_req       -eq 1 ]; then compile_req;       fi
 if [ $job_reload_term       -eq 1 ]; then reload_term;       fi
 
 if [ $job_setup_environment -eq 1 ]; then
