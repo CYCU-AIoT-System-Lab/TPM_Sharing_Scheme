@@ -12,6 +12,11 @@ Disk Manager is also a good place to check whether SD card is detected by Window
 2. Right-click on the disk (Windows File Explorer) to format to NTFS format with default settings.
 3. Use [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) to format with default settings.
 
+Edge cases:
+
+1. https://www.minitool.com/news/fix-disk-signature-collision-problem.html
+2. https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/uniqueid
+
 ## Out of Method Method
 
 Sometimes, when SD card flashing is interrupted, Windows File Explorer will show that it requires formatting but can't be formatted after you click it. The following steps will fix this issue: (If the optimization needed notification appears, click ```cancel```)
