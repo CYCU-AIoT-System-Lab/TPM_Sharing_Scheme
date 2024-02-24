@@ -11,12 +11,14 @@ if [ ${job_config_apport} -eq 1 ]; then
     clear_dir $apport_dir
 fi
 
-if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ] || [ ${install_platform} -eq 5 ]; then
-    clear_dir $cmake_dir
-    clear_dir $valgrind_dir
-    clear_dir /opt/openssl
-else
-    :
+if [ ${job_compile_req} -eq 1 ]; then
+    if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ] || [ ${install_platform} -eq 5 ]; then
+        clear_dir $cmake_dir
+        clear_dir $valgrind_dir
+        clear_dir /opt/openssl
+    else
+        :
+    fi
 fi
 
 if [ ${job_setup_environment} -eq 1 ]; then
