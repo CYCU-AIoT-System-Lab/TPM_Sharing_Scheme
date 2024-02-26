@@ -91,6 +91,7 @@ compile_req () {
         cd $working_dir
     elif [ ${install_platform} -eq 5 ]; then
         build_cmake
+        cd $working_dir
     fi
     build_valgrind
     cd $working_dir
