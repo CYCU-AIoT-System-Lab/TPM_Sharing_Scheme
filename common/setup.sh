@@ -79,16 +79,18 @@ install_req () {
         aptins "autoconf"
         aptins "unzip"
     fi
-    if [ ${install_platform} -eq 2 ] || [ ${install_platform} -eq 3 ]; then
+    if [ ${install_platform} -eq 2 ] || [ ${install_platform} -eq 3 ] || [ ${install_platform} -eq 5 ]; then
         aptins "libssl-dev"
     fi
 }
 
 compile_req () {
-    if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ] || [ ${install_platform} -eq 5 ]; then
+    if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ]; then
         build_libssl
         build_cmake
         cd $working_dir
+    elif [ ${install_platform} -eq 5 ]; then
+        build_cmake
     fi
     build_valgrind
     cd $working_dir
