@@ -57,8 +57,9 @@ build_libssl () {
 
 install_req () {
     echo_notice "${dirname}" "${filename}" "Installing required packages..."
-    sudo apt-get $apt_gflag update
-    sudo apt-get $apt_gflag upgrade -y
+    sudo apt $apt_gflag update
+    sudo apt $apt_gflag upgrade -y
+    sudo apt $apt_gflag autoremove -y
     aptins "git"
     aptins "htop"
     #aptins "s-tui"
