@@ -78,7 +78,7 @@ install_req () {
         aptins "autoconf"
         aptins "unzip"
     fi
-    if [ ${install_platform} -eq 2 ] || [ ${install_platform} -eq 3 ] || [ ${install_platform} -eq 5 ]; then
+    if [ ${install_platform} -eq 2 ] || [ ${install_platform} -eq 3 ]; then
         aptins "libssl-dev"
     fi
 }
