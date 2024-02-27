@@ -8,7 +8,7 @@ This directory holdes common utilities for this project.
 1. In terminal, type ```ssh-keygen```, keep pressing ```enter``` till command is finished.
 2. In terminal, type ```cat ~/.ssh/id_rsa.pub```, copy all of the output string.
 3. In browser, go to <https://github.com/settings/ssh/new>, type the name of this key in title, and paste copied RSA public key in.
-4. In terminal, copy the code in [./setup_repo.sh](./setup_repo.sh) into a local bash file and execute it without privilege.
+4. In terminal, copy the code in [./download_repo.sh](./download_repo.sh) into a local bash file and execute it without privilege.
 5. After the script is finished, set [./config.ini](./config.ini) item ```install_platform``` to your platform.
 6. Execute [./setup.sh](./setup.sh).
 7. After the script is finished, and showed "Reboot", reboot.
