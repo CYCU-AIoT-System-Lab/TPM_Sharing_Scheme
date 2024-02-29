@@ -116,7 +116,29 @@ Unfinished
 
 ## Jetson Nano
 
-Unfinished
+Steps:
+
+1. Download the latest JetPack from [NVIDIA Site](https://developer.nvidia.com/jetson-nano-sd-card-image)
+2. Download [BalenaEtcher](https://etcher.balena.io/) and install it.
+3. Connect a microSD card reader with the microSD card inside to your PC.
+4. Open BalenaEtcher
+    1. click ```Flash from file``` and select the downloaded JetPack file (.zip) in step 1
+    2. click ```Select target``` and choose your microSD card
+    3. click ```Flash!``` and wait till the writing process is finished (can skip verification)
+5. Insert the microSD card into the Jetson Nano, connect the Jetson Nano to a monitor (HDMI), keyboard, mouse, and lastly power supply. (Jetson Nano should bootup)
+6. After ```System Configuration``` tab appears, click ```I accept the terms of these licenses``` and click ```Continue```.
+7. Select system language to your preference, then click ```Continue```.
+8. Select keyboard layout to your preference, then click ```Continue```.
+9. Connect to either a Wi-Fi or a wired network, then click ```Continue```.
+10. Select your location for correct time and date, then click ```Continue```.
+11. Type in your name, computer name, username, and password, then click ```Continue```.
+12. In ```APP Partition Size```, type in the maximum allowed number (use the full SD card), then click ```Continue```.
+13. In ```Select Nvpmodel Mode```, use the default option, then click ```Continue```. Wait till the installation process is finished and auto rebooted.
+
+Refer to following link for original sources:
+
+1. [Get Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#intro)
+2. [Jetson AI Fundamentals - S1E1 - First Time Setup with JetPack](https://youtu.be/uvU8AXY1170?si=Qf2Bg7mnXAK7APGU)
 
 ## Common Issue
 
