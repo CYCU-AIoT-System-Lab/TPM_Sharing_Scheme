@@ -20,7 +20,8 @@ deploy_repo () {
     err_retry_exec "git clone $repo_ssh_link" 1 5 "${dirname}" "${filename}-deploy_repo"
 
     echo_notice "${dirname}" "${filename}-deploy_repo" "Installing dependencies ..."
-    err_retry_exec "pip install ${pip_dep}" 1 5 "${dirname}" "${filename}-deploy_repo"
+    err_retry_exec "aptins ${apt_dep}" 1 5 "${dirname}" "${filename}-deploy_repo"
+    err_retry_exec "pip3 install ${pip_dep}" 1 5 "${dirname}" "${filename}-deploy_repo"
 }
 
 exec_main () {
