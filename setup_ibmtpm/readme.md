@@ -36,6 +36,19 @@ Currently, ACS doesn't support TPM2.0.
 2. [IBM Attestation Client Server测试](https://rlyown.github.io/2021/02/28/IBM-Attestation-Client-Server%E6%B5%8B%E8%AF%95/)
 3. [记一次双系统配置TPM的过程](https://rlyown.github.io/2021/05/29/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%8F%8C%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AETPM%E7%9A%84%E8%BF%87%E7%A8%8B/#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99)
 4. https://github.com/kgoldman/ibmtss/issues/10
+5. [Paper: Subverting Linux' Integrity Measurement Architecture](https://svs.informatik.uni-hamburg.de/publications/2020/2020-08-27-Bohling-IMA.pdf)
+6. [Linux man page: tpm_quote_tools(8)](https://linux.die.net/man/8/tpm_quote_tools)
+7. [Infineon/remote-attestation-optiga-tpm](https://github.com/Infineon/remote-attestation-optiga-tpm)
+8. [LWN.net ima: directory and special files integrity protection](https://lwn.net/Articles/512364/)
+9. [LWN.net LSS: Integrity for directories and special files](https://lwn.net/Articles/516334/)
+10. [FiveDirections/IMA: File Integrity Monitoring for Linux](https://github.com/FiveDirections/IMA)
+11. [SourceForge: Integrity Measurement Architecture (IMA) Wiki](https://sourceforge.net/p/linux-ima/wiki/Home/)
+12. [YouTube: TPM (Trusted Platform Module) - Computerphile](https://youtu.be/RW2zHvVO09g?si=zcRH45MMXyjJSKKm)
+13. [YouTube: An Unified TPM Event Log for Linux](https://youtu.be/FA1O3fuPQDk?si=K1z7dl8-cpbZpAis)
+14. [YouTube: Using the TPM - It's Not Rocket Science (Anymore) - Johannes Holland & Peter Huewe](https://youtu.be/XwaSyHJIos8?si=Z2K7q_Jwu0uqy26w)
+15. [YouTube: "TPM based attestation - how can we use it for good?" - Matthew Garrett (LCA 2020)](https://youtu.be/FobfM9S9xSI?si=5sJ616F-f-SlhL97)
+16. [YouTube: Securing Embedded Linux Systems with TPM 2.0 - Philip Tricca, Intel](https://youtu.be/0qu9R7Tlw9o?si=ptPCEsUcgdMNVZz6)
+17. [YouTube: Better Data Security with Commodity TPM Chips - Haris Okanovic, National Instruments](https://youtu.be/fu2RGBcb9aQ?si=_DyP3f0Lc9KXTJK_)
 
 ## Possible Bugs
 
