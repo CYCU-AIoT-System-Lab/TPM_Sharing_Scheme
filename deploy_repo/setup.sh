@@ -21,8 +21,8 @@ deploy_repo () {
 
     echo_notice "${dirname}" "${filename}-deploy_repo" "Solving dependencies ..."
     err_retry_exec "sudo apt remove ${apt_rm_dep} -y" 1 5 "${dirname}" "${filename}-deploy_repo"
-    err_retry_exec "python3 -m pip install --upgrade pip" 1 5 "${dirname}" "${filename}-deploy_repo"
     err_retry_exec "aptins ${apt_dep}" 1 5 "${dirname}" "${filename}-deploy_repo"
+    err_retry_exec "python3 -m pip install --upgrade pip" 1 5 "${dirname}" "${filename}-deploy_repo"
     err_retry_exec "python3 -m pip install ${pip_dep_flag} ${pip_dep}" 1 5 "${dirname}" "${filename}-deploy_repo"
 }
 
