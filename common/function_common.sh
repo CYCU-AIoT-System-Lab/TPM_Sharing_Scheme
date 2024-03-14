@@ -52,6 +52,7 @@ load_preset () {
     check_var job_setup_optiga 1
     check_var job_enable_ssh 1
     check_var job_enable_pi_spi 1
+    check_var job_deploy_repo 1
 }
 if [ $verbose == 1 ]; then
     echo_notice "${dirname}" "${filename}" "Loaded function: load_preset"
@@ -89,6 +90,7 @@ clear_preset () {
     unset job_setup_optiga
     unset job_enable_ssh
     unset job_enable_pi_spi
+    unset job_deploy_repo
 }
 if [ $verbose == 1 ]; then
     echo_notice "${dirname}" "${filename}" "Loaded function: clear_preset"

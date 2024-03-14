@@ -213,6 +213,15 @@ else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_optiga ! Skipping setup_optiga..."
 fi
 
+cd $working_dir
+if [ $job_deploy_repo -eq 1 ]; then
+    echo_notice "${dirname}" "${filename}" "Running deploy_repo setup..."
+    cd ../deploy_repo
+    install_platform=$install_platform bash ./setup.sh
+else
+    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_deploy_repo ! Skipping setup_deploy_repo..."
+fi
+
 clear_preset
 
 echo_notice "${dirname}" "${filename}" "All setup complete."

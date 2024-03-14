@@ -53,4 +53,12 @@ else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_optiga ! Skipping remove of setup_optiga..."
 fi
 
+if [ ${job_deploy_repo} -eq 1 ]; then
+    echo_notice "${dirname}" "${filename}" "Running deploy_repo remove..."
+    cd ../deploy_repo
+    install_platform=$install_platform bash ./remove.sh
+else
+    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_deploy_repo ! Skipping remove of setup_deploy_repo..."
+fi
+
 clear_preset
