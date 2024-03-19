@@ -9,4 +9,7 @@ filename="remove"
 
 clear_dir "mmWAVE_Radar"
 
+cd "$(dirname "${remove_path}")"
+bash "$(basename "${remove_path}")"
+
 clear_preset
