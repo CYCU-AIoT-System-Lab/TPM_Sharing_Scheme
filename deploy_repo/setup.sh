@@ -20,14 +20,18 @@ deploy_repo () {
     err_retry_exec "git clone $repo_ssh_link" 1 5 "${dirname}" "${filename}-deploy_repo"
 
     echo_notice "${dirname}" "${filename}-deploy_repo" "Executing setup script ..."
-    cd "$(dirname "${setup_path}")"
+    current_path="$(pwd)"
+    cd "$(pwd)$(dirname "${setup_path}")"
     bash "$(basename "${setup_path}")"
+    cd "${current_path}"
 }
 
 exec_main () {
     echo_notice "${dirname}" "${filename}" "Running main script ..."
+    current_path="$(pwd)"
     cd "$(dirname "${main_path}")"
     bash "$(basename "${main_path}")"
+    cd "${current_path}"
 }
 
 echo_notice "${dirname}" "${filename}" "Running setup script ..."
