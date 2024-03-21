@@ -21,7 +21,7 @@ deploy_repo () {
 
     echo_notice "${dirname}" "${filename}-deploy_repo" "Executing setup script ..."
     current_path="$(pwd)"
-    cd "$(pwd)$(dirname "${setup_path}")"
+    cd "$(dirname "${setup_path}")"
     bash "$(basename "${setup_path}")"
     cd "${current_path}"
 }
