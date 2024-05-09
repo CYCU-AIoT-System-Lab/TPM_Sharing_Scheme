@@ -12,4 +12,4 @@ sudo docker build --build-arg PACKAGE_NAME=$proj_name -t ${proj_name}_pkg_image 
 
 echo "Create new container from image"
 sudo docker run -it --name ${proj_name}_container ${proj_name}_pkg_image
-sudo docker run --name ${proj_name}_container ${proj_name}_pkg_image
+#sudo docker run --name ${proj_name}_container ${proj_name}_pkg_image
