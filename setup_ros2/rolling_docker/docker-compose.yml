@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  talker:
+    image: ros_cpp_pubsub_pkg_image
+    command: . src/ros_cpp_pubsub/install/setup.bash && ros2 run ros_cpp_pubsub talker
+  listener:
+    image: ros_cpp_pubsub_pkg_image
+    command: . src/ros_cpp_pubsub/install/setup.bash ros2 run ros_cpp_pubsub listener
+    depends_on:
+      - talker
