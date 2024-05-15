@@ -1,0 +1,16 @@
+#!/bin/bash
+set -x
+
+# Ref: https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html
+
+sudo apt remove --purge -y chromium-browser chromium-browser-l10n
+sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y
+sudo sed -i '/Prompt=never/c\Prompt=normal' /etc/update-manager/release-upgrades
+sudo apt update
+sudo apt dist-upgrade -y
+
+# Perform required reboot
+read -rsn1 -p "Press any key to perform required reboot ..."
+reboot

@@ -1,5 +1,5 @@
 #!/bin/bash
-set +x
+set -x
 
 sudo apt install -y curl gnupg2 lsb-release
 wget -nv --show-progress https://github.com/ros2/ros2/releases/download/release-humble-20240222/ros2-humble-20240222-linux-jammy-arm64.tar.bz2 --output-document ros2-humble-20240222-linux-jammy-arm64.tar.bz2
