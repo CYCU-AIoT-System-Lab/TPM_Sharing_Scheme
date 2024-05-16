@@ -41,5 +41,6 @@ sudo apt update
 sudo apt upgrade -y
 
 # Perform required reboot
+echo ""
 read -rsn1 -p "Press any key to perform required reboot ..."
 reboot
