@@ -5,6 +5,7 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 echo $script_path
 
+# Check if script is run from its directory
 if [[ ! $script_path == *"/setup_ros2/bin_ros_20"* ]]; then
     echo "Please run this script from its directory"
     exit 1
@@ -12,11 +13,15 @@ fi
 
 mkdir -p $ros_workspace
 cd $ros_workspace
-source $ros_source
+source $ros_source || { echo "ROS is not installed in default location \"~/ros2_${ros_distro} or not installed!"; exit 1; }
 
+# Create ROS2 package
 ros2 pkg create --build-type ament_cmake ${ros_package}
 
+# Copy source files
 cp $script_path/*.cpp ${package_dir}/src
+
+# Modify build dependencies
 sed -i '11 i <depend>rclcpp</depend>\n<depend>std_msgs</depend>' ${package_dir}/package.xml
 sed -i '13 i find_package(rclcpp REQUIRED)\nfind_package(std_msgs REQUIRED)' ${package_dir}/CMakeLists.txt
 sed -i '16 i add_executable('${package_node1}' src/publisher_member_function.cpp)\n' ${package_dir}/CMakeLists.txt
