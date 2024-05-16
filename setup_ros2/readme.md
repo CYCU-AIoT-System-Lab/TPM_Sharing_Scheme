@@ -4,10 +4,20 @@ For raspberry pi platform, docker is required; for jetson nano, use normal binar
 
 ROS2 Humble is prefered then Iron for longer support (LTS 2027).
 
+## Structure
+
+- [./bin_ros_18](./bin_ros_18): ROS2 humble binary installation for approach 1
+- [./bin_ros_20](./bin_ros_20): ROS2 humble binary installation for approach 3
+- [./rolling_docker](./rolling_docker): ROS2 rolling arm linux docker environment for approach 2
+- [./upgrade_jetson](./upgrade_jetson): Upgrade Jetpack Ubuntu 18.04 to 20.04 for approach 3
+- [./readme.md](./readme.md): This file
+
 ## Development Approach
 
-- ROS2 Humble, binary installation, rclpy can't be imported and installed
-- ROS2 Rolling, docker environment, local machine pub sub success, cross machine pub sub failed
+1. Jetson Nano: ROS2 Humble, binary installation, rclpy can't be imported and installed
+2. Jetson Nano: ROS2 Rolling, docker environment, local machine pub sub success, cross machine pub sub failed
+3. Jetson Nano: Upgrade Jetpack Ubuntu 18.04 to 20.04, ROS2 Humble, binary installation, conducting
+4. Raspberry Pi: Ubuntu 24.04, ROS2 Humble, binary installation, success by labmate
 
 ## References
 
