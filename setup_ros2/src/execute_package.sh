@@ -10,8 +10,8 @@ echo -e "3. ${ros_package} | ${package_node3}"
 echo -e "4. ${ros_package} | ${package_node4}"
 echo -e "Else, exit.\n"
 
-read -rsn1 -p "Press number key to execute package ..." key
-echo ""
+read -rsn1 -p "Press number key to execute ..." key
+echo -e "\n"
 
 if [ "$key" == "1" ]; then
     ros2 run ${ros_package} ${package_node1}
