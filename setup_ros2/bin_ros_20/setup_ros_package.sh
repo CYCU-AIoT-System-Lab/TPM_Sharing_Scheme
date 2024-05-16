@@ -3,6 +3,12 @@ source common.sh
 
 script=$(realpath "$0")
 script_path=$(dirname "$script")
+echo $script_path
+
+if [[ ! $script_path == *"/setup_ros2/bin_ros_20"* ]]; then
+    echo "Please run this script from its directory"
+    exit 1
+fi
 
 mkdir -p $ros_workspace
 cd $ros_workspace
@@ -23,7 +29,5 @@ sed -i '22 i ament_target_dependencies('${package_node3}' rclcpp std_msgs)\n' ${
 sed -i '23 i ament_target_dependencies('${package_node4}' rclcpp std_msgs)\n' ${package_dir}/CMakeLists.txt
 sed -i '24 i install(TARGETS\n\t'${package_node1}'\n\t'${package_node2}'\n\t'${package_node3}'\n\t'${package_node4}'\n\tDESTINATION\n\tlib/${PROJECT_NAME})\n' ${package_dir}/CMakeLists.txt
 
-rosdep install -i --from-path . --rosdistro $ros_distro -y
-colcon build --packages-select ${ros_package}
-
-echo "Build comple"
+cd $script_path
+source build_ros.sh

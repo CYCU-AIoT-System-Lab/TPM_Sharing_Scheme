@@ -1,5 +1,6 @@
 #!/bin/bash
 #set -x
+set -e
 
 ros_distro="humble"
 ros_package="remote_controller"
