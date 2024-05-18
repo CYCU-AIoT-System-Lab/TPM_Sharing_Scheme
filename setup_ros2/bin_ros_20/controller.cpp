@@ -35,13 +35,13 @@ private:
         if (valid_input) {
             RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
             publisher_->publish(message);
+            ++count_;
         } else {
             RCLCPP_INFO(this->get_logger(), "Invalid input: '%s'", message.data.c_str());
         }
-        if (count_++ > 1) {
+        if (count_ >= 1) {
             rclcpp::shutdown();
         }
-        rclcpp::shutdown();
     }
     rclcpp::TimerBase::SharedPtr timer_;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
