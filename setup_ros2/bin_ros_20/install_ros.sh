@@ -16,6 +16,12 @@ export LANG=en_US.UTF-8
 
 locale  # verify settings
 
+echo "> Creating python 3.8 virtual environment ..."
+sudo apt install -y python3.8-venv
+cd $HOME
+python3.8 -m venv venv
+source $HOME/venv/bin/activate
+
 echo "> Add the ROS 2 apt repository ..."
 sudo apt install software-properties-common
 sudo add-apt-repository universe
@@ -59,7 +65,8 @@ sudo apt install -y --fix-missing \
 
 pip3 install \
     empy \
-    lark
+    lark \
+    catkin_pkg
 
 echo "> Get ROS2 code ..."
 mkdir -p $ros_distro_ws/src

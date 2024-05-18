@@ -1,4 +1,5 @@
 #!/bin/bash
+source $HOME/venv/bin/activate || echo "> Python 3.8 virtual environment not found, defaulting to system python3"
 
 # Try to source ROS2 workspace
 echo "> Trying to source ROS2 workspace setup.bash, if it exists..."
