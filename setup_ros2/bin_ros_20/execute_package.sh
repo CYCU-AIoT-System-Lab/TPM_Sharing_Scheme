@@ -1,6 +1,7 @@
 #!/bin/bash
 source common.sh
 source load_ros_env.sh
+source $ros_workspace/install/setup.bash
 
 echo -e "\nAvailable nodes in package:"
 echo -e "1. ${ros_package} | ${package_node1}"
