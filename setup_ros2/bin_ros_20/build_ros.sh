@@ -1,6 +1,5 @@
 #!/bin/bash
 source common.sh
-source $ros_source
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 

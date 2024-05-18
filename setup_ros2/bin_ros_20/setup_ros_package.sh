@@ -1,6 +1,6 @@
 #!/bin/bash
 source common.sh
-
+source load_ros_env.sh
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 
@@ -13,7 +13,6 @@ fi
 echo "> Entering ROS2 workspace"
 mkdir -p $ros_workspace
 cd $ros_workspace
-source $ros_source || { echo "ROS is not installed in default location \"~/ros2_${ros_distro} or not installed!"; exit 1; }
 
 echo "> Creating ROS2 package"
 ros2 pkg create --build-type ament_cmake ${ros_package}

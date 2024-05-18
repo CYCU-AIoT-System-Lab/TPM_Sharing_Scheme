@@ -44,18 +44,6 @@ python3 -m pip install -U \
    pytest-repeat \
    pytest-rerunfailures
 
-echo "> Get ROS2 code ..."
-mkdir -p $ros_distro_ws/src
-cd $ros_distro_ws
-vcs import --input https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos src
-
-echo "> Install dependencies using rosdep ..."
-sudo apt upgrade
-sudo rosdep init
-rosdep update
-cd $ros_distro_ws
-rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"
-
 echo "> Get library dependencies ..."
 sudo apt install -y --fix-missing \ 
     build-essential \
@@ -72,6 +60,18 @@ sudo apt install -y --fix-missing \
 pip3 install \
     empy \
     lark
+
+echo "> Get ROS2 code ..."
+mkdir -p $ros_distro_ws/src
+cd $ros_distro_ws
+vcs import --input https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos src
+
+echo "> Install dependencies using rosdep ..."
+sudo apt upgrade
+sudo rosdep init
+rosdep update
+cd $ros_distro_ws
+rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"
 
 # If python related issues, try to re-perform \"rosdep install\" command 21 lines above
 echo "> Build the code in the workspace ..."
