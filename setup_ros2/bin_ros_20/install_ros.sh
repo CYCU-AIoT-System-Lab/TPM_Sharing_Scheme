@@ -45,7 +45,7 @@ python3 -m pip install -U \
    pytest-rerunfailures
 
 echo "> Get library dependencies ..."
-sudo apt install -y --fix-missing \ 
+sudo apt install -y --fix-missing \
     build-essential \
     libacl1-dev \
     libtinyxml2-dev \
@@ -55,8 +55,8 @@ sudo apt install -y --fix-missing \
     python3-pyqt5 \
     qtcreator \
     qt5-default \
-    qtbase5-examples \
     libfreetype6-dev
+
 pip3 install \
     empy \
     lark
