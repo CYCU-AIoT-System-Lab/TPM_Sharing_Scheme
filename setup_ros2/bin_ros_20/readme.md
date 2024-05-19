@@ -35,7 +35,7 @@ Video available at YouTube: [https://youtu.be/H-CKrWAzGJA](https://youtu.be/H-CK
 - [./publisher_member_function.cpp](./publisher_member_function.cpp): A publisher example script from ROS2 tutorial.
 - [./subscriber_member_function.cpp](./subscriber_member_function.cpp): A subscriber example script from ROS2 tutorial.
 - [./controller.cpp](./controller.cpp): A controller for demo.
-- [./car.cpp](./car.cpp): A control protocol development helper.
+- [./car.cpp](./car.cpp): A control protocol development helper dummy.
 
 ## Debugging
 
