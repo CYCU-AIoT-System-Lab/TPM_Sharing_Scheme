@@ -1,16 +1,21 @@
 # Binary ROS2 Installation on Ubuntu 20.04 and after
 
+## Demo
+
+Video available at YouTube: [https://youtu.be/H-CKrWAzGJA](https://youtu.be/H-CKrWAzGJA).
+
 ## Structure
 
 ### Utilities
 
+- [./install_ros.sh](./install_ros.sh): Install ROS2 binary and build from source on Jetson Nano with Ubuntu 20.04.
 - [./setup_ros_package.sh](./setup_ros_package.sh): Create a new package with CPP source code in this directory.
     1. Check executing path.
     2. Create ROS working space and package.
     3. Create initial file structure in package.
     4. Modify `package.xml` and `CMakeLists.txt` for the package.
     5. Call `build_ros.sh`.
-- [./build_ros.sh](./build_ros.sh): Perform `colcon build` for this package.
+- [./build_package.sh](./build_package.sh): Perform `colcon build` for this package.
     1. Copy source file to package directory.
     2. Use `rosdep` to install erquired dependencies.
     3. Use `colcon build` to build the package.
@@ -23,6 +28,7 @@
     1. Set bash execution mode.
     2. Set common variables.
     3. Set nodes in package.
+- [./load_ros_env.sh](./load_ros_env.sh): Load ROS2 environment variables.
 
 ### Source Code
 
