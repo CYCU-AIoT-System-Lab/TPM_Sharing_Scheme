@@ -31,7 +31,6 @@
 - [./controller.cpp](./controller.cpp): A controller for demo.
 - [./car.cpp](./car.cpp): A control protocol development helper.
 
-### Update answer sequence
+## Debugging
 
-1. enter
-2. y enter
+1. If can't exit spawned ROS2 process, use `Ctrl + z` to pause the process and `kill -9 <PID>` to kill the process.
