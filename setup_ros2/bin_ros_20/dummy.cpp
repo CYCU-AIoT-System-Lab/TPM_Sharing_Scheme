@@ -10,6 +10,8 @@ using namespace std::chrono_literals;
 using std::placeholders::_1;
 
 std::string pub_sub_topic = "controll_signal";
+std::string ready_sig = "ready";
+std::string term_sig  = "terminate";
 std::chrono::duration<int, std::milli> pub_interval = 100ms;
 std::chrono::duration<int, std::milli> sub_interval = 10s;
 std::chrono::duration<int, std::milli> sleep_interval = 2s;
@@ -32,7 +34,7 @@ private:
     {
         ++count_;
         auto message = std_msgs::msg::String();
-        message.data = "ready";
+        message.data = ready_sig;
         publisher_->publish(message);
         if (count_ >= consecutive_publish_cnt) {
             rclcpp::shutdown();
@@ -60,7 +62,7 @@ private:
     {
         ++count_;
         auto message = std_msgs::msg::String();
-        message.data = "terminate";
+        message.data = term_sig;
         publisher_->publish(message);
         if (count_ >= consecutive_publish_cnt) {
             rclcpp::shutdown();

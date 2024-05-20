@@ -11,6 +11,8 @@ using namespace std::chrono_literals;
 using std::placeholders::_1;
 
 std::string pub_sub_topic = "controll_signal";
+std::string ready_sig = "ready";
+std::string term_sig  = "terminate";
 std::chrono::duration<int, std::milli> pub_interval = 10ms;
 std::chrono::duration<int, std::milli> sub_interval = 1s;
 long unsigned int consecutive_publish_cnt = 1;
@@ -66,7 +68,7 @@ public:
 private:
     void topic_callback(const std_msgs::msg::String::SharedPtr msg) const
     {
-        if (msg->data == "ready") {
+        if (msg->data == ready_sig) {
             RCLCPP_INFO(this->get_logger(), "I heard: '%s'", msg->data.c_str());
             ready = true;
             rclcpp::shutdown();
@@ -91,7 +93,7 @@ public:
 private:
     void topic_callback(const std_msgs::msg::String::SharedPtr msg) const
     {
-        if (msg->data == "terminate") {
+        if (msg->data == term_sig) {
             RCLCPP_INFO(this->get_logger(), "I heard: '%s'", msg->data.c_str());
             ready = false;
             rclcpp::shutdown();

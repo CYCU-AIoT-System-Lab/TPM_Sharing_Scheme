@@ -11,4 +11,4 @@ package_dir="${ros_workspace}/${ros_package}"
 package_node1="talker"          # default demo
 package_node2="listener"        # default demo
 package_node3="controller"
-package_node4="car"
+package_node4="dummy"

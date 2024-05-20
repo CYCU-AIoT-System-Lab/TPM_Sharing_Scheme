@@ -9,6 +9,7 @@ Video available at YouTube: [https://youtu.be/H-CKrWAzGJA](https://youtu.be/H-CK
 ### Utilities
 
 - [./install_ros.sh](./install_ros.sh): Install ROS2 binary and build from source on Jetson Nano with Ubuntu 20.04.
+- [./uninstall_ros.sh](./uninstall_ros.sh): Uninstall ROS2 from Jetson Nano.
 - [./setup_ros_package.sh](./setup_ros_package.sh): Create a new package with CPP source code in this directory.
     1. Check executing path.
     2. Create ROS working space and package.
