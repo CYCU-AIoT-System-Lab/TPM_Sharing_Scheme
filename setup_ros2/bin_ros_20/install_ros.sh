@@ -87,14 +87,18 @@ rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext
 # *qt* can't be compiled due to PyQt5 dependency issue
 echo "> Build the code in the workspace ..."
 cd $ros_distro_ws
+#colcon build --symlink-install \
+#    --packages-ignore rviz_rendering \
+#                      rviz_rendering_tests \
+#                      rviz_common \
+#                      rviz_visual_testing_framework \
+#                      rviz_default_plugins \
+#                      rviz2 \
+#                      qt_gui_cpp \
+#                      rqt_gui_cpp
 colcon build --symlink-install \
-    --packages-ignore rviz_rendering \
-                      rviz_rendering_tests \
-                      rviz_common \
-                      rviz_visual_testing_framework \
-                      rviz_default_plugins \
-                      rviz2 \
-                      qt_gui_cpp \
+    --packages-skip-regex rviz* \
+    --packages-ignore qt_gui_cpp \
                       rqt_gui_cpp
 
 echo "> Finished installing ROS 2 Humble"
