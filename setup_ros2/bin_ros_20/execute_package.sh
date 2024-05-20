@@ -12,6 +12,7 @@ source $ros_workspace/install/setup.bash
 # local: ""
 ros_master_uri="master"
 ros_master_uri="http://192.168.1.113"
+ros_master_local=""
 ros_port=11311
 ros_domain_id=5
 # ==========================================================
