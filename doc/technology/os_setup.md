@@ -140,6 +140,27 @@ Refer to following link for original sources:
 1. [Get Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#intro)
 2. [Jetson AI Fundamentals - S1E1 - First Time Setup with JetPack](https://youtu.be/uvU8AXY1170?si=Qf2Bg7mnXAK7APGU)
 
+## VM Bridge Network Adapter to Gain IP Address
+
+Steps:
+
+1. Make sure your VM is working normally. It should be able to `ping` other devices, but others can't `ping` it.
+2. Shutdown the VM.
+3. Change VM network settings:
+    1. Click the VM, click `Edit virtual machine settings`, click `Network Adapter`
+    2. Change from `NAT: Used to share the host's IP address` to `Bridged: Connected directly to the physical network`
+    3. Tick `Replicate physical network connection state`
+    4. Click `Configure Adapters`, dis-select everything in the `Automatic Bridging Settings` window besides your `WiFi` card, click `OK`.
+    5. Click `OK`
+4. Boot up your VM, it should now have a working IP address that can be `ping` by other devices.
+5. (optional) Ubuntu UFW (firewall) can still potentially block your communication, check reference (3) for instructions to change UFW rules.
+
+Refer to following link for original sources:
+
+1. [https://stackoverflow.com/questions/18278409/cant-ping-a-local-vm-from-the-host](https://stackoverflow.com/questions/18278409/cant-ping-a-local-vm-from-the-host)
+2. [Fix VMware Bridged Network not working on Windows 10 Host | Fix VMware Bridged Network not Working by TechSolutionZ](https://youtu.be/CSKgy2sfD_8?si=sC3LfvHPmptmPHaJ)
+3. [https://www.geeksforgeeks.org/ubuntu-disable-firewall/](https://www.geeksforgeeks.org/ubuntu-disable-firewall/)
+
 ## Common Issue
 
 1. Computer get super laggy, clunky, buggy suddenly after long usage even after restarting (Windows 11)
