@@ -18,8 +18,7 @@ locale  # verify settings
 
 echo "> Creating python 3.8 virtual environment ..."
 sudo apt install -y python3.8-venv
-cd $HOME
-python3.8 -m venv venv
+python3.8 -m venv $HOME/venv
 source $HOME/venv/bin/activate
 
 echo "> Add the ROS 2 apt repository ..."
@@ -63,8 +62,11 @@ sudo apt install -y --fix-missing \
     qt5-default \
     libfreetype6-dev
 
+# empy version must be below 4.0
+# https://robotics.stackexchange.com/questions/109773/colcon-build-problem
+# https://stackoverflow.com/questions/77642155/attributeerror-module-object-has-no-attribute-raw-opt/77656642#77656642
 pip3 install \
-    empy \
+    empy==3.3.4 \
     lark \
     catkin_pkg
 
@@ -81,6 +83,8 @@ cd $ros_distro_ws
 rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"
 
 # If python related issues, try to re-perform \"rosdep install\" command 21 lines above
+# rviz* can't be compiled due to rviz_rendering dependency issue
+# *qt* can't be compiled due to PyQt5 dependency issue
 echo "> Build the code in the workspace ..."
 cd $ros_distro_ws
 colcon build --symlink-install \
@@ -89,6 +93,8 @@ colcon build --symlink-install \
                       rviz_common \
                       rviz_visual_testing_framework \
                       rviz_default_plugins \
-                      rviz2
+                      rviz2 \
+                      qt_gui_cpp \
+                      rqt_gui_cpp
 
 echo "> Finished installing ROS 2 Humble"
