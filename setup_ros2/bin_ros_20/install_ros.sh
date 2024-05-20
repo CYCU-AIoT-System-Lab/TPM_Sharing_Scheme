@@ -35,7 +35,8 @@ sudo apt update && sudo apt install -y \
   python3-flake8-docstrings \
   python3-pip \
   python3-pytest-cov \
-  ros-dev-tools
+  ros-dev-tools \
+  python3-roslaunch
 
 python3 -m pip install -U \
    flake8-blind-except \
