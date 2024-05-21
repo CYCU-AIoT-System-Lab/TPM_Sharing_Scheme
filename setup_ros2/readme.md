@@ -16,8 +16,9 @@ ROS2 Humble is prefered then Iron for longer support (LTS 2027).
 
 1. Jetson Nano: ROS2 Humble, binary installation, rclpy can't be imported and installed
 2. Jetson Nano: ROS2 Rolling, docker environment, local machine pub sub success, cross machine pub sub failed
-3. Jetson Nano: Upgrade Jetpack Ubuntu 18.04 to 20.04, ROS2 Humble, binary installation, conducting
-4. Raspberry Pi: Ubuntu 24.04, ROS2 Humble, binary installation, success by labmate
+3. Jetson Nano: Upgrade Jetpack Ubuntu 18.04 to 20.04, ROS2 Humble, binary installation, proven successful
+4. Jetson Nano: Upgrade Jetpack Ubuntu 18.04 to 22.04, ROS2 Humble, debian package installation, not worked on
+5. Raspberry Pi: Ubuntu 24.04, ROS2 Humble, binary installation, success by labmate
 
 ## References
 
