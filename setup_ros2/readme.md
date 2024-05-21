@@ -4,6 +4,8 @@ For raspberry pi platform, docker is required; for jetson nano, use normal binar
 
 ROS2 Humble is prefered then Iron for longer support (LTS 2027).
 
+Note: This directory can not be automatically installed with [../common/setup.sh](../common/setup.sh) since the working approach requires OS upgrade.
+
 ## Structure
 
 - [./bin_ros_18](./bin_ros_18): ROS2 humble binary installation for approach 1

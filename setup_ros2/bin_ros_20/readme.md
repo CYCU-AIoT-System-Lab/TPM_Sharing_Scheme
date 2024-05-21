@@ -6,6 +6,15 @@ Local execution video available at YouTube: [https://youtu.be/Ygegn1MnVTE](https
 
 Cross machine execution video available at YouTube: [https://youtu.be/SdiJkYvwXNQ](https://youtu.be/SdiJkYvwXNQ).
 
+## Setup
+
+```bash
+chmod +x *.sh
+./install_ros.sh
+./setup_ros_package.sh
+./execute_ros_package.sh
+```
+
 ## Structure
 
 ### Utilities
