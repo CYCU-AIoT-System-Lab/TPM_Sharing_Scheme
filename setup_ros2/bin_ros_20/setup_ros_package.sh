@@ -31,4 +31,4 @@ sed -i '23 i ament_target_dependencies('${package_node4}' rclcpp std_msgs)'     
 sed -i '24 i install(TARGETS\n\t'${package_node1}'\n\t'${package_node2}'\n\t'${package_node3}'\n\t'${package_node4}'\n\tDESTINATION\n\tlib/${PROJECT_NAME})\n' ${package_dir}/CMakeLists.txt
 
 cd $script_path
-source build_package.sh
+source build_ros_package.sh
