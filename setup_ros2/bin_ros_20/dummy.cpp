@@ -9,7 +9,7 @@
 using namespace std::chrono_literals;
 using std::placeholders::_1;
 
-std::string pub_sub_topic = "controll_signal";
+std::string pub_sub_topic = "control_signal";
 std::string ready_sig = "ready";
 std::string term_sig  = "terminate";
 std::chrono::duration<int, std::milli> pub_interval = 100ms;

@@ -18,13 +18,13 @@ Cross machine execution video available at YouTube: [https://youtu.be/SdiJkYvwXN
     3. Create initial file structure in package.
     4. Modify `package.xml` and `CMakeLists.txt` for the package.
     5. Call `build_ros.sh`.
-- [./build_package.sh](./build_package.sh): Perform `colcon build` for this package.
+- [./build_ros_package.sh](./build_ros_package.sh): Perform `colcon build` for this package.
     1. Copy source file to package directory.
     2. Use `rosdep` to install erquired dependencies.
     3. Use `colcon build` to build the package.
 - [./remove_ros_package.sh](./remove_ros_package.sh): Remove this package from workspace.
     1. Remove the entire package.
-- [./execute_package.sh](./execute_package.sh): Execute user selected package with number input.
+- [./execute_ros_package.sh](./execute_ros_package.sh): Execute user selected package with number input.
     1. List out all nodes in the package.
     2. Execute the selected node.
 - [./common.sh](./common.sh): General settings for utilities.

@@ -1,6 +1,7 @@
 #!/bin/bash
 source common.sh
 source load_ros_env.sh
+echo "> Trying to source ROS2 workspace setup.bash ..."
 source $ros_workspace/install/setup.bash
 
 # ==========================================================
@@ -53,7 +54,7 @@ if [ "$key" == "1" ]; then
 elif [ "$key" == "2" ]; then
     ros2 run ${ros_package} ${package_node2}
 elif [ "$key" == "3" ]; then
-    ros2 run ${ros_package} ${package_node3}
+    ros2 run ${ros_package} ${package_node3} -pi 10 -si 1 -cpn 1 -rpn 1 -t control_signal
 elif [ "$key" == "4" ]; then
     ros2 run ${ros_package} ${package_node4}
 else
