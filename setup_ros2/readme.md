@@ -7,9 +7,8 @@ ROS2 Humble is prefered then Iron for longer support (LTS 2027).
 ## Structure
 
 - [./bin_ros_18](./bin_ros_18): ROS2 humble binary installation for approach 1
-- [./bin_ros_20](./bin_ros_20): ROS2 humble binary installation for approach 3
+- [./bin_ros_20](./bin_ros_20): ROS2 humble binary installation for approach 3. Execute scripts in [../device_util/upgrade_jetson/](../device_util/upgrade_jetson/) in order first.
 - [./rolling_docker](./rolling_docker): ROS2 rolling arm linux docker environment for approach 2
-- [./upgrade_jetson](./upgrade_jetson): Upgrade Jetpack Ubuntu 18.04 to 20.04 for approach 3
 - [./readme.md](./readme.md): This file
 
 ## Development Approach
