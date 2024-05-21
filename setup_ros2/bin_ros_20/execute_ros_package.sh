@@ -50,13 +50,17 @@ read -rsn1 -p "Press number key to execute ..." key
 echo -e "\n"
 
 if [ "$key" == "1" ]; then
-    ros2 run ${ros_package} ${package_node1}
+    exec_cmd_arr=(ros2 run ${ros_package} ${package_node1})
 elif [ "$key" == "2" ]; then
-    ros2 run ${ros_package} ${package_node2}
+    exec_cmd_arr=(ros2 run ${ros_package} ${package_node2})
 elif [ "$key" == "3" ]; then
-    ros2 run ${ros_package} ${package_node3} -pi 10 -si 1 -cpn 1 -rpn 1 -t control_signal
+    exec_cmd_arr=(ros2 run ${ros_package} ${package_node3} -pi 10 -si 1 -cpn 1 -rpn 1 -t control_signal)
 elif [ "$key" == "4" ]; then
-    ros2 run ${ros_package} ${package_node4}
+    exec_cmd_arr=(ros2 run ${ros_package} ${package_node4})
 else
     echo "Invalid key"
+    exit 1
 fi
+
+echo "> Executing -> ${exec_cmd_arr[@]}"
+"${exec_cmd_arr[@]}"
