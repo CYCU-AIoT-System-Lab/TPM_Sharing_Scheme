@@ -17,7 +17,7 @@ cd $install_dir
 git clone https://github.com/waveshare/UPS-Power-Module
 
 echo "> Final installing ..."
-cd UPS-Power-Module
+cd $install_dir/UPS-Power-Module
 sudo ./install.sh
 
 echo "> Installation finished!"
