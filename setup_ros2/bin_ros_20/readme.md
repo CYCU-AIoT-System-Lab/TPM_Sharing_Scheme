@@ -43,3 +43,6 @@ Cross machine execution video available at YouTube: [https://youtu.be/SdiJkYvwXN
 ## Debugging
 
 1. If can't exit spawned ROS2 process, use `Ctrl + z` to pause the process and `kill -9 <PID>` to kill the process.
+2. If executing `build_ros_package.sh` shows error like `remote_controller: No definition of [std_msgs] for OS version [focal]`:
+    1. Execute `./remove_ros_package.sh`
+    2. Execute `./setup_ros_package.sh`
