@@ -47,7 +47,7 @@ echo -e "4. ${ros_package} | ${package_node4}"
 echo -e "Else, exit.\n"
 
 read -rsn1 -p "Press number key to execute ..." key
-echo -e "\n"
+echo -e "$key\n"
 
 if [ "$key" == "1" ]; then
     exec_cmd_arr=(ros2 run ${ros_package} ${package_node1})
@@ -55,6 +55,8 @@ elif [ "$key" == "2" ]; then
     exec_cmd_arr=(ros2 run ${ros_package} ${package_node2})
 elif [ "$key" == "3" ]; then
     exec_cmd_arr=(ros2 run ${ros_package} ${package_node3} -pi 10 -si 1 -cpn 1 -rpn 1 -t pub)
+    #exec_cmd_arr=(ros2 run ${ros_package} ${package_node3} -rpn 1 -t pub -b)
+    #exec_cmd_arr=(ros2 run ${ros_package} ${package_node3} -h)
 elif [ "$key" == "4" ]; then
     exec_cmd_arr=(ros2 run ${ros_package} ${package_node4})
 else

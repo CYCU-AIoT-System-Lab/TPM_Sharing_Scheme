@@ -30,6 +30,7 @@ std::chrono::duration<int, std::milli> sub_interval = 1s;
 long unsigned int consecutive_publish_num = 1;
 long unsigned int repeat_publish_num = 5;
 std::string pub_sub_topic = "controll_signal";
+bool basic_mode = false;
 
 /* global params */
 std::string ready_sig = "ready";
@@ -176,6 +177,7 @@ void subscribe_term(int argc, char *argv[])
 void print_help_message(void)
 {
     std::cout << "Usage: ros2 run remote_controller controller [-pi <milli-seconds>] [-si <seconds>] [-cpn <positive_int>] [-rpn <positive_int>] [-t <topic_string>]" << std::endl;
+    std::cout << "       ros2 run remote_controller controller [-b]" << std::endl;
     std::cout << "       ros2 run remote_controller controller [-h] [--help]" << std::endl;
     std::cout << "Options:\n" << std::endl;
     std::cout << "  -pi     Publish interval in milliseconds" << std::endl;
@@ -183,6 +185,7 @@ void print_help_message(void)
     std::cout << "  -cpn    Consecutive publish count, times to ask for user input and do regex match" << std::endl;
     std::cout << "  -rpn    Repeat publish count, times to publish the same message" << std::endl;
     std::cout << "  -t      ROS2 publish subscribe topic" << std::endl;
+    std::cout << "  -b      Basic control mode, only send" << std::endl;
     return;
 }
 
@@ -322,6 +325,8 @@ int main(int argc, char *argv[])
                 errno = EC_CLI_NO_T_VALUE;
             }
         /* check for optional single arguments */
+        } else if (strcmp(argv[i], "-b") == 0) {
+            basic_mode = true;
         } else if ((strcmp(argv[i], "-h") == 0) || (strcmp(argv[i], "--help") == 0)) {
             print_help_message();
             exit(EXIT_SUCCESS);
@@ -336,12 +341,13 @@ int main(int argc, char *argv[])
         print_help_message();
         exit(EXIT_FAILURE);
     } else {
-        std::cout << "Arguments parsed:" << std::endl;
+        std::cout << "Arguments value:" << std::endl;
         std::cout << "  -pi \t" << pub_interval.count() << std::endl;
         std::cout << "  -si \t" << sub_interval.count() << std::endl;
         std::cout << "  -cpn\t" << consecutive_publish_num << std::endl;
         std::cout << "  -rpn\t" << repeat_publish_num << std::endl;
         std::cout << "  -t  \t" << pub_sub_topic << std::endl;
+        std::cout << "  -b  \t" << basic_mode << std::endl;
     }
 
     /* display command format */
@@ -350,13 +356,19 @@ int main(int argc, char *argv[])
     std::cout << "Example: 1,90" << std::endl;
 
     /* main loop */
-    while (true) {
-        std::cout << "Waiting for ready signal ..." << std::endl;
-        subscribe_ready(argc, argv); // wait for ready signal
-        std::cout << "Ready signal received, start publishing until terminiate signal ..." << std::endl;
-        while (ready) {
+    if (basic_mode) {
+        while (true) {
             publish_once(argc, argv);
-            subscribe_term(argc, argv); // wait for term signal
+        }
+    } else {
+        while (true) {
+            std::cout << "Waiting for ready signal ..." << std::endl;
+            subscribe_ready(argc, argv); // wait for ready signal
+            std::cout << "Ready signal received, start publishing until terminiate signal ..." << std::endl;
+            while (ready) {
+                publish_once(argc, argv);
+                subscribe_term(argc, argv); // wait for term signal
+            }
         }
     }
     return 0;
