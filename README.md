@@ -6,12 +6,15 @@ Refer to [```./common```](./common/) for overall installation script.
 
 1. [boot](boot): Boot phase of the project
 2. [common](common): Common utilities accross different subprojects.
-3. [doc](doc): Documentation used in this project.
-4. [install_log](install_log): Log file during installation for debugging purpose.
-5. [post_boot](post_boot): Post-boot phase of the project.
-6. [setup_environment](setup_environment): Script used to install tpm2-tss, tpm2-tools, tpm2-tss-engine, tpm2-abrmd, and IBM SWTPM. SOON TO BE DEPRECATED.
-7. [setup_ibmtpm](setup_ibmtpm): Script used to install IBM TSS, SWTPM, ACS, and demonstration.
-8. [setup_optiga](setup_optiga): Script used to install Infineon OPTIGA TPM 2.0 Software Stack (tpm2-tss, tpm2-tools, tpm2-abrmd, tpm2-tss-engine).
-9. [socket_com](socket_com): Implement socket communication between server and client.
-10. [.gitignore](.gitignore): Files / Directories to ignore for this repo.
-11. [README.md](README.md): This file.
+3. [deploy_repo](deploy_repo): Deploy demo purpose repository.
+4. [device_util](device_util): Scripts related to hardware and OS configuration.
+5. [doc](doc): Documentation used in this project.
+6. [install_log](install_log): Log file during installation for debugging purpose.
+7. [post_boot](post_boot): Post-boot phase of the project.
+8. [setup_environment](setup_environment): Scripts used to install tpm2-tss, tpm2-tools, tpm2-tss-engine, tpm2-abrmd, and IBM SWTPM. SOON TO BE DEPRECATED.
+9. [setup_ibmtpm](setup_ibmtpm): Scripts used to install IBM TSS, SWTPM, ACS, and demonstration.
+10. [setup_optiga](setup_optiga): Scripts used to install Infineon OPTIGA TPM 2.0 Software Stack (tpm2-tss, tpm2-tools, tpm2-abrmd, tpm2-tss-engine).
+11. [setup_ros2](setup_ros2): Scripts to setup/build/remove ROS2 environment and setup/build/execute/remove demo purpose package.
+12. [socket_com](socket_com): Implement socket communication between server and client.
+13. [.gitignore](.gitignore): Files / Directories to ignore for this repo.
+14. [README.md](README.md): This file.
