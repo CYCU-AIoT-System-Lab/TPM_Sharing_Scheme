@@ -8,12 +8,14 @@ cli_input_arr=($cli_input_str)
 re='^[0-9]+$'
 
 help_msg () {
+    echo "> This is a script to control Jetson Nano PWM fan with Linux device utility"
     echo "> Usage:  ./pwm_fan_jetson.sh <pwm_number>"
     echo "          $min_num ~ <pwm_number> ~ $max_num"
     exit 0
 }
 
 if [ -z "${cli_input_str}" ]; then
+    echo "> No input argument provided."
     help_msg
     exit 0
 fi
