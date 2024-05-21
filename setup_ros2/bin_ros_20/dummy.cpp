@@ -9,9 +9,9 @@
 using namespace std::chrono_literals;
 using std::placeholders::_1;
 
-std::string pub_sub_topic = "control_signal";
 std::string ready_sig = "ready";
 std::string term_sig  = "terminate";
+std::string pub_sub_topic = "pub";
 std::chrono::duration<int, std::milli> pub_interval = 100ms;
 std::chrono::duration<int, std::milli> sub_interval = 10s;
 std::chrono::duration<int, std::milli> sleep_interval = 2s;
@@ -26,7 +26,9 @@ public:
         publisher_ = this->create_publisher<std_msgs::msg::String>(pub_sub_topic, 10);
         timer_ = this->create_wall_timer(
             pub_interval, std::bind(&ReadyPublisher::timer_callback, this));
-        RCLCPP_INFO(this->get_logger(), "Publishing: 'ready'");
+        auto message = std_msgs::msg::String();
+        message.data = ready_sig;
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
     }
 
 private:
@@ -54,7 +56,9 @@ public:
         publisher_ = this->create_publisher<std_msgs::msg::String>(pub_sub_topic, 10);
         timer_ = this->create_wall_timer(
             pub_interval, std::bind(&TermPublisher::timer_callback, this));
-        RCLCPP_INFO(this->get_logger(), "Publishing: 'ready'");
+        auto message = std_msgs::msg::String();
+        message.data = term_sig;
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
     }
 
 private:

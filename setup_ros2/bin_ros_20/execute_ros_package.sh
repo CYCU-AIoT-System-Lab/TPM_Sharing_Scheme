@@ -15,7 +15,7 @@ ros_master_uri="master"
 ros_master_uri="http://192.168.1.113"
 ros_master_local=""
 ros_port=11311
-ros_domain_id=5
+ros_domain_id=40
 # ==========================================================
 
 echo -e "\nRemember to configure the parameters!"
@@ -54,7 +54,7 @@ if [ "$key" == "1" ]; then
 elif [ "$key" == "2" ]; then
     exec_cmd_arr=(ros2 run ${ros_package} ${package_node2})
 elif [ "$key" == "3" ]; then
-    exec_cmd_arr=(ros2 run ${ros_package} ${package_node3} -pi 10 -si 1 -cpn 1 -rpn 1 -t control_signal)
+    exec_cmd_arr=(ros2 run ${ros_package} ${package_node3} -pi 10 -si 1 -cpn 1 -rpn 1 -t pub)
 elif [ "$key" == "4" ]; then
     exec_cmd_arr=(ros2 run ${ros_package} ${package_node4})
 else
