@@ -37,5 +37,5 @@ else
     exec_cmd_arr=(sudo sh -c "echo ${cli_input_arr[0]} > /sys/devices/pwm-fan/target_pwm")
     echo "> Executing -> ${exec_cmd_arr[@]}"
     "${exec_cmd_arr[@]}" || { echo "PWM fan inaccessable"; exit 1; }
-    echo "> PWM fan speed set to $((cli_input_arr[0] * 100 / max_num))%"
+    echo "> PWM fan speed set to $((cli_input_arr[0] * 100 / (max_num - min_num)))%"
 fi
