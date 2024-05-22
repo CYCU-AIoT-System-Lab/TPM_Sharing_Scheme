@@ -10,6 +10,7 @@ Note: This directory can not be automatically installed with [../common/setup.sh
 
 - [./bin_ros_18](./bin_ros_18): ROS2 humble binary installation for approach 1
 - [./bin_ros_20](./bin_ros_20): ROS2 humble binary installation for approach 3. Execute scripts in [../device_util/upgrade_jetson/](../device_util/upgrade_jetson/) in order first.
+- [./pac_ros_22](./pac_ros_22): ROS2 humble debian package installation for approach 4
 - [./rolling_docker](./rolling_docker): ROS2 rolling arm linux docker environment for approach 2
 - [./readme.md](./readme.md): This file
 
