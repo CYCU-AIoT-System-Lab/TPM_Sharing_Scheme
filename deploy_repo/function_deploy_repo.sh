@@ -21,12 +21,18 @@ load_preset () {
     if [ $verbose == 1 ]; then
         echo_notice "${dirname}" "${filename}" "Checking var..."
     fi
-    check_var repo_ssh_link $exit_code
-    check_var setup_path $exit_code
-    check_var main_path $exit_code
-    check_var remove_path $exit_code
     check_var deploy_repo $exit_code
     check_var exec_main $exit_code
+
+    if [ $verbose == 1 ]; then
+        echo_notice "$message1" "$message2" "Loading preset..."
+    fi
+    # ==== url ====
+    repo_ssh_link="git@github.com:CYCU-AIoT-System-Lab/mmWAVE_Radar.git"
+    # ==== path ====
+    setup_path="mmWAVE_Radar/runed_on_jetson_nano/setup.sh"
+    main_path="mmWAVE_Radar/runed_on_jetson_nano/execute.sh"
+    remove_path="mmWAVE_Radar/runed_on_jetson_nano/remove.sh"
 }
 if [ $verbose == 1 ]; then
     echo_notice "${dirname}" "${filename}" "Loaded function: load_preset"
