@@ -56,16 +56,8 @@ build_libssl () {
 }
 
 install_req () {
-    echo_notice "${dirname}" "${filename}" "Installing apt-fast..."
-    sudo apt $apt_gflag update
-    sudo apt-get install software-properties-common -y
-    sudo add-apt-repository ppa:apt-fast/stable -y
-    sudo apt-get install apt-fast
-    echo "alias apt-get='apt-fast'" >> ~/.bash_aliases
-    echo "alias apt='apt-fast'" >> ~/.bash_aliases
-    source ~/.bash_aliases
-
     echo_notice "${dirname}" "${filename}" "Installing required packages..."
+    sudo apt $apt_gflag update
     sudo apt $apt_gflag upgrade -y
     #sudo apt $apt_gflag autoremove -y
     aptins "git"
