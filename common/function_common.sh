@@ -11,10 +11,10 @@ filename="function_common"
 # Usage: source "config.ini"
 # Input variable: $1: config.ini
 load_preset () {
-    if [ $verbose == 1 ]; then
-        echo_notice "${dirname}" "${filename}" "Env var to config file..."
-    fi
-    sed -i 's@${HOME}@'"$HOME"'@' "$1" # replace ${HOME} with $HOME
+    #if [ $verbose == 1 ]; then
+    #    echo_notice "${dirname}" "${filename}" "Env var to config file..."
+    #fi
+    #sed -i 's@${HOME}@'"$HOME"'@' "$1" # replace ${HOME} with $HOME
 
     if [ $verbose == 1 ]; then
         echo_notice "${dirname}" "${filename}" "Loading config file..."
@@ -25,20 +25,6 @@ load_preset () {
         echo_notice "${dirname}" "${filename}" "Checking var..."
     fi
     check_var install_platform 1
-    check_var cmake_ver 1
-    check_var cmake_build 1
-    check_var valgrind_ver 1
-    check_var libssl_ver 1
-    check_var nvim_config_url 1
-    check_var nvim_dir 1
-    check_var apport_dir 1
-    check_var cmake_dir 1
-    check_var valgrind_dir 1
-    check_var libssl_dir 1
-    check_var wget_gflag 1
-    check_var make_gflag 1
-    check_var sudo_gflag 1
-    check_var apt_gflag 1
     check_var job_install_req 1
     check_var job_compile_req 1
     check_var job_config_nvim 1
@@ -53,6 +39,29 @@ load_preset () {
     check_var job_enable_ssh 1
     check_var job_enable_pi_spi 1
     check_var job_deploy_repo 1
+
+    if [ $verbose == 1 ]; then
+        echo_notice "$message1" "$message2" "Performing mutual actions"
+    fi
+    # ==== version ====
+    cmake_ver="3.18"        # cmake version
+    cmake_build="4"         # cmake build
+    valgrind_ver="3.22.0"   # valgrind version
+    libssl_ver="1.1.1w"     # libssl version
+    # ==== url ====
+    nvim_config_url="https://raw.githubusercontent.com/belongtothenight/config-files/main/ubuntu_init.vim"  # nvim config url
+    # ==== directory ====
+    current_dir=$(pwd)
+    nvim_dir="$HOME/.config/nvim"       # nvim installation directory
+    apport_dir="$HOME/.config/apport"   # apport installation directory
+    cmake_dir="/opt/cmake"              # cmake installation directory
+    valgrind_dir="/opt/valgrind"        # valgrind installation directory
+    libssl_dir="/opt/libssl"            # libssl installation directory
+    # ==== flag ====
+    wget_gflag="-q --show-progress --no-check-certificate --no-cache --no-cookies"
+    make_gflag="-s"
+    sudo_gflag="-E"
+    apt_gflag="-q"
 }
 if [ $verbose == 1 ]; then
     echo_notice "${dirname}" "${filename}" "Loaded function: load_preset"
