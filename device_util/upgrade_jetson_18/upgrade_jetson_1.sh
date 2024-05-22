@@ -14,6 +14,7 @@ sudo apt update
 sudo apt dist-upgrade -y
 
 echo "> Install apt-fast ..."
+echo "choose \"apt-get\" and the maximum number of connections"
 sudo add-apt-repository ppa:apt-fast/stable -y
 sudo apt-get install apt-fast
 echo "alias apt-get='apt-fast'" >> ~/.bash_aliases
