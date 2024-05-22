@@ -41,7 +41,7 @@ load_preset () {
     check_var job_deploy_repo 1
 
     if [ $verbose == 1 ]; then
-        echo_notice "$message1" "$message2" "Performing mutual actions"
+        echo_notice "$message1" "$message2" "Loading preset..."
     fi
     # ==== version ====
     cmake_ver="3.18"        # cmake version
