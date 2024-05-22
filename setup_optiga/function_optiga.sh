@@ -24,7 +24,12 @@ load_preset () {
         echo_notice "${dirname}" "${filename}" "Checking var..."
     fi
     check_var install_platform 1
-    check_var optiga_url 1
+
+    if [ $verbose == 1 ]; then
+        echo_notice "$message1" "$message2" "Loading preset..."
+    fi
+    # ==== url ====
+    optiga_url="https://github.com/Infineon/optiga-tpm-explorer.git"
 }
 if [ $verbose == 1 ]; then
     echo_notice "${dirname}" "${filename}" "Loaded function: load_preset"
