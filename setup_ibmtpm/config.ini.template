@@ -12,27 +12,6 @@
 # Default: 1
 install_platform      = 1
 
-[ Param - USER ]
-
-# OS user name
-user                  = user
-
-[Param - VERSION]
-
-# IBM TSS version
-# Default: 2.1.1
-# Platform 1 tested: 2.1.1
-# Platform 3 tested: 1.6.0
-ibmtss_ver             = 1.6.0
-
-# IBM SWTPM version
-# Default: 1682
-ibmtpm_ver             = 1682
-
-# IBM ACS version
-# Default: 1658
-ibmacs_ver             = 1658
-
 [Param - MODE]
 
 # TPM version
@@ -64,97 +43,6 @@ SCmachineMode          = 1
 # 1: Edit setting into code
 # Default: 1
 force_acs_sql_setting  = 1
-
-[Param - MySQL]
-
-# MySQL DB username
-mysql_user             = tpm2ACS
-
-# MySQL DB password
-mysql_password         = 123456
-
-# MySQL DB name
-mysql_database         = tpm2
-
-[Param - URL]
-
-# GitHub webpage to display
-# Default: https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/main/setup_ibmtpm
-repo_url               = https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/main/setup_ibmtpm
-
-# ACS demo server ipv4 address
-# Default: 127.0.0.1 ie. localhost
-acs_demo_server_ip     = localhost
-
-# ACS demo webpage port
-# Default: 8000
-acs_demo_server_port   = 80
-
-# ACS demo client ipv4 address
-# Default: 127.0.0.1 ie. localhost
-acs_demo_client_ip     = localhost
-
-# IBM TSS port
-# Default: 2321
-tpm_command_port       = 2321
-
-# IBM ACS port
-# Default: 2323
-acs_port               = 2323
-
-[Param - FORMAT]
-
-# Output time format for log4j
-# Default: "%Y/%m/%d-%H:%M:%S"
-log4j_time_format      = %Y/%m/%d-%H:%M:%S
-
-# Output log line number at startup for log4j
-# Default: 100
-log4j_line_number      = 100
-
-[Param - PATH]
-
-# Directory to install all packages
-# Default: /opt
-base_dir               = /opt
-
-# Directory to hold ACS demo webpage
-# Default: /var/www/html/acs
-html_dir               = /var/www/html/acs
-
-# Directory to hold ACS demo json-c include files
-# Default: /usr/include/json-c
-c_json_lib_dir         = /usr/include/json-c
-
-# Symbolic link to hold ACS demo json include files
-# Default: /usr/include/json
-c_json_lib_link_dir    = /usr/include/json
-
-# Symbolic link to hold ACS demo user files
-# Default: /home/user/tpm2
-tpm_data_dir           = /home/user/tpm2
-
-[Param - GLOBAL FLAG]
-
-# wget global flag
-# Default: -q --show-progress (only show progress bar)
-wget_gflag             = -q --show-progress --no-check-certificate --no-cache --no-cookies
-
-# make global flag
-# Default: -s (silent)
-make_gflag             = -s
-
-# sudo global flag
-# Default: -E (preserve environment variables)
-sudo_gflag             = -E
-
-# bash global flag
-# Default: -x (print commands and their arguments as they are executed)
-bash_gflag             = -x
-
-# tar global flag
-# Default: -zxf (extract .tar.gz file, -v for verbose)
-tar_gflag              = -zxf
 
 [Param - JOB]
 # 1: Enable

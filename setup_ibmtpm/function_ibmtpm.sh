@@ -22,36 +22,11 @@ load_preset () {
         echo_notice "${dirname}" "${filename}" "Checking var..."
     fi
     check_var install_platform $exit_code
-    check_var user $exit_code
-    check_var base_dir $exit_code
-    check_var html_dir $exit_code
-    check_var c_json_lib_dir $exit_code
-    check_var c_json_lib_link_dir $exit_code
-    check_var tpm_data_dir $exit_code
-    check_var repo_url $exit_code
-    check_var acs_demo_server_ip $exit_code
-    check_var acs_demo_server_port $exit_code
-    check_var acs_demo_client_ip $exit_code
-    check_var tpm_command_port $exit_code
-    check_var acs_port $exit_code
-    check_var ibmtss_ver $exit_code
-    check_var ibmtpm_ver $exit_code
-    check_var ibmacs_ver $exit_code
     check_var verMode $exit_code
     check_var TPMMode $exit_code
     check_var acsMode $exit_code
     check_var SCmachineMode $exit_code
     check_var force_acs_sql_setting $exit_code
-    check_var mysql_user $exit_code
-    check_var mysql_password $exit_code
-    check_var mysql_database $exit_code
-    check_var log4j_time_format $exit_code
-    check_var log4j_line_number $exit_code
-    check_var wget_gflag $exit_code
-    check_var make_gflag $exit_code
-    check_var sudo_gflag $exit_code
-    check_var bash_gflag $exit_code
-    check_var tar_gflag $exit_code
     check_var install_req $exit_code
     check_var setup_ibmtpmtss_env $exit_code
     check_var compile_ibmtpmtss $exit_code
@@ -71,6 +46,42 @@ load_preset () {
     check_var active_ACS_Demo_verify $exit_code
     check_var print_log_path $exit_code
     check_var open_all_logs $exit_code
+
+    if [ $verbose == 1 ]; then
+        echo_notice "$message1" "$message2" "Loading preset..."
+    fi
+    # ==== user ====
+    user="user"
+    # ==== version ====
+    ibmtss_ver="1.6.0" # Platform 1: 2.1.1, Platform 3: 1.6.0
+    ibmtpm_ver="1682"
+    ibmacs_ver="1658"
+    # ==== mysql ====
+    mysql_user="tpm2ACS"
+    mysql_password="123456"
+    mysql_database="tpm2"
+    # ==== network ====
+    repo_url="https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/main/setup_ibmtpm"
+    acs_demo_server_ip="localhost" # i.e. 127.0.0.1
+    acs_demo_server_port="80"
+    acs_demo_client_ip="localhost" # i.e. 127.0.0.1
+    tpm_command_port="2321"
+    acs_port="2323"
+    # ==== format ====
+    log4j_time_format="%Y/%m/%d-%H:%M:%S" # default: %Y/%m/%d-%H:%M:%S
+    log4j_line_number="100"
+    # ==== path ====
+    base_dir="/opt"
+    html_dir="var/www/html/acs"
+    c_json_lib_dir="/usr/include/json-c"
+    c_json_lib_link_dir="/usr/include/json"
+    tpm_data_dir="/home/$user/tpm2"
+    # ==== flag ====
+    wget_gflag="-q --show-progress --no-check-certificate --no-cache --no-cookies"
+    make_gflag="-s"
+    sudo_gflag="-E"
+    bash_gflag="-x"
+    tar_gflag="-zxf"
 }
 if [ $verbose == 1 ]; then
     echo_notice "setup_ibmtpm" "function_ibmtpm" "Loaded function: load_preset"
