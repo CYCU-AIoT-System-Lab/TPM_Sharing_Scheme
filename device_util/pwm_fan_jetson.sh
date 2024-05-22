@@ -34,7 +34,8 @@ if [ ${cli_input_arr[0]} -lt $min_num ] || [ ${cli_input_arr[0]} -gt $max_num ];
     echo "> Input: $@ | Use numbers between $min_num to $max_num"
     exit 1
 else
-    exec_cmd_arr=(sudo sh -c "\"echo ${cli_input_arr[0]} > /sys/devices/pwm-fan/target_pwm\"")
+    exec_cmd_arr=(sudo sh -c "echo ${cli_input_arr[0]} > /sys/devices/pwm-fan/target_pwm")
     echo "> Executing -> ${exec_cmd_arr[@]}"
     "${exec_cmd_arr[@]}" || { echo "PWM fan inaccessable"; exit 1; }
+    echo "> PWM fan speed set to $((cli_input_arr[0] * 100 / max_num))%"
 fi
