@@ -1,4 +1,5 @@
 #!/bin/bash
+source ~/.bash_aliases
 
 # Don't reboot when asked
 echo -e "This process can't be scripted! Answer with default options beside rebooting."

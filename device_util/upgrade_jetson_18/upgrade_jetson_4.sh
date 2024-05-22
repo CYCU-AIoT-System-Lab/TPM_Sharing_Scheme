@@ -1,4 +1,5 @@
 #!/bin/bash
+source ~/.bash_aliases
 set -x
 
 sudo apt update

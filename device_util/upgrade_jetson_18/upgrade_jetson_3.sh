@@ -1,4 +1,5 @@
 #!/bin/bash
+source ~/.bash_aliases
 set -x
 
 sudo sed -i '/#*WaylandEnable*=*false/c\WaylandEnable=false' /etc/gdm3/custom.conf
