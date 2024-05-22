@@ -7,6 +7,7 @@ echo "> Install apt-fast ..."
 echo "choose \"apt-get\" and the maximum number of connections"
 sudo add-apt-repository ppa:apt-fast/stable -y
 sudo apt-get install apt-fast
+echo "alias apt-get='apt-fast'" >> ~/.bash_aliases
 echo "alias apt='apt-fast'" >> ~/.bash_aliases
 source ~/.bash_aliases
 
