@@ -29,12 +29,12 @@ Why is this useful? It allows the OS to not render any GUI, and instead just ren
     ```bash
     count=1 \
     while true; do \
-        fbgrab -c 3 $HOME/Pictures/cap1/$count.ppm; \
+        fbgrab -c 3 -i $HOME/Pictures/cap1/$count.png; \
         count=$((count+1)); \
         sleep 0.5; \
     done
     ```
-    It is recommended to use `PPM` format for this instead of `PNG` format, as `PPM` format is faster to write to disk, and experiment shwon that `PNG` format can cause USB drive unable to unmount and kernel crash when CPU underload.
+    Experiment shown that `PNG` format can cause USB drive unable to unmount and kernel crash when CPU underload. However, `fbgrab` doesn't have the option to save in `PPM` format. Therefore, the above script uses `PNG` format.
 
 ## References
 
