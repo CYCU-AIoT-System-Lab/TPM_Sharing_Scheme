@@ -31,6 +31,7 @@ Why is this useful? It allows the OS to not render any GUI, and instead just ren
     while true; do \
         fbgrab -c 3 $HOME/Pictures/cap1/$count.ppm; \
         count=$((count+1)); \
+        sleep 0.5; \
     done
     ```
     It is recommended to use `PPM` format for this instead of `PNG` format, as `PPM` format is faster to write to disk, and experiment shwon that `PNG` format can cause USB drive unable to unmount and kernel crash when CPU underload.
