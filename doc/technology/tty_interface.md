@@ -2,6 +2,8 @@
 
 Why is this useful? It allows the OS to not render any GUI, and instead just render text. This can be extremely helpful for computation power limited embedded systems.
 
+To use the full CPU power, remember to logout the TTY for GUI and switch to text only ones.
+
 ## TTY Screenshot Program
 
 1. Install:
