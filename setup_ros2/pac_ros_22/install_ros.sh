@@ -5,7 +5,7 @@
 echo "> Setting local ..."
 locale  # check for UTF-8
 
-sudo apt update && sudo apt install locales
+sudo apt update && sudo apt install -y locales
 sudo locale-gen en_US en_US.UTF-8
 sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -13,7 +13,7 @@ export LANG=en_US.UTF-8
 locale  # verify settings
 
 echo "> Setting sources ..."
-sudo apt install software-properties-common
+sudo apt install -y software-properties-common
 sudo add-apt-repository universe
 
 sudo apt update && sudo apt install curl -y
@@ -23,10 +23,10 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 
 echo "> Installing ROS2 packages ..."
 sudo apt update
-sudo apt upgrade
-sudo apt install ros-humble-desktop
-sudo apt install ros-humble-ros-base
-sudo apt install ros-dev-tools
+sudo apt upgrade -y
+sudo apt install -y ros-humble-desktop
+sudo apt install -y ros-humble-ros-base
+sudo apt install -y ros-dev-tools
 
 echo "> Initializing setup ..."
 # Replace ".bash" with your shell if you're not using bash
