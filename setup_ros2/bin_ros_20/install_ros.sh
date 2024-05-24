@@ -1,5 +1,5 @@
 #!/bin/bash
-source common.sh || { echo "Error: common.sh not found"; exit 1; }
+source ../demo_package/common.sh || { echo "Error: common.sh not found"; exit 1; }
 
 # Note: This script is for Ubuntu 20.04 (Focal Fossa) not older or newer versions.
 # Ref: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html

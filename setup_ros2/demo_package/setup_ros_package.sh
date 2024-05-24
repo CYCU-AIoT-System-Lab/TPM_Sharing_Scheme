@@ -5,7 +5,7 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 
 # Check if script is run from its directory
-if [[ ! $script_path == *"/setup_ros2/bin_ros_20"* ]]; then
+if [[ ! $script_path == *"/setup_ros2/demo_package"* ]]; then
     echo "Please run this script from its directory"
     exit 1
 fi

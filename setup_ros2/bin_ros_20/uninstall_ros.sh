@@ -1,5 +1,5 @@
 #!/bin/bash
-source common.sh
+source ../demo_package/common.sh
 
 echo "> Removing $ros_workspace"
 rm -rf $ros_workspace
