@@ -167,3 +167,7 @@ Refer to following link for original sources:
     1. Go to ```Control Panel```, navigate to ```Power Options/Choose what the power buttons do/Change settings that are currently unavailable```, untick ```Turn on fast startup (recommended)```, then click ```Save changes```.
 2. VMware VMs get laggy or even freeze
     1. [How to Speed Up Your Virtual Machine](https://youtu.be/cEJyqI1R36A?si=wfoM1tjbjaLoLJZ_)
+
+## General Reference
+
+1. [https://askubuntu.com/questions/18654/how-to-prevent-updating-of-a-specific-package](https://askubuntu.com/questions/18654/how-to-prevent-updating-of-a-specific-package)
