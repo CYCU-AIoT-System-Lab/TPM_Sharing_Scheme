@@ -42,19 +42,19 @@ system_ls=$(which ls)
 system_cat=$(which cat)
 system_echo=$(which echo)
 if [ -z "$system_tpm2_hash" ]; then
-    echo -e "> $error_message: Binary "tpm2_hash" not found!"
-    exit 1
+    $system_echo -e "> $error_message: Binary "tpm2_hash" not found!"
+    exit 1 # skip for now
 fi
 if [ -z "$system_ls" ]; then
-    echo -e "> $error_message: Binary "ls" not found!"
+    $system_echo -e "> $error_message: Binary "ls" not found!"
     exit 1
 fi
 if [ -z "$system_cat" ]; then
-    echo -e "> $error_message: Binary "cat" not found!"
+    $system_echo -e "> $error_message: Binary "cat" not found!"
     exit 1
 fi
 if [ -z "$system_echo" ]; then
-    echo -e "> $error_message: Binary "echo" not found!"
+    $system_echo -e "> $error_message: Binary "echo" not found!"
     exit 1
 fi
 
@@ -79,37 +79,37 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
     exit 0
 fi
 if [ ${#cli_input_arr[@]} -ne 2 ] && [ ${#cli_input_arr[@]} -ne 3 ] && [ ${#cli_input_arr[@]} -ne 4 ]; then
-    echo -e "> $error_message: Incorrect number of arguments!"
+    $system_echo -e "> $error_message: Incorrect number of arguments!"
     help_msg
     exit 1
 fi
 if [ -z "$dir_list_file" ]; then
-    echo -e "> $error_message: Missing dir_list_file!"
+    $system_echo -e "> $error_message: Missing dir_list_file!"
     help_msg
     exit 1
 fi
 if [ -z "$initial_hash_value" ]; then
-    echo -e "> $error_message: Missing initial_hash_value!"
+    $system_echo -e "> $error_message: Missing initial_hash_value!"
     help_msg
     exit 1
 fi
 if ! [ -s "$dir_list_file" ]; then
-    echo -e "> $error_message: <dir_list_file> does not exist or is empty!"
+    $system_echo -e "> $error_message: <dir_list_file> does not exist or is empty!"
     help_msg
     exit 1
 fi
 if [ ${#initial_hash_value} -ne 64 ]; then
-    echo -e "> $error_message: <initial_hash_value> should be 64 characters long, but it is ${#initial_hash_value}!"
+    $system_echo -e "> $error_message: <initial_hash_value> should be 64 characters long, but it is ${#initial_hash_value}!"
     help_msg
     exit 1
 fi
 if ! [[ $initial_hash_value =~ $hash_pattern ]]; then
-    echo -e "> $error_message: <initial_hash_value> should consist of 0~9 and A~F!"
+    $system_echo -e "> $error_message: <initial_hash_value> should consist of 0~9 and A~F!"
     help_msg
     exit 1
 fi
 if [ -f "$hashed_file_list_storing_file" ]; then
-    echo -e "> $warning_message: <hashed_file_list_storing_file> exists, moving it to ${hashed_file_list_storing_file}.bak ..."
+    $system_echo -e "> $warning_message: <hashed_file_list_storing_file> exists, moving it to ${hashed_file_list_storing_file}.bak ..."
     mv $hashed_file_list_storing_file "${hashed_file_list_storing_file}.bak"
 fi
 
@@ -120,7 +120,7 @@ fi
 # *  - echo: 36k
 
 # > 2. Generate list of files to hash
-echo "> Generating list of files to hash ..."
+$system_echo "> Generating list of files to hash ..."
 dir_list=($(cat $dir_list_file))
 file_list=()
 # *
@@ -128,10 +128,10 @@ file_list=()
 # *
 for dir in "${dir_list[@]}"; do
     if [ ! -d "$dir" ]; then
-        echo -e "> $error_message: Directory $dir does not exist!"
+        $system_echo -e "> $error_message: Directory $dir does not exist!"
         exit 1
     fi
-    # ls -AR $dir
+    # $system_ls -AR $dir
     file_list+=($($system_ls -AR $dir))
 done
 # *
@@ -143,14 +143,14 @@ file_dir="$script_path:"
 index_offset=0
 for index in "${!file_list[@]}"; do
     # if is path, start with /
-    #echo ""
-    #echo ${file_list[@]}
+    #$system_echo ""
+    #$system_echo ${file_list[@]}
     index=$((index-index_offset))
     if [[ "${file_list[index]}" = /* ]]; then
         temp="${file_list[index]}"
         temp_dir="${temp::-1}"
         if [ $verbose == true ]; then
-            echo "dir:  $temp_dir"
+            $system_echo "dir:  $temp_dir"
         fi
         if ! [[ " ${dir_list[@]} " =~ " $temp_dir " ]]; then
             dir_list+=($temp_dir)
@@ -161,7 +161,7 @@ for index in "${!file_list[@]}"; do
     else
         file_list[index]="${file_dir::-1}/${file_list[index]}"
         if [ $verbose == true ]; then
-            echo "file: ${file_list[index]}"
+            $system_echo "file: ${file_list[index]}"
         fi
     fi
 done
@@ -169,8 +169,8 @@ done
 # * 1.3 Remove duplicates of files and dirs
 # *    - ref: https://stackoverflow.com/questions/13648410/how-can-i-get-unique-values-from-an-array-in-bash
 # *
-file_list=($(echo "${file_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
-dir_list=($(echo "${dir_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+file_list=($($system_echo "${file_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+dir_list=($($system_echo "${dir_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
 # *
 # * 1.4 Check if files exist, also removing included directories
 # *
@@ -180,30 +180,30 @@ for index in "${!file_list[@]}"; do
         unset -v 'file_list[index]'
         if [ -d "${file_list[index]}" ]; then
             if [ $verbose == true ]; then
-                echo -e "$warning_message: removed directory ${file_list[index]}"
+                $system_echo -e "$warning_message: removed directory ${file_list[index]}"
             fi
         else
             if ! [ -z "${file_list[index]}" ]; then
-                echo -e "$warning_message: removed ${file_list[index]}"
+                $system_echo -e "$warning_message: removed ${file_list[index]}"
             fi
         fi
     fi
 done
-echo "> Number of files to hash: ${#file_list[@]}"
-echo "> Number of directories: ${#dir_list[@]}"
+$system_echo "> Number of files to hash: ${#file_list[@]}"
+$system_echo "> Number of directories: ${#dir_list[@]}"
 if ! [ -z $hashed_file_list_storing_file ]; then
-    echo "Files:" > $hashed_file_list_storing_file
+    $system_echo "Files:" > $hashed_file_list_storing_file
     for file in "${file_list[@]}"; do
-        echo "$file" >> $hashed_file_list_storing_file
+        $system_echo "$file" >> $hashed_file_list_storing_file
     done
-    echo -e "\nDirectory:" >> $hashed_file_list_storing_file
+    $system_echo -e "\nDirectory:" >> $hashed_file_list_storing_file
     for dir in "${dir_list[@]}"; do
-        echo "$dir" >> $hashed_file_list_storing_file
+        $system_echo "$dir" >> $hashed_file_list_storing_file
     done
-    echo "> Files to hash are stored in $hashed_file_list_storing_file"
+    $system_echo "> Files to hash are stored in $hashed_file_list_storing_file"
 fi
 
 # > 3. Perform hashing chain on files
 # > 4. Unmount binaries from RAMDisk
 
-echo "end of script"
+$system_echo "end of script"
