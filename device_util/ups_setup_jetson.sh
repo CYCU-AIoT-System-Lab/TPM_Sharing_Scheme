@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 # Ref: https://www.waveshare.com/ups-power-module.htm
 # Ref: --> https://blog.cavedu.com/2019/10/04/nvidia-jetson-nano-fan/

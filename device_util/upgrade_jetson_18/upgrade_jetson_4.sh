@@ -1,4 +1,6 @@
 #!/bin/bash
+script=$(realpath "$0")
+script_path=$(dirname "$script")
 source ~/.bash_aliases
 set -x
 
@@ -40,6 +42,10 @@ sudo dpkg -i --force-overwrite /var/cache/apt/archives/nvidia-l4t-init*.deb
 # Final update
 sudo apt update
 sudo apt upgrade -y
+
+echo "> Creating progress flag file ..."
+rm      $script_path/upgrade_jetson_3_done.flag
+touch   $script_path/upgrade_jetson_4_done.flag
 
 # Perform required reboot
 echo ""
