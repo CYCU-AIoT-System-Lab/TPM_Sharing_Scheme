@@ -72,7 +72,7 @@ load_preset () {
     log4j_line_number="100"
     # ==== path ====
     base_dir="/opt"
-    html_dir="var/www/html/acs"
+    html_dir="/var/www/html/acs"
     c_json_lib_dir="/usr/include/json-c"
     c_json_lib_link_dir="/usr/include/json"
     tpm_data_dir="/home/$user/tpm2"
