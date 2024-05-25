@@ -132,11 +132,12 @@ for index in "${!file_list[@]}"; do
     index=$((index-index_offset))
     if [[ "${file_list[index]}" = /* ]]; then
         temp="${file_list[index]}"
+        temp_dir="${temp::-1}"
         if [ $verbose == true ]; then
-            echo "dir:  ${temp::-1}"
+            echo "dir:  $temp_dir"
         fi
-        if ! [[ " ${dir_list[@]} " =~ " ${temp::-1} " ]]; then
-            dir_list+=(${temp::-1})
+        if ! [[ " ${dir_list[@]} " =~ " $temp_dir " ]]; then
+            dir_list+=($temp_dir)
         fi
         file_dir="$temp"
         file_list=(${file_list[@]/$temp})
