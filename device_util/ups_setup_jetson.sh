@@ -14,7 +14,7 @@ sudo apt-get install python-smbus -y
 
 echo "> Cloning from waveshare github repository ..."
 cd $install_dir
-git clone https://github.com/waveshare/UPS-Power-Module
+sudo git clone https://github.com/waveshare/UPS-Power-Module
 
 echo "> Final installing ..."
 cd $install_dir/UPS-Power-Module

@@ -31,7 +31,7 @@ To use the full CPU power, remember to logout the TTY for GUI and switch to text
     ```bash
     count=1 \
     while true; do \
-        fbgrab -c 3 -i $HOME/Pictures/cap1/$count.png; \
+        fbgrab -c 3 $HOME/Pictures/cap1/$count.png; \
         count=$((count+1)); \
         sleep 0.5; \
     done
