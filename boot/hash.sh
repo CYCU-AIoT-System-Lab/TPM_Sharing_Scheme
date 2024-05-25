@@ -41,6 +41,22 @@ system_tpm2_hash=$(which tpm2_hash)
 system_ls=$(which ls)
 system_cat=$(which cat)
 system_echo=$(which echo)
+if [ -z "$system_tpm2_hash" ]; then
+    echo -e "> $error_message: Binary "tpm2_hash" not found!"
+    exit 1
+fi
+if [ -z "$system_ls" ]; then
+    echo -e "> $error_message: Binary "ls" not found!"
+    exit 1
+fi
+if [ -z "$system_cat" ]; then
+    echo -e "> $error_message: Binary "cat" not found!"
+    exit 1
+fi
+if [ -z "$system_echo" ]; then
+    echo -e "> $error_message: Binary "echo" not found!"
+    exit 1
+fi
 
 # > 0. CLI parsing
 $system_echo "> Parsing CLI arguments ..."
