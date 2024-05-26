@@ -6,13 +6,13 @@
 # -------------------------
 help_msg () {
     echo ""
-    echo "Usage:    bash hash.sh <dir_list_file> <initial_hash_value> [<hashed_file_list_storing_file>] [-v] [-p] [-r] [-h|--help]"
+    echo "Usage:    bash hash.sh <dir_list_file> <initial_hash_value> [<hashed_file_list_storing_file>] [-p] [-r] [-v] [-h|--help]"
     echo "  <dir_list_file>:                    File containing list of directories to hash"
     echo "  <initial_hash_value>:               Initial hash value to start hashing chain by PCR SHA256 standard, should be 8x8 hex characters of 0~9 and A~F"
     echo "  <hashed_file_list_storing_file>:    (optional) File to store hashed file list"
-    echo "  -v:                                 Verbose mode"
-    echo "  -p:                                 Enable UNIX Named Pipe to accelerate storage R/W"
-    echo "  -r:                                 Enable RAMDisk to accelerate binary calling"
+    echo "  -p:                                 (optional) Enable UNIX Named Pipe to accelerate storage R/W"
+    echo "  -r:                                 (optional) Enable RAMDisk to accelerate binary calling"
+    echo "  -v:                                 (optional) Verbose mode"
     echo "  -h|--help:                          Display this help message"
     echo ""
     echo "Example:  bash hash.sh -h"
