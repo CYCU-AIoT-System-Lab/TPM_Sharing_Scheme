@@ -398,6 +398,9 @@ fi
 
 # > 3. Perform hashing chain on files
 err_code_offset=$((err_code_offset+20)) # 60
+#   - ref: https://www.youtube.com/watch?v=DFreHo3UCD0
+#      - echo "hello" > file.fifo &
+#      - cat < file.fifo
 
 # > 4. Unmount binaries from RAMDisk
 err_code_offset=$((err_code_offset+20)) # 80
