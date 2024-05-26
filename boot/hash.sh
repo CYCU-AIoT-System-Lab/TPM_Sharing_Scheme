@@ -158,22 +158,22 @@ fi
 # *
 # * 0.2 Check if binaries exist
 # *
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_tpm2_hash" ]; then
         err_code=$((err_code_offset+2))
     fi
 fi
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_ls" ]; then
         err_code=$((err_code_offset+3))
     fi
 fi
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_cat" ]; then
         err_code=$((err_code_offset+4))
     fi
 fi
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_echo" ]; then
         err_code=$((err_code_offset+5))
     fi
@@ -185,33 +185,33 @@ $system_echo "dir_list_file:                    $dir_list_file"
 $system_echo "initial_hash_value:               $initial_hash_value"
 $system_echo "hashed_file_list_storing_file:    $hashed_file_list_storing_file"
 $system_echo ""
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if [ -z "$dir_list_file" ]; then
         err_code=$((err_code_offset+6))
     fi
 fi
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if [ -z "$initial_hash_value" ]; then
         err_code=$((err_code_offset+7))
     fi
 fi
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if ! [ -s "$dir_list_file" ]; then
         err_code=$((err_code_offset+8))
     fi
 fi
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if [ ${#initial_hash_value} -ne 64 ]; then
         err_code=$((err_code_offset+9))
         $system_echo "> <initial_hash_value> is ${#initial_hash_value} characters long!"
     fi
 fi
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if ! [[ $initial_hash_value =~ $hash_pattern ]]; then
         err_code=$((err_code_offset+10))
     fi
 fi
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if [ -f "$hashed_file_list_storing_file" ]; then
         $system_echo -e "> $warning_message: <hashed_file_list_storing_file> exists, moving it to ${hashed_file_list_storing_file}.bak ..."
         mv $hashed_file_list_storing_file "${hashed_file_list_storing_file}.bak"
@@ -238,14 +238,14 @@ err_code_offset=$((err_code_offset+20)) # 20
 # *
 # * 1.1 Create temporary hash file
 # *
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     #if [ -f "$temporary_hash_file" ]; then # existence check doesn't work
     rm "$temporary_hash_file".*
     if [ $? -ne 0 ]; then
         echo -e "> $warning_message: Skipped removing existing temporary hash file!"
     fi
 fi
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if [ $unix_named_pipe == true ]; then
         temporary_hash_file="${temporary_hash_file}.fifo"
     else
@@ -281,7 +281,7 @@ $system_echo "> Generating list of files to hash ..."
 # *
 dir_list=($(cat $dir_list_file))
 file_list=()
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     for dir in "${dir_list[@]}"; do
         if [ ! -d "$dir" ]; then
             err_code=$((err_code_offset+1))
@@ -301,7 +301,7 @@ fi
 # *
 file_dir="$script_path:"
 index_offset=0
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     for index in "${!file_list[@]}"; do
         # if is path, start with /
         #$system_echo ""
@@ -334,7 +334,7 @@ fi
 # * 2.3 Remove duplicates of files and dirs
 # *    - ref: https://stackoverflow.com/questions/13648410/how-can-i-get-unique-values-from-an-array-in-bash
 # *
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     file_list=($($system_echo "${file_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
     if [ $? -ne 0 ]; then
         err_code=$((err_code_offset+3))
@@ -347,7 +347,7 @@ fi
 # *
 # * 2.4 Check if files exist, also removing included directories
 # *
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     for index in "${!file_list[@]}"; do
         if [ ! -f "${file_list[index]}" ]; then
             #file_list=(${file_list[@]/${file_list[index]}}) # can't remove element by value cause it would also remove other path containing the value
@@ -372,7 +372,7 @@ fi
 # *
 # * 2.5 Store list of files and dirs to hash in a file
 # *
-if [[ $? -eq 0 ]] && [[ $err_code -eq 0 ]]; then
+if [[ $err_code -eq 0 ]]; then
     if ! [ -z $hashed_file_list_storing_file ]; then
         $system_echo "Files:" > $hashed_file_list_storing_file
         for file in "${file_list[@]}"; do
