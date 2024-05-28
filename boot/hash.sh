@@ -233,12 +233,13 @@ fi
 # *     - ls: 136k
 # *     - cat: 36k
 # *     - echo: 36k
-$system_echo "> Creating temporary files ..."
 err_code_offset=$((err_code_offset+20)) # 20
+$system_echo "> Creating temporary files ..."
 # *
 # * 1.1 Create temporary hash file
 # *
 if [[ $err_code -eq 0 ]]; then
+    # this is necessary to avoid residual data in the file
     #if [ -f "$temporary_hash_file" ]; then # existence check doesn't work
     rm "$temporary_hash_file".*
     if [ $? -ne 0 ]; then
@@ -402,7 +403,29 @@ err_code_offset=$((err_code_offset+20)) # 60
 #      - echo "hello" > file.fifo &
 #      - cat < file.fifo
 
-# > 4. Unmount binaries from RAMDisk
+# > 4. Remove I/O files
 err_code_offset=$((err_code_offset+20)) # 80
+$system_echo "> Removing temporary files ..."
+# *
+# * 4.1 Remove temporary hash file
+# *
+if [[ $err_code -eq 0 ]]; then
+    #if [ -f "$temporary_hash_file" ]; then # existence check doesn't work
+    rm $temporary_hash_file
+    if [ $? -ne 0 ]; then
+        echo -e "> $warning_message: Skipped removing temporary hash file!"
+    fi
+fi
+# *
+# * 4.2 Unmount binaries from RAMDisk
+# *
+
+# *
+# * 4.3 Section 4 ends
+# *
+if [[ $? -ne 0 ]] || [[ $err_code -ne 0 ]]; then
+    print_error_msg
+    exit 1
+fi
 
 $system_echo "end of script"
