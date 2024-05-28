@@ -3,6 +3,8 @@
 source "../common/functions.sh"
 source "./function_ibmtpm.sh"
 load_preset "./config.ini"
+script=$(realpath "$0")
+script_path=$(dirname "$script")
 
 #echo_notice "${dirname}" "${filename}" "Uninstalling dependencies..."
 #cd "${base_dir}/ibmacs${ibmacs_ver}/acs" && sudo make uninstall    # no uninstall target provided
@@ -27,3 +29,4 @@ sudo mysql -Bse "DROP DATABASE IF EXISTS $mysql_database;"
 sudo mysql -Bse "DROP DATABASE IF EXISTS machines;"
 
 clear_preset
+sudo rm $script_path/config.ini
