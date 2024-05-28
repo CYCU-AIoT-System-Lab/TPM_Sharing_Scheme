@@ -4,6 +4,16 @@ Scripts here is tested on Ubuntu 18.04 VM.
 
 Currently, ACS doesn't support TPM2.0.
 
+## Usage
+
+If no presets are set (default), the script will require the user to input the option they desire.
+
+1. Installing platform: 1~5
+    - Add preset: `touch ./ip<1~5>`, like `touch ./ip<5>` for preset 5.
+2. config file option: the script will list out options in `./config_files/` directory.
+    - Add preset: `touch ./cf<1~5>`, like `touch ./cf<5>` for preset 5.
+    - You can duplicate the default config files in `./config_files/` and modify them to your needs. It will also be listed as an option.
+
 ## Directory Description
 
 1. [config_files](config_files): Configuration files for installation.

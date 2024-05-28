@@ -62,11 +62,6 @@ load_preset () {
     mysql_database="tpm2"
     # ==== network ====
     repo_url="https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/main/setup_ibmtpm"
-    acs_demo_server_ip="localhost" # i.e. 127.0.0.1
-    acs_demo_server_port="80"
-    acs_demo_client_ip="localhost" # i.e. 127.0.0.1
-    tpm_command_port="2321"
-    acs_port="2323"
     # ==== format ====
     log4j_time_format="%Y/%m/%d-%H:%M:%S" # default: %Y/%m/%d-%H:%M:%S
     log4j_line_number="100"

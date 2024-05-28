@@ -2,36 +2,10 @@
 
 source "../common/functions.sh"
 source "./function_ibmtpm.sh"
-load_preset "./config.ini"
 
 dirname="setup_ibmtpm"
 filename="setup_sudo"
-
 current_dir=$(pwd)
-dn_ibmtss="ibmtss"
-dn_ibmtpm="ibmtpm"
-dn_ibmacs="ibmacs"
-fn_ibmtss="${dn_ibmtss}${ibmtss_ver}.tar.gz"
-fn_ibmtpm="${dn_ibmtpm}${ibmtpm_ver}.tar.gz"
-fn_ibmacs="${dn_ibmacs}${ibmacs_ver}.tar.gz"
-sym_link_ibmtss="${base_dir}/${dn_ibmtss}"
-sym_link_ibmtpm="${base_dir}/${dn_ibmtpm}"
-sym_link_ibmacs="${base_dir}/${dn_ibmacs}"
-path_ibmtss="${sym_link_ibmtss}${ibmtss_ver}"
-path_ibmtpm="${sym_link_ibmtpm}${ibmtpm_ver}"
-path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
-path_NV="${sym_link_ibmtpm}/src/NVChip"
-tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
-acs_demo_url_A="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
-acs_demo_url_B="${acs_demo_server_ip}/acs"
-tpm2_nvread="/usr/local/bin/tpm2_nvread" # Required setup_optiga installed
-acs_demo_server_log_dir="${sym_link_ibmacs}/serverenroll.log4j"
-acs_demo_client_log_dir="${sym_link_ibmacs}/clientenroll.log4j"
-swtpm_bios_log_dir="${sym_link_ibmacs}/tpm2bios.log"
-acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmacs}/b.log4j"
-ima_sig_log_dir="${sym_link_ibmacs}/imasig.log"
-acs_demo_verify_imasig_log_dir="${sym_link_ibmacs}/i.log4j"
-acs_demo_verify_client_log_dir="${sym_link_ibmacs}/client.log4j"
 
 # Install requirements for development, building, and testing
 # Download ibmtss, ibmtpm, and ibmacs from sourceforge
@@ -573,25 +547,105 @@ open_all_logs () {
 
 echo_notice "${dirname}" "${filename}" "Running setup script ..."
 
-if [ $install_req            == 1 ]; then install_req;                 fi
-if [ $setup_ibmtpmtss_env    == 1 ]; then setup_ibmtpmtss_env;         fi
-if [ $compile_ibmtpmtss      == 1 ]; then compile_ibmtpmtss;           fi
-if [ $setup_ibmswtpm_env     == 1 ]; then setup_ibmswtpm_env;          fi
-if [ $compile_ibmswtpm       == 1 ]; then compile_ibmswtpm;            fi
-if [ $setup_ibmacs_env       == 1 ]; then setup_ibmacs_env;            fi
-if [ $compile_ibmacs         == 1 ]; then compile_ibmacs;              fi
-if [ $open_demo_webpage      == 1 ]; then open_demo_webpage;           fi
-if [ $generate_CA            == 1 ]; then generate_CA;                 fi
-if [ $activate_TPM_server    == 1 ]; then activate_TPM_server;         fi
-if [ $activate_TPM_client    == 1 ]; then activate_TPM_client;         fi
-if [ $generate_EK            == 1 ]; then generate_EK;                 fi
-if [ $retrieve_EK            == 1 ]; then retrieve_EK;                 fi
-if [ $set_acs_sql_setting    == 1 ]; then set_acs_sql_setting;         fi
-if [ $active_ACS_Demo_Server == 1 ]; then active_ACS_Demo_Server;      fi
-if [ $active_ACS_Demo_Client == 1 ]; then active_ACS_Demo_Client;      fi
-if [ $active_ACS_Demo_verify == 1 ]; then active_ACS_Demo_verify;      fi
-if [ $print_log_path         == 1 ]; then print_log_path;              fi
-if [ $open_all_logs          == 1 ]; then open_all_logs 1;             fi
+# look for option preset (install_platform & config_file)
+if [ -z ${install_platform+x} ]; then
+    found_install_platform=false
+    preset_list=($(ls $current_dir | grep -E 'ip[0-9]+')) || { echo -e "No preset option found for install_platform"; }
+    preset_file=${preset_list[0]}
+    install_platform=${preset_file:2}
+    if ! [ -z $install_platform ]; then
+        found_install_platform=true
+    fi
+else
+    found_install_platform=true
+fi
+found_config_file=false
+preset_list=($(ls $current_dir | grep -E 'cf[0-9]+')) || { echo -e "No preset option found for config_file"; }
+preset_file=${preset_list[0]}
+config_file=${preset_file:2}
+if ! [ -z $config_file ]; then
+    found_config_file=true
+fi
+
+# no preset option found, take user input
+if ! [ $found_install_platform == true ]; then
+    echo -e "Please select the platform to install:"
+    echo -e "1. Ubuntu 18.04 VM"
+    echo -e "2. Raspbian Bullseye 2022-07-01 5.1 Kernel Debian i386 VM"
+    echo -e "3. Raspbian Bullseye 2023-05-03 6.x Kernel Debian arm64 Raspberry Pi 4"
+    echo -e "4. Ubuntu 22.04.3 on Raspberry Pi 4 B"
+    echo -e "5. Jetson Nano"
+    echo -e "Else. Exit"
+    read -rsn1 -p "Select: " install_platform
+    echo -e "$install_platform\n"
+    if [[ $install_platform -lt 1 ]] || [[ $install_platform -gt 5 ]]; then
+        echo -e "\nExiting ..."
+        exit 1
+    fi
+fi
+config_file_list=($(ls $current_dir/config_files))
+config_file_num=${#config_file_list[@]}
+if ! [ $found_config_file == true ]; then
+    echo -e "Please select the config file to use:"
+    for index in "${!config_file_list[@]}"; do
+        echo -e "$((index+1)). ${config_file_list[index]}"
+    done
+    echo -e "Else. Exit"
+    read -rsn1 -p "Select: " config_file
+    echo -e "$config_file\n"
+    if [[ $config_file -lt 1 ]] || [[ $config_file -gt $config_file_num ]]; then
+        echo -e "\nExiting ..."
+        exit 1
+    fi
+fi
+echo -e "install_platform: $install_platform\n"
+echo -e "config_file: ${config_file_list[$((config_file-1))]}\n"
+load_preset "$current_dir/config_files/${config_file_list[$((config_file-1))]}"
+
+dn_ibmtss="ibmtss"
+dn_ibmtpm="ibmtpm"
+dn_ibmacs="ibmacs"
+fn_ibmtss="${dn_ibmtss}${ibmtss_ver}.tar.gz"
+fn_ibmtpm="${dn_ibmtpm}${ibmtpm_ver}.tar.gz"
+fn_ibmacs="${dn_ibmacs}${ibmacs_ver}.tar.gz"
+sym_link_ibmtss="${base_dir}/${dn_ibmtss}"
+sym_link_ibmtpm="${base_dir}/${dn_ibmtpm}"
+sym_link_ibmacs="${base_dir}/${dn_ibmacs}"
+path_ibmtss="${sym_link_ibmtss}${ibmtss_ver}"
+path_ibmtpm="${sym_link_ibmtpm}${ibmtpm_ver}"
+path_ibmacs="${sym_link_ibmacs}${ibmacs_ver}"
+path_NV="${sym_link_ibmtpm}/src/NVChip"
+tss_cert_rootcert_dir="${sym_link_ibmtss}/utils/certificates"
+acs_demo_url_A="${acs_demo_server_ip}:${acs_demo_server_port}/acs"
+acs_demo_url_B="${acs_demo_server_ip}/acs"
+tpm2_nvread="/usr/local/bin/tpm2_nvread" # Required setup_optiga installed
+acs_demo_server_log_dir="${sym_link_ibmacs}/serverenroll.log4j"
+acs_demo_client_log_dir="${sym_link_ibmacs}/clientenroll.log4j"
+swtpm_bios_log_dir="${sym_link_ibmacs}/tpm2bios.log"
+acs_demo_verify_tpm2bios_log_dir="${sym_link_ibmacs}/b.log4j"
+ima_sig_log_dir="${sym_link_ibmacs}/imasig.log"
+acs_demo_verify_imasig_log_dir="${sym_link_ibmacs}/i.log4j"
+acs_demo_verify_client_log_dir="${sym_link_ibmacs}/client.log4j"
+
+if [[  $install_req            == 1 ]]; then install_req;                 fi
+if [[  $setup_ibmtpmtss_env    == 1 ]]; then setup_ibmtpmtss_env;         fi
+if [[  $compile_ibmtpmtss      == 1 ]]; then compile_ibmtpmtss;           fi
+if [[  $setup_ibmswtpm_env     == 1 ]]; then setup_ibmswtpm_env;          fi
+if [[  $compile_ibmswtpm       == 1 ]]; then compile_ibmswtpm;            fi
+if [[  $setup_ibmacs_env       == 1 ]]; then setup_ibmacs_env;            fi
+if [[  $compile_ibmacs         == 1 ]]; then compile_ibmacs;              fi
+if [[  $open_demo_webpage      == 1 ]]; then open_demo_webpage;           fi
+if [[  $generate_CA            == 1 ]]; then generate_CA;                 fi
+if [[  $activate_TPM_server    == 1 ]]; then activate_TPM_server;         fi
+if [[  $activate_TPM_client    == 1 ]]; then activate_TPM_client;         fi
+if [[  $generate_EK            == 1 ]]; then generate_EK;                 fi
+if [[  $retrieve_EK            == 1 ]]; then retrieve_EK;                 fi
+if [[  $set_acs_sql_setting    == 1 ]]; then set_acs_sql_setting;         fi
+if [[  $active_ACS_Demo_Server == 1 ]]; then active_ACS_Demo_Server;      fi
+if [[  $active_ACS_Demo_Client == 1 ]]; then active_ACS_Demo_Client;      fi
+if [[  $active_ACS_Demo_verify == 1 ]]; then active_ACS_Demo_verify;      fi
+if [[  $print_log_path         == 1 ]]; then print_log_path;              fi
+if [[  $open_all_logs          == 1 ]]; then open_all_logs 1;             fi
 
 clear_preset
 
