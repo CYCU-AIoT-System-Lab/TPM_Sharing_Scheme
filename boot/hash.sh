@@ -92,7 +92,46 @@ print_error_msg () {
             print_msg "Failed to create temporary hash file!"
             ;;
         22)
-            print_msg "Failed to create hashed file list storing file!"
+            print_msg "Failed to unmount existing RAMDisk!"
+            ;;
+        23)
+            print_msg "Failed to remove existing temporary folder for mounting RAMDisk!"
+            ;;
+        24)
+            print_msg "Failed to create temporary folder for mounting RAMDisk!"
+            ;;
+        25)
+            print_msg "Failed to change temporary folder's permission!"
+            ;;
+        26)
+            print_msg "Failed to mount RAMDisk!"
+            ;;
+        27)
+            print_msg "Failed to verify RAMDisk mounted!"
+            ;;
+        28)
+            print_msg "Failed to copy tpm2_hash binary to RAMDisk!"
+            ;;
+        29)
+            print_msg "Copied tpm2_hash binary doesn't work!"
+            ;;
+        30)
+            print_msg "Failed to copy ls to RAMDisk!"
+            ;;
+        31)
+            print_msg "Copied ls binary doesn't work!"
+            ;;
+        32)
+            print_msg "Failed to copy cat to RAMDisk!"
+            ;;
+        33)
+            print_msg "Copied cat binary doesn't work!"
+            ;;
+        34)
+            print_msg "Failed to copy echo to RAMDisk!"
+            ;;
+        35)
+            print_msg "Copied echo binary doesn't work!"
             ;;
         # Section 2: Generating list of files and directories
         # Offset: 40
@@ -113,6 +152,13 @@ print_error_msg () {
             ;;
         46)
             print_msg "Failed to store list of files and dirs to hash in a file!"
+            ;;
+        # Section 3: Hashing chain
+        # Offset: 60
+        # Section 4: I/O cleanup
+        # Offset: 80
+        81)
+            print_msg "Failed to clean up RAMDisk!"
             ;;
         *)
             echo -e "> $error_message[$err_code]: Unknown error!"
@@ -229,14 +275,10 @@ fi
 # > 1. File I/O
 # *  - Create temporary hash file
 # *  - Mout binaries to RAMDisk (4K+49K)
-# *     - tpm2_hash: 4k
-# *     - ls: 136k
-# *     - cat: 36k
-# *     - echo: 36k
 err_code_offset=$((err_code_offset+20)) # 20
 $system_echo "> Creating temporary files ..."
 # *
-# * 1.1 Create temporary hash file
+# * 1.1 Create temporary hash file / named pipe
 # *
 if [[ $err_code -eq 0 ]]; then
     # this is necessary to avoid residual data in the file
@@ -264,7 +306,99 @@ if [[ $err_code -eq 0 ]]; then
 fi
 # *
 # * 1.2 Mount binaries to RAMDisk
+# *     - tpm2_hash: 4k
+# *     - ls: 136k
+# *     - cat: 36k
+# *     - echo: 36k
+# *   - create 5MB RAMDisk
 # *
+mbc_binary_ramdisk="/tmp/mbc_bin_ramdisk"
+if [[ $err_code -eq 0 ]]; then
+    if [ $ramdisk == true ]; then
+        if grep -qs $mbc_binary_ramdisk /proc/mounts; then
+            $system_echo "> RAMDisk already mounted!"
+            $system_echo "> Removing existing RAMDisk ..."
+            #sudo lsof -n $mbc_binary_ramdisk
+            sudo umount $mbc_binary_ramdisk
+            if [ $? -ne 0 ]; then
+                err_code=$((err_code_offset+2))
+            fi
+            sudo rmdir $mbc_binary_ramdisk
+            if [ $? -ne 0 ]; then
+                err_code=$((err_code_offset+3))
+            fi
+        fi
+    fi
+fi
+if [[ $err_code -eq 0 ]]; then
+    if [ $ramdisk == true ]; then
+        $system_echo "> Mounting binaries to RAMDisk ..."
+        sudo mkdir -p $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+4))
+        fi
+        sudo chmod 777 $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+5))
+        fi
+        sudo mount -t tmpfs -o size=5M mbc_binary $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+6))
+        fi
+        mount | tail -n 1 | grep $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+7))
+        fi
+    fi
+fi
+if [[ $err_code -eq 0 ]]; then
+    if [ $ramdisk == true ]; then
+        $system_echo "> Copying binaries to RAMDisk ..."
+        sudo cp $system_tpm2_hash $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+8))
+        fi
+        system_tpm2_hash_path=$(dirname $system_tpm2_hash)
+        system_tpm2_hash=$mbc_binary_ramdisk/$(basename $system_tpm2_hash)
+        $system_tpm2_hash --version > /dev/null
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+9))
+        fi
+
+        sudo cp $system_ls $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+10))
+        fi
+        system_ls_path=$(dirname $system_ls)
+        system_ls=$mbc_binary_ramdisk/$(basename $system_ls)
+        $system_ls --version > /dev/null
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+11))
+        fi
+
+        sudo cp $system_cat $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+12))
+        fi
+        system_cat_path=$(dirname $system_cat)
+        system_cat=$mbc_binary_ramdisk/$(basename $system_cat)
+        $system_cat --version > /dev/null
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+13))
+        fi
+
+        sudo cp $system_echo $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+14))
+        fi
+        system_echo_path=$(dirname $system_echo)
+        system_echo=$mbc_binary_ramdisk/$(basename $system_echo)
+        $system_echo --version > /dev/null
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+15))
+        fi
+    fi
+fi
 
 # *
 # * 1.3 Section 1 ends
@@ -402,6 +536,12 @@ err_code_offset=$((err_code_offset+20)) # 60
 #   - ref: https://www.youtube.com/watch?v=DFreHo3UCD0
 #      - echo "hello" > file.fifo &
 #      - cat < file.fifo
+$system_echo "> Performing hashing chain on files ..."
+hashing_chain () {
+    $system_echo "> Hashing  ..."
+    sleep 1
+}
+time hashing_chain
 
 # > 4. Remove I/O files
 err_code_offset=$((err_code_offset+20)) # 80
@@ -418,8 +558,24 @@ if [[ $err_code -eq 0 ]]; then
 fi
 # *
 # * 4.2 Unmount binaries from RAMDisk
+# *   - experiments show that it is impossible to unmount the RAMDisk with the same process creating it
+# *   - so, only remove the files in the RAMDisk
 # *
-
+if [[ $err_code -eq 0 ]]; then
+    if [ $ramdisk == true ]; then
+        $system_echo "> Removing binaries from RAMDisk ..."
+        sudo rm -rf $mbc_binary_ramdisk/*
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+1))
+        fi
+        system_tpm2_hash=$system_tpm2_hash_path/$(basename $system_tpm2_hash)
+        system_ls=$system_ls_path/$(basename $system_ls)
+        system_cat=$system_cat_path/$(basename $system_cat)
+        system_echo=$system_echo_path/$(basename $system_echo)
+        $system_echo "> To unmout the RAMDisk manually, run the following command: (it would be unmounted next time this script is (auto)run)"
+        $system_echo "      sudo umount $mbc_binary_ramdisk"
+    fi
+fi
 # *
 # * 4.3 Section 4 ends
 # *
@@ -428,4 +584,4 @@ if [[ $? -ne 0 ]] || [[ $err_code -ne 0 ]]; then
     exit 1
 fi
 
-$system_echo "end of script"
+$system_echo "Execution ends successfully!"
