@@ -26,11 +26,11 @@ This directory holdes common utilities for this project.
 2. [./config.ini](./config.ini) set ```setup_ibmtpm = 1```.
 3. [./config.ini](./config.ini) set ```install_platform = <your_setting>```.
 4. Rename one of the following configuration files to ```config.ini```
-    1. [../setup_ibmtpm/config_dTPM_local.ini](../setup_ibmtpm/config_dTPM_local.ini): ACS local dTPM.
-    2. [../setup_ibmtpm/config_vTPM_local.ini](../setup_ibmtpm/config_vTPM_local.ini): ACS local vTPM.
-    3. [../setup_ibmtpm/config_RA_server.ini](../setup_ibmtpm/config_RA_server.ini): ACS Remote Attestation server.
+    1. [../setup_ibmtpm/config_files/config_dTPM_local.ini](../setup_ibmtpm/config_files/config_dTPM_local.ini): ACS local dTPM.
+    2. [../setup_ibmtpm/config_files/config_vTPM_local.ini](../setup_ibmtpm/config_files/config_vTPM_local.ini): ACS local vTPM.
+    3. [../setup_ibmtpm/config_files/config_RA_server.ini](../setup_ibmtpm/config_files/config_RA_server.ini): ACS Remote Attestation server.
         1. [./config.ini](./config.ini) set ```acs_demo_client_ip = <client_machine_ip>```
-    4. [../setup_ibmtpm/config_RA_client.ini](../setup_ibmtpm/config_RA_client.ini): ACS Remote Attestation client.
+    4. [../setup_ibmtpm/config_files/config_RA_client.ini](../setup_ibmtpm/config_files/config_RA_client.ini): ACS Remote Attestation client.
         1. [./config.ini](./config.ini) set ```acs_demo_server_ip = <server_machine_ip>```
 5. Execute [./setup.sh](./setup.sh).
 

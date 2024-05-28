@@ -6,7 +6,7 @@ Currently, ACS doesn't support TPM2.0.
 
 ## Directory Description
 
-1. [config.ini](config.ini): Configuration file for installation.
+1. [config_files](config_files): Configuration files for installation.
 2. [readme.md](readme.md): This file.
 3. [remove.sh](remove.sh): Uninstall script.
 4. [setup.sh](setup.sh): Install script approach with minimum privilege, unsuccesful.
