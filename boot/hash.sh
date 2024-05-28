@@ -572,8 +572,9 @@ if [[ $err_code -eq 0 ]]; then
         system_ls=$system_ls_path/$(basename $system_ls)
         system_cat=$system_cat_path/$(basename $system_cat)
         system_echo=$system_echo_path/$(basename $system_echo)
-        $system_echo "> To unmout the RAMDisk manually, run the following command: (it would be unmounted next time this script is (auto)run)"
-        $system_echo "      sudo umount $mbc_binary_ramdisk"
+        $system_echo "It is currently impossible to unmount the RAMDisk with the same process creating it."
+        $system_echo "To unmout the RAMDisk manually, run the following command: (it would be unmounted next time this script is [auto-]executed)"
+        $system_echo "    sudo umount $mbc_binary_ramdisk && sudo rmdir $mbc_binary_ramdisk"
     fi
 fi
 # *
