@@ -1,4 +1,1 @@
-/mnt/e/GitHub/TPM_Sharing_Scheme/boot
-/mnt/e/GitHub/TPM_Sharing_Scheme/boot
-/mnt/e/GitHub/TPM_Sharing_Scheme/boot
-/mnt/e/GitHub/TPM_Sharing_Scheme/boot
+/home/dachu/2_80.dat

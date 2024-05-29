@@ -6,12 +6,13 @@
 # -------------------------
 help_msg () {
     echo ""
-    echo "Usage:    bash hash.sh <dir_list_file> <initial_hash_value> [<hashed_file_list_storing_file>] [-p] [-r] [-v] [-h|--help]"
+    echo "Usage:    bash hash.sh <dir_list_file> <initial_hash_value> [<hashed_file_list_storing_file>] [-p] [-r] [-t] [-v] [-h|--help]"
     echo "  <dir_list_file>:                    File containing list of directories to hash"
     echo "  <initial_hash_value>:               Initial hash value to start hashing chain by PCR SHA256 standard, should be 8x8 hex characters of 0~9 and A~F"
     echo "  <hashed_file_list_storing_file>:    (optional) File to store hashed file list"
     echo "  -p:                                 (optional) Enable UNIX Named Pipe to accelerate storage R/W"
     echo "  -r:                                 (optional) Enable RAMDisk to accelerate binary calling"
+    echo "  -t:                                 (optional) Enable hash output trimming to remove \\n, space, filename, and so on"
     echo "  -v:                                 (optional) Verbose mode"
     echo "  -h|--help:                          Display this help message"
     echo ""
@@ -43,6 +44,8 @@ system_tpm2_hash=$(which tpm2_hash)
 system_ls=$(which ls)
 system_cat=$(which cat)
 system_echo=$(which echo)
+system_xxd=$(which xxd)
+system_tr=$(which tr)
 temporary_hash_file="/tmp/hash" # file to store temporary hash value and file content for next hashing, extension will be added later
 error_code=0
 
@@ -72,18 +75,24 @@ print_error_msg () {
             print_msg "Binary \"echo\" not found!"
             ;;
         6)
-            print_msg "Missing <dir_list_file>!"
+            print_msg "Binary \"xxd\" not found!"
             ;;
         7)
-            print_msg "Missing <initial_hash_value>!"
+            print_msg "Binary \"tr\" not found!"
             ;;
         8)
-            print_msg "<dir_list_file> does not exist or is empty!"
+            print_msg "Missing <dir_list_file>!"
             ;;
         9)
-            print_msg "<initial_hash_value> is not 64 characters long!"
+            print_msg "Missing <initial_hash_value>!"
             ;;
         10)
+            print_msg "<dir_list_file> does not exist or is empty!"
+            ;;
+        11)
+            print_msg "<initial_hash_value> is not 64 characters long!"
+            ;;
+        12)
             print_msg "<initial_hash_value> should consist of 0~9 and A~F only!"
             ;;
         # Section 1: File I/O
@@ -133,6 +142,18 @@ print_error_msg () {
         35)
             print_msg "Copied echo binary doesn't work!"
             ;;
+        36)
+            print_msg "Failed to copy xxd to RAMDisk!"
+            ;;
+        37)
+            print_msg "Copied xxd binary doesn't work!"
+            ;;
+        38)
+            print_msg "Failed to copy tr to RAMDisk!"
+            ;;
+        39)
+            print_msg "Copied tr binary doesn't work!"
+            ;;
         # Section 2: Generating list of files and directories
         # Offset: 40
         41)
@@ -177,6 +198,7 @@ hashed_file_list_storing_file=${cli_input_arr[2]}
 verbose=false
 unix_named_pipe=false
 ramdisk=false
+trim=false
 # *
 # * 0.1 Process optional arguments
 # *
@@ -193,6 +215,9 @@ if [ $? -eq 0 ]; then
     fi
     if [[ "${cli_input_arr[*]}" =~ "-r" ]]; then
         ramdisk=true
+    fi
+    if [[ "${cli_input_arr[*]}" =~ "-t" ]]; then
+        trim=true
     fi
     $system_echo "verbose mode:                     $verbose"
     $system_echo "unix_named_pipe acceleration:     $unix_named_pipe"
@@ -224,6 +249,16 @@ if [[ $err_code -eq 0 ]]; then
         err_code=$((err_code_offset+5))
     fi
 fi
+if [[ $err_code -eq 0 ]]; then
+    if [ -z "$system_xxd" ]; then
+        err_code=$((err_code_offset+6))
+    fi
+fi
+if [[ $err_code -eq 0 ]]; then
+    if [ -z "$system_tr" ]; then
+        err_code=$((err_code_offset+7))
+    fi
+fi
 # *
 # * 0.3 Check if required arguments are provided and valid
 # *
@@ -233,28 +268,28 @@ $system_echo "hashed_file_list_storing_file:    $hashed_file_list_storing_file"
 $system_echo ""
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$dir_list_file" ]; then
-        err_code=$((err_code_offset+6))
-    fi
-fi
-if [[ $err_code -eq 0 ]]; then
-    if [ -z "$initial_hash_value" ]; then
-        err_code=$((err_code_offset+7))
-    fi
-fi
-if [[ $err_code -eq 0 ]]; then
-    if ! [ -s "$dir_list_file" ]; then
         err_code=$((err_code_offset+8))
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
-    if [ ${#initial_hash_value} -ne 64 ]; then
+    if [ -z "$initial_hash_value" ]; then
         err_code=$((err_code_offset+9))
+    fi
+fi
+if [[ $err_code -eq 0 ]]; then
+    if ! [ -s "$dir_list_file" ]; then
+        err_code=$((err_code_offset+10))
+    fi
+fi
+if [[ $err_code -eq 0 ]]; then
+    if [ ${#initial_hash_value} -ne 64 ]; then
+        err_code=$((err_code_offset+11))
         $system_echo "> <initial_hash_value> is ${#initial_hash_value} characters long!"
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if ! [[ $initial_hash_value =~ $hash_pattern ]]; then
-        err_code=$((err_code_offset+10))
+        err_code=$((err_code_offset+12))
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
@@ -292,12 +327,13 @@ if [[ $err_code -eq 0 ]]; then
     if [ $unix_named_pipe == true ]; then
         temporary_hash_file="${temporary_hash_file}.fifo"
     else
-        temporary_hash_file="${temporary_hash_file}.tmp.XXXXXXXX"
+        temporary_hash_file="${temporary_hash_file}.tmp"
     fi
     if [ $unix_named_pipe == true ]; then
         mkfifo $temporary_hash_file
     else
-        mktemp $temporary_hash_file
+        mktemp "$temporary_hash_file.XXXXXXXX"
+        temporary_hash_file=$(ls "${temporary_hash_file}"*)
     fi
     if [ $? -ne 0 ]; then
         echo "File: $temporary_hash_file"
@@ -397,6 +433,28 @@ if [[ $err_code -eq 0 ]]; then
         if [ $? -ne 0 ]; then
             err_code=$((err_code_offset+15))
         fi
+        
+        sudo cp $system_xxd $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+16))
+        fi
+        system_xxd_path=$(dirname $system_xxd)
+        system_xxd=$mbc_binary_ramdisk/$(basename $system_xxd)
+        $system_xxd --version > /dev/null
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+17))
+        fi
+
+        sudo cp $system_tr $mbc_binary_ramdisk
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+18))
+        fi
+        system_tr_path=$(dirname $system_tr)
+        system_tr=$mbc_binary_ramdisk/$(basename $system_tr)
+        $system_tr --version > /dev/null
+        if [ $? -ne 0 ]; then
+            err_code=$((err_code_offset+19))
+        fi
     fi
 fi
 
@@ -416,14 +474,22 @@ $system_echo "> Generating list of files to hash ..."
 # *
 dir_list=($(cat $dir_list_file))
 file_list=()
+index_offset=0
 if [[ $err_code -eq 0 ]]; then
-    for dir in "${dir_list[@]}"; do
-        if [ ! -d "$dir" ]; then
-            err_code=$((err_code_offset+1))
-            echo "Not existed dir: $dir"
+    for index in "${!dir_list[@]}"; do
+        index=$((index-index_offset))
+        if [ ! -d "${dir_list[index]}" ]; then
+            if [ ! -f "${dir_list[index]}" ]; then
+                err_code=$((err_code_offset+1))
+                echo "Not existed dir: ${dir_list[index]}"
+            else
+                file_list+=(${dir_list[index]})
+                index_offset=$((index_offset+1))
+                unset 'dir_list[index]'
+            fi
+        else
+            file_list+=($($system_ls -AR ${dir_list[index]}))
         fi
-        # $system_ls -AR $dir
-        file_list+=($($system_ls -AR $dir))
     done
     if [ $? -ne 0 ]; then
         err_code=$((err_code_offset+1))
@@ -434,17 +500,19 @@ fi
 # *     - Move directories to dir_list
 # *     - Convert relative path to absolute path
 # *
+$system_echo "> Processing file list ..."
 file_dir="$script_path:"
 index_offset=0
 if [[ $err_code -eq 0 ]]; then
     for index in "${!file_list[@]}"; do
-        # if is path, start with /
+        # if is path, start with /, this doesn't work in this case
+        #if [[ "${file_list[index]}" = /* ]]; then
         #$system_echo ""
         #$system_echo ${file_list[@]}
         index=$((index-index_offset))
-        if [[ "${file_list[index]}" = /* ]]; then
-            temp="${file_list[index]}"
-            temp_dir="${temp::-1}"
+        temp="${file_list[index]}"
+        temp_dir="${temp::-1}"
+        if [[ -d "$temp_dir" ]]; then
             if [ $verbose == true ]; then
                 $system_echo "dir:  $temp_dir"
             fi
@@ -455,7 +523,8 @@ if [[ $err_code -eq 0 ]]; then
             file_list=(${file_list[@]/$temp})
             index_offset=$((index_offset+1))
         else
-            file_list[index]="${file_dir::-1}/${file_list[index]}"
+            #file_list[index]="${file_dir::-1}/${file_list[index]}" # keep both version of path, cause given full path of file will also be pre-pended
+            file_list+=("${file_dir::-1}/${file_list[index]}")
             if [ $verbose == true ]; then
                 $system_echo "file: ${file_list[index]}"
             fi
@@ -469,12 +538,13 @@ fi
 # * 2.3 Remove duplicates of files and dirs
 # *    - ref: https://stackoverflow.com/questions/13648410/how-can-i-get-unique-values-from-an-array-in-bash
 # *
+$system_echo "> Removing duplicates ..."
 if [[ $err_code -eq 0 ]]; then
-    file_list=($($system_echo "${file_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+    file_list=($($system_echo "${file_list[@]}" | $system_tr ' ' '\n' | sort -u | $system_tr '\n' ' '))
     if [ $? -ne 0 ]; then
         err_code=$((err_code_offset+3))
     fi
-    dir_list=($($system_echo "${dir_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+    dir_list=($($system_echo "${dir_list[@]}" | $system_tr ' ' '\n' | sort -u | $system_tr '\n' ' '))
     if [ $? -ne 0 ]; then
         err_code=$((err_code_offset+4))
     fi
@@ -482,6 +552,7 @@ fi
 # *
 # * 2.4 Check if files exist, also removing included directories
 # *
+$system_echo "> Removing invalid files ..."
 if [[ $err_code -eq 0 ]]; then
     for index in "${!file_list[@]}"; do
         if [ ! -f "${file_list[index]}" ]; then
@@ -498,8 +569,10 @@ if [[ $err_code -eq 0 ]]; then
             fi
         fi
     done
-    $system_echo "> Number of files to hash: ${#file_list[@]}"
-    $system_echo "> Number of directories: ${#dir_list[@]}"
+    file_list_cnt=${#file_list[@]}
+    dir_list_cnt=${#dir_list[@]}
+    $system_echo "> Number of files to hash: $file_list_cnt"
+    $system_echo "> Number of directories: $dir_list_cnt"
     if [ $? -ne 0 ]; then
         err_code=$((err_code_offset+5))
     fi
@@ -507,6 +580,7 @@ fi
 # *
 # * 2.5 Store list of files and dirs to hash in a file
 # *
+$system_echo "> Storing list of files and directories to hash ..."
 if [[ $err_code -eq 0 ]]; then
     if ! [ -z $hashed_file_list_storing_file ]; then
         $system_echo "Files:" > $hashed_file_list_storing_file
@@ -539,9 +613,28 @@ err_code_offset=$((err_code_offset+20)) # 60
 $system_echo "> Performing hashing chain on files ..."
 hashing_chain () {
     $system_echo "> Hashing  ..."
-    sleep 1
+    for index in "${!file_list[@]}"; do
+        $system_echo -e "\e[1A\e[KHashing ${file_list[index]} ..."
+        # Add initial hash value
+        $system_echo "$initial_hash_value" > $temporary_hash_file &
+        # Add path of file
+        $system_echo "${file_list[index]}" >> $temporary_hash_file &
+        # Add file content
+        $system_cat ${file_list[index]} >> $temporary_hash_file &
+        # Hash the file
+        #$system_cat $temporary_hash_file
+        if [ $trim == true ]; then
+            #initial_hash_value=$($system_tpm2_hash -C o -g sha256 $temporary_hash_file | $system_xxd -p | $system_tr -d '\n')
+            initial_hash_value=$(shasum -a 256 $temporary_hash_file | $system_tr -d '\n' | $system_tr -d ' ' | $system_tr -d "$temporary_hash_file")
+        else
+            #initial_hash_value=$($system_tpm2_hash -C o -g sha256 $temporary_hash_file | $system_xxd -p)
+            initial_hash_value=$(shasum -a 256 $temporary_hash_file)
+        fi
+    done
 }
 time hashing_chain
+# result stores in initial_hash_value
+echo $(echo $initial_hash_value | $system_tr -d '\n' | $system_tr -d ' ' | $system_tr -d "$temporary_hash_file")
 
 # > 4. Remove I/O files
 err_code_offset=$((err_code_offset+20)) # 80
@@ -551,7 +644,7 @@ $system_echo "> Removing temporary files ..."
 # *
 if [[ $err_code -eq 0 ]]; then
     #if [ -f "$temporary_hash_file" ]; then # existence check doesn't work
-    rm $temporary_hash_file
+    #rm $temporary_hash_file
     if [ $? -ne 0 ]; then
         echo -e "> $warning_message: Skipped removing temporary hash file!"
     fi
@@ -572,6 +665,8 @@ if [[ $err_code -eq 0 ]]; then
         system_ls=$system_ls_path/$(basename $system_ls)
         system_cat=$system_cat_path/$(basename $system_cat)
         system_echo=$system_echo_path/$(basename $system_echo)
+        system_xxd=$system_xxd_path/$(basename $system_xxd)
+        system_tr=$system_tr_path/$(basename $system_tr)
         $system_echo "It is currently impossible to unmount the RAMDisk with the same process creating it."
         $system_echo "To unmout the RAMDisk manually, run the following command: (it would be unmounted next time this script is [auto-]executed)"
         $system_echo "    sudo umount $mbc_binary_ramdisk && sudo rmdir $mbc_binary_ramdisk"
