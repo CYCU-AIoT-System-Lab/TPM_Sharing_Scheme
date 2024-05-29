@@ -56,7 +56,7 @@ error_code=0
 # >>>> Error Codes Handling
 # -------------------------
 print_msg () {
-    echo -e "> $error_message[$err_code]: $1"
+    >&2 echo -e "> $error_message[$err_code]: $1"
 }
 print_error_msg () {
     case "$err_code" in
