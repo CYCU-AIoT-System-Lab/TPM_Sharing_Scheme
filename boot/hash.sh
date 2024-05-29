@@ -6,15 +6,18 @@
 # -------------------------
 help_msg () {
     echo ""
-    echo "Usage:    bash hash.sh <dir_list_file> <initial_hash_value> [<hashed_file_list_storing_file>] [-p] [-r] [-t] [-v] [-h|--help]"
+    echo "Usage:    bash hash.sh <dir_list_file> <initial_hash_value> [<hashed_file_list_storing_file>] [-p] [-r] [-tr] [-ts] [-v] [-h|--help]"
     echo "  <dir_list_file>:                    File containing list of directories to hash"
     echo "  <initial_hash_value>:               Initial hash value to start hashing chain by PCR SHA256 standard, should be 8x8 hex characters of 0~9 and A~F"
     echo "  <hashed_file_list_storing_file>:    (optional) File to store hashed file list"
     echo "  -p:                                 (optional) Enable UNIX Named Pipe to accelerate storage R/W"
     echo "  -r:                                 (optional) Enable RAMDisk to accelerate binary calling"
-    echo "  -t:                                 (optional) Enable hash output trimming to remove \\n, space, filename, and so on"
+    echo "  -tr:                                (optional) Enable hash output trimming to remove \\n, space, filename, and so on"
+    echo "  -ts:                                (optional) Enable timing how log it takes to hash each file"
     echo "  -v:                                 (optional) Verbose mode"
     echo "  -h|--help:                          Display this help message"
+    echo ""
+    echo "Output variable: FINAL_HASH_VALUE     source this script to get the final hash value"
     echo ""
     echo "Example:  bash hash.sh -h"
     echo "          bash hash.sh dir_list.txt 1234567890ABCDEF000000000000000000000000000000000000000000000000"
@@ -199,6 +202,7 @@ verbose=false
 unix_named_pipe=false
 ramdisk=false
 trim=false
+time_hash=false
 # *
 # * 0.1 Process optional arguments
 # *
@@ -216,12 +220,18 @@ if [ $? -eq 0 ]; then
     if [[ "${cli_input_arr[*]}" =~ "-r" ]]; then
         ramdisk=true
     fi
-    if [[ "${cli_input_arr[*]}" =~ "-t" ]]; then
+    if [[ "${cli_input_arr[*]}" =~ "-tr" ]]; then
         trim=true
+    fi
+    if [[ "${cli_input_arr[*]}" =~ "-ts" ]]; then
+        time_hash=true
     fi
     $system_echo "verbose mode:                     $verbose"
     $system_echo "unix_named_pipe acceleration:     $unix_named_pipe"
     $system_echo "ramdisk acceleration:             $ramdisk"
+    $system_echo "trim hash output:                 $trim"
+    $system_echo "time hash process:                $time_hash"
+    $system_echo ""
 fi
 if [ $? -ne 0 ]; then
     err_code=$((err_code_offset+1))
@@ -615,12 +625,29 @@ hashing_chain () {
     $system_echo "> Hashing  ..."
     for index in "${!file_list[@]}"; do
         $system_echo -e "\e[1A\e[KHashing ${file_list[index]} ..."
+        # Empty the temporary hash file
         # Add initial hash value
-        $system_echo "$initial_hash_value" > $temporary_hash_file &
         # Add path of file
-        $system_echo "${file_list[index]}" >> $temporary_hash_file &
         # Add file content
-        $system_cat ${file_list[index]} >> $temporary_hash_file &
+        if [ $unix_named_pipe == true ]; then # potentially not work due to blocking
+            > $temporary_hash_file &
+            BACK_PID=$!
+            wait $BACK_PID
+            $system_echo "$initial_hash_value" >> $temporary_hash_file &
+            BACK_PID=$!
+            wait $BACK_PID
+            $system_echo "${file_list[index]}" >> $temporary_hash_file &
+            BACK_PID=$!
+            wait $BACK_PID
+            $system_cat ${file_list[index]} >> $temporary_hash_file &
+            BACK_PID=$!
+            wait $BACK_PID
+        else # mostly consistant
+            > $temporary_hash_file
+            $system_echo "$initial_hash_value" >> $temporary_hash_file
+            $system_echo "${file_list[index]}" >> $temporary_hash_file
+            $system_cat ${file_list[index]} >> $temporary_hash_file
+        fi
         # Hash the file
         #$system_cat $temporary_hash_file
         if [ $trim == true ]; then
@@ -632,9 +659,15 @@ hashing_chain () {
         fi
     done
 }
-time hashing_chain
+if [ $time_hash == true ]; then
+    time hashing_chain
+else
+    hashing_chain
+fi
 # result stores in initial_hash_value
-echo $(echo $initial_hash_value | $system_tr -d '\n' | $system_tr -d ' ' | $system_tr -d "$temporary_hash_file")
+FINAL_HASH_VALUE=$(echo $initial_hash_value | $system_tr -d '\n' | $system_tr -d ' ' | $system_tr -d "$temporary_hash_file")
+echo $FINAL_HASH_VALUE
+export FINAL_HASH_VALUE
 
 # > 4. Remove I/O files
 err_code_offset=$((err_code_offset+20)) # 80
@@ -645,6 +678,7 @@ $system_echo "> Removing temporary files ..."
 if [[ $err_code -eq 0 ]]; then
     #if [ -f "$temporary_hash_file" ]; then # existence check doesn't work
     #rm $temporary_hash_file
+    echo -e "Temporary hash file is not removed! This is still in testing phase."
     if [ $? -ne 0 ]; then
         echo -e "> $warning_message: Skipped removing temporary hash file!"
     fi
