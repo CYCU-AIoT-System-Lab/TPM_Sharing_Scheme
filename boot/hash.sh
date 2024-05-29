@@ -646,7 +646,7 @@ hashing_chain () {
             > $temporary_hash_file
             $system_echo "$initial_hash_value" >> $temporary_hash_file
             $system_echo "${file_list[index]}" >> $temporary_hash_file
-            $system_cat ${file_list[index]} >> $temporary_hash_file
+            $system_cat  "${file_list[index]}" >> $temporary_hash_file
         fi
         # Hash the file
         #$system_cat $temporary_hash_file
@@ -664,9 +664,8 @@ if [ $time_hash == true ]; then
 else
     hashing_chain
 fi
-# result stores in initial_hash_value
 FINAL_HASH_VALUE=$(echo $initial_hash_value | $system_tr -d '\n' | $system_tr -d ' ' | $system_tr -d "$temporary_hash_file")
-echo $FINAL_HASH_VALUE
+#echo $FINAL_HASH_VALUE
 export FINAL_HASH_VALUE
 
 # > 4. Remove I/O files
