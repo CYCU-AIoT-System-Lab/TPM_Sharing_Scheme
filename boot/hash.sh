@@ -6,15 +6,20 @@
 # -------------------------
 help_msg () {
     echo ""
-    echo "Usage:    bash hash.sh <dir_list_file> <initial_hash_value> [<hashed_file_list_storing_file>] [-p] [-r] [-tr] [-ts] [-v] [-h|--help]"
+    echo "Usage:    bash hash.sh <dir_list_file> <initial_hash_value> [<hashed_file_list_storing_file>] [-p] [-r] [-tr] [-ts] [-tpm] [-v] [-h|--help]"
+    echo ""
+    echo "Necessary arguments:"
     echo "  <dir_list_file>:                    File containing list of directories to hash"
     echo "  <initial_hash_value>:               Initial hash value to start hashing chain by PCR SHA256 standard, should be 8x8 hex characters of 0~9 and A~F"
-    echo "  <hashed_file_list_storing_file>:    (optional) File to store hashed file list"
-    echo "  -p:                                 (optional) Enable UNIX Named Pipe to accelerate storage R/W"
-    echo "  -r:                                 (optional) Enable RAMDisk to accelerate binary calling"
-    echo "  -tr:                                (optional) Enable hash output trimming to remove \\n, space, filename, and so on"
-    echo "  -ts:                                (optional) Enable timing how log it takes to hash each file"
-    echo "  -v:                                 (optional) Verbose mode"
+    echo ""
+    echo "Optional arguments:"
+    echo "  <hashed_file_list_storing_file>:    File to store hashed file list"
+    echo "  -p:                                 Enable UNIX Named Pipe to accelerate storage R/W"
+    echo "  -r:                                 Enable RAMDisk to accelerate binary calling"
+    echo "  -tr:                                Enable hash output trimming to remove \\n, space, filename, and so on"
+    echo "  -ts:                                Enable timing how log it takes to hash each file"
+    echo "  -tpm:                               Use TPM2.0 to hash files, default is shasum"
+    echo "  -v:                                 Verbose mode"
     echo "  -h|--help:                          Display this help message"
     echo ""
     echo "Output variable: FINAL_HASH_VALUE     source this script to get the final hash value"
@@ -43,11 +48,6 @@ warning_message="\033[33m\033[1mWarning\033[0m"
 hash_pattern='^[0-9A-Fa-f]+$'
 script=$(realpath "$0")
 script_path=$(dirname "$script")
-system_tpm2_hash=$(which tpm2_hash)
-system_ls=$(which ls)
-system_cat=$(which cat)
-system_echo=$(which echo)
-system_xxd=$(which xxd)
 temporary_hash_file="/tmp/hash" # file to store temporary hash value and file content for next hashing, extension will be added later
 error_code=0
 
@@ -65,34 +65,37 @@ print_error_msg () {
             print_msg "[0.1] Failed to parse optional CLI arguments!"
             ;;
         2)
-            print_msg "[0.2] Binary \"tpm2_hash\" not found!"
+            print_msg "[0.2] Missing CLI argument: <dir_list_file>!"
             ;;
         3)
-            print_msg "[0.2] Binary \"ls\" not found!"
+            print_msg "[0.2] Missing CLI argument: <initial_hash_value>!"
             ;;
         4)
-            print_msg "[0.2] Binary \"cat\" not found!"
+            print_msg "[0.2] <dir_list_file> does not exist or is empty!"
             ;;
         5)
-            print_msg "[0.2] Binary \"echo\" not found!"
+            print_msg "[0.2] <initial_hash_value> is not 64 characters long!"
             ;;
         6)
-            print_msg "[0.2] Binary \"xxd\" not found!"
+            print_msg "[0.2] <initial_hash_value> should consist of 0~9 and A~F only!"
             ;;
         7)
-            print_msg "[0.3] Missing CLI argument: <dir_list_file>!"
+            print_msg "[0.3] Binary \"tpm2_hash\" not found!"
             ;;
         8)
-            print_msg "[0.3] Missing CLI argument: <initial_hash_value>!"
+            print_msg "[0.3] Binary \"shasum\" not found!"
             ;;
         9)
-            print_msg "[0.3] <dir_list_file> does not exist or is empty!"
+            print_msg "[0.3] Binary \"ls\" not found!"
             ;;
         10)
-            print_msg "[0.3] <initial_hash_value> is not 64 characters long!"
+            print_msg "[0.3] Binary \"cat\" not found!"
             ;;
         11)
-            print_msg "[0.3] <initial_hash_value> should consist of 0~9 and A~F only!"
+            print_msg "[0.3] Binary \"echo\" not found!"
+            ;;
+        12)
+            print_msg "[0.3] Binary \"xxd\" not found!"
             ;;
         # Section 1: File I/O
         # Offset: 20
@@ -192,6 +195,7 @@ unix_named_pipe=false
 ramdisk=false
 trim=false
 time_hash=false
+tpm=false
 # *
 # * 0.1 Process optional arguments
 # *
@@ -209,87 +213,104 @@ if [ $? -eq 0 ]; then
     if [[ "${cli_input_arr[*]}" =~ "-r" ]]; then
         ramdisk=true
     fi
+    if [[ "${cli_input_arr[*]}" =~ "-tpm" ]]; then
+        tpm=true
+    fi
     if [[ "${cli_input_arr[*]}" =~ "-tr" ]]; then
         trim=true
     fi
     if [[ "${cli_input_arr[*]}" =~ "-ts" ]]; then
         time_hash=true
     fi
-    $system_echo "verbose mode:                     $verbose"
-    $system_echo "unix_named_pipe acceleration:     $unix_named_pipe"
-    $system_echo "ramdisk acceleration:             $ramdisk"
-    $system_echo "trim hash output:                 $trim"
-    $system_echo "time hash process:                $time_hash"
-    $system_echo ""
+    echo "verbose mode:                     $verbose"
+    echo "unix_named_pipe acceleration:     $unix_named_pipe"
+    echo "ramdisk acceleration:             $ramdisk"
+    echo "trim hash output:                 $trim"
+    echo "time hash process:                $time_hash"
+    echo ""
 fi
 if [ $? -ne 0 ]; then
     err_code=1
 fi
 # *
-# * 0.2 Check if binaries exist
+# * 0.2 Check if required arguments are provided and valid
 # *
+echo "dir_list_file:                    $dir_list_file"
+echo "initial_hash_value:               $initial_hash_value"
+echo "hashed_file_list_storing_file:    $hashed_file_list_storing_file"
+echo ""
 if [[ $err_code -eq 0 ]]; then
-    if [ -z "$system_tpm2_hash" ]; then
+    if [ -z "$dir_list_file" ]; then
         err_code=2
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
-    if [ -z "$system_ls" ]; then
+    if [ -z "$initial_hash_value" ]; then
         err_code=3
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
-    if [ -z "$system_cat" ]; then
+    if ! [ -s "$dir_list_file" ]; then
         err_code=4
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
-    if [ -z "$system_echo" ]; then
-        err_code=5
-    fi
-fi
-if [[ $err_code -eq 0 ]]; then
-    if [ -z "$system_xxd" ]; then
-        err_code=6
-    fi
-fi
-# *
-# * 0.3 Check if required arguments are provided and valid
-# *
-$system_echo "dir_list_file:                    $dir_list_file"
-$system_echo "initial_hash_value:               $initial_hash_value"
-$system_echo "hashed_file_list_storing_file:    $hashed_file_list_storing_file"
-$system_echo ""
-if [[ $err_code -eq 0 ]]; then
-    if [ -z "$dir_list_file" ]; then
-        err_code=7
-    fi
-fi
-if [[ $err_code -eq 0 ]]; then
-    if [ -z "$initial_hash_value" ]; then
-        err_code=8
-    fi
-fi
-if [[ $err_code -eq 0 ]]; then
-    if ! [ -s "$dir_list_file" ]; then
-        err_code=9
-    fi
-fi
-if [[ $err_code -eq 0 ]]; then
     if [ ${#initial_hash_value} -ne 64 ]; then
-        err_code=10
-        $system_echo "> <initial_hash_value> is ${#initial_hash_value} characters long!"
+        err_code=5
+        echo "> <initial_hash_value> is ${#initial_hash_value} characters long!"
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if ! [[ $initial_hash_value =~ $hash_pattern ]]; then
-        err_code=11
+        err_code=6
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ -f "$hashed_file_list_storing_file" ]; then
-        $system_echo -e "> $warning_message: <hashed_file_list_storing_file> exists, moving it to ${hashed_file_list_storing_file}.bak ..."
+        echo -e "> $warning_message: <hashed_file_list_storing_file> exists, moving it to ${hashed_file_list_storing_file}.bak ..."
         mv $hashed_file_list_storing_file "${hashed_file_list_storing_file}.bak"
+    fi
+fi
+# *
+# * 0.3 Check if binaries exist
+# *
+system_tpm2_hash=$(which tpm2_hash)
+system_shasum=$(which shasum)
+if [[ $err_code -eq 0 ]]; then
+    if [ $tpm == true ]; then
+        system_hash_bin=$(which tpm2_hash)
+        if [ $? -ne 0 ]; then
+            err_code=7
+        fi
+    else
+        system_hash_bin=$(which shasum)
+        if [ $? -ne 0 ]; then
+            err_code=8
+        fi
+    fi
+fi
+if [[ $err_code -eq 0 ]]; then
+    system_ls=$(which ls)
+    if [ $? -ne 0 ]; then
+        err_code=9
+    fi
+fi
+if [[ $err_code -eq 0 ]]; then
+    system_cat=$(which cat)
+    if [ $? -ne 0 ]; then
+        err_code=10
+    fi
+fi
+if [[ $err_code -eq 0 ]]; then
+    system_echo=$(which echo)
+    if [ $? -ne 0 ]; then
+        err_code=11
+    fi
+fi
+if [[ $err_code -eq 0 ]]; then
+    system_xxd=$(which xxd)
+    if [ $? -ne 0 ]; then
+        err_code=12
     fi
 fi
 # *
@@ -383,13 +404,13 @@ fi
 if [[ $err_code -eq 0 ]]; then
     if [ $ramdisk == true ]; then
         $system_echo "> Copying binaries to RAMDisk ..."
-        sudo cp $system_tpm2_hash $mbc_binary_ramdisk
+        sudo cp $system_hash_bin $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
             err_code=28
         fi
-        system_tpm2_hash_path=$(dirname $system_tpm2_hash)
-        system_tpm2_hash=$mbc_binary_ramdisk/$(basename $system_tpm2_hash)
-        $system_tpm2_hash --version > /dev/null
+        system_hash_bin_path=$(dirname $system_hash_bin)
+        system_tpm2_hash=$mbc_binary_ramdisk/$(basename $system_hash_bin)
+        $system_hash_bin --version > /dev/null
         if [ $? -ne 0 ]; then
             err_code=29
         fi
@@ -618,11 +639,11 @@ hashing_chain () {
         # Hash the file
         #$system_cat $temporary_hash_file
         if [ $trim == true ]; then
-            #initial_hash_value=$($system_tpm2_hash -C o -g sha256 $temporary_hash_file | $system_xxd -p | $system_tr -d '\n')
+            #initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | $system_xxd -p | $system_tr -d '\n')
             initial_hash_value=$(shasum -a 256 $temporary_hash_file)
             initial_hash_value=${initial_hash_value//$temporary_hash_file/}
         else
-            #initial_hash_value=$($system_tpm2_hash -C o -g sha256 $temporary_hash_file | $system_xxd -p)
+            #initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | $system_xxd -p)
             initial_hash_value=$(shasum -a 256 $temporary_hash_file)
         fi
     done
@@ -660,7 +681,7 @@ if [[ $err_code -eq 0 ]]; then
         if [ $? -ne 0 ]; then
             err_code=81
         fi
-        system_tpm2_hash=$system_tpm2_hash_path/$(basename $system_tpm2_hash)
+        system_hash_bin=$system_hash_bin_path/$(basename $system_hash_bin)
         system_ls=$system_ls_path/$(basename $system_ls)
         system_cat=$system_cat_path/$(basename $system_cat)
         system_echo=$system_echo_path/$(basename $system_echo)
