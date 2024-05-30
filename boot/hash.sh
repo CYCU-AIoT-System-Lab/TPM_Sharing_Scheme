@@ -48,7 +48,6 @@ system_ls=$(which ls)
 system_cat=$(which cat)
 system_echo=$(which echo)
 system_xxd=$(which xxd)
-system_tr=$(which tr)
 temporary_hash_file="/tmp/hash" # file to store temporary hash value and file content for next hashing, extension will be added later
 error_code=0
 
@@ -81,21 +80,18 @@ print_error_msg () {
             print_msg "Binary \"xxd\" not found!"
             ;;
         7)
-            print_msg "Binary \"tr\" not found!"
-            ;;
-        8)
             print_msg "Missing <dir_list_file>!"
             ;;
-        9)
+        8)
             print_msg "Missing <initial_hash_value>!"
             ;;
-        10)
+        9)
             print_msg "<dir_list_file> does not exist or is empty!"
             ;;
-        11)
+        10)
             print_msg "<initial_hash_value> is not 64 characters long!"
             ;;
-        12)
+        11)
             print_msg "<initial_hash_value> should consist of 0~9 and A~F only!"
             ;;
         # Section 1: File I/O
@@ -150,12 +146,6 @@ print_error_msg () {
             ;;
         37)
             print_msg "Copied xxd binary doesn't work!"
-            ;;
-        38)
-            print_msg "Failed to copy tr to RAMDisk!"
-            ;;
-        39)
-            print_msg "Copied tr binary doesn't work!"
             ;;
         # Section 2: Generating list of files and directories
         # Offset: 40
@@ -263,11 +253,6 @@ if [[ $err_code -eq 0 ]]; then
         err_code=6
     fi
 fi
-if [[ $err_code -eq 0 ]]; then
-    if [ -z "$system_tr" ]; then
-        err_code=7
-    fi
-fi
 # *
 # * 0.3 Check if required arguments are provided and valid
 # *
@@ -277,28 +262,28 @@ $system_echo "hashed_file_list_storing_file:    $hashed_file_list_storing_file"
 $system_echo ""
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$dir_list_file" ]; then
-        err_code=8
+        err_code=7
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$initial_hash_value" ]; then
-        err_code=9
+        err_code=8
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if ! [ -s "$dir_list_file" ]; then
-        err_code=10
+        err_code=9
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ ${#initial_hash_value} -ne 64 ]; then
-        err_code=11
+        err_code=10
         $system_echo "> <initial_hash_value> is ${#initial_hash_value} characters long!"
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if ! [[ $initial_hash_value =~ $hash_pattern ]]; then
-        err_code=12
+        err_code=11
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
@@ -452,17 +437,6 @@ if [[ $err_code -eq 0 ]]; then
         if [ $? -ne 0 ]; then
             err_code=37
         fi
-
-        sudo cp $system_tr $mbc_binary_ramdisk
-        if [ $? -ne 0 ]; then
-            err_code=38
-        fi
-        system_tr_path=$(dirname $system_tr)
-        system_tr=$mbc_binary_ramdisk/$(basename $system_tr)
-        $system_tr --version > /dev/null
-        if [ $? -ne 0 ]; then
-            err_code=39
-        fi
     fi
 fi
 
@@ -544,11 +518,11 @@ fi
 # *
 $system_echo "> Removing duplicates ..."
 if [[ $err_code -eq 0 ]]; then
-    file_list=($($system_echo "${file_list[@]}" | $system_tr ' ' '\n' | sort -u | $system_tr '\n' ' '))
+    file_list=($($system_echo "${file_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
     if [ $? -ne 0 ]; then
         err_code=43
     fi
-    dir_list=($($system_echo "${dir_list[@]}" | $system_tr ' ' '\n' | sort -u | $system_tr '\n' ' '))
+    dir_list=($($system_echo "${dir_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
     if [ $? -ne 0 ]; then
         err_code=44
     fi
@@ -635,32 +609,31 @@ hashing_chain () {
             $system_cat ${file_list[index]} >> $temporary_hash_file &
             BACK_PID=$!
             wait $BACK_PID
-        else # mostly consistant
+        else
             > $temporary_hash_file
             $system_echo "$initial_hash_value" >> $temporary_hash_file
             $system_echo "${file_list[index]}" >> $temporary_hash_file
             $system_cat  "${file_list[index]}" >> $temporary_hash_file
-            $system_cat $temporary_hash_file
         fi
         # Hash the file
         #$system_cat $temporary_hash_file
         if [ $trim == true ]; then
             #initial_hash_value=$($system_tpm2_hash -C o -g sha256 $temporary_hash_file | $system_xxd -p | $system_tr -d '\n')
-            initial_hash_value=$(shasum -a 256 $temporary_hash_file | $system_tr -d '\n' | $system_tr -d ' ' | $system_tr -d "$temporary_hash_file")
+            initial_hash_value=$(shasum -a 256 $temporary_hash_file)
+            initial_hash_value=${initial_hash_value//$temporary_hash_file/}
         else
             #initial_hash_value=$($system_tpm2_hash -C o -g sha256 $temporary_hash_file | $system_xxd -p)
             initial_hash_value=$(shasum -a 256 $temporary_hash_file)
         fi
     done
+    export FINAL_HASH_VALUE=${initial_hash_value//$temporary_hash_file/}
 }
 if [ $time_hash == true ]; then
     time hashing_chain
 else
     hashing_chain
 fi
-FINAL_HASH_VALUE=$(echo $initial_hash_value | $system_tr -d '\n' | $system_tr -d ' ' | $system_tr -d "$temporary_hash_file")
 echo $FINAL_HASH_VALUE
-export FINAL_HASH_VALUE
 
 # > 4. Remove I/O files
 $system_echo "> Removing temporary files ..."
@@ -692,7 +665,6 @@ if [[ $err_code -eq 0 ]]; then
         system_cat=$system_cat_path/$(basename $system_cat)
         system_echo=$system_echo_path/$(basename $system_echo)
         system_xxd=$system_xxd_path/$(basename $system_xxd)
-        system_tr=$system_tr_path/$(basename $system_tr)
         $system_echo "It is currently impossible to unmount the RAMDisk with the same process creating it."
         $system_echo "To unmout the RAMDisk manually, run the following command: (it would be unmounted next time this script is [auto-]executed)"
         $system_echo "    sudo umount $mbc_binary_ramdisk && sudo rmdir $mbc_binary_ramdisk"

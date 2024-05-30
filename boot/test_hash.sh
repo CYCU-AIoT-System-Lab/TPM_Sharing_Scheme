@@ -1,12 +1,12 @@
 #!/bin/bash
 # This script is used to test the consistency of hashing script
 
-test_total_count=50
+test_total_count=100
 
 test_default=true
 test_pipe=false
 test_ramdisk=false
-test_trim=false
+test_trim=true
 
 echo -e "Start testing hash.sh consecutively $test_total_count times for different options\n"
 ideal_len=64
