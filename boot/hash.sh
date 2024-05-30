@@ -115,46 +115,46 @@ print_error_msg () {
             print_msg "[1.2] Failed to remove existing temporary folder for mounting RAMDisk!"
             ;;
         24)
-            print_msg "[1.2] Failed to create temporary folder for mounting RAMDisk!"
+            print_msg "[1.3] Failed to create temporary folder for mounting RAMDisk!"
             ;;
         25)
-            print_msg "[1.2] Failed to change temporary folder's permission!"
+            print_msg "[1.3] Failed to change temporary folder's permission!"
             ;;
         26)
-            print_msg "[1.2] Failed to mount RAMDisk!"
+            print_msg "[1.3] Failed to mount RAMDisk!"
             ;;
         27)
-            print_msg "[1.2] Failed to verify RAMDisk mounted!"
+            print_msg "[1.3] Failed to verify RAMDisk mounted!"
             ;;
         28)
-            print_msg "[1.2] Failed to copy hash binary to RAMDisk!"
+            print_msg "[1.4] Failed to copy hash binary to RAMDisk!"
             ;;
         29)
-            print_msg "[1.2] Copied hash binary doesn't work!"
+            print_msg "[1.4] Copied hash binary doesn't work!"
             ;;
         30)
-            print_msg "[1.2] Failed to copy ls to RAMDisk!"
+            print_msg "[1.4] Failed to copy ls to RAMDisk!"
             ;;
         31)
-            print_msg "[1.2] Copied ls binary doesn't work!"
+            print_msg "[1.4] Copied ls binary doesn't work!"
             ;;
         32)
-            print_msg "[1.2] Failed to copy cat to RAMDisk!"
+            print_msg "[1.4] Failed to copy cat to RAMDisk!"
             ;;
         33)
-            print_msg "[1.2] Copied cat binary doesn't work!"
+            print_msg "[1.4] Copied cat binary doesn't work!"
             ;;
         34)
-            print_msg "[1.2] Failed to copy echo to RAMDisk!"
+            print_msg "[1.4] Failed to copy echo to RAMDisk!"
             ;;
         35)
-            print_msg "[1.2] Copied echo binary doesn't work!"
+            print_msg "[1.4] Copied echo binary doesn't work!"
             ;;
         36)
-            print_msg "[1.2] Failed to copy xxd to RAMDisk!"
+            print_msg "[1.4] Failed to copy xxd to RAMDisk!"
             ;;
         37)
-            print_msg "[1.2] Copied xxd binary doesn't work!"
+            print_msg "[1.4] Copied xxd binary doesn't work!"
             ;;
         # Section 2: Generating list of files and directories
         # Offset: 40
@@ -354,12 +354,7 @@ if [[ $err_code -eq 0 ]]; then
     fi
 fi
 # *
-# * 1.2 Mount binaries to RAMDisk
-# *     - tpm2_hash: 4k
-# *     - ls: 136k
-# *     - cat: 36k
-# *     - echo: 36k
-# *   - create 5MB RAMDisk
+# * 1.2 Remove existing RAMDisk
 # *
 mbc_binary_ramdisk="/tmp/mbc_bin_ramdisk"
 if [[ $err_code -eq 0 ]]; then
@@ -379,6 +374,14 @@ if [[ $err_code -eq 0 ]]; then
         fi
     fi
 fi
+# *
+# * 1.3 Mount binaries to RAMDisk
+# *     - tpm2_hash: 4k
+# *     - ls: 136k
+# *     - cat: 36k
+# *     - echo: 36k
+# *   - create 5MB RAMDisk
+# *
 if [[ $err_code -eq 0 ]]; then
     if [ $ramdisk == true ]; then
         $system_echo "> Mounting binaries to RAMDisk ..."
@@ -400,6 +403,9 @@ if [[ $err_code -eq 0 ]]; then
         fi
     fi
 fi
+# *
+# * 1.4 Move binaries to RAMDisk
+# *
 if [[ $err_code -eq 0 ]]; then
     if [ $ramdisk == true ]; then
         $system_echo "> Copying binaries to RAMDisk ..."
@@ -461,7 +467,7 @@ if [[ $err_code -eq 0 ]]; then
 fi
 
 # *
-# * 1.3 Section 1 ends
+# * 1.5 Section 1 ends
 # *
 if [[ $? -ne 0 ]] || [[ $err_code -ne 0 ]]; then
     print_error_msg
