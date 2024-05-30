@@ -35,6 +35,12 @@ help_msg () {
 # -------------------------
 # Take a file containing a list of directories to hash, and initial hash value as input
 # Using tpm2tss hashing binary to perform hashing chain on files from directories
+verbose=false
+unix_named_pipe=false
+ramdisk=false
+trim=false
+time_hash=false
+tpm=false
 
 # =========================
 # >>>> Ajustable Parameters
@@ -121,10 +127,10 @@ print_error_msg () {
             print_msg "[1.2] Failed to verify RAMDisk mounted!"
             ;;
         28)
-            print_msg "[1.2] Failed to copy tpm2_hash binary to RAMDisk!"
+            print_msg "[1.2] Failed to copy hash binary to RAMDisk!"
             ;;
         29)
-            print_msg "[1.2] Copied tpm2_hash binary doesn't work!"
+            print_msg "[1.2] Copied hash binary doesn't work!"
             ;;
         30)
             print_msg "[1.2] Failed to copy ls to RAMDisk!"
@@ -184,18 +190,12 @@ print_error_msg () {
 }
 
 # > 0. CLI parsing
-$system_echo "> Parsing CLI arguments ..."
+echo "> Parsing CLI arguments ..."
 cli_input_str="$@"
 cli_input_arr=($cli_input_str)
 dir_list_file=${cli_input_arr[0]}
 initial_hash_value=${cli_input_arr[1]}
 hashed_file_list_storing_file=${cli_input_arr[2]}
-verbose=false
-unix_named_pipe=false
-ramdisk=false
-trim=false
-time_hash=false
-tpm=false
 # *
 # * 0.1 Process optional arguments
 # *
@@ -213,20 +213,21 @@ if [ $? -eq 0 ]; then
     if [[ "${cli_input_arr[*]}" =~ "-r" ]]; then
         ramdisk=true
     fi
-    if [[ "${cli_input_arr[*]}" =~ "-tpm" ]]; then
-        tpm=true
-    fi
     if [[ "${cli_input_arr[*]}" =~ "-tr" ]]; then
         trim=true
     fi
     if [[ "${cli_input_arr[*]}" =~ "-ts" ]]; then
         time_hash=true
     fi
+    if [[ "${cli_input_arr[*]}" =~ "-tpm" ]]; then
+        tpm=true
+    fi
     echo "verbose mode:                     $verbose"
     echo "unix_named_pipe acceleration:     $unix_named_pipe"
     echo "ramdisk acceleration:             $ramdisk"
     echo "trim hash output:                 $trim"
     echo "time hash process:                $time_hash"
+    echo "use TPM for hashing:              $tpm"
     echo ""
 fi
 if [ $? -ne 0 ]; then
@@ -274,8 +275,6 @@ fi
 # *
 # * 0.3 Check if binaries exist
 # *
-system_tpm2_hash=$(which tpm2_hash)
-system_shasum=$(which shasum)
 if [[ $err_code -eq 0 ]]; then
     if [ $tpm == true ]; then
         system_hash_bin=$(which tpm2_hash)
@@ -409,7 +408,7 @@ if [[ $err_code -eq 0 ]]; then
             err_code=28
         fi
         system_hash_bin_path=$(dirname $system_hash_bin)
-        system_tpm2_hash=$mbc_binary_ramdisk/$(basename $system_hash_bin)
+        system_hash_bin=$mbc_binary_ramdisk/$(basename $system_hash_bin)
         $system_hash_bin --version > /dev/null
         if [ $? -ne 0 ]; then
             err_code=29
@@ -454,7 +453,7 @@ if [[ $err_code -eq 0 ]]; then
         fi
         system_xxd_path=$(dirname $system_xxd)
         system_xxd=$mbc_binary_ramdisk/$(basename $system_xxd)
-        $system_xxd --version > /dev/null
+        $system_xxd --version 2>&1 /dev/null
         if [ $? -ne 0 ]; then
             err_code=37
         fi
@@ -639,12 +638,18 @@ hashing_chain () {
         # Hash the file
         #$system_cat $temporary_hash_file
         if [ $trim == true ]; then
-            #initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | $system_xxd -p | $system_tr -d '\n')
-            initial_hash_value=$(shasum -a 256 $temporary_hash_file)
-            initial_hash_value=${initial_hash_value//$temporary_hash_file/}
+            if [ $tpm == true ]; then
+                initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | $system_xxd -p | tr -d '\n')
+            else
+                initial_hash_value=$($system_hash_bin -a 256 $temporary_hash_file)
+                initial_hash_value=${initial_hash_value//$temporary_hash_file/}
+            fi
         else
-            #initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | $system_xxd -p)
-            initial_hash_value=$(shasum -a 256 $temporary_hash_file)
+            if [ $tpm == true ]; then
+                initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | $system_xxd -p)
+            else
+                initial_hash_value=$($system_hash_bin -a 256 $temporary_hash_file)
+            fi
         fi
     done
     export FINAL_HASH_VALUE=${initial_hash_value//$temporary_hash_file/}
