@@ -14,7 +14,7 @@ help_msg () {
     echo ""
     echo "Optional arguments:"
     echo "  <hashed_file_list_storing_file>:    File to store hashed file list"
-    echo "  -p:                                 Enable UNIX Named Pipe to accelerate storage R/W"
+    echo "  -p:                                 (not supported yet) Enable UNIX Named Pipe to accelerate storage R/W"
     echo "  -r:                                 Enable RAMDisk to accelerate binary calling"
     echo "  -tr:                                Enable hash output trimming to remove \\n, space, filename, and so on"
     echo "  -ts:                                Enable timing how log it takes to hash each file"
@@ -209,6 +209,8 @@ if [ $? -eq 0 ]; then
     fi
     if [[ "${cli_input_arr[*]}" =~ "-p" ]]; then
         unix_named_pipe=true
+        echo "unix_named_pipe acceleration is not supported yet!"
+        exit 1
     fi
     if [[ "${cli_input_arr[*]}" =~ "-r" ]]; then
         ramdisk=true
@@ -344,6 +346,7 @@ if [[ $err_code -eq 0 ]]; then
     fi
     if [ $unix_named_pipe == true ]; then
         mkfifo $temporary_hash_file
+        exec 3<> $temporary_hash_file
     else
         mktemp "$temporary_hash_file.XXXXXXXX"
         temporary_hash_file=$(ls "${temporary_hash_file}"*)
@@ -619,46 +622,39 @@ hashing_chain () {
     for index in "${!file_list[@]}"; do
         $system_echo -e "\e[1A\e[KHashing ${file_list[index]} ..."
         # Empty the temporary hash file
+        > $temporary_hash_file
         # Add initial hash value
+        $system_echo "$initial_hash_value" >> $temporary_hash_file
         # Add path of file
+        $system_echo "${file_list[index]}" >> $temporary_hash_file
         # Add file content
-        if [ $unix_named_pipe == true ]; then # potentially not work due to blocking
-            > $temporary_hash_file &
-            BACK_PID=$!
-            wait $BACK_PID
-            $system_echo "$initial_hash_value" >> $temporary_hash_file &
-            BACK_PID=$!
-            wait $BACK_PID
-            $system_echo "${file_list[index]}" >> $temporary_hash_file &
-            BACK_PID=$!
-            wait $BACK_PID
-            $system_cat ${file_list[index]} >> $temporary_hash_file &
-            BACK_PID=$!
-            wait $BACK_PID
-        else
-            > $temporary_hash_file
-            $system_echo "$initial_hash_value" >> $temporary_hash_file
-            $system_echo "${file_list[index]}" >> $temporary_hash_file
-            $system_cat  "${file_list[index]}" >> $temporary_hash_file
-        fi
+        $system_cat ${file_list[index]} >> $temporary_hash_file
+        #if [ $unix_named_pipe == true ]; then
+        #    # get file line count
+        #    #
+        #    :
+        #fi
         # Hash the file
-        #$system_cat $temporary_hash_file
         if [ $trim == true ]; then
             if [ $tpm == true ]; then
-                initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | $system_xxd -p | tr -d '\n')
+                initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | tr -d '\n')
             else
                 initial_hash_value=$($system_hash_bin -a 256 $temporary_hash_file)
                 initial_hash_value=${initial_hash_value//$temporary_hash_file/}
             fi
         else
             if [ $tpm == true ]; then
-                initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | $system_xxd -p)
+                initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file)
             else
                 initial_hash_value=$($system_hash_bin -a 256 $temporary_hash_file)
             fi
         fi
     done
-    export FINAL_HASH_VALUE=${initial_hash_value//$temporary_hash_file/}
+    if [ $tpm == true ]; then
+        export FINAL_HASH_VALUE=$(echo $initial_hash_value | $system_xxd -p | tr -d '\n')
+    else
+        export FINAL_HASH_VALUE=${initial_hash_value//$temporary_hash_file/}
+    fi
 }
 if [ $time_hash == true ]; then
     time hashing_chain
