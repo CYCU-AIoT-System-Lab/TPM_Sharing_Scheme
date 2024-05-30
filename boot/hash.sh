@@ -192,7 +192,6 @@ print_error_msg () {
 
 # > 0. CLI parsing
 $system_echo "> Parsing CLI arguments ..."
-err_code_offset=00
 cli_input_str="$@"
 cli_input_arr=($cli_input_str)
 dir_list_file=${cli_input_arr[0]}
@@ -234,39 +233,39 @@ if [ $? -eq 0 ]; then
     $system_echo ""
 fi
 if [ $? -ne 0 ]; then
-    err_code=$((err_code_offset+1))
+    err_code=1
 fi
 # *
 # * 0.2 Check if binaries exist
 # *
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_tpm2_hash" ]; then
-        err_code=$((err_code_offset+2))
+        err_code=2
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_ls" ]; then
-        err_code=$((err_code_offset+3))
+        err_code=3
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_cat" ]; then
-        err_code=$((err_code_offset+4))
+        err_code=4
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_echo" ]; then
-        err_code=$((err_code_offset+5))
+        err_code=5
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_xxd" ]; then
-        err_code=$((err_code_offset+6))
+        err_code=6
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$system_tr" ]; then
-        err_code=$((err_code_offset+7))
+        err_code=7
     fi
 fi
 # *
@@ -278,28 +277,28 @@ $system_echo "hashed_file_list_storing_file:    $hashed_file_list_storing_file"
 $system_echo ""
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$dir_list_file" ]; then
-        err_code=$((err_code_offset+8))
+        err_code=8
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ -z "$initial_hash_value" ]; then
-        err_code=$((err_code_offset+9))
+        err_code=9
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if ! [ -s "$dir_list_file" ]; then
-        err_code=$((err_code_offset+10))
+        err_code=10
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ ${#initial_hash_value} -ne 64 ]; then
-        err_code=$((err_code_offset+11))
+        err_code=11
         $system_echo "> <initial_hash_value> is ${#initial_hash_value} characters long!"
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
     if ! [[ $initial_hash_value =~ $hash_pattern ]]; then
-        err_code=$((err_code_offset+12))
+        err_code=12
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
@@ -320,7 +319,6 @@ fi
 # > 1. File I/O
 # *  - Create temporary hash file
 # *  - Mout binaries to RAMDisk (4K+49K)
-err_code_offset=$((err_code_offset+20)) # 20
 $system_echo "> Creating temporary files ..."
 # *
 # * 1.1 Create temporary hash file / named pipe
@@ -347,7 +345,7 @@ if [[ $err_code -eq 0 ]]; then
     fi
     if [ $? -ne 0 ]; then
         echo "File: $temporary_hash_file"
-        err_code=$((err_code_offset+1))
+        err_code=21
     fi
 fi
 # *
@@ -367,11 +365,11 @@ if [[ $err_code -eq 0 ]]; then
             #sudo lsof -n $mbc_binary_ramdisk
             sudo umount $mbc_binary_ramdisk
             if [ $? -ne 0 ]; then
-                err_code=$((err_code_offset+2))
+                err_code=22
             fi
             sudo rmdir $mbc_binary_ramdisk
             if [ $? -ne 0 ]; then
-                err_code=$((err_code_offset+3))
+                err_code=23
             fi
         fi
     fi
@@ -381,19 +379,19 @@ if [[ $err_code -eq 0 ]]; then
         $system_echo "> Mounting binaries to RAMDisk ..."
         sudo mkdir -p $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+4))
+            err_code=24
         fi
         sudo chmod 777 $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+5))
+            err_code=25
         fi
         sudo mount -t tmpfs -o size=5M mbc_binary $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+6))
+            err_code=26
         fi
         mount | tail -n 1 | grep $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+7))
+            err_code=27
         fi
     fi
 fi
@@ -402,68 +400,68 @@ if [[ $err_code -eq 0 ]]; then
         $system_echo "> Copying binaries to RAMDisk ..."
         sudo cp $system_tpm2_hash $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+8))
+            err_code=28
         fi
         system_tpm2_hash_path=$(dirname $system_tpm2_hash)
         system_tpm2_hash=$mbc_binary_ramdisk/$(basename $system_tpm2_hash)
         $system_tpm2_hash --version > /dev/null
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+9))
+            err_code=29
         fi
 
         sudo cp $system_ls $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+10))
+            err_code=30
         fi
         system_ls_path=$(dirname $system_ls)
         system_ls=$mbc_binary_ramdisk/$(basename $system_ls)
         $system_ls --version > /dev/null
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+11))
+            err_code=31
         fi
 
         sudo cp $system_cat $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+12))
+            err_code=32
         fi
         system_cat_path=$(dirname $system_cat)
         system_cat=$mbc_binary_ramdisk/$(basename $system_cat)
         $system_cat --version > /dev/null
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+13))
+            err_code=33
         fi
 
         sudo cp $system_echo $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+14))
+            err_code=34
         fi
         system_echo_path=$(dirname $system_echo)
         system_echo=$mbc_binary_ramdisk/$(basename $system_echo)
         $system_echo --version > /dev/null
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+15))
+            err_code=35
         fi
         
         sudo cp $system_xxd $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+16))
+            err_code=36
         fi
         system_xxd_path=$(dirname $system_xxd)
         system_xxd=$mbc_binary_ramdisk/$(basename $system_xxd)
         $system_xxd --version > /dev/null
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+17))
+            err_code=37
         fi
 
         sudo cp $system_tr $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+18))
+            err_code=38
         fi
         system_tr_path=$(dirname $system_tr)
         system_tr=$mbc_binary_ramdisk/$(basename $system_tr)
         $system_tr --version > /dev/null
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+19))
+            err_code=39
         fi
     fi
 fi
@@ -477,7 +475,6 @@ if [[ $? -ne 0 ]] || [[ $err_code -ne 0 ]]; then
 fi
 
 # > 2. Generate list of files to hash
-err_code_offset=$((err_code_offset+20)) # 40
 $system_echo "> Generating list of files to hash ..."
 # *
 # * 2.1 Check if directories exist
@@ -490,7 +487,7 @@ if [[ $err_code -eq 0 ]]; then
         index=$((index-index_offset))
         if [ ! -d "${dir_list[index]}" ]; then
             if [ ! -f "${dir_list[index]}" ]; then
-                err_code=$((err_code_offset+1))
+                err_code=41
                 echo "Not existed dir: ${dir_list[index]}"
             else
                 file_list+=(${dir_list[index]})
@@ -501,9 +498,6 @@ if [[ $err_code -eq 0 ]]; then
             file_list+=($($system_ls -AR ${dir_list[index]}))
         fi
     done
-    if [ $? -ne 0 ]; then
-        err_code=$((err_code_offset+1))
-    fi
 fi
 # *
 # * 2.2 Process file list
@@ -541,7 +535,7 @@ if [[ $err_code -eq 0 ]]; then
         fi
     done
     if [ $? -ne 0 ]; then
-        err_code=$((err_code_offset+2))
+        err_code=42
     fi
 fi
 # *
@@ -552,11 +546,11 @@ $system_echo "> Removing duplicates ..."
 if [[ $err_code -eq 0 ]]; then
     file_list=($($system_echo "${file_list[@]}" | $system_tr ' ' '\n' | sort -u | $system_tr '\n' ' '))
     if [ $? -ne 0 ]; then
-        err_code=$((err_code_offset+3))
+        err_code=43
     fi
     dir_list=($($system_echo "${dir_list[@]}" | $system_tr ' ' '\n' | sort -u | $system_tr '\n' ' '))
     if [ $? -ne 0 ]; then
-        err_code=$((err_code_offset+4))
+        err_code=44
     fi
 fi
 # *
@@ -584,7 +578,7 @@ if [[ $err_code -eq 0 ]]; then
     $system_echo "> Number of files to hash: $file_list_cnt"
     $system_echo "> Number of directories: $dir_list_cnt"
     if [ $? -ne 0 ]; then
-        err_code=$((err_code_offset+5))
+        err_code=45
     fi
 fi
 # *
@@ -604,7 +598,7 @@ if [[ $err_code -eq 0 ]]; then
         $system_echo "> Files to hash are stored in $hashed_file_list_storing_file"
     fi
     if [ $? -ne 0 ]; then
-        err_code=$((err_code_offset+6))
+        err_code=46
     fi
 fi
 # *
@@ -616,7 +610,6 @@ if [[ $? -ne 0 ]] || [[ $err_code -ne 0 ]]; then
 fi
 
 # > 3. Perform hashing chain on files
-err_code_offset=$((err_code_offset+20)) # 60
 #   - ref: https://www.youtube.com/watch?v=DFreHo3UCD0
 #      - echo "hello" > file.fifo &
 #      - cat < file.fifo
@@ -647,6 +640,7 @@ hashing_chain () {
             $system_echo "$initial_hash_value" >> $temporary_hash_file
             $system_echo "${file_list[index]}" >> $temporary_hash_file
             $system_cat  "${file_list[index]}" >> $temporary_hash_file
+            $system_cat $temporary_hash_file
         fi
         # Hash the file
         #$system_cat $temporary_hash_file
@@ -665,11 +659,10 @@ else
     hashing_chain
 fi
 FINAL_HASH_VALUE=$(echo $initial_hash_value | $system_tr -d '\n' | $system_tr -d ' ' | $system_tr -d "$temporary_hash_file")
-#echo $FINAL_HASH_VALUE
+echo $FINAL_HASH_VALUE
 export FINAL_HASH_VALUE
 
 # > 4. Remove I/O files
-err_code_offset=$((err_code_offset+20)) # 80
 $system_echo "> Removing temporary files ..."
 # *
 # * 4.1 Remove temporary hash file
@@ -692,7 +685,7 @@ if [[ $err_code -eq 0 ]]; then
         $system_echo "> Removing binaries from RAMDisk ..."
         sudo rm -rf $mbc_binary_ramdisk/*
         if [ $? -ne 0 ]; then
-            err_code=$((err_code_offset+1))
+            err_code=81
         fi
         system_tpm2_hash=$system_tpm2_hash_path/$(basename $system_tpm2_hash)
         system_ls=$system_ls_path/$(basename $system_ls)
