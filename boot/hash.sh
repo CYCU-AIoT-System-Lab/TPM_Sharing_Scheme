@@ -62,117 +62,117 @@ print_error_msg () {
         # Section 0: CLI parsing
         # Offset: 00
         1)
-            print_msg "Failed to parse optional CLI arguments!"
+            print_msg "[0.1] Failed to parse optional CLI arguments!"
             ;;
         2)
-            print_msg "Binary \"tpm2_hash\" not found!"
+            print_msg "[0.2] Binary \"tpm2_hash\" not found!"
             ;;
         3)
-            print_msg "Binary \"ls\" not found!"
+            print_msg "[0.2] Binary \"ls\" not found!"
             ;;
         4)
-            print_msg "Binary \"cat\" not found!"
+            print_msg "[0.2] Binary \"cat\" not found!"
             ;;
         5)
-            print_msg "Binary \"echo\" not found!"
+            print_msg "[0.2] Binary \"echo\" not found!"
             ;;
         6)
-            print_msg "Binary \"xxd\" not found!"
+            print_msg "[0.2] Binary \"xxd\" not found!"
             ;;
         7)
-            print_msg "Missing <dir_list_file>!"
+            print_msg "[0.3] Missing CLI argument: <dir_list_file>!"
             ;;
         8)
-            print_msg "Missing <initial_hash_value>!"
+            print_msg "[0.3] Missing CLI argument: <initial_hash_value>!"
             ;;
         9)
-            print_msg "<dir_list_file> does not exist or is empty!"
+            print_msg "[0.3] <dir_list_file> does not exist or is empty!"
             ;;
         10)
-            print_msg "<initial_hash_value> is not 64 characters long!"
+            print_msg "[0.3] <initial_hash_value> is not 64 characters long!"
             ;;
         11)
-            print_msg "<initial_hash_value> should consist of 0~9 and A~F only!"
+            print_msg "[0.3] <initial_hash_value> should consist of 0~9 and A~F only!"
             ;;
         # Section 1: File I/O
         # Offset: 20
         21)
-            print_msg "Failed to create temporary hash file!"
+            print_msg "[1.1] Failed to create temporary hash file!"
             ;;
         22)
-            print_msg "Failed to unmount existing RAMDisk!"
+            print_msg "[1.2] Failed to unmount existing RAMDisk!"
             ;;
         23)
-            print_msg "Failed to remove existing temporary folder for mounting RAMDisk!"
+            print_msg "[1.2] Failed to remove existing temporary folder for mounting RAMDisk!"
             ;;
         24)
-            print_msg "Failed to create temporary folder for mounting RAMDisk!"
+            print_msg "[1.2] Failed to create temporary folder for mounting RAMDisk!"
             ;;
         25)
-            print_msg "Failed to change temporary folder's permission!"
+            print_msg "[1.2] Failed to change temporary folder's permission!"
             ;;
         26)
-            print_msg "Failed to mount RAMDisk!"
+            print_msg "[1.2] Failed to mount RAMDisk!"
             ;;
         27)
-            print_msg "Failed to verify RAMDisk mounted!"
+            print_msg "[1.2] Failed to verify RAMDisk mounted!"
             ;;
         28)
-            print_msg "Failed to copy tpm2_hash binary to RAMDisk!"
+            print_msg "[1.2] Failed to copy tpm2_hash binary to RAMDisk!"
             ;;
         29)
-            print_msg "Copied tpm2_hash binary doesn't work!"
+            print_msg "[1.2] Copied tpm2_hash binary doesn't work!"
             ;;
         30)
-            print_msg "Failed to copy ls to RAMDisk!"
+            print_msg "[1.2] Failed to copy ls to RAMDisk!"
             ;;
         31)
-            print_msg "Copied ls binary doesn't work!"
+            print_msg "[1.2] Copied ls binary doesn't work!"
             ;;
         32)
-            print_msg "Failed to copy cat to RAMDisk!"
+            print_msg "[1.2] Failed to copy cat to RAMDisk!"
             ;;
         33)
-            print_msg "Copied cat binary doesn't work!"
+            print_msg "[1.2] Copied cat binary doesn't work!"
             ;;
         34)
-            print_msg "Failed to copy echo to RAMDisk!"
+            print_msg "[1.2] Failed to copy echo to RAMDisk!"
             ;;
         35)
-            print_msg "Copied echo binary doesn't work!"
+            print_msg "[1.2] Copied echo binary doesn't work!"
             ;;
         36)
-            print_msg "Failed to copy xxd to RAMDisk!"
+            print_msg "[1.2] Failed to copy xxd to RAMDisk!"
             ;;
         37)
-            print_msg "Copied xxd binary doesn't work!"
+            print_msg "[1.2] Copied xxd binary doesn't work!"
             ;;
         # Section 2: Generating list of files and directories
         # Offset: 40
         41)
-            print_msg "Directory does not exist!"
+            print_msg "[2.1] Directory does not exist!"
             ;;
         42)
-            print_msg "Failed to list files in directory!"
+            print_msg "[2.2] Failed to list files in directory!"
             ;;
         43)
-            print_msg "Failed to remove duplicates in file list!"
+            print_msg "[2.3] Failed to remove duplicates in file list!"
             ;;
         44)
-            print_msg "Failed to remove duplicates in directory list!"
+            print_msg "[2.3] Failed to remove duplicates in directory list!"
             ;;
         45)
-            print_msg "Failed to check if files exist!"
+            print_msg "[2.4] Failed to check if files exist!"
             ;;
         46)
-            print_msg "Failed to store list of files and dirs to hash in a file!"
+            print_msg "[2.5] Failed to store list of files and dirs to hash in a file!"
             ;;
         # Section 3: Hashing chain
         # Offset: 60
         # Section 4: I/O cleanup
         # Offset: 80
         81)
-            print_msg "Failed to clean up RAMDisk!"
+            print_msg "[4.2] Failed to clean up RAMDisk!"
             ;;
         *)
             echo -e "> $error_message[$err_code]: Unknown error!"
