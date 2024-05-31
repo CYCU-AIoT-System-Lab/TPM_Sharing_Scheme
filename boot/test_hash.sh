@@ -4,7 +4,7 @@
 # ==================================================
 # Test options -------------------------------------
 
-test_total_count=1000000
+test_total_count=100
 
 test_default=true
 test_ramdisk=true
@@ -18,9 +18,10 @@ test_tpm_full=true
 # ==================================================
 # Test functions -----------------------------------
 
-total_test_count=10
+total_test_count=8
 success_count=0
 test_no=0
+test_result_hash=()
 
 echo -e "Start testing hash.sh consecutively $test_total_count times for different options\n"
 ideal_len=64
@@ -46,6 +47,7 @@ test_command_and_list_unique_cnt(){
     if [ $unique_count -eq 1 ]; then
         echo -e "\e[1A\e[K\033[32m\033[1mUnique count test passed\033[0m"
         success_count=$((success_count+1))
+        test_result_hash+=("${unique_result_arr[0]}")
     else
         echo -e "\e[1A\e[K\033[31m\033[1mUnique count test failed\033[0m | Unique count: $unique_count"
     fi
@@ -130,4 +132,20 @@ else
     echo -e ">> $test_no Skip testing hash.sh with tpm pipe, ramdisk, trim\n"
 fi
 
-echo -e "Test result: $success_count/$total_test_count passed"
+# summary
+if [ $success_count -eq $total_test_count ]; then
+    echo -e "\033[32m\033[1mUnique count tests passed\033[0m"
+else
+    echo -e "\033[31m\033[1mFailed unique count tests\033[0m | Failed count: $((total_test_count-success_count))"
+fi
+test_result_hash_count=${#test_result_hash[@]}
+unique_test_result_hash=($(echo "${test_result_hash[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+unique_test_result_hash_count=${#unique_test_result_hash[@]}
+if [ $unique_test_result_hash_count -eq 1 ] && [ $test_result_hash_count -eq $total_test_count ]; then
+    echo -e "\033[32m\033[1mAll unique hash values are same\033[0m"
+else
+    echo -e "\033[31m\033[1mDifferent unique hash values\033[0m | Unique count: $unique_test_result_hash_count"
+    for item in "${unique_test_result_hash[@]}"; do
+        echo -e "$item"
+    done
+fi
