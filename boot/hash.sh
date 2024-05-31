@@ -162,19 +162,7 @@ print_error_msg () {
             print_msg "[2.1] Directory does not exist!"
             ;;
         42)
-            print_msg "[2.2] Failed to list files in directory!"
-            ;;
-        43)
-            print_msg "[2.3] Failed to remove duplicates in file list!"
-            ;;
-        44)
-            print_msg "[2.3] Failed to remove duplicates in directory list!"
-            ;;
-        45)
-            print_msg "[2.4] Failed to check if files exist!"
-            ;;
-        46)
-            print_msg "[2.5] Failed to store list of files and dirs to hash in a file!"
+            print_msg "[2.2] Failed to write list of files and directories to temporary file!"
             ;;
         # Section 3: Hashing chain
         # Offset: 60
@@ -480,132 +468,29 @@ fi
 # > 2. Generate list of files to hash
 $system_echo "> Generating list of files to hash ..."
 # *
-# * 2.1 Check if directories exist
+# * 2.1 Find files in directories
 # *
 dir_list=($(cat $dir_list_file))
 file_list=()
-index_offset=0
 if [[ $err_code -eq 0 ]]; then
-    for index in "${!dir_list[@]}"; do
-        index=$((index-index_offset))
-        if [ ! -d "${dir_list[index]}" ]; then
-            if [ ! -f "${dir_list[index]}" ]; then
-                err_code=41
-                echo "Not existed dir: ${dir_list[index]}"
-            else
-                file_list+=(${dir_list[index]})
-                index_offset=$((index_offset+1))
-                unset 'dir_list[index]'
-            fi
-        else
-            file_list+=($($system_ls -AR ${dir_list[index]}))
-        fi
+    for item in "${dir_list[@]}"; do
+        file_list+=($(find $item -type f))
     done
+    if [[ $err_code -eq 0 ]]; then
+        if [ ${#file_list[@]} -eq 0 ]; then
+            err_code=41
+            break
+        fi
+    fi
 fi
-# *
-# * 2.2 Process file list
-# *     - Move directories to dir_list
-# *     - Convert relative path to absolute path
-# *
-$system_echo "> Processing file list ..."
-file_dir="$script_path:"
-index_offset=0
 if [[ $err_code -eq 0 ]]; then
-    for index in "${!file_list[@]}"; do
-        # if is path, start with /, this doesn't work in this case
-        #if [[ "${file_list[index]}" = /* ]]; then
-        #$system_echo ""
-        #$system_echo ${file_list[@]}
-        index=$((index-index_offset))
-        temp="${file_list[index]}"
-        temp_dir="${temp::-1}"
-        if [[ -d "$temp_dir" ]]; then
-            if [ $verbose == true ]; then
-                $system_echo "dir:  $temp_dir"
-            fi
-            if ! [[ " ${dir_list[@]} " =~ " $temp_dir " ]]; then
-                dir_list+=($temp_dir)
-            fi
-            file_dir="$temp"
-            file_list=(${file_list[@]/$temp})
-            index_offset=$((index_offset+1))
-        else
-            #file_list[index]="${file_dir::-1}/${file_list[index]}" # keep both version of path, cause given full path of file will also be pre-pended
-            file_list+=("${file_dir::-1}/${file_list[index]}")
-            if [ $verbose == true ]; then
-                $system_echo "file: ${file_list[index]}"
-            fi
-        fi
-    done
+    printf "%s\n" "${file_list[@]}" > $hashed_file_list_storing_file
     if [ $? -ne 0 ]; then
         err_code=42
     fi
 fi
 # *
-# * 2.3 Remove duplicates of files and dirs
-# *    - ref: https://stackoverflow.com/questions/13648410/how-can-i-get-unique-values-from-an-array-in-bash
-# *
-$system_echo "> Removing duplicates ..."
-if [[ $err_code -eq 0 ]]; then
-    file_list=($($system_echo "${file_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
-    if [ $? -ne 0 ]; then
-        err_code=43
-    fi
-    dir_list=($($system_echo "${dir_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
-    if [ $? -ne 0 ]; then
-        err_code=44
-    fi
-fi
-# *
-# * 2.4 Check if files exist, also removing included directories
-# *
-$system_echo "> Removing invalid files ..."
-if [[ $err_code -eq 0 ]]; then
-    for index in "${!file_list[@]}"; do
-        if [ ! -f "${file_list[index]}" ]; then
-            #file_list=(${file_list[@]/${file_list[index]}}) # can't remove element by value cause it would also remove other path containing the value
-            unset -v 'file_list[index]'
-            if [ -d "${file_list[index]}" ]; then
-                if [ $verbose == true ]; then
-                    $system_echo -e "$warning_message: removed directory ${file_list[index]}"
-                fi
-            else
-                if ! [ -z "${file_list[index]}" ]; then
-                    $system_echo -e "$warning_message: removed ${file_list[index]}"
-                fi
-            fi
-        fi
-    done
-    file_list_cnt=${#file_list[@]}
-    dir_list_cnt=${#dir_list[@]}
-    $system_echo "> Number of files to hash: $file_list_cnt"
-    $system_echo "> Number of directories: $dir_list_cnt"
-    if [ $? -ne 0 ]; then
-        err_code=45
-    fi
-fi
-# *
-# * 2.5 Store list of files and dirs to hash in a file
-# *
-$system_echo "> Storing list of files and directories to hash ..."
-if [[ $err_code -eq 0 ]]; then
-    if ! [ -z $hashed_file_list_storing_file ]; then
-        $system_echo "Files:" > $hashed_file_list_storing_file
-        for file in "${file_list[@]}"; do
-            $system_echo "$file" >> $hashed_file_list_storing_file
-        done
-        $system_echo -e "\nDirectory:" >> $hashed_file_list_storing_file
-        for dir in "${dir_list[@]}"; do
-            $system_echo "$dir" >> $hashed_file_list_storing_file
-        done
-        $system_echo "> Files to hash are stored in $hashed_file_list_storing_file"
-    fi
-    if [ $? -ne 0 ]; then
-        err_code=46
-    fi
-fi
-# *
-# * 2.6 Section 2 ends
+# * 2.2 Section 2 ends
 # *
 if [[ $? -ne 0 ]] || [[ $err_code -ne 0 ]]; then
     print_error_msg

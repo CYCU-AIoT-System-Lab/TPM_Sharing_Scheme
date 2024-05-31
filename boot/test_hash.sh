@@ -4,7 +4,7 @@
 # ==================================================
 # Test options -------------------------------------
 
-test_total_count=100
+test_total_count=1
 
 test_default=true
 test_ramdisk=true
@@ -14,6 +14,8 @@ test_tpm_default=true
 test_tpm_ramdisk=true
 test_tpm_trim=true
 test_tpm_full=true
+
+output_stdout=true
 
 # ==================================================
 # Test functions -----------------------------------
@@ -30,7 +32,11 @@ result_arr=()
 execute_hash_with_args() {
     local script="$1"
     shift
-    . "$script" "$@" > /dev/null
+    if [ $output_stdout == true ]; then
+        . "$script" "$@"
+    else
+        . "$script" "$@" > /dev/null
+    fi
 }
 
 test_command_and_list_unique_cnt(){

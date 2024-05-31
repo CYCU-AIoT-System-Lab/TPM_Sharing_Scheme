@@ -1,1 +1,2 @@
 /home/dachu/2_80.dat
+/home/dachu/log
