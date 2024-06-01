@@ -162,7 +162,10 @@ print_error_msg () {
             print_msg "[2.1] Directory does not exist!"
             ;;
         42)
-            print_msg "[2.2] Failed to write list of files and directories to temporary file!"
+            print_msg "[2.2] Failed to remove duplicate files from array!"
+            ;;
+        43)
+            print_msg "[2.4] Failed to write list of files and directories to temporary file!"
             ;;
         # Section 3: Hashing chain
         # Offset: 60
@@ -476,21 +479,55 @@ if [[ $err_code -eq 0 ]]; then
     for item in "${dir_list[@]}"; do
         file_list+=($(find $item -type f))
     done
-    if [[ $err_code -eq 0 ]]; then
-        if [ ${#file_list[@]} -eq 0 ]; then
-            err_code=41
-            break
-        fi
+    if [ ${#file_list[@]} -eq 0 ]; then
+        err_code=41
+        break
     fi
 fi
+# *
+# * 2.2 Remove duplicates
+# *
+$system_echo "> Removing duplicates ..."
 if [[ $err_code -eq 0 ]]; then
-    printf "%s\n" "${file_list[@]}" > $hashed_file_list_storing_file
-    if [ $? -ne 0 ]; then
+    file_list=($(echo "${file_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+fi
+if [[ $err_code -eq 0 ]]; then
+    if [ ${#file_list[@]} -eq 0 ]; then
         err_code=42
     fi
 fi
 # *
-# * 2.2 Section 2 ends
+# * 2.3 Verify files exist
+# *
+$system_echo "> Verifying files exist ..."
+index_offset=0
+if [[ $err_code -eq 0 ]]; then
+    for index in "${!file_list[@]}"; do
+        index=$((index - index_offset))
+        if [ ! -f "${file_list[index]}" ]; then
+            unset 'file_list[index]'
+            index_offset=$((index_offset + 1))
+            $system_echo -e "$warning_message: ${file_list[index]} does not exist!"
+        fi
+        if [ -d "${file_list[index]}" ]; then
+            unset 'file_list[index]'
+            index_offset=$((index_offset + 1))
+            $system_echo -e "$warning_message: ${file_list[index]} is a directory!"
+        fi
+    done
+fi
+# *
+# * 2.4 Store file list
+# *
+$system_echo "> Storing file list ..."
+if [[ $err_code -eq 0 ]]; then
+    printf "%s\n" "${file_list[@]}" > $hashed_file_list_storing_file
+    if [ $? -ne 0 ]; then
+        err_code=43
+    fi
+fi
+# *
+# * 2.4 Section 2 ends
 # *
 if [[ $? -ne 0 ]] || [[ $err_code -ne 0 ]]; then
     print_error_msg

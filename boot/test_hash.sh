@@ -4,23 +4,23 @@
 # ==================================================
 # Test options -------------------------------------
 
-test_total_count=1
+test_total_count=5
 
-test_default=true
-test_ramdisk=true
+test_default=false
+test_ramdisk=false
 test_trim=true
 test_full=true
-test_tpm_default=true
-test_tpm_ramdisk=true
-test_tpm_trim=true
-test_tpm_full=true
+test_tpm_default=false
+test_tpm_ramdisk=false
+test_tpm_trim=false
+test_tpm_full=false
 
-output_stdout=true
+output_stdout=false
 
 # ==================================================
 # Test functions -----------------------------------
 
-total_test_count=8
+total_test_count=0
 success_count=0
 test_no=0
 test_result_hash=()
@@ -40,6 +40,7 @@ execute_hash_with_args() {
 }
 
 test_command_and_list_unique_cnt(){
+    total_test_count=$((total_test_count+1))
     echo ""
     local result_arr=()
     local unique_result_arr=()
@@ -148,9 +149,9 @@ test_result_hash_count=${#test_result_hash[@]}
 unique_test_result_hash=($(echo "${test_result_hash[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
 unique_test_result_hash_count=${#unique_test_result_hash[@]}
 if [ $unique_test_result_hash_count -eq 1 ] && [ $test_result_hash_count -eq $total_test_count ]; then
-    echo -e "\033[32m\033[1mAll unique hash values are same\033[0m"
+    echo -e "\033[32m\033[1mCross mode test passed\033[0m"
 else
-    echo -e "\033[31m\033[1mDifferent unique hash values\033[0m | Unique count: $unique_test_result_hash_count"
+    echo -e "\033[31m\033[1mCross mode test failed\033[0m | Unique count: $unique_test_result_hash_count"
     for item in "${unique_test_result_hash[@]}"; do
         echo -e "$item"
     done

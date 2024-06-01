@@ -1,2 +1,6 @@
 /home/dachu/2_80.dat
 /home/dachu/log
+/home/dachu/build
+/home/dachu/install
+/home/dachu/ros2_humble
+/home/dachu/ros2_ws
