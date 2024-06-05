@@ -2,6 +2,10 @@
 
 Purpose: Add SWTPM PCR hashing to the boot chain.
 
+## Limitation
+
+Any path containing spaces will not be hashed correctly.
+
 ## Methodology
 
 1. Add to boot chain: https://belongtothenight.github.io/HOW_TO/how_to_LINUX-auto_launch_program_on_boot/

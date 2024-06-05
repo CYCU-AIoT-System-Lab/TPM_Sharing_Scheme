@@ -15,7 +15,8 @@ test_tpm_ramdisk=false
 test_tpm_trim=false
 test_tpm_full=false
 
-output_stdout=false
+output_stdout=true
+output_stderr=false
 
 # ==================================================
 # Test functions -----------------------------------
@@ -32,10 +33,12 @@ result_arr=()
 execute_hash_with_args() {
     local script="$1"
     shift
-    if [ $output_stdout == true ]; then
-        . "$script" "$@"
-    else
+    if [ $output_stdout == false ] && [ $output_stderr == true ]; then
         . "$script" "$@" > /dev/null
+    elif [ $output_stdout == false ] && [ $output_stderr == false ]; then
+        . "$script" "$@" 1> /dev/null 2> /dev/null
+    else
+        . "$script" "$@"
     fi
 }
 

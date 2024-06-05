@@ -473,23 +473,26 @@ $system_echo "> Generating list of files to hash ..."
 # *
 # * 2.1 Find files in directories
 # *
-dir_list=($(cat $dir_list_file))
+dir_list=($(cat "$dir_list_file"))
 file_list=()
+#IFS=$'\n' # https://stackoverflow.com/a/63969005/19138739
 if [[ $err_code -eq 0 ]]; then
     for item in "${dir_list[@]}"; do
-        file_list+=($(find $item -type f))
+        #file_list+=($(find "$item" -type f | sed -e's/ /\\ /g'))
+        file_list+=($(find "$item" -type f))
     done
     if [ ${#file_list[@]} -eq 0 ]; then
         err_code=41
         break
     fi
 fi
+#unset IFS
 # *
 # * 2.2 Remove duplicates
 # *
 $system_echo "> Removing duplicates ..."
 if [[ $err_code -eq 0 ]]; then
-    file_list=($(echo "${file_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+    file_list=($(echo "${file_list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' ')) # this line will breakup path with spaces
 fi
 if [[ $err_code -eq 0 ]]; then
     if [ ${#file_list[@]} -eq 0 ]; then
@@ -507,7 +510,7 @@ if [[ $err_code -eq 0 ]]; then
         if [ ! -f "${file_list[index]}" ]; then
             unset 'file_list[index]'
             index_offset=$((index_offset + 1))
-            $system_echo -e "$warning_message: ${file_list[index]} does not exist!"
+            #$system_echo -e "$warning_message: ${file_list[index]} does not exist!" # Costly to print
         fi
         if [ -d "${file_list[index]}" ]; then
             unset 'file_list[index]'
@@ -521,7 +524,7 @@ fi
 # *
 $system_echo "> Storing file list ..."
 if [[ $err_code -eq 0 ]]; then
-    printf "%s\n" "${file_list[@]}" > $hashed_file_list_storing_file
+    printf "%s\n" "${file_list[@]}" > "$hashed_file_list_storing_file"
     if [ $? -ne 0 ]; then
         err_code=43
     fi
