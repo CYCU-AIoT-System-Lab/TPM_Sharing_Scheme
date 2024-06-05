@@ -6,8 +6,8 @@
 
 test_total_count=5
 
-test_default=false
-test_ramdisk=false
+test_default=true
+test_ramdisk=true
 test_trim=true
 test_full=true
 test_tpm_default=false

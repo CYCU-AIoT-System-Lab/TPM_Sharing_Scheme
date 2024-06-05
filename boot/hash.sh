@@ -559,24 +559,25 @@ hashing_chain () {
         # Hash the file
         if [ $trim == true ]; then
             if [ $tpm == true ]; then
-                initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file | tr -d '\n')
+                initial_hash_value="$($system_hash_bin -C o -g sha256 $temporary_hash_file | tr -d '\n')"
             else
-                initial_hash_value=$($system_hash_bin -a 256 $temporary_hash_file)
-                initial_hash_value=${initial_hash_value//$temporary_hash_file/}
+                initial_hash_value="$($system_hash_bin -a 256 $temporary_hash_file)"
+                initial_hash_value="${initial_hash_value//$temporary_hash_file/}"
             fi
         else
             if [ $tpm == true ]; then
-                initial_hash_value=$($system_hash_bin -C o -g sha256 $temporary_hash_file)
+                initial_hash_value="$($system_hash_bin -C o -g sha256 $temporary_hash_file)"
             else
-                initial_hash_value=$($system_hash_bin -a 256 $temporary_hash_file)
+                initial_hash_value="$($system_hash_bin -a 256 $temporary_hash_file)"
+                initial_hash_value="${initial_hash_value//$temporary_hash_file/}"
             fi
         fi
     done
     if [ $tpm == true ]; then
-        FINAL_HASH_VALUE=$(echo $initial_hash_value | $system_xxd -p | tr -d '\n')
-        export FINAL_HASH_VALUE=${FINAL_HASH_VALUE::-2}
+        FINAL_HASH_VALUE="$(echo $initial_hash_value | $system_xxd -p | tr -d '\n')"
+        export FINAL_HASH_VALUE="${FINAL_HASH_VALUE::-2}"
     else
-        export FINAL_HASH_VALUE=${initial_hash_value//$temporary_hash_file/}
+        export FINAL_HASH_VALUE="${initial_hash_value//$temporary_hash_file/}"
     fi
 }
 if [ $time_hash == true ]; then
