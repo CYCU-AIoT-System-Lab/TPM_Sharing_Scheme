@@ -11,6 +11,7 @@ set -x
 
 monitoring_PID=1937542
 monitoring_TIME=600 # in seconds
+chmod +x *.pl
 
 sudo perf record -F 99 -a -g -p $monitoring_PID -- sleep $monitoring_TIME
 sudo perf script | ./stackcollapse-perf.pl > out.perf-folded

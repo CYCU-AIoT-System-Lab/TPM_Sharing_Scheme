@@ -577,8 +577,8 @@ hashing_chain () {
         fi
     done
     if [ $tpm == true ]; then
-        FINAL_HASH_VALUE="$(echo $initial_hash_value | $system_xxd -p | tr -d '\n')"
-        export FINAL_HASH_VALUE="${FINAL_HASH_VALUE::-2}"
+        FINAL_HASH_VALUE="$(echo $initial_hash_value | tr -d '\n' | $system_xxd -p | tr -d '\n' | tr -d ' ')"
+        export FINAL_HASH_VALUE="$FINAL_HASH_VALUE"
     else
         export FINAL_HASH_VALUE="${initial_hash_value//$temporary_hash_file/}"
     fi
