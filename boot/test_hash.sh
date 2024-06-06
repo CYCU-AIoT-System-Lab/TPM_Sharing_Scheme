@@ -18,6 +18,11 @@ test_tpm_full=false
 output_stdout=false
 output_stderr=false
 
+hashing_script="./hash.sh"
+hashing_target="dir_list.txt"
+initial_pcr="1234567890ABCDEF000000000000000000000000000000000000000000000000" 
+output_file="hashed_file_list.txt"
+
 # ==================================================
 # Test functions -----------------------------------
 
@@ -74,7 +79,7 @@ test_command_and_list_unique_cnt(){
 test_no=$((test_no+1))
 if [ $test_default == true ]; then
     echo ">> $test_no Testing default hash.sh"
-    time test_command_and_list_unique_cnt "./hash.sh" "dir_list.txt" "1234567890ABCDEF000000000000000000000000000000000000000000000000" "hashed_file_list.txt" "-v"
+    time test_command_and_list_unique_cnt "$hashing_script" "$hashing_target" "$initial_pcr" "$output_file" "-v"
 else
     echo -e ">> $test_no Skip testing default hash.sh\n"
 fi
@@ -83,7 +88,7 @@ fi
 test_no=$((test_no+1))
 if [ $test_ramdisk == true ]; then
     echo ">> $test_no Testing hash.sh with ramdisk"
-    time test_command_and_list_unique_cnt "./hash.sh" "dir_list.txt" "1234567890ABCDEF000000000000000000000000000000000000000000000000" "hashed_file_list.txt" "-v" "-r"
+    time test_command_and_list_unique_cnt "$hashing_script" "$hashing_target" "$initial_pcr" "$output_file" "-v" "-r"
 else
     echo -e ">> $test_no Skip testing hash.sh with ramdisk\n"
 fi
@@ -92,7 +97,7 @@ fi
 test_no=$((test_no+1))
 if [ $test_trim == true ]; then
     echo ">> $test_no Testing hash.sh with trim"
-    time test_command_and_list_unique_cnt "./hash.sh" "dir_list.txt" "1234567890ABCDEF000000000000000000000000000000000000000000000000" "hashed_file_list.txt" "-v" "-tr"
+    time test_command_and_list_unique_cnt "$hashing_script" "$hashing_target" "$initial_pcr" "$output_file" "-v" "-tr"
 else
     echo -e ">> $test_no Skip testing hash.sh with trim\n"
 fi
@@ -101,7 +106,7 @@ fi
 test_no=$((test_no+1))
 if [ $test_full == true ]; then
     echo ">> $test_no Testing hash.sh with, ramdisk, trim"
-    time test_command_and_list_unique_cnt "./hash.sh" "dir_list.txt" "1234567890ABCDEF000000000000000000000000000000000000000000000000" "hashed_file_list.txt" "-v" "-r" "-tr"
+    time test_command_and_list_unique_cnt "$hashing_script" "$hashing_target" "$initial_pcr" "$output_file" "-v" "-r" "-tr"
 else
     echo -e ">> $test_no Skip testing hash.sh with pipe, ramdisk, trim\n"
 fi
@@ -110,7 +115,7 @@ fi
 test_no=$((test_no+1))
 if [ $test_tpm_default == true ]; then
     echo ">> $test_no Testing hash.sh with tpm default"
-    time test_command_and_list_unique_cnt "./hash.sh" "dir_list.txt" "1234567890ABCDEF000000000000000000000000000000000000000000000000" "hashed_file_list.txt" "-v" "-tpm"
+    time test_command_and_list_unique_cnt "$hashing_script" "$hashing_target" "$initial_pcr" "$output_file" "-v" "-tpm"
 else
     echo -e ">> $test_no Skip testing hash.sh with tpm default\n"
 fi
@@ -119,7 +124,7 @@ fi
 test_no=$((test_no+1))
 if [ $test_tpm_ramdisk == true ]; then
     echo ">> $test_no Testing hash.sh with tpm ramdisk"
-    time test_command_and_list_unique_cnt "./hash.sh" "dir_list.txt" "1234567890ABCDEF000000000000000000000000000000000000000000000000" "hashed_file_list.txt" "-v" "-r" "-tpm"
+    time test_command_and_list_unique_cnt "$hashing_script" "$hashing_target" "$initial_pcr" "$output_file" "-v" "-r" "-tpm"
 else
     echo -e ">> $test_no Skip testing hash.sh with tpm ramdisk\n"
 fi
@@ -128,7 +133,7 @@ fi
 test_no=$((test_no+1))
 if [ $test_tpm_trim == true ]; then
     echo ">> $test_no Testing hash.sh with tpm trim"
-    time test_command_and_list_unique_cnt "./hash.sh" "dir_list.txt" "1234567890ABCDEF000000000000000000000000000000000000000000000000" "hashed_file_list.txt" "-v" "-tr" "-tpm"
+    time test_command_and_list_unique_cnt "$hashing_script" "$hashing_target" "$initial_pcr" "$output_file" "-v" "-tr" "-tpm"
 else
     echo -e ">> $test_no Skip testing hash.sh with tpm trim\n"
 fi
@@ -137,7 +142,7 @@ fi
 test_no=$((test_no+1))
 if [ $test_tpm_full == true ]; then
     echo ">> $test_no Testing hash.sh with tpm, ramdisk, trim"
-    time test_command_and_list_unique_cnt "./hash.sh" "dir_list.txt" "1234567890ABCDEF000000000000000000000000000000000000000000000000" "hashed_file_list.txt" "-v" "-r" "-tr" "-tpm"
+    time test_command_and_list_unique_cnt "$hashing_script" "$hashing_target" "$initial_pcr" "$output_file" "-v" "-r" "-tr" "-tpm"
 else
     echo -e ">> $test_no Skip testing hash.sh with tpm pipe, ramdisk, trim\n"
 fi

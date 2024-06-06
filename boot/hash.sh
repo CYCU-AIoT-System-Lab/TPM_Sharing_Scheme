@@ -187,6 +187,9 @@ cli_input_arr=($cli_input_str)
 dir_list_file=${cli_input_arr[0]}
 initial_hash_value=${cli_input_arr[1]}
 hashed_file_list_storing_file=${cli_input_arr[2]}
+if [[ ! $hashed_file_list_storing_file =~ "-*" ]]; then
+    hashed_file_list_storing_file=false
+fi
 # *
 # * 0.1 Process optional arguments
 # *
@@ -522,11 +525,14 @@ fi
 # *
 # * 2.4 Store file list
 # *
-$system_echo "> Storing file list ..."
-if [[ $err_code -eq 0 ]]; then
-    printf "%s\n" "${file_list[@]}" > "$hashed_file_list_storing_file"
-    if [ $? -ne 0 ]; then
-        err_code=43
+if [ ! $hashed_file_list_storing_file == false ]; then
+    echo "$hashed_file_list_storing_file"
+    $system_echo "> Storing file list ..."
+    if [[ $err_code -eq 0 ]]; then
+        printf "%s\n" "${file_list[@]}" > "$hashed_file_list_storing_file"
+        if [ $? -ne 0 ]; then
+            err_code=43
+        fi
     fi
 fi
 # *
