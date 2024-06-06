@@ -15,7 +15,7 @@ test_tpm_ramdisk=false
 test_tpm_trim=false
 test_tpm_full=false
 
-output_stdout=true
+output_stdout=false
 output_stderr=false
 
 # ==================================================

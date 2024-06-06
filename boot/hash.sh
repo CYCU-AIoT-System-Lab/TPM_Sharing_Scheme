@@ -92,7 +92,7 @@ print_error_msg () {
             print_msg "[0.3] Binary \"shasum\" not found!"
             ;;
         9)
-            print_msg "[0.3] Binary \"ls\" not found!"
+            print_msg "[0.3] Binary \"find\" not found!"
             ;;
         10)
             print_msg "[0.3] Binary \"cat\" not found!"
@@ -282,7 +282,7 @@ if [[ $err_code -eq 0 ]]; then
     fi
 fi
 if [[ $err_code -eq 0 ]]; then
-    system_ls=$(which ls)
+    system_find=$(which find)
     if [ $? -ne 0 ]; then
         err_code=9
     fi
@@ -414,13 +414,13 @@ if [[ $err_code -eq 0 ]]; then
             err_code=29
         fi
 
-        sudo cp $system_ls $mbc_binary_ramdisk
+        sudo cp $system_find $mbc_binary_ramdisk
         if [ $? -ne 0 ]; then
             err_code=30
         fi
-        system_ls_path=$(dirname $system_ls)
-        system_ls=$mbc_binary_ramdisk/$(basename $system_ls)
-        $system_ls --version > /dev/null
+        system_find_path=$(dirname $system_find)
+        system_find=$mbc_binary_ramdisk/$(basename $system_find)
+        $system_find --version > /dev/null
         if [ $? -ne 0 ]; then
             err_code=31
         fi
@@ -616,7 +616,7 @@ if [[ $err_code -eq 0 ]]; then
             err_code=81
         fi
         system_hash_bin=$system_hash_bin_path/$(basename $system_hash_bin)
-        system_ls=$system_ls_path/$(basename $system_ls)
+        system_find=$system_find_path/$(basename $system_find)
         system_cat=$system_cat_path/$(basename $system_cat)
         system_echo=$system_echo_path/$(basename $system_echo)
         system_xxd=$system_xxd_path/$(basename $system_xxd)
