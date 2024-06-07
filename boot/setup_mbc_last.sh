@@ -12,6 +12,8 @@ TPM2_NVM_INDEX="0x1500016"
 HASH_SCRIPT="./hash.sh"
 HASH_TARGET="dir_list.txt"
 MBC_SCRIPT="./mbc_last.sh"
+SERVICE_FILE="mbc_last.service"
+SYSTEMD_DIR="/etc/systemd/system/"
 PCR_IDX_INIT_ZERO=0
 HASH="sha256" # can be sha1, sha256
 PCR_IDX_MIN=0
@@ -77,5 +79,31 @@ HASH_TMP_FILE="hash_value.txt.tmp"
 echo "$FINAL_HASH_VALUE" > $HASH_TMP_FILE
 tpm2_nvwrite $TPM2_NVM_INDEX -P $TPM2_AUTH_NV -i $HASH_TMP_FILE
 rm $HASH_TMP_FILE
+
+# >7. Set MBC script to run at startup/boot
+if [ $VERBOSE == true ]; then echo "Setting MBC script to run at startup/boot..."; fi
+echo -e "\
+[Unit]\n\
+Description=TPM Sharing Scheme SWTPM Measured Boot Chain (MBC) perform at startup/boot service\n\
+After=multi-user.target\n\
+StartLimitIntervalSec=0\n\
+\n\
+[Service]\n\
+User=$USER\n\
+Type=simple\n\
+KillMode=mixed\n\
+#Restart=always\n\
+#RestartSec=1\n\
+WorkingDirectory=$PWD\n\
+ExecStart=bash $MBC_SCRIPT\n\
+TimeoutStartSec=infinity\n\
+\n\
+[Install]\n\
+WantedBy=multi-user.target\
+" > $SERVICE_FILE
+sudo mv $SERVICE_FILE $SYSTEMD_DIR
+sudo systemctl daemon-reload
+sudo systemctl enable $SERVICE_FILE
+sudo systemctl start $SERVICE_FILE
 
 echo "MBC script updated successfully!"
