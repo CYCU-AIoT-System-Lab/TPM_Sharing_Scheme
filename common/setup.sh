@@ -222,6 +222,15 @@ else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_deploy_repo ! Skipping setup_deploy_repo..."
 fi
 
+cd $working_dir
+if [ $job_setup_mbc_last -eq 1 ]; then
+    echo_notice "${dirname}" "${filename}" "Running setup_mbc_last setup..."
+    cd ../boot
+    install_platform=$install_platform bash ./setup_mbc_last.sh
+else
+    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_mbc_last ! Skipping setup_mbc_last..."
+fi
+
 clear_preset
 
 echo_notice "${dirname}" "${filename}" "All setup complete."
