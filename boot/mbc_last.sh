@@ -79,8 +79,14 @@ if [[ "$INTEGRITY_CHECK_PASS" == true ]]; then
     echo "No need to extend PCR, hash value is the same as the one previously calculated and stored in NVM"
     echo "MBC: File integrity check completed successfully!"
 else
+    echo "Hash value is different from the one previously calculated and stored in NVM"
     echo "Extending PCR..."
-    #tpm2_pcrextend "$PCR_IDX_INIT_ZERO:$HASH=$FINAL_HASH_VALUE"
+    tpm2_pcrextend "$PCR_IDX_INIT_ZERO:$HASH=$FINAL_HASH_VALUE"
+    echo "Updating hash value in NVM..."
+    HASH_TMP_FILE="hash_value.txt.tmp"
+    echo "$FINAL_HASH_VALUE" > $HASH_TMP_FILE
+    tpm2_nvwrite $TPM2_NVM_INDEX -P $TPM2_AUTH_NV -i $HASH_TMP_FILE
+    rm $HASH_TMP_FILE
     echo "MBC: File integrity check failed!"
     exit 1
 fi
