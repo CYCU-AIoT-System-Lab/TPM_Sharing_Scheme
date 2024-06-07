@@ -68,19 +68,14 @@ fi
 if [ $VERBOSE == true ]; then echo "Extending PCR..."; fi
 tpm2_pcrextend "$PCR_IDX_INIT_ZERO:$HASH=$FINAL_HASH_VALUE"
 
-# >5. Read just extended PCR
-if [ $VERBOSE == true ]; then echo "Reading extended PCR..."; fi
-PCR_X="$(tpm2_pcrread $HASH:$PCR_IDX_INIT_ZERO)"
-PCR_X="${PCR_X#*x}"
-
-# >6. Write hash value to NVM
+# >5. Write hash value to NVM
 if [ $VERBOSE == true ]; then echo "Writing hash to NVM..."; fi
 HASH_TMP_FILE="hash_value.txt.tmp"
 echo "$FINAL_HASH_VALUE" > $HASH_TMP_FILE
 tpm2_nvwrite $TPM2_NVM_INDEX -P $TPM2_AUTH_NV -i $HASH_TMP_FILE
 rm $HASH_TMP_FILE
 
-# >7. Set MBC script to run at startup/boot
+# >6. Set MBC script to run at startup/boot
 if [ $VERBOSE == true ]; then echo "Setting MBC script to run at startup/boot..."; fi
 echo -e "\
 [Unit]\n\
