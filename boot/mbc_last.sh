@@ -11,13 +11,19 @@ PCR_IDX_MIN=0
 PCR_IDX_MAX=23
 INITIAL_ZERO_PCR="0000000000000000000000000000000000000000000000000000000000000000"
 INTEGRITY_CHECK_PASS=false
+VERBOSE=false
+CLI_INPUT_STR="$@"
+CLI_INPUT_ARR=($CLI_INPUT_STR)
 
 # >0. Checking existance
 #    - TPM
 #    - scripts
+if [[ "${CLI_INPUT_ARR[*]}" =~ "-v" ]]; then
+    VERBOSE=true
+fi
 
 # >1. Find the index of last non-zero PCR
-echo "Finding the index of last non-zero PCR..."
+if [ $VERBOSE == true ]; then echo "Finding the index of last non-zero PCR..."; fi
 for i in $(seq $PCR_IDX_MIN $PCR_IDX_MAX); do
     PCR_TEMP="$(tpm2_pcrread $HASH:$i)"
     PCR_TEMP="${PCR_TEMP#*x}"
@@ -26,10 +32,10 @@ for i in $(seq $PCR_IDX_MIN $PCR_IDX_MAX); do
         break
     fi
 done
-echo -e "Last non-zero PCR index: \t$PCR_IDX_INIT_ZERO"
+if [ $VERBOSE == true ]; then echo "Last non-zero PCR index: \t$PCR_IDX_INIT_ZERO"; fi
 
 # >2. Read PCR out from TPM
-echo "Reading PCR from TPM..."
+if [ $VERBOSE == true ]; then echo "Reading PCR from TPM..."; fi
 PCR_IDX_INIT_ZERO_1=$((PCR_IDX_INIT_ZERO-1))
 if [[ $PCR_IDX_INIT_ZERO_1 -lt $PCR_IDX_MIN ]]; then
     PCR_X_1="$INITIAL_ZERO_PCR"
@@ -39,27 +45,33 @@ else
 fi
 PCR_X="$(tpm2_pcrread $HASH:$PCR_IDX_INIT_ZERO)"
 PCR_X="${PCR_X#*x}"
-echo -e "PCR_HASH[$PCR_IDX_INIT_ZERO_1]: \t$PCR_X_1"
-echo -e "PCR_HASH[$PCR_IDX_INIT_ZERO]: \t$PCR_X"
+if [ $VERBOSE == true ]; then
+    echo -e "PCR_HASH[$PCR_IDX_INIT_ZERO_1]: \t$PCR_X_1"
+    echo -e "PCR_HASH[$PCR_IDX_INIT_ZERO]: \t$PCR_X"
+fi
 
 # >3. Call hashing script
-echo "Hashing target file..."
+if [ $VERBOSE == true ]; then echo "Hashing target file..."; fi
 . "$HASH_SCRIPT" "$HASH_TARGET" "$PCR_X_1" 1> /dev/null
 FINAL_HASH_VALUE="$(echo $FINAL_HASH_VALUE | tr -d ' ')"
-echo -e "Generated PCR_HASH[$PCR_IDX_INIT_ZERO]: \t$FINAL_HASH_VALUE"
+if [ $VERBOSE == true ]; then echo -e "Generated PCR_HASH[$PCR_IDX_INIT_ZERO]: \t$FINAL_HASH_VALUE"; fi
 
 # >4. Read hash out from NVM
-echo "Reading hash from NVM..."
+if [ $VERBOSE == true ]; then echo "Reading hash from NVM..."; fi
 NVM_HASH_TMP_FILE="nvm_hash_value.txt.tmp"
 tpm2_nvread "$TPM2_NVM_INDEX" -s 64 -o 0 -P "$TPM2_AUTH_NV" -o "$NVM_HASH_TMP_FILE"
 NVM_HASH="$(cat $NVM_HASH_TMP_FILE)"
 rm "$NVM_HASH_TMP_FILE"
-echo -e "Hash value in NVM: \t$NVM_HASH"
+if [ $VERBOSE == true ]; then echo -e "Hash value in NVM: \t$NVM_HASH"; fi
 if [[ "$NVM_HASH" == "$FINAL_HASH_VALUE" ]]; then
-    echo "Hash value in NVM is the same as the generated one"
+    if [ $VERBOSE == true ]; then
+        echo "Hash value in NVM is the same as the generated one"
+    fi
     INTEGRITY_CHECK_PASS=true
 else
-    echo "Hash value in NVM is different from the generated one"
+    if [ $VERBOSE == true ]; then
+        echo "Hash value in NVM is different from the generated one"
+    fi
 fi
 
 # >5. Extend PCR index if needed
@@ -70,4 +82,5 @@ else
     echo "Extending PCR..."
     #tpm2_pcrextend "$PCR_IDX_INIT_ZERO:$HASH=$FINAL_HASH_VALUE"
     echo "MBC: File integrity check failed!"
+    exit 1
 fi
