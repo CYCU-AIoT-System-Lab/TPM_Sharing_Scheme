@@ -6,6 +6,14 @@ Purpose: Add SWTPM PCR hashing to the boot chain.
 
 Any path containing spaces will not be hashed correctly.
 
+## Usage
+
+1. `bash hash.sh -h` to find CLI arguments to have a file.
+2. `bash test_hash.sh` to test the hashing process.
+3. `bash setup_mbc_last.sh` to setup Measured Boot Chain (MBC) last stage.
+4. `bash mbc_last.sh` to run MBC last stage.
+5. `bash remove.sh` to remove MBC last stage from system.
+
 ## Methodology
 
 1. Add to boot chain: https://belongtothenight.github.io/HOW_TO/how_to_LINUX-auto_launch_program_on_boot/
