@@ -14,6 +14,15 @@ This directory holdes common utilities for this project.
 7. After the script is finished, and showed "Reboot", reboot.
 8. Edit ```/common/config.ini``` to disable ```setup_optiga``` and enable other components you want to install, and execute ```/common/setup.sh``` again.
 
+## Component install ordering
+
+Part of the components are dependent on each other, please follow the order below to install them.
+
+1. job_setup_optiga
+2. job_setup_ibmtpm
+3. (optional) job_update_swtpm
+4. (optional) job_setup_mbc_last
+
 ## Adjust Installation Components - setup_environment
 
 1. [./config.ini](./config.ini) set all other components to 0.

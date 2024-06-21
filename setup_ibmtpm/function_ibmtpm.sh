@@ -22,6 +22,12 @@ load_preset () {
         echo_notice "${dirname}" "${filename}" "Checking var..."
     fi
     check_var install_platform $exit_code
+    check_var acs_demo_server_ip $exit_code
+    check_var acs_demo_server_port $exit_code
+    check_var acs_demo_client_ip $exit_code
+    check_var tpm_command_port $exit_code
+    check_var tpm_socket_port $exit_code
+    check_var acs_port $exit_code
     check_var verMode $exit_code
     check_var TPMMode $exit_code
     check_var acsMode $exit_code
@@ -71,9 +77,10 @@ load_preset () {
     c_json_lib_dir="/usr/include/json-c"
     c_json_lib_link_dir="/usr/include/json"
     tpm_data_dir="/home/$user/tpm2"
+    swtpm_socket_device="/dev/swtpm"
     # ==== flag ====
     wget_gflag="-q --show-progress --no-check-certificate --no-cache --no-cookies"
-    make_gflag="-s"
+    make_gflag=""
     sudo_gflag="-E"
     bash_gflag="-x"
     tar_gflag="-zxf"
@@ -98,6 +105,7 @@ clear_preset () {
     unset acs_demo_server_port
     unset acs_demo_client_ip
     unset tpm_command_port
+    unset tpm_socket_port
     unset acs_port
     unset ibmtss_ver
     unset ibmtpm_ver

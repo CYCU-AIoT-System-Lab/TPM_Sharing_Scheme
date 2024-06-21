@@ -11,6 +11,11 @@ script_path=$(dirname "$script")
 #cd "${base_dir}/ibmtpm${ibmtpm_ver}/src" && sudo make uninstall    # no uninstall target provided
 #cd "${base_dir}/ibmtss${ibmtss_ver}" && sudo make uninstall        # no uninstall target provided
 
+if ! [ $install_platform -eq 3 ]; then
+    echo_notice "${dirname}" "${filename}" "Removing swtpm device ..."
+    sudo rm -rf $swtpm_socket_device
+fi
+
 echo_notice "${dirname}" "${filename}" "Removing directories..."
 clear_dir "$(basename -- $html_dir)"
 clear_dir "$tpm_data_dir"

@@ -167,7 +167,10 @@ compile_ibmtpmtss () {
 # Create symbolic link to ibmswtpm
 # Only need to setup once (can re-run)
 setup_ibmswtpm_env () {
-    :
+    if ! [ $install_platform -eq 3 ]; then
+        echo_notice "${dirname}" "${filename}-setup_ibmswtpm_env" "Export environment variable for SWTPM socket interface ..."
+        echo "export TPM_COMMAND_PORT=$tpm_command_port TPM_PLATFORM_PORT=$tpm_socket_port TPM_SERVER_NAME=$acs_demo_server_ip TPM_INTERFACE_TYPE=socsim TPM_SERVER_TYPE=raw" >> ~/.bashrc
+    fi
 }
 
 # Compile ibmswtpm
@@ -317,8 +320,13 @@ activate_TPM_server () {
     cd "${sym_link_ibmtpm}/src/"
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
-    lc3="./tpm_server"
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 1 ]; then
+    if [ $install_platform -eq 3 ]; then
+        lc3="./tpm_server"
+    else
+        # ref: https://github.com/stefanberger/swtpm/wiki/Using-the-IBM-TSS-with-swtpm
+        lc3="mkdir $swtpm_socket_device && swtpm socket --tpmstate dir=$swtpm_socket_device --tpm2 --ctrl type=tcp,port=$tpm_socket_port --server type=tcp,port=$tpm_command_port --flags not-need-init"
+    fi
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
         newGterm "TPM SERVER" "$bash_gflag" "$lc1; $lc2; $lc3" 1
     else
         newLXterm "TPM SERVER" "$lc1; $lc2; $lc3" 1
@@ -354,7 +362,7 @@ generate_EK () {
         activate_TPM_client
 
         echo_notice "${dirname}" "${filename}-generate_EK" "Backing up NVChip ......"
-        err_retry_exec "cp ${path_NV} ${path_NV}.bak" 1 5 "${dirname}" "setup-generate_EK"
+        err_conti_exec "cp ${path_NV} ${path_NV}.bak" "${dirname}" "setup-generate_EK"
 
         cd "${sym_link_ibmtss}/utils/"
         echo_notice "${dirname}" "${filename}-generate_EK" "Generating RSAEK and load into NV ......"
