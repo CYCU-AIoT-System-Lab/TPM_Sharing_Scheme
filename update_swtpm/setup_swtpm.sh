@@ -6,14 +6,13 @@ source function_swtpm.sh
 if [ $install_apt_package -eq 1 ]; then
     echo "installing apt packages"
     sudo apt install -y mercurial
-    sudo apt install -y ftp
 fi
 
 echo "downloading from sources"
 github="https://github.com"
 gnu_mirror="ftp://ftp.twaren.net/Unix/GNU/gnu"
 gnome="https://download.gnome.org/sources"
-total_cnt=17
+total_cnt=22
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -24,75 +23,100 @@ update_var () {
 }
 update_var "gmp"
 if [ $install_gmp -eq 1 ]; then echo "$msg1"
-    hg clone https://gmplib.org/repo/gmp-$gmp_version/ $gmp_name || { echo "$msg4"; }
+    hg clone https://gmplib.org/repo/gmp-$gmp_version/ $gmp_name || { echo "$msg4"; exit 1; }
 else echo "$msg2"; fi
 update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/stefanberger/libtpms/archive/refs/tags/v$libtpms_version.tar.gz" -O $libtpms_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "$github/stefanberger/libtpms/archive/refs/tags/v$libtpms_version$libtpms_ext" -O $libtpms_name$libtpms_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "tpm2-tss"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/tpm2-software/tpm2-tss/releases/download/$tpm2tss_version/tpm2-tss-$tpm2tss_version.tar.gz" -O $tpm2tss_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "$github/tpm2-software/tpm2-tss/releases/download/$tpm2tss_version/tpm2-tss-$tpm2tss_version$tpm2tss_ext" -O $tpm2tss_name$tpm2tss_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "json-c"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/json-c/json-c/archive/refs/tags/json-c-$jsonc_version-20230812.tar.gz" -O $jsonc_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "$github/json-c/json-c/archive/refs/tags/json-c-$jsonc_version-20230812$jsonc_ext" -O $jsonc_name$jsonc_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "texinfo"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/texinfo/texinfo-$texinfo_version.tar.gz" -O $texinfo_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "$gnu_mirror/texinfo/texinfo-$texinfo_version$texinfo_ext" -O $texinfo_name$texinfo_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "automake"
 if [ $install_automake -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/automake/automake-$automake_version.tar.gz" -O $automake_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "$gnu_mirror/automake/automake-$automake_version$automake_ext" -O $automake_name$automake_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "autoconf"
 if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/autoconf/autoconf-$autoconf_version.tar.gz" -O $autoconf_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "$gnu_mirror/autoconf/autoconf-$autoconf_version$autoconf_ext" -O $autoconf_name$autoconf_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "help2man"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/help2man/help2man-$help2man_version.tar.xz" -O $help2man_name.tar.xz || { echo "$msg3"; }
+    wget $wget_flag "$gnu_mirror/help2man/help2man-$help2man_version$help2man_ext" -O $help2man_name$help2man_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "m4"
 if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/m4/m4-$m4_version.tar.gz" -O $m4_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "$gnu_mirror/m4/m4-$m4_version$m4_ext" -O $m4_name$m4_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "gperf"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/gperf/gperf-$gperf_version.tar.gz" -O $gperf_name.tar.gz || { echo "$msg3"; }
-else echo "$msg2"; fi
-update_var "libtool"
-if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/libtool/libtool-$libtool_version.tar.gz" -O $libtool_name.tar.gz || { echo "$msg4"; }
+    wget $wget_flag "$gnu_mirror/gperf/gperf-$gperf_version$gperf_ext" -O $gperf_name$gperf_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "pkg-config"
 if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "https://pkgconfig.freedesktop.org/releases/pkg-config-$pkgconfig_version.tar.gz" -O $pkgconfig_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "https://pkgconfig.freedesktop.org/releases/pkg-config-$pkgconfig_version$pkgconfig_ext" -O $pkgconfig_name$pkgconfig_ext || { echo "$msg3"; exit 1; }
+else echo "$msg2"; fi
+update_var "libtool"
+if [ $install_libtool -eq 1 ]; then echo "$msg1"
+    wget $wget_flag "$gnu_mirror/libtool/libtool-$libtool_version$libtool_ext" -O $libtool_name$libtool_ext || { echo "$msg4"; exit 1; }
 else echo "$msg2"; fi
 update_var "libtasn1"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/libtasn1/libtasn1-$libtasn1_version.tar.gz" -O $libtasn1_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "$gnu_mirror/libtasn1/libtasn1-$libtasn1_version$libtasn1_ext" -O $libtasn1_name$libtasn1_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "python"
 if [ $install_python -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "https://www.python.org/ftp/python/$python_version/Python-$python_version.tgz" -O $python_name.tgz || { echo "$msg3"; }
+    wget $wget_flag "https://www.python.org/ftp/python/$python_version/Python-$python_version$python_ext" -O $python_name$python_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "libpcre2"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/PCRE2Project/pcre2/releases/download/pcre2-$libpcre2_version/pcre2-$libpcre2_version.tar.gz" -O $libpcre2_name.tar.gz || { echo "$msg3"; }
+    wget $wget_flag "$github/PCRE2Project/pcre2/releases/download/pcre2-$libpcre2_version/pcre2-$libpcre2_version$libpcre2_ext" -O $libpcre2_name$libpcre2_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "glib"
 if [ $install_glib -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnome/glib/${glib_version%.*}/glib-$glib_version.tar.xz" -O $glib_name.tar.xz || { echo "$msg3"; }
+    wget $wget_flag "$gnome/glib/${glib_version%.*}/glib-$glib_version$glib_ext" -O $glib_name$glib_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnome/json-glib/${jsonglib_version%.*}/json-glib-$jsonglib_version.tar.xz" -O $jsonglib_name.tar.xz || { echo "$msg3"; }
+    wget $wget_flag "$gnome/json-glib/${jsonglib_version%.*}/json-glib-$jsonglib_version$jsonglib_ext" -O $jsonglib_name$jsonglib_ext || { echo "$msg3"; exit 1; }
+else echo "$msg2"; fi
+update_var "bison"
+if [ $install_bison -eq 1 ]; then echo "$msg1"
+    wget $wget_flag "$gnu_mirror/bison/bison-$bison_version$bison_ext" -O $bison_name$bison_ext || { echo "$msg3"; exit 1; }
+else echo "$msg2"; fi
+update_var "openssl"
+if [ $install_openssl -eq 1 ]; then echo "$msg1"
+    openssl_ver_arr=(${openssl_version//./ } )
+    if [[ ${openssl_ver_arr[0]} -ge 3 ]]; then
+        wget $wget_flag "$github/openssl/openssl/releases/download/openssl-$openssl_version/openssl-$openssl_version$openssl_ext" -O $openssl_name$openssl_ext || { echo "$msg3"; exit 1; }
+    else
+        wget $wget_flag "https://www.openssl.org/source/old/${openssl_version::-1}/openssl-$openssl_version$openssl_ext" -O $openssl_name$openssl_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "libcurl"
+if [ $install_libcurl -eq 1 ]; then echo "$msg1"
+    wget $wget_flag "https://curl.se/download/curl-$libcurl_version$libcurl_ext" -O $libcurl_name$libcurl_ext || { echo "$msg3"; exit 1; }
+else echo "$msg2"; fi
+update_var "libuuid"
+if [ $install_libuuid -eq 1 ]; then echo "$msg1"
+    wget $wget_flag "https://sourceforge.net/projects/libuuid/files/libuuid-$libuuid_version$libuuid_ext/download" -O $libuuid_name$libuuid_ext || { echo "$msg3"; exit 1; }
+else echo "$msg2"; fi
+update_var "swtpm"
+if [ $install_swtpm -eq 1 ]; then echo "$msg1"
+    wget $wget_flag "$github/stefanberger/swtpm/archive/refs/tags/v$swtpm_version$swtpm_ext" -O $swtpm_name$swtpm_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
 
 echo "creating directories to hold sources"
-total_cnt=16
+total_cnt=21
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -164,10 +188,30 @@ update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
     mkdir $jsonglib_name
 else echo "$msg2"; fi
+update_var "bison"
+if [ $install_bison -eq 1 ]; then echo "$msg1"
+    mkdir $bison_name
+else echo "$msg2"; fi
+update_var "openssl"
+if [ $install_openssl -eq 1 ]; then echo "$msg1"
+    mkdir $openssl_name
+else echo "$msg2"; fi
+update_var "libcurl"
+if [ $install_libcurl -eq 1 ]; then echo "$msg1"
+    mkdir $libcurl_name
+else echo "$msg2"; fi
+update_var "libuuid"
+if [ $install_libuuid -eq 1 ]; then echo "$msg1"
+    mkdir $libuuid_name
+else echo "$msg2"; fi
+update_var "swtpm"
+if [ $install_swtpm -eq 1 ]; then echo "$msg1"
+    mkdir $swtpm_name
+else echo "$msg2"; fi
 
 echo "unzipping sources"
 tar_add_flag="--strip-components=1"
-total_cnt=16
+total_cnt=21
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -177,71 +221,91 @@ update_var () {
 }
 update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libtpms_name.tar.gz  -C $libtpms_name    $tar_add_flag
+    tar $tar_flag $libtpms_name$libtpms_ext -C $libtpms_name    $tar_add_flag
 else echo "$msg2"; fi
 update_var "tpm2-tss"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $tpm2tss_name.tar.gz  -C $tpm2tss_name    $tar_add_flag
+    tar $tar_flag $tpm2tss_name$tpm2tss_ext -C $tpm2tss_name    $tar_add_flag
 else echo "$msg2"; fi
 update_var "json-c"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $jsonc_name.tar.gz    -C $jsonc_name      $tar_add_flag
+    tar $tar_flag $jsonc_name$jsonc_ext    -C $jsonc_name      $tar_add_flag
 else echo "$msg2"; fi
 update_var "texinfo"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $texinfo_name.tar.gz  -C $texinfo_name    $tar_add_flag
+    tar $tar_flag $texinfo_name$texinfo_ext  -C $texinfo_name    $tar_add_flag
 else echo "$msg2"; fi
 update_var "automake"
 if [ $install_automake -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $automake_name.tar.gz -C $automake_name   $tar_add_flag
+    tar $tar_flag $automake_name$automake_ext -C $automake_name   $tar_add_flag
 else echo "$msg2"; fi
 update_var "autoconf"
 if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $autoconf_name.tar.gz -C $autoconf_name   $tar_add_flag
+    tar $tar_flag $autoconf_name$autoconf_ext -C $autoconf_name   $tar_add_flag
 else echo "$msg2"; fi
 update_var "help2man"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $help2man_name.tar.xz -C $help2man_name   $tar_add_flag
+    tar $tar_flag $help2man_name$help2man_ext -C $help2man_name   $tar_add_flag
 else echo "$msg2"; fi
 update_var "m4"
 if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $m4_name.tar.gz       -C $m4_name         $tar_add_flag
+    tar $tar_flag $m4_name$m4_ext       -C $m4_name         $tar_add_flag
 else echo "$msg2"; fi
 update_var "gperf"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $gperf_name.tar.gz    -C $gperf_name      $tar_add_flag
+    tar $tar_flag $gperf_name$gperf_ext    -C $gperf_name      $tar_add_flag
 else echo "$msg2"; fi
 update_var "libtool"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libtool_name.tar.gz  -C $libtool_name    $tar_add_flag
+    tar $tar_flag $libtool_name$libtool_ext  -C $libtool_name    $tar_add_flag
 else echo "$msg2"; fi
 update_var "pkg-config"
 if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $pkgconfig_name.tar.gz -C $pkgconfig_name $tar_add_flag
+    tar $tar_flag $pkgconfig_name$pkgconfig_ext -C $pkgconfig_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "libtasn1"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libtasn1_name.tar.gz -C $libtasn1_name $tar_add_flag
+    tar $tar_flag $libtasn1_name$libtasn1_ext -C $libtasn1_name   $tar_add_flag
 else echo "$msg2"; fi
 update_var "python"
 if [ $install_python -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $python_name.tgz -C $python_name $tar_add_flag
+    tar $tar_flag $python_name$python_ext -C $python_name          $tar_add_flag
 else echo "$msg2"; fi
 update_var "libpcre2"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libpcre2_name.tar.gz -C $libpcre2_name $tar_add_flag
+    tar $tar_flag $libpcre2_name$libpcre2_ext -C $libpcre2_name   $tar_add_flag
 else echo "$msg2"; fi
 update_var "glib"
 if [ $install_glib -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $glib_name.tar.xz -C $glib_name $tar_add_flag
+    tar $tar_flag $glib_name$glib_ext -C $glib_name           $tar_add_flag
 else echo "$msg2"; fi
 update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $jsonglib_name.tar.xz -C $jsonglib_name $tar_add_flag
+    tar $tar_flag $jsonglib_name$jsonglib_ext -C $jsonglib_name   $tar_add_flag
+else echo "$msg2"; fi
+update_var "bison"
+if [ $install_bison -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $bison_name$bison_ext -C $bison_name         $tar_add_flag
+else echo "$msg2"; fi
+update_var "openssl"
+if [ $install_openssl -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $openssl_name$openssl_ext -C $openssl_name         $tar_add_flag
+else echo "$msg2"; fi
+update_var "libcurl"
+if [ $install_libcurl -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $libcurl_name$libcurl_ext -C $libcurl_name         $tar_add_flag
+else echo "$msg2"; fi
+update_var "libuuid"
+if [ $install_libuuid -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $libuuid_name$libuuid_ext -C $libuuid_name         $tar_add_flag
+else echo "$msg2"; fi
+update_var "swtpm"
+if [ $install_swtpm -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $swtpm_name$swtpm_ext -C $swtpm_name         $tar_add_flag
 else echo "$msg2"; fi
 
 echo "creating symlink to directories"
-total_cnt=16
+total_cnt=22
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -317,6 +381,26 @@ update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
     ln -sf $jsonglib_name $jsonglib_dirname
 else echo "$msg2"; fi
+update_var "bison"
+if [ $install_bison -eq 1 ]; then echo "$msg1"
+    ln -sf $bison_name $bison_dirname
+else echo "$msg2"; fi
+update_var "openssl"
+if [ $install_openssl -eq 1 ]; then echo "$msg1"
+    ln -sf $openssl_name $openssl_dirname
+else echo "$msg2"; fi
+update_var "libcurl"
+if [ $install_libcurl -eq 1 ]; then echo "$msg1"
+    ln -sf $libcurl_name $libcurl_dirname
+else echo "$msg2"; fi
+update_var "libuuid"
+if [ $install_libuuid -eq 1 ]; then echo "$msg1"
+    ln -sf $libuuid_name $libuuid_dirname
+else echo "$msg2"; fi
+update_var "swtpm"
+if [ $install_swtpm -eq 1 ]; then echo "$msg1"
+    ln -sf $swtpm_name $swtpm_dirname
+else echo "$msg2"; fi
 
 echo "compiling sources"
 make_flag="-j$(nproc)"
@@ -331,13 +415,15 @@ tpm_compile () {
     sudo make $make_flag install
 }
 meson_compile () {
-    meson_path="$python_dirname/bin/meson"
+    venv_bin_path="$python_venv_path/bin/activate"
+    meson_path="$python_venv_path/bin/meson"
+    source $venv_bin_path
     $meson_path setup _build
     $meson_path compile -C _build
-    sudo $meson_path install -C _build
+    sudo bash -c "source $venv_bin_path && $meson_path install -C _build"
     sudo cp _build/meson-private/*.pc /usr/local/lib/pkgconfig
 }
-total_cnt=18
+total_cnt=23
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -350,10 +436,25 @@ if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
     cd $pkgconfig_dirname
     gnu_compile "--with-internal-glib" | ts "$msg"
 else echo "$msg2"; fi
-update_var "libtasn1"
-if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    cd $libtasn1_dirname
+update_var "bison"
+if [ $install_bison -eq 1 ]; then echo "$msg1"
+    cd $bison_dirname
     gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "openssl"
+if [ $install_openssl -eq 1 ]; then echo "$msg1"
+    cd $openssl_dirname
+    openssl_ver_arr=(${openssl_version//./ } )
+    if [[ ${openssl_ver_arr[0]} -ge 3 ]]; then
+        ./Configure | ts "$msg"
+    else
+        ./config | ts "$msg"
+    fi
+    make $make_flag | ts "$msg"
+    sudo make $make_flag install | ts "$msg"
+    sudo cp libcrypto.pc /usr/local/lib/pkgconfig | ts "$msg"
+    sudo cp libssl.pc /usr/local/lib/pkgconfig | ts "$msg"
+    sudo cp openssl.pc /usr/local/lib/pkgconfig | ts "$msg"
 else echo "$msg2"; fi
 update_var "python"
 if [ $install_python -eq 1 ]; then echo "$msg1"
@@ -361,12 +462,20 @@ if [ $install_python -eq 1 ]; then echo "$msg1"
     sudo ./configure --enable-optimizations --prefix=$python_dirname --exec-prefix=$python_dirname | ts "$msg"
     make $make_flag | ts "$msg"
     sudo make $make_flag altinstall | ts "$msg"
+    echo "$msg creating virtual environment for library building"
+    "$python_bin_path/python${python_version%.*}" -m venv $python_venv_path
 else echo "$msg2"; fi
 update_var "pip-package"
 if [ $install_pip_package -eq 1 ]; then echo "$msg1"
-    pip_path="$python_dirname/bin/pip${python_version%.*}"
-    sudo -H $pip_path install -U pip setuptools | ts "$msg"
-    sudo -H $pip_path install packaging ninja meson | ts "$msg"
+    #echo "$msg installing for newly built python globally"
+    #pip_path="$python_dirname/bin/pip${python_version%.*}"
+    #sudo -H $pip_path install -U pip setuptools | ts "$msg"
+    #sudo -H $pip_path install packaging ninja meson | ts "$msg"
+    echo "$msg installing for newly created virtual environment"
+    source $python_venv_path/bin/activate
+    pip install -U pip setuptools | ts "$msg"
+    pip install packaging ninja meson | ts "$msg"
+    deactivate
 else echo "$msg2"; fi
 update_var "libpcre2"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
@@ -382,6 +491,11 @@ update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
     cd $jsonglib_dirname
     meson_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "libtasn1"
+if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
+    cd $libtasn1_dirname
+    gnu_compile | ts "$msg"
 else echo "$msg2"; fi
 update_var "help2man"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
@@ -433,6 +547,16 @@ if [ $install_jsonc -eq 1 ]; then echo "$msg1"
     make $make_flag | ts "$msg"
     sudo make $make_flag install | ts "$msg" 
 else echo "$msg2"; fi
+update_var "libcurl"
+if [ $install_libcurl -eq 1 ]; then echo "$msg1"
+    cd $libcurl_dirname
+    gnu_compile "--with-openssl" | ts "$msg"
+else echo "$msg2"; fi
+update_var "libuuid"
+if [ $install_libuuid -eq 1 ]; then echo "$msg1"
+    cd $libuuid_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
 update_var "tpm2-tss"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
     cd $tpm2tss_dirname
@@ -444,6 +568,11 @@ update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
     cd $libtpms_dirname
     tpm_compile "--with-tpm2 --with-openssl --prefix=/usr" | ts "$msg"
+else echo "$msg2"; fi
+update_var "swtpm"
+if [ $install_swtpm -eq 1 ]; then echo "$msg1"
+    cd $swtpm_dirname
+    tpm_compile "--with-openssl --prefix=/usr" | ts "$msg"
 else echo "$msg2"; fi
 
 echo "$script finished"

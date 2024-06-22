@@ -6,12 +6,11 @@ source function_swtpm.sh
 if [ $install_apt_package -eq 1 ]; then
     echo "uninstalling apt packages"
     sudo apt remove -y mercurial
-    sudo apt remove -y ftp
 fi
 
 # Note: this section is reversed-compile ordered
 echo "uninstalling compiled sources"
-total_cnt=18
+total_cnt=23
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -20,25 +19,40 @@ update_var () {
     msg2="$msg skipped!"
     msg3="$msg uninstalling compiled binaries"
 }
+update_var "swtpm"
+if [ $install_swtpm -eq 1 ]; then echo "$msg3"
+    cd $swtpm_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
 update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then echo "$msg3"
     cd $libtpms_dirname
-    sudo make uninstall | ts "$msg" || { echo "$msg1"; }
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
 update_var "tpm2-tss"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg3"
     cd $tpm2tss_dirname
     sudo make uninstall | ts "$msg"
 else echo "$msg2"; fi
+update_var "libuuid"
+if [ $install_libuuid -eq 1 ]; then echo "$msg3"
+    cd $libuuid_dirname
+    sudo make uninstall | ts "$msg"
+else echo "$msg2"; fi
+update_var "libcurl"
+if [ $install_libcurl -eq 1 ]; then echo "$msg3"
+    cd $libcurl_dirname
+    sudo make uninstall | ts "$msg"
+else echo "$msg2"; fi
 update_var "json-c"
 if [ $install_jsonc -eq 1 ]; then echo "$msg3"
     cd "$working_dir/json-c-build"
-    sudo make uninstall | ts "$msg" || { echo "$msg1"; }
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
 update_var "gmp"
 if [ $install_gmp -eq 1 ]; then echo "$msg3"
     cd $gmp_dirname
-    sudo make uninstall | ts "$msg" || { echo "$msg1"; }
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
 update_var "libtool"
 if [ $install_libtool -eq 1 ]; then echo "$msg3"
@@ -73,7 +87,12 @@ else echo "$msg2"; fi
 update_var "help2man"
 if [ $install_help2man -eq 1 ]; then echo "$msg3"
     cd $help2man_dirname
-    sudo make uninstall | ts "$msg" || { echo "$msg1"; }
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
+update_var "libtasn1"
+if [ $install_libtasn1 -eq 1 ]; then echo "$msg3"
+    cd $libtasn1_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
 update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg3"
@@ -86,7 +105,7 @@ else echo "$msg2"; fi
 update_var "libpcre2"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg3"
     cd $libpcre2_dirname
-    sudo make uninstall | ts "$msg" || { echo "$msg1"; }
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
 update_var "pip-package"
 if [ $install_pip_package -eq 1 ]; then echo "$msg3"
@@ -95,21 +114,30 @@ else echo "$msg2"; fi
 update_var "python"
 if [ $install_python -eq 1 ]; then echo "$msg3"
     cd $python_dirname
-    sudo make uninstall | ts "$msg" || { echo "$msg1"; }
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+    rm -rf $python_venv_path
 else echo "$msg2"; fi
-update_var "libtasn1"
-if [ $install_libtasn1 -eq 1 ]; then echo "$msg3"
-    cd $libtasn1_dirname
-    sudo make uninstall | ts "$msg" || { echo "$msg1"; }
+update_var "openssl"
+if [ $install_openssl -eq 1 ]; then echo "$msg3"
+    cd $openssl_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+    sudo rm /usr/local/lib/pkgconfig/libcrypto.pc | ts "$msg" 
+    sudo rm /usr/local/lib/pkgconfig/libssl.pc | ts "$msg" 
+    sudo rm /usr/local/lib/pkgconfig/openssl.pc | ts "$msg" 
+else echo "$msg2"; fi
+update_var "bison"
+if [ $install_bison -eq 1 ]; then echo "$msg3"
+    cd $bison_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
 update_var "pkg-config"
 if [ $install_libtpms -eq 1 ]; then echo "$msg3"
     cd $pkgconfig_dirname
-    sudo make uninstall | ts "$msg" || { echo "$msg1"; }
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
 
 echo "removing created directories"
-total_cnt=17
+total_cnt=22
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -186,9 +214,29 @@ update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
     rm -rf $jsonglib_name
 else echo "$msg2"; fi
+update_var "bison"
+if [ $install_bison -eq 1 ]; then echo "$msg1"
+    rm -rf $bison_name
+else echo "$msg2"; fi
+update_var "openssl"
+if [ $install_openssl -eq 1 ]; then echo "$msg1"
+    rm -rf $openssl_name
+else echo "$msg2"; fi
+update_var "libcurl"
+if [ $install_libcurl -eq 1 ]; then echo "$msg1"
+    rm -rf $libcurl_name
+else echo "$msg2"; fi
+update_var "libuuid"
+if [ $install_libuuid -eq 1 ]; then echo "$msg1"
+    rm -rf $libuuid_name
+else echo "$msg2"; fi
+update_var "swtpm"
+if [ $install_swtpm -eq 1 ]; then echo "$msg1"
+    rm -rf $swtpm_name
+else echo "$msg2"; fi
 
 echo "removing downloaded source"
-total_cnt=16
+total_cnt=21
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -198,71 +246,91 @@ update_var () {
 }
 update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    rm -f $libtpms_name.tar.gz
+    rm -f $libtpms_name$libtpms_ext
 else echo "$msg2"; fi
 update_var "tpm2-tss"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    rm -f $tpm2tss_name.tar.gz
+    rm -f $tpm2tss_name$tpm2tss_ext
 else echo "$msg2"; fi
 update_var "json-c"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    rm -f $jsonc_name.tar.gz
+    rm -f $jsonc_name$jsonc_ext
 else echo "$msg2"; fi
 update_var "texinfo"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    rm -f $texinfo_name.tar.gz
+    rm -f $texinfo_name$texinfo_ext
 else echo "$msg2"; fi
 update_var "automake"
 if [ $install_automake -eq 1 ]; then echo "$msg1"
-    rm -f $automake_name.tar.gz
+    rm -f $automake_name$automake_ext
 else echo "$msg2"; fi
 update_var "autoconf"
 if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    rm -f $autoconf_name.tar.gz
+    rm -f $autoconf_name$autoconf_ext
 else echo "$msg2"; fi
 update_var "help2man"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    rm -f $help2man_name.tar.xz
+    rm -f $help2man_name$help2man_ext
 else echo "$msg2"; fi
 update_var "m4"
 if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    rm -f $m4_name.tar.gz
+    rm -f $m4_name$m4_ext
 else echo "$msg2"; fi
 update_var "gperf"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    rm -f $gperf_name.tar.gz
+    rm -f $gperf_name$m4_ext
 else echo "$msg2"; fi
 update_var "libtool"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    rm -f $libtool_name.tar.gz
+    rm -f $libtool_name$libtool_ext
 else echo "$msg2"; fi
 update_var "pkg-config"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    rm -f $pkgconfig_name.tar.gz
+    rm -f $pkgconfig_name$pkgconfig_ext
 else echo "$msg2"; fi
 update_var "libtasn1"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    rm -f $libtasn1_name.tar.gz
+    rm -f $libtasn1_name$libtasn1_ext
 else echo "$msg2"; fi
 update_var "python"
 if [ $install_python -eq 1 ]; then echo "$msg1"
-    rm -f $python_name.tgz
+    rm -f $python_name$python_ext
 else echo "$msg2"; fi
 update_var "libpcre2"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
-    rm -f $libpcre2_name.tar.gz
+    rm -f $libpcre2_name$libpcre2_ext
 else echo "$msg2"; fi
 update_var "glib"
 if [ $install_glib -eq 1 ]; then echo "$msg1"
-    rm -f $glib_name.tar.xz
+    rm -f $glib_name$glib_ext
 else echo "$msg2"; fi
 update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
-    rm -f $jsonglib_name.tar.xz
+    rm -f $jsonglib_name$jsonglib_ext
+else echo "$msg2"; fi
+update_var "bison"
+if [ $install_bison -eq 1 ]; then echo "$msg1"
+    rm -f $bison_name$bison_ext
+else echo "$msg2"; fi
+update_var "openssl"
+if [ $install_openssl -eq 1 ]; then echo "$msg1"
+    rm -f $openssl_name$openssl_ext
+else echo "$msg2"; fi
+update_var "libcurl"
+if [ $install_libcurl -eq 1 ]; then echo "$msg1"
+    rm -f $libcurl_name$libcurl_ext
+else echo "$msg2"; fi
+update_var "libuuid"
+if [ $install_libuuid -eq 1 ]; then echo "$msg1"
+    rm -f $libuuid_name$libuuid_ext
+else echo "$msg2"; fi
+update_var "swtpm"
+if [ $install_swtpm -eq 1 ]; then echo "$msg1"
+    rm -f $swtpm_name$swtpm_ext
 else echo "$msg2"; fi
 
 echo "removing symlinks"
-total_cnt=17
+total_cnt=22
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -310,13 +378,13 @@ update_var "gperf"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
     rm -r $gperf_dirname
 else echo "$msg2"; fi
-update_var "libtool"
-if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    rm -r $libtool_dirname
-else echo "$msg2"; fi
 update_var "pkg-config"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
     rm -r $pkgconfig_dirname
+else echo "$msg2"; fi
+update_var "libtool"
+if [ $install_libtool -eq 1 ]; then echo "$msg1"
+    rm -r $libtool_dirname
 else echo "$msg2"; fi
 update_var "libtasn1"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
@@ -337,6 +405,26 @@ else echo "$msg2"; fi
 update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
     rm -r $jsonglib_dirname
+else echo "$msg2"; fi
+update_var "bison"
+if [ $install_bison -eq 1 ]; then echo "$msg1"
+    rm -r $bison_dirname
+else echo "$msg2"; fi
+update_var "openssl"
+if [ $install_openssl -eq 1 ]; then echo "$msg1"
+    rm -r $openssl_dirname
+else echo "$msg2"; fi
+update_var "libcurl"
+if [ $install_libcurl -eq 1 ]; then echo "$msg1"
+    rm -r $libcurl_dirname
+else echo "$msg2"; fi
+update_var "libuuid"
+if [ $install_libuuid -eq 1 ]; then echo "$msg1"
+    rm -r $libuuid_dirname
+else echo "$msg2"; fi
+update_var "swtpm"
+if [ $install_swtpm -eq 1 ]; then echo "$msg1"
+    rm -r $swtpm_dirname
 else echo "$msg2"; fi
 
 echo "$script finished"
