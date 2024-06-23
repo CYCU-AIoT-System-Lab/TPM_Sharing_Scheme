@@ -3,16 +3,25 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 source function_swtpm.sh
 
+total_cnt=1
+progress_cnt=0
+update_var () {
+    progress_cnt=$((progress_cnt + 1))
+    msg="$progress_cnt/$total_cnt - $1 >>"
+    msg1="$msg installing package"
+    msg2="$msg installing failed!"
+}
 if [ $install_apt_package -eq 1 ]; then
     echo "installing apt packages"
-    sudo apt install -y mercurial
+    update_var "mercurial"
+    echo "$msg1"; sudo apt install -y mercurial | ts "$msg" || { echo "$msg2"; exit 1; }
 fi
 
 echo "downloading from sources"
 github="https://github.com"
 gnu_mirror="ftp://ftp.twaren.net/Unix/GNU/gnu"
 gnome="https://download.gnome.org/sources"
-total_cnt=22
+total_cnt=24
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -106,17 +115,25 @@ update_var "libcurl"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
     wget $wget_flag "https://curl.se/download/curl-$libcurl_version$libcurl_ext" -O $libcurl_name$libcurl_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
-update_var "libuuid"
-if [ $install_libuuid -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "https://sourceforge.net/projects/libuuid/files/libuuid-$libuuid_version$libuuid_ext/download" -O $libuuid_name$libuuid_ext || { echo "$msg3"; exit 1; }
-else echo "$msg2"; fi
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     wget $wget_flag "$github/stefanberger/swtpm/archive/refs/tags/v$swtpm_version$swtpm_ext" -O $swtpm_name$swtpm_ext || { echo "$msg3"; exit 1; }
 else echo "$msg2"; fi
+update_var "gettext"
+if [ $install_gettext -eq 1 ]; then echo "$msg1"
+    wget $wget_flag "$gnu_mirror/gettext/gettext-$gettext_version$gettext_ext" -O $gettext_name$gettext_ext || { echo "$msg3"; exit 1; }
+else echo "$msg2"; fi
+update_var "flex"
+if [ $install_flex -eq 1 ]; then echo "$msg1"
+    wget $wget_flag "$github/westes/flex/releases/download/v$flex_version/flex-$flex_version$flex_ext" -O $flex_name$flex_ext || { echo "$msg3"; exit 1; }
+else echo "$msg2"; fi
+update_var "util-linux"
+if [ $install_utillinux -eq 1 ]; then echo "$msg1"
+    wget $wget_flag "$github/util-linux/util-linux/archive/refs/tags/v$utillinux_version$utillinux_ext" -O $utillinux_name$utillinux_ext || { echo "$msg3"; exit 1; }
+else echo "$msg2"; fi
 
 echo "creating directories to hold sources"
-total_cnt=21
+total_cnt=23
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -200,18 +217,26 @@ update_var "libcurl"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
     mkdir $libcurl_name
 else echo "$msg2"; fi
-update_var "libuuid"
-if [ $install_libuuid -eq 1 ]; then echo "$msg1"
-    mkdir $libuuid_name
-else echo "$msg2"; fi
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     mkdir $swtpm_name
 else echo "$msg2"; fi
+update_var "gettext"
+if [ $install_gettext -eq 1 ]; then echo "$msg1"
+    mkdir $gettext_name
+else echo "$msg2"; fi
+update_var "flex"
+if [ $install_flex -eq 1 ]; then echo "$msg1"
+    mkdir $flex_name
+else echo "$msg2"; fi
+update_var "util-linux"
+if [ $install_utillinux -eq 1 ]; then echo "$msg1"
+    mkdir $utillinux_name
+else echo "$msg2"; fi
 
 echo "unzipping sources"
 tar_add_flag="--strip-components=1"
-total_cnt=21
+total_cnt=23
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -221,43 +246,43 @@ update_var () {
 }
 update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libtpms_name$libtpms_ext -C $libtpms_name    $tar_add_flag
+    tar $tar_flag $libtpms_name$libtpms_ext -C $libtpms_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "tpm2-tss"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $tpm2tss_name$tpm2tss_ext -C $tpm2tss_name    $tar_add_flag
+    tar $tar_flag $tpm2tss_name$tpm2tss_ext -C $tpm2tss_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "json-c"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $jsonc_name$jsonc_ext    -C $jsonc_name      $tar_add_flag
+    tar $tar_flag $jsonc_name$jsonc_ext -C $jsonc_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "texinfo"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $texinfo_name$texinfo_ext  -C $texinfo_name    $tar_add_flag
+    tar $tar_flag $texinfo_name$texinfo_ext -C $texinfo_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "automake"
 if [ $install_automake -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $automake_name$automake_ext -C $automake_name   $tar_add_flag
+    tar $tar_flag $automake_name$automake_ext -C $automake_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "autoconf"
 if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $autoconf_name$autoconf_ext -C $autoconf_name   $tar_add_flag
+    tar $tar_flag $autoconf_name$autoconf_ext -C $autoconf_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "help2man"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $help2man_name$help2man_ext -C $help2man_name   $tar_add_flag
+    tar $tar_flag $help2man_name$help2man_ext -C $help2man_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "m4"
 if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $m4_name$m4_ext       -C $m4_name         $tar_add_flag
+    tar $tar_flag $m4_name$m4_ext -C $m4_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "gperf"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $gperf_name$gperf_ext    -C $gperf_name      $tar_add_flag
+    tar $tar_flag $gperf_name$gperf_ext -C $gperf_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "libtool"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libtool_name$libtool_ext  -C $libtool_name    $tar_add_flag
+    tar $tar_flag $libtool_name$libtool_ext -C $libtool_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "pkg-config"
 if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
@@ -265,47 +290,55 @@ if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
 else echo "$msg2"; fi
 update_var "libtasn1"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libtasn1_name$libtasn1_ext -C $libtasn1_name   $tar_add_flag
+    tar $tar_flag $libtasn1_name$libtasn1_ext -C $libtasn1_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "python"
 if [ $install_python -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $python_name$python_ext -C $python_name          $tar_add_flag
+    tar $tar_flag $python_name$python_ext -C $python_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "libpcre2"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libpcre2_name$libpcre2_ext -C $libpcre2_name   $tar_add_flag
+    tar $tar_flag $libpcre2_name$libpcre2_ext -C $libpcre2_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "glib"
 if [ $install_glib -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $glib_name$glib_ext -C $glib_name           $tar_add_flag
+    tar $tar_flag $glib_name$glib_ext -C $glib_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $jsonglib_name$jsonglib_ext -C $jsonglib_name   $tar_add_flag
+    tar $tar_flag $jsonglib_name$jsonglib_ext -C $jsonglib_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "bison"
 if [ $install_bison -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $bison_name$bison_ext -C $bison_name         $tar_add_flag
+    tar $tar_flag $bison_name$bison_ext -C $bison_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "openssl"
 if [ $install_openssl -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $openssl_name$openssl_ext -C $openssl_name         $tar_add_flag
+    tar $tar_flag $openssl_name$openssl_ext -C $openssl_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "libcurl"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libcurl_name$libcurl_ext -C $libcurl_name         $tar_add_flag
-else echo "$msg2"; fi
-update_var "libuuid"
-if [ $install_libuuid -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $libuuid_name$libuuid_ext -C $libuuid_name         $tar_add_flag
+    tar $tar_flag $libcurl_name$libcurl_ext -C $libcurl_name $tar_add_flag
 else echo "$msg2"; fi
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
-    tar $tar_flag $swtpm_name$swtpm_ext -C $swtpm_name         $tar_add_flag
+    tar $tar_flag $swtpm_name$swtpm_ext -C $swtpm_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "gettext"
+if [ $install_gettext -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $gettext_name$gettext_ext -C $gettext_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "flex"
+if [ $install_flex -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $flex_name$flex_ext -C $flex_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "util-linux"
+if [ $install_utillinux -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $utillinux_name$utillinux_ext -C $utillinux_name $tar_add_flag
 else echo "$msg2"; fi
 
 echo "creating symlink to directories"
-total_cnt=22
+total_cnt=24
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -315,51 +348,51 @@ update_var () {
 }
 update_var "gmp"
 if [ $install_gmp -eq 1 ]; then echo "$msg1"
-    ln -sf $gmp_name        $gmp_dirname
+    ln -sf $gmp_name $gmp_dirname
 else echo "$msg2"; fi
 update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    ln -sf $libtpms_name    $libtpms_dirname
+    ln -sf $libtpms_name $libtpms_dirname
 else echo "$msg2"; fi
 update_var "tpm2-tss"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    ln -sf $tpm2tss_name    $tpm2tss_dirname
+    ln -sf $tpm2tss_name $tpm2tss_dirname
 else echo "$msg2"; fi
 update_var "json-c"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    ln -sf $jsonc_name      $jsonc_dirname
+    ln -sf $jsonc_name $jsonc_dirname
 else echo "$msg2"; fi
 update_var "texinfo"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    ln -sf $texinfo_name    $texinfo_dirname
+    ln -sf $texinfo_name $texinfo_dirname
 else echo "$msg2"; fi
 update_var "automake"
 if [ $install_automake -eq 1 ]; then echo "$msg1"
-    ln -sf $automake_name   $automake_dirname
+    ln -sf $automake_name $automake_dirname
 else echo "$msg2"; fi
 update_var "autoconf"
 if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    ln -sf $autoconf_name   $autoconf_dirname
+    ln -sf $autoconf_name $autoconf_dirname
 else echo "$msg2"; fi
 update_var "help2man"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    ln -sf $help2man_name   $help2man_dirname
+    ln -sf $help2man_name $help2man_dirname
 else echo "$msg2"; fi
 update_var "m4"
 if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    ln -sf $m4_name         $m4_dirname
+    ln -sf $m4_name $m4_dirname
 else echo "$msg2"; fi
 update_var "gperf"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    ln -sf $gperf_name      $gperf_dirname
+    ln -sf $gperf_name $gperf_dirname
 else echo "$msg2"; fi
 update_var "libtool"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    ln -sf $libtool_name    $libtool_dirname
+    ln -sf $libtool_name $libtool_dirname
 else echo "$msg2"; fi
 update_var "pkg-config"
 if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
-    ln -sf $pkgconfig_name  $pkgconfig_dirname
+    ln -sf $pkgconfig_name $pkgconfig_dirname
 else echo "$msg2"; fi
 update_var "libtasn1"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
@@ -393,13 +426,21 @@ update_var "libcurl"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
     ln -sf $libcurl_name $libcurl_dirname
 else echo "$msg2"; fi
-update_var "libuuid"
-if [ $install_libuuid -eq 1 ]; then echo "$msg1"
-    ln -sf $libuuid_name $libuuid_dirname
-else echo "$msg2"; fi
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     ln -sf $swtpm_name $swtpm_dirname
+else echo "$msg2"; fi
+update_var "gettext"
+if [ $install_gettext -eq 1 ]; then echo "$msg1"
+    ln -sf $gettext_name $gettext_dirname
+else echo "$msg2"; fi
+update_var "flex"
+if [ $install_flex -eq 1 ]; then echo "$msg1"
+    ln -sf $flex_name $flex_dirname
+else echo "$msg2"; fi
+update_var "util-linux"
+if [ $install_utillinux -eq 1 ]; then echo "$msg1"
+    ln -sf $utillinux_name $utillinux_dirname
 else echo "$msg2"; fi
 
 echo "compiling sources"
@@ -423,7 +464,7 @@ meson_compile () {
     sudo bash -c "source $venv_bin_path && $meson_path install -C _build"
     sudo cp _build/meson-private/*.pc /usr/local/lib/pkgconfig
 }
-total_cnt=23
+total_cnt=25
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -541,8 +582,8 @@ else echo "$msg2"; fi
 update_var "json-c"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
     cd $working_dir
-    mkdir json-c-build
-    cd json-c-build
+    mkdir $jsonc_build_path
+    cd $jsonc_build_path
     cmake $jsonc_dirname | ts "$msg"
     make $make_flag | ts "$msg"
     sudo make $make_flag install | ts "$msg" 
@@ -552,10 +593,21 @@ if [ $install_libcurl -eq 1 ]; then echo "$msg1"
     cd $libcurl_dirname
     gnu_compile "--with-openssl" | ts "$msg"
 else echo "$msg2"; fi
-update_var "libuuid"
-if [ $install_libuuid -eq 1 ]; then echo "$msg1"
-    cd $libuuid_dirname
+update_var "gettext"
+if [ $install_gettext -eq 1 ]; then echo "$msg1"
+    cd $gettext_dirname
     gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "flex"
+if [ $install_flex -eq 1 ]; then echo "$msg1"
+    cd $flex_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "util-linux"
+if [ $install_utillinux -eq 1 ]; then echo "$msg1"
+    cd $utillinux_dirname
+    ./autogen.sh
+    gnu_compile "--disable-all-programs --enable-libuuid" | ts "$msg"
 else echo "$msg2"; fi
 update_var "tpm2-tss"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"

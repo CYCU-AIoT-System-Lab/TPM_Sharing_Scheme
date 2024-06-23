@@ -33,7 +33,9 @@ install_libtool=0
 install_gmp=0
 install_jsonc=0
 install_libcurl=0
-install_libuuid=0
+install_gettext=0
+install_flex=0
+install_utillinux=0
 install_tpm2tss=0
 install_libtpms=0
 install_swtpm=1
@@ -53,6 +55,7 @@ jsonc_version="0.17"
 jsonc_ext=".tar.gz"
 jsonc_dirname="$working_dir/jsonc"
 jsonc_name="$jsonc_dirname-$jsonc_version"
+jsonc_build_path="$working_dir/jsonc-build"
 #>4 https://gmplib.org/repo/
 gmp_version="6.3"
 gmp_dirname="$working_dir/gmp"
@@ -63,7 +66,7 @@ texinfo_ext=".tar.gz"
 texinfo_dirname="$working_dir/texinfo"
 texinfo_name="$texinfo_dirname-$texinfo_version"
 #>6 http://ftp.twaren.net/Unix/GNU/gnu/automake/
-automake_version="1.16"
+automake_version="1.16.3"
 automake_ext=".tar.gz"
 automake_dirname="$working_dir/automake"
 automake_name="$automake_dirname-$automake_version"
@@ -144,13 +147,25 @@ libcurl_version="8.8.0"
 libcurl_ext=".tar.gz"
 libcurl_dirname="$working_dir/libcurl"
 libcurl_name="$libcurl_dirname-$libcurl_version"
-#> 22 https://sourceforge.net/projects/libuuid/files/
-libuuid_version="1.0.3"
-libuuid_ext=".tar.gz"
-libuuid_dirname="$working_dir/libuuid"
-libuuid_name="$libuuid_dirname-$libuuid_version"
-#> 23 https://github.com/stefanberger/swtpm/releases
+#> 22 https://github.com/stefanberger/swtpm/releases
 swtpm_version="0.9.0"
 swtpm_ext=".tar.gz"
 swtpm_dirname="$working_dir/swtpm"
 swtpm_name="$swtpm_dirname-$swtpm_version"
+#> 23 http://ftp.twaren.net/Unix/GNU/gnu/gettext/
+gettext_version="0.22.5"
+gettext_ext=".tar.gz"
+gettext_dirname="$working_dir/gettext"
+gettext_name="$gettext_dirname-$gettext_version"
+#> 24 https://github.com/westes/flex/releases
+flex_version="2.6.3" # 2.6.4 results in compiling core dump
+flex_ext=".tar.gz"
+flex_dirname="$working_dir/flex"
+flex_name="$flex_dirname-$flex_version"
+#> 25 https://github.com/util-linux/util-linux/tags
+#   this is only used to build libuuid
+#   installing entire project might break system
+utillinux_version="2.40.1"
+utillinux_ext=".tar.gz"
+utillinux_dirname="$working_dir/utillinux"
+utillinux_name="$utillinux_dirname-$utillinux_version"

@@ -3,14 +3,23 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 source function_swtpm.sh
 
+total_cnt=1
+progress_cnt=0
+update_var () {
+    progress_cnt=$((progress_cnt + 1))
+    msg="$progress_cnt/$total_cnt - $1 >>"
+    msg1="$msg removing package"
+    msg2="$msg removing failed!"
+}
 if [ $install_apt_package -eq 1 ]; then
     echo "uninstalling apt packages"
-    sudo apt remove -y mercurial
+    update_var "mercurial"
+    echo "$msg1"; sudo apt remove -y mercurial | ts "$msg" || { echo "$msg2"; exit 1; }
 fi
 
 # Note: this section is reversed-compile ordered
 echo "uninstalling compiled sources"
-total_cnt=23
+total_cnt=25
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -34,9 +43,19 @@ if [ $install_tpm2tss -eq 1 ]; then echo "$msg3"
     cd $tpm2tss_dirname
     sudo make uninstall | ts "$msg"
 else echo "$msg2"; fi
-update_var "libuuid"
-if [ $install_libuuid -eq 1 ]; then echo "$msg3"
-    cd $libuuid_dirname
+update_var "util-linux"
+if [ $install_utillinux -eq 1 ]; then echo "$msg3"
+    cd $utillinux_dirname
+    sudo make uninstall | ts "$msg"
+else echo "$msg2"; fi
+update_var "flex"
+if [ $install_flex -eq 1 ]; then echo "$msg3"
+    cd $flex_dirname
+    sudo make uninstall | ts "$msg"
+else echo "$msg2"; fi
+update_var "gettext"
+if [ $install_gettext -eq 1 ]; then echo "$msg3"
+    cd $gettext_dirname
     sudo make uninstall | ts "$msg"
 else echo "$msg2"; fi
 update_var "libcurl"
@@ -46,7 +65,7 @@ if [ $install_libcurl -eq 1 ]; then echo "$msg3"
 else echo "$msg2"; fi
 update_var "json-c"
 if [ $install_jsonc -eq 1 ]; then echo "$msg3"
-    cd "$working_dir/json-c-build"
+    cd "$jsonc_build_path"
     sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
 update_var "gmp"
@@ -137,7 +156,7 @@ if [ $install_libtpms -eq 1 ]; then echo "$msg3"
 else echo "$msg2"; fi
 
 echo "removing created directories"
-total_cnt=22
+total_cnt=24
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -160,7 +179,7 @@ else echo "$msg2"; fi
 update_var "json-c"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
     rm -rf $jsonc_name
-    rm -rf "$working_dir/json-c-build"
+    rm -rf "$jsonc_build_path"
 else echo "$msg2"; fi
 update_var "texinfo"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
@@ -226,17 +245,25 @@ update_var "libcurl"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
     rm -rf $libcurl_name
 else echo "$msg2"; fi
-update_var "libuuid"
-if [ $install_libuuid -eq 1 ]; then echo "$msg1"
-    rm -rf $libuuid_name
-else echo "$msg2"; fi
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     rm -rf $swtpm_name
 else echo "$msg2"; fi
+update_var "gettext"
+if [ $install_gettext -eq 1 ]; then echo "$msg1"
+    rm -rf $gettext_name
+else echo "$msg2"; fi
+update_var "flex"
+if [ $install_flex -eq 1 ]; then echo "$msg1"
+    rm -rf $flex_name
+else echo "$msg2"; fi
+update_var "util-linux"
+if [ $install_utillinux -eq 1 ]; then echo "$msg1"
+    rm -rf $utillinux_name
+else echo "$msg2"; fi
 
 echo "removing downloaded source"
-total_cnt=21
+total_cnt=23
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -320,17 +347,25 @@ update_var "libcurl"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
     rm -f $libcurl_name$libcurl_ext
 else echo "$msg2"; fi
-update_var "libuuid"
-if [ $install_libuuid -eq 1 ]; then echo "$msg1"
-    rm -f $libuuid_name$libuuid_ext
-else echo "$msg2"; fi
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     rm -f $swtpm_name$swtpm_ext
 else echo "$msg2"; fi
+update_var "gettext"
+if [ $install_gettext -eq 1 ]; then echo "$msg1"
+    rm -f $gettext_name$gettext_ext
+else echo "$msg2"; fi
+update_var "flex"
+if [ $install_flex -eq 1 ]; then echo "$msg1"
+    rm -f $flex_name$flex_ext
+else echo "$msg2"; fi
+update_var "util-linux"
+if [ $install_utillinux -eq 1 ]; then echo "$msg1"
+    rm -f $utillinux_name$utillinux_ext
+else echo "$msg2"; fi
 
 echo "removing symlinks"
-total_cnt=22
+total_cnt=24
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -418,13 +453,21 @@ update_var "libcurl"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
     rm -r $libcurl_dirname
 else echo "$msg2"; fi
-update_var "libuuid"
-if [ $install_libuuid -eq 1 ]; then echo "$msg1"
-    rm -r $libuuid_dirname
-else echo "$msg2"; fi
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     rm -r $swtpm_dirname
+else echo "$msg2"; fi
+update_var "gettext"
+if [ $install_gettext -eq 1 ]; then echo "$msg1"
+    rm -r $gettext_dirname
+else echo "$msg2"; fi
+update_var "flex"
+if [ $install_flex -eq 1 ]; then echo "$msg1"
+    rm -r $flex_dirname
+else echo "$msg2"; fi
+update_var "util-linux"
+if [ $install_utillinux -eq 1 ]; then echo "$msg1"
+    rm -r $utillinux_dirname
 else echo "$msg2"; fi
 
 echo "$script finished"
