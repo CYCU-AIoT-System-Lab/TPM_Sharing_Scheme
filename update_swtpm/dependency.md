@@ -1,0 +1,214 @@
+# Dependency Installation Record
+
+Keep record of dependencies needed to install swtpm on oldest supported OS in this project - Ubuntu 18.04.
+
+- [O] compile newer version of swtpm directly from github
+    - remove: every compiled need to be uninstalled first
+    - [O] (compile) [libtpms](https://github.com/stefanberger/libtpms/blob/master/INSTALL) (required by swtpm)
+        - [O] (compile) openssl (required by libtpms)
+            - done with installing 1.1.1w
+        - [O] (compile) pkg-config (required by new environment breaking swtpm compiling)
+            - `./configure --with-internal-glib`
+            - `make -j$(nproc)`
+            - `sudo make install`
+    - [X] (apt-get) libtasn1-6-dev (required by swtpm)
+    - [O] (compile) libtasn1-4.19.0 (required by swtpm)
+        - gnu_compile
+    - [X] (apt-get) json-glib-1.0 (required by swtpm) # available version is old but still work
+    - [O] (comiple) json-glib
+        - [O] ninja
+            - `sudo -H $path_to_new_py/pip3.12 install ninja`
+        - [O] meson
+            - [O] python > 3.7.0
+                - https://www.python.org/downloads/source/
+                - `wget https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz`
+                - `tar xf Python-3.12.4.tgz`
+                - `sudo ./configure --enable-optimizations --prefix=$(pwd) --exec-prefix=$(pwd)`
+                - `make -j$(nproc)`
+                - `sudo make -jj$(nproc) altinstall`
+                - `sudo -H $path_to_new_py/pip3.12 install -U pip setuptools`
+            - https://github.com/mesonbuild/meson/releases/tag/1.4.1
+            - `sudo -H $path_to_new_py/pip3.12 install meson`
+        - [O] (compile) glib (required by json-glib)
+            - [O] (pip) packaging (required by glib)
+                - `sudo -H $path_to_new_py/pip3.12 install packaging`
+            - [O] (compile) libpcre (required by glib)
+                - ref: https://github.com/PCRE2Project/pcre2
+                - `wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.44/pcre2-10.44.tar.gz`
+                - `tar xf pcre2-10.44.tar.gz`
+                - `./configure`
+                - `make -j$(nproc)`
+                - `sudo make install`
+            - https://gitlab.gnome.org/GNOME/glib
+            - https://download.gnome.org/sources/glib/
+            - `wget https://download.gnome.org/sources/glib/2.80/glib-2.80.3.tar.xz`
+            - `tar xf glib-2.80.3.tar.gz`
+            - `$path_to_new_py/meson setup _build`
+            - `$path_to_new_py/meson compile -C _build`
+            - `sudo $path_to_new_py/meson install -C _build`
+            - ERROR: doesn't work because pkgconfig file is not created
+            - `sudo cp _build/meson-private/*.pc /usr/local/lib/pkgconfig`
+        - `wget https://download.gnome.org/sources/json-glib/1.8/json-glib-1.8.0.tar.xz`
+        - `tar xf json-glib-1.8.0.tar.xz`
+        - `$path_to_new_py/meson setup _build` # this one would fall back for git cloning dependencies, but might fail, require retry
+        - `$path_to_new_py/meson compile -C _build`
+        - `sudo $path_to_new_py/meson install -C _build`
+        - ERROR: doesn't work because pkgconfig file is not created
+        - `sudo cp _build/meson-private/*.pc /usr/local/lib/pkgconfig`
+    - [O] (compile) [tpm2-tss](https://github.com/tpm2-software/tpm2-tss) (required by swtpm)
+        - [O] (compile) [json-c](https://github.com/json-c/json-c/tree/master) (required by tpm2-tss)
+        - [O] (compile) libcurl (required by tpm2-tss)
+            - `wget https://curl.se/download/curl-8.8.0.tar.gz`
+            - `tar xf curl-8.8.0.tar.gz`
+            - `./configure --with-openssl`
+            - `make -j$(nproc)`
+            - `sudo make install`
+        - [X] (compile) uuid (required by tpm2-tss)
+            - https://sourceforge.net/projects/libuuid/files/
+            - `wget https://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz/download`
+            - `tar xf libuuid-1.0.3.tar.gz`
+            - `./configure`
+            - `make -j$(nproc)`
+            - `sudo make install`
+            - compiled version way too old, break wget
+        - [O] (compile) util-linux (containing libuuid/uuid)
+            - [O] (compile) gettext (containing autopoint)
+                - http://ftp.twaren.net/Unix/GNU/gnu/gettext/
+                - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/gettext/gettext-0.22.tar.gz`
+                - `tar xf gettext-0.22.tar.gz`
+                - `./configure`
+                - `make -j$(nproc)`
+                - `make install`
+            - [O] (compile) flex (required by util-linux)
+                - https://github.com/westes/flex
+                - `wget https://github.com/westes/flex/releases/download/v2.6.3/flex-2.6.3.tar.gz`
+                - `tar xf flex-2.6.3.tar.gz`
+                - `./configure`
+                - `make -j$(nproc)`
+                - `make install`
+                - note: 2.6.4 causing core dump when compiling
+            - https://github.com/util-linux/util-linux/tags
+            - `wget https://github.com/util-linux/util-linux/archive/refs/tags/v2.40.1.tar.gz`
+            - `tar xf v2.40.1.tar.gz`
+            - `./autogen.sh`
+            - `./configure --disable-all-programs --enable-libuuid`
+            - `make -j$(nproc)`
+            - `sudo make install`
+            - autogen.sh script will caused aclocal error, caused by automake 1.16.0
+            - also, it's not recommended to install entire util-linux, might break system since its core utilities
+    - [O] (compile) [gmp](https://gmplib.org/devel/repo-usage) (required by swtpm)
+        - [O] (apt-get) mercurial (required by libgmp-dev)
+        - [O] (compile) texinfo (required by gmp)
+            - [O] (compile) [automake](https://github.com/autotools-mirror/automake) (new version required by texinfo)
+                - [O] (compile) [autoconf](https://github.com/autotools-mirror/autoconf) (required by new automake)
+                    - [?] (apt-get) ftp
+                    - [O] (compile) help2man (required by autoconf)
+                        - ref: https://www.gnu.org/software/help2man/
+                        - ref: http://ftp.twaren.net/Unix/GNU/gnu/help2man/
+                        - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/help2man/help2man-1.49.3.tar.xz`
+                        - `tar xf help2man-1.49.3.tar.xz`
+                        - `./configure`
+                        - `make`
+                        - `sudo make install`
+                    - `./bootstrap`
+                    - `./configure`
+                    - `make -j$(nproc)`
+                    - `sudo make install`
+                - [O] (compile) m4 (required by new automake)
+                    - [O] (compile) gperf (required by m4)
+                        - ref: https://www.gnu.org/software/gperf/
+                        - ref: http://ftp.twaren.net/Unix/GNU/gnu/gperf/
+                        - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/gperf/gperf-3.1.tar.gz`
+                        - `tar xf gperf-3.1.tar.gz`
+                        - `./configure`
+                        - `make`
+                        - `sudo make install`
+                    - ref: http://ftp.twaren.net/Unix/GNU/gnu/m4/
+                    - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/m4/m4-latest.tar.xz`
+                    - `tar xf m4-latest.tar.xz`
+                    - `./configure`
+                    - `make -j$(nproc)`
+                    - `sudo make install`
+        - [O] (compile) [libtool](https://github.com/autotools-mirror/libtool) (required by gmp)
+            - `./bootstrap`
+            - `./configure`
+            - `make -j$(nproc)`
+            - `sudo make install`
+        -  `hg clone https://gmplib.org/repo/gmp/ gmp`
+        - `./.bootstrap`
+        - `./configure`
+        - `make -j$(nproc)`
+        - `sudo make install`
+    - [o] (compile) gnutls (required by swtpm)
+        - [X] (apt-get) unbound-anchor (required by gnutls) can't create root.key
+        - [?] (compile) libnettle (required by gnutls, require gmp)
+        - http://ftp.twaren.net/Unix/GNU/gnu/nettle/
+            - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/nettle/nettle-3.10.tar.gz`
+            - `tar xf nettle-3.10.tar.gz`
+            - `./configure`
+            - `make -j$(nproc)`
+            - `make install`
+        - [?] (compile) gnulib (required by gnutls)
+            - [ ]
+            - https://github.com/coreutils/gnulib/tags
+            - `wget https://github.com/coreutils/gnulib/archive/refs/tags/v1.0.tar.gz`
+            - `tar xf v1.0.tar.gz`
+            - activate python virtualenv
+            - `./gnulib-tool --create-testdir --with-tests --dir=../gnulib-build`
+            - `cd ../gnulib-build`
+            - `./configure`
+            - `make dist`
+        - [O] (compile) gettext (required by gnutls)
+            - http://ftp.twaren.net/Unix/GNU/gnu/gettext/
+            - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/gettext/gettext-0.22.tar.gz`
+            - `tar xf gettext-0.22.tar.gz`
+            - `./configure`
+            - `make -j$(nproc)`
+            - `make install`
+        - [ ] (compile) gtk-doc (required by gnutls, before libtasn1)
+            - [ ] (compile) libxslt (required by gtk-doc)
+                - [ ] (compile) python2.7 (required by libxslt)
+                    - https://www.python.org/downloads/source/
+                    - `wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz`
+                    - `./configure --enable-optimizations --prefix=$(pwd) --exec-prefix=$(pwd)`
+                    - `make -j$(nproc)`
+                    - `make altinstall`
+                - https://gitlab.gnome.org/GNOME/libxslt/-/releases
+                - `wget https://gitlab.gnome.org/GNOME/libxslt/-/archive/v1.1.41/libxslt-v1.1.41.tar.gz`
+                - `tar xf libxslt-v1.1.41.tar.gz`
+                - `./autogen.sh`
+            - https://gitlab.gnome.org/GNOME/gtk-doc/-/tags
+            - `wget https://gitlab.gnome.org/GNOME/gtk-doc/-/archive/1.34.0/gtk-doc-1.34.0.tar.gz`
+            - `tar xf gtk-doc-1.34.0.tar.gz`
+            - `./configure`
+        - gnu website version is too old, new version requires a lot of dependencies
+        - install a lot of libraries, maybe should be the first few to install?
+        - https://gitlab.com/gnutls/gnutls
+        - `wget https://gitlab.com/gnutls/gnutls/-/archive/3.7.11/gnutls-3.7.11.tar.gz`
+        - `./configure`
+        - `make -j$(nproc)`
+    - [?] (compile) autogen (required by new automake)
+        - [O] (compile) guile (required by autogen)
+            - [O] (compile) libunistring (required by guile)
+                - ref: http://ftp.twaren.net/Unix/GNU/gnu/libunistring/
+                - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/libunistring/libunistring-1.2.tar.xz`
+                - `tar xf libunistring-1.2.tar.xz`
+                - `./configure`
+                - `make -j$(nproc)`
+                - `sudo make install`
+            - [ ] (compile) libffi (required by guile)
+                - ref: https://github.com/libffi/libffi 
+                - `wget https://github.com/libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz`
+                - `tar xf libffi-3.4.6.tar.gz`
+                - `./configure`
+                - `make -j$(nproc)`
+            - ref: http://ftp.twaren.net/Unix/GNU/gnu/guile/
+            - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/guile/guile-3.0.9.tar.xz`
+            - `tar xf guile-3.0.9.tar.xz`
+            - ./configure
+        - ref: http://ftp.twaren.net/Unix/GNU/gnu/autogen/
+        - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/autogen/rel5.18.16/autogen-5.18.16.tar.xz`
+        - `tar xf autogen-5.18.16.tar.xz`
+        - `./configure`
+        - `make -j$(nproc)`
+        - `sudo make install`
