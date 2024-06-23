@@ -33,11 +33,11 @@ install_libtool=0
 install_gmp=0
 install_jsonc=0
 install_libcurl=0
-install_gettext=0
-install_flex=0
-install_utillinux=0
-install_tpm2tss=0
-install_libtpms=0
+install_gettext=1
+install_flex=1
+install_utillinux=1
+install_tpm2tss=1
+install_libtpms=1
 install_swtpm=1
 
 #>1 https://github.com/stefanberger/swtpm/releases
@@ -111,7 +111,7 @@ python_ext=".tgz"
 python_dirname="$working_dir/python"
 python_name="$python_dirname-$python_version"
 python_bin_path="$python_dirname/bin"
-python_venv_path="$working_dir/python_build_venv" # venv used for library building
+python_venv_path="$working_dir/python-$python_version-build-venv" # venv used for library building
 #>15 pip package skipped (setuptools, packaging, ninja, meson)
 #>15    newer python version installed packages will be up-to-date
 #>16 https://github.com/PCRE2Project/pcre2/releases

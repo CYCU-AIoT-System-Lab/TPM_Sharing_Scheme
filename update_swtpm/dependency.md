@@ -23,8 +23,8 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                 - https://www.python.org/downloads/source/
                 - `wget https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz`
                 - `tar xf Python-3.12.4.tgz`
-                - `sudo ./configure --enable-optimizations --prefix=$(pwd) --exec-prefix=$(pwd)`
-                - `make -j$(nproc)`
+                - `sudo ./configure --prefix=$(pwd) --exec-prefix=$(pwd) --enable-shared` note `--enable-optimizations` increase performance but require long tests
+                - `sudo make -j$(nproc)`
                 - `sudo make -jj$(nproc) altinstall`
                 - `sudo -H $path_to_new_py/pip3.12 install -U pip setuptools`
             - https://github.com/mesonbuild/meson/releases/tag/1.4.1
@@ -153,7 +153,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - https://github.com/coreutils/gnulib/tags
             - `wget https://github.com/coreutils/gnulib/archive/refs/tags/v1.0.tar.gz`
             - `tar xf v1.0.tar.gz`
-            - activate python virtualenv
+            - activate python virtualenv py3
             - `./gnulib-tool --create-testdir --with-tests --dir=../gnulib-build`
             - `cd ../gnulib-build`
             - `./configure`
@@ -166,18 +166,32 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `make -j$(nproc)`
             - `make install`
         - [ ] (compile) gtk-doc (required by gnutls, before libtasn1)
-            - [ ] (compile) libxslt (required by gtk-doc)
-                - [ ] (compile) python2.7 (required by libxslt)
+            - :white_check_mark: (compile) libxslt (required by gtk-doc)
+                - :white_check_mark: (compile) python2.7 (required by libxslt)
                     - https://www.python.org/downloads/source/
                     - `wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz`
-                    - `./configure --enable-optimizations --prefix=$(pwd) --exec-prefix=$(pwd)`
-                    - `make -j$(nproc)`
-                    - `make altinstall`
+                    - `./configure --prefix=$(pwd) --exec-prefix=$(pwd) --enable-shared` note `--enable-optimizations` increase performance but require long tests
+                    - `sudo make -j$(nproc)`
+                    - `sudo make altinstall`
+                    - `pc_files=($(find . -name '*.pc'))`
+                    - `cd $(dirname ${pc_files[0]})`
+                    - `sudo cp $(basename ${files[0]}) /usr/local/lib/pkgconfig`
+                    - remove: `python-2.7.pc` `libffi.pc` `python.pc`
+                - :x: (apt-get) python2.7-dev libpython2.7-dev
+                - :white_check_mark: (compile) libxml (required by libxslt, requries python2.7)
+                    - https://gitlab.gnome.org/GNOME/libxml2/-/releases
+                    - `wget https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.13.1/libxml2-v2.13.1.tar.gz`
+                    - `tar xf libxml2-v2.13.1.tar.gz`
+                    - `./autogen.sh`
+                    - `make`
+                    - `make install`
                 - https://gitlab.gnome.org/GNOME/libxslt/-/releases
                 - `wget https://gitlab.gnome.org/GNOME/libxslt/-/archive/v1.1.41/libxslt-v1.1.41.tar.gz`
                 - `tar xf libxslt-v1.1.41.tar.gz`
                 - `./autogen.sh`
+            - [ ] (compile) dblatex/fop (required by gtk-doc), libxml2 problem?
             - https://gitlab.gnome.org/GNOME/gtk-doc/-/tags
+            - note: no need to source virtualenv, it only requires 3.x not > 3.7
             - `wget https://gitlab.gnome.org/GNOME/gtk-doc/-/archive/1.34.0/gtk-doc-1.34.0.tar.gz`
             - `tar xf gtk-doc-1.34.0.tar.gz`
             - `./configure`

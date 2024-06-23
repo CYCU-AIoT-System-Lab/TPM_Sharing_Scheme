@@ -500,8 +500,8 @@ else echo "$msg2"; fi
 update_var "python"
 if [ $install_python -eq 1 ]; then echo "$msg1"
     cd $python_dirname
-    sudo ./configure --enable-optimizations --prefix=$python_dirname --exec-prefix=$python_dirname | ts "$msg"
-    make $make_flag | ts "$msg"
+    sudo ./configure --prefix=$python_dirname --exec-prefix=$python_dirname --enable-shared | ts "$msg"
+    sudo make $make_flag | ts "$msg"
     sudo make $make_flag altinstall | ts "$msg"
     echo "$msg creating virtual environment for library building"
     "$python_bin_path/python${python_version%.*}" -m venv $python_venv_path
