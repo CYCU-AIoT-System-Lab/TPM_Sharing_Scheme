@@ -11,10 +11,10 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `./configure --with-internal-glib`
             - `make -j$(nproc)`
             - `sudo make install`
-    - :negative_squared_cross_mark: (apt-get) libtasn1-6-dev (required by swtpm)
+    - :x: (apt-get) libtasn1-6-dev (required by swtpm)
     - :white_check_mark: (compile) libtasn1-4.19.0 (required by swtpm)
         - gnu_compile
-    - :negative_squared_cross_mark: (apt-get) json-glib-1.0 (required by swtpm) # available version is old but still work
+    - :x: (apt-get) json-glib-1.0 (required by swtpm) # available version is old but still work
     - :white_check_mark: (comiple) json-glib
         - :white_check_mark: ninja
             - `sudo -H $path_to_new_py/pip3.12 install ninja`
@@ -63,7 +63,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `./configure --with-openssl`
             - `make -j$(nproc)`
             - `sudo make install`
-        - :negative_squared_cross_mark: (compile) uuid (required by tpm2-tss)
+        - :x: (compile) uuid (required by tpm2-tss)
             - https://sourceforge.net/projects/libuuid/files/
             - `wget https://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz/download`
             - `tar xf libuuid-1.0.3.tar.gz`
@@ -140,7 +140,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `make -j$(nproc)`
         - `sudo make install`
     - :grey_question: (compile) gnutls (required by swtpm)
-        - :negative_squared_cross_mark: (apt-get) unbound-anchor (required by gnutls) can't create root.key
+        - :x: (apt-get) unbound-anchor (required by gnutls) can't create root.key
         - :grey_question: (compile) libnettle (required by gnutls, require gmp)
         - http://ftp.twaren.net/Unix/GNU/gnu/nettle/
             - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/nettle/nettle-3.10.tar.gz`
