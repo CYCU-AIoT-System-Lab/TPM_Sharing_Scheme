@@ -2,24 +2,24 @@
 
 Keep record of dependencies needed to install swtpm on oldest supported OS in this project - Ubuntu 18.04.
 
-- [O] compile newer version of swtpm directly from github
+- :white_check_mark: compile newer version of swtpm directly from github
     - remove: every compiled need to be uninstalled first
-    - [O] (compile) [libtpms](https://github.com/stefanberger/libtpms/blob/master/INSTALL) (required by swtpm)
-        - [O] (compile) openssl (required by libtpms)
+    - :white_check_mark: (compile) [libtpms](https://github.com/stefanberger/libtpms/blob/master/INSTALL) (required by swtpm)
+        - :white_check_mark: (compile) openssl (required by libtpms)
             - done with installing 1.1.1w
-        - [O] (compile) pkg-config (required by new environment breaking swtpm compiling)
+        - :white_check_mark: (compile) pkg-config (required by new environment breaking swtpm compiling)
             - `./configure --with-internal-glib`
             - `make -j$(nproc)`
             - `sudo make install`
-    - [X] (apt-get) libtasn1-6-dev (required by swtpm)
-    - [O] (compile) libtasn1-4.19.0 (required by swtpm)
+    - :negative_squared_cross_mark: (apt-get) libtasn1-6-dev (required by swtpm)
+    - :white_check_mark: (compile) libtasn1-4.19.0 (required by swtpm)
         - gnu_compile
-    - [X] (apt-get) json-glib-1.0 (required by swtpm) # available version is old but still work
-    - [O] (comiple) json-glib
-        - [O] ninja
+    - :negative_squared_cross_mark: (apt-get) json-glib-1.0 (required by swtpm) # available version is old but still work
+    - :white_check_mark: (comiple) json-glib
+        - :white_check_mark: ninja
             - `sudo -H $path_to_new_py/pip3.12 install ninja`
-        - [O] meson
-            - [O] python > 3.7.0
+        - :white_check_mark: meson
+            - :white_check_mark: python > 3.7.0
                 - https://www.python.org/downloads/source/
                 - `wget https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz`
                 - `tar xf Python-3.12.4.tgz`
@@ -29,10 +29,10 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                 - `sudo -H $path_to_new_py/pip3.12 install -U pip setuptools`
             - https://github.com/mesonbuild/meson/releases/tag/1.4.1
             - `sudo -H $path_to_new_py/pip3.12 install meson`
-        - [O] (compile) glib (required by json-glib)
-            - [O] (pip) packaging (required by glib)
+        - :white_check_mark: (compile) glib (required by json-glib)
+            - :white_check_mark: (pip) packaging (required by glib)
                 - `sudo -H $path_to_new_py/pip3.12 install packaging`
-            - [O] (compile) libpcre (required by glib)
+            - :white_check_mark: (compile) libpcre (required by glib)
                 - ref: https://github.com/PCRE2Project/pcre2
                 - `wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.44/pcre2-10.44.tar.gz`
                 - `tar xf pcre2-10.44.tar.gz`
@@ -55,15 +55,15 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `sudo $path_to_new_py/meson install -C _build`
         - ERROR: doesn't work because pkgconfig file is not created
         - `sudo cp _build/meson-private/*.pc /usr/local/lib/pkgconfig`
-    - [O] (compile) [tpm2-tss](https://github.com/tpm2-software/tpm2-tss) (required by swtpm)
-        - [O] (compile) [json-c](https://github.com/json-c/json-c/tree/master) (required by tpm2-tss)
-        - [O] (compile) libcurl (required by tpm2-tss)
+    - :white_check_mark: (compile) [tpm2-tss](https://github.com/tpm2-software/tpm2-tss) (required by swtpm)
+        - :white_check_mark: (compile) [json-c](https://github.com/json-c/json-c/tree/master) (required by tpm2-tss)
+        - :white_check_mark: (compile) libcurl (required by tpm2-tss)
             - `wget https://curl.se/download/curl-8.8.0.tar.gz`
             - `tar xf curl-8.8.0.tar.gz`
             - `./configure --with-openssl`
             - `make -j$(nproc)`
             - `sudo make install`
-        - [X] (compile) uuid (required by tpm2-tss)
+        - :negative_squared_cross_mark: (compile) uuid (required by tpm2-tss)
             - https://sourceforge.net/projects/libuuid/files/
             - `wget https://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz/download`
             - `tar xf libuuid-1.0.3.tar.gz`
@@ -71,15 +71,15 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `make -j$(nproc)`
             - `sudo make install`
             - compiled version way too old, break wget
-        - [O] (compile) util-linux (containing libuuid/uuid)
-            - [O] (compile) gettext (containing autopoint)
+        - :white_check_mark: (compile) util-linux (containing libuuid/uuid)
+            - :white_check_mark: (compile) gettext (containing autopoint)
                 - http://ftp.twaren.net/Unix/GNU/gnu/gettext/
                 - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/gettext/gettext-0.22.tar.gz`
                 - `tar xf gettext-0.22.tar.gz`
                 - `./configure`
                 - `make -j$(nproc)`
                 - `make install`
-            - [O] (compile) flex (required by util-linux)
+            - :white_check_mark: (compile) flex (required by util-linux)
                 - https://github.com/westes/flex
                 - `wget https://github.com/westes/flex/releases/download/v2.6.3/flex-2.6.3.tar.gz`
                 - `tar xf flex-2.6.3.tar.gz`
@@ -96,13 +96,13 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `sudo make install`
             - autogen.sh script will caused aclocal error, caused by automake 1.16.0
             - also, it's not recommended to install entire util-linux, might break system since its core utilities
-    - [O] (compile) [gmp](https://gmplib.org/devel/repo-usage) (required by swtpm)
-        - [O] (apt-get) mercurial (required by libgmp-dev)
-        - [O] (compile) texinfo (required by gmp)
-            - [O] (compile) [automake](https://github.com/autotools-mirror/automake) (new version required by texinfo)
-                - [O] (compile) [autoconf](https://github.com/autotools-mirror/autoconf) (required by new automake)
-                    - [?] (apt-get) ftp
-                    - [O] (compile) help2man (required by autoconf)
+    - :white_check_mark: (compile) [gmp](https://gmplib.org/devel/repo-usage) (required by swtpm)
+        - :white_check_mark: (apt-get) mercurial (required by libgmp-dev)
+        - :white_check_mark: (compile) texinfo (required by gmp)
+            - :white_check_mark: (compile) [automake](https://github.com/autotools-mirror/automake) (new version required by texinfo)
+                - :white_check_mark: (compile) [autoconf](https://github.com/autotools-mirror/autoconf) (required by new automake)
+                    - :grey_question: (apt-get) ftp
+                    - :white_check_mark: (compile) help2man (required by autoconf)
                         - ref: https://www.gnu.org/software/help2man/
                         - ref: http://ftp.twaren.net/Unix/GNU/gnu/help2man/
                         - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/help2man/help2man-1.49.3.tar.xz`
@@ -114,8 +114,8 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                     - `./configure`
                     - `make -j$(nproc)`
                     - `sudo make install`
-                - [O] (compile) m4 (required by new automake)
-                    - [O] (compile) gperf (required by m4)
+                - :white_check_mark: (compile) m4 (required by new automake)
+                    - :white_check_mark: (compile) gperf (required by m4)
                         - ref: https://www.gnu.org/software/gperf/
                         - ref: http://ftp.twaren.net/Unix/GNU/gnu/gperf/
                         - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/gperf/gperf-3.1.tar.gz`
@@ -129,7 +129,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                     - `./configure`
                     - `make -j$(nproc)`
                     - `sudo make install`
-        - [O] (compile) [libtool](https://github.com/autotools-mirror/libtool) (required by gmp)
+        - :white_check_mark: (compile) [libtool](https://github.com/autotools-mirror/libtool) (required by gmp)
             - `./bootstrap`
             - `./configure`
             - `make -j$(nproc)`
@@ -139,16 +139,16 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `./configure`
         - `make -j$(nproc)`
         - `sudo make install`
-    - [o] (compile) gnutls (required by swtpm)
-        - [X] (apt-get) unbound-anchor (required by gnutls) can't create root.key
-        - [?] (compile) libnettle (required by gnutls, require gmp)
+    - :grey_question: (compile) gnutls (required by swtpm)
+        - :negative_squared_cross_mark: (apt-get) unbound-anchor (required by gnutls) can't create root.key
+        - :grey_question: (compile) libnettle (required by gnutls, require gmp)
         - http://ftp.twaren.net/Unix/GNU/gnu/nettle/
             - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/nettle/nettle-3.10.tar.gz`
             - `tar xf nettle-3.10.tar.gz`
             - `./configure`
             - `make -j$(nproc)`
             - `make install`
-        - [?] (compile) gnulib (required by gnutls)
+        - :grey_question: (compile) gnulib (required by gnutls)
             - [ ]
             - https://github.com/coreutils/gnulib/tags
             - `wget https://github.com/coreutils/gnulib/archive/refs/tags/v1.0.tar.gz`
@@ -158,7 +158,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `cd ../gnulib-build`
             - `./configure`
             - `make dist`
-        - [O] (compile) gettext (required by gnutls)
+        - :white_check_mark: (compile) gettext (required by gnutls)
             - http://ftp.twaren.net/Unix/GNU/gnu/gettext/
             - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/gettext/gettext-0.22.tar.gz`
             - `tar xf gettext-0.22.tar.gz`
@@ -187,9 +187,9 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `wget https://gitlab.com/gnutls/gnutls/-/archive/3.7.11/gnutls-3.7.11.tar.gz`
         - `./configure`
         - `make -j$(nproc)`
-    - [?] (compile) autogen (required by new automake)
-        - [O] (compile) guile (required by autogen)
-            - [O] (compile) libunistring (required by guile)
+    - :grey_question: (compile) autogen (required by new automake)
+        - :white_check_mark: (compile) guile (required by autogen)
+            - :white_check_mark: (compile) libunistring (required by guile)
                 - ref: http://ftp.twaren.net/Unix/GNU/gnu/libunistring/
                 - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/libunistring/libunistring-1.2.tar.xz`
                 - `tar xf libunistring-1.2.tar.xz`
@@ -212,11 +212,3 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `./configure`
         - `make -j$(nproc)`
         - `sudo make install`
-
-[ ] abc
-    - abc
-        [ ] test
-- abc
-    [ ] abc
-        - abc
-            [ ] test
