@@ -128,13 +128,12 @@ if [ $install_libpcre2 -eq 1 ]; then echo "$msg3"
 else echo "$msg2"; fi
 update_var "pip-package"
 if [ $install_pip_package -eq 1 ]; then echo "$msg3"
-    echo "$msg2"
+    rm -rf $python_venv_path
 else echo "$msg2"; fi
 update_var "python"
 if [ $install_python -eq 1 ]; then echo "$msg3"
     cd $python_dirname
     sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
-    rm -rf $python_venv_path
 else echo "$msg2"; fi
 update_var "openssl"
 if [ $install_openssl -eq 1 ]; then echo "$msg3"

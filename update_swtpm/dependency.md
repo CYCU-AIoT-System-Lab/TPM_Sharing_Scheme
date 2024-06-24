@@ -164,7 +164,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `./configure`
             - `make -j$(nproc)`
             - `make install`
-        - [ ] (compile) gtk-doc (required by gnutls, before libtasn1)
+        - [ ] (compile) gtk-doc (required by gnutls, can be before libtasn1, also can not)
             - :white_check_mark: (compile) libxslt (required by gtk-doc)
                 - :white_check_mark: (compile) python2.7 (required by libxslt)
                     - https://www.python.org/downloads/source/
@@ -195,20 +195,94 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                     - binary is generated, but no pc file
                 - :grey_question: (compile) epstopdf (required by dblatex)
                 - :grey_question: (compile) fig2dev (required by dblatex)
-                - [ ] (compile) miktex:latex+pdflatex (required by dblatex)
-                    - [ ] (compile) qt6 (required by miktex)
-                        - https://download.qt.io/official_releases/qt/
-                        - `wget https://download.qt.io/official_releases/qt/6.7/6.7.2/single/qt-everywhere-src-6.7.2.tar.xz`
-                        - `tar xf qt-everywhere-src-6.7.2.tar.xz`
-                        - `./configure`
-                        - `mkdir qt6-build`
-                        - `cmake --build ../qt-everywhere-src-6.7.2 --parallel`
-                        - `cmake --install .`
-                    - https://github.com/MiKTeX/miktex/releases
-                    - `wget https://miktex.org/download/ctan/systems/win32/miktex/source/miktex-24.4.tar.xz`
-                    - `tar xf miktex-24.4.tar.xz`
-                    - `mkdir miktex-build`
-                    - `cmake ../miktex-24.4`
+                - [ ] (compile) texlive (required by dblatex)
+                    - :white_check_mark: (compile) libX11 (required by texlive)
+                        - :white_check_mark: (compile) macros-util-macros (required by libX11)
+                            - https://gitlab.freedesktop.org/xorg/util/macros/-/tags
+                            - `wget https://gitlab.freedesktop.org/xorg/util/macros/-/archive/util-macros-1.20.1/macros-util-macros-1.20.1.tar.gz`
+                            - `./autogen.sh`
+                            - `make`
+                            - `sudo make install`
+                        - :white_check_mark: (compile) libXtrans (required by libX11)
+                            - https://gitlab.freedesktop.org/xorg/lib/libxtrans/-/tags
+                            - `wget https://gitlab.freedesktop.org/xorg/lib/libxtrans/-/archive/xtrans-1.5.0/libxtrans-xtrans-1.5.0.tar.gz`
+                            - `tar xf libxtrans-xtrans-1.5.0.tar.gz`
+                            - `./autogen.sh`
+                            - `make`
+                            - `sudo make install`
+                        - :white_check_mark: (compile) xproto (required by libX11)
+                            - https://gitlab.freedesktop.org/xorg/proto/xproto/-/tags
+                            - `wget https://gitlab.freedesktop.org/xorg/proto/xproto/-/archive/xproto-7.0.31/xproto-xproto-7.0.31.tar.gz`
+                            - `tar xf xproto....tar.gz`
+                            - `./autogen.sh`
+                            - `make`
+                            - `sudo make install`
+                        - :white_check_mark: (compile) xextproto (required by libX11)
+                            - https://gitlab.freedesktop.org/xorg/proto/xextproto/-/tags
+                            - `wget https://gitlab.freedesktop.org/xorg/proto/xextproto/-/archive/xextproto-7.3.0/xextproto-xextproto-7.3.0.tar.gz`
+                            - `tar xf xextproto....tar.gz`
+                            - `./autogen.sh`
+                            - `make`
+                            - `sudo make install`
+                        - :white_check_mark: (compile) libXcb (required by libX11)
+                            - :white_check_mark: (compile) xcb-proto (required by libX11)
+                                - https://gitlab.freedesktop.org/xorg/proto/xcbproto/-/tags
+                                - `wget https://gitlab.freedesktop.org/xorg/proto/xcbproto/-/archive/xcb-proto-1.17.0/xcbproto-xcb-proto-1.17.0.tar.gz`
+                                - `tar xf xcbproto....tar.gz`
+                                - `./autogen.sh`
+                                - `make`
+                                - `sudo make install`
+                            - :white_check_mark: (compile) xau (required by libX11)
+                                - https://gitlab.freedesktop.org/xorg/lib/libxau/-/tags
+                                - `wget https://gitlab.freedesktop.org/xorg/lib/libxau/-/archive/libXau-1.0.11/libxau-libXau-1.0.11.tar.gz`
+                                - `tar xf libxau....tar.gz`
+                                - `./autogen.sh`
+                                - `make`
+                                - `sudo make install`
+                            - https://gitlab.freedesktop.org/xorg/lib/libxcb/-/tags
+                            - `wget https://gitlab.freedesktop.org/xorg/lib/libxcb/-/archive/libxcb-1.17.0/libxcb-libxcb-1.17.0.tar.gz`
+                            - `tar xf libxcb....tar.gz`
+                            - `./autogen.sh`
+                            - `make`
+                        - :white_check_mark: (compile) kbproto (required by libX11)
+                            - https://gitlab.freedesktop.org/xorg/proto/kbproto/-/tags
+                            - `wget https://gitlab.freedesktop.org/xorg/proto/kbproto/-/archive/kbproto-1.0.7/kbproto-kbproto-1.0.7.tar.gz`
+                            - `tar xf kbproto....tar.gz`
+                            - `./autogen.sh`
+                            - `make`
+                            - `sudo make install`
+                        - :white_check_mark: (compile) inputproto (required by libX11)
+                            - https://gitlab.freedesktop.org/xorg/proto/inputproto/-/tags
+                            - `wget https://gitlab.freedesktop.org/xorg/proto/inputproto/-/archive/inputproto-2.3.2/inputproto-inputproto-2.3.2.tar.gz`
+                            - `tar xf inputproto....tar.gz`
+                            - `./autogen.sh`
+                            - `make`
+                            - `sudo make install`
+                        - :white_check_mark: (compile) libXaw (required by libX11)
+                            - [ ] (compile) xserver/xext (required by libXaw)
+                                - https://gitlab.freedesktop.org/xorg/xserver/-/tags
+                                - `wget https://gitlab.freedesktop.org/xorg/xserver/-/archive/xwayland-24.1.0/xserver-xwayland-24.1.0.tar.gz`
+                                - `tar xf xserver....tar.gz`
+                                - source python3.x build environment
+                            - [ ] (compile) xt (required by libXaw)
+                            - [ ] (compile) xmu (required by libXaw)
+                            - https://gitlab.freedesktop.org/xorg/lib/libxaw/-/tags
+                            - `wget https://gitlab.freedesktop.org/xorg/lib/libxaw/-/archive/libXaw-1.0.16/libxaw-libXaw-1.0.16.tar.gz`
+                            - `tar xf libxaw....tar.gz`
+                            - `./autogen.sh`
+                            - `make`
+                            - `sudo make install`
+                        - https://github.com/mirror/libX11/tags
+                        - `wget https://github.com/mirror/libX11/archive/refs/tags/libX11-1.8.4.tar.gz`
+                        - `tar xf libX11....tar.gz`
+                        - `./autogen.sh`
+                        - `make`
+                        - `sudo make install`
+                    - https://github.com/TeX-Live/texlive-source/releases
+                    - `wget https://github.com/TeX-Live/texlive-source/archive/refs/tags/svn70897.tar.gz`
+                    - `tar xf svn70897.tar.gz`
+                    - `./configure --enable-build-in-source-tree`
+                    - `make`
                 - [ ] (compile) makeindex (required by dblatex)
                 - [ ] (compile) kpsewhich (required by dblatex)
                 - https://sourceforge.net/projects/dblatex/files/dblatex/

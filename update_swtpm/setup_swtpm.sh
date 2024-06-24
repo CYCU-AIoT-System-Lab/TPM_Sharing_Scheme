@@ -599,11 +599,11 @@ if [ $install_python -eq 1 ]; then echo "$msg1"
     sudo ./configure --prefix=$python_dirname --exec-prefix=$python_dirname --enable-shared | ts "$msg"
     sudo make $make_flag | ts "$msg"
     sudo make $make_flag altinstall | ts "$msg"
-    echo "$msg creating virtual environment for library building"
-    "$python_bin_path/python${python_version%.*}" -m venv $python_venv_path
 else echo "$msg2"; fi
 update_var "pip-package"
 if [ $install_pip_package -eq 1 ]; then echo "$msg1"
+    echo "$msg creating virtual environment for library building"
+    "$python_bin_path/python${python_version%.*}" -m venv $python_venv_path
     #echo "$msg installing for newly built python globally"
     #pip_path="$python_dirname/bin/pip${python_version%.*}"
     #sudo -H $pip_path install -U pip setuptools | ts "$msg"
