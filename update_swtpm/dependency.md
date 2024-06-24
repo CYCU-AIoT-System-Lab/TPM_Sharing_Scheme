@@ -260,9 +260,206 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                             - `sudo make install`
                         - :white_check_mark: (compile) libXaw (required by libX11)
                             - [ ] (compile) xserver/xext (required by libXaw)
-                                - [ ] (compile) randrproto (required by xserver)
+                                - :x: (compile) randrproto (required by xserver)
                                     - https://gitlab.freedesktop.org/xorg/proto/randrproto/-/tags
                                     - `wget https://gitlab.freedesktop.org/xorg/proto/randrproto/-/archive/randrproto-1.5.0/randrproto-randrproto-1.5.0.tar.gz`
+                                    - `tar xf randrproto....tar.gz`
+                                    - `./autogen.sh`
+                                    - `make`
+                                    - `sudo make install`
+                                    - library deprecated https://gitlab.freedesktop.org/xorg/proto/randrproto/-/blob/master/autogen.sh?ref_type=heads
+                                - :white_check_mark: (compile) xorgproto (required by xserver)
+                                    - https://gitlab.freedesktop.org/xorg/proto/xorgproto/-/tags
+                                    - `wget https://gitlab.freedesktop.org/xorg/proto/xorgproto/-/archive/xorgproto-2024.1/xorgproto-xorgproto-2024.1.tar.gz`
+                                    - `tar xf xorgproto.....tar.gz`
+                                    - `./autogen.sh`
+                                    - `make`
+                                    - `sudo make install`
+                                    - `sudo cp *.pc /usr/local/lib/pkgconfig`
+                                - :white_check_mark: (compile) pixman (required by xserver)
+                                    - https://www.cairographics.org/snapshots/
+                                    - `wget https://www.cairographics.org/snapshots/pixman-0.33.6.tar.gz`
+                                    - `tar xf pixman....tar.gz`
+                                    - `./configure`
+                                    - `make`
+                                    - `sudo make install`
+                                - :white_check_mark: (compile) xshmfence (required by xserver)
+                                    - https://gitlab.freedesktop.org/xorg/lib/libxshmfence/-/tags
+                                    - `wget https://gitlab.freedesktop.org/xorg/lib/libxshmfence/-/archive/libxshmfence-1.3.2/libxshmfence-libxshmfence-1.3.2.tar.gz`
+                                    - `tar xf libxsh....tar.gz`
+                                    - `./autogen.sh`
+                                    - `make`
+                                    - `sudo make install`
+                                - :x: (compile) libbsd (required by xserver)
+                                    - :x: (compile) libmd (required by xserver)
+                                        - https://libbsd.freedesktop.org/releases/
+                                        - `wget https://libbsd.freedesktop.org/releases/libmd-1.1.0.tar.xz`
+                                        - `tar xf libmd....tar.xz`
+                                        - `./configure`
+                                        - `make`
+                                        - `sudo make install`
+                                        - not needed
+                                    - https://gitlab.freedesktop.org/libbsd/libbsd/-/tags
+                                    - `wget https://gitlab.freedesktop.org/libbsd/libbsd/-/archive/0.12.2/libbsd-0.12.2.tar.gz`
+                                    - `tar xf libbsd....tar.gz`
+                                    - `./autogen`
+                                    - `./configure`
+                                    - `make`
+                                    - `sudo make install`
+                                    - doesn't generate pc files in none BSD os
+                                - :grey_question: (compile) libbsd (required by xserver)
+                                    - https://github.com/LuaDist/libbsd/tags
+                                    - `wget https://github.com/LuaDist/libbsd/archive/refs/tags/0.3.0.tar.gz`
+                                    - `tar xf libbsd....tar.gz`
+                                    - `mkdir libbsd-build`
+                                    - `cmake ../libbsd-0.3.0`
+                                    - `make`
+                                    - `sudo make install`
+                                    - `sudo cp *.pc /usr/local/lib/pkgconfig`
+                                - :white_check_mark: (compile) xkbcomp (required by xserver)
+                                    - :white_check_mark: (compile) xkbfile xproto (required by xkbcomp)
+                                        - https://gitlab.freedesktop.org/xorg/lib/libxkbfile/-/tags
+                                        - `wget https://gitlab.freedesktop.org/xorg/lib/libxkbfile/-/archive/libxkbfile-1.1.3/libxkbfile-libxkbfile-1.1.3.tar.gz`
+                                        - `tar xf libxkbfile....tar.gz`
+                                        - `./autogen.sh`
+                                        - `make`
+                                        - `sudo make install`
+                                    - https://gitlab.freedesktop.org/xorg/app/xkbcomp/-/tags
+                                    - `wget https://gitlab.freedesktop.org/xorg/app/xkbcomp/-/archive/xkbcomp-1.4.7/xkbcomp-xkbcomp-1.4.7.tar.gz`
+                                    - `./autogen.sh`
+                                    - `make`
+                                    - `sudo make install`
+                                - :white_check_mark: (compile) libXfont (required by xserver)
+                                    - :white_check_mark: (compile) freetype (required by libXfont)
+                                        - https://sourceforge.net/projects/freetype/files/freetype2/
+                                        - `wget https://sourceforge.net/projects/freetype/files/freetype2/2.13.2/freetype-2.13.2.tar.gz/download`
+                                        - `tar xf freetype....tar.gz`
+                                        - `./configure`
+                                        - `make`
+                                        - `sudo make install`
+                                    - :white_check_mark: (compile) fontenc (required by libXfont)
+                                        - :white_check_mark: (compile) util-font-util (required by fontenc)
+                                            - https://gitlab.freedesktop.org/xorg/font/util/-/tags
+                                            - `wget https://gitlab.freedesktop.org/xorg/font/util/-/archive/font-util-1.4.1/util-font-util-1.4.1.tar.gz`
+                                            - `tar xf util-font-util....tar.gz`
+                                            - `./autogen.sh`
+                                            - `make`
+                                            - `sudo make install`
+                                        - https://gitlab.freedesktop.org/xorg/lib/libfontenc/-/tags
+                                        - `wget https://gitlab.freedesktop.org/xorg/lib/libfontenc/-/archive/libfontenc-1.1.8/libfontenc-libfontenc-1.1.8.tar.gz`
+                                        - `tar xf libfontenc....tar.gz`
+                                        - `./autogen.sh`
+                                        - `make`
+                                        - `sudo make install`
+                                    - https://gitlab.freedesktop.org/xorg/lib/libxfont/-/tags
+                                    - `wget https://gitlab.freedesktop.org/xorg/lib/libxfont/-/archive/libXfont2-2.0.6/libxfont-libXfont2-2.0.6.tar.gz`
+                                    - `tar xf libxfont....tar.gz`
+                                    - `./autogen.sh`
+                                    - `make`
+                                    - `sudo make install`
+                                - :grey_question: (compile) libsystemd (required by xserver)
+                                    - :white_check_mark: (compile) libcap (required by libsystemd)
+                                        - https://git.kernel.org/pub/scm/libs/libcap/libcap.git/
+                                        - `wget https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/libcap-2.70.tar.gz`
+                                        - `tar xf libcap....tar.gz`
+                                        - `make`
+                                        - `sudo make install`
+                                        - `cd libcap`
+                                        - `sudo cp *.pc /usr/local/lib/pkgconfig`
+                                    - :grey_question: (compile) libbpf (required by libsystemd)
+                                        - :x: (compile) libelf (required by libbpf)
+                                        - :white_check_mark: (apt-get) libelf-dev (required by libbpf)
+                                            - :white_check_mark: (compile) zlib (required by libelf)
+                                                - https://www.zlib.net/
+                                                - `wget https://www.zlib.net/zlib-1.3.1.tar.gz`
+                                                - `tar xf zlib....tar.gz`
+                                                - `./configure`
+                                                - `make`
+                                                - `sudo make install`
+                                            - `sudo apt install -y libelf-dev`
+                                            - `pc_path=find /usr/lib/ -name libelf.pc`
+                                            - `cd $(dirname $pc_path)`
+                                            - `sudo cp libelf.pc /usr/local/lib/pkgconfig`
+                                        - https://github.com/libbpf/libbpf/releases
+                                        - `wget https://github.com/libbpf/libbpf/archive/refs/tags/v1.4.3.tar.gz`
+                                        - `tar xf libbpf....tar.gz`
+                                        - `cd src`
+                                        - `make`
+                                    - https://github.com/systemd/systemd/releases
+                                    - `wget https://github.com/systemd/systemd/archive/refs/tags/v256.1.tar.gz`
+                                    - `tar xf systemd....tar.gz`
+                                    - source python3.x build environment
+                                    - `meson setup _build`
+                                - :grey_question: (compile) libsystemd-daemon (required by xserver)
+                                - :white_check_mark: (compile) libxcvt (required by xserver)
+                                    - https://gitlab.freedesktop.org/xorg/lib/libxcvt/-/tags
+                                    - `wget https://gitlab.freedesktop.org/xorg/lib/libxcvt/-/archive/libxcvt-0.1.2/libxcvt-libxcvt-0.1.2.tar.gz`
+                                    - `tar xf libxcvt....tar.gz`
+                                    - source python3.x build environment
+                                    - `meson setup _build`
+                                    - `sudo bahs -c 'source ~~~/bin/activate && ninja -C _build install'`
+                                    - `cd _build/meson-private && sudo cp libxcvt.pc /usr/local/lib/pkgconfig`
+                                    - `cd _build/meson-uninstalled && sudo cp libxcvt-uninstalled.pc /usr/local/lib/pkgconfig`
+                                - :white_check_mark: (compile) wayland (required by xserver)
+                                    - :white_check_mark: (compile) expat (required by wayland)
+                                        - https://github.com/libexpat/libexpat/releases
+                                        - `wget https://github.com/libexpat/libexpat/releases/download/R_2_6_2/expat-2.6.2.tar.gz`
+                                        - `tar xf expat....tar.gz`
+                                        - `./configure`
+                                        - `make`
+                                        - `sudo make install`
+                                    - :x: (compile) graphviz (required by wayland)
+                                        - https://graphviz.org/download/source/
+                                        - `wget https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/11.0.0/graphviz-11.0.0.tar.gz`
+                                        - `./configure`
+                                        - `make`
+                                        - `sudo make install`
+                                        - not needed
+                                    - :white_check_mark: (compile) xmlto (required by wayland)
+                                        - https://www.linuxfromscratch.org/blfs/view/svn/pst/xmlto.html
+                                        - `wget https://releases.pagure.org/xmlto/xmlto-0.0.28.tar.bz2`
+                                        - `tar xf xmlto....tar.bz2`
+                                        - `sed -ri 's/ifsense;|main/int &/' xmlif/xmlif.l`
+                                        - `LINKS="/usr/bin/links" ./configure --prefix=/usr`
+                                        - `make`
+                                        - `sudo make -j6 install`
+                                    - https://gitlab.freedesktop.org/wayland/wayland/-/tags
+                                    - `wget https://gitlab.freedesktop.org/wayland/wayland/-/archive/1.23.0/wayland-1.23.0.tar.gz`
+                                    - `tar xf wayland....tar.gz`
+                                    - `mv meson.build meson.build.bak`
+                                    - `sed -e '125,127d' meson.build.bak > meson.build` # remove documentation option, which requries tons of dependencies
+                                    - source python3.x build environment
+                                    - `meson setup _build`
+                                    - `meson compile -C _build`
+                                    - `meson install -C _build`
+                                    - `cd _build/meson-private && sudo cp *.pc /usr/local/lib/pkgconfig`
+                                    - `cd _build/meson-uninstalled && sudo cp *.pc /usr/local/lib/pkgconfig`
+                                - :white_check_mark: (compile) wayland-protocols (required by xserver)
+                                    - https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases
+                                    - `wget https://gitlab.freedesktop.org/wayland/wayland-protocols/-/archive/1.36/wayland-protocols-1.36.tar.gz`
+                                    - `tar xf wayland-protocols....tar.gz`
+                                    - `mv meson.build meson.build.bak`
+                                    - `sed -e '139,141d' meson.build.bak > meson.build` # remove test option, which can't get variable from installed wayland-scanner.pc
+                                    - `meson setup _build`
+                                    - `meson compile -C _build`
+                                    - `meson install -C _build`
+                                - :white_check_mark: (compile) libdrm (required by xserver)
+                                    - https://dri.freedesktop.org/libdrm/
+                                    - `wget https://dri.freedesktop.org/libdrm/libdrm-2.4.121.tar.xz`
+                                    - `tar xf libdrm....tar.xz`
+                                    - source python3.x build environment
+                                    - `meson setup _build`
+                                    - `meson compile -C _build`
+                                    - `cd _build/meson-private && sudo cp *.pc /usr/local/lib/pkgconfig`
+                                    - `cd _build/meson-uninstalled && sudo cp *.pc /usr/local/lib/pkgconfig`
+                                - :question: (compile) libepoxy (required by xserver)
+                                    - :question: (compile) EGL (required by libepoxy)
+                                    - https://github.com/anholt/libepoxy/releases
+                                    - `wget https://github.com/anholt/libepoxy/archive/refs/tags/1.5.10.tar.gz`
+                                    - `tar xf libepoxy....tar.gz`
+                                    - source python3.x build environment
+                                    - `meson setup _build`
+                                    - `meson compile -C _build`
                                 - https://gitlab.freedesktop.org/xorg/xserver/-/tags
                                 - `wget https://gitlab.freedesktop.org/xorg/xserver/-/archive/xwayland-24.1.0/xserver-xwayland-24.1.0.tar.gz`
                                 - `tar xf xserver....tar.gz`
