@@ -29,107 +29,156 @@ update_var () {
     msg1="$msg downloading source"
     msg2="$msg skipped!"
     msg3="$msg download failed!"
+    msg4="$msg already existed, skipped!"
 }
 update_var "gmp"
-if [ $install_gmp -eq 1 ]; then echo "$msg1"
-    hg clone https://gmplib.org/repo/gmp-$gmp_version/ $gmp_name || { echo "$msg4"; exit 1; }
+if [ $install_gmp -eq 1 ]; then
+    if [ -d $gmp_name ]; then echo "$msg4"; else echo "$msg1"
+        hg clone https://gmplib.org/repo/gmp-$gmp_version/ $gmp_name || { echo "$msg4"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "libtpms"
-if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/stefanberger/libtpms/archive/refs/tags/v$libtpms_version$libtpms_ext" -O $libtpms_name$libtpms_ext || { echo "$msg3"; exit 1; }
+if [ $install_libtpms -eq 1 ]; then
+    if [ -f $libtpms_name$libtpms_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/stefanberger/libtpms/archive/refs/tags/v$libtpms_version$libtpms_ext" -O $libtpms_name$libtpms_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "tpm2-tss"
-if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/tpm2-software/tpm2-tss/releases/download/$tpm2tss_version/tpm2-tss-$tpm2tss_version$tpm2tss_ext" -O $tpm2tss_name$tpm2tss_ext || { echo "$msg3"; exit 1; }
+if [ $install_tpm2tss -eq 1 ]; then
+    if [ -f $tpm2tss_name$tpm2tss_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/tpm2-software/tpm2-tss/releases/download/$tpm2tss_version/tpm2-tss-$tpm2tss_version$tpm2tss_ext" -O $tpm2tss_name$tpm2tss_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "json-c"
-if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/json-c/json-c/archive/refs/tags/json-c-$jsonc_version-20230812$jsonc_ext" -O $jsonc_name$jsonc_ext || { echo "$msg3"; exit 1; }
+if [ $install_jsonc -eq 1 ]; then
+    if [ -f $jsonc_name$jsonc_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/json-c/json-c/archive/refs/tags/json-c-$jsonc_version-20230812$jsonc_ext" -O $jsonc_name$jsonc_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "texinfo"
-if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/texinfo/texinfo-$texinfo_version$texinfo_ext" -O $texinfo_name$texinfo_ext || { echo "$msg3"; exit 1; }
+if [ $install_texinfo -eq 1 ]; then
+    if [ -f $texinfo_name$texinfo_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/texinfo/texinfo-$texinfo_version$texinfo_ext" -O $texinfo_name$texinfo_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "automake"
-if [ $install_automake -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/automake/automake-$automake_version$automake_ext" -O $automake_name$automake_ext || { echo "$msg3"; exit 1; }
+if [ $install_automake -eq 1 ]; then
+    if [ -f $automake_name$automake_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/automake/automake-$automake_version$automake_ext" -O $automake_name$automake_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "autoconf"
-if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/autoconf/autoconf-$autoconf_version$autoconf_ext" -O $autoconf_name$autoconf_ext || { echo "$msg3"; exit 1; }
+if [ $install_autoconf -eq 1 ]; then
+    if [ -f $autoconf_name$autoconf_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/autoconf/autoconf-$autoconf_version$autoconf_ext" -O $autoconf_name$autoconf_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "help2man"
-if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/help2man/help2man-$help2man_version$help2man_ext" -O $help2man_name$help2man_ext || { echo "$msg3"; exit 1; }
+if [ $install_help2man -eq 1 ]; then
+    if [ -f $help2man_name$help2man_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/help2man/help2man-$help2man_version$help2man_ext" -O $help2man_name$help2man_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "m4"
-if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/m4/m4-$m4_version$m4_ext" -O $m4_name$m4_ext || { echo "$msg3"; exit 1; }
+if [ $install_m4 -eq 1 ]; then
+    if [ -f $m4_name$m4_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/m4/m4-$m4_version$m4_ext" -O $m4_name$m4_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "gperf"
-if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/gperf/gperf-$gperf_version$gperf_ext" -O $gperf_name$gperf_ext || { echo "$msg3"; exit 1; }
+if [ $install_gperf -eq 1 ]; then
+    if [ -f $gperf_name$gperf_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/gperf/gperf-$gperf_version$gperf_ext" -O $gperf_name$gperf_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "pkg-config"
-if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "https://pkgconfig.freedesktop.org/releases/pkg-config-$pkgconfig_version$pkgconfig_ext" -O $pkgconfig_name$pkgconfig_ext || { echo "$msg3"; exit 1; }
+if [ $install_pkgconfig -eq 1 ]; then
+    if [ -f $pkgconfig_name$pkgconfig_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "https://pkgconfig.freedesktop.org/releases/pkg-config-$pkgconfig_version$pkgconfig_ext" -O $pkgconfig_name$pkgconfig_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "libtool"
-if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/libtool/libtool-$libtool_version$libtool_ext" -O $libtool_name$libtool_ext || { echo "$msg4"; exit 1; }
+if [ $install_libtool -eq 1 ]; then
+    if [ -f $libtool_name$libtool_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/libtool/libtool-$libtool_version$libtool_ext" -O $libtool_name$libtool_ext || { echo "$msg4"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "libtasn1"
-if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/libtasn1/libtasn1-$libtasn1_version$libtasn1_ext" -O $libtasn1_name$libtasn1_ext || { echo "$msg3"; exit 1; }
+if [ $install_libtasn1 -eq 1 ]; then
+    if [ -f $libtasn1_name$libtasn1_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/libtasn1/libtasn1-$libtasn1_version$libtasn1_ext" -O $libtasn1_name$libtasn1_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "python"
-if [ $install_python -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "https://www.python.org/ftp/python/$python_version/Python-$python_version$python_ext" -O $python_name$python_ext || { echo "$msg3"; exit 1; }
+if [ $install_python -eq 1 ]; then
+    if [ -f $python_name$python_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "https://www.python.org/ftp/python/$python_version/Python-$python_version$python_ext" -O $python_name$python_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "libpcre2"
-if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/PCRE2Project/pcre2/releases/download/pcre2-$libpcre2_version/pcre2-$libpcre2_version$libpcre2_ext" -O $libpcre2_name$libpcre2_ext || { echo "$msg3"; exit 1; }
+if [ $install_libpcre2 -eq 1 ]; then
+    if [ -f $libpcre2_name$libpcre2_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/PCRE2Project/pcre2/releases/download/pcre2-$libpcre2_version/pcre2-$libpcre2_version$libpcre2_ext" -O $libpcre2_name$libpcre2_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "glib"
-if [ $install_glib -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnome/glib/${glib_version%.*}/glib-$glib_version$glib_ext" -O $glib_name$glib_ext || { echo "$msg3"; exit 1; }
+if [ $install_glib -eq 1 ]; then
+    if [ -f $glib_name$glib_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnome/glib/${glib_version%.*}/glib-$glib_version$glib_ext" -O $glib_name$glib_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "json-glib"
-if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnome/json-glib/${jsonglib_version%.*}/json-glib-$jsonglib_version$jsonglib_ext" -O $jsonglib_name$jsonglib_ext || { echo "$msg3"; exit 1; }
+if [ $install_jsonglib -eq 1 ]; then
+    if [ -f $jsonglib_name$jsonglib_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnome/json-glib/${jsonglib_version%.*}/json-glib-$jsonglib_version$jsonglib_ext" -O $jsonglib_name$jsonglib_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "bison"
-if [ $install_bison -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/bison/bison-$bison_version$bison_ext" -O $bison_name$bison_ext || { echo "$msg3"; exit 1; }
+if [ $install_bison -eq 1 ]; then
+    if [ -f $bison_name$bison_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/bison/bison-$bison_version$bison_ext" -O $bison_name$bison_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "openssl"
-if [ $install_openssl -eq 1 ]; then echo "$msg1"
-    openssl_ver_arr=(${openssl_version//./ } )
-    if [[ ${openssl_ver_arr[0]} -ge 3 ]]; then
-        wget $wget_flag "$github/openssl/openssl/releases/download/openssl-$openssl_version/openssl-$openssl_version$openssl_ext" -O $openssl_name$openssl_ext || { echo "$msg3"; exit 1; }
-    else
-        wget $wget_flag "https://www.openssl.org/source/old/${openssl_version::-1}/openssl-$openssl_version$openssl_ext" -O $openssl_name$openssl_ext || { echo "$msg3"; exit 1; }
+if [ $install_openssl -eq 1 ]; then
+    if [ -f $openssl_name$openssl_ext ]; then echo "$msg4"; else echo "$msg1"
+        openssl_ver_arr=(${openssl_version//./ } )
+        if [[ ${openssl_ver_arr[0]} -ge 3 ]]; then
+            wget $wget_flag "$github/openssl/openssl/releases/download/openssl-$openssl_version/openssl-$openssl_version$openssl_ext" -O $openssl_name$openssl_ext || { echo "$msg3"; exit 1; }
+        else
+            wget $wget_flag "https://www.openssl.org/source/old/${openssl_version::-1}/openssl-$openssl_version$openssl_ext" -O $openssl_name$openssl_ext || { echo "$msg3"; exit 1; }
+        fi
     fi
 else echo "$msg2"; fi
 update_var "libcurl"
-if [ $install_libcurl -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "https://curl.se/download/curl-$libcurl_version$libcurl_ext" -O $libcurl_name$libcurl_ext || { echo "$msg3"; exit 1; }
+if [ $install_libcurl -eq 1 ]; then
+    if [ -f $libcurl_name$libcurl_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "https://curl.se/download/curl-$libcurl_version$libcurl_ext" -O $libcurl_name$libcurl_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "swtpm"
-if [ $install_swtpm -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/stefanberger/swtpm/archive/refs/tags/v$swtpm_version$swtpm_ext" -O $swtpm_name$swtpm_ext || { echo "$msg3"; exit 1; }
+if [ $install_swtpm -eq 1 ]; then
+    if [ -f $swtpm_name$swtpm_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/stefanberger/swtpm/archive/refs/tags/v$swtpm_version$swtpm_ext" -O $swtpm_name$swtpm_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "gettext"
-if [ $install_gettext -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$gnu_mirror/gettext/gettext-$gettext_version$gettext_ext" -O $gettext_name$gettext_ext || { echo "$msg3"; exit 1; }
+if [ $install_gettext -eq 1 ]; then
+    if [ -f $gettext_name$gettext_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/gettext/gettext-$gettext_version$gettext_ext" -O $gettext_name$gettext_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "flex"
-if [ $install_flex -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/westes/flex/releases/download/v$flex_version/flex-$flex_version$flex_ext" -O $flex_name$flex_ext || { echo "$msg3"; exit 1; }
+if [ $install_flex -eq 1 ]; then
+    if [ -f $flex_name$flex_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/westes/flex/releases/download/v$flex_version/flex-$flex_version$flex_ext" -O $flex_name$flex_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 update_var "util-linux"
-if [ $install_utillinux -eq 1 ]; then echo "$msg1"
-    wget $wget_flag "$github/util-linux/util-linux/archive/refs/tags/v$utillinux_version$utillinux_ext" -O $utillinux_name$utillinux_ext || { echo "$msg3"; exit 1; }
+if [ $install_utillinux -eq 1 ]; then
+    if [ -f $utillinux_name$utillinux_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/util-linux/util-linux/archive/refs/tags/v$utillinux_version$utillinux_ext" -O $utillinux_name$utillinux_ext || { echo "$msg3"; exit 1; }
+    fi
 else echo "$msg2"; fi
 
 echo "creating directories to hold sources"
@@ -140,98 +189,145 @@ update_var () {
     msg="$progress_cnt/$total_cnt - $1 >>"
     msg1="$msg creating directory"
     msg2="$msg skipped!"
+    msg3="$msg directory existed, skipped!"
 }
 update_var "libtpms"
-if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    mkdir $libtpms_name
+if [ $install_libtpms -eq 1 ]; then
+    if [ -d $libtpms_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $libtpms_name
+    fi
 else echo "$msg2"; fi
 update_var "tpm2-tss"
-if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    mkdir $tpm2tss_name
+if [ $install_tpm2tss -eq 1 ]; then
+    if [ -d $tpm2tss_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $tpm2tss_name
+    fi
 else echo "$msg2"; fi
 update_var "json-c"
-if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    mkdir $jsonc_name
+if [ $install_jsonc -eq 1 ]; then
+    if [ -d $jsonc_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $jsonc_name
+    fi
 else echo "$msg2"; fi
 update_var "texinfo"
-if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    mkdir $texinfo_name
+if [ $install_texinfo -eq 1 ]; then
+    if [ -d $texinfo_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $texinfo_name
+    fi
 else echo "$msg2"; fi
 update_var "automake"
-if [ $install_automake -eq 1 ]; then echo "$msg1"
-    mkdir $automake_name
+if [ $install_automake -eq 1 ]; then
+    if [ -d $automake_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $automake_name
+    fi
 else echo "$msg2"; fi
 update_var "autoconf"
-if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    mkdir $autoconf_name
+if [ $install_autoconf -eq 1 ]; then
+    if [ -d $autoconf_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $autoconf_name
+    fi
 else echo "$msg2"; fi
 update_var "help2man"
-if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    mkdir $help2man_name
+if [ $install_help2man -eq 1 ]; then
+    if [ -d $help2man_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $help2man_name
+    fi
 else echo "$msg2"; fi
 update_var "m4"
-if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    mkdir $m4_name
+if [ $install_m4 -eq 1 ]; then
+    if [ -d $m4_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $m4_name
+    fi
 else echo "$msg2"; fi
 update_var "gperf"
-if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    mkdir $gperf_name
+if [ $install_gperf -eq 1 ]; then
+    if [ -d $gperf_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $gperf_name
+    fi
 else echo "$msg2"; fi
 update_var "libtool"
-if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    mkdir $libtool_name
+if [ $install_libtool -eq 1 ]; then
+    if [ -d $libtool_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $libtool_name
+    fi
 else echo "$msg2"; fi
 update_var "pkg-config"
-if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
-    mkdir $pkgconfig_name
+if [ $install_pkgconfig -eq 1 ]; then
+    if [ -d $pkgconfig_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $pkgconfig_name
+    fi
 else echo "$msg2"; fi
 update_var "libtasn1"
-if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    mkdir $libtasn1_name
+if [ $install_libtasn1 -eq 1 ]; then
+    if [ -d $libtasn1_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $libtasn1_name
+    fi
 else echo "$msg2"; fi
 update_var "python"
-if [ $install_python -eq 1 ]; then echo "$msg1"
-    mkdir $python_name
+if [ $install_python -eq 1 ]; then
+    if [ -d $python_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $python_name
+    fi
 else echo "$msg2"; fi
 update_var "libpcre2"
-if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
-    mkdir $libpcre2_name
+if [ $install_libpcre2 -eq 1 ]; then
+    if [ -d $libpcre2_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $libpcre2_name
+    fi
 else echo "$msg2"; fi
 update_var "glib"
-if [ $install_glib -eq 1 ]; then echo "$msg1"
-    mkdir $glib_name
+if [ $install_glib -eq 1 ]; then
+    if [ -d $glib_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $glib_name
+    fi
 else echo "$msg2"; fi
 update_var "json-glib"
-if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
-    mkdir $jsonglib_name
+if [ $install_jsonglib -eq 1 ]; then
+    if [ -d $jsonglib_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $jsonglib_name
+    fi
 else echo "$msg2"; fi
 update_var "bison"
-if [ $install_bison -eq 1 ]; then echo "$msg1"
-    mkdir $bison_name
+if [ $install_bison -eq 1 ]; then
+    if [ -d $bison_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $bison_name
+    fi
 else echo "$msg2"; fi
 update_var "openssl"
-if [ $install_openssl -eq 1 ]; then echo "$msg1"
-    mkdir $openssl_name
+if [ $install_openssl -eq 1 ]; then
+    if [ -d $openssl_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $openssl_name
+    fi
 else echo "$msg2"; fi
 update_var "libcurl"
-if [ $install_libcurl -eq 1 ]; then echo "$msg1"
-    mkdir $libcurl_name
+if [ $install_libcurl -eq 1 ]; then
+    if [ -d $libcurl_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $libcurl_name
+    fi
 else echo "$msg2"; fi
 update_var "swtpm"
-if [ $install_swtpm -eq 1 ]; then echo "$msg1"
-    mkdir $swtpm_name
+if [ $install_swtpm -eq 1 ]; then
+    if [ -d $swtpm_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $swtpm_name
+    fi
 else echo "$msg2"; fi
 update_var "gettext"
-if [ $install_gettext -eq 1 ]; then echo "$msg1"
-    mkdir $gettext_name
+if [ $install_gettext -eq 1 ]; then
+    if [ -d $gettext_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $gettext_name
+    fi
 else echo "$msg2"; fi
 update_var "flex"
-if [ $install_flex -eq 1 ]; then echo "$msg1"
-    mkdir $flex_name
+if [ $install_flex -eq 1 ]; then
+    if [ -d $flex_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $flex_name
+    fi
 else echo "$msg2"; fi
 update_var "util-linux"
-if [ $install_utillinux -eq 1 ]; then echo "$msg1"
-    mkdir $utillinux_name
+if [ $install_utillinux -eq 1 ]; then
+    if [ -d $utillinux_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $utillinux_name
+    fi
 else echo "$msg2"; fi
 
 echo "unzipping sources"

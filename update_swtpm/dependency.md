@@ -148,8 +148,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `./configure`
             - `make -j$(nproc)`
             - `make install`
-        - :grey_question: (compile) gnulib (required by gnutls)
-            - [ ]
+        - :x: (compile) gnulib (required by gnutls)
             - https://github.com/coreutils/gnulib/tags
             - `wget https://github.com/coreutils/gnulib/archive/refs/tags/v1.0.tar.gz`
             - `tar xf v1.0.tar.gz`
@@ -189,7 +188,34 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                 - `wget https://gitlab.gnome.org/GNOME/libxslt/-/archive/v1.1.41/libxslt-v1.1.41.tar.gz`
                 - `tar xf libxslt-v1.1.41.tar.gz`
                 - `./autogen.sh`
-            - [ ] (compile) dblatex/fop (required by gtk-doc), libxml2 problem?
+                - `make`
+                - `make install`
+            - [ ] (compile) dblatex (required by gtk-doc), libxml2 problem?, requires libxslt
+                - :grey_question: (compile) xslt with saxon (required by dblatex)
+                    - binary is generated, but no pc file
+                - :grey_question: (compile) epstopdf (required by dblatex)
+                - :grey_question: (compile) fig2dev (required by dblatex)
+                - [ ] (compile) miktex:latex+pdflatex (required by dblatex)
+                    - [ ] (compile) qt6 (required by miktex)
+                        - https://download.qt.io/official_releases/qt/
+                        - `wget https://download.qt.io/official_releases/qt/6.7/6.7.2/single/qt-everywhere-src-6.7.2.tar.xz`
+                        - `tar xf qt-everywhere-src-6.7.2.tar.xz`
+                        - `./configure`
+                        - `mkdir qt6-build`
+                        - `cmake --build ../qt-everywhere-src-6.7.2 --parallel`
+                        - `cmake --install .`
+                    - https://github.com/MiKTeX/miktex/releases
+                    - `wget https://miktex.org/download/ctan/systems/win32/miktex/source/miktex-24.4.tar.xz`
+                    - `tar xf miktex-24.4.tar.xz`
+                    - `mkdir miktex-build`
+                    - `cmake ../miktex-24.4`
+                - [ ] (compile) makeindex (required by dblatex)
+                - [ ] (compile) kpsewhich (required by dblatex)
+                - https://sourceforge.net/projects/dblatex/files/dblatex/
+                - `wget https://sourceforge.net/projects/dblatex/files/dblatex/dblatex-0.3.12/dblatex3-0.3.12.tar.bz2/download`
+                - `tar xf dblatex3-0.3.12.tar.bz2`
+                - `python setup.py build`
+                - `sudo python setup.py install`
             - https://gitlab.gnome.org/GNOME/gtk-doc/-/tags
             - note: no need to source virtualenv, it only requires 3.x not > 3.7
             - `wget https://gitlab.gnome.org/GNOME/gtk-doc/-/archive/1.34.0/gtk-doc-1.34.0.tar.gz`

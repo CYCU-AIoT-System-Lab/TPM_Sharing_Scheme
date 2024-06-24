@@ -45,8 +45,8 @@ load_preset () {
         echo_notice "$message1" "$message2" "Loading preset..."
     fi
     # ==== version ====
-    cmake_ver="3.18"        # cmake version
-    cmake_build="4"         # cmake build
+    cmake_ver="3.29"        # cmake version
+    cmake_build="6"         # cmake build
     valgrind_ver="3.22.0"   # valgrind version
     libssl_ver="1.1.1w"     # libssl version
     # ==== url ====
