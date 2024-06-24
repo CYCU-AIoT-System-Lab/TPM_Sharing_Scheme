@@ -40,6 +40,9 @@ install_tpm2tss=0
 install_libtpms=0
 install_swtpm=0
 
+github="https://github.com"
+gnu_mirror="ftp://ftp.twaren.net/Unix/GNU/gnu"
+gnome="https://download.gnome.org/sources"
 #>1 https://github.com/stefanberger/swtpm/releases
 libtpms_version="0.9.6"
 libtpms_ext=".tar.gz"

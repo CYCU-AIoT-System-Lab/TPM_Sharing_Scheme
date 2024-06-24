@@ -260,10 +260,16 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                             - `sudo make install`
                         - :white_check_mark: (compile) libXaw (required by libX11)
                             - [ ] (compile) xserver/xext (required by libXaw)
+                                - [ ] (compile) randrproto (required by xserver)
+                                    - https://gitlab.freedesktop.org/xorg/proto/randrproto/-/tags
+                                    - `wget https://gitlab.freedesktop.org/xorg/proto/randrproto/-/archive/randrproto-1.5.0/randrproto-randrproto-1.5.0.tar.gz`
                                 - https://gitlab.freedesktop.org/xorg/xserver/-/tags
                                 - `wget https://gitlab.freedesktop.org/xorg/xserver/-/archive/xwayland-24.1.0/xserver-xwayland-24.1.0.tar.gz`
                                 - `tar xf xserver....tar.gz`
                                 - source python3.x build environment
+                                - `meson setup _build`
+                                - `meson compile -C _build`
+                                - `meson install -C _build`
                             - [ ] (compile) xt (required by libXaw)
                             - [ ] (compile) xmu (required by libXaw)
                             - https://gitlab.freedesktop.org/xorg/lib/libxaw/-/tags
