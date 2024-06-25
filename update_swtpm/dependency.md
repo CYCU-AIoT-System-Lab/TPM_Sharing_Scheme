@@ -630,7 +630,6 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `./configure`
         - `make -j$(nproc)`
         - `sudo make install`
-    - #--------------------------------------------
     - :white_check_mark: (compile) tcsd (required by swtpm)
         - https://sourceforge.net/projects/trousers/files/trousers/
         - `wget https://sourceforge.net/projects/trousers/files/trousers/0.3.15/trousers-0.3.15.tar.gz/download`
@@ -654,27 +653,44 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `./configure`
         - `make`
         - `sudo make install`
-    - :white_check_mark: (compile) gawk (optionally required by swtpm)
+    - :white_check_mark: (compile) gawk (required by swtpm)
         - http://ftp.twaren.net/Unix/GNU/gnu/gawk/
         - `wget ftp.twaren.net/Unix/GNU/gnu/gawk/gawk-5.3.0.tar.gz`
         - `tar xf gawk....tar.gz`
         - `configure`
         - `make`
         - `sudo make install`
-    - :white_check_mark: (compile) socat (optionally required by swtpm)
+    - :white_check_mark: (compile) socat (required by swtpm)
         - http://www.dest-unreach.org/socat/
         - `wget www.dest-unreach.org/socat/download/socat-1.7.4.4.tar.gz`
         - `./configure`
         - `make`
         - `sudo make install`
-    - :white_check_mark: (compile) libseccomp (optionally required by swtpm)
+    - :white_check_mark: (compile) libseccomp (required by swtpm)
         - https://github.com/seccomp/libseccomp/releases
         - `wget https://github.com/seccomp/libseccomp/releases/download/v2.5.5/libseccomp-2.5.5.tar.gz`
         - `tar xf libseccomp....tar.gz`
         - `configure`
         - `make`
         - `sudo make install`
-    - :question: (compile) tpm-tools (optionally required by swtpm)
-    - :question: (compile) tpm2-abrmd (optionally required by swtpm)
-    - :question: (compile) tpm2-tools (optionally required by swtpm)
-    - :question: (compile) tpm2-tss-engine (optionally required by swtpm)
+    - :white_check_mark: (compile) tpm-tools (optional)
+        - https://github.com/tpm2-software/tpm2-tools/releases
+        - `wget https://github.com/tpm2-software/tpm2-tools/releases/download/5.7/tpm2-tools-5.7.tar.gz`
+        - `tar xf tpm2-tools....tar.gz`
+        - `./configure`
+        - `make`
+        - `sudo make install`
+    - :white_check_mark: (compile) tpm2-abrmd (optional)
+        - https://github.com/tpm2-software/tpm2-abrmd/releases
+        - `wget https://github.com/tpm2-software/tpm2-abrmd/releases/download/3.0.0/tpm2-abrmd-3.0.0.tar.gz`
+        - `tar xf tpm2-abrmd....tar.gz`
+        - `./configure`
+        - `make`
+        - `sudo make install`
+    - :white_check_mark: (compile) tpm2-tss-engine (optional)
+        - https://github.com/tpm2-software/tpm2-tss-engine/releases
+        - `wget https://github.com/tpm2-software/tpm2-tss-engine/releases/download/1.2.0/tpm2-tss-engine-1.2.0.tar.gz`
+        - `tar xf tpm2-tss-engine....tar.gz`
+        - `./configure`
+        - `make`
+        - `sudo make install`
