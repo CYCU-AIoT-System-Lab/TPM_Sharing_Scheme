@@ -675,7 +675,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `configure`
         - `make`
         - `sudo make install`
-    - :white_check_mark: (compile) tpm-tools (optional)
+    - :white_check_mark: (compile) tpm2-tools (optional)
         - https://github.com/tpm2-software/tpm2-tools/releases
         - `wget https://github.com/tpm2-software/tpm2-tools/releases/download/5.7/tpm2-tools-5.7.tar.gz`
         - `tar xf tpm2-tools....tar.gz`

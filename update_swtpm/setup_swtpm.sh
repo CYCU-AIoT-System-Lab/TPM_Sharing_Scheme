@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# This script is used to install all of the dependency of swtpm and optional packages
+#   This script is used to install all of the dependency of swtpm and
+# optional packages, based on oldest oldest project supported platform
+# Ubuntu 18.04 and jetson-nano-jp461
 #
-# Dependency and version experiments end on 20240625
-# You can update installing software versions by changing settings in `function_swtpm.sh` file
+#   You can update installing software versions by changing settings
+# in `function_swtpm.sh` file
 #
-# Core utility finished in 20240625 by belongtothenight / Da-chuan Chen
+#   Core utility finished in 20240625 by belongtothenight / Da-chuan Chen
 #
 # !!!! It is recommended to re-run installation script for circular dependency issue
 
@@ -46,7 +48,7 @@ echo "downloading from sources"
 github="https://github.com"
 gnu_mirror="ftp://ftp.twaren.net/Unix/GNU/gnu"
 gnome="https://download.gnome.org/sources"
-total_cnt=29
+total_cnt=38
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -238,9 +240,63 @@ if [ $install_p11kit -eq 1 ]; then
         wget $wget_flag "$github/p11-glue/p11-kit/releases/download/$p11kit_version/p11-kit-$p11kit_version$p11kit_ext" -O $p11kit_name$p11kit_ext || { echo "$msg3"; exit 1; }
     fi
 else echo "$msg2"; fi
+update_var "tcsd"
+if [ $install_tcsd -eq 1 ]; then
+    if [ -f $tcsd_name$tcsd_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$sourceforge/trousers/files/trousers/$tcsd_version/trousers-$tcsd_version$tcsd_ext/download" -O $tcsd_name$tcsd_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "tcl"
+if [ $install_tcl -eq 1 ]; then
+    if [ -f $tcl_name$tcl_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$sourceforge/tcl/files/Tcl/$tcl_version/tcl$tcl_version-src$tcl_ext/download" -O $tcl_name$tcl_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "expect"
+if [ $install_expect -eq 1 ]; then
+    if [ -f $expect_name$expect_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$sourceforge/expect/files/Expect/$expect_version/expect$expect_version$expect_ext/download" -O $expect_name$expect_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "gawk"
+if [ $install_gawk -eq 1 ]; then
+    if [ -f $gawk_name$gawk_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/gawk/gawk-$gawk_version$gawk_ext" -O $gawk_name$gawk_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "socat"
+if [ $install_socat -eq 1 ]; then
+    if [ -f $socat_name$socat_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "www.dest-unreach.org/socat/download/socat-$socat_version$socat_ext" -O $socat_name$socat_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "libseccomp"
+if [ $install_libseccomp -eq 1 ]; then
+    if [ -f $libseccomp_name$libseccomp_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/seccomp/libseccomp/releases/download/v$libseccomp_version/libseccomp-$libseccomp_version$libseccomp_ext" -O $libseccomp_name$libseccomp_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "tpm2-tools"
+if [ $install_tpm2tools -eq 1 ]; then
+    if [ -f $tpm2tools_name$tpm2tools_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/tpm2-software/tpm2-tools/releases/download/$tpm2tools_version/tpm2-tools-$tpm2tools_version$tpm2tools_ext" -O $tpm2tools_name$tpm2tools_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "tpm2abrmd"
+if [ $install_tpm2abrmd -eq 1 ]; then
+    if [ -f $tpm2abrmd_name$tpm2abrmd_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/tpm2-software/tpm2-abrmd/releases/download/$tpm2abrmd_version/tpm2-abrmd-$tpm2abrmd_version$tpm2abrmd_ext" -O $tpm2abrmd_name$tpm2abrmd_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "tpm2tssengine"
+if [ $install_tpm2tssengine -eq 1 ]; then
+    if [ -f $tpm2tssengine_name$tpm2tssengine_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/tpm2-software/tpm2-tss-engine/releases/download/$tpm2tssengine_version/tpm2-tss-engine-$tpm2tssengine_version$tpm2tssengine_ext" -O $tpm2tssengine_name$tpm2tssengine_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
 
 echo "creating directories to hold sources"
-total_cnt=27
+total_cnt=36
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -411,10 +467,64 @@ if [ $install_p11kit -eq 1 ]; then
         mkdir $p11kit_name
     fi
 else echo "$msg2"; fi
+update_var "tcsd"
+if [ $install_tcsd -eq 1 ]; then
+    if [ -d $tcsd_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $tcsd_name
+    fi
+else echo "$msg2"; fi
+update_var "tcl"
+if [ $install_tcl -eq 1 ]; then
+    if [ -d $tcl_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $tcl_name
+    fi
+else echo "$msg2"; fi
+update_var "expect"
+if [ $install_expect -eq 1 ]; then
+    if [ -d $expect_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $expect_name
+    fi
+else echo "$msg2"; fi
+update_var "gawk"
+if [ $install_gawk -eq 1 ]; then
+    if [ -d $gawk_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $gawk_name
+    fi
+else echo "$msg2"; fi
+update_var "socat"
+if [ $install_socat -eq 1 ]; then
+    if [ -d $socat_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $socat_name
+    fi
+else echo "$msg2"; fi
+update_var "libseccomp"
+if [ $install_libseccomp -eq 1 ]; then
+    if [ -d $libseccomp_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $libseccomp_name
+    fi
+else echo "$msg2"; fi
+update_var "tpm2tools"
+if [ $install_tpm2tools -eq 1 ]; then
+    if [ -d $tpm2tools_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $tpm2tools_name
+    fi
+else echo "$msg2"; fi
+update_var "tpm2abrmd"
+if [ $install_tpm2abrmd -eq 1 ]; then
+    if [ -d $tpm2abrmd_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $tpm2abrmd_name
+    fi
+else echo "$msg2"; fi
+update_var "tpm2tssengine"
+if [ $install_tpm2tssengine -eq 1 ]; then
+    if [ -d $tpm2tssengine_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $tpm2tssengine_name
+    fi
+else echo "$msg2"; fi
 
 echo "unzipping sources"
 tar_add_flag="--strip-components=1"
-total_cnt=27
+total_cnt=36
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -530,9 +640,45 @@ update_var "p11-kit"
 if [ $install_p11kit -eq 1 ]; then echo "$msg1"
     tar $tar_flag $p11kit_name$p11kit_ext -C $p11kit_name $tar_add_flag
 else echo "$msg2"; fi
+update_var "tcsd"
+if [ $install_tcsd -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $tcsd_name$tcsd_ext -C $tcsd_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "tcl"
+if [ $install_tcl -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $tcl_name$tcl_ext -C $tcl_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "expect"
+if [ $install_expect -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $expect_name$expect_ext -C $expect_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "gawk"
+if [ $install_gawk -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $gawk_name$gawk_ext -C $gawk_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "socat"
+if [ $install_socat -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $socat_name$socat_ext -C $socat_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "libseccomp"
+if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $libseccomp_name$libseccomp_ext -C $libseccomp_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "tpm2-tools"
+if [ $install_tpm2tools -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $tpm2tools_name$tpm2tools_ext -C $tpm2tools_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "tpm2-abrmd"
+if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $tpm2abrmd_name$tpm2abrmd_ext -C $tpm2abrmd_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "tpm2-tss-engine"
+if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $tpm2tssengine_name$tpm2tssengine_ext -C $tpm2tssengine_name $tar_add_flag
+else echo "$msg2"; fi
 
 echo "creating symlink to directories"
-total_cnt=28
+total_cnt=37
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -652,6 +798,42 @@ update_var "p11-kit"
 if [ $install_p11kit -eq 1 ]; then echo "$msg1"
     ln -sf $p11kit_name $p11kit_dirname
 else echo "$msg2"; fi
+update_var "tcsd"
+if [ $install_tcsd -eq 1 ]; then echo "$msg1"
+    ln -sf $tcsd_name $tcsd_dirname
+else echo "$msg2"; fi
+update_var "tcl"
+if [ $install_tcl -eq 1 ]; then echo "$msg1"
+    ln -sf $tcl_name $tcl_dirname
+else echo "$msg2"; fi
+update_var "expect"
+if [ $install_expect -eq 1 ]; then echo "$msg1"
+    ln -sf $expect_name $expect_dirname
+else echo "$msg2"; fi
+update_var "gawk"
+if [ $install_gawk -eq 1 ]; then echo "$msg1"
+    ln -sf $gawk_name $gawk_dirname
+else echo "$msg2"; fi
+update_var "socat"
+if [ $install_socat -eq 1 ]; then echo "$msg1"
+    ln -sf $socat_name $socat_dirname
+else echo "$msg2"; fi
+update_var "libseccomp"
+if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
+    ln -sf $libseccomp_name $libseccomp_dirname
+else echo "$msg2"; fi
+update_var "tpm2-tools"
+if [ $install_tpm2tools -eq 1 ]; then echo "$msg1"
+    ln -sf $tpm2tools_name $tpm2tools_dirname
+else echo "$msg2"; fi
+update_var "tpm2-abrmd"
+if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
+    ln -sf $tpm2abrmd_name $tpm2abrmd_dirname
+else echo "$msg2"; fi
+update_var "tpm2-tss-engine"
+if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
+    ln -sf $tpm2tssengine_name $tpm2tssengine_dirname
+else echo "$msg2"; fi
 
 echo "compiling sources"
 make_flag="-j$(nproc)"
@@ -674,7 +856,7 @@ meson_compile () {
     sudo bash -c "source $venv_bin_path && $meson_path install -C _build"
     sudo cp _build/meson-private/*.pc /usr/local/lib/pkgconfig
 }
-total_cnt=30
+total_cnt=39
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -816,7 +998,7 @@ else echo "$msg2"; fi
 update_var "util-linux"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
     cd $utillinux_dirname
-    ./autogen.sh
+    ./autogen.sh | ts "$msg"
     gnu_compile "--disable-all-programs --enable-libuuid" | ts "$msg"
 else echo "$msg2"; fi
 update_var "nettle"
@@ -842,15 +1024,68 @@ else echo "$msg2"; fi
 update_var "gnutls"
 if [ $install_gnutls -eq 1 ]; then echo "$msg1"
     cd $gnutls_dirname
-    ./bootstrap
+    ./bootstrap | ts "$msg"
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "tcsd"
+if [ $install_tcsd -eq 1 ]; then echo "$msg1"
+    cd $tcsd_dirname
+    ./bootstrap.sh | ts "$msg"
+    make $make_flag | ts "$msg"
+    sudo make $make_flag install | ts "$msg"
+else echo "$msg2"; fi
+update_var "tcl"
+if [ $install_tcl -eq 1 ]; then echo "$msg1"
+    cd $tcl_dirname/unix
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "expect"
+if [ $install_expect -eq 1 ]; then echo "$msg1"
+    cd $expect_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "gawk"
+if [ $install_gawk -eq 1 ]; then echo "$msg1"
+    cd $gawk_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "socat"
+if [ $install_socat -eq 1 ]; then echo "$msg1"
+    cd $socat_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "libseccomp"
+if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
+    cd $libseccomp_dirname
     gnu_compile | ts "$msg"
 else echo "$msg2"; fi
 update_var "tpm2-tss"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
     cd $tpm2tss_dirname
     gnu_compile "--with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix" | ts "$msg"
-    sudo udevadm control --reload-rules && sudo udevadm trigger
-    sudo ldconfig
+    sudo udevadm control --reload-rules | ts "$msg"
+    sudo udevadm trigger | ts "$msg"
+    sudo ldconfig | ts "$msg"
+else echo "$msg2"; fi
+update_var "tpm2-tools"
+if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
+    cd $libseccomp_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "tpm2-abrmd"
+if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
+    cd $tpm2abrmd_dirname
+    sudo useradd --system --user-group tss | ts "$msg" || :
+    gnu_compile "--with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share" | ts "$msg" # can test integration with swtpm with --enable-integration
+    sudo ldconfig | ts "$msg"
+    sudo pkill -HUP dbus-daemon | ts "$msg"
+    sudo systemctl daemon-reload | ts "$msg"
+else echo "$msg2"; fi
+update_var "tpm2-tss-engine"
+if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
+    cd $tpm2tssengine_dirname
+    gnu_compile | ts "$msg"
+    sudo ldconfig | ts "$msg"
 else echo "$msg2"; fi
 update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"

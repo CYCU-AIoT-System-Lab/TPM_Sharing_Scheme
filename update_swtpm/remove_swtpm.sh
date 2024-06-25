@@ -24,7 +24,7 @@ fi
 
 # Note: this section is reversed-compile ordered
 echo "uninstalling compiled sources"
-total_cnt=30
+total_cnt=39
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -38,15 +38,68 @@ if [ $install_swtpm -eq 1 ]; then echo "$msg3"
     cd $swtpm_dirname
     sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
-update_var "tpm2-tss"
-if [ $install_tpm2tss -eq 1 ]; then echo "$msg3"
-    cd $tpm2tss_dirname
-    sudo make uninstall | ts "$msg"
-else echo "$msg2"; fi
 update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then echo "$msg3"
     cd $libtpms_dirname
     sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
+update_var "tpm2-tss-engine"
+if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg3"
+    cd $tpm2tssengine_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+    sudo ldconfig | ts "$msg"
+else echo "$msg2"; fi
+update_var "tpm2-abrmd"
+if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg3"
+    cd $tpm2abrmd_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+    sudo deluser --system tss | ts "$msg" || :
+    # sudo groupdel tss || : # auto-deleted in previous line
+    sudo ldconfig | ts "$msg"
+    sudo pkill -HUP dbus-daemon | ts "$msg"
+    sudo systemctl daemon-reload | ts "$msg"
+else echo "$msg2"; fi
+update_var "tpm2-tools"
+if [ $install_tpm2tools -eq 1 ]; then echo "$msg3"
+    cd $tpm2tools_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
+update_var "tpm2-tss"
+if [ $install_tpm2tss -eq 1 ]; then echo "$msg3"
+    cd $tpm2tss_dirname
+    sudo make uninstall | ts "$msg"
+    sudo udevadm control --reload-rules | ts "$msg"
+    sudo udevadm trigger | ts "$msg"
+    sudo ldconfig | ts "$msg"
+else echo "$msg2"; fi
+update_var "libseccomp"
+if [ $install_libseccomp -eq 1 ]; then echo "$msg3"
+    cd $libseccomp_dirname
+    sudo make uninstall | ts "$msg"
+else echo "$msg2"; fi
+update_var "socat"
+if [ $install_socat -eq 1 ]; then echo "$msg3"
+    cd $socat_dirname
+    sudo make uninstall | ts "$msg"
+else echo "$msg2"; fi
+update_var "gawk"
+if [ $install_gawk -eq 1 ]; then echo "$msg3"
+    cd $gawk_dirname
+    sudo make uninstall | ts "$msg"
+else echo "$msg2"; fi
+update_var "expect"
+if [ $install_expect -eq 1 ]; then echo "$msg3"
+    cd $expect_dirname
+    sudo make uninstall-binaries | ts "$msg"
+else echo "$msg2"; fi
+update_var "tcl"
+if [ $install_tcl -eq 1 ]; then echo "$msg3"
+    echo "$msg no removing solution provided"
+else echo "$msg2"; fi
+update_var "tcsd"
+if [ $install_tcsd -eq 1 ]; then echo "$msg3"
+    cd $tcsd_dirname
+    sudo make uninstall | ts "$msg"
 else echo "$msg2"; fi
 update_var "gnutls"
 if [ $install_gnutls -eq 1 ]; then echo "$msg3"
@@ -185,7 +238,7 @@ if [ $install_libtpms -eq 1 ]; then echo "$msg3"
 else echo "$msg2"; fi
 
 echo "removing created directories"
-total_cnt=29
+total_cnt=38
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -310,9 +363,45 @@ update_var "gnutls"
 if [ $install_gnutls -eq 1 ]; then echo "$msg1"
     rm -rf $gnutls_name
 else echo "$msg2"; fi
+update_var "tcsd"
+if [ $install_tcsd -eq 1 ]; then echo "$msg1"
+    rm -rf $tcsd_name
+else echo "$msg2"; fi
+update_var "tcl"
+if [ $install_tcl -eq 1 ]; then echo "$msg1"
+    rm -rf $tcl_name
+else echo "$msg2"; fi
+update_var "expect"
+if [ $install_expect -eq 1 ]; then echo "$msg1"
+    rm -rf $expect_name
+else echo "$msg2"; fi
+update_var "gawk"
+if [ $install_gawk -eq 1 ]; then echo "$msg1"
+    rm -rf $gawk_name
+else echo "$msg2"; fi
+update_var "socat"
+if [ $install_socat -eq 1 ]; then echo "$msg1"
+    rm -rf $socat_name
+else echo "$msg2"; fi
+update_var "libseccomp"
+if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
+    rm -rf $libseccomp_name
+else echo "$msg2"; fi
+update_var "tpm2-tools"
+if [ $install_tpm2tools -eq 1 ]; then echo "$msg1"
+    rm -rf $tpm2tools_name
+else echo "$msg2"; fi
+update_var "tpm2-abrmd"
+if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
+    rm -rf $tpm2abrmd_name
+else echo "$msg2"; fi
+update_var "tpm2-tss-engine"
+if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
+    rm -rf $tpm2tssengine_name
+else echo "$msg2"; fi
 
 echo "removing downloaded source"
-total_cnt=27
+total_cnt=36
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -428,9 +517,45 @@ update_var "p11-kit"
 if [ $install_p11kit -eq 1 ]; then echo "$msg1"
     rm -f $p11kit_name$p11kit_ext
 else echo "$msg2"; fi
+update_var "tcsd"
+if [ $install_tcsd -eq 1 ]; then echo "$msg1"
+    rm -f $tcsd_name$tcsd_ext
+else echo "$msg2"; fi
+update_var "tcl"
+if [ $install_tcl -eq 1 ]; then echo "$msg1"
+    rm -f $tcl_name$tcl_ext
+else echo "$msg2"; fi
+update_var "expect"
+if [ $install_expect -eq 1 ]; then echo "$msg1"
+    rm -f $expect_name$expect_ext
+else echo "$msg2"; fi
+update_var "gawk"
+if [ $install_gawk -eq 1 ]; then echo "$msg1"
+    rm -f $gawk_name$gawk_ext
+else echo "$msg2"; fi
+update_var "socat"
+if [ $install_socat -eq 1 ]; then echo "$msg1"
+    rm -f $socat_name$socat_ext
+else echo "$msg2"; fi
+update_var "libseccomp"
+if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
+    rm -f $libseccomp_name$libseccomp_ext
+else echo "$msg2"; fi
+update_var "tpm2-tools"
+if [ $install_tpm2tools -eq 1 ]; then echo "$msg1"
+    rm -f $tpm2tools_name$tpm2tools_ext
+else echo "$msg2"; fi
+update_var "tpm2-abrmd"
+if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
+    rm -f $tpm2abrmd_name$tpm2abrmd_ext
+else echo "$msg2"; fi
+update_var "tpm2-tss-engine"
+if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
+    rm -f $tpm2tssengine_name$tpm2tssengine_ext
+else echo "$msg2"; fi
 
 echo "removing symlinks"
-total_cnt=28
+total_cnt=37
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -549,6 +674,42 @@ else echo "$msg2"; fi
 update_var "p11-kit"
 if [ $install_p11kit -eq 1 ]; then echo "$msg1"
     rm -r $p11kit_dirname
+else echo "$msg2"; fi
+update_var "tcsd"
+if [ $install_tcsd -eq 1 ]; then echo "$msg1"
+    rm -r $tcsd_dirname
+else echo "$msg2"; fi
+update_var "tcl"
+if [ $install_tcl -eq 1 ]; then echo "$msg1"
+    rm -r $tcl_dirname
+else echo "$msg2"; fi
+update_var "expect"
+if [ $install_expect -eq 1 ]; then echo "$msg1"
+    rm -r $expect_dirname
+else echo "$msg2"; fi
+update_var "gawk"
+if [ $install_gawk -eq 1 ]; then echo "$msg1"
+    rm -r $gawk_dirname
+else echo "$msg2"; fi
+update_var "socat"
+if [ $install_socat -eq 1 ]; then echo "$msg1"
+    rm -r $socat_dirname
+else echo "$msg2"; fi
+update_var "libseccomp"
+if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
+    rm -r $libseccomp_dirname
+else echo "$msg2"; fi
+update_var "tpm2-tools"
+if [ $install_tpm2tools -eq 1 ]; then echo "$msg1"
+    rm -r $tpm2tools_dirname
+else echo "$msg2"; fi
+update_var "tpm2-abrmd"
+if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
+    rm -r $tpm2abrmd_dirname
+else echo "$msg2"; fi
+update_var "tpm2-tss-engine"
+if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
+    rm -r $tpm2tssengine_dirname
 else echo "$msg2"; fi
 
 echo "$script finished"
