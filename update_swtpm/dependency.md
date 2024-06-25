@@ -166,8 +166,8 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `sudo make install`
     - :white_check_mark: (compile) gnutls (required by swtpm)
         - :x: (apt-get) unbound-anchor (required by gnutls) can't create root.key
-        - :grey_question: (compile) libnettle (required by gnutls, require gmp)
-        - http://ftp.twaren.net/Unix/GNU/gnu/nettle/
+        - :white_check_mark: (compile) libnettle (required by gnutls, require gmp)
+            - http://ftp.twaren.net/Unix/GNU/gnu/nettle/
             - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/nettle/nettle-3.10.tar.gz`
             - `tar xf nettle-3.10.tar.gz`
             - `./configure`
@@ -592,7 +592,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `sudo make install`
         - :x: (apt-get) unbound (required by gnutls)
             - doesn't install pkgconfig files
-        - :question: (compile) libunbound (required by gnutls, require openssl)
+        - :x: (compile) libunbound (required by gnutls, require openssl)
             - :white_check_mark: (compile) expat (required by unbound)
             - :white_check_mark: (compile) bison (required by unbound)
             - :white_check_mark: (compile) flex (required by unbound)

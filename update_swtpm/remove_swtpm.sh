@@ -10,16 +10,21 @@ update_var () {
     msg="$progress_cnt/$total_cnt - $1 >>"
     msg1="$msg removing package"
     msg2="$msg removing failed!"
+    package="$1"
+}
+apt_remove () {
+    echo "$msg1"
+    sudo apt remove -y $package | ts "$msg" || { echo "$msg2"; exit 1; }
 }
 if [ $install_apt_package -eq 1 ]; then
     echo "uninstalling apt packages"
-    update_var "mercurial"
-    echo "$msg1"; sudo apt remove -y mercurial | ts "$msg" || { echo "$msg2"; exit 1; }
+    update_var "mercurial" && apt_remove "$package"
+    update_var "gtk_doc-tools" && apt_remove "$package"
 fi
 
 # Note: this section is reversed-compile ordered
 echo "uninstalling compiled sources"
-total_cnt=25
+total_cnt=30
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -31,6 +36,31 @@ update_var () {
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg3"
     cd $swtpm_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
+update_var "gnutls"
+if [ $install_gnutls -eq 1 ]; then echo "$msg3"
+    cd $gnutls_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
+update_var "p11-kit"
+if [ $install_p11kit -eq 1 ]; then echo "$msg3"
+    cd $p11kit_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
+update_var "libev"
+if [ $install_libev -eq 1 ]; then echo "$msg3"
+    cd $libev_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
+update_var "libunistring"
+if [ $install_libunistring -eq 1 ]; then echo "$msg3"
+    cd $libunistring_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
+update_var "nettle"
+if [ $install_nettle -eq 1 ]; then echo "$msg3"
+    cd $nettle_dirname
     sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
 update_var "libtpms"
@@ -155,7 +185,7 @@ if [ $install_libtpms -eq 1 ]; then echo "$msg3"
 else echo "$msg2"; fi
 
 echo "removing created directories"
-total_cnt=24
+total_cnt=29
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -260,9 +290,29 @@ update_var "util-linux"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
     rm -rf $utillinux_name
 else echo "$msg2"; fi
+update_var "nettle"
+if [ $install_nettle -eq 1 ]; then echo "$msg1"
+    rm -rf $nettle_name
+else echo "$msg2"; fi
+update_var "libunistring"
+if [ $install_libunistring -eq 1 ]; then echo "$msg1"
+    rm -rf $libunistring_name
+else echo "$msg2"; fi
+update_var "libev"
+if [ $install_libev -eq 1 ]; then echo "$msg1"
+    rm -rf $libev_name
+else echo "$msg2"; fi
+update_var "p11-kit"
+if [ $install_p11kit -eq 1 ]; then echo "$msg1"
+    rm -rf $p11kit_name
+else echo "$msg2"; fi
+update_var "gnutls"
+if [ $install_gnutls -eq 1 ]; then echo "$msg1"
+    rm -rf $gnutls_name
+else echo "$msg2"; fi
 
 echo "removing downloaded source"
-total_cnt=23
+total_cnt=27
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -362,9 +412,25 @@ update_var "util-linux"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
     rm -f $utillinux_name$utillinux_ext
 else echo "$msg2"; fi
+update_var "nettle"
+if [ $install_nettle -eq 1 ]; then echo "$msg1"
+    rm -f $nettle_name$nettle_ext
+else echo "$msg2"; fi
+update_var "libunistring"
+if [ $install_libunistring -eq 1 ]; then echo "$msg1"
+    rm -f $libunistring_name$libunistring_ext
+else echo "$msg2"; fi
+update_var "libev"
+if [ $install_libev -eq 1 ]; then echo "$msg1"
+    rm -f $libev_name$libev_ext
+else echo "$msg2"; fi
+update_var "p11-kit"
+if [ $install_p11kit -eq 1 ]; then echo "$msg1"
+    rm -f $p11kit_name$p11kit_ext
+else echo "$msg2"; fi
 
 echo "removing symlinks"
-total_cnt=24
+total_cnt=28
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -467,6 +533,22 @@ else echo "$msg2"; fi
 update_var "util-linux"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
     rm -r $utillinux_dirname
+else echo "$msg2"; fi
+update_var "nettle"
+if [ $install_nettle -eq 1 ]; then echo "$msg1"
+    rm -r $nettle_dirname
+else echo "$msg2"; fi
+update_var "libunistring"
+if [ $install_libunistring -eq 1 ]; then echo "$msg1"
+    rm -r $libunistring_dirname
+else echo "$msg2"; fi
+update_var "libev"
+if [ $install_libev -eq 1 ]; then echo "$msg1"
+    rm -r $libev_dirname
+else echo "$msg2"; fi
+update_var "p11-kit"
+if [ $install_p11kit -eq 1 ]; then echo "$msg1"
+    rm -r $p11kit_dirname
 else echo "$msg2"; fi
 
 echo "$script finished"

@@ -18,18 +18,25 @@ update_var () {
     msg="$progress_cnt/$total_cnt - $1 >>"
     msg1="$msg installing package"
     msg2="$msg installing failed!"
+    package="$1"
+}
+apt_install () {
+    echo "$msg1"
+    sudo apt install -y $package | ts "$msg" || { echo "$msg2"; exit 1; }
 }
 if [ $install_apt_package -eq 1 ]; then
     echo "installing apt packages"
-    update_var "mercurial"
-    echo "$msg1"; sudo apt install -y mercurial | ts "$msg" || { echo "$msg2"; exit 1; }
+    update_var "mercurial" && apt_install "$package"
+    update_var "gtk-doc-tools" && apt_install "$package"
 fi
 
+# Note
+#   following ordering is to proceed with most easy to fail operation first
 echo "downloading from sources"
 github="https://github.com"
 gnu_mirror="ftp://ftp.twaren.net/Unix/GNU/gnu"
 gnome="https://download.gnome.org/sources"
-total_cnt=24
+total_cnt=29
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -39,12 +46,21 @@ update_var () {
     msg3="$msg download failed!"
     msg4="$msg already existed, skipped!"
 }
+# git clone
+update_var "gnutls"
+if [ $install_gnutls -eq 1 ]; then
+    if [ -d $gnutls_name ]; then echo "$msg4"; else echo "$msg1"
+        git clone https://gitlab.com/gnutls/gnutls.git $gnutls_name || { echo "$msg4"; exit 1; }
+    fi
+else echo "$msg2"; fi
+# hg clone
 update_var "gmp"
 if [ $install_gmp -eq 1 ]; then
     if [ -d $gmp_name ]; then echo "$msg4"; else echo "$msg1"
         hg clone https://gmplib.org/repo/gmp-$gmp_version/ $gmp_name || { echo "$msg4"; exit 1; }
     fi
 else echo "$msg2"; fi
+# wget
 update_var "libtpms"
 if [ $install_libtpms -eq 1 ]; then
     if [ -f $libtpms_name$libtpms_ext ]; then echo "$msg4"; else echo "$msg1"
@@ -188,9 +204,33 @@ if [ $install_utillinux -eq 1 ]; then
         wget $wget_flag "$github/util-linux/util-linux/archive/refs/tags/v$utillinux_version$utillinux_ext" -O $utillinux_name$utillinux_ext || { echo "$msg3"; exit 1; }
     fi
 else echo "$msg2"; fi
+update_var "nettle"
+if [ $install_nettle -eq 1 ]; then
+    if [ -f $nettle_name$nettle_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/nettle/nettle-$nettle_version$nettle_ext" -O $nettle_name$nettle_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "libunistring"
+if [ $install_libunistring -eq 1 ]; then
+    if [ -f $libunistring_name$libunistring_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$gnu_mirror/libunistring/libunistring-$libunistring_version$libunistring_ext" -O $libunistring_name$libunistring_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "libev"
+if [ $install_libev -eq 1 ]; then
+    if [ -f $libev_name$libev_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/mksdev/libev-release/archive/refs/tags/v$libev_version$libev_ext" -O $libev_name$libev_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
+update_var "p11-kit"
+if [ $install_p11kit -eq 1 ]; then
+    if [ -f $p11kit_name$p11kit_ext ]; then echo "$msg4"; else echo "$msg1"
+        wget $wget_flag "$github/p11-glue/p11-kit/releases/download/$p11kit_version/p11-kit-$p11kit_version$p11kit_ext" -O $p11kit_name$p11kit_ext || { echo "$msg3"; exit 1; }
+    fi
+else echo "$msg2"; fi
 
 echo "creating directories to hold sources"
-total_cnt=23
+total_cnt=27
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -337,15 +377,39 @@ if [ $install_utillinux -eq 1 ]; then
         mkdir $utillinux_name
     fi
 else echo "$msg2"; fi
+update_var "nettle"
+if [ $install_nettle -eq 1 ]; then
+    if [ -d $nettle_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $nettle_name
+    fi
+else echo "$msg2"; fi
+update_var "libunistring"
+if [ $install_libunistring -eq 1 ]; then
+    if [ -d $libunistring_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $libunistring_name
+    fi
+else echo "$msg2"; fi
+update_var "libev"
+if [ $install_libev -eq 1 ]; then
+    if [ -d $libev_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $libev_name
+    fi
+else echo "$msg2"; fi
+update_var "p11-kit"
+if [ $install_p11kit -eq 1 ]; then
+    if [ -d $p11kit_name ]; then echo "$msg3"; else echo "$msg1"
+        mkdir $p11kit_name
+    fi
+else echo "$msg2"; fi
 
 echo "unzipping sources"
 tar_add_flag="--strip-components=1"
-total_cnt=23
+total_cnt=27
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
     msg="$progress_cnt/$total_cnt - $1 >>"
-    msg1="$msg creating directory"
+    msg1="$msg unzipping"
     msg2="$msg skipped!"
 }
 update_var "libtpms"
@@ -440,9 +504,25 @@ update_var "util-linux"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
     tar $tar_flag $utillinux_name$utillinux_ext -C $utillinux_name $tar_add_flag
 else echo "$msg2"; fi
+update_var "nettle"
+if [ $install_nettle -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $nettle_name$nettle_ext -C $nettle_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "libunistring"
+if [ $install_libunistring -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $libunistring_name$libunistring_ext -C $libunistring_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "libev"
+if [ $install_libev -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $libev_name$libev_ext -C $libev_name $tar_add_flag
+else echo "$msg2"; fi
+update_var "p11-kit"
+if [ $install_p11kit -eq 1 ]; then echo "$msg1"
+    tar $tar_flag $p11kit_name$p11kit_ext -C $p11kit_name $tar_add_flag
+else echo "$msg2"; fi
 
 echo "creating symlink to directories"
-total_cnt=24
+total_cnt=28
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
@@ -546,6 +626,22 @@ update_var "util-linux"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
     ln -sf $utillinux_name $utillinux_dirname
 else echo "$msg2"; fi
+update_var "nettle"
+if [ $install_nettle -eq 1 ]; then echo "$msg1"
+    ln -sf $nettle_name $nettle_dirname
+else echo "$msg2"; fi
+update_var "libunistring"
+if [ $install_libunistring -eq 1 ]; then echo "$msg1"
+    ln -sf $libunistring_name $libunistring_dirname
+else echo "$msg2"; fi
+update_var "libev"
+if [ $install_libev -eq 1 ]; then echo "$msg1"
+    ln -sf $libev_name $libev_dirname
+else echo "$msg2"; fi
+update_var "p11-kit"
+if [ $install_p11kit -eq 1 ]; then echo "$msg1"
+    ln -sf $p11kit_name $p11kit_dirname
+else echo "$msg2"; fi
 
 echo "compiling sources"
 make_flag="-j$(nproc)"
@@ -568,12 +664,12 @@ meson_compile () {
     sudo bash -c "source $venv_bin_path && $meson_path install -C _build"
     sudo cp _build/meson-private/*.pc /usr/local/lib/pkgconfig
 }
-total_cnt=25
+total_cnt=30
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
     msg="$progress_cnt/$total_cnt - $1 >>"
-    msg1="$msg compiling"
+    msg1="$msg compiling and installing"
     msg2="$msg skipped!"
 }
 update_var "pkg-config"
@@ -725,6 +821,32 @@ if [ $install_libtpms -eq 1 ]; then echo "$msg1"
     cd $libtpms_dirname
     tpm_compile "--with-tpm2 --with-openssl --prefix=/usr" | ts "$msg"
 else echo "$msg2"; fi
+update_var "nettle"
+if [ $install_nettle -eq 1 ]; then echo "$msg1"
+    cd $nettle_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "libunistring"
+if [ $install_libunistring -eq 1 ]; then echo "$msg1"
+    cd $libunistring_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "libev"
+if [ $install_libev -eq 1 ]; then echo "$msg1"
+    cd $libev_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "p11-kit"
+if [ $install_p11kit -eq 1 ]; then echo "$msg1"
+    cd $p11kit_dirname
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
+update_var "gnutls"
+if [ $install_gnutls -eq 1 ]; then echo "$msg1"
+    cd $gnutls_dirname
+    ./bootstrap
+    gnu_compile | ts "$msg"
+else echo "$msg2"; fi
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     cd $swtpm_dirname
@@ -735,7 +857,7 @@ else echo "$msg2"; fi
 if [ $enable_wget_cert_skip -eq 1 ]; then
     echo "enabling wget certification check"
     #sed -i '$d' $wget_rc_path
-    sed -i "/$wget_config_str/c\ " $wget_rc_path
+    sed -i "/$wget_config_str/d" $wget_rc_path
 fi
 #> ------------------------------------------------
 

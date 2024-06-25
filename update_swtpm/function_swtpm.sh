@@ -13,8 +13,8 @@ install_platform=1
 #   ordering of downloading and compiling is different due to networking consideration
 #   following option switches is mostly the order required to install due to dependency issue
 # 1: proceed; others: pass
-install_apt_package=0
 enable_wget_cert_skip=1
+install_apt_package=0
 
 install_pkgconfig=0
 install_bison=0
@@ -40,6 +40,11 @@ install_flex=0
 install_utillinux=0
 install_tpm2tss=0
 install_libtpms=0
+install_nettle=1
+install_libunistring=1
+install_libev=1
+install_p11kit=1
+install_gnutls=1
 install_swtpm=0
 
 github="https://github.com"
@@ -174,3 +179,27 @@ utillinux_version="2.40.1"
 utillinux_ext=".tar.gz"
 utillinux_dirname="$working_dir/utillinux"
 utillinux_name="$utillinux_dirname-$utillinux_version"
+#> 26 http://ftp.twaren.net/Unix/GNU/gnu/nettle/
+nettle_version="3.10"
+nettle_ext=".tar.gz"
+nettle_dirname="$working_dir/nettle"
+nettle_name="$nettle_dirname-$nettle_version"
+#> 27 http://ftp.twaren.net/Unix/GNU/gnu/libunistring/
+libunistring_version="1.2"
+libunistring_ext=".tar.gz"
+libunistring_dirname="$working_dir/libunistring"
+libunistring_name="$libunistring_dirname-$libunistring_version"
+#> 28 https://github.com/mksdev/libev-release/tags
+libev_version="4.33"
+libev_ext=".tar.gz"
+libev_dirname="$working_dir/libev"
+libev_name="$libev_dirname-$libev_version"
+#> 29 https://github.com/p11-glue/p11-kit/releases
+p11kit_version="0.25.3"
+p11kit_ext=".tar.xz"
+p11kit_dirname="$working_dir/p11kit"
+p11kit_name="$p11kit_dirname-$p11kit_version"
+#> 30 https://gitlab.com/gnutls/gnutls
+#   release can't be built successfully, can only be cloned directly
+gnutls_dirname="$working_dir/gnutls"
+gnutls_name="$gnutls_dirname"
