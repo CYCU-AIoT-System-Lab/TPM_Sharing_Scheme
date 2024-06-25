@@ -602,17 +602,17 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `./configure`
             - `make`
             - can't get pass this point with following error
-    ```
-    /tmp/cc5QbUMs.ltrans0.ltrans.o: In function `daemon_delete.part.1':
-    /home/tpm6/Downloads/unbound-release-1.20.0/daemon/daemon.c:921: undefined reference to `ub_c_lex_destroy'
-    /tmp/cc5QbUMs.ltrans2.ltrans.o: In function `config_read':
-    /home/tpm6/Downloads/unbound-release-1.20.0/util/config_file.c:1456: undefined reference to `ub_c_in'
-    /tmp/cc5QbUMs.ltrans11.ltrans.o: In function `ub_c_parse':
-    /home/tpm6/Downloads/unbound-release-1.20.0/util/configparser.c:2833: undefined reference to `ub_c_lex'
-    collect2: error: ld returned 1 exit status
-    Makefile:369: recipe for target 'unbound' failed
-    make: *** [unbound] Error 1
-    ```
+            ```
+            /tmp/cc5QbUMs.ltrans0.ltrans.o: In function `daemon_delete.part.1':
+            /home/tpm6/Downloads/unbound-release-1.20.0/daemon/daemon.c:921: undefined reference to `ub_c_lex_destroy'
+            /tmp/cc5QbUMs.ltrans2.ltrans.o: In function `config_read':
+            /home/tpm6/Downloads/unbound-release-1.20.0/util/config_file.c:1456: undefined reference to `ub_c_in'
+            /tmp/cc5QbUMs.ltrans11.ltrans.o: In function `ub_c_parse':
+            /home/tpm6/Downloads/unbound-release-1.20.0/util/configparser.c:2833: undefined reference to `ub_c_lex'
+            collect2: error: ld returned 1 exit status
+            Makefile:369: recipe for target 'unbound' failed
+            make: *** [unbound] Error 1
+            ```
             - `sudo make install`
         - :white_check_mark: (compile) p11-kit-1 (required by gnutls)
             - https://github.com/p11-glue/p11-kit/releases
