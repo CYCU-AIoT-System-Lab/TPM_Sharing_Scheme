@@ -3,22 +3,24 @@
 set -e
 
 tar_flag="xf"
-wget_flag="-q --show-progress --no-check-certificate"
 working_dir="$HOME/Downloads"
+wget_flag="-q --show-progress" # --no-check-certificate
+wget_rc_path="$HOME/.wgetrc"
 
 install_platform=1
 
 # Note: 
 #   ordering of downloading and compiling is different due to networking consideration
 #   following option switches is mostly the order required to install due to dependency issue
-# 1: install; others: pass
+# 1: proceed; others: pass
 install_apt_package=0
+enable_wget_cert_skip=1
 
 install_pkgconfig=0
 install_bison=0
 install_openssl=0
 install_python=0
-install_pip_package=1
+install_pip_package=0
 install_libpcre2=0
 install_glib=0
 install_jsonglib=0

@@ -3,6 +3,14 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 source function_swtpm.sh
 
+#> ------------------------------------------------
+if [ $enable_wget_cert_skip -eq 1 ]; then
+    echo "disabling wget certification check"
+    wget_config_str="check_certificate = off"
+    echo "$wget_config_str" >> $wget_rc_path
+fi
+#> ------------------------------------------------
+
 total_cnt=1
 progress_cnt=0
 update_var () {
@@ -722,5 +730,13 @@ if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     cd $swtpm_dirname
     tpm_compile "--with-openssl --prefix=/usr" | ts "$msg"
 else echo "$msg2"; fi
+
+#> ------------------------------------------------
+if [ $enable_wget_cert_skip -eq 1 ]; then
+    echo "enabling wget certification check"
+    #sed -i '$d' $wget_rc_path
+    sed -i "/$wget_config_str/c\ " $wget_rc_path
+fi
+#> ------------------------------------------------
 
 echo "$script finished"
