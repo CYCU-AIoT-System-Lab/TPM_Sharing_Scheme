@@ -630,7 +630,51 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `./configure`
         - `make -j$(nproc)`
         - `sudo make install`
-    - :question: (compile) tcsd (required by swtpm)
+    - #--------------------------------------------
+    - :white_check_mark: (compile) tcsd (required by swtpm)
+        - https://sourceforge.net/projects/trousers/files/trousers/
+        - `wget https://sourceforge.net/projects/trousers/files/trousers/0.3.15/trousers-0.3.15.tar.gz/download`
+        - `tar xf trousers....tar.gz`
+        - `./bootstrap`
+        - `./configure`
+        - `make`
+        - `sudo make install`
+    - :white_check_mark: (compile) expect (required by swtpm)
+        - :white_check_mark: (compile) tcl (required by expect)
+            - https://sourceforge.net/projects/tcl/files/Tcl/
+            - `wget https://sourceforge.net/projects/tcl/files/Tcl/8.6.14/tcl8.6.14-src.tar.gz/download`
+            - `tar xf tcl....tar.gz`
+            - `cd unix`
+            - `./configure`
+            - `make`
+            - `sudo make install`
+        - https://sourceforge.net/projects/expect/files/Expect/
+        - `wget https://sourceforge.net/projects/expect/files/Expect/5.45.4/expect5.45.4.tar.gz/download`
+        - `tar xf expect....tar.gz`
+        - `./configure`
+        - `make`
+        - `sudo make install`
+    - :white_check_mark: (compile) gawk (optionally required by swtpm)
+        - http://ftp.twaren.net/Unix/GNU/gnu/gawk/
+        - `wget ftp.twaren.net/Unix/GNU/gnu/gawk/gawk-5.3.0.tar.gz`
+        - `tar xf gawk....tar.gz`
+        - `configure`
+        - `make`
+        - `sudo make install`
+    - :white_check_mark: (compile) socat (optionally required by swtpm)
+        - http://www.dest-unreach.org/socat/
+        - `wget www.dest-unreach.org/socat/download/socat-1.7.4.4.tar.gz`
+        - `./configure`
+        - `make`
+        - `sudo make install`
+    - :white_check_mark: (compile) libseccomp (optionally required by swtpm)
+        - https://github.com/seccomp/libseccomp/releases
+        - `wget https://github.com/seccomp/libseccomp/releases/download/v2.5.5/libseccomp-2.5.5.tar.gz`
+        - `tar xf libseccomp....tar.gz`
+        - `configure`
+        - `make`
+        - `sudo make install`
     - :question: (compile) tpm-tools (optionally required by swtpm)
+    - :question: (compile) tpm2-abrmd (optionally required by swtpm)
     - :question: (compile) tpm2-tools (optionally required by swtpm)
     - :question: (compile) tpm2-tss-engine (optionally required by swtpm)
