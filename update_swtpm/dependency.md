@@ -647,12 +647,14 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `./configure`
             - `make`
             - `sudo make install`
+            - note: can't be uninstalled, uninstall-binaries doesn't work as well, no uninstall target
         - https://sourceforge.net/projects/expect/files/Expect/
         - `wget https://sourceforge.net/projects/expect/files/Expect/5.45.4/expect5.45.4.tar.gz/download`
         - `tar xf expect....tar.gz`
         - `./configure`
         - `make`
         - `sudo make install`
+        - note: uninstall-binaries
     - :white_check_mark: (compile) gawk (required by swtpm)
         - http://ftp.twaren.net/Unix/GNU/gnu/gawk/
         - `wget ftp.twaren.net/Unix/GNU/gnu/gawk/gawk-5.3.0.tar.gz`

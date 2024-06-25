@@ -1,4 +1,14 @@
 #!/bin/bash
+
+# This script is used to install all of the dependency of swtpm and optional packages
+#
+# Dependency and version experiments end on 20240625
+# You can update installing software versions by changing settings in `function_swtpm.sh` file
+#
+# Core utility finished in 20240625 by belongtothenight / Da-chuan Chen
+#
+# !!!! It is recommended to re-run installation script for circular dependency issue
+
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 source function_swtpm.sh
@@ -809,18 +819,6 @@ if [ $install_utillinux -eq 1 ]; then echo "$msg1"
     ./autogen.sh
     gnu_compile "--disable-all-programs --enable-libuuid" | ts "$msg"
 else echo "$msg2"; fi
-update_var "tpm2-tss"
-if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    cd $tpm2tss_dirname
-    gnu_compile "--with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix" | ts "$msg"
-    sudo udevadm control --reload-rules && sudo udevadm trigger
-    sudo ldconfig
-else echo "$msg2"; fi
-update_var "libtpms"
-if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    cd $libtpms_dirname
-    tpm_compile "--with-tpm2 --with-openssl --prefix=/usr" | ts "$msg"
-else echo "$msg2"; fi
 update_var "nettle"
 if [ $install_nettle -eq 1 ]; then echo "$msg1"
     cd $nettle_dirname
@@ -847,6 +845,18 @@ if [ $install_gnutls -eq 1 ]; then echo "$msg1"
     ./bootstrap
     gnu_compile | ts "$msg"
 else echo "$msg2"; fi
+update_var "tpm2-tss"
+if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
+    cd $tpm2tss_dirname
+    gnu_compile "--with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix" | ts "$msg"
+    sudo udevadm control --reload-rules && sudo udevadm trigger
+    sudo ldconfig
+else echo "$msg2"; fi
+update_var "libtpms"
+if [ $install_libtpms -eq 1 ]; then echo "$msg1"
+    cd $libtpms_dirname
+    tpm_compile "--with-tpm2 --with-openssl --prefix=/usr" | ts "$msg"
+else echo "$msg2"; fi
 update_var "swtpm"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     cd $swtpm_dirname
@@ -856,7 +866,6 @@ else echo "$msg2"; fi
 #> ------------------------------------------------
 if [ $enable_wget_cert_skip -eq 1 ]; then
     echo "enabling wget certification check"
-    #sed -i '$d' $wget_rc_path
     sed -i "/$wget_config_str/d" $wget_rc_path
 fi
 #> ------------------------------------------------

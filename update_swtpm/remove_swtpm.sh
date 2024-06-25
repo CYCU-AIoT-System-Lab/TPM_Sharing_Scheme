@@ -38,6 +38,16 @@ if [ $install_swtpm -eq 1 ]; then echo "$msg3"
     cd $swtpm_dirname
     sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
 else echo "$msg2"; fi
+update_var "tpm2-tss"
+if [ $install_tpm2tss -eq 1 ]; then echo "$msg3"
+    cd $tpm2tss_dirname
+    sudo make uninstall | ts "$msg"
+else echo "$msg2"; fi
+update_var "libtpms"
+if [ $install_libtpms -eq 1 ]; then echo "$msg3"
+    cd $libtpms_dirname
+    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
+else echo "$msg2"; fi
 update_var "gnutls"
 if [ $install_gnutls -eq 1 ]; then echo "$msg3"
     cd $gnutls_dirname
@@ -62,16 +72,6 @@ update_var "nettle"
 if [ $install_nettle -eq 1 ]; then echo "$msg3"
     cd $nettle_dirname
     sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
-else echo "$msg2"; fi
-update_var "libtpms"
-if [ $install_libtpms -eq 1 ]; then echo "$msg3"
-    cd $libtpms_dirname
-    sudo make uninstall | ts "$msg" || { echo "$msg1"; exit 1; }
-else echo "$msg2"; fi
-update_var "tpm2-tss"
-if [ $install_tpm2tss -eq 1 ]; then echo "$msg3"
-    cd $tpm2tss_dirname
-    sudo make uninstall | ts "$msg"
 else echo "$msg2"; fi
 update_var "util-linux"
 if [ $install_utillinux -eq 1 ]; then echo "$msg3"
