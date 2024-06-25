@@ -23,7 +23,7 @@ if [ $enable_wget_cert_skip -eq 1 ]; then
 fi
 #> ------------------------------------------------
 
-total_cnt=1
+total_cnt=2
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))

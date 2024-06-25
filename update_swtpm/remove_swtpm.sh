@@ -3,7 +3,7 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 source function_swtpm.sh
 
-total_cnt=1
+total_cnt=2
 progress_cnt=0
 update_var () {
     progress_cnt=$((progress_cnt + 1))
