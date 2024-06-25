@@ -96,6 +96,31 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `sudo make install`
             - autogen.sh script will caused aclocal error, caused by automake 1.16.0
             - also, it's not recommended to install entire util-linux, might break system since its core utilities
+    - :x: (compile) autogen (required by new automake, actually not needed)
+        - :white_check_mark: (compile) guile (required by autogen)
+            - :white_check_mark: (compile) libunistring (required by guile)
+                - ref: http://ftp.twaren.net/Unix/GNU/gnu/libunistring/
+                - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/libunistring/libunistring-1.2.tar.xz`
+                - `tar xf libunistring-1.2.tar.xz`
+                - `./configure`
+                - `make -j$(nproc)`
+                - `sudo make install`
+            - [ ] (compile) libffi (required by guile)
+                - ref: https://github.com/libffi/libffi 
+                - `wget https://github.com/libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz`
+                - `tar xf libffi-3.4.6.tar.gz`
+                - `./configure`
+                - `make -j$(nproc)`
+            - ref: http://ftp.twaren.net/Unix/GNU/gnu/guile/
+            - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/guile/guile-3.0.9.tar.xz`
+            - `tar xf guile-3.0.9.tar.xz`
+            - ./configure
+        - ref: http://ftp.twaren.net/Unix/GNU/gnu/autogen/
+        - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/autogen/rel5.18.16/autogen-5.18.16.tar.xz`
+        - `tar xf autogen-5.18.16.tar.xz`
+        - `./configure`
+        - `make -j$(nproc)`
+        - `sudo make install`
     - :white_check_mark: (compile) [gmp](https://gmplib.org/devel/repo-usage) (required by swtpm)
         - :white_check_mark: (apt-get) mercurial (required by libgmp-dev)
         - :white_check_mark: (compile) texinfo (required by gmp)
@@ -139,7 +164,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
         - `./configure`
         - `make -j$(nproc)`
         - `sudo make install`
-    - :grey_question: (compile) gnutls (required by swtpm)
+    - :white_check_mark: (compile) gnutls (required by swtpm)
         - :x: (apt-get) unbound-anchor (required by gnutls) can't create root.key
         - :grey_question: (compile) libnettle (required by gnutls, require gmp)
         - http://ftp.twaren.net/Unix/GNU/gnu/nettle/
@@ -164,7 +189,8 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             - `./configure`
             - `make -j$(nproc)`
             - `make install`
-        - [ ] (compile) gtk-doc (required by gnutls, can be before libtasn1, also can not)
+        - :white_check_mark: (apt-get) gtk-doc-tools (required by gnutls)
+        - :question: (compile) gtk-doc (required by gnutls, can be before libtasn1, also can not)
             - :white_check_mark: (compile) libxslt (required by gtk-doc)
                 - :white_check_mark: (compile) python2.7 (required by libxslt)
                     - https://www.python.org/downloads/source/
@@ -190,12 +216,14 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                 - `./autogen.sh`
                 - `make`
                 - `make install`
-            - [ ] (compile) dblatex (required by gtk-doc), libxml2 problem?, requires libxslt
+            - :question: (compile) dblatex (required by gtk-doc), libxml2 problem?, requires libxslt
                 - :grey_question: (compile) xslt with saxon (required by dblatex)
                     - binary is generated, but no pc file
                 - :grey_question: (compile) epstopdf (required by dblatex)
                 - :grey_question: (compile) fig2dev (required by dblatex)
-                - [ ] (compile) texlive (required by dblatex)
+                - :white_check_mark: (apt-get) texlive (required by dblatex)
+                - :x: (compile) texlive (required by dblatex)
+                    - way too hard to compile
                     - :white_check_mark: (compile) libX11 (required by texlive)
                         - :white_check_mark: (compile) macros-util-macros (required by libX11)
                             - https://gitlab.freedesktop.org/xorg/util/macros/-/tags
@@ -305,7 +333,7 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                                     - `./autogen`
                                     - `./configure`
                                     - `make`
-                                    - `sudo make install`
+                                    - `sudo git clone https://gitlab.com/gnutls/gnutls.gitmake install`
                                     - doesn't generate pc files in none BSD os
                                 - :grey_question: (compile) libbsd (required by xserver)
                                     - https://github.com/LuaDist/libbsd/tags
@@ -450,16 +478,63 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                                     - source python3.x build environment
                                     - `meson setup _build`
                                     - `meson compile -C _build`
+                                    - `meson install -C _build`
                                     - `cd _build/meson-private && sudo cp *.pc /usr/local/lib/pkgconfig`
                                     - `cd _build/meson-uninstalled && sudo cp *.pc /usr/local/lib/pkgconfig`
-                                - :question: (compile) libepoxy (required by xserver)
-                                    - :question: (compile) EGL (required by libepoxy)
+                                - :white_check_mark: (compile) libepoxy (required by xserver)
+                                    - :x: (compile) EGL (required by libepoxy)
+                                    - :white_check_mark: (apt-get) libglfw3 libgles2-mesa-dev (required by libepoxy)
                                     - https://github.com/anholt/libepoxy/releases
                                     - `wget https://github.com/anholt/libepoxy/archive/refs/tags/1.5.10.tar.gz`
                                     - `tar xf libepoxy....tar.gz`
+                                    - `cp meson.build meson.build.bak`
+                                    - `sed -i "/gl_dep = dependency('gl', required: false)/c\gl_dep = dependency('gl', required: false, static: true)" meson.build`
                                     - source python3.x build environment
                                     - `meson setup _build`
                                     - `meson compile -C _build`
+                                    - `meson install -C _build`
+                                    - `cd _build/meson-private && sed -i "/Requires.private: x11, /c\Requires.private: x11" epoxy.pc && sudo cp *.pc /usr/local/lib/pkgconfig`
+                                    - `cd _build/meson-uninstalled && sed -i "/Requires.private: x11, /c\Requires.private: x11" epoxy-uninstalled.pc && sudo cp *.pc /usr/local/lib/pkgconfig`
+                                - :white_check_mark: (compile) libXdmcp (required by xserver)
+                                    - https://gitlab.freedesktop.org/xorg/lib/libxdmcp/-/tags
+                                    - `wget https://gitlab.freedesktop.org/xorg/lib/libxdmcp/-/archive/libXdmcp-1.1.5/libxdmcp-libXdmcp-1.1.5.tar.gz`
+                                    - `tar libxdmcp....tar.gz`
+                                    - `cp configure.ac configure.ac.bak`
+                                    - `sed -i '/doc\/Makefile/d' configure.ac`
+                                    - `cp Makefile.am Makefile.am.bak`
+                                    - `sed -i '/SUBDIRS=doc . test/c\SUBDIRS= . test' Makefile.am`
+                                    - `./autogen.sh`
+                                    - `make`
+                                    - `sudo make install`
+                                    - `sudo cp xdmcp.pc /usr/local/lib/pkgconfig`
+                                - :question: (compile) mesa (required by xserver)
+                                    - :question: (compile) glslang (required by mesa)
+                                        - :question: (compile) gcc-17 (required by mesa)
+                                            - :white_check_mark: (compile) gmp (required by gcc)
+                                            - :white_check_mark: (compile) mpfr (required by gcc)
+                                                - http://ftp.twaren.net/Unix/GNU/gnu/mpfr/
+                                                - `wget ftp.twaren.net/Unix/GNU/gnu/mpfr/mpfr-4.2.1.tar.gz`
+                                                - `./configure`
+                                                - `make`
+                                                - `sudo make install`
+                                            - :white_check_mark: (compile) mpc (required by gcc, require mpfr)
+                                                - http://ftp.twaren.net/Unix/GNU/gnu/mpc/
+                                                - `wget ftp.twaren.net/Unix/GNU/gnu/mpc/mpc-1.3.1.tar.gz`
+                                                - `./configure`
+                                                - `make`
+                                                - `sudo make install`
+                                            - http://ftp.twaren.net/Unix/GNU/gnu/gcc/
+                                            - `wget ftp.twaren.net/Unix/GNU/gnu/gcc/gcc-14.1.0/gcc-14.1.0.tar.gz`
+                                        - https://github.com/KhronosGroup/glslang/releases
+                                        - `wget https://github.com/KhronosGroup/glslang/archive/refs/tags/14.2.0.tar.gz`
+                                        - `tar xf glslang....tar.gz`
+                                        - source python3.x build environment
+                                        - `./update_glslang_sources.py`
+                                        - `mkdir glslang-build`
+                                        - `cmake -DCMAKE_BUILD_TYPE=Release ../glslang-14.2.0`
+                                    - https://gitlab.freedesktop.org/mesa/mesa/-/tags
+                                    - `wget https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-24.1.2/mesa-mesa-24.1.2.tar.gz`
+                                    - `tar xf mesa....tar.gz`
                                 - https://gitlab.freedesktop.org/xorg/xserver/-/tags
                                 - `wget https://gitlab.freedesktop.org/xorg/xserver/-/archive/xwayland-24.1.0/xserver-xwayland-24.1.0.tar.gz`
                                 - `tar xf xserver....tar.gz`
@@ -493,39 +568,69 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
                 - `tar xf dblatex3-0.3.12.tar.bz2`
                 - `python setup.py build`
                 - `sudo python setup.py install`
+            - :x: (compile) docbook (required by gtk-doc)
+                - unable to find source
             - https://gitlab.gnome.org/GNOME/gtk-doc/-/tags
             - note: no need to source virtualenv, it only requires 3.x not > 3.7
             - `wget https://gitlab.gnome.org/GNOME/gtk-doc/-/archive/1.34.0/gtk-doc-1.34.0.tar.gz`
             - `tar xf gtk-doc-1.34.0.tar.gz`
+            - `./autogen.sh`
+        - :white_check_mark: (compile) nettle (required by gnutls), previous compiled
+        - :white_check_mark: (compile) libunistring (required by gnutls), previous compiled
+            - http://ftp.twaren.net/Unix/GNU/gnu/libunistring/
+            - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/libunistring/libunistring-1.2.tar.gz`
+            - `tar xf libunistring....tar.gz`
             - `./configure`
+            - `make`
+            - `sudo make install`
+        - :white_check_mark: (compile) libev (required by gnutls)
+            - https://github.com/mksdev/libev-release/tags
+            - `wget https://github.com/mksdev/libev-release/archive/refs/tags/v4.33.tar.gz`
+            - `tar xf libev....tar.gz`
+            - `./configure`
+            - `make`
+            - `sudo make install`
+        - :x: (apt-get) unbound (required by gnutls)
+            - doesn't install pkgconfig files
+        - :question: (compile) libunbound (required by gnutls, require openssl)
+            - :white_check_mark: (compile) expat (required by unbound)
+            - :white_check_mark: (compile) bison (required by unbound)
+            - :white_check_mark: (compile) flex (required by unbound)
+            - https://github.com/NLnetLabs/unbound/releases
+            - `wget https://github.com/NLnetLabs/unbound/archive/refs/tags/release-1.20.0.tar.gz`
+            - `tar xf unbound....tar.gz`
+            - `./configure`
+            - `make`
+            - can't get pass this point with following error
+```
+/tmp/cc5QbUMs.ltrans0.ltrans.o: In function `daemon_delete.part.1':
+/home/tpm6/Downloads/unbound-release-1.20.0/daemon/daemon.c:921: undefined reference to `ub_c_lex_destroy'
+/tmp/cc5QbUMs.ltrans2.ltrans.o: In function `config_read':
+/home/tpm6/Downloads/unbound-release-1.20.0/util/config_file.c:1456: undefined reference to `ub_c_in'
+/tmp/cc5QbUMs.ltrans11.ltrans.o: In function `ub_c_parse':
+/home/tpm6/Downloads/unbound-release-1.20.0/util/configparser.c:2833: undefined reference to `ub_c_lex'
+collect2: error: ld returned 1 exit status
+Makefile:369: recipe for target 'unbound' failed
+make: *** [unbound] Error 1
+```
+            - `sudo make install`
+        - :white_check_mark: (compile) p11-kit-1 (required by gnutls)
+            - https://github.com/p11-glue/p11-kit/releases
+            - `wget https://github.com/p11-glue/p11-kit/releases/download/0.25.3/p11-kit-0.25.3.tar.xz`
+            - `tar xf p11....tar.xz`
+            - `./configure`
+            - `make`
+            - `sudo make install`
         - gnu website version is too old, new version requires a lot of dependencies
         - install a lot of libraries, maybe should be the first few to install?
+        - `echo "check_certificate = off" >> ~/.wetrc` # to bypass wget certification check, should only be used if wget returns certificate error, shoudl disable after use
         - https://gitlab.com/gnutls/gnutls
-        - `wget https://gitlab.com/gnutls/gnutls/-/archive/3.7.11/gnutls-3.7.11.tar.gz`
-        - `./configure`
-        - `make -j$(nproc)`
-    - :grey_question: (compile) autogen (required by new automake)
-        - :white_check_mark: (compile) guile (required by autogen)
-            - :white_check_mark: (compile) libunistring (required by guile)
-                - ref: http://ftp.twaren.net/Unix/GNU/gnu/libunistring/
-                - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/libunistring/libunistring-1.2.tar.xz`
-                - `tar xf libunistring-1.2.tar.xz`
-                - `./configure`
-                - `make -j$(nproc)`
-                - `sudo make install`
-            - [ ] (compile) libffi (required by guile)
-                - ref: https://github.com/libffi/libffi 
-                - `wget https://github.com/libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz`
-                - `tar xf libffi-3.4.6.tar.gz`
-                - `./configure`
-                - `make -j$(nproc)`
-            - ref: http://ftp.twaren.net/Unix/GNU/gnu/guile/
-            - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/guile/guile-3.0.9.tar.xz`
-            - `tar xf guile-3.0.9.tar.xz`
-            - ./configure
-        - ref: http://ftp.twaren.net/Unix/GNU/gnu/autogen/
-        - `wget ftp://ftp.twaren.net/Unix/GNU/gnu/autogen/rel5.18.16/autogen-5.18.16.tar.xz`
-        - `tar xf autogen-5.18.16.tar.xz`
+        - `git clone https://gitlab.com/gnutls/gnutls.git` # there seems to be no other way around to actually get `.git` directory
+        - `./bootstrap`
         - `./configure`
         - `make -j$(nproc)`
         - `sudo make install`
+    - :question: (compile) tcsd (required by swtpm)
+    - :question: (compile) tpm-tools (optionally required by swtpm)
+    - :question: (compile) tpm2-tools (optionally required by swtpm)
+    - :question: (compile) tpm2-tss-engine (optionally required by swtpm)
