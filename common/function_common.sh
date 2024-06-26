@@ -25,19 +25,22 @@ load_preset () {
         echo_notice "${dirname}" "${filename}" "Checking var..."
     fi
     check_var install_platform 1
-    check_var job_install_req 1
-    check_var job_compile_req 1
-    check_var job_config_nvim 1
+
     check_var job_update_src 1
     check_var job_change_all_sh_mod 1
+    check_var job_enable_ssh 1
+    check_var job_enable_pi_spi 1
+    check_var job_config_nvim 1
     check_var job_config_apport 1
+    check_var job_install_req 1
+    check_var job_compile_req 1
     check_var job_reload_term 1
+
+    check_var job_common 1
     check_var job_setup_environment 1
     check_var job_setup_ibmtpm 1
     check_var job_socket_com 1
     check_var job_setup_optiga 1
-    check_var job_enable_ssh 1
-    check_var job_enable_pi_spi 1
     check_var job_deploy_repo 1
     check_var job_setup_mbc_last 1
 
@@ -63,6 +66,20 @@ load_preset () {
     make_gflag="-s"
     sudo_gflag="-E"
     apt_gflag="-q"
+
+    # Disable jobs in this directory if not activated
+    if [ ! $job_common -eq 1 ]; then
+        echo_notice "$message1" "$message2" "Skipping common..."
+        job_update_src=0
+        job_change_all_sh_mod=0
+        job_enable_ssh=0
+        job_enable_pi_spi=0
+        job_config_nvim=0
+        job_config_apport=0
+        job_install_req=0
+        job_compile_req=0
+        job_reload_term=0
+    fi
 }
 if [ $verbose == 1 ]; then
     echo_notice "${dirname}" "${filename}" "Loaded function: load_preset"
