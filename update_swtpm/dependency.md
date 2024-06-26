@@ -614,7 +614,15 @@ Keep record of dependencies needed to install swtpm on oldest supported OS in th
             make: *** [unbound] Error 1
             ```
             - `sudo make install`
-        - :white_check_mark: (compile) p11-kit-1 (required by gnutls)
+        - :white_check_mark: (compile) p11-kit (required by gnutls)
+            - :white_check_mark: (compile) libffi (required by p11-kit)
+                - https://github.com/libffi/libffi/releases
+                - not much dependencies required, likely to put at the beginning
+                - `wget https://github.com/libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz`
+                - `tar xf libffi....tar.gz`
+                - `./configure`
+                - `make`
+                - `sudo make install`
             - https://github.com/p11-glue/p11-kit/releases
             - `wget https://github.com/p11-glue/p11-kit/releases/download/0.25.3/p11-kit-0.25.3.tar.xz`
             - `tar xf p11....tar.xz`

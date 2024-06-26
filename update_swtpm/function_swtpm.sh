@@ -22,10 +22,11 @@ enable_wget_cert_skip=1
 install_apt_package=1
 
 install_pkgconfig=1
+install_libffi=1
 install_bison=1
 install_openssl=1
 install_python=1
-install_pip_package=1
+install_pippackage=1
 install_libpcre2=1
 install_glib=1
 install_jsonglib=1
@@ -183,6 +184,9 @@ tpm2abrmd_ext=".tar.gz"
 #> 39 https://github.com/tpm2-software/tpm2-tss-engine/releases
 tpm2tssengine_version="1.2.0"
 tpm2tssengine_ext=".tar.gz"
+#> 40 https://github.com/libffi/libffi/releases
+libffi_version="3.4.6"
+libffi_ext=".tar.gz"
 
 # This section is configurations critical to this script
 # DO NOT MODIFY unless you understand how it work
@@ -199,119 +203,202 @@ gnu_mirror="ftp://ftp.twaren.net/Unix/GNU/gnu"
 gnome="https://download.gnome.org/sources"
 sourceforge="https://sourceforge.net/projects"
 
-libtpms_dirname="$working_dir/libtpms"
+libtpms_origin_name="libtpms"
+libtpms_custom_name="libtpms"
+libtpms_dirname="$working_dir/$libtpms_custom_name"
 libtpms_name="$libtpms_dirname-$libtpms_version"
 
-tpm2tss_dirname="$working_dir/tpm2tss"
+tpm2tss_origin_name="tpm2-tss"
+tpm2tss_custom_name="tpm2tss"
+tpm2tss_dirname="$working_dir/$tpm2tss_custom_name"
 tpm2tss_name="$tpm2tss_dirname-$tpm2tss_version"
 
-jsonc_dirname="$working_dir/jsonc"
+jsonc_origin_name="json-c"
+jsonc_custom_name="jsonc"
+jsonc_dirname="$working_dir/$jsonc_custom_name"
 jsonc_name="$jsonc_dirname-$jsonc_version"
 jsonc_build_path="$working_dir/jsonc-build"
 
-gmp_dirname="$working_dir/gmp"
+gmp_origin_name="gmp"
+gmp_custom_name="$gmp_origin_name"
+gmp_dirname="$working_dir/$gmp_custom_name"
 gmp_name="$gmp_dirname-$gmp_version"
 
-texinfo_dirname="$working_dir/texinfo"
+texinfo_origin_name="texinfo"
+texinfo_custom_name="texinfo"
+texinfo_dirname="$working_dir/$texinfo_custom_name"
 texinfo_name="$texinfo_dirname-$texinfo_version"
 
-automake_dirname="$working_dir/automake"
+automake_origin_name="automake"
+automake_custom_name="automake"
+automake_dirname="$working_dir/$automake_custom_name"
 automake_name="$automake_dirname-$automake_version"
 
-autoconf_dirname="$working_dir/autoconf"
+autoconf_origin_name="autoconf"
+autoconf_custom_name="autoconf"
+autoconf_dirname="$working_dir/$autoconf_custom_name"
 autoconf_name="$autoconf_dirname-$autoconf_version"
 
-help2man_dirname="$working_dir/help2man"
+help2man_origin_name="help2man"
+help2man_custom_name="help2man"
+help2man_dirname="$working_dir/$help2man_custom_name"
 help2man_name="$help2man_dirname-$help2man_version"
 
-m4_dirname="$working_dir/m4"
+m4_origin_name="m4"
+m4_custom_name="m4"
+m4_dirname="$working_dir/$m4_custom_name"
 m4_name="$m4_dirname-$m4_version"
 
-gperf_dirname="$working_dir/gperf"
+gperf_origin_name="gperf"
+gperf_custom_name="gperf"
+gperf_dirname="$working_dir/$gperf_custom_name"
 gperf_name="$gperf_dirname-$gperf_version"
 
-pkgconfig_dirname="$working_dir/pkgconfig"
+pkgconfig_origin_name="pkg-config"
+pkgconfig_custom_name="pkgconfig"
+pkgconfig_dirname="$working_dir/$pkgconfig_custom_name"
 pkgconfig_name="$pkgconfig_dirname-$pkgconfig_version"
 
-libtool_dirname="$working_dir/libtool"
+libtool_origin_name="libtool"
+libtool_custom_name="libtool"
+libtool_dirname="$working_dir/$libtool_custom_name"
 libtool_name="$libtool_dirname-$libtool_version"
 
-libtasn1_dirname="$working_dir/libtasn1"
+libtasn1_origin_name="libtasn1"
+libtasn1_custom_name="libtasn1"
+libtasn1_dirname="$working_dir/$libtasn1_custom_name"
 libtasn1_name="$libtasn1_dirname-$libtasn1_version"
 
-python_dirname="$working_dir/python"
+python_origin_name="python"
+python_custom_name="python"
+python_dirname="$working_dir/$python_custom_name"
 python_name="$python_dirname-$python_version"
 python_bin_path="$python_dirname/bin"
-python_venv_path="$working_dir/python-$python_version-build-venv" # venv used for library building
+python_venv_path="$working_dir/$python_custom_name-$python_version-build-venv" # venv used for library building
 
-libpcre2_dirname="$working_dir/libpcre2"
+pippackage_origin_name="pip-package"
+
+libpcre2_origin_name="libpcre2"
+libpcre2_custom_name="libpcre2"
+libpcre2_dirname="$working_dir/$libpcre2_custom_name"
 libpcre2_name="$libpcre2_dirname-$libpcre2_version"
 
-glib_dirname="$working_dir/glib"
+glib_origin_name="glib"
+glib_custom_name="glib"
+glib_dirname="$working_dir/$glib_custom_name"
 glib_name="$glib_dirname-$glib_version"
 
-jsonglib_dirname="$working_dir/jsonglib"
+jsonglib_origin_name="json-glib"
+jsonglib_custom_name="jsonglib"
+jsonglib_dirname="$working_dir/$jsonglib_custom_name"
 jsonglib_name="$jsonglib_dirname-$jsonglib_version"
 
-bison_dirname="$working_dir/bison"
+bison_origin_name="bison"
+bison_custom_name="bison"
+bison_dirname="$working_dir/$bison_custom_name"
 bison_name="$bison_dirname-$bison_version"
 
-openssl_dirname="$working_dir/openssl"
+openssl_origin_name="openssl"
+openssl_custom_name="openssl"
+openssl_dirname="$working_dir/$openssl_custom_name"
 openssl_name="$openssl_dirname-$openssl_version"
 
-libcurl_dirname="$working_dir/libcurl"
+libcurl_origin_name="libcurl"
+libcurl_custom_name="libcurl"
+libcurl_dirname="$working_dir/$libcurl_custom_name"
 libcurl_name="$libcurl_dirname-$libcurl_version"
 
-swtpm_dirname="$working_dir/swtpm"
+swtpm_origin_name="swtpm"
+swtpm_custom_name="swtpm"
+swtpm_dirname="$working_dir/$swtpm_custom_name"
 swtpm_name="$swtpm_dirname-$swtpm_version"
 
-gettext_dirname="$working_dir/gettext"
+gettext_origin_name="gettext"
+gettext_custom_name="gettext"
+gettext_dirname="$working_dir/$gettext_custom_name"
 gettext_name="$gettext_dirname-$gettext_version"
 
-flex_dirname="$working_dir/flex"
+flex_origin_name="flex"
+flex_custom_name="flex"
+flex_dirname="$working_dir/$flex_custom_name"
 flex_name="$flex_dirname-$flex_version"
 
-utillinux_dirname="$working_dir/utillinux"
+utillinux_origin_name="utillinux"
+utillinux_custom_name="util-linux"
+utillinux_dirname="$working_dir/$utillinux_custom_name"
 utillinux_name="$utillinux_dirname-$utillinux_version"
 
-nettle_dirname="$working_dir/nettle"
+nettle_origin_name="nettle"
+nettle_custom_name="nettle"
+nettle_dirname="$working_dir/$nettle_custom_name"
 nettle_name="$nettle_dirname-$nettle_version"
 
-libunistring_dirname="$working_dir/libunistring"
+libunistring_origin_name="libunistring"
+libunistring_custom_name="libunistring"
+libunistring_dirname="$working_dir/$libunistring_custom_name"
 libunistring_name="$libunistring_dirname-$libunistring_version"
 
-libev_dirname="$working_dir/libev"
+libev_origin_name="libev"
+libev_custom_name="libev"
+libev_dirname="$working_dir/$libev_custom_name"
 libev_name="$libev_dirname-$libev_version"
 
-p11kit_dirname="$working_dir/p11kit"
+p11kit_origin_name="p11-kit"
+p11kit_custom_name="p11kit"
+p11kit_dirname="$working_dir/$p11kit_custom_name"
 p11kit_name="$p11kit_dirname-$p11kit_version"
 
-gnutls_dirname="$working_dir/gnutls"
+gnutls_origin_name="gnutls"
+gnutls_custom_name="gnutls"
+gnutls_dirname="$working_dir/$gnutls_custom_name"
 gnutls_name="$gnutls_dirname"
 
-tcsd_dirname="$working_dir/tcsd"
+tcsd_origin_name="tcsd"
+tcsd_custom_name="tcsd"
+tcsd_dirname="$working_dir/$tcsd_custom_name"
 tcsd_name="$tcsd_dirname-$tcsd_version"
 
-tcl_dirname="$working_dir/tcl"
+tcl_origin_name="tcl"
+tcl_custom_name="tcl"
+tcl_dirname="$working_dir/$tcl_custom_name"
 tcl_name="$tcl_dirname-$tcl_version"
 
-expect_dirname="$working_dir/expect"
+expect_origin_name="expect"
+expect_custom_name="expect"
+expect_dirname="$working_dir/$expect_custom_name"
 expect_name="$expect_dirname-$expect_version"
 
-gawk_dirname="$working_dir/gawk"
+gawk_origin_name="gawk"
+gawk_custom_name="gawk"
+gawk_dirname="$working_dir/$gawk_custom_name"
 gawk_name="$gawk_dirname-$gawk_version"
 
-socat_dirname="$working_dir/socat"
+socat_origin_name="socat"
+socat_custom_name="socat"
+socat_dirname="$working_dir/$socat_custom_name"
 socat_name="$socat_dirname-$socat_version"
 
-libseccomp_dirname="$working_dir/libseccomp"
+libseccomp_origin_name="libseccomp"
+libseccomp_custom_name="libseccomp"
+libseccomp_dirname="$working_dir/$libseccomp_custom_name"
 libseccomp_name="$libseccomp_dirname-$libseccomp_version"
 
-tpm2tools_dirname="$working_dir/tpm2tools"
+tpm2tools_origin_name="tpm2-tools"
+tpm2tools_custom_name="tpm2tools"
+tpm2tools_dirname="$working_dir/$tpm2tools_custom_name"
 tpm2tools_name="$tpm2tools_dirname-$tpm2tools_version"
 
-tpm2abrmd_dirname="$working_dir/tpm2abrmd"
+tpm2abrmd_origin_name="tpm2-abrmd"
+tpm2abrmd_custom_name="tpm2abrmd"
+tpm2abrmd_dirname="$working_dir/$tpm2abrmd_custom_name"
 tpm2abrmd_name="$tpm2abrmd_dirname-$tpm2abrmd_version"
 
-tpm2tssengine_dirname="$working_dir/tpm2tssengine"
+tpm2tssengine_origin_name="tpm2-tss-engine"
+tpm2tssengine_custom_name="tpm2tssengine"
+tpm2tssengine_dirname="$working_dir/$tpm2tssengine_custom_name"
 tpm2tssengine_name="$tpm2tssengine_dirname-$tpm2tssengine_version"
+
+libffi_origin_name="libffi"
+libffi_custom_name="libffi"
+libffi_dirname="$working_dir/$libffi_custom_name"
+libffi_name="$libffi_dirname-$libffi_version"
