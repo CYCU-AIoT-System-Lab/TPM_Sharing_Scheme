@@ -162,7 +162,6 @@ enable_pi_spi () {
     fi
 }
 
-echo_notice "${dirname}" "${filename}" "Running common setup..."
 echo_notice "${dirname}" "${filename}" "Current directory: $PWD"
 working_dir=$PWD
 
@@ -229,6 +228,15 @@ if [ $job_setup_mbc_last -eq 1 ]; then
     install_platform=$install_platform bash ./setup_mbc_last.sh
 else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_mbc_last ! Skipping setup_mbc_last..."
+fi
+
+cd $working_dir
+if [ $job_update_swtpm -eq 1 ]; then
+    echo_notice "${dirname}" "${filename}" "Running update_swtpm setup..."
+    cd ../update_swtpm
+    install_platform=$install_platform bash ./setup_swtpm.sh
+else
+    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_update_swtpm ! Skipping setup_swtpm..."
 fi
 
 clear_preset

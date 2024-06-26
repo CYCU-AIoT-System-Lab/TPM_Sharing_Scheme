@@ -43,9 +43,10 @@ load_preset () {
     check_var job_setup_optiga 1
     check_var job_deploy_repo 1
     check_var job_setup_mbc_last 1
+    check_var job_update_swtpm 1
 
     if [ $verbose == 1 ]; then
-        echo_notice "$message1" "$message2" "Loading preset..."
+        echo_notice "$dirname" "$filename" "Loading preset..."
     fi
     # ==== version ====
     cmake_ver="3.29"        # cmake version
@@ -69,7 +70,7 @@ load_preset () {
 
     # Disable jobs in this directory if not activated
     if [ ! $job_common -eq 1 ]; then
-        echo_notice "$message1" "$message2" "Skipping common..."
+        echo_warn "$dirname" "$filename" "Skipping common..."
         job_update_src=0
         job_change_all_sh_mod=0
         job_enable_ssh=0
@@ -119,6 +120,7 @@ clear_preset () {
     unset job_enable_pi_spi
     unset job_deploy_repo
     unset job_setup_mbc_last
+    unset job_update_swtpm
 }
 if [ $verbose == 1 ]; then
     echo_notice "${dirname}" "${filename}" "Loaded function: clear_preset"

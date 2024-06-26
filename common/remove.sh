@@ -69,4 +69,12 @@ else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_mbc_last ! Skipping remove of setup_mbc_last..."
 fi
 
+if [ $job_update_swtpm -eq 1 ]; then
+    echo_notice "$dirname" "$filename" "Running update_swtpm remove..."
+    cd ../update_swtpm
+    install_platform=$install_platform bash ./remove_swtpm.sh
+else
+    echo_warn "$dirname" "$filename" "Invalid Argument: $job_update_swtpm ! Skipping remove of update_swtpm..."
+fi
+
 clear_preset
