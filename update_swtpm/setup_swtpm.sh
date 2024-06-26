@@ -68,7 +68,7 @@ update_var () {
 }
 apt_install () {
     echo "$msg1"
-    sudo apt install -y $package | ts "$msg"; exit "${PIPESTATUS[0]}";
+    sudo apt install -y $package | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 }
 if [ $install_apt_package -eq 1 ]; then
     echo_notice "$script_path" "$script" "installing apt packages"
@@ -926,13 +926,13 @@ else echo "$msg2"; fi
 echo_notice "$script_path" "$script" "compiling sources"
 make_flag="-j$(nproc)"
 gnu_compile () {
-    ./configure $1
-    make $make_flag
+    sudo ./configure $1
+    sudo make $make_flag
     sudo make $make_flag install
 }
 tpm_compile () {
-    ./autogen.sh $1
-    make $make_flag
+    sudo ./autogen.sh $1
+    sudo make $make_flag
     sudo make $make_flag install
 }
 meson_compile () {(
@@ -959,40 +959,40 @@ update_var () {
 update_var "$pkgconfig_origin_name"
 if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
     cd $pkgconfig_dirname
-    gnu_compile "--with-internal-glib" | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile "--with-internal-glib" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$libffi_origin_name"
 if [ $install_libffi -eq 1 ]; then echo "$msg1"
     cd $libffi_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$bison_origin_name"
 if [ $install_bison -eq 1 ]; then echo "$msg1"
     cd $bison_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$openssl_origin_name"
 if [ $install_openssl -eq 1 ]; then echo "$msg1"
     cd $openssl_dirname
     openssl_ver_arr=(${openssl_version//./ } )
     if [[ ${openssl_ver_arr[0]} -ge 3 ]]; then
-        ./Configure | ts "$msg"; exit "${PIPESTATUS[0]}";
+        sudo ./Configure | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     else
-        ./config | ts "$msg"; exit "${PIPESTATUS[0]}";
+        sudo ./config | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     fi
-    make $make_flag | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo make $make_flag install | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo cp libcrypto.pc /usr/local/lib/pkgconfig | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo cp libssl.pc /usr/local/lib/pkgconfig | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo cp openssl.pc /usr/local/lib/pkgconfig | ts "$msg"; exit "${PIPESTATUS[0]}";
+    sudo make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo cp libcrypto.pc /usr/local/lib/pkgconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo cp libssl.pc /usr/local/lib/pkgconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo cp openssl.pc /usr/local/lib/pkgconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$python_origin_name"
 if [ $install_python -eq 1 ]; then echo "$msg1"
     cd $python_dirname
-    sudo ./configure --prefix=$python_dirname --exec-prefix=$python_dirname --enable-shared | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo make $make_flag | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo make $make_flag altinstall | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo ldconfig $python_dirname | ts "$msg"; exit "${PIPESTATUS[0]}";
+    sudo ./configure --prefix=$python_dirname --exec-prefix=$python_dirname --enable-shared | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag altinstall | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo ldconfig $python_dirname | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$pippackage_origin_name"
 if [ $install_pippackage -eq 1 ]; then echo "$msg1"
@@ -1000,198 +1000,198 @@ if [ $install_pippackage -eq 1 ]; then echo "$msg1"
     "$python_bin_path/python${python_version%.*}" -m venv $python_venv_path
     echo "$msg installing for newly created virtual environment"
     source $python_venv_path/bin/activate
-    pip install -U pip setuptools | ts "$msg"; exit "${PIPESTATUS[0]}";
-    pip install packaging ninja meson | ts "$msg"; exit "${PIPESTATUS[0]}";
+    pip install -U pip setuptools | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    pip install packaging ninja meson | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     deactivate
 else echo "$msg2"; fi
 update_var "$libpcre2_origin_name"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
     cd $libpcre2_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$glib_origin_name"
 if [ $install_glib -eq 1 ]; then echo "$msg1"
     cd $glib_dirname
-    meson_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    meson_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$jsonglib_origin_name"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
     cd $jsonglib_dirname
     # `meson setup` process contains `git clone`, considering fail-redo mechanism
-    meson_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    meson_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$libtasn1_origin_name"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
     cd $libtasn1_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$help2man_origin_name"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
     cd $help2man_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$autoconf_origin_name"
 if [ $install_autoconf -eq 1 ]; then echo "$msg1"
     cd $autoconf_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$gperf_origin_name"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
     cd $gperf_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$m4_origin_name"
 if [ $install_m4 -eq 1 ]; then echo "$msg1"
     cd $m4_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$automake_origin_name"
 if [ $install_automake -eq 1 ]; then echo "$msg1"
     cd $automake_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$texinfo_origin_name"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
     cd $texinfo_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$libtool_origin_name"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
     cd $libtool_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$gmp_origin_name"
 if [ $install_gmp -eq 1 ]; then echo "$msg1"
     cd $gmp_dirname
-    ./.bootstrap | ts "$msg"; exit "${PIPESTATUS[0]}";
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    sudo ./.bootstrap | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$jsonc_origin_name"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
     cd $working_dir
     sudo mkdir $jsonc_build_path
     cd $jsonc_build_path
-    cmake $jsonc_dirname | ts "$msg"; exit "${PIPESTATUS[0]}";
-    make $make_flag | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo make $make_flag install | ts "$msg"; exit "${PIPESTATUS[0]}"; 
+    sudo cmake $jsonc_dirname | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi 
 else echo "$msg2"; fi
 update_var "$libcurl_origin_name"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
     cd $libcurl_dirname
-    gnu_compile "--with-openssl" | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile "--with-openssl" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$gettext_origin_name"
 if [ $install_gettext -eq 1 ]; then echo "$msg1"
     cd $gettext_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$flex_origin_name"
 if [ $install_flex -eq 1 ]; then echo "$msg1"
     cd $flex_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$utillinux_origin_name"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
     cd $utillinux_dirname
-    ./autogen.sh | ts "$msg"; exit "${PIPESTATUS[0]}";
-    gnu_compile "--disable-all-programs --enable-libuuid" | ts "$msg"; exit "${PIPESTATUS[0]}";
+    sudo ./autogen.sh | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    gnu_compile "--disable-all-programs --enable-libuuid" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$nettle_origin_name"
 if [ $install_nettle -eq 1 ]; then echo "$msg1"
     cd $nettle_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$libunistring_origin_name"
 if [ $install_libunistring -eq 1 ]; then echo "$msg1"
     cd $libunistring_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$libev_origin_name"
 if [ $install_libev -eq 1 ]; then echo "$msg1"
     cd $libev_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$p11kit_origin_name"
 if [ $install_p11kit -eq 1 ]; then echo "$msg1"
     cd $p11kit_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$gnutls_origin_name"
 if [ $install_gnutls -eq 1 ]; then echo "$msg1"
     cd $gnutls_dirname
     # `bootstap` process contains `git clone`, considering fail-redo mechanism
-    ./bootstrap | ts "$msg"; exit "${PIPESTATUS[0]}";
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    sudo ./bootstrap | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$tcsd_origin_name"
 if [ $install_tcsd -eq 1 ]; then echo "$msg1"
     cd $tcsd_dirname
-    ./bootstrap.sh | ts "$msg"; exit "${PIPESTATUS[0]}";
-    make $make_flag | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo make $make_flag install | ts "$msg"; exit "${PIPESTATUS[0]}";
+    sudo ./bootstrap.sh | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$tcl_origin_name"
 if [ $install_tcl -eq 1 ]; then echo "$msg1"
     cd $tcl_dirname/unix
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$expect_origin_name"
 if [ $install_expect -eq 1 ]; then echo "$msg1"
     cd $expect_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$gawk_origin_name"
 if [ $install_gawk -eq 1 ]; then echo "$msg1"
     cd $gawk_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$socat_origin_name"
 if [ $install_socat -eq 1 ]; then echo "$msg1"
     cd $socat_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$libseccomp_origin_name"
 if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
     cd $libseccomp_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$tpm2tss_origin_name"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
     cd $tpm2tss_dirname
-    gnu_compile "--with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix" | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo udevadm control --reload-rules | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo udevadm trigger | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo ldconfig | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile "--with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo udevadm control --reload-rules | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo udevadm trigger | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo ldconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$tpm2tools_origin_name"
 if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
     cd $libseccomp_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$tpm2abrmd_origin_name"
 if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
     cd $tpm2abrmd_dirname
-    sudo useradd --system --user-group tss | ts "$msg"; exit "${PIPESTATUS[0]}"; || :
-    gnu_compile "--with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share" | ts "$msg"; exit "${PIPESTATUS[0]}"; # can test integration with swtpm with --enable-integration
-    sudo ldconfig | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo pkill -HUP dbus-daemon | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo systemctl daemon-reload | ts "$msg"; exit "${PIPESTATUS[0]}";
+    sudo useradd --system --user-group tss | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi || :
+    gnu_compile "--with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
+    sudo ldconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo pkill -HUP dbus-daemon | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo systemctl daemon-reload | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$tpm2tssengine_origin_name"
 if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
     cd $tpm2tssengine_dirname
-    gnu_compile | ts "$msg"; exit "${PIPESTATUS[0]}";
-    sudo ldconfig | ts "$msg"; exit "${PIPESTATUS[0]}";
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo ldconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$libtpms_origin_name"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
     cd $libtpms_dirname
-    tpm_compile "--with-tpm2 --with-openssl --prefix=/usr" | ts "$msg"; exit "${PIPESTATUS[0]}";
+    tpm_compile "--with-tpm2 --with-openssl --prefix=/usr" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$swtpm_origin_name"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
     cd $swtpm_dirname
-    tpm_compile "--with-openssl --prefix=/usr" | ts "$msg"; exit "${PIPESTATUS[0]}";
+    tpm_compile "--with-openssl --prefix=/usr" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 
 #> ------------------------------------------------
