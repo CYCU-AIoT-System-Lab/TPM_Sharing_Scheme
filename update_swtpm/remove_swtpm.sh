@@ -16,7 +16,7 @@ update_var () {
 }
 apt_remove () {
     echo "$msg1"
-    sudo apt remove -y $package | ts "$msg" || { echo -e "$msg2"; exit 1; }
+    sudo apt remove -y $package | ts "$msg"; exit "${PIPESTATUS[0]}";
 }
 if [ $install_apt_package -eq 1 ]; then
     echo_notice "$script_path" "$script" "uninstalling apt packages..."
@@ -38,61 +38,61 @@ update_var () {
 update_var "$swtpm_origin_name"
 if [ $install_swtpm -eq 1 ]; then echo "$msg3"
     cd $swtpm_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$libtpms_origin_name"
 if [ $install_libtpms -eq 1 ]; then echo "$msg3"
     cd $libtpms_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$tpm2tssengine_origin_name"
 if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg3"
     cd $tpm2tssengine_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
-    sudo ldconfig | ts "$msg"
+    sudo make uninstall | ts "$msg"; || :
+    sudo ldconfig | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$tpm2abrmd_origin_name"
 if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg3"
     cd $tpm2abrmd_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
-    sudo deluser --system tss | ts "$msg" || :
+    sudo make uninstall | ts "$msg"; || :
+    sudo deluser --system tss | ts "$msg"; || :
     # sudo groupdel tss || : # auto-deleted in previous line
-    sudo pkill -HUP dbus-daemon | ts "$msg"
-    sudo systemctl daemon-reload | ts "$msg"
-    sudo ldconfig | ts "$msg"
+    sudo pkill -HUP dbus-daemon | ts "$msg"; || :
+    sudo systemctl daemon-reload | ts "$msg"; || :
+    sudo ldconfig | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$tpm2tools_origin_name"
 if [ $install_tpm2tools -eq 1 ]; then echo "$msg3"
     cd $tpm2tools_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$tpm2tss_origin_name"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg3"
     cd $tpm2tss_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
-    sudo udevadm control --reload-rules | ts "$msg"
-    sudo udevadm trigger | ts "$msg"
-    sudo ldconfig | ts "$msg"
+    sudo make uninstall | ts "$msg"; || :
+    sudo udevadm control --reload-rules | ts "$msg"; || :
+    sudo udevadm trigger | ts "$msg"; || :
+    sudo ldconfig | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$libseccomp_origin_name"
 if [ $install_libseccomp -eq 1 ]; then echo "$msg3"
     cd $libseccomp_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$socat_origin_name"
 if [ $install_socat -eq 1 ]; then echo "$msg3"
     cd $socat_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$gawk_origin_name"
 if [ $install_gawk -eq 1 ]; then echo "$msg3"
     cd $gawk_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$expect_origin_name"
 if [ $install_expect -eq 1 ]; then echo "$msg3"
     cd $expect_dirname
-    sudo make uninstall-binaries | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall-binaries | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$tcl_origin_name"
 if [ $install_tcl -eq 1 ]; then echo "$msg3"
@@ -101,102 +101,102 @@ else echo "$msg2"; fi
 update_var "$tcsd_origin_name"
 if [ $install_tcsd -eq 1 ]; then echo "$msg3"
     cd $tcsd_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$gnutls_origin_name"
 if [ $install_gnutls -eq 1 ]; then echo "$msg3"
     cd $gnutls_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$p11kit_origin_name"
 if [ $install_p11kit -eq 1 ]; then echo "$msg3"
     cd $p11kit_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$libev_origin_name"
 if [ $install_libev -eq 1 ]; then echo "$msg3"
     cd $libev_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$libunistring_origin_name"
 if [ $install_libunistring -eq 1 ]; then echo "$msg3"
     cd $libunistring_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$nettle_origin_name"
 if [ $install_nettle -eq 1 ]; then echo "$msg3"
     cd $nettle_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$utillinux_origin_name"
 if [ $install_utillinux -eq 1 ]; then echo "$msg3"
     cd $utillinux_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$flex_origin_name"
 if [ $install_flex -eq 1 ]; then echo "$msg3"
     cd $flex_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$gettext_origin_name"
 if [ $install_gettext -eq 1 ]; then echo "$msg3"
     cd $gettext_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$libcurl_origin_name"
 if [ $install_libcurl -eq 1 ]; then echo "$msg3"
     cd $libcurl_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$jsonc_origin_name"
 if [ $install_jsonc -eq 1 ]; then echo "$msg3"
     cd "$jsonc_build_path"
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$gmp_origin_name"
 if [ $install_gmp -eq 1 ]; then echo "$msg3"
     cd $gmp_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$libtool_origin_name"
 if [ $install_libtool -eq 1 ]; then echo "$msg3"
     cd $libtool_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$texinfo_origin_name"
 if [ $install_texinfo -eq 1 ]; then echo "$msg3"
     cd $texinfo_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$automake_origin_name"
 if [ $install_automake -eq 1 ]; then echo "$msg3"
     cd $automake_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$m4_origin_name"
 if [ $install_m4 -eq 1 ]; then echo "$msg3"
     cd $m4_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$gperf_origin_name"
 if [ $install_gperf -eq 1 ]; then echo "$msg3"
     cd $gperf_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$autoconf_origin_name"
 if [ $install_autoconf -eq 1 ]; then echo "$msg3"
     cd $autoconf_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$help2man_origin_name"
 if [ $install_help2man -eq 1 ]; then echo "$msg3"
     cd $help2man_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$libtasn1_origin_name"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg3"
     cd $libtasn1_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$jsonglib_origin_name"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg3"
@@ -209,7 +209,7 @@ else echo "$msg2"; fi
 update_var "$libpcre2_origin_name"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg3"
     cd $libpcre2_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$pippackage_origin_name"
 if [ $install_pippackage -eq 1 ]; then echo "$msg3"
@@ -218,31 +218,31 @@ else echo "$msg2"; fi
 update_var "$python_origin_name"
 if [ $install_python -eq 1 ]; then echo "$msg3"
     cd $python_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
-    sudo ldconfig | ts "$msg"
+    sudo make uninstall | ts "$msg"; || :
+    sudo ldconfig | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$openssl_origin_name"
 if [ $install_openssl -eq 1 ]; then echo "$msg3"
     cd $openssl_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
-    sudo rm /usr/local/lib/pkgconfig/libcrypto.pc | ts "$msg" 
-    sudo rm /usr/local/lib/pkgconfig/libssl.pc | ts "$msg" 
-    sudo rm /usr/local/lib/pkgconfig/openssl.pc | ts "$msg" 
+    sudo make uninstall | ts "$msg"; || :
+    sudo rm /usr/local/lib/pkgconfig/libcrypto.pc | ts "$msg"; || :
+    sudo rm /usr/local/lib/pkgconfig/libssl.pc | ts "$msg"; || :
+    sudo rm /usr/local/lib/pkgconfig/openssl.pc | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$bison_origin_name"
 if [ $install_bison -eq 1 ]; then echo "$msg3"
     cd $bison_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$libffi_origin_name"
 if [ $install_libffi -eq 1 ]; then echo "$msg3"
     cd $libffi_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 update_var "$pkgconfig_origin_name"
 if [ $install_libtpms -eq 1 ]; then echo "$msg3"
     cd $pkgconfig_dirname
-    sudo make uninstall | ts "$msg" || { echo -e "$msg1"; }
+    sudo make uninstall | ts "$msg"; || :
 else echo "$msg2"; fi
 
 echo_notice "$script_path" "$script" "removing created directories"
