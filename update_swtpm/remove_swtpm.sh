@@ -16,7 +16,7 @@ update_var () {
 }
 apt_remove () {
     echo "$msg1"
-    sudo apt remove -y $package | ts "$msg"; exit "${PIPESTATUS[0]}";
+    sudo apt remove -y $package | ts "$msg" || :
 }
 if [ $install_apt_package -eq 1 ]; then
     echo_notice "$script_path" "$script" "uninstalling apt packages..."
@@ -37,62 +37,62 @@ update_var () {
 }
 update_var "$swtpm_origin_name"
 if [ $install_swtpm -eq 1 ]; then echo "$msg3"
-    cd $swtpm_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $swtpm_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$libtpms_origin_name"
 if [ $install_libtpms -eq 1 ]; then echo "$msg3"
-    cd $libtpms_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $libtpms_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$tpm2tssengine_origin_name"
 if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg3"
-    cd $tpm2tssengine_dirname
-    sudo make uninstall | ts "$msg"; || :
-    sudo ldconfig | ts "$msg"; || :
+    cd $tpm2tssengine_dirname || :
+    sudo make uninstall | ts "$msg" || :
+    sudo ldconfig | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$tpm2abrmd_origin_name"
 if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg3"
-    cd $tpm2abrmd_dirname
-    sudo make uninstall | ts "$msg"; || :
-    sudo deluser --system tss | ts "$msg"; || :
+    cd $tpm2abrmd_dirname || :
+    sudo make uninstall | ts "$msg" || :
+    sudo deluser --system tss | ts "$msg" || :
     # sudo groupdel tss || : # auto-deleted in previous line
-    sudo pkill -HUP dbus-daemon | ts "$msg"; || :
-    sudo systemctl daemon-reload | ts "$msg"; || :
-    sudo ldconfig | ts "$msg"; || :
+    sudo pkill -HUP dbus-daemon | ts "$msg" || :
+    sudo systemctl daemon-reload | ts "$msg" || :
+    sudo ldconfig | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$tpm2tools_origin_name"
 if [ $install_tpm2tools -eq 1 ]; then echo "$msg3"
-    cd $tpm2tools_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $tpm2tools_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$tpm2tss_origin_name"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg3"
-    cd $tpm2tss_dirname
-    sudo make uninstall | ts "$msg"; || :
-    sudo udevadm control --reload-rules | ts "$msg"; || :
-    sudo udevadm trigger | ts "$msg"; || :
-    sudo ldconfig | ts "$msg"; || :
+    cd $tpm2tss_dirname || :
+    sudo make uninstall | ts "$msg" || :
+    sudo udevadm control --reload-rules | ts "$msg" || :
+    sudo udevadm trigger | ts "$msg" || :
+    sudo ldconfig | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$libseccomp_origin_name"
 if [ $install_libseccomp -eq 1 ]; then echo "$msg3"
-    cd $libseccomp_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $libseccomp_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$socat_origin_name"
 if [ $install_socat -eq 1 ]; then echo "$msg3"
-    cd $socat_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $socat_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$gawk_origin_name"
 if [ $install_gawk -eq 1 ]; then echo "$msg3"
-    cd $gawk_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $gawk_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$expect_origin_name"
 if [ $install_expect -eq 1 ]; then echo "$msg3"
-    cd $expect_dirname
-    sudo make uninstall-binaries | ts "$msg"; || :
+    cd $expect_dirname || :
+    sudo make uninstall-binaries | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$tcl_origin_name"
 if [ $install_tcl -eq 1 ]; then echo "$msg3"
@@ -100,103 +100,103 @@ if [ $install_tcl -eq 1 ]; then echo "$msg3"
 else echo "$msg2"; fi
 update_var "$tcsd_origin_name"
 if [ $install_tcsd -eq 1 ]; then echo "$msg3"
-    cd $tcsd_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $tcsd_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$gnutls_origin_name"
 if [ $install_gnutls -eq 1 ]; then echo "$msg3"
-    cd $gnutls_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $gnutls_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$p11kit_origin_name"
 if [ $install_p11kit -eq 1 ]; then echo "$msg3"
-    cd $p11kit_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $p11kit_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$libev_origin_name"
 if [ $install_libev -eq 1 ]; then echo "$msg3"
-    cd $libev_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $libev_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$libunistring_origin_name"
 if [ $install_libunistring -eq 1 ]; then echo "$msg3"
-    cd $libunistring_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $libunistring_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$nettle_origin_name"
 if [ $install_nettle -eq 1 ]; then echo "$msg3"
-    cd $nettle_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $nettle_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$utillinux_origin_name"
 if [ $install_utillinux -eq 1 ]; then echo "$msg3"
-    cd $utillinux_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $utillinux_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$flex_origin_name"
 if [ $install_flex -eq 1 ]; then echo "$msg3"
-    cd $flex_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $flex_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$gettext_origin_name"
 if [ $install_gettext -eq 1 ]; then echo "$msg3"
-    cd $gettext_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $gettext_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$libcurl_origin_name"
 if [ $install_libcurl -eq 1 ]; then echo "$msg3"
-    cd $libcurl_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $libcurl_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$jsonc_origin_name"
 if [ $install_jsonc -eq 1 ]; then echo "$msg3"
-    cd "$jsonc_build_path"
-    sudo make uninstall | ts "$msg"; || :
+    cd $jsonc_build_path || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$gmp_origin_name"
 if [ $install_gmp -eq 1 ]; then echo "$msg3"
-    cd $gmp_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $gmp_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$libtool_origin_name"
 if [ $install_libtool -eq 1 ]; then echo "$msg3"
-    cd $libtool_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $libtool_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$texinfo_origin_name"
 if [ $install_texinfo -eq 1 ]; then echo "$msg3"
-    cd $texinfo_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $texinfo_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$automake_origin_name"
 if [ $install_automake -eq 1 ]; then echo "$msg3"
-    cd $automake_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $automake_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$m4_origin_name"
 if [ $install_m4 -eq 1 ]; then echo "$msg3"
-    cd $m4_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $m4_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$gperf_origin_name"
 if [ $install_gperf -eq 1 ]; then echo "$msg3"
-    cd $gperf_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $gperf_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$autoconf_origin_name"
 if [ $install_autoconf -eq 1 ]; then echo "$msg3"
-    cd $autoconf_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $autoconf_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$help2man_origin_name"
 if [ $install_help2man -eq 1 ]; then echo "$msg3"
-    cd $help2man_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $help2man_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$libtasn1_origin_name"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg3"
-    cd $libtasn1_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $libtasn1_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$jsonglib_origin_name"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg3"
@@ -208,41 +208,41 @@ if [ $install_glib -eq 1 ]; then echo "$msg3"
 else echo "$msg2"; fi
 update_var "$libpcre2_origin_name"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg3"
-    cd $libpcre2_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $libpcre2_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$pippackage_origin_name"
 if [ $install_pippackage -eq 1 ]; then echo "$msg3"
-    sudo rm -rf $python_venv_path
+    rm -rf $python_venv_path
 else echo "$msg2"; fi
 update_var "$python_origin_name"
 if [ $install_python -eq 1 ]; then echo "$msg3"
-    cd $python_dirname
-    sudo make uninstall | ts "$msg"; || :
-    sudo ldconfig | ts "$msg"; || :
+    cd $python_dirname || :
+    sudo make uninstall | ts "$msg" || :
+    sudo ldconfig | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$openssl_origin_name"
 if [ $install_openssl -eq 1 ]; then echo "$msg3"
-    cd $openssl_dirname
-    sudo make uninstall | ts "$msg"; || :
-    sudo rm /usr/local/lib/pkgconfig/libcrypto.pc | ts "$msg"; || :
-    sudo rm /usr/local/lib/pkgconfig/libssl.pc | ts "$msg"; || :
-    sudo rm /usr/local/lib/pkgconfig/openssl.pc | ts "$msg"; || :
+    cd $openssl_dirname || :
+    sudo make uninstall | ts "$msg" || :
+    sudo rm /usr/local/lib/pkgconfig/libcrypto.pc | ts "$msg" || :
+    sudo rm /usr/local/lib/pkgconfig/libssl.pc | ts "$msg" || :
+    sudo rm /usr/local/lib/pkgconfig/openssl.pc | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$bison_origin_name"
 if [ $install_bison -eq 1 ]; then echo "$msg3"
-    cd $bison_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $bison_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$libffi_origin_name"
 if [ $install_libffi -eq 1 ]; then echo "$msg3"
-    cd $libffi_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $libffi_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 update_var "$pkgconfig_origin_name"
 if [ $install_libtpms -eq 1 ]; then echo "$msg3"
-    cd $pkgconfig_dirname
-    sudo make uninstall | ts "$msg"; || :
+    cd $pkgconfig_dirname || :
+    sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 
 echo_notice "$script_path" "$script" "removing created directories"
@@ -256,160 +256,160 @@ update_var () {
 }
 update_var "$gmp_origin_name"
 if [ $install_gmp -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $gmp_name
+    rm -rf $gmp_name
 else echo "$msg2"; fi
 update_var "$libtpms_origin_name"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $libtpms_name
+    rm -rf $libtpms_name
 else echo "$msg2"; fi
 update_var "$tpm2tss_origin_name"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $tpm2tss_name
+    rm -rf $tpm2tss_name
 else echo "$msg2"; fi
 update_var "$jsonc_origin_name"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $jsonc_name
-    sudo rm -rf "$jsonc_build_path"
+    rm -rf $jsonc_name
+    rm -rf "$jsonc_build_path"
 else echo "$msg2"; fi
 update_var "$texinfo_origin_name"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $texinfo_name
+    rm -rf $texinfo_name
 else echo "$msg2"; fi
 update_var "$automake_origin_name"
 if [ $install_automake -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $automake_name
+    rm -rf $automake_name
 else echo "$msg2"; fi
 update_var "$autoconf_origin_name"
 if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $autoconf_name
+    rm -rf $autoconf_name
 else echo "$msg2"; fi
 update_var "$help2man_origin_name"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $help2man_name
+    rm -rf $help2man_name
 else echo "$msg2"; fi
 update_var "$m4_origin_name"
 if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $m4_name
+    rm -rf $m4_name
 else echo "$msg2"; fi
 update_var "$gperf_origin_name"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $gperf_name
+    rm -rf $gperf_name
 else echo "$msg2"; fi
 update_var "$libtool_origin_name"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $libtool_name
+    rm -rf $libtool_name
 else echo "$msg2"; fi
 update_var "$pkgconfig_origin_name"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $pkgconfig_name
+    rm -rf $pkgconfig_name
 else echo "$msg2"; fi
 update_var "$libtasn1_origin_name"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $libtasn1_name
+    rm -rf $libtasn1_name
 else echo "$msg2"; fi
 update_var "$python_origin_name"
 if [ $install_python -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $python_name
+    rm -rf $python_name
 else echo "$msg2"; fi
 update_var "$libpcre2_origin_name"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $libpcre2_name
+    rm -rf $libpcre2_name
 else echo "$msg2"; fi
 update_var "$glib_origin_name"
 if [ $install_glib -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $glib_name
+    rm -rf $glib_name
 else echo "$msg2"; fi
 update_var "$jsonglib_origin_name"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $jsonglib_name
+    rm -rf $jsonglib_name
 else echo "$msg2"; fi
 update_var "$bison_origin_name"
 if [ $install_bison -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $bison_name
+    rm -rf $bison_name
 else echo "$msg2"; fi
 update_var "$openssl_origin_name"
 if [ $install_openssl -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $openssl_name
+    rm -rf $openssl_name
 else echo "$msg2"; fi
 update_var "$libcurl_origin_name"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $libcurl_name
+    rm -rf $libcurl_name
 else echo "$msg2"; fi
 update_var "$swtpm_origin_name"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $swtpm_name
+    rm -rf $swtpm_name
 else echo "$msg2"; fi
 update_var "$gettext_origin_name"
 if [ $install_gettext -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $gettext_name
+    rm -rf $gettext_name
 else echo "$msg2"; fi
 update_var "$flex_origin_name"
 if [ $install_flex -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $flex_name
+    rm -rf $flex_name
 else echo "$msg2"; fi
 update_var "$utillinux_origin_name"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $utillinux_name
+    rm -rf $utillinux_name
 else echo "$msg2"; fi
 update_var "$nettle_origin_name"
 if [ $install_nettle -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $nettle_name
+    rm -rf $nettle_name
 else echo "$msg2"; fi
 update_var "$libunistring_origin_name"
 if [ $install_libunistring -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $libunistring_name
+    rm -rf $libunistring_name
 else echo "$msg2"; fi
 update_var "$libev_origin_name"
 if [ $install_libev -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $libev_name
+    rm -rf $libev_name
 else echo "$msg2"; fi
 update_var "$p11kit_origin_name"
 if [ $install_p11kit -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $p11kit_name
+    rm -rf $p11kit_name
 else echo "$msg2"; fi
 update_var "$gnutls_origin_name"
 if [ $install_gnutls -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $gnutls_name
+    rm -rf $gnutls_name
 else echo "$msg2"; fi
 update_var "$tcsd_origin_name"
 if [ $install_tcsd -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $tcsd_name
+    rm -rf $tcsd_name
 else echo "$msg2"; fi
 update_var "$tcl_origin_name"
 if [ $install_tcl -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $tcl_name
+    rm -rf $tcl_name
 else echo "$msg2"; fi
 update_var "$expect_origin_name"
 if [ $install_expect -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $expect_name
+    rm -rf $expect_name
 else echo "$msg2"; fi
 update_var "$gawk_origin_name"
 if [ $install_gawk -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $gawk_name
+    rm -rf $gawk_name
 else echo "$msg2"; fi
 update_var "$socat_origin_name"
 if [ $install_socat -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $socat_name
+    rm -rf $socat_name
 else echo "$msg2"; fi
 update_var "$libseccomp_origin_name"
 if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $libseccomp_name
+    rm -rf $libseccomp_name
 else echo "$msg2"; fi
 update_var "$tpm2tools_origin_name"
 if [ $install_tpm2tools -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $tpm2tools_name
+    rm -rf $tpm2tools_name
 else echo "$msg2"; fi
 update_var "$tpm2abrmd_origin_name"
 if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $tpm2abrmd_name
+    rm -rf $tpm2abrmd_name
 else echo "$msg2"; fi
 update_var "$tpm2tssengine_origin_name"
 if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $tpm2tssengine_name
+    rm -rf $tpm2tssengine_name
 else echo "$msg2"; fi
 update_var "$libffi_origin_name"
 if [ $install_libffi -eq 1 ]; then echo "$msg1"
-    sudo rm -rf $libffi_name
+    rm -rf $libffi_name
 else echo "$msg2"; fi
 
 echo_notice "$script_path" "$script" "removing downloaded source"
@@ -423,151 +423,151 @@ update_var () {
 }
 update_var "$libtpms_origin_name"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libtpms_name$libtpms_ext
+    rm -f $libtpms_name$libtpms_ext
 else echo "$msg2"; fi
 update_var "$tpm2tss_origin_name"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    sudo rm -f $tpm2tss_name$tpm2tss_ext
+    rm -f $tpm2tss_name$tpm2tss_ext
 else echo "$msg2"; fi
 update_var "$jsonc_origin_name"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    sudo rm -f $jsonc_name$jsonc_ext
+    rm -f $jsonc_name$jsonc_ext
 else echo "$msg2"; fi
 update_var "$texinfo_origin_name"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    sudo rm -f $texinfo_name$texinfo_ext
+    rm -f $texinfo_name$texinfo_ext
 else echo "$msg2"; fi
 update_var "$automake_origin_name"
 if [ $install_automake -eq 1 ]; then echo "$msg1"
-    sudo rm -f $automake_name$automake_ext
+    rm -f $automake_name$automake_ext
 else echo "$msg2"; fi
 update_var "$autoconf_origin_name"
 if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    sudo rm -f $autoconf_name$autoconf_ext
+    rm -f $autoconf_name$autoconf_ext
 else echo "$msg2"; fi
 update_var "$help2man_origin_name"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    sudo rm -f $help2man_name$help2man_ext
+    rm -f $help2man_name$help2man_ext
 else echo "$msg2"; fi
 update_var "$m4_origin_name"
 if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    sudo rm -f $m4_name$m4_ext
+    rm -f $m4_name$m4_ext
 else echo "$msg2"; fi
 update_var "$gperf_origin_name"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    sudo rm -f $gperf_name$m4_ext
+    rm -f $gperf_name$m4_ext
 else echo "$msg2"; fi
 update_var "$libtool_origin_name"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libtool_name$libtool_ext
+    rm -f $libtool_name$libtool_ext
 else echo "$msg2"; fi
 update_var "$pkgconfig_origin_name"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    sudo rm -f $pkgconfig_name$pkgconfig_ext
+    rm -f $pkgconfig_name$pkgconfig_ext
 else echo "$msg2"; fi
 update_var "$libtasn1_origin_name"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libtasn1_name$libtasn1_ext
+    rm -f $libtasn1_name$libtasn1_ext
 else echo "$msg2"; fi
 update_var "$python_origin_name"
 if [ $install_python -eq 1 ]; then echo "$msg1"
-    sudo rm -f $python_name$python_ext
+    rm -f $python_name$python_ext
 else echo "$msg2"; fi
 update_var "$libpcre2_origin_name"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libpcre2_name$libpcre2_ext
+    rm -f $libpcre2_name$libpcre2_ext
 else echo "$msg2"; fi
 update_var "$glib_origin_name"
 if [ $install_glib -eq 1 ]; then echo "$msg1"
-    sudo rm -f $glib_name$glib_ext
+    rm -f $glib_name$glib_ext
 else echo "$msg2"; fi
 update_var "$jsonglib_origin_name"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
-    sudo rm -f $jsonglib_name$jsonglib_ext
+    rm -f $jsonglib_name$jsonglib_ext
 else echo "$msg2"; fi
 update_var "$bison_origin_name"
 if [ $install_bison -eq 1 ]; then echo "$msg1"
-    sudo rm -f $bison_name$bison_ext
+    rm -f $bison_name$bison_ext
 else echo "$msg2"; fi
 update_var "$openssl_origin_name"
 if [ $install_openssl -eq 1 ]; then echo "$msg1"
-    sudo rm -f $openssl_name$openssl_ext
+    rm -f $openssl_name$openssl_ext
 else echo "$msg2"; fi
 update_var "$libcurl_origin_name"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libcurl_name$libcurl_ext
+    rm -f $libcurl_name$libcurl_ext
 else echo "$msg2"; fi
 update_var "$swtpm_origin_name"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
-    sudo rm -f $swtpm_name$swtpm_ext
+    rm -f $swtpm_name$swtpm_ext
 else echo "$msg2"; fi
 update_var "$gettext_origin_name"
 if [ $install_gettext -eq 1 ]; then echo "$msg1"
-    sudo rm -f $gettext_name$gettext_ext
+    rm -f $gettext_name$gettext_ext
 else echo "$msg2"; fi
 update_var "$flex_origin_name"
 if [ $install_flex -eq 1 ]; then echo "$msg1"
-    sudo rm -f $flex_name$flex_ext
+    rm -f $flex_name$flex_ext
 else echo "$msg2"; fi
 update_var "$utillinux_origin_name"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
-    sudo rm -f $utillinux_name$utillinux_ext
+    rm -f $utillinux_name$utillinux_ext
 else echo "$msg2"; fi
 update_var "$nettle_origin_name"
 if [ $install_nettle -eq 1 ]; then echo "$msg1"
-    sudo rm -f $nettle_name$nettle_ext
+    rm -f $nettle_name$nettle_ext
 else echo "$msg2"; fi
 update_var "$libunistring_origin_name"
 if [ $install_libunistring -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libunistring_name$libunistring_ext
+    rm -f $libunistring_name$libunistring_ext
 else echo "$msg2"; fi
 update_var "$libev_origin_name"
 if [ $install_libev -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libev_name$libev_ext
+    rm -f $libev_name$libev_ext
 else echo "$msg2"; fi
 update_var "$p11kit_origin_name"
 if [ $install_p11kit -eq 1 ]; then echo "$msg1"
-    sudo rm -f $p11kit_name$p11kit_ext
+    rm -f $p11kit_name$p11kit_ext
 else echo "$msg2"; fi
 update_var "$tcsd_origin_name"
 if [ $install_tcsd -eq 1 ]; then echo "$msg1"
-    sudo rm -f $tcsd_name$tcsd_ext
+    rm -f $tcsd_name$tcsd_ext
 else echo "$msg2"; fi
 update_var "$tcl_origin_name"
 if [ $install_tcl -eq 1 ]; then echo "$msg1"
-    sudo rm -f $tcl_name$tcl_ext
+    rm -f $tcl_name$tcl_ext
 else echo "$msg2"; fi
 update_var "$expect_origin_name"
 if [ $install_expect -eq 1 ]; then echo "$msg1"
-    sudo rm -f $expect_name$expect_ext
+    rm -f $expect_name$expect_ext
 else echo "$msg2"; fi
 update_var "$gawk_origin_name"
 if [ $install_gawk -eq 1 ]; then echo "$msg1"
-    sudo rm -f $gawk_name$gawk_ext
+    rm -f $gawk_name$gawk_ext
 else echo "$msg2"; fi
 update_var "$socat_origin_name"
 if [ $install_socat -eq 1 ]; then echo "$msg1"
-    sudo rm -f $socat_name$socat_ext
+    rm -f $socat_name$socat_ext
 else echo "$msg2"; fi
 update_var "$libseccomp_origin_name"
 if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libseccomp_name$libseccomp_ext
+    rm -f $libseccomp_name$libseccomp_ext
 else echo "$msg2"; fi
 update_var "$tpm2tools_origin_name"
 if [ $install_tpm2tools -eq 1 ]; then echo "$msg1"
-    sudo rm -f $tpm2tools_name$tpm2tools_ext
+    rm -f $tpm2tools_name$tpm2tools_ext
 else echo "$msg2"; fi
 update_var "$tpm2abrmd_origin_name"
 if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
-    sudo rm -f $tpm2abrmd_name$tpm2abrmd_ext
+    rm -f $tpm2abrmd_name$tpm2abrmd_ext
 else echo "$msg2"; fi
 update_var "$tpm2tssengine_origin_name"
 if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
-    sudo rm -f $tpm2tssengine_name$tpm2tssengine_ext
+    rm -f $tpm2tssengine_name$tpm2tssengine_ext
 else echo "$msg2"; fi
 update_var "$libffi_origin_name"
 if [ $install_libffi -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libffi_name$libffi_ext
+    rm -f $libffi_name$libffi_ext
 else echo "$msg2"; fi
 
 echo_notice "$script_path" "$script" "removing symlinks"
@@ -581,155 +581,155 @@ update_var () {
 }
 update_var "$gmp_origin_name"
 if [ $install_gmp -eq 1 ]; then echo "$msg1"
-    sudo rm -f $gmp_dirname
+    rm -f $gmp_dirname
 else echo "$msg2"; fi
 update_var "$libtpms_origin_name"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
-    sudo rm -f $libtpms_dirname
+    rm -f $libtpms_dirname
 else echo "$msg2"; fi
 update_var "$tpm2tss_origin_name"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
-    sudo rm -f $tpm2tss_dirname
+    rm -f $tpm2tss_dirname
 else echo "$msg2"; fi
 update_var "$jsonc_origin_name"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
-    sudo rm -f $jsonc_dirname
+    rm -f $jsonc_dirname
 else echo "$msg2"; fi
 update_var "$texinfo_origin_name"
 if [ $install_texinfo -eq 1 ]; then echo "$msg1"
-    sudo rm -r $texinfo_dirname
+    rm -f $texinfo_dirname
 else echo "$msg2"; fi
 update_var "$automake_origin_name"
 if [ $install_automake -eq 1 ]; then echo "$msg1"
-    sudo rm -r $automake_dirname
+    rm -f $automake_dirname
 else echo "$msg2"; fi
 update_var "$autoconf_origin_name"
 if [ $install_autoconf -eq 1 ]; then echo "$msg1"
-    sudo rm -r $autoconf_dirname
+    rm -f $autoconf_dirname
 else echo "$msg2"; fi
 update_var "$help2man_origin_name"
 if [ $install_help2man -eq 1 ]; then echo "$msg1"
-    sudo rm -r $help2man_dirname
+    rm -f $help2man_dirname
 else echo "$msg2"; fi
 update_var "$m4_origin_name"
 if [ $install_m4 -eq 1 ]; then echo "$msg1"
-    sudo rm -r $m4_dirname
+    rm -f $m4_dirname
 else echo "$msg2"; fi
 update_var "$gperf_origin_name"
 if [ $install_gperf -eq 1 ]; then echo "$msg1"
-    sudo rm -r $gperf_dirname
+    rm -f $gperf_dirname
 else echo "$msg2"; fi
 update_var "$pkgconfig_origin_name"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    sudo rm -r $pkgconfig_dirname
+    rm -f $pkgconfig_dirname
 else echo "$msg2"; fi
 update_var "$libtool_origin_name"
 if [ $install_libtool -eq 1 ]; then echo "$msg1"
-    sudo rm -r $libtool_dirname
+    rm -f $libtool_dirname
 else echo "$msg2"; fi
 update_var "$libtasn1_origin_name"
 if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
-    sudo rm -r $libtasn1_dirname
+    rm -f $libtasn1_dirname
 else echo "$msg2"; fi
 update_var "$python_origin_name"
 if [ $install_python -eq 1 ]; then echo "$msg1"
-    sudo rm -r $python_dirname
+    rm -f $python_dirname
 else echo "$msg2"; fi
 update_var "$libpcre2_origin_name"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
-    sudo rm -r $libpcre2_dirname
+    rm -f $libpcre2_dirname
 else echo "$msg2"; fi
 update_var "$glib_origin_name"
 if [ $install_glib -eq 1 ]; then echo "$msg1"
-    sudo rm -r $glib_dirname
+    rm -f $glib_dirname
 else echo "$msg2"; fi
 update_var "$jsonglib_origin_name"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
-    sudo rm -r $jsonglib_dirname
+    rm -f $jsonglib_dirname
 else echo "$msg2"; fi
 update_var "$bison_origin_name"
 if [ $install_bison -eq 1 ]; then echo "$msg1"
-    sudo rm -r $bison_dirname
+    rm -f $bison_dirname
 else echo "$msg2"; fi
 update_var "$openssl_origin_name"
 if [ $install_openssl -eq 1 ]; then echo "$msg1"
-    sudo rm -r $openssl_dirname
+    rm -f $openssl_dirname
 else echo "$msg2"; fi
 update_var "$libcurl_origin_name"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
-    sudo rm -r $libcurl_dirname
+    rm -f $libcurl_dirname
 else echo "$msg2"; fi
 update_var "$swtpm_origin_name"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
-    sudo rm -r $swtpm_dirname
+    rm -f $swtpm_dirname
 else echo "$msg2"; fi
 update_var "$gettext_origin_name"
 if [ $install_gettext -eq 1 ]; then echo "$msg1"
-    sudo rm -r $gettext_dirname
+    rm -f $gettext_dirname
 else echo "$msg2"; fi
 update_var "$flex_origin_name"
 if [ $install_flex -eq 1 ]; then echo "$msg1"
-    sudo rm -r $flex_dirname
+    rm -f $flex_dirname
 else echo "$msg2"; fi
 update_var "$utillinux_origin_name"
 if [ $install_utillinux -eq 1 ]; then echo "$msg1"
-    sudo rm -r $utillinux_dirname
+    rm -f $utillinux_dirname
 else echo "$msg2"; fi
 update_var "$nettle_origin_name"
 if [ $install_nettle -eq 1 ]; then echo "$msg1"
-    sudo rm -r $nettle_dirname
+    rm -f $nettle_dirname
 else echo "$msg2"; fi
 update_var "$libunistring_origin_name"
 if [ $install_libunistring -eq 1 ]; then echo "$msg1"
-    sudo rm -r $libunistring_dirname
+    rm -f $libunistring_dirname
 else echo "$msg2"; fi
 update_var "$libev_origin_name"
 if [ $install_libev -eq 1 ]; then echo "$msg1"
-    sudo rm -r $libev_dirname
+    rm -f $libev_dirname
 else echo "$msg2"; fi
 update_var "$p11kit_origin_name"
 if [ $install_p11kit -eq 1 ]; then echo "$msg1"
-    sudo rm -r $p11kit_dirname
+    rm -f $p11kit_dirname
 else echo "$msg2"; fi
 update_var "$tcsd_origin_name"
 if [ $install_tcsd -eq 1 ]; then echo "$msg1"
-    sudo rm -r $tcsd_dirname
+    rm -f $tcsd_dirname
 else echo "$msg2"; fi
 update_var "$tcl_origin_name"
 if [ $install_tcl -eq 1 ]; then echo "$msg1"
-    sudo rm -r $tcl_dirname
+    rm -f $tcl_dirname
 else echo "$msg2"; fi
 update_var "$expect_origin_name"
 if [ $install_expect -eq 1 ]; then echo "$msg1"
-    sudo rm -r $expect_dirname
+    rm -f $expect_dirname
 else echo "$msg2"; fi
 update_var "$gawk_origin_name"
 if [ $install_gawk -eq 1 ]; then echo "$msg1"
-    sudo rm -r $gawk_dirname
+    rm -f $gawk_dirname
 else echo "$msg2"; fi
 update_var "$socat_origin_name"
 if [ $install_socat -eq 1 ]; then echo "$msg1"
-    sudo rm -r $socat_dirname
+    rm -f $socat_dirname
 else echo "$msg2"; fi
 update_var "$libseccomp_origin_name"
 if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
-    sudo rm -r $libseccomp_dirname
+    rm -f $libseccomp_dirname
 else echo "$msg2"; fi
 update_var "$tpm2tools_origin_name"
 if [ $install_tpm2tools -eq 1 ]; then echo "$msg1"
-    sudo rm -r $tpm2tools_dirname
+    rm -f $tpm2tools_dirname
 else echo "$msg2"; fi
 update_var "$tpm2abrmd_origin_name"
 if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
-    sudo rm -r $tpm2abrmd_dirname
+    rm -f $tpm2abrmd_dirname
 else echo "$msg2"; fi
 update_var "$tpm2tssengine_origin_name"
 if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
-    sudo rm -r $tpm2tssengine_dirname
+    rm -f $tpm2tssengine_dirname
 else echo "$msg2"; fi
 update_var "$libffi_origin_name"
 if [ $install_libffi -eq 1 ]; then echo "$msg1"
-    sudo rm -r $libffi_dirname
+    rm -f $libffi_dirname
 else echo "$msg2"; fi
 
 echo_notice "$script_path" "$script" "$script finished"

@@ -86,7 +86,7 @@ install_req () {
 
 compile_req () {
     if [ ${install_platform} -eq 1 ] || [ ${install_platform} -eq 4 ]; then
-        build_libssl
+        #build_libssl # This somehow breaks the system
         build_cmake
         cd $working_dir
     elif [ ${install_platform} -eq 5 ]; then

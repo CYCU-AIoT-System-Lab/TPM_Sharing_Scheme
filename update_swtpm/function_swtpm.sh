@@ -16,7 +16,6 @@ load_preset () {
         echo_notice "$script_path" "$script" "Checking var..."
     fi
     check_var install_platform 1
-    check_var working_dir 1
 
     check_var enable_wget_cert_skip 1
     check_var install_apt_package 1
@@ -65,6 +64,10 @@ load_preset () {
     if [ $verbose -eq 1 ]; then
         echo_notice "$script_path" "$script" "Loading preset..."
     fi
+
+    # Path to store all source code to compile
+    # This should never be set to directory requiring root permission
+    working_dir="$HOME/update_swtpm"
 
     # This section is package version and file extension
     # You can use specific link given below to check the newest version and update it
