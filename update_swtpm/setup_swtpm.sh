@@ -935,6 +935,7 @@ else echo "$msg2"; fi
 update_var "pip-package"
 if [ $install_pip_package -eq 1 ]; then echo "$msg1"
     echo "$msg creating virtual environment for library building"
+    export LD_LIBRARY_PATH="$python_dirname:$LD_LIBRARY_PATH" # sometimes LD doesn't work right
     "$python_bin_path/python${python_version%.*}" -m venv $python_venv_path
     #echo "$msg installing for newly built python globally"
     #pip_path="$python_dirname/bin/pip${python_version%.*}"
@@ -959,6 +960,7 @@ else echo "$msg2"; fi
 update_var "json-glib"
 if [ $install_jsonglib -eq 1 ]; then echo "$msg1"
     cd $jsonglib_dirname
+    # `meson setup` process contains `git clone`, considering fail-redo mechanism
     meson_compile | ts "$msg"
 else echo "$msg2"; fi
 update_var "libtasn1"
@@ -1060,6 +1062,7 @@ else echo "$msg2"; fi
 update_var "gnutls"
 if [ $install_gnutls -eq 1 ]; then echo "$msg1"
     cd $gnutls_dirname
+    # `bootstap` process contains `git clone`, considering fail-redo mechanism
     ./bootstrap | ts "$msg"
     gnu_compile | ts "$msg"
 else echo "$msg2"; fi
