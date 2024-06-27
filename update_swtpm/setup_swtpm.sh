@@ -3,7 +3,7 @@
 #   Core utilities finished in 20240625 by belongtothenight / Da-chuan Chen
 #
 #   This script is used to install all of the dependency of swtpm and
-# optional packages, based on oldest oldest project supported platform
+# optional packages, based on oldest project supported platform
 # Ubuntu 18.04 and jetson-nano-jp461, and should NEVER be run with root
 # /sudo permission.
 #

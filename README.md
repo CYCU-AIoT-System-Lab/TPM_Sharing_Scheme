@@ -18,5 +18,6 @@ Refer to [```./common```](./common/) for overall installation script.
 | 10  | [./setup_optiga/](./setup_optiga/)           | Scripts used to install Infineon OPTIGA TPM 2.0 Software Stack (tpm2-tss, tpm2-tools, tpm2-abrmd, tpm2-tss-engine). |
 | 11  | [./setup_ros2/](./setup_ros2/)               | Scripts to setup/build/remove ROS2 environment and setup/build/execute/remove demo purpose package.                 |
 | 12  | [./socket_com/](./socket_com/)               | Implement socket communication between server and client.                                                           |
+| 13  | [./update_swtpm/](./update_swtpm/)           | System-wide installation of new SWTPM.                                                                              |
 | 13  | [./gitignore](./gitignore)                   | Files / Directories to ignore for this repo.                                                                        |
 | 14  | [./README.md](./README.md)                   | This file.                                                                                                          |
