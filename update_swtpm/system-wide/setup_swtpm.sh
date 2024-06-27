@@ -946,6 +946,26 @@ if [ $install_libffi -eq 1 ]; then echo "$msg1"
 else echo "$msg2"; fi
 
 echo_notice "$script_path" "$script" "compiling sources"
+make_flag="-j$(nproc)"
+gnu_compile () {
+    ./configure $1
+    make $make_flag
+    sudo make $make_flag install
+}
+tpm_compile () {
+    ./autogen.sh $1
+    make $make_flag
+    sudo make $make_flag install
+}
+meson_compile () {(
+    venv_bin_path="$python_venv_path/bin/activate"
+    source $venv_bin_path
+    meson setup _build
+    meson compile -C _build
+    sudo bash -c "source $venv_bin_path && \
+        meson install -C _build"
+    sudo cp _build/meson-private/*.pc /usr/local/lib/pkgconfig
+)}
 total_cnt=40
 progress_cnt=0
 update_var () {
@@ -955,54 +975,6 @@ update_var () {
     msg2="$msg skipped!"
     msg3="$msg ${BOLD}${RED}failed!${NC}"
 }
-# compile settings
-cs1="--prefix=$install_dir"
-cs2="--exec-prefix=$install_dir"
-cs3="--openssldir=$install_dir/ssl"
-cs4="-DCMAKE_INSTALL_PREFIX=$install_dir"
-echo -e "\n"
-printf "%-10s%s\n" "cs1" "$cs1"
-printf "%-10s%s\n" "cs2" "$cs2"
-printf "%-10s%s\n" "cs3" "$cs3"
-printf "%-10s%s\n" "cs4" "$cs4"
-# set custom environment variables for isolated dependency (not affecting system)
-export PATH="$install_dir/bin:$PATH"
-export LD_LIBRARY_PATH="$install_dir/lib:$LD_LIBRARY_PATH"
-export LD_RUN_PATH="$install_dir/lib:$LD_RUN_PATH"
-export PKG_CONFIG_PATH="$install_dir/lib/pkgconfig:$install_dir/lib/$(uname -m)-linux-gnu/pkgconfig:$PKG_CONFIG_PATH"
-export CFLAGS="-I$install_dir/include $CFLAGS"
-export CXXFLAGS="-I$install_dir/include $CXXFLAGS"
-export LDFLAGS="-L$install_dir/lib $LDFLAGS"
-sudo ldconfig "$install_dir/lib" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-#sudo ldconfig "$install_dir/lib/$(uname -m)-linux-gnu" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-echo -e "\n"
-printf "%-20s%s\n" "PATH" "$PATH"
-printf "%-20s%s\n" "LD_LIBRARY_PATH" "$LD_LIBRARY_PATH"
-printf "%-20s%s\n" "PKG_CONFIG_PATH" "$PKG_CONFIG_PATH"
-printf "%-20s%s\n" "CFLAGS" "$CFLAGS"
-printf "%-20s%s\n" "CXXFLAGS" "$CXXFLAGS"
-printf "%-20s%s\n" "LDFLAGS" "$LDFLAGS"
-echo -e "\n"
-# set compile functions
-make_flag="-j$(nproc)"
-gnu_compile () {
-    ./configure "$cs1" "$cs2" $1
-    make $make_flag
-    make $make_flag install
-}
-tpm_compile () {
-    ./autogen.sh "$cs1" "$cs2" $1
-    make $make_flag
-    make $make_flag install
-}
-meson_compile () {(
-    venv_bin_path="$python_venv_path/bin/activate"
-    source $venv_bin_path
-    meson setup _build "$cs1"
-    meson compile -C _build
-    meson install -C _build
-)}
-# compiling
 update_var "$pkgconfig_origin_name"
 if [ $install_pkgconfig -eq 1 ]; then echo "$msg1"
     cd $pkgconfig_dirname
@@ -1023,24 +995,28 @@ if [ $install_openssl -eq 1 ]; then echo "$msg1"
     cd $openssl_dirname
     openssl_ver_arr=(${openssl_version//./ } )
     if [[ ${openssl_ver_arr[0]} -ge 3 ]]; then
-        ./Configure "$cs1" "$cs3" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+        ./Configure | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     else
-        ./config "$cs1" "$cs3" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+        ./config | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     fi
     make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo cp libcrypto.pc /usr/local/lib/pkgconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo cp libssl.pc /usr/local/lib/pkgconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo cp openssl.pc /usr/local/lib/pkgconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$python_origin_name"
 if [ $install_python -eq 1 ]; then echo "$msg1"
     cd $python_dirname
-    ./configure "$cs1" "$cs2" --enable-shared | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    ./configure --prefix=$python_dirname --exec-prefix=$python_dirname --enable-shared | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    make $make_flag altinstall | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag altinstall | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo ldconfig $python_dirname | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$pippackage_origin_name"
 if [ $install_pippackage -eq 1 ]; then echo "$msg1"
     echo "$msg creating virtual environment for library building"
-    "$install_dir/bin/python${python_version%.*}" -m venv $python_venv_path
+    "$python_bin_path/python${python_version%.*}" -m venv $python_venv_path
     echo "$msg installing for newly created virtual environment"
     source $python_venv_path/bin/activate
     pip install -U pip setuptools | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
@@ -1112,11 +1088,11 @@ else echo "$msg2"; fi
 update_var "$jsonc_origin_name"
 if [ $install_jsonc -eq 1 ]; then echo "$msg1"
     cd $working_dir
-    mkdir $jsonc_build_path || :
+    mkdir $jsonc_build_path
     cd $jsonc_build_path
-    cmake "$cs4" $jsonc_dirname | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    cmake $jsonc_dirname | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    make install $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi 
 else echo "$msg2"; fi
 update_var "$libcurl_origin_name"
 if [ $install_libcurl -eq 1 ]; then echo "$msg1"
@@ -1170,9 +1146,9 @@ update_var "$tcsd_origin_name"
 if [ $install_tcsd -eq 1 ]; then echo "$msg1"
     cd $tcsd_dirname
     ./bootstrap.sh | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    ./configure "$cs1" "$cs2" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    ./configure | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$tcl_origin_name"
 if [ $install_tcl -eq 1 ]; then echo "$msg1"
@@ -1207,9 +1183,7 @@ else echo "$msg2"; fi
 update_var "$tpm2tss_origin_name"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
     cd $tpm2tss_dirname
-    ./configure "$cs1" "$cs2" --with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    gnu_compile "--with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo udevadm control --reload-rules | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo udevadm trigger | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo ldconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
@@ -1223,10 +1197,7 @@ update_var "$tpm2abrmd_origin_name"
 if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
     cd $tpm2abrmd_dirname
     sudo useradd --system --user-group tss | ts "$msg" || :
-    #gnu_compile "--with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
-    ./configure "$cs1" "$cs2" --with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
-    make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
-    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
+    gnu_compile "--with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
     sudo ldconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo pkill -HUP dbus-daemon | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo systemctl daemon-reload | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi

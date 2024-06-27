@@ -68,6 +68,7 @@ load_preset () {
     # Path to store all source code to compile
     # This should never be set to directory requiring root permission
     working_dir="$HOME/update_swtpm"
+    install_dir="$working_dir/deps"
 
     # This section is package version and file extension
     # You can use specific link given below to check the newest version and update it
@@ -327,8 +328,8 @@ load_preset () {
     flex_dirname="$working_dir/$flex_custom_name"
     flex_name="$flex_dirname-$flex_version"
 
-    utillinux_origin_name="utillinux"
-    utillinux_custom_name="util-linux"
+    utillinux_origin_name="util-linux"
+    utillinux_custom_name="utillinux"
     utillinux_dirname="$working_dir/$utillinux_custom_name"
     utillinux_name="$utillinux_dirname-$utillinux_version"
 
