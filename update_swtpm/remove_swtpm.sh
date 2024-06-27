@@ -309,7 +309,7 @@ if [ $install_libtasn1 -eq 1 ]; then echo "$msg1"
 else echo "$msg2"; fi
 update_var "$python_origin_name"
 if [ $install_python -eq 1 ]; then echo "$msg1"
-    rm -rf $python_name
+    sudo rm -rf $python_name
 else echo "$msg2"; fi
 update_var "$libpcre2_origin_name"
 if [ $install_libpcre2 -eq 1 ]; then echo "$msg1"
