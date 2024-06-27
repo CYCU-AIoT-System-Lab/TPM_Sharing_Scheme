@@ -335,22 +335,29 @@ activate_TPM_server () {
     fi
 }
 
-# Activate TPM Client in current terminal
+# Send TPM activation command to TPM server
 # Only need to setup once (can re-run)
 activate_TPM_client () {
     TPM_client_executed=1
-    echo_notice "${dirname}" "${filename}-activate_TPM_client" "Starting TPM simulator (SWTPM/vTPM/client) on new temrinal ..."
+    echo_notice "${dirname}" "${filename}-activate_TPM_client" "Sending activation command to TPM on new temrinal ..."
     cd "${sym_link_ibmtss}/utils/"
     lc1="source ${current_dir}/../common/functions.sh"
-    lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Starting TPM simulator (client) on new temrinal ...\n\""
-    lc3="./powerup"
-    lc4="./startup"
-    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
-        newGterm "TPM CLIENT" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
+    lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Sending activation command to TPM on new temrinal ...\n\""
+    if [ $new_swtpm -ne 1 ]; then
+        # legacy SWTPM will hang here (it's fine)
+        lc3="./powerup"
+        lc4="./startup"
     else
-        newLXterm "TPM CLIENT" "$lc1; $lc2; $lc3; $lc4" 1
+        # updated SWTPM will just pass through and exit
+        lc3="export TPM2TOOLS_TCTI=\"swtpm:port=$tpm_command_port\""
+        lc4="tpm2_startup -c; sleep 5; tpm2_startup -c"
     fi
-
+    if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
+        #newGterm "TPM ACT CMD" "-x" "$lc1; $lc2; $lc3; $lc4" 1
+        newGterm "TPM ACT CMD" "" "$lc1; $lc2; $lc3; $lc4" 1
+    else
+        newLXterm "TPM ACT CMD" "$lc1; $lc2; $lc3; $lc4" 1
+    fi
 }
 
 # Create EK certificate and key, activated TPM on new terminal
