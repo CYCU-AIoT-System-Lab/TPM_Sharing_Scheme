@@ -52,6 +52,16 @@
 #   4. Since this script is going to install dependencies system-wide,
 #       not just inside the project directory, I suggest you not to
 #       try to install in root-owned directories.
+# 9. Modify for none system-wide installation:
+#   1. (optional) Add `--prefix=/path_to_install` to `./configure` or
+#       `meson setup` to specify the installation to none system-wide
+#       directory.
+#   2. Export `LD_LIBRARY_PATH` to the directory where the library is
+#       installed, or use `ldconfig` to add the path to the library
+#       search path.
+#   3. Export `PKG_CONFIG_PATH` to the directory where the package
+#       configuration file is installed so that *.pc files can be
+#       found by `pkg-config`.
 
 script=$(realpath "$0")
 script_path=$(dirname "$script")
