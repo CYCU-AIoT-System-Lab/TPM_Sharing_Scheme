@@ -28,6 +28,16 @@ load_preset () {
     check_var tpm_command_port $exit_code
     check_var tpm_socket_port $exit_code
     check_var acs_port $exit_code
+
+    check_var new_swtpm $exit_code
+    if [ $new_swtpm -ne 1 ]; then
+        echo_warn "${dirname}" "${filename}" "Using legacy swtpm..."
+        echo_notice "${dirname}" "${filename}" "If you want to use updated swtpm, please make sure submodule \`update_swtpm\` is installed, and set \`new_swtpm=1\`"
+    else
+        echo_notice "${dirname}" "${filename}" "Using updated swtpm..."
+    fi
+
+
     check_var verMode $exit_code
     check_var TPMMode $exit_code
     check_var acsMode $exit_code

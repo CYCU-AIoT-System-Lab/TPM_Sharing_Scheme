@@ -170,6 +170,7 @@ setup_ibmswtpm_env () {
     if ! [ $install_platform -eq 3 ]; then
         echo_notice "${dirname}" "${filename}-setup_ibmswtpm_env" "Export environment variable for SWTPM socket interface ..."
         echo "export TPM_COMMAND_PORT=$tpm_command_port TPM_PLATFORM_PORT=$tpm_socket_port TPM_SERVER_NAME=$acs_demo_server_ip TPM_INTERFACE_TYPE=socsim TPM_SERVER_TYPE=raw" >> ~/.bashrc
+        echo "export TPM2TOOLS_TCTI=\"swtpm:port=$tpm_command_port\"" >> ~/.bashrc
     fi
 }
 
@@ -319,12 +320,13 @@ activate_TPM_server () {
     echo_notice "${dirname}" "${filename}-activate_TPM_server" "Starting TPM simulator (server) on new temrinal ..."
     cd "${sym_link_ibmtpm}/src/"
     lc1="source ${current_dir}/../common/functions.sh"
-    lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
-    if [ $install_platform -eq 3 ]; then
+    if [ $new_swtpm -ne 1 ]; then
+        lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting legacy TPM simulator (server) on new temrinal ...\n\""
         lc3="./tpm_server"
     else
+        lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_server\" \"Starting TPM simulator (server) on new temrinal ...\n\""
         # ref: https://github.com/stefanberger/swtpm/wiki/Using-the-IBM-TSS-with-swtpm
-        lc3="mkdir $swtpm_socket_device && swtpm socket --tpmstate dir=$swtpm_socket_device --tpm2 --ctrl type=tcp,port=$tpm_socket_port --server type=tcp,port=$tpm_command_port --flags not-need-init"
+        lc3="mkdir $swtpm_socket_device || :; swtpm socket --tpmstate dir=$swtpm_socket_device --tpm2 --ctrl type=tcp,port=$tpm_socket_port --server type=tcp,port=$tpm_command_port --flags not-need-init"
     fi
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
         newGterm "TPM SERVER" "$bash_gflag" "$lc1; $lc2; $lc3" 1
