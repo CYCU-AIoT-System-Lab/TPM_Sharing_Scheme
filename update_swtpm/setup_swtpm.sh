@@ -62,6 +62,8 @@
 #   3. Export `PKG_CONFIG_PATH` to the directory where the package
 #       configuration file is installed so that *.pc files can be
 #       found by `pkg-config`.
+# 10. If `config.ini` parsing encounter error, try to convert the file
+#   to UNIX format by using `dos2unix` command.
 
 script=$(realpath "$0")
 script_path=$(dirname "$script")
