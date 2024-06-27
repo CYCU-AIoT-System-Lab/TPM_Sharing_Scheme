@@ -1156,7 +1156,12 @@ else echo "$msg2"; fi
 update_var "$expect_origin_name"
 if [ $install_expect -eq 1 ]; then echo "$msg1"
     cd $expect_dirname
-    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    if [ $install_platform -eq 5 ]; then
+        platform_arg="--build=aarch64-unknown-linux-gnu"
+    else
+        platform_arg=""
+    fi
+    gnu_compile $platform_arg | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$gawk_origin_name"
 if [ $install_gawk -eq 1 ]; then echo "$msg1"
