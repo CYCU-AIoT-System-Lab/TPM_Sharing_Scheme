@@ -5,15 +5,17 @@ set -e
 verbose=0 # 1 for verbose, 0 for silent
 script=$(realpath "$0")
 script_path=$(dirname "$script")
+dirname=$(basename "$script_path")
+filename=$(basename "$0")
 
 load_preset () {
     if [ $verbose -eq 1 ]; then
-        echo_notice "$script_path" "$script" "Loading config file..."
+        echo_notice "$dirname" "$filename" "Loading config file..."
     fi
     parse "$1" ""
 
     if [ $verbose -eq 1 ]; then
-        echo_notice "$script_path" "$script" "Checking var..."
+        echo_notice "$dirname" "$filename" "Checking var..."
     fi
     check_var install_platform 1
 
@@ -62,7 +64,7 @@ load_preset () {
     check_var install_swtpm 1
 
     if [ $verbose -eq 1 ]; then
-        echo_notice "$script_path" "$script" "Loading preset..."
+        echo_notice "$dirname" "$filename" "Loading preset..."
     fi
 
     # Path to store all source code to compile
@@ -409,7 +411,7 @@ load_preset () {
     libffi_name="$libffi_dirname-$libffi_version"
 }
 if [ $verbose -eq 1 ]; then
-    echo_notice "$script_path" "$script" "Loaded function: load_preset"
+    echo_notice "$dirname" "$filename" "Loaded function: load_preset"
 fi
 
 # Note: `clear_preset` function is not yet implemented

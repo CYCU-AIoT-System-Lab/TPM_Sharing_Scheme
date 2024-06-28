@@ -67,13 +67,15 @@
 
 script=$(realpath "$0")
 script_path=$(dirname "$script")
+dirname=$(basename "$script_path")
+filename=$(basename "$0")
 source "../common/functions.sh"
 source "./function_swtpm.sh"
 load_preset "./config.ini"
 
 #> ------------------------------------------------
 if [ $enable_wget_cert_skip -eq 1 ]; then
-    echo_notice "$script_path" "$script" "disabling wget certification check"
+    echo_notice "$dirname" "$filename" "disabling wget certification check"
     wget_config_str="check_certificate = off"
     echo "$wget_config_str" >> $wget_rc_path
 fi
@@ -93,14 +95,14 @@ apt_install () {
     sudo apt install -y $package | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 }
 if [ $install_apt_package -eq 1 ]; then
-    echo_notice "$script_path" "$script" "installing apt packages"
+    echo_notice "$dirname" "$filename" "installing apt packages"
     update_var "mercurial" && apt_install "$package"
     update_var "gtk-doc-tools" && apt_install "$package"
 fi
 
 # Note
 #   following ordering is to proceed with most easy to fail operation first
-echo_notice "$script_path" "$script" "downloading from sources"
+echo_notice "$dirname" "$filename" "downloading from sources"
 total_cnt=39
 progress_cnt=0
 update_var () {
@@ -391,7 +393,7 @@ if [ $install_libffi -eq 1 ]; then
     fi
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "creating directories to hold sources"
+echo_notice "$dirname" "$filename" "creating directories to hold sources"
 total_cnt=38
 progress_cnt=0
 update_var () {
@@ -624,7 +626,7 @@ if [ $install_libffi -eq 1 ]; then
     fi
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "unzipping sources"
+echo_notice "$dirname" "$filename" "unzipping sources"
 tar_add_flag="--strip-components=1"
 total_cnt=37
 progress_cnt=0
@@ -783,7 +785,7 @@ if [ $install_libffi -eq 1 ]; then echo "$msg1"
     tar $tar_flag $libffi_name$libffi_ext -C $libffi_name $tar_add_flag
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "creating symlink to directories"
+echo_notice "$dirname" "$filename" "creating symlink to directories"
 total_cnt=38
 progress_cnt=0
 update_var () {
@@ -945,7 +947,7 @@ if [ $install_libffi -eq 1 ]; then echo "$msg1"
     ln -sf $libffi_name $libffi_dirname
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "compiling sources"
+echo_notice "$dirname" "$filename" "compiling sources"
 total_cnt=40
 progress_cnt=0
 update_var () {
@@ -966,16 +968,20 @@ printf "%-10s%s\n" "cs2" "$cs2"
 printf "%-10s%s\n" "cs3" "$cs3"
 printf "%-10s%s\n" "cs4" "$cs4"
 # set custom environment variables for isolated dependency (not affecting system)
+mkdir -p "$install_dir/bin"
+mkdir -p "$install_dir/lib"
+mkdir -p "$install_dir/include"
 export PATH="$install_dir/bin:$PATH"
-export LD_LIBRARY_PATH="$install_dir/lib:$LD_LIBRARY_PATH"
-export LD_RUN_PATH="$install_dir/lib:$LD_RUN_PATH"
+export LD_LIBRARY_PATH="$install_dir/lib:$install_dir/lib/$(uname -m)-linux-gnu:$LD_LIBRARY_PATH"
+export LD_RUN_PATH="$install_dir/lib:$install_dir/lib/$(uname -m)-linux-gnu:$LD_RUN_PATH"
 export PKG_CONFIG_PATH="$install_dir/lib/pkgconfig:$install_dir/lib/$(uname -m)-linux-gnu/pkgconfig:$PKG_CONFIG_PATH"
 export CFLAGS="-I$install_dir/include $CFLAGS"
 export CXXFLAGS="-I$install_dir/include $CXXFLAGS"
 export LDFLAGS="-L$install_dir/lib $LDFLAGS"
+echo ""
 sudo ldconfig "$install_dir/lib" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 #sudo ldconfig "$install_dir/lib/$(uname -m)-linux-gnu" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-echo -e "\n"
+echo ""
 printf "%-20s%s\n" "PATH" "$PATH"
 printf "%-20s%s\n" "LD_LIBRARY_PATH" "$LD_LIBRARY_PATH"
 printf "%-20s%s\n" "PKG_CONFIG_PATH" "$PKG_CONFIG_PATH"
@@ -990,15 +996,22 @@ gnu_compile () {
     make $make_flag
     make $make_flag install
 }
-tpm_compile () {
-    ./autogen.sh "$cs1" "$cs2" $1
+gnu_sudo_compile () {
+    ./configure "$cs1" "$cs2" $1
     make $make_flag
-    make $make_flag install
+    sudo make $make_flag install
+}
+tpm_compile () {
+    # libtpms can't be installed in custom location
+    # swtpm should be install globally
+    ./autogen.sh $1
+    make $make_flag
+    sudo make $make_flag install
 }
 meson_compile () {(
     venv_bin_path="$python_venv_path/bin/activate"
     source $venv_bin_path
-    meson setup _build "$cs1"
+    meson setup _build "$cs1" # --wipe
     meson compile -C _build
     meson install -C _build
 )}
@@ -1170,9 +1183,10 @@ update_var "$tcsd_origin_name"
 if [ $install_tcsd -eq 1 ]; then echo "$msg1"
     cd $tcsd_dirname
     ./bootstrap.sh | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    ./configure "$cs1" "$cs2" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    #./configure "$cs1" "$cs2" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    #make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    #make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$tcl_origin_name"
 if [ $install_tcl -eq 1 ]; then echo "$msg1"
@@ -1193,6 +1207,7 @@ update_var "$gawk_origin_name"
 if [ $install_gawk -eq 1 ]; then echo "$msg1"
     cd $gawk_dirname
     gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo ln -sf "$install_dir/bin/gawk" gawk
 else echo "$msg2"; fi
 update_var "$socat_origin_name"
 if [ $install_socat -eq 1 ]; then echo "$msg1"
@@ -1207,9 +1222,10 @@ else echo "$msg2"; fi
 update_var "$tpm2tss_origin_name"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
     cd $tpm2tss_dirname
-    ./configure "$cs1" "$cs2" --with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    #./configure "$cs1" "$cs2" --with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    #make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    #sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    gnu_sudo_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo udevadm control --reload-rules | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo udevadm trigger | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo ldconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
@@ -1223,10 +1239,10 @@ update_var "$tpm2abrmd_origin_name"
 if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
     cd $tpm2abrmd_dirname
     sudo useradd --system --user-group tss | ts "$msg" || :
-    #gnu_compile "--with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
-    ./configure "$cs1" "$cs2" --with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
-    make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
-    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
+    #./configure "$cs1" "$cs2" --with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
+    #make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
+    #sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
+    gnu_sudo_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
     sudo ldconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo pkill -HUP dbus-daemon | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo systemctl daemon-reload | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
@@ -1255,4 +1271,19 @@ if [ $enable_wget_cert_skip -eq 1 ]; then
 fi
 #> ------------------------------------------------
 
-echo_notice "$script_path" "$script" "$script finished"
+echo -e "\nFiles are installed to the following locations:"
+printf "%-15s%-15s%s\n" "1. libtpms" "(system-wide)" "/usr"
+printf "%-15s%-15s%s\n" "2. swtpm" "(system-wide)" "/usr"
+printf "%-15s%-15s%s\n" "3. others" "(isolated)" "$install_dir"
+echo -e "\nTo use them without this script, you need to try the following things:"
+echo "1. PATH=$PATH"
+echo "2. LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+echo "3. LD_RUN_PATH=$LD_RUN_PATH"
+echo "4. PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
+echo "5. CFLAGS=$CFLAGS"
+echo "6. CXXFLAGS=$CXXFLAGS"
+echo "7. LDFLAGS=$LDFLAGS"
+echo "8. sudo ln -sf $install_dir/bin/<binary_name> <binary_name>"
+echo ""
+
+echo_notice "$dirname" "$filename" "$script finished"
