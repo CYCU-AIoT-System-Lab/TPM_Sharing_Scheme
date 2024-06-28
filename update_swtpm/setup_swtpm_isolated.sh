@@ -1267,7 +1267,7 @@ fi
 #> ------------------------------------------------
 
 echo -e "\nFiles are installed to the following locations:"
-printf "%-15s%-15s%s\n" "1. libtpms" "(mixed)" "/usr"
+printf "%-15s%-15s%s\n" "1. libtpms" "(mixed)" "$install_dir"
 printf "%-15s%-15s%s\n" "2. swtpm" "(system-wide)" "/usr"
 printf "%-15s%-15s%s\n" "3. others" "(isolated)" "$install_dir"
 echo -e "\nTo use them without this script, you need to try the following things:"
