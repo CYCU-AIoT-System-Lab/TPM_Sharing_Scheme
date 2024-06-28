@@ -39,6 +39,8 @@ If no presets are set (default), the script will require the user to input the o
 1. Adjust specific `.ini` config file in `/setup_ibmtpm/config_files/`, set setting `new_swtpm=1`.
 2. Execute ```sudo bash setup_sudo.sh```
 
+Note: New SWTPM is communicated through its socket interface, character device interface is still not supported.
+
 ## Installing Tools
 
 1. Software stack: 
