@@ -24,12 +24,21 @@ During installation, if anything caused installation to fail, you can disable th
 
 ## Structure
 
-- `./config.ini`: Configuration file for this submodule. Use this file to enable or disable certain packages to be installed or removed.
-- `./dependency.md`: Dependency investigation record.
-- `./function_swtpm.sh`: Common functions for this submodule.
-- `./readme.md`: This file.
-- `./remove_swtpm`: Based on selected configuration in `./config.ini` to remove certain packages.
-- `./setup_swtpm`: Based on selected configuration in `./config.ini` to install certain packages.
+- [./config.ini](./config.ini): Configuration file for this submodule. Use this file to enable or disable certain packages to be installed or removed.
+- [./dependency.md](./dependency.md): Dependency investigation record.
+- [./function_swtpm.sh](./function_swtpm.sh): Common functions for this submodule.
+- [./readme.md](./readme.md): This file.
+- [./remove_swtpm_isolated.sh](./remove_swtpm_isolated.sh): Based on selected configuration in `./config.ini` to remove certain packages in ISOLATED environment.
+- [./remove_swtpm_systemwide.sh](./remove_swtpm_systemwide.sh): Based on selected configuration in `./config.ini` to remove certain packages in SYSTEM-WIDE environment, not recommended due to its system-wide nature.
+- [./setup_swtpm_isolated.sh](./setup_swtpm_isolated.sh): Based on selected configuration in `./config.ini` to install certain packages in ISOLATED environment.
+- [./setup_swtpm_systemwide.sh](./setup_swtpm_systemwide.sh): Based on selected configuration in `./config.ini` to install certain packages in SYSTEM-WIDE environment, not recommended due to its system-wide nature.
+
+Note: 
+1. Isolated install: Install packages in custom directory without affecting package manager or core system.
+2. System-wide install: Install packages in system-wide directory `/usr`, some widely used packages (`openssl`, `glib`) may cause system-wide impact.
+3. Isolated setup script is paired with isolated remove script, vice versa.
+4. Isolated scripts are used in this project to prevent system-wide impact.
+5. System-wide setup scripts work fine, but break other parts of this project due to shared resources (.so) overwriting.
 
 ## Demo
 

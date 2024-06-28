@@ -618,7 +618,7 @@ fi
 echo -e "install_platform: $install_platform\n"
 echo -e "config_file: ${config_file_list[$((config_file-1))]}\n"
 load_preset "$current_dir/config_files/${config_file_list[$((config_file-1))]}"
-cp $current_dir/config_files/${config_file_list[$((config_file-1))]} $current_dir/config.ini
+#cp $current_dir/config_files/${config_file_list[$((config_file-1))]} $current_dir/config.ini
 
 dn_ibmtss="ibmtss"
 dn_ibmtpm="ibmtpm"

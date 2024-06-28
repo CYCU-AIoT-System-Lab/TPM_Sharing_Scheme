@@ -8,24 +8,35 @@ Currently, ACS doesn't support TPM2.0.
 
 If no presets are set (default), the script will require the user to input the option they desire.
 
-1. Installing platform: 1~5
-    - Add preset: `touch ./ip<1~5>`, like `touch ./ip<5>` for preset 5.
+1. Installing platform: 1~6
+    - Add preset: `touch ./ip<1~6>`, like `touch ./ip<5>` for preset 5.
 2. config file option: the script will list out options in `./config_files/` directory.
-    - Add preset: `touch ./cf<1~5>`, like `touch ./cf<5>` for preset 5.
+    - Add preset: `touch ./cf<1~6>`, like `touch ./cf<5>` for preset 5.
     - You can duplicate the default config files in `./config_files/` and modify them to your needs. It will also be listed as an option.
 
 ## Directory Description
 
 1. [config_files](config_files): Configuration files for installation.
-2. [readme.md](readme.md): This file.
-3. [remove.sh](remove.sh): Uninstall script.
-4. [setup.sh](setup.sh): Install script approach with minimum privilege, unsuccesful.
-5. [setup_sudo.sh](setup_sudo.sh): Install script approach with sudo privilege, successful.
-6. [setup_sudo_old.sh](setup_sudo_old.sh): Backup of setup_sudo.sh.
+    1. [config_files/config.ini.template](config_files/config.ini.template): Template for configuration file. Should not be selected.
+    2. [config_files/config_dTPM_local.ini](config_files/config_dTPM_local.ini): Launch ACS setup process which local dTPM installed.
+    3. [config_files/config_RA_client_launch.ini](config_files/config_RA_client_launch.ini): Launch ACS Remote Attestation client demo. Should only be selected after `config_RA_client_setup.ini` finished.
+    4. [config_files/config_RA_client_setup.ini](config_files/config_RA_client_setup.ini): Launch ACS Remote Attestation client setup and demo process.
+    5. [config_files/config_RA_server.ini](config_files/config_RA_server.ini): Launch ACS Remote Attestation server setup and demo process.
+    6. config_files/config_vTPM_local.ini: Launch ACS setup process which only want with vTPM.
+2. [function_ibmtpm.sh](function_ibmtpm.sh): Functions for both `setup.sh` and `remove.sh`.
+3. [readme.md](readme.md): This file.
+4. [remove.sh](remove.sh): Uninstall script.
+5. [setup.sh](setup.sh): Install script approach with minimum privilege, unsuccesful.
+6. [setup_sudo.sh](setup_sudo.sh): Install script approach with sudo privilege, successful.
 
 ## Run specific functionalities of setup.sh
 
-1. Adjust [config.ini](config.ini) to your needs.
+1. Adjust specific `.ini` config file in `/setup_ibmtpm/config_files/` to your needs.
+2. Execute ```sudo bash setup_sudo.sh```
+
+## Execute with updated SWTPM
+
+1. Adjust specific `.ini` config file in `/setup_ibmtpm/config_files/`, set setting `new_swtpm=1`.
 2. Execute ```sudo bash setup_sudo.sh```
 
 ## Installing Tools

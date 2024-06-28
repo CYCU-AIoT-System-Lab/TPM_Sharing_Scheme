@@ -234,7 +234,7 @@ cd $working_dir
 if [ $job_update_swtpm -eq 1 ]; then
     echo_notice "${dirname}" "${filename}" "Running update_swtpm setup..."
     cd ../update_swtpm
-    install_platform=$install_platform bash ./setup_swtpm.sh
+    sudo install_platform=$install_platform bash ./setup_swtpm_isolated.sh
 else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_update_swtpm ! Skipping setup_swtpm..."
 fi

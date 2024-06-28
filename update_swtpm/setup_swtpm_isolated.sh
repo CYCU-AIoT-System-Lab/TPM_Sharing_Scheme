@@ -979,6 +979,7 @@ export CFLAGS="-I$install_dir/include $CFLAGS"
 export CXXFLAGS="-I$install_dir/include $CXXFLAGS"
 export LDFLAGS="-L$install_dir/lib $LDFLAGS"
 echo ""
+echo "Adding libraries to ldconfig cache"
 sudo ldconfig "$install_dir/lib" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 #sudo ldconfig "$install_dir/lib/$(uname -m)-linux-gnu" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 echo ""
@@ -998,13 +999,6 @@ gnu_compile () {
 }
 gnu_sudo_compile () {
     ./configure "$cs1" "$cs2" $1
-    make $make_flag
-    sudo make $make_flag install
-}
-tpm_compile () {
-    # libtpms can't be installed in custom location
-    # swtpm should be install globally
-    ./autogen.sh $1
     make $make_flag
     sudo make $make_flag install
 }
@@ -1183,9 +1177,6 @@ update_var "$tcsd_origin_name"
 if [ $install_tcsd -eq 1 ]; then echo "$msg1"
     cd $tcsd_dirname
     ./bootstrap.sh | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    #./configure "$cs1" "$cs2" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    #make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    #make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$tcl_origin_name"
@@ -1207,7 +1198,8 @@ update_var "$gawk_origin_name"
 if [ $install_gawk -eq 1 ]; then echo "$msg1"
     cd $gawk_dirname
     gnu_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    sudo ln -sf "$install_dir/bin/gawk" gawk
+    echo "Linking gawk to public path to be accessed by make"
+    cd /usr/bin && sudo ln -sf "$install_dir/bin/gawk" gawk
 else echo "$msg2"; fi
 update_var "$socat_origin_name"
 if [ $install_socat -eq 1 ]; then echo "$msg1"
@@ -1221,10 +1213,8 @@ if [ $install_libseccomp -eq 1 ]; then echo "$msg1"
 else echo "$msg2"; fi
 update_var "$tpm2tss_origin_name"
 if [ $install_tpm2tss -eq 1 ]; then echo "$msg1"
+    # some operation still require root privilege
     cd $tpm2tss_dirname
-    #./configure "$cs1" "$cs2" --with-udevrulesdir=/etc/udev/rules.d --with-udevrulesprefix | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    #make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
-    #sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     gnu_sudo_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo udevadm control --reload-rules | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo udevadm trigger | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
@@ -1237,11 +1227,9 @@ if [ $install_tpm2tools -eq 1 ]; then echo "$msg1"
 else echo "$msg2"; fi
 update_var "$tpm2abrmd_origin_name"
 if [ $install_tpm2abrmd -eq 1 ]; then echo "$msg1"
+    # some operation still require root privilege
     cd $tpm2abrmd_dirname
     sudo useradd --system --user-group tss | ts "$msg" || :
-    #./configure "$cs1" "$cs2" --with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/lib/systemd/system --datarootdir=/usr/share | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
-    #make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
-    #sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
     gnu_sudo_compile | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi # can test integration with swtpm with --enable-integration
     sudo ldconfig | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
     sudo pkill -HUP dbus-daemon | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
@@ -1255,13 +1243,20 @@ if [ $install_tpm2tssengine -eq 1 ]; then echo "$msg1"
 else echo "$msg2"; fi
 update_var "$libtpms_origin_name"
 if [ $install_libtpms -eq 1 ]; then echo "$msg1"
+    # libtpms only partially support custom location installation
+    # some operation still require access to /usr
     cd $libtpms_dirname
-    tpm_compile "--with-tpm2 --with-openssl --prefix=/usr" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    ./autogen.sh "$cs1" "$cs2" --with-tpm2 --with-openssl --prefix=/usr | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 update_var "$swtpm_origin_name"
 if [ $install_swtpm -eq 1 ]; then echo "$msg1"
+    # swtpm should be install globally to make command accessible
     cd $swtpm_dirname
-    tpm_compile "--with-openssl --prefix=/usr" | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    ./autogen.sh --with-openssl --prefix=/usr | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi 
+    make $make_flag | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
+    sudo make $make_flag install | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 else echo "$msg2"; fi
 
 #> ------------------------------------------------
@@ -1272,7 +1267,7 @@ fi
 #> ------------------------------------------------
 
 echo -e "\nFiles are installed to the following locations:"
-printf "%-15s%-15s%s\n" "1. libtpms" "(system-wide)" "/usr"
+printf "%-15s%-15s%s\n" "1. libtpms" "(mixed)" "/usr"
 printf "%-15s%-15s%s\n" "2. swtpm" "(system-wide)" "/usr"
 printf "%-15s%-15s%s\n" "3. others" "(isolated)" "$install_dir"
 echo -e "\nTo use them without this script, you need to try the following things:"
@@ -1283,7 +1278,7 @@ echo "4. PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
 echo "5. CFLAGS=$CFLAGS"
 echo "6. CXXFLAGS=$CXXFLAGS"
 echo "7. LDFLAGS=$LDFLAGS"
-echo "8. sudo ln -sf $install_dir/bin/<binary_name> <binary_name>"
+echo "8. cd /usr/bin && sudo ln -sf $install_dir/bin/<binary_name> <binary_name>"
 echo ""
 
 echo_notice "$dirname" "$filename" "$script finished"
