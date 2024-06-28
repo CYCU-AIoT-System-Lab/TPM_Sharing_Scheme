@@ -1,6 +1,8 @@
 #!/bin/bash
 script=$(realpath "$0")
 script_path=$(dirname "$script")
+dirname=$(basename "$script_path")
+filename=$(basename "$0")
 source "../common/functions.sh"
 source "./function_swtpm.sh"
 load_preset "./config.ini"
@@ -19,13 +21,13 @@ apt_remove () {
     sudo apt remove -y $package | ts "$msg" || :
 }
 if [ $install_apt_package -eq 1 ]; then
-    echo_notice "$script_path" "$script" "uninstalling apt packages..."
+    echo_notice "$dirname" "$filename" "uninstalling apt packages..."
     update_var "mercurial" && apt_remove "$package"
     update_var "gtk_doc-tools" && apt_remove "$package"
 fi
 
 # Note: this section is reversed-compile ordered
-echo_notice "$script_path" "$script" "uninstalling compiled sources..."
+echo_notice "$dirname" "$filename" "uninstalling compiled sources..."
 total_cnt=40
 progress_cnt=0
 update_var () {
@@ -245,7 +247,7 @@ if [ $install_libtpms -eq 1 ]; then echo "$msg3"
     sudo make uninstall | ts "$msg" || :
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "removing created directories"
+echo_notice "$dirname" "$filename" "removing created directories"
 total_cnt=39
 progress_cnt=0
 update_var () {
@@ -412,7 +414,7 @@ if [ $install_libffi -eq 1 ]; then echo "$msg1"
     rm -rf $libffi_name
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "removing downloaded source"
+echo_notice "$dirname" "$filename" "removing downloaded source"
 total_cnt=37
 progress_cnt=0
 update_var () {
@@ -570,7 +572,7 @@ if [ $install_libffi -eq 1 ]; then echo "$msg1"
     rm -f $libffi_name$libffi_ext
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "removing symlinks"
+echo_notice "$dirname" "$filename" "removing symlinks"
 total_cnt=38
 progress_cnt=0
 update_var () {
@@ -732,4 +734,4 @@ if [ $install_libffi -eq 1 ]; then echo "$msg1"
     rm -f $libffi_dirname
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "$script finished"
+echo_notice "$dirname" "$filename" "$script finished"

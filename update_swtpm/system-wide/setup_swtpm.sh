@@ -67,13 +67,15 @@
 
 script=$(realpath "$0")
 script_path=$(dirname "$script")
+dirname=$(basename "$script_path")
+filename=$(basename "$0")
 source "../common/functions.sh"
 source "./function_swtpm.sh"
 load_preset "./config.ini"
 
 #> ------------------------------------------------
 if [ $enable_wget_cert_skip -eq 1 ]; then
-    echo_notice "$script_path" "$script" "disabling wget certification check"
+    echo_notice "$dirname" "$filename" "disabling wget certification check"
     wget_config_str="check_certificate = off"
     echo "$wget_config_str" >> $wget_rc_path
 fi
@@ -93,14 +95,14 @@ apt_install () {
     sudo apt install -y $package | ts "$msg"; if [ "${PIPESTATUS[0]}" -ne 0 ]; then exit "${PIPESTATUS[0]}"; fi
 }
 if [ $install_apt_package -eq 1 ]; then
-    echo_notice "$script_path" "$script" "installing apt packages"
+    echo_notice "$dirname" "$filename" "installing apt packages"
     update_var "mercurial" && apt_install "$package"
     update_var "gtk-doc-tools" && apt_install "$package"
 fi
 
 # Note
 #   following ordering is to proceed with most easy to fail operation first
-echo_notice "$script_path" "$script" "downloading from sources"
+echo_notice "$dirname" "$filename" "downloading from sources"
 total_cnt=39
 progress_cnt=0
 update_var () {
@@ -391,7 +393,7 @@ if [ $install_libffi -eq 1 ]; then
     fi
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "creating directories to hold sources"
+echo_notice "$dirname" "$filename" "creating directories to hold sources"
 total_cnt=38
 progress_cnt=0
 update_var () {
@@ -624,7 +626,7 @@ if [ $install_libffi -eq 1 ]; then
     fi
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "unzipping sources"
+echo_notice "$dirname" "$filename" "unzipping sources"
 tar_add_flag="--strip-components=1"
 total_cnt=37
 progress_cnt=0
@@ -783,7 +785,7 @@ if [ $install_libffi -eq 1 ]; then echo "$msg1"
     tar $tar_flag $libffi_name$libffi_ext -C $libffi_name $tar_add_flag
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "creating symlink to directories"
+echo_notice "$dirname" "$filename" "creating symlink to directories"
 total_cnt=38
 progress_cnt=0
 update_var () {
@@ -945,7 +947,7 @@ if [ $install_libffi -eq 1 ]; then echo "$msg1"
     ln -sf $libffi_name $libffi_dirname
 else echo "$msg2"; fi
 
-echo_notice "$script_path" "$script" "compiling sources"
+echo_notice "$dirname" "$filename" "compiling sources"
 make_flag="-j$(nproc)"
 gnu_compile () {
     ./configure $1
@@ -1226,4 +1228,4 @@ if [ $enable_wget_cert_skip -eq 1 ]; then
 fi
 #> ------------------------------------------------
 
-echo_notice "$script_path" "$script" "$script finished"
+echo_notice "$dirname" "$filename" "$script finished"
