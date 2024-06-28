@@ -11,7 +11,7 @@ This submodule requires the following submodules to be first executed:
 
 The dependency investigation record is kept in `./dependency.md`.
 
-To find newer release or information, check `./function_swtpm.sh` starting at line 75 for links to their official distribution site.
+To find newer release or information, check `./function_swtpm.sh` starting at line 80 for links to their official distribution site.
 
 ## Install
 
