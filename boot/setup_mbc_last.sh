@@ -1,6 +1,11 @@
 #!/bin/bash
 #set -x
 
+# Use new SWTPM installed in `update_swtpm` submodule instead of HWTPM
+USE_SWTPM=1
+SWTPM_SERVER_PORT=2321
+SWTPM_CTRL_PORT=2322
+
 # note: remember to add fail check
 
 TPM2_AUTH_OWNER="owner123"
@@ -30,7 +35,30 @@ if [[ "${CLI_INPUT_ARR[*]}" =~ "-v" ]]; then
     VERBOSE=true
 fi
 
-# >1. Configure TPM
+# >1. If choosen SWTPM, do preperations:
+#   - modify script parameters
+#       - launch_swtpm.sh
+#       - activate_swtpm.sh
+#   - Call 2 daemon setup script: setup_swtpm_daemon.sh
+#       - swtpm.service
+#       - activate_swtpm.service
+#   - Modify daemon added in this script
+MBC_AFTER=""
+MBC_DELAY=""
+if [ $USE_SWTPM -eq 1 ]; then
+    if [ $VERBOSE == true ]; then echo "do SWTPM preparation..."; fi
+    #1
+    sed "/SERVER_PORT=/c SERVER_PORT=$SWTPM_SERVER_PORT" launch_swtpm.sh
+    sed "/CTRL_PORT=/c CTRL_PORT=$SWTPM_CTRL_PORT" launch_swtpm.sh
+    sed "/SERVER_PORT=/c SERVER_PORT=$SWTPM_SERVER_PORT" activate_swtpm.sh
+    #2
+    bash setup_swtpm_daemon.sh
+    #3
+    MBC_AFTER="activate_swtpm.service"
+    MBC_DELAY="ExecStartPre=/bin/sleep 1"
+fi
+
+# >2. Configure TPM
 if [ $VERBOSE == true ]; then echo "Configuring TPM..."; fi
 tpm2_startup -c
 tpm2_clear -c p
@@ -40,7 +68,7 @@ tpm2_changeauth -c lockout $TPM2_AUTH_LOCKOUT
 tpm2_nvdefine $TPM2_NVM_INDEX -C o -s 900 -a $TPM2_AUTH_ATTRIBUTE -P $TPM2_AUTH_OWNER -p $TPM2_AUTH_NV
 # now we can write to NVM
 
-# >2. Read PCR out from TPM and find the index of the first non-zero byte
+# >3. Read PCR out from TPM and find the index of the first non-zero byte
 if [ $VERBOSE == true ]; then echo "Reading PCR from TPM..."; fi
 PCR_X_1="$INITIAL_ZERO_PCR" # last non-zero PCR
 for i in $(seq $PCR_IDX_MIN $PCR_IDX_MAX); do
@@ -54,7 +82,7 @@ for i in $(seq $PCR_IDX_MIN $PCR_IDX_MAX); do
     #echo $PCR_TEMP
 done
 
-# >3. Call hashing script
+# >4. Call hashing script
 if [ $VERBOSE == true ]; then echo "Hashing target file..."; fi
 . "$HASH_SCRIPT" "$HASH_TARGET" "$PCR_X_1" 1> /dev/null
 FINAL_HASH_VALUE="$(echo $FINAL_HASH_VALUE | tr -d ' ')"
@@ -64,23 +92,23 @@ if [ $VERBOSE == true ]; then
     echo -e "Generated PCR_HASH[$PCR_IDX_INIT_ZERO]: \t$FINAL_HASH_VALUE"
 fi
 
-# >4. Extend PCR index x with new value
+# >5. Extend PCR index x with new value
 if [ $VERBOSE == true ]; then echo "Extending PCR..."; fi
 tpm2_pcrextend "$PCR_IDX_INIT_ZERO:$HASH=$FINAL_HASH_VALUE"
 
-# >5. Write hash value to NVM
+# >6. Write hash value to NVM
 if [ $VERBOSE == true ]; then echo "Writing hash to NVM..."; fi
 HASH_TMP_FILE="hash_value.txt.tmp"
 echo "$FINAL_HASH_VALUE" > $HASH_TMP_FILE
 tpm2_nvwrite $TPM2_NVM_INDEX -P $TPM2_AUTH_NV -i $HASH_TMP_FILE
 rm $HASH_TMP_FILE
 
-# >6. Set MBC script to run at startup/boot
+# >7. Set MBC script to run at startup/boot
 if [ $VERBOSE == true ]; then echo "Setting MBC script to run at startup/boot..."; fi
 echo -e "\
 [Unit]\n\
 Description=TPM Sharing Scheme SWTPM Measured Boot Chain (MBC) perform at startup/boot service\n\
-After=multi-user.target\n\
+After=multi-user.target $MBC_AFTER\n\
 StartLimitIntervalSec=0\n\
 \n\
 [Service]\n\
@@ -90,8 +118,9 @@ KillMode=mixed\n\
 #Restart=always\n\
 #RestartSec=1\n\
 WorkingDirectory=$PWD\n\
-ExecStart=bash $MBC_SCRIPT\n\
+ExecStart=$MBC_SCRIPT\n\
 TimeoutStartSec=infinity\n\
+$MBC_DELAY\n\
 \n\
 [Install]\n\
 WantedBy=multi-user.target\
