@@ -69,7 +69,7 @@ load_preset () {
 
     # Path to store all source code to compile
     # This should never be set to directory requiring root permission
-    # ISOLATED install: worked in non-root directory
+    # ISOLATED install: worked in non-root and root directory
     # SYSTEM-WIDE instsall: worked in non-root directory
     working_dir="/opt/update_swtpm"
     install_dir="$working_dir/deps"
