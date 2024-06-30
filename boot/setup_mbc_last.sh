@@ -89,6 +89,13 @@ fi
 # now we can write to NVM
 
 # >3. Read PCR out from TPM and find the index of the first non-zero byte
+# IDX:PCR_VALUE
+# 1:1234
+# 2:5678
+# 3:9ABC <-                     PCR_X_1
+# 4:0000 <- PCR_IDX_INIT_ZERO
+# Formula: PCR_X-new = hash( PCR_X_1 || files )
+# If PCR_X-old != PCR_X-new => something being modified
 if [ $VERBOSE == true ]; then echo "Reading PCR from TPM..."; fi
 PCR_X_1="$INITIAL_ZERO_PCR" # last non-zero PCR
 for i in $(seq $PCR_IDX_MIN $PCR_IDX_MAX); do
