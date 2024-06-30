@@ -1261,7 +1261,7 @@ else echo "$msg2"; fi
 
 #> ------------------------------------------------
 if [ $enable_wget_cert_skip -eq 1 ]; then
-    echo "enabling wget certification check"
+    echo_notice "$dirname" "$filename" "enabling wget certification check"
     sed -i "/$wget_config_str/d" $wget_rc_path
 fi
 #> ------------------------------------------------
