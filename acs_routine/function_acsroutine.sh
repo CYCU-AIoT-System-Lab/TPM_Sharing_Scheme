@@ -18,12 +18,31 @@ load_preset () {
         echo_notice "$dirname" "$filename" "Checking var..."
     fi
     check_var install_platform 1
+    check_var is_server 1
+
+    check_var job_setup 1
+    check_var job_exec 1
+
+    check_var acs_demo_server_ip 1
+    check_var acs_demo_server_port 1
+    check_var acs_port 1
+
+    check_var acs_demo_client_ip 1
+    check_var tpm_command_port 1
+    check_var tpm_socket_port 1
 
     if [ $verbose -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Loading preset..."
     fi
-    working_dir="/opt/update_swtpm"
-    install_dir="$working_dir/deps"
+    # mysql
+    mysql_user="tpm2ACS"
+    mysql_password="123456"
+    mysql_database="tpm2"
+    # format
+    log4j_time_format="%Y/%m/%d-%H:%M:%S"
+    log4j_line_number=100
+    # path
+    base_dir="/opt"
 }
 if [ $verbose -eq 1 ]; then
     echo_notice "$dirname" "$filename" "Loaded function: load_preset"
