@@ -1,3 +1,5 @@
+#!/bin/bash
+
 SYSTEMD_DIR="/etc/systemd/system"
 SERVICE_FILE_1="swtpm.service"
 SERVICE_FILE_2="activate_swtpm.service"

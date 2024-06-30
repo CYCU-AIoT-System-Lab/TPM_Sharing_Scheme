@@ -14,9 +14,9 @@ TPM2_AUTH_LOCKOUT="lockout123"
 TPM2_AUTH_ATTRIBUTE="authwrite|authread|read_stclear"
 TPM2_AUTH_NV="nv123"
 TPM2_NVM_INDEX="0x1500016"
-HASH_SCRIPT="./hash.sh"
-HASH_TARGET="dir_list.txt"
-MBC_SCRIPT="./mbc_last.sh"
+HASH_SCRIPT="$PWD/hash.sh"
+HASH_TARGET="$PWD/dir_list.txt"
+MBC_SCRIPT="$PWD/mbc_last.sh"
 SERVICE_FILE="mbc_last.service"
 SYSTEMD_DIR="/etc/systemd/system"
 PCR_IDX_INIT_ZERO=0
@@ -29,43 +29,63 @@ CLI_INPUT_STR="$@"
 CLI_INPUT_ARR=($CLI_INPUT_STR)
 
 # >0. Checking existance
-#    - TPM
-#    - scripts
+#   - TPM
+#   - scripts
+#   - create a demo dir_list.txt
 if [[ "${CLI_INPUT_ARR[*]}" =~ "-v" ]]; then
     VERBOSE=true
 fi
+HASH_DEMO_DATA="$PWD/hash_target.txt"
+echo "some data" > $HASH_DEMO_DATA
+echo $HASH_DEMO_DATA > $HASH_TARGET
 
 # >1. If choosen SWTPM, do preperations:
+#   - Modify parameters
+#       - daemon setting added in this script
+#       - filepath
 #   - modify script parameters
 #       - launch_swtpm.sh
 #       - activate_swtpm.sh
+#       - mbc_last.sh
 #   - Call 2 daemon setup script: setup_swtpm_daemon.sh
 #       - swtpm.service
 #       - activate_swtpm.service
-#   - Modify daemon added in this script
-MBC_AFTER=""
-MBC_DELAY=""
-if [ $USE_SWTPM -eq 1 ]; then
+if [ $USE_SWTPM -ne 1 ]; then
+    MBC_AFTER=""
+    MBC_DELAY=""
+    SWTPM_NVM=""
+else
     if [ $VERBOSE == true ]; then echo "do SWTPM preparation..."; fi
+    export TPM2TOOLS_TCTI="swtpm:port=$SWTPM_SERVER_PORT"
     #1
-    sed "/SERVER_PORT=/c SERVER_PORT=$SWTPM_SERVER_PORT" launch_swtpm.sh
-    sed "/CTRL_PORT=/c CTRL_PORT=$SWTPM_CTRL_PORT" launch_swtpm.sh
-    sed "/SERVER_PORT=/c SERVER_PORT=$SWTPM_SERVER_PORT" activate_swtpm.sh
-    #2
-    bash setup_swtpm_daemon.sh
-    #3
     MBC_AFTER="activate_swtpm.service"
     MBC_DELAY="ExecStartPre=/bin/sleep 1"
+    SWTPM_NVM="$PWD/swtpm_nvm.data"
+    #2
+    sed -i "/SERVER_PORT=/c SERVER_PORT=$SWTPM_SERVER_PORT" "$PWD/launch_swtpm.sh"
+    sed -i "/CTRL_PORT=/c CTRL_PORT=$SWTPM_CTRL_PORT" "$PWD/launch_swtpm.sh"
+    sed -i "/SERVER_PORT=/c SERVER_PORT=$SWTPM_SERVER_PORT" "$PWD/activate_swtpm.sh"
+    sed -i "/USE_SWTPM=/c USE_SWTPM=$USE_SWTPM" "$PWD/mbc_last.sh"
+    sed -i "/SWTPM_NVM=/c SWTPM_NVM=$SWTPM_NVM" "$PWD/mbc_last.sh"
+    #3
+    bash setup_swtpm_daemon.sh
 fi
 
 # >2. Configure TPM
 if [ $VERBOSE == true ]; then echo "Configuring TPM..."; fi
-tpm2_startup -c
-tpm2_clear -c p
-tpm2_changeauth -c owner $TPM2_AUTH_OWNER
-tpm2_changeauth -c endorsement $TPM2_AUTH_ENDORSEMENT
-tpm2_changeauth -c lockout $TPM2_AUTH_LOCKOUT
-tpm2_nvdefine $TPM2_NVM_INDEX -C o -s 900 -a $TPM2_AUTH_ATTRIBUTE -P $TPM2_AUTH_OWNER -p $TPM2_AUTH_NV
+if [ $USE_SWTPM -ne 1 ]; then
+    # new SWTPM have a specific daemon starting it up
+    tpm2_startup -c
+    # new SWTPM can't be R/W for now with following cmd
+    tpm2_clear -c p
+    tpm2_changeauth -c owner $TPM2_AUTH_OWNER
+    tpm2_changeauth -c endorsement $TPM2_AUTH_ENDORSEMENT
+    tpm2_changeauth -c lockout $TPM2_AUTH_LOCKOUT
+    tpm2_nvdefine $TPM2_NVM_INDEX -C o -s 900 -a $TPM2_AUTH_ATTRIBUTE -P $TPM2_AUTH_OWNER -p $TPM2_AUTH_NV
+else
+    # new SWTPM use SD card to store hash instead
+    > $SWTPM_NVM
+fi
 # now we can write to NVM
 
 # >3. Read PCR out from TPM and find the index of the first non-zero byte
@@ -100,7 +120,11 @@ tpm2_pcrextend "$PCR_IDX_INIT_ZERO:$HASH=$FINAL_HASH_VALUE"
 if [ $VERBOSE == true ]; then echo "Writing hash to NVM..."; fi
 HASH_TMP_FILE="hash_value.txt.tmp"
 echo "$FINAL_HASH_VALUE" > $HASH_TMP_FILE
-tpm2_nvwrite $TPM2_NVM_INDEX -P $TPM2_AUTH_NV -i $HASH_TMP_FILE
+if [ $USE_SWTPM -ne 1 ]; then
+    tpm2_nvwrite $TPM2_NVM_INDEX -P $TPM2_AUTH_NV -i $HASH_TMP_FILE
+else
+    cp $HASH_TMP_FILE $SWTPM_NVM
+fi
 rm $HASH_TMP_FILE
 
 # >7. Set MBC script to run at startup/boot
@@ -130,4 +154,4 @@ sudo systemctl daemon-reload
 sudo systemctl enable $SERVICE_FILE
 sudo systemctl start $SERVICE_FILE
 
-echo "MBC script updated successfully!"
+echo "MBC script finished!"
