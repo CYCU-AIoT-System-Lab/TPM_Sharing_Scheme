@@ -1,24 +1,13 @@
 #!/bin/bash
 #set -x
 
-TPM2_AUTH_NV="nv123"
-TPM2_NVM_INDEX="0x1500016"
-HASH_SCRIPT="./hash.sh"
-HASH_TARGET="dir_list.txt"
-HASH="sha256" # can be sha1, sha256
-PCR_IDX_INIT_ZERO=0
-PCR_IDX_MIN=0
-PCR_IDX_MAX=23
-INITIAL_ZERO_PCR="0000000000000000000000000000000000000000000000000000000000000000"
+source "../common/functions.sh"
+source "./function_boot.sh"
+load_preset "./config.ini"
+
 INTEGRITY_CHECK_PASS=false
 CLI_INPUT_STR="$@"
 CLI_INPUT_ARR=($CLI_INPUT_STR)
-VERBOSE=true
-
-# These option will be overwritten by setup_mbc_last.sh
-USE_SWTPM=1
-SWTPM_NVM=/home/tpm6/TPM_Sharing_Scheme/boot/swtpm_nvm.data
-export TPM2TOOLS_TCTI="swtpm:port=2321"
 
 # >0. Checking existance
 #    - TPM

@@ -1,30 +1,12 @@
 #!/bin/bash
 #set -x
 
-# Use new SWTPM installed in `update_swtpm` submodule instead of HWTPM
-USE_SWTPM=1
-SWTPM_SERVER_PORT=2321
-SWTPM_CTRL_PORT=2322
+source "../common/functions.sh"
+source "./function_boot.sh"
+load_preset "./config.ini"
 
 # note: remember to add fail check
 
-TPM2_AUTH_OWNER="owner123"
-TPM2_AUTH_ENDORSEMENT="endorsement123"
-TPM2_AUTH_LOCKOUT="lockout123"
-TPM2_AUTH_ATTRIBUTE="authwrite|authread|read_stclear"
-TPM2_AUTH_NV="nv123"
-TPM2_NVM_INDEX="0x1500016"
-HASH_SCRIPT="$PWD/hash.sh"
-HASH_TARGET="$PWD/dir_list.txt"
-MBC_SCRIPT="$PWD/mbc_last.sh"
-SERVICE_FILE="mbc_last.service"
-SYSTEMD_DIR="/etc/systemd/system"
-PCR_IDX_INIT_ZERO=0
-HASH="sha256" # can be sha1, sha256
-PCR_IDX_MIN=0
-PCR_IDX_MAX=23
-INITIAL_ZERO_PCR="0000000000000000000000000000000000000000000000000000000000000000"
-VERBOSE=false
 CLI_INPUT_STR="$@"
 CLI_INPUT_ARR=($CLI_INPUT_STR)
 
@@ -35,7 +17,6 @@ CLI_INPUT_ARR=($CLI_INPUT_STR)
 if [[ "${CLI_INPUT_ARR[*]}" =~ "-v" ]]; then
     VERBOSE=true
 fi
-HASH_DEMO_DATA="$PWD/hash_target.txt"
 echo "some data" > $HASH_DEMO_DATA
 echo $HASH_DEMO_DATA > $HASH_TARGET
 
@@ -43,31 +24,18 @@ echo $HASH_DEMO_DATA > $HASH_TARGET
 #   - Modify parameters
 #       - daemon setting added in this script
 #       - filepath
-#   - modify script parameters
-#       - launch_swtpm.sh
-#       - activate_swtpm.sh
-#       - mbc_last.sh
 #   - Call 2 daemon setup script: setup_swtpm_daemon.sh
 #       - swtpm.service
 #       - activate_swtpm.service
 if [ $USE_SWTPM -ne 1 ]; then
     MBC_AFTER=""
     MBC_DELAY=""
-    SWTPM_NVM=""
 else
     if [ $VERBOSE == true ]; then echo "do SWTPM preparation..."; fi
-    export TPM2TOOLS_TCTI="swtpm:port=$SWTPM_SERVER_PORT"
     #1
     MBC_AFTER="activate_swtpm.service"
     MBC_DELAY="ExecStartPre=/bin/sleep 1"
-    SWTPM_NVM="$PWD/swtpm_nvm.data"
     #2
-    sed -i "/SERVER_PORT=/c SERVER_PORT=$SWTPM_SERVER_PORT" "$PWD/launch_swtpm.sh"
-    sed -i "/CTRL_PORT=/c CTRL_PORT=$SWTPM_CTRL_PORT" "$PWD/launch_swtpm.sh"
-    sed -i "/SERVER_PORT=/c SERVER_PORT=$SWTPM_SERVER_PORT" "$PWD/activate_swtpm.sh"
-    sed -i "/USE_SWTPM=/c USE_SWTPM=$USE_SWTPM" "$PWD/mbc_last.sh"
-    sed -i "/SWTPM_NVM=/c SWTPM_NVM=$SWTPM_NVM" "$PWD/mbc_last.sh"
-    #3
     bash setup_swtpm_daemon.sh
 fi
 
@@ -149,16 +117,16 @@ KillMode=mixed\n\
 #Restart=always\n\
 #RestartSec=1\n\
 WorkingDirectory=$PWD\n\
-ExecStart=$MBC_SCRIPT\n\
+ExecStart=$LAUNCH_SCRIPT_3\n\
 TimeoutStartSec=infinity\n\
 $MBC_DELAY\n\
 \n\
 [Install]\n\
 WantedBy=multi-user.target\
-" > $SERVICE_FILE
-sudo mv $SERVICE_FILE $SYSTEMD_DIR
+" > $SERVICE_FILE_3
+sudo mv $SERVICE_FILE_3 $SYSTEMD_DIR
 sudo systemctl daemon-reload
-sudo systemctl enable $SERVICE_FILE
-sudo systemctl start $SERVICE_FILE
+sudo systemctl enable $SERVICE_FILE_3
+sudo systemctl start $SERVICE_FILE_3
 
 echo "MBC script finished!"

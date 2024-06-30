@@ -1,10 +1,8 @@
 #!/bin/bash
 
-SYSTEMD_DIR="/etc/systemd/system"
-SERVICE_FILE_1="swtpm.service"
-SERVICE_FILE_2="activate_swtpm.service"
-LAUNCH_SCRIPT_1="$PWD/launch_swtpm.sh"
-LAUNCH_SCRIPT_2="$PWD/activate_swtpm.sh"
+source "../common/functions.sh"
+source "./function_boot.sh"
+load_preset "./config.ini"
 
 echo -e "\
 [Unit]\n\

@@ -22,6 +22,7 @@ Any path containing spaces will not be hashed correctly.
 ## Notes
 
 1. Due to no tpm2-tools found to be able to perform TPM hashing operation without overwriting the PCR, the generated hash is stored in NVM for now. This is the reason requiring additional TPM configuration and NVM R/W operations.
+2. SWTPM in current setting cannot keep PCR value persistent after reboot. Therefore each startup need to perform `setup_mbc_last.md` first so that `mbc_last.md` can work with initialized PCR table.
 
 ## Reference
 

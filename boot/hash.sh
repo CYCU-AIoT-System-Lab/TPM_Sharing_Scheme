@@ -327,7 +327,7 @@ $system_echo "> Creating temporary files ..."
 if [[ $err_code -eq 0 ]]; then
     # this is necessary to avoid residual data in the file
     #if [ -f "$temporary_hash_file" ]; then # existence check doesn't work
-    rm "$temporary_hash_file".*
+    rm "$temporary_hash_file".* || :
     if [ $? -ne 0 ]; then
         echo -e "> $warning_message: Skipped removing existing temporary hash file!"
     fi
