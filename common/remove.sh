@@ -61,20 +61,20 @@ else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_deploy_repo ! Skipping remove of setup_deploy_repo..."
 fi
 
-if [ ${job_setup_mbc_last} -eq 1 ]; then
-    echo_notice "${dirname}" "${filename}" "Running setup_mbc_last remove..."
-    cd ../boot
-    install_platform=$install_platform bash ./remove.sh
-else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_mbc_last ! Skipping remove of setup_mbc_last..."
-fi
-
 if [ $job_update_swtpm -eq 1 ]; then
     echo_notice "$dirname" "$filename" "Running update_swtpm remove..."
     cd ../update_swtpm
     sudo install_platform=$install_platform bash ./remove_swtpm_isolated.sh
 else
     echo_warn "$dirname" "$filename" "Invalid Argument: $job_update_swtpm ! Skipping remove of update_swtpm..."
+fi
+
+if [ ${job_setup_mbc_last} -eq 1 ]; then
+    echo_notice "${dirname}" "${filename}" "Running setup_mbc_last remove..."
+    cd ../boot
+    install_platform=$install_platform bash ./remove_mbc_last.sh
+else
+    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_mbc_last ! Skipping remove of setup_mbc_last..."
 fi
 
 clear_preset

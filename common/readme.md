@@ -20,8 +20,7 @@ Part of the components are dependent on each other, please follow the order belo
 
 1. job_common + job_setup_optiga
 2. job_setup_ibmtpm
-3. (optional) job_update_swtpm
-4. (optional) job_setup_mbc_last
+3. (optional) job_update_swtpm + job_setup_mbc_last
 
 ## Adjust Installation Components - setup_environment
 
