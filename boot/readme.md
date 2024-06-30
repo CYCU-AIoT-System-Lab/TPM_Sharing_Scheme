@@ -19,6 +19,10 @@ Any path containing spaces will not be hashed correctly.
 1. Add to boot chain: https://belongtothenight.github.io/HOW_TO/how_to_LINUX-auto_launch_program_on_boot/
 2. Extend PCR: Add log entry when extending, to PCR x.
 
+## Notes
+
+1. Due to no tpm2-tools found to be able to perform TPM hashing operation without overwriting the PCR, the generated hash is stored in NVM for now. This is the reason requiring additional TPM configuration and NVM R/W operations.
+
 ## Reference
 
 1. https://uapi-group.org/specifications/specs/linux_tpm_pcr_registry/
