@@ -52,14 +52,21 @@ fi
 
 # >2. Read PCR out from TPM
 if [ $VERBOSE == true ]; then echo "Reading PCR from TPM..."; fi
-if [[ $PCR_IDX_INIT_ZERO_2 -lt $PCR_IDX_MIN ]]; then
+if [[ $PCR_IDX_INIT_ZERO -le $PCR_IDX_MIN ]]; then
+    echo "Please perform setup with \`setup_mbc_last.sh\` first"
+    exit 1
+    #PCR_X_1="$INITIAL_ZERO_PCR"
+    #PCR_X="$INITIAL_ZERO_PCR"
+elif [[ $PCR_IDX_INIT_ZERO_1 -le $PCR_IDX_MIN ]]; then
     PCR_X_1="$INITIAL_ZERO_PCR"
+    PCR_X="$(tpm2_pcrread $HASH:$PCR_IDX_INIT_ZERO_1)"
+    PCR_X="${PCR_X#*x}"
 else
     PCR_X_1="$(tpm2_pcrread $HASH:$PCR_IDX_INIT_ZERO_2)"
     PCR_X_1="${PCR_X_1#*x}"
+    PCR_X="$(tpm2_pcrread $HASH:$PCR_IDX_INIT_ZERO_1)"
+    PCR_X="${PCR_X#*x}"
 fi
-PCR_X="$(tpm2_pcrread $HASH:$PCR_IDX_INIT_ZERO_1)"
-PCR_X="${PCR_X#*x}"
 if [ $VERBOSE == true ]; then
     echo -e "PCR_HASH[$PCR_IDX_INIT_ZERO_2]: \t$PCR_X_1"
     echo -e "PCR_HASH[$PCR_IDX_INIT_ZERO_1]: \t$PCR_X"
