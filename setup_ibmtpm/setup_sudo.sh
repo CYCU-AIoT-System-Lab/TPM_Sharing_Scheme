@@ -163,6 +163,7 @@ compile_ibmtpmtss () {
         exit 1
     fi
 }
+export LD_LIBRARY_PATH="${path_ibmtss}/utils:$LD_LIBRARY_PATH"
 
 # Create symbolic link to ibmswtpm
 # Only need to setup once (can re-run)
@@ -349,7 +350,7 @@ activate_TPM_client () {
         lc4="./startup"
     else
         # updated SWTPM will just pass through and exit
-        lc3="export TPM2TOOLS_TCTI=\"swtpm:port=$tpm_command_port\""
+        lc3="export TPM2TOOLS_TCTI=\"swtpm:port=$tpm_command_port\" LD_LIBRARY_PATH=${path_ibmtss}/utils:$LD_LIBRARY_PATH"
         lc4="tpm2_startup -c; sleep 5; tpm2_startup -c"
     fi
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
@@ -430,7 +431,7 @@ active_ACS_Demo_Server () {
     cd ${path_ibmacs}/acs
     lc1="source ${current_dir}/../common/functions.sh"
     lc2="echo_notice \"setup_ibmtpm\" \"setup-active_ACS_Demo_Server\" \"Activating ACS Demo ...\""
-    lc3="export ACS_PORT=${acs_port}"
+    lc3="export ACS_PORT=${acs_port} LD_LIBRARY_PATH=${path_ibmtss}/utils:$LD_LIBRARY_PATH"
     lc4="log_date_time \"./server -vv -root ${tss_cert_rootcert_dir}/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"${acs_demo_server_log_dir}\" \"default\""
     if [ $install_platform -eq 1 ] || [ $install_platform -eq 4 ] || [ $install_platform -eq 5 ]; then
         newGterm "ACS SERVER" "$bash_gflag" "$lc1; $lc2; $lc3; $lc4" 1
@@ -442,6 +443,7 @@ active_ACS_Demo_Server () {
 # Active ACS Demo Client
 # Can be run multiple times
 active_ACS_Demo_Client () {
+    export LD_LIBRARY_PATH="${path_ibmtss}/utils:$LD_LIBRARY_PATH"
     cd "${path_ibmacs}/acs"
     if [ $SCmachineMode == 1 ]; then
         echo_notice "${dirname}" "${filename}-active_ACS_Demo_Client" "Activating ACS Demo on local machine ..."
@@ -458,6 +460,7 @@ active_ACS_Demo_Client () {
 # Active ACS Demo verify
 # Can be run multiple times
 active_ACS_Demo_verify () {
+    export LD_LIBRARY_PATH="${path_ibmtss}/utils:$LD_LIBRARY_PATH"
     cd "${sym_link_ibmacs}"
     echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
     log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
