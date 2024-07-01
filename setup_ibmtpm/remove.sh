@@ -34,4 +34,4 @@ sudo mysql -Bse "DROP DATABASE IF EXISTS $mysql_database;"
 sudo mysql -Bse "DROP DATABASE IF EXISTS machines;"
 
 clear_preset
-#sudo rm $script_path/config.ini
+sudo rm $script_path/config.ini
