@@ -22,4 +22,4 @@ Server-side:
 
 Client-side:
 1. job_common + job_setup_optiga
-2. job_setup_ibmtpm + job_update_swtpm + job_setup_mbc_last + job_setup_IMA (un-developed)
+2. job_setup_ibmtpm + job_update_swtpm + job_boot + job_setup_IMA (un-developed)
