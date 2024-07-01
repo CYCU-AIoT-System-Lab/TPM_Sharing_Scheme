@@ -42,8 +42,9 @@ load_preset () {
     check_var job_socket_com 1
     check_var job_setup_optiga 1
     check_var job_deploy_repo 1
-    check_var job_setup_mbc_last 1
     check_var job_update_swtpm 1
+    check_var job_boot 1
+    check_var job_acs_routine 1
 
     if [ $verbose == 1 ]; then
         echo_notice "$dirname" "$filename" "Loading preset..."
@@ -119,8 +120,9 @@ clear_preset () {
     unset job_enable_ssh
     unset job_enable_pi_spi
     unset job_deploy_repo
-    unset job_setup_mbc_last
     unset job_update_swtpm
+    unset job_boot
+    unset job_acs_routine
 }
 if [ $verbose == 1 ]; then
     echo_notice "${dirname}" "${filename}" "Loaded function: clear_preset"

@@ -69,10 +69,18 @@ else
     echo_warn "$dirname" "$filename" "Invalid Argument: $job_update_swtpm ! Skipping remove of update_swtpm..."
 fi
 
-if [ ${job_setup_mbc_last} -eq 1 ]; then
-    echo_notice "${dirname}" "${filename}" "Running setup_mbc_last remove..."
+if [ $job_boot -eq 1 ]; then
+    echo_notice "${dirname}" "${filename}" "Running boot remove..."
     cd ../boot
     install_platform=$install_platform bash ./remove_mbc_last.sh
+else
+    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_mbc_last ! Skipping remove of setup_mbc_last..."
+fi
+
+if [ $job_acs_routine -eq 1 ]; then
+    echo_notice "${dirname}" "${filename}" "Running acs_routine remove..."
+    cd ../boot
+    install_platform=$install_platform bash ./remove_acsroutine.sh
 else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_mbc_last ! Skipping remove of setup_mbc_last..."
 fi
