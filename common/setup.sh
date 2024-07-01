@@ -178,7 +178,7 @@ if [ $job_reload_term       -eq 1 ]; then reload_term;       fi
 if [ $job_setup_environment -eq 1 ]; then
     echo_warn "${dirname}" "${filename}" "Running environment setup Not Implemneted Yet!"
 else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_environment ! Skipping setup_environment..."
+    echo_notice "${dirname}" "${filename}" "Skipped setup_environment"
 fi
 
 cd $working_dir
@@ -191,7 +191,7 @@ elif [ $job_setup_ibmtpm -eq 2 ]; then
     cd ../setup_ibmtpm
     bash ./setup.sh
 else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_ibmtpm ! Skipping setup_ibmtpm..."
+    echo_notice "${dirname}" "${filename}" "Skipped setup_ibmtpm"
 fi
 
 cd $working_dir
@@ -200,7 +200,7 @@ if [ $job_socket_com -eq 1 ]; then
     cd ../socket_com
     install_platform=$install_platform bash ./setup.sh
 else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_socket_com ! Skipping setup_socket_com..."
+    echo_notice "${dirname}" "${filename}" "Skipped setup_socket_com"
 fi
 
 cd $working_dir
@@ -209,7 +209,7 @@ if [ $job_setup_optiga -eq 1 ]; then
     cd ../setup_optiga
     install_platform=$install_platform bash ./setup.sh
 else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_optiga ! Skipping setup_optiga..."
+    echo_notice "${dirname}" "${filename}" "Skipped setup_optiga"
 fi
 
 cd $working_dir
@@ -218,7 +218,7 @@ if [ $job_deploy_repo -eq 1 ]; then
     cd ../deploy_repo
     install_platform=$install_platform bash ./setup.sh
 else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_deploy_repo ! Skipping setup_deploy_repo..."
+    echo_notice "${dirname}" "${filename}" "Skipped setup_deploy_repo"
 fi
 
 cd $working_dir
@@ -227,7 +227,7 @@ if [ $job_update_swtpm -eq 1 ]; then
     cd ../update_swtpm
     sudo install_platform=$install_platform bash ./setup_swtpm_isolated.sh
 else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_update_swtpm ! Skipping setup_swtpm..."
+    echo_notice "${dirname}" "${filename}" "Skipped setup_swtpm"
 fi
 
 cd $working_dir
@@ -236,7 +236,7 @@ if [ $job_boot -eq 1 ]; then
     cd ../boot
     install_platform=$install_platform bash ./setup_mbc_last.sh
 else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_mbc_last ! Skipping setup_mbc_last..."
+    echo_notice "${dirname}" "${filename}" "Skipped setup_mbc_lst"
 fi
 
 cd $working_dir
@@ -245,7 +245,7 @@ if [ $job_acs_routine -eq 1 ]; then
     cd ../acs_routine
     install_platform=$install_platform bash ./setup_acsroutine.sh
 else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_mbc_last ! Skipping setup_mbc_last..."
+    echo_notice "${dirname}" "${filename}" "Skipped setup_mbc_last"
 fi
 
 clear_preset
