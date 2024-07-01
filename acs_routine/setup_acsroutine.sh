@@ -34,12 +34,11 @@ server_exec () {
     lc1="source $script_path/../common/functions.sh"
     lc2="echo_notice \"$dirname\" \"$filename\" 'Launching ACS server'"
     lc3="cd $base_dir/ibmacs"
-    lc4="export LD_LIBRARY_PATH=/opt/ibmtss/utils:$LD_LIBRARY_PATH"
-    lc5="export ACS_PORT=$acs_port ACS_SQL_USERID=\"$mysql_user\" ACS_SQL_PASSWORD=\"$mysql_password\""
-    lc6="./server -vv -root $base_dir/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der"
-    #lc6="log_date_time \"./server -vv -root $base_dir/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"$base_dir/ibmacs/serverenroll.log4j\" \"default\""
-    newLXterm "ACS SERVER" "sudo bash -c \"$lc1; $lc2; $lc3; $lc4; $lc5; service apache2 restart; $lc6 || :\"" 1
-    #sudo bash -c "$lc2; $lc3; $lc4; $lc5; $lc6 || { pkill apache2 && service apache2 restart && $lc6; }" # debug use
+    lc4="export LD_LIBRARY_PATH=/opt/ibmtss/utils:$LD_LIBRARY_PATH ACS_PORT=$acs_port ACS_SQL_USERID=\"$mysql_user\" ACS_SQL_PASSWORD=\"$mysql_password\" TPM_INTERFACE_TYPE=dev"
+    lc5="./server -vv -root $base_dir/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der"
+    #lc5="log_date_time \"./server -vv -root $base_dir/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"$base_dir/ibmacs/serverenroll.log4j\" \"default\""
+    newLXterm "ACS SERVER" "sudo bash -c \"$lc1; $lc2; $lc3; $lc4; service apache2 restart; $lc5 || :\"" 1
+    #sudo bash -c "$lc2; $lc3; $lc4; $lc5 || { pkill apache2 && service apache2 restart && $lc5; }" # debug use
 
     echo_notice "$dirname" "$filename" "ACS website starting"
     lc1="source $PWD/../common/functions.sh"
