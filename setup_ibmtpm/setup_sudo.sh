@@ -462,10 +462,10 @@ active_ACS_Demo_Client () {
 active_ACS_Demo_verify () {
     export LD_LIBRARY_PATH="${path_ibmtss}/utils:$LD_LIBRARY_PATH"
     cd "${sym_link_ibmacs}"
-    echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking TPM2BIOS.LOG ..."
+    echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Extending TPM2BIOS.LOG ..."
     log_date_time "${sym_link_ibmtss}/utils/eventextend -if ${swtpm_bios_log_dir} -tpm -v" "$log4j_time_format" "${acs_demo_verify_tpm2bios_log_dir}" "default"
 
-    echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Checking IMASIG.LOG (it can take a few minutes) ..."
+    echo_notice "${dirname}" "${filename}-active_ACS_Demo_verify" "Extending IMASIG.LOG (it can take a few minutes) ..."
     log_date_time "${sym_link_ibmtss}/utils/imaextend -if ${ima_sig_log_dir} -le -v" "$log4j_time_format" "${acs_demo_verify_imasig_log_dir}" "default"
 
     if [ $SCmachineMode == 1 ]; then

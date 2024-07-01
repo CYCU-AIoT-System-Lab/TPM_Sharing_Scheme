@@ -77,6 +77,7 @@ Note: New SWTPM is communicated through its socket interface, character device i
 
 - Only tested on Ubuntu 18.04 VM, not on physical machine.
 - If you see `TSS_RC_NO_CONNECTION - Failure connecting to lower layer`, try press the reset button on TPM and reboot the system.
+- If you see `no akecpub_<client_ipv4>.bin` not found, remove the same machine from server DB table and re-run client setup.
 
 ## Progress Update
 
