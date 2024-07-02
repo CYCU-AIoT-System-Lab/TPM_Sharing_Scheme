@@ -11,7 +11,7 @@ After=multi-user.target\n\
 StartLimitIntervalSec=0\n\
 \n\
 [Service]\n\
-User=$USER\n\
+User=root\n\
 Type=simple\n\
 KillMode=mixed\n\
 Restart=always\n\
@@ -52,3 +52,8 @@ sudo mv $SERVICE_FILE_2 $SYSTEMD_DIR
 sudo systemctl daemon-reload
 sudo systemctl enable $SERVICE_FILE_2
 sudo systemctl start $SERVICE_FILE_2
+
+echo "waiting for swtpm to be launched and online"
+sleep 2
+echo "activating swtpm server service"
+bash $LAUNCH_SCRIPT_2

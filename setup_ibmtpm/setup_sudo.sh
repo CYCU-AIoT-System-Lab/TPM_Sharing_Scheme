@@ -473,7 +473,19 @@ active_ACS_Demo_verify () {
         log_date_time "${sym_link_ibmacs}/client -alg rsa -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
     elif [ $SCmachineMode == 2 ]; then
         # for Remote
-        log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
+        if ! [ -z ${interval+x} ]; then
+            # if interval is set, perform forever attestation
+            attest_cnt=0
+            while true; do
+                log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
+                attest_cnt=$((attest_cnt + 1))
+                echo "wait $interval >> performed attestation: $attest_cnt"
+                sleep $interval
+            done
+        else
+            # if interval is not set, perform just once
+            log_date_time "${sym_link_ibmacs}/client -alg ec -ifb ${swtpm_bios_log_dir} -ifi ${ima_sig_log_dir} -ho ${acs_demo_server_ip} -vv -ma ${acs_demo_client_ip}" "$log4j_time_format" "${acs_demo_verify_client_log_dir}" "default"
+        fi
     else 
         echo_warn "${dirname}" "${filename}-active_ACS_Demo_verify" "Invalid SCmachineMode"
         exit 1

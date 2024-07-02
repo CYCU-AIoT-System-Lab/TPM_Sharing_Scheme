@@ -33,10 +33,10 @@ server_exec () {
     echo_notice "$dirname" "$filename" "ACS server starting"
     lc1="source $script_path/../common/functions.sh"
     lc2="echo_notice \"$dirname\" \"$filename\" 'Launching ACS server'"
-    lc3="cd $base_dir/ibmacs"
-    lc4="export LD_LIBRARY_PATH=/opt/ibmtss/utils:$LD_LIBRARY_PATH ACS_PORT=$acs_port ACS_SQL_USERID=\"$mysql_user\" ACS_SQL_PASSWORD=\"$mysql_password\" TPM_INTERFACE_TYPE=dev"
-    lc5="./server -vv -root $base_dir/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der"
-    #lc5="log_date_time \"./server -vv -root $base_dir/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der\" \"$log4j_time_format\" \"$base_dir/ibmacs/serverenroll.log4j\" \"default\""
+    lc3="cd $BASE_DIR/ibmacs"
+    lc4="export LD_LIBRARY_PATH=$BASE_DIR/ibmtss/utils:$LD_LIBRARY_PATH ACS_PORT=$ACS_PORT ACS_SQL_USERID=\"$MYSQL_USER\" ACS_SQL_PASSWORD=\"$MYSQL_PASSWORD\" TPM_INTERFACE_TYPE=dev"
+    lc5="./server -vv -root $BASE_DIR/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der"
+    #lc5="log_date_time \"./server -vv -root $BASE_DIR/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der\" \"$LOG4J_TIME_FORMAT\" \"$BASE_DIR/ibmacs/serverenroll.log4j\" \"default\""
     newLXterm "ACS SERVER" "sudo bash -c \"$lc1; $lc2; $lc3; $lc4; service apache2 restart; $lc5 || :\"" 1
     #sudo bash -c "$lc2; $lc3; $lc4; $lc5 || { pkill apache2 && service apache2 restart && $lc5; }" # debug use
 
@@ -55,7 +55,11 @@ server_exec () {
 #   - detect anomaly server traffic
 #   - block anomaly server traffic
 client_setup () {
-    echo_notice "$dirname" "$filename" "client-side setting up"
+    echo_notice "$dirname" "$filename" "Enrolling client"
+    sudo bash -c "\
+        cd $BASE_DIR/ibmacs; \
+        export LD_LIBRARY_PATH=\"$BASE_DIR/ibmtss/utils:$LD_LIBRARY_PATH\"; \
+        $BASE_DIR/ibmacs/clientenroll -alg ec -vv -ho $ACS_DEMO_SERVER_IP -ma $ACS_DEMO_CLIENT_IP -co akeccert.pem" || { echo "please inspect the error message! if it is \`already exists machine error\`, this can be ignored."; }
 }
 
 # execute CLIENT program
@@ -64,6 +68,15 @@ client_setup () {
 #   - block client if top one condition fails
 client_exec () {
     echo_notice "$dirname" "$filename" "client-side executing"
+    p1="$BASE_DIR/ibmacs/tpm2bios.log"
+    p2="$BASE_DIR/ibmacs/imasig.log"
+    # cmd 1&2 can add "-v" flag for verbose
+        #$BASE_DIR/ibmtss/utils/eventextend -if $p1 -tpm; \
+        #$BASE_DIR/ibmtss/utils/imaextend -if $p2 -le; \
+    sudo bash -c "\
+        cd $BASE_DIR/ibmacs; \
+        export LD_LIBRARY_PATH=\"$BASE_DIR/ibmtss/utils:$LD_LIBRARY_PATH\"; \
+        $BASE_DIR/ibmacs/client -alg ec -vv -ifb $p1 -ifi $p2 -ho $ACS_DEMO_SERVER_IP -ma $ACS_DEMO_CLIENT_IP"
 }
 
 if [ $job_setup_libtrace    -eq 1 ]; then setup_libtrace; fi

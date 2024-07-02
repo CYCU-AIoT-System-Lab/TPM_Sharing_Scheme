@@ -8,6 +8,9 @@ dirname=$(basename "$script_path")
 filename=$(basename "$0")
 
 load_preset () {
+    source "../setup_ibmtpm/function_ibmtpm.sh"
+    load_preset "../setup_ibmtpm/config.ini" # If this file is not found, generate it through running setup_ibmtpm
+
     if [ $verbose -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Loading config file..."
     fi
@@ -23,9 +26,14 @@ load_preset () {
     if [ $verbose -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Loading preset..."
     fi
+    #SWTPM_SERVER_PORT=2321
+    SWTPM_SERVER_PORT=$tpm_command_port
+    #SWTPM_CTRL_PORT=2322
+    SWTPM_CTRL_PORT=$tpm_socket_port
+    SWTPM_SOCKET_DEVICE=$swtpm_socket_device
+    clear_preset # clear preset of setup_ibmtpm
+
     USE_SWTPM=$use_swtpm
-    SWTPM_SERVER_PORT=2321
-    SWTPM_CTRL_PORT=2322
     SWTPM_NVM="$PWD/swtpm_nvm.data"
 
     VERBOSE=true

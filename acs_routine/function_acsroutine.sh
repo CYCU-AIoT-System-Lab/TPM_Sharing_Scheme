@@ -9,6 +9,9 @@ dirname=$(basename "$script_path")
 filename=$(basename "$0")
 
 load_preset () {
+    source "../setup_ibmtpm/function_ibmtpm.sh"
+    load_preset "../setup_ibmtpm/config.ini"
+
     if [ $verbose -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Loading config file..."
     fi
@@ -24,25 +27,40 @@ load_preset () {
     check_var job_setup 1
     check_var job_exec 1
 
-    check_var acs_demo_server_ip 1
-    check_var acs_port 1
+    #check_var acs_demo_server_ip 1
+    #check_var acs_port 1
 
-    check_var acs_demo_client_ip 1
-    check_var tpm_command_port 1
-    check_var tpm_socket_port 1
+    #check_var acs_demo_client_ip 1
+    #check_var tpm_command_port 1
+    #check_var tpm_socket_port 1
+
+    check_var interval 1
 
     if [ $verbose -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Loading preset..."
     fi
     # mysql
-    mysql_user="tpm2ACS"
-    mysql_password="123456"
-    mysql_database="tpm2"
+    #mysql_user="tpm2ACS"
+    MYSQL_USER=$mysql_user
+    #mysql_password="123456"
+    MYSQL_PASSWORD=$mysql_password
+    #mysql_database="tpm2"
+    MYSQL_DATABASE=$mysql_database
+
     # format
-    log4j_time_format="%Y/%m/%d-%H:%M:%S"
-    log4j_line_number=100
+    #log4j_time_format="%Y/%m/%d-%H:%M:%S"
+    LOG4J_TIME_FORMAT=$log4j_time_format
+
     # path
-    base_dir="/opt"
+    #base_dir="/opt"
+    BASE_DIR=$base_dir
+
+    # network
+    ACS_DEMO_SERVER_IP=$acs_demo_server_ip
+    ACS_PORT=$acs_port
+    ACS_DEMO_CLIENT_IP=$acs_demo_client_ip
+
+    clear_preset # clear preset from setup_ibmtpm
 
     # server-side must be raspberry pi with TPM9670 installed
     if [ $is_server -eq 1 ]; then
