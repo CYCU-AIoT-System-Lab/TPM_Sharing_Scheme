@@ -9,9 +9,6 @@ dirname=$(basename "$script_path")
 filename=$(basename "$0")
 
 load_preset () {
-    source "../setup_ibmtpm/function_ibmtpm.sh"
-    load_preset "../setup_ibmtpm/config.ini"
-
     if [ $verbose -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Loading config file..."
     fi
@@ -39,6 +36,9 @@ load_preset () {
     if [ $verbose -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Loading preset..."
     fi
+    source "../setup_ibmtpm/function_ibmtpm.sh"
+    load_preset "../setup_ibmtpm/config.ini"
+
     # mysql
     #mysql_user="tpm2ACS"
     MYSQL_USER=$mysql_user

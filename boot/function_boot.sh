@@ -31,6 +31,7 @@ load_preset () {
     #SWTPM_CTRL_PORT=2322
     SWTPM_CTRL_PORT=$tpm_socket_port
     SWTPM_SOCKET_DEVICE=$swtpm_socket_device
+    BASE_DIR=$base_dir
     clear_preset # clear preset of setup_ibmtpm
 
     USE_SWTPM=$use_swtpm
