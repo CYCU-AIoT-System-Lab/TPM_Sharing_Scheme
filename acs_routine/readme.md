@@ -73,3 +73,8 @@ Require `job_update_swtpm` to be finished.
     - tpm2_load -C primary.ctx -u obj.pub -r obj.priv -c obj.ctx
     - tpm2_flushcontext -t # this is to prevent 0x902 outofmemory error
 
+## Demo
+
+| No. | Date       | Commit                                                                                                                                                 | Detail                                | Demo Video URL                                               |
+| -   | -          | -                                                                                                                                                      | -                                     | -                                                            |
+| 1   | 2024/07/02 | [6335baf45e8d67e2001c72ebcc00eea2d6928cc7](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/6335baf45e8d67e2001c72ebcc00eea2d6928cc7)   | Full installation on fresh new VM OS. | [https://youtu.be/UyiN50dHs7s](https://youtu.be/UyiN50dHs7s) |
