@@ -78,3 +78,10 @@ Require `job_update_swtpm` to be finished.
 | No. | Date       | Commit                                                                                                                                               | Detail                                                                             | Demo Video URL                                               |
 | -   | -          | -                                                                                                                                                    | -                                                                                  | -                                                            |
 | 1   | 2024/07/02 | [6335baf45e8d67e2001c72ebcc00eea2d6928cc7](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/6335baf45e8d67e2001c72ebcc00eea2d6928cc7) | Ubuntu 18.04 VM, job_common, job_setup_optiga, job_setup_ibmtpm, job_update_swtpm. | [https://youtu.be/UyiN50dHs7s](https://youtu.be/UyiN50dHs7s) |
+
+## Reference Links
+
+1. [https://mariadb.com/kb/en/operating-system-error-codes/](https://mariadb.com/kb/en/operating-system-error-codes/)
+2. [https://mariadb.com/kb/en/mariadb-connectorc-api-functions/](https://mariadb.com/kb/en/mariadb-connectorc-api-functions/)
+3. [Database Connection in C++ - MySQL or MariaDB - Steve's teacher](https://youtu.be/cSZvq7Kv6_0?si=PYCB_hs1MV6GNnMt)
+4. [How to Create/Drop User in MariaDB - MariaDB Admin Tutorial - TechBrothersIT](https://youtu.be/MI4590v1QoU?si=SHSjoOksfvoxqAwQ)
