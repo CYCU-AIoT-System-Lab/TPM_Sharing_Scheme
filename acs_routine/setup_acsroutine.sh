@@ -30,7 +30,6 @@ setup_libtrace () {
 
     echo_notice "$dirname" "$filename" "Changing libtrace dependency installing directory"
     sudo sed -i "/program_install_dir=\"*\"/c program_install_dir=\"$LIBTRACEDEP_DIRNAME\"" "$SETUPLIBTRACE_DIRNAME/hw4_libtrace_setup/common_functions.sh"
-    sudo sed -i '/AC_PREREQ/c AC_PREREQ([2.69])' "$SETUPLIBTRACE_DIRNAME/hw5_c_trace_analyze/configure.ac"
 
     echo_notice "$dirname" "$filename" "Changing file mode"
     cd "$SETUPLIBTRACE_DIRNAME"
