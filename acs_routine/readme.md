@@ -28,14 +28,15 @@ Client-side:
 
 1. [./attestlog_AD/](./attestlog_AD/): Server-side DB parsing binary. Output attestation state and partial log.
 2. [./m4/](./m4/): Directory to hold m4 macro files after installation start.
-3. [./bootstrap.sh](./bootstrap.sh): Script to compile binaries in this submodule.
-4. [./config.ini](./config.ini): Configuration file for this submodule.
-5. [./configure.ac](./configure.ac): Binary pre-compilation setting file.
-6. [./function_acsroutine.sh](./function_acsroutine.sh): Function script for this submodule.
-7. [./Makefile.am](./Makefile.am): Binary compilation setting file.
-8. [./readme.md](./readme.md): This file.
-9. [./remove_acsroutine.sh](./remove_acsroutine.sh): Script to remove system changes made by this submodule.
-10. [./setup_acsroutine.sh](./setup_acsroutine.sh): Script to setup execution environment and execute this submodule. Performing tasks specified in `config.ini`.
+3. [./traffic_AD/](./traffic_AD/): Anomaly traffic detection binary. First interval will measure normal traffic, then compare with following interval.
+4. [./bootstrap.sh](./bootstrap.sh): Script to compile binaries in this submodule.
+5. [./config.ini](./config.ini): Configuration file for this submodule.
+6. [./configure.ac](./configure.ac): Binary pre-compilation setting file.
+7. [./function_acsroutine.sh](./function_acsroutine.sh): Function script for this submodule.
+8. [./Makefile.am](./Makefile.am): Binary compilation setting file.
+9. [./readme.md](./readme.md): This file.
+10. [./remove_acsroutine.sh](./remove_acsroutine.sh): Script to remove system changes made by this submodule.
+11. [./setup_acsroutine.sh](./setup_acsroutine.sh): Script to setup execution environment and execute this submodule. Performing tasks specified in `config.ini`.
 
 ## Debug Links
 
@@ -100,3 +101,5 @@ Require `job_update_swtpm` to be finished.
 4. [How to Create/Drop User in MariaDB - MariaDB Admin Tutorial - TechBrothersIT](https://youtu.be/MI4590v1QoU?si=SHSjoOksfvoxqAwQ)
 5. [https://github.com/kgoldman/acs/blob/master/acs/reports.php](https://github.com/kgoldman/acs/blob/master/acs/reports.php)
 6. [https://github.com/kgoldman/acs/blob/master/acs/serversql.c](https://github.com/kgoldman/acs/blob/master/acs/serversql.c)
+7. [https://stackoverflow.com/questions/1746501/can-someone-give-an-example-of-cosine-similarity-in-a-very-simple-graphical-wa](https://stackoverflow.com/questions/1746501/can-someone-give-an-example-of-cosine-similarity-in-a-very-simple-graphical-wa)
+8. [https://cs.stackexchange.com/questions/72193/are-there-any-efficient-algorithems-to-find-packets-similarities-in-a-list](https://cs.stackexchange.com/questions/72193/are-there-any-efficient-algorithems-to-find-packets-similarities-in-a-list)

@@ -1,7 +1,7 @@
 /* @file main
  * @brief Main function for ACS attestation log DB anomaly detection,
  *        No error handling is implemented in this version.
- * @authoer belongtothenight / Da-Chuan Chen/ 2024
+ * @authoer belongtothenight / Da-Chuan Chen / 2024-07-03
  */
 
 #include <stdio.h>

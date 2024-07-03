@@ -9,6 +9,7 @@ AC_INIT([acs_routine], [0.0.1], [dachuan516@gmail.com])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects]) # Display all errors, treat warning as error, following minimum GNU policy, enable automake to look into subdirectories
 AC_CONFIG_SRCDIR([attestlog_AD])
+AC_CONFIG_SRCDIR([traffic_AD])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AM_PROG_AR
@@ -19,18 +20,17 @@ LT_INIT([disable-static])
 
 # Checks for libraries.
 #AC_CHECK_LIB([pthread], [pthread_mutex_trylock], [have_pthread=1], [have_pthread=0])
-#AC_CHECK_LIB([crypto], [OPENSSL_init_crypto], [have_crypto=1], [have_crypto=0])
-#AC_CHECK_LIB([wandder], [wandder_etsili_get_cc_format], [have_wandder=1], [have_wandder=0])
-#AC_CHECK_LIB([trace], [trace_create_packet], [have_trace=1], [have_trace=0])
-#AC_CHECK_LIB([trace], [trace_create], [have_trace=1], [have_trace=0])
-#AC_CHECK_LIB([trace], [trace_is_err], [have_trace=1], [have_trace=0])
-#AC_CHECK_LIB([trace], [trace_perror], [have_trace=1], [have_trace=0])
-#AC_CHECK_LIB([trace], [trace_start], [have_trace=1], [have_trace=0])
-#AC_CHECK_LIB([trace], [trace_read_packet], [have_trace=1], [have_trace=0])
-#AC_CHECK_LIB([trace], [trace_get_timespec], [have_trace=1], [have_trace=0])
-#AC_CHECK_LIB([trace], [trace_get_timeval], [have_trace=1], [have_trace=0])
-#AC_CHECK_LIB([trace], [trace_destroy], [have_trace=1], [have_trace=0])
-#AC_CHECK_LIB([trace], [trace_destroy_packet], [have_trace=1], [have_trace=0])
+# libtrace and its dependencies can't be checked by PKG_CHECK_MODULES since they don't have .pc files
+AC_CHECK_LIB([trace], [trace_create_packet], [], [echo -e "\nlibtrace not found\n"; exit 1])
+AC_CHECK_LIB([trace], [trace_create], [], [echo -e "\nlibtrace not found\n"; exit 1])
+AC_CHECK_LIB([trace], [trace_is_err], [], [echo -e "\nlibtrace not found\n"; exit 1])
+AC_CHECK_LIB([trace], [trace_perror], [], [echo -e "\nlibtrace not found\n"; exit 1])
+AC_CHECK_LIB([trace], [trace_start], [], [echo -e "\nlibtrace not found\n"; exit 1])
+AC_CHECK_LIB([trace], [trace_read_packet], [], [echo -e "\nlibtrace not found\n"; exit 1])
+AC_CHECK_LIB([trace], [trace_get_timespec], [], [echo -e "\nlibtrace not found\n"; exit 1])
+AC_CHECK_LIB([trace], [trace_get_timeval], [], [echo -e "\nlibtrace not found\n"; exit 1])
+AC_CHECK_LIB([trace], [trace_destroy], [], [echo -e "\nlibtrace not found\n"; exit 1])
+AC_CHECK_LIB([trace], [trace_destroy_packet], [], [echo -e "\nlibtrace not found\n"; exit 1])
 PKG_PROG_PKG_CONFIG
 PKG_CHECK_MODULES([MARIADB], [mariadb >= 3.1.22])
 
@@ -58,7 +58,8 @@ AC_TYPE_UINT64_T
 #                setvbuf strcmp strstr signal sizeof snprintf strdup strtod strtol strerror])
 
 AC_CONFIG_FILES([Makefile
-                 attestlog_AD/Makefile])
+                 attestlog_AD/Makefile
+                 traffic_AD/Makefile])
 AC_SUBST([ADD_LIBS])
 AC_SUBST([EXTRA_LIBS])
 AC_SUBST([ADD_LDFLAGS])

@@ -15,17 +15,41 @@ filename=$(basename "$0")
 # clone libtrace install program
 #   - https://github.com/belongtothenight/ACN_Code/releases
 setup_libtrace () {
-    echo_notice "$dirname" "$filename" "libtrace setting up"
+    echo_notice "$dirname" "$filename" "Disabling wget certification check"
+    WGET_CONFIG_STR="check_certificate = off"
+    echo "$WGET_CONFIG_STR" >> $WGET_RC_PATH
+
+    echo_notice "$dirname" "$filename" "Downloading libtrace setup script"
+    ZIPNAME="$SETUPLIBTRACE_DIRNAME$SETUPLIBTRACE_EXT"
+    sudo wget $WGET_FLAG "https://github.com/belongtothenight/ACN_Code/archive/refs/tags/1.0.0.tar.gz" -O $ZIPNAME || { rm -rf $ZIPNAME; echo -e "${RED}${BOLD}download failed, removing partial file!${END}"; exit 1; }
+    if ! [ -d $SETUPLIBTRACE_DIRNAME ]; then sudo mkdir $SETUPLIBTRACE_DIRNAME; fi
+    sudo tar $TAR_FLAG $ZIPNAME -C $SETUPLIBTRACE_DIRNAME $TAR_ADD_FLAG
+
+    echo_notice "$dirname" "$filename" "Enabling wget certification check"
+    sed -i "/$WGET_CONFIG_STR/d" $WGET_RC_PATH
+
+    echo_notice "$dirname" "$filename" "Changing libtrace dependency installing directory"
+    sudo sed -i "/program_install_dir=\"*\"/c program_install_dir=\"$LIBTRACEDEP_DIRNAME\"" "$SETUPLIBTRACE_DIRNAME/hw4_libtrace_setup/common_functions.sh"
+    sudo sed -i '/AC_PREREQ/c AC_PREREQ([2.69])' "$SETUPLIBTRACE_DIRNAME/hw5_c_trace_analyze/configure.ac"
+
+    echo_notice "$dirname" "$filename" "Changing file mode"
+    cd "$SETUPLIBTRACE_DIRNAME"
+    sudo find $SETUPLIBTRACE_DIRNAME -type f -iname "*.sh" -exec sudo chmod +x {} \;
+
+    echo_notice "$dirname" "$filename" "Launching libtrace installation script"
+    cd "$SETUPLIBTRACE_DIRNAME/hw4_libtrace_setup"
+    sudo mkdir $LIBTRACEDEP_DIRNAME || :
+    sudo bash ./setup.sh
 }
 
 # install & compile SERVER program:
-#   - [ ] ACS DB parsing
-#   - [ ] detect anomaly client traffic
+#   - [O] ACS DB parsing
+#   - [O] detect anomaly client traffic
 #   - [ ] block anomaly client traffic
-server_setup_task1=1
+server_setup_task12=1
 server_setup () {
-    if [ $server_setup_task1 -eq 1 ]; then
-        echo_notice "$dirname" "$filename" "Compiling ACS DB parsing"
+    if [ $server_setup_task12 -eq 1 ]; then
+        echo_notice "$dirname" "$filename" "Compiling binaries for ACS Remote Attestation routine"
         ./bootstrap.sh
         ./configure
         make
@@ -35,12 +59,13 @@ server_setup () {
 # execute SERVER program
 #   - [O] open ACS demo server
 #   - [O] open ACS demo server webpage
-#   - [ ] routine ACS DB parsing for state change
-#   - [ ] constant traffic monitoring
+#   - [O] routine ACS DB parsing for state change
+#   - [O] constant traffic monitoring
 #   - [ ] block client if top two condition fails
 server_exec_task1=0
 server_exec_task2=0
-server_exec_task3=1
+server_exec_task3=0
+server_exec_task4=1
 server_exec () {
     if [ $server_exec_task1 -eq 1 ]; then
         echo_notice "$dirname" "$filename" "ACS server starting"
@@ -61,10 +86,19 @@ server_exec () {
     fi
     if [ $server_exec_task3 -eq 1 ]; then
         # note: need to be executed in separate terminal
-        echo_notice "$dirname" "$filename" "ACS DB parsing"
+        echo_notice "$dirname" "$filename" "Launching ACS DB monitoring binary"
         lc1="source $script_path/../common/functions.sh"
         lc2="echo_notice \"$dirname\" \"$filename\" 'ACS DB parsing'"
         lc3="while true; do $script_path/attestlog_AD/attestlog_AD -H $MYSQL_HOST -u $MYSQL_USER -p $MYSQL_PASSWORD -d $MYSQL_DATABASE -P $MYSQL_PORT; sleep $interval; done"
+        bash -c "$lc1; $lc2; $lc3"
+        #newLXterm "ACS DB Parsing" "bash -c \"$lc1; $lc2; $lc3\"" 1
+    fi
+    if [ $server_exec_task4 -eq 1 ]; then
+        # note: need to be executed in separate terminal
+        echo_notice "$dirname" "$filename" "Launching traffic monitoring binary"
+        lc1="source $script_path/../common/functions.sh"
+        lc2="echo_notice \"$dirname\" \"$filename\" 'Traffic monitoring'"
+        lc3="while true; do $script_path/traffic_AD/traffic_AD"
         bash -c "$lc1; $lc2; $lc3"
         #newLXterm "ACS DB Parsing" "bash -c \"$lc1; $lc2; $lc3\"" 1
     fi
