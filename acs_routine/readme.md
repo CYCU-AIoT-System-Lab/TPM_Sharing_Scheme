@@ -75,6 +75,6 @@ Require `job_update_swtpm` to be finished.
 
 ## Demo
 
-| No. | Date       | Commit                                                                                                                                                 | Detail                                | Demo Video URL                                               |
-| -   | -          | -                                                                                                                                                      | -                                     | -                                                            |
-| 1   | 2024/07/02 | [6335baf45e8d67e2001c72ebcc00eea2d6928cc7](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/6335baf45e8d67e2001c72ebcc00eea2d6928cc7)   | Full installation on fresh new VM OS. | [https://youtu.be/UyiN50dHs7s](https://youtu.be/UyiN50dHs7s) |
+| No. | Date       | Commit                                                                                                                                               | Detail                                                                             | Demo Video URL                                               |
+| -   | -          | -                                                                                                                                                    | -                                                                                  | -                                                            |
+| 1   | 2024/07/02 | [6335baf45e8d67e2001c72ebcc00eea2d6928cc7](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/6335baf45e8d67e2001c72ebcc00eea2d6928cc7) | Ubuntu 18.04 VM, job_common, job_setup_optiga, job_setup_ibmtpm, job_update_swtpm. | [https://youtu.be/UyiN50dHs7s](https://youtu.be/UyiN50dHs7s) |
