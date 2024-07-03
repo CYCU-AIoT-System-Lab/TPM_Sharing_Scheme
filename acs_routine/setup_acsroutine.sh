@@ -64,7 +64,7 @@ server_exec () {
         echo_notice "$dirname" "$filename" "ACS DB parsing"
         lc1="source $script_path/../common/functions.sh"
         lc2="echo_notice \"$dirname\" \"$filename\" 'ACS DB parsing'"
-        lc3="$script_path/attestlog_AD/attestlog_AD -H $MYSQL_HOST -u $MYSQL_USER -p $MYSQL_PASSWORD -d $MYSQL_DATABASE -P $MYSQL_PORT -i $interval"
+        lc3="while true; do $script_path/attestlog_AD/attestlog_AD -H $MYSQL_HOST -u $MYSQL_USER -p $MYSQL_PASSWORD -d $MYSQL_DATABASE -P $MYSQL_PORT; sleep $interval; done"
         bash -c "$lc1; $lc2; $lc3"
         #newLXterm "ACS DB Parsing" "bash -c \"$lc1; $lc2; $lc3\"" 1
     fi

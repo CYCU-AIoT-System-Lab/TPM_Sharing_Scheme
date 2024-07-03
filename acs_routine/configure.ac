@@ -3,7 +3,7 @@
 
 USER_CFLAGS=$CFLAGS # save userspace CFLAGS options
 
-AC_PREREQ([2.71])
+AC_PREREQ([2.69])
 AC_INIT([acs_routine], [0.0.1], [dachuan516@gmail.com])
 #AC_SUBST([PROG_VER_INFO_LIBTOOL], [$PROG_VER_INFO_LIBTOOL])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -31,6 +31,8 @@ LT_INIT([disable-static])
 #AC_CHECK_LIB([trace], [trace_get_timeval], [have_trace=1], [have_trace=0])
 #AC_CHECK_LIB([trace], [trace_destroy], [have_trace=1], [have_trace=0])
 #AC_CHECK_LIB([trace], [trace_destroy_packet], [have_trace=1], [have_trace=0])
+PKG_PROG_PKG_CONFIG
+PKG_CHECK_MODULES([MARIADB], [mariadb >= 3.1.22])
 
 # Checks for header files.
 AC_CHECK_HEADERS([stdio.h stdlib.h stdbool.h string.h signal.h unistd.h errno.h time.h inttypes.h])

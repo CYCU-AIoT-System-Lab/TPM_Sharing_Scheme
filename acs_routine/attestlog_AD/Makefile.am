@@ -24,6 +24,6 @@ bin_PROGRAMS   = attestlog_AD
 # NOTE: need to use the executable name as prefix
 # ====================================
 attestlog_AD_SOURCES = main.c
-attestlog_AD_CFLAGS = $(common_cflag)
-attestlog_AD_LDADD = -ltrace -lm -L/usr/local/lib
+attestlog_AD_CFLAGS = $(common_cflag) @MARIADB_CFLAGS@
+attestlog_AD_LDADD = -lm -L/usr/local/lib @MARIADB_LIBS@
 attestlog_AD_LDFLAGS = -I/usr/local/include
