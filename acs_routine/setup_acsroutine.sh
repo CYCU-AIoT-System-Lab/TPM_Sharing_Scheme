@@ -4,9 +4,13 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 dirname=$(basename "$script_path")
 filename=$(basename "$0")
-source "../common/functions.sh"
-source "./function_acsroutine.sh"
-load_preset "./config.ini"
+source "$script_path/../common/functions.sh"
+source "$script_path/function_acsroutine.sh"
+load_preset "$script_path/config.ini"
+script=$(realpath "$0")
+script_path=$(dirname "$script")
+dirname=$(basename "$script_path")
+filename=$(basename "$0")
 
 # clone libtrace install program
 #   - https://github.com/belongtothenight/ACN_Code/releases
@@ -18,8 +22,14 @@ setup_libtrace () {
 #   - [ ] ACS DB parsing
 #   - [ ] detect anomaly client traffic
 #   - [ ] block anomaly client traffic
+server_setup_task1=1
 server_setup () {
-    echo_notice "$dirname" "$filename" "server-side setting up"
+    if [ $server_setup_task1 -eq 1 ]; then
+        echo_notice "$dirname" "$filename" "Compiling ACS DB parsing"
+        ./bootstrap.sh
+        ./configure
+        make
+    fi
 }
 
 # execute SERVER program
@@ -28,35 +38,45 @@ server_setup () {
 #   - [ ] routine ACS DB parsing for state change
 #   - [ ] constant traffic monitoring
 #   - [ ] block client if top two condition fails
+server_exec_task1=0
+server_exec_task2=0
+server_exec_task3=1
 server_exec () {
-    #1
-    echo_notice "$dirname" "$filename" "ACS server starting"
-    lc1="source $script_path/../common/functions.sh"
-    lc2="echo_notice \"$dirname\" \"$filename\" 'Launching ACS server'"
-    lc3="cd $BASE_DIR/ibmacs"
-    lc4="export LD_LIBRARY_PATH=$BASE_DIR/ibmtss/utils:$LD_LIBRARY_PATH ACS_PORT=$ACS_PORT ACS_SQL_USERID=\"$MYSQL_USER\" ACS_SQL_PASSWORD=\"$MYSQL_PASSWORD\" TPM_INTERFACE_TYPE=dev"
-    lc5="./server -vv -root $BASE_DIR/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der"
-    #lc5="log_date_time \"./server -vv -root $BASE_DIR/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der\" \"$LOG4J_TIME_FORMAT\" \"$BASE_DIR/ibmacs/serverenroll.log4j\" \"default\""
-    newLXterm "ACS SERVER" "sudo bash -c \"$lc1; $lc2; $lc3; $lc4; service apache2 restart; $lc5 || :\"" 1
-    #sudo bash -c "$lc2; $lc3; $lc4; $lc5 || { pkill apache2 && service apache2 restart && $lc5; }" # debug use
-
-    echo_notice "$dirname" "$filename" "ACS website starting"
-    lc1="source $PWD/../common/functions.sh"
-    lc2="chromium-browser --new-window localhost/acs"
-    newLXterm "ACS Webpage" "$lc1; $lc2" 1
-
-    #2
-    #3
-    #4
+    if [ $server_exec_task1 -eq 1 ]; then
+        echo_notice "$dirname" "$filename" "ACS server starting"
+        lc1="source $script_path/../common/functions.sh"
+        lc2="echo_notice \"$dirname\" \"$filename\" 'Launching ACS server'"
+        lc3="cd $BASE_DIR/ibmacs"
+        lc4="export LD_LIBRARY_PATH=$BASE_DIR/ibmtss/utils:$LD_LIBRARY_PATH ACS_PORT=$ACS_PORT ACS_SQL_USERID=\"$MYSQL_USER\" ACS_SQL_PASSWORD=\"$MYSQL_PASSWORD\" TPM_INTERFACE_TYPE=dev"
+        lc5="./server -vv -root $BASE_DIR/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der"
+        #lc5="log_date_time \"./server -vv -root $BASE_DIR/ibmtss/utils/certificates/rootcerts.txt -imacert imakey.der\" \"$LOG4J_TIME_FORMAT\" \"$BASE_DIR/ibmacs/serverenroll.log4j\" \"default\""
+        newLXterm "ACS SERVER" "sudo bash -c \"$lc1; $lc2; $lc3; $lc4; service apache2 restart; $lc5 || :\"" 1
+        #sudo bash -c "$lc2; $lc3; $lc4; $lc5 || { pkill apache2 && service apache2 restart && $lc5; }" # debug use
+    fi
+    if [ $server_exec_task2 -eq 1 ]; then
+        echo_notice "$dirname" "$filename" "ACS website starting"
+        lc1="source $PWD/../common/functions.sh"
+        lc2="chromium-browser --new-window localhost/acs"
+        newLXterm "ACS Webpage" "$lc1; $lc2" 1
+    fi
+    if [ $server_exec_task3 -eq 1 ]; then
+        # note: need to be executed in separate terminal
+        echo_notice "$dirname" "$filename" "ACS DB parsing"
+        lc1="source $script_path/../common/functions.sh"
+        lc2="echo_notice \"$dirname\" \"$filename\" 'ACS DB parsing'"
+        lc3="$script_path/attestlog_AD/attestlog_AD -H $MYSQL_HOST -u $MYSQL_USER -p $MYSQL_PASSWORD -d $MYSQL_DATABASE -P $MYSQL_PORT -i $interval"
+        bash -c "$lc1; $lc2; $lc3"
+        #newLXterm "ACS DB Parsing" "bash -c \"$lc1; $lc2; $lc3\"" 1
+    fi
 }
 
 # install & compile CLIENT program:
-#   - [ ] send attestation info to server
+#   - [O] send attestation info to server
 #   - [ ] detect anomaly server traffic
 #   - [ ] block anomaly server traffic
-enroll_client=0 # This is not neccesary since it is performed by setup_ibmtpm
+client_setup_task1=0 # This is not neccesary since it is performed by setup_ibmtpm
 client_setup () {
-    if [ $enroll_client -eq 1 ]; then
+    if [ $client_setup_task1 -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Enrolling client"
         sudo bash -c "\
             cd $BASE_DIR/ibmacs; \
@@ -69,12 +89,12 @@ client_setup () {
 #   - [O] routine send attestation info
 #   - [ ] constant traffic monitoring
 #   - [ ] block client if top one condition fails
-approach=2
+client_exec_approach=2
 client_exec () {
     echo_notice "$dirname" "$filename" "client-side executing"
-    echo "approach: $approach"
-    if [ $approach -eq 1 ]; then
-        # this approach tries to execute client only with systemd managed swtpm
+    echo "client_exec_approach: $approach"
+    if [ $client_exec_approach -eq 1 ]; then
+        # this client_exec_approach tries to execute client only with systemd managed swtpm
         # but it seems to need swtpm not handeled by systemd
         p1="$BASE_DIR/ibmacs/tpm2bios.log"
         p2="$BASE_DIR/ibmacs/imasig.log"
@@ -89,8 +109,8 @@ client_exec () {
             cd $BASE_DIR/ibmacs; \
             export LD_LIBRARY_PATH=\"$BASE_DIR/ibmtss/utils:$LD_LIBRARY_PATH\"; \
             $BASE_DIR/ibmacs/client -alg ec -vv -ifb $p1 -ifi $p2 -ho $ACS_DEMO_SERVER_IP -ma $ACS_DEMO_CLIENT_IP"
-    elif [ $approach -eq 2 ]; then
-        # this approach directly calls setup_ibmtpm for consistantly remote attestation
+    elif [ $client_exec_approach -eq 2 ]; then
+        # this client_exec_approach directly calls setup_ibmtpm for consistantly remote attestation
         #1> disable swtpm daemon
         sudo systemctl stop swtpm.service
 

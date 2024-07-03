@@ -36,8 +36,12 @@ load_preset () {
     if [ $verbose -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Loading preset..."
     fi
-    source "../setup_ibmtpm/function_ibmtpm.sh"
-    load_preset "../setup_ibmtpm/config.ini"
+    source "$script_path/../setup_ibmtpm/function_ibmtpm.sh"
+    setup_ibmtpm_config="$script_path/../setup_ibmtpm/config.ini"
+    if ! [ -f "$setup_ibmtpm_config" ]; then
+        echo_error "$dirname" "$filename" "Submodule \`setup_ibmtpm\` has not been installed!" 1
+    fi
+    load_preset "$setup_ibmtpm_config"
 
     # mysql
     #mysql_user="tpm2ACS"
@@ -46,6 +50,8 @@ load_preset () {
     MYSQL_PASSWORD=$mysql_password
     #mysql_database="tpm2"
     MYSQL_DATABASE=$mysql_database
+    MYSQL_HOST=$acs_demo_server_ip
+    MYSQL_PORT=0 # default
 
     # format
     #log4j_time_format="%Y/%m/%d-%H:%M:%S"
@@ -60,14 +66,14 @@ load_preset () {
     ACS_PORT=$acs_port
     ACS_DEMO_CLIENT_IP=$acs_demo_client_ip
 
-    clear_preset # clear preset from setup_ibmtpm
-
     # server-side must be raspberry pi with TPM9670 installed
     if [ $is_server -eq 1 ]; then
         if [ $install_platform -ne 3 ]; then
-            echo_error "$dirname" "$filename" "No supported platform, please check your configuration" 1
+            echo_error "$dirname" "$filename" "Platform $install_platform is not supported, only 3. Please check your configuration" 1
         fi
     fi
+
+    clear_preset # clear preset from setup_ibmtpm
 }
 if [ $verbose -eq 1 ]; then
     echo_notice "$dirname" "$filename" "Loaded function: load_preset"
