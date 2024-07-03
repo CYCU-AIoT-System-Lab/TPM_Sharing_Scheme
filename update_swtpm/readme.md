@@ -40,6 +40,12 @@ Note:
 4. Isolated scripts are used in this project to prevent system-wide impact.
 5. System-wide setup scripts work fine, but break other parts of this project due to shared resources (.so) overwriting.
 
+## Usage Links
+
+1. [https://github.com/stefanberger/swtpm/wiki](https://github.com/stefanberger/swtpm/wiki)
+2. [https://github.com/stefanberger/swtpm/wiki/Using-the-IBM-TSS-with-swtpm](https://github.com/stefanberger/swtpm/wiki/Using-the-IBM-TSS-with-swtpm)
+3. [https://github.com/stefanberger/swtpm/wiki/Using-the-Intel-TSS-with-swtpm](https://github.com/stefanberger/swtpm/wiki/Using-the-Intel-TSS-with-swtpm)
+
 ## Demo
 
 | No. | Date       | Commit                                                                                                                                                 | Detail                                | Demo Video URL                                               |
