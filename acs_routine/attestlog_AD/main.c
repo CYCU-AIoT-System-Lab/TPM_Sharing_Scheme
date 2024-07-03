@@ -29,7 +29,7 @@ void print_help_message (void) {
     printf("  <result_num>:<id>:<userid>:<hostname>:<result_info>\n");
     printf("Description:\n");
     printf("  This program will query the last/latest row from the attestlog table in provided MySQL database and determine attestation result.\n");
-    return;
+    return 0;
 }
 
 MYSQL_ROW query_last_line (MYSQL *con, const char* query_str) {

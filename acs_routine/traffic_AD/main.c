@@ -21,10 +21,10 @@ void print_help_message (void) {
     printf("  <result_num>:<timestamp>:<hostname/IP>:<vector_deviation>:<result_info>\n");
     printf("Description:\n");
     printf("  This program will monitor the traffic from specific IP in its first execution interval, and compare with following intervals to check for anomaly situation.\n");
-    return;
+    return 0;
 }
 
 int main (int argc, char *argv[]) {
     printf("Hello, World!\n");
-    return;
+    return 0;
 }
