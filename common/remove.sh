@@ -29,14 +29,6 @@ else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_environment ! Skipping remove of setup_environment..."
 fi
 
-if [ ${job_setup_ibmtpm} -eq 1 ]; then
-    echo_notice "${dirname}" "${filename}" "Running ibmtpm remove..."
-    cd ../setup_ibmtpm
-    install_platform=$install_platform bash ./remove.sh
-else
-    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_ibmtpm ! Skipping remove of setup_ibmtpm..."
-fi
-
 if [ ${job_socket_com} -eq 1 ]; then
     echo_notice "${dirname}" "${filename}" "Running socket_com remove..."
     cd ../socket_com
@@ -51,6 +43,14 @@ if [ ${job_setup_optiga} -eq 1 ]; then
     install_platform=$install_platform bash ./remove.sh
 else
     echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_optiga ! Skipping remove of setup_optiga..."
+fi
+
+if [ ${job_setup_ibmtpm} -eq 1 ]; then
+    echo_notice "${dirname}" "${filename}" "Running ibmtpm remove..."
+    cd ../setup_ibmtpm
+    install_platform=$install_platform bash ./remove.sh
+else
+    echo_warn "${dirname}" "${filename}" "Invalid Argument: $job_setup_ibmtpm ! Skipping remove of setup_ibmtpm..."
 fi
 
 if [ ${job_deploy_repo} -eq 1 ]; then

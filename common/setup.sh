@@ -182,19 +182,6 @@ else
 fi
 
 cd $working_dir
-if [ $job_setup_ibmtpm -eq 1 ]; then
-    echo_notice "${dirname}" "${filename}" "Running ibmtpm setup..."
-    cd ../setup_ibmtpm
-    sudo install_platform=$install_platform user=${USER} bash ./setup_sudo.sh
-elif [ $job_setup_ibmtpm -eq 2 ]; then
-    echo_notice "${dirname}" "${filename}" "Running ibmtpm setup..."
-    cd ../setup_ibmtpm
-    bash ./setup.sh
-else
-    echo_notice "${dirname}" "${filename}" "Skipped setup_ibmtpm"
-fi
-
-cd $working_dir
 if [ $job_socket_com -eq 1 ]; then
     echo_notice "${dirname}" "${filename}" "Running socket_com setup..."
     cd ../socket_com
@@ -210,6 +197,19 @@ if [ $job_setup_optiga -eq 1 ]; then
     install_platform=$install_platform bash ./setup.sh
 else
     echo_notice "${dirname}" "${filename}" "Skipped setup_optiga"
+fi
+
+cd $working_dir
+if [ $job_setup_ibmtpm -eq 1 ]; then
+    echo_notice "${dirname}" "${filename}" "Running ibmtpm setup..."
+    cd ../setup_ibmtpm
+    sudo install_platform=$install_platform user=${USER} bash ./setup_sudo.sh
+elif [ $job_setup_ibmtpm -eq 2 ]; then
+    echo_notice "${dirname}" "${filename}" "Running ibmtpm setup..."
+    cd ../setup_ibmtpm
+    bash ./setup.sh
+else
+    echo_notice "${dirname}" "${filename}" "Skipped setup_ibmtpm"
 fi
 
 cd $working_dir
