@@ -85,3 +85,5 @@ Require `job_update_swtpm` to be finished.
 2. [https://mariadb.com/kb/en/mariadb-connectorc-api-functions/](https://mariadb.com/kb/en/mariadb-connectorc-api-functions/)
 3. [Database Connection in C++ - MySQL or MariaDB - Steve's teacher](https://youtu.be/cSZvq7Kv6_0?si=PYCB_hs1MV6GNnMt)
 4. [How to Create/Drop User in MariaDB - MariaDB Admin Tutorial - TechBrothersIT](https://youtu.be/MI4590v1QoU?si=SHSjoOksfvoxqAwQ)
+5. [https://github.com/kgoldman/acs/blob/master/acs/reports.php](https://github.com/kgoldman/acs/blob/master/acs/reports.php)
+6. [https://github.com/kgoldman/acs/blob/master/acs/serversql.c](https://github.com/kgoldman/acs/blob/master/acs/serversql.c)
