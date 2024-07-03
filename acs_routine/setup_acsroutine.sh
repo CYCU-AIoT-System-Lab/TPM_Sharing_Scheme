@@ -20,10 +20,9 @@ setup_libtrace () {
     echo "$WGET_CONFIG_STR" >> $WGET_RC_PATH
 
     echo_notice "$dirname" "$filename" "Downloading libtrace setup script"
-    ZIPNAME="$SETUPLIBTRACE_DIRNAME$SETUPLIBTRACE_EXT"
-    sudo wget $WGET_FLAG "https://github.com/belongtothenight/ACN_Code/archive/refs/tags/1.0.0.tar.gz" -O $ZIPNAME || { rm -rf $ZIPNAME; echo -e "${RED}${BOLD}download failed, removing partial file!${END}"; exit 1; }
+    sudo wget $WGET_FLAG "https://github.com/belongtothenight/ACN_Code/archive/refs/tags/1.0.0.tar.gz" -O $SETUP_LIBTRACE_ZIPNAME || { rm -rf $SETUP_LIBTRACE_ZIPNAME; echo -e "${RED}${BOLD}download failed, removing partial file!${END}"; exit 1; }
     if ! [ -d $SETUPLIBTRACE_DIRNAME ]; then sudo mkdir $SETUPLIBTRACE_DIRNAME; fi
-    sudo tar $TAR_FLAG $ZIPNAME -C $SETUPLIBTRACE_DIRNAME $TAR_ADD_FLAG
+    sudo tar $TAR_FLAG $SETUP_LIBTRACE_ZIPNAME -C $SETUPLIBTRACE_DIRNAME $TAR_ADD_FLAG
 
     echo_notice "$dirname" "$filename" "Enabling wget certification check"
     sed -i "/$WGET_CONFIG_STR/d" $WGET_RC_PATH
@@ -38,7 +37,7 @@ setup_libtrace () {
     echo_notice "$dirname" "$filename" "Launching libtrace installation script"
     cd "$SETUPLIBTRACE_DIRNAME/hw4_libtrace_setup"
     sudo mkdir $LIBTRACEDEP_DIRNAME || :
-    sudo bash ./setup.sh
+    sudo bash ./setup.sh || :
 }
 
 # install & compile SERVER program:
@@ -97,7 +96,7 @@ server_exec () {
         echo_notice "$dirname" "$filename" "Launching traffic monitoring binary"
         lc1="source $script_path/../common/functions.sh"
         lc2="echo_notice \"$dirname\" \"$filename\" 'Traffic monitoring'"
-        lc3="while true; do $script_path/traffic_AD/traffic_AD"
+        lc3="$script_path/traffic_AD/traffic_AD"
         bash -c "$lc1; $lc2; $lc3"
         #newLXterm "ACS DB Parsing" "bash -c \"$lc1; $lc2; $lc3\"" 1
     fi

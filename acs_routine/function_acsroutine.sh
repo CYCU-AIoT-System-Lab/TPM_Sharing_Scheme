@@ -5,8 +5,7 @@ set -e
 verbose=0 # 1 for verbose, 0 for silent
 script=$(realpath "$0")
 script_path=$(dirname "$script")
-dirname=$(basename "$script_path")
-filename=$(basename "$0")
+dirname=$(basename "$script_path") filename=$(basename "$0")
 
 load_preset () {
     if [ $verbose -eq 1 ]; then
@@ -32,6 +31,13 @@ load_preset () {
     #check_var tpm_socket_port 1
 
     check_var interval 1
+
+    # server-side must be raspberry pi with TPM9670 installed
+    if [ $is_server -eq 1 ]; then
+        if [ $install_platform -ne 3 ]; then
+            echo_error "$dirname" "$filename" "Platform $install_platform is not supported, only 3. Please check your configuration" 1
+        fi
+    fi
 
     if [ $verbose -eq 1 ]; then
         echo_notice "$dirname" "$filename" "Loading preset..."
@@ -66,14 +72,20 @@ load_preset () {
     ACS_PORT=$acs_port
     ACS_DEMO_CLIENT_IP=$acs_demo_client_ip
 
-    # server-side must be raspberry pi with TPM9670 installed
-    if [ $is_server -eq 1 ]; then
-        if [ $install_platform -ne 3 ]; then
-            echo_error "$dirname" "$filename" "Platform $install_platform is not supported, only 3. Please check your configuration" 1
-        fi
-    fi
-
     clear_preset # clear preset from setup_ibmtpm
+
+    # setup_libtrace
+    #> https://github.com/belongtothenight/ACN_Code/releases
+    SETUPLIBTRACE_VERSION="1.0.0"
+    SETUPLIBTRACE_EXT=".tar.gz"
+    SETUPLIBTRACE_DIRNAME="$BASE_DIR/setup-libtrace"
+    SETUPLIBTRACE_ZIPNAME="$SETUPLIBTRACE_DIRNAME$SETUPLIBTRACE_EXT"
+    LIBTRACEDEP_DIRNAME="$BASE_DIR/libtrace-dep"
+
+    TAR_FLAG="xf"
+    TAR_ADD_FLAG="--strip-components=1"
+    WGET_FLAG="-q --show-progress"
+    WGET_RC_PATH="$HOME/.wgetrc"
 }
 if [ $verbose -eq 1 ]; then
     echo_notice "$dirname" "$filename" "Loaded function: load_preset"

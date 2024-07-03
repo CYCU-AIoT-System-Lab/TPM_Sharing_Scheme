@@ -10,6 +10,11 @@ load_preset "./config.ini"
 
 remove_libtrace () {
     echo_notice "$dirname" "$filename" "libtrace removing"
+    cd "$SETUPLIBTRACE_DIRNAME/hw4_libtrace_setup"
+    sudo bash ./remove.sh
+    sudo rm -rf $SETUPLIBTRACE_DIRNAME
+    sudo rm -rf $LIBTRACEDEP_DIRNAME
+    sudo rm -rf $SETUPLIBTRACE_ZIPNAME
 }
 
 remove_server () {
