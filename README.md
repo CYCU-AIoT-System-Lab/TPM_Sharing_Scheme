@@ -6,6 +6,7 @@ Refer to [```./common```](./common/) for overall installation script.
 
 | No. | Item                                         | Description                                                                                                         |
 | --- | ---                                          | :--                                                                                                                 |
+| 1   | [./acs_routine/](./acs_routine/)             | Multiple ACS Remote Attestation system demo scripts and binaries.                                                   |
 | 1   | [./boot/](./boot/)                           | Boot phase of the project.                                                                                          |
 | 2   | [./deploy_repo/](./deploy_repo/)             | Common utilities accross different subprojects.                                                                     |
 | 3   | [./deploy_repo/](./deploy_repo/)             | Deploy demo purpose repository.                                                                                     |

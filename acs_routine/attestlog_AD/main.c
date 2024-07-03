@@ -14,8 +14,9 @@
 #include <stdbool.h>
 
 void print_help_message (void) {
-    printf("Usage: ./attestlog_AD -H <host> -u <user_name> -p <password> -d <db_name> -P <port> [-v]\n");
-    printf("Usage: ./attestlog_AD -h");
+    printf("Usage:\n");
+    printf("  ./attestlog_AD -H <host> -u <user_name> -p <password> -d <db_name> -P <port> [-v]\n");
+    printf("  ./attestlog_AD -h\n");
     printf("Options:\n");
     printf("  -H, --mysql-host <host_name>      MySQL host name, IPv4 address\n");
     printf("  -u, --mysql-user <user_name>      MySQL user name\n");
@@ -24,7 +25,10 @@ void print_help_message (void) {
     printf("  -P, --mysql-port <port_number>    MySQL port number\n");
     printf("  -v, --verbose                     Verbose output\n");
     printf("  -h, --help                        Show this help message and exit\n");
-    printf("Output format: <result_num>:<id>:<userid>:<hostname>:<result_info>\n");
+    printf("Output format:\n");
+    printf("  <result_num>:<id>:<userid>:<hostname>:<result_info>\n");
+    printf("Description:\n");
+    printf("  This program will query the last/latest row from the attestlog table in provided MySQL database and determine attestation result.\n");
     return;
 }
 

@@ -24,6 +24,19 @@ Client-side:
 1. job_common + job_setup_optiga
 2. job_setup_ibmtpm + job_update_swtpm + job_boot + job_setup_IMA (un-developed)
 
+## Structure
+
+1. [./attestlog_AD/](./attestlog_AD/): Server-side DB parsing binary. Output attestation state and partial log.
+2. [./m4/](./m4/): Directory to hold m4 macro files after installation start.
+3. [./bootstrap.sh](./bootstrap.sh): Script to compile binaries in this submodule.
+4. [./config.ini](./config.ini): Configuration file for this submodule.
+5. [./configure.ac](./configure.ac): Binary pre-compilation setting file.
+6. [./function_acsroutine.sh](./function_acsroutine.sh): Function script for this submodule.
+7. [./Makefile.am](./Makefile.am): Binary compilation setting file.
+8. [./readme.md](./readme.md): This file.
+9. [./remove_acsroutine.sh](./remove_acsroutine.sh): Script to remove system changes made by this submodule.
+10. [./setup_acsroutine.sh](./setup_acsroutine.sh): Script to setup execution environment and execute this submodule. Performing tasks specified in `config.ini`.
+
 ## Debug Links
 
 1. ERROR: JS_ObjectGetString: getting key: imaevent1083 / processImaEntries20Pass1: done, no event 1083
