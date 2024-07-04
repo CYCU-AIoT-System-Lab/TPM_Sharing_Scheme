@@ -57,7 +57,6 @@ struct ACS_query {
     struct ACS_state pcrinvalid;
 };
 
-/* this function will trigger aggregate value warning */
 void mysql_strtol (struct ACS_state *acs_state) {
     long val;
     int base = 10;
@@ -227,7 +226,6 @@ int main (int argc, char *argv[]) {
     /* MySQL tinyint type value checking */
     if (errno == 0) {
         if (verbose) printf("Value checking\n");
-        /* these 3 lines will trigger aggregate value warning */
         mysql_strtol(&selected_data.quoteverified);
         mysql_strtol(&selected_data.pcrschanged);
         mysql_strtol(&selected_data.pcrinvalid);
@@ -255,7 +253,7 @@ int main (int argc, char *argv[]) {
         mysql_close(&mysql);
         exit(EXIT_SUCCESS);
     } else {
-        printf("Exist with code %d: %s\n", errno, strerror(errno));
+        printf("Exit with code %d: %s\n", errno, strerror(errno));
         exit(errno);
     }
     return 0;
