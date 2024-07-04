@@ -29,7 +29,7 @@ void print_help_message (void) {
     printf("  <result_num>:<id>:<userid>:<hostname>:<result_info>\n");
     printf("Description:\n");
     printf("  This program will query the last/latest row from the attestlog table in provided MySQL database and determine attestation result.\n");
-    return 0;
+    return;
 }
 
 MYSQL_ROW query_last_line (MYSQL *con, const char* query_str) {
@@ -58,29 +58,28 @@ struct ACS_query {
 };
 
 /* this function will trigger aggregate value warning */
-struct ACS_state mysql_strtol (struct ACS_state acs_state) {
+void mysql_strtol (struct ACS_state *acs_state) {
     long val;
     int base = 10;
     char *endptr;
-    const char *item = acs_state.p;
+    const char *item = acs_state->p;
     errno = 0;
     /* printf here can leads to seg fault */
     //printf("%s\n", item);
-    if (acs_state.p != NULL) {
+    if (item != NULL) {
         val = strtol(item, &endptr, base);
         if (errno != 0) {
             perror("strtol");
             exit(EXIT_FAILURE);
         }
-        if (endptr == acs_state.p) {
+        if (endptr == item) {
             fprintf(stderr, "No digits were found\n");
             exit(EXIT_FAILURE);
         }
-        if (val == 1) acs_state.is_yes = true;
-        else if (val == 0) acs_state.is_no = true;
+        if (val == 1) acs_state->is_yes = true;
+        else if (val == 0) acs_state->is_no = true;
         else printf("unexpected value");
-    } else acs_state.is_null = true;
-    return acs_state;
+    } else acs_state->is_null = true;
 }
 
 int main (int argc, char *argv[]) {
@@ -229,9 +228,9 @@ int main (int argc, char *argv[]) {
     if (errno == 0) {
         if (verbose) printf("Value checking\n");
         /* these 3 lines will trigger aggregate value warning */
-        selected_data.quoteverified = mysql_strtol(selected_data.quoteverified);
-        selected_data.pcrschanged = mysql_strtol(selected_data.pcrschanged);
-        selected_data.pcrinvalid= mysql_strtol(selected_data.pcrinvalid);
+        mysql_strtol(&selected_data.quoteverified);
+        mysql_strtol(&selected_data.pcrschanged);
+        mysql_strtol(&selected_data.pcrinvalid);
         errno = 0; // resetting errno caused during DB connection
     }
 
