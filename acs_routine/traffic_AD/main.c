@@ -19,40 +19,46 @@
 
 #include "../lib/lib_signal_handler.h"
 
-#define LIBTRACE_ERRNO  1000
-#define NANOSEC_CONVERT 1000000000
+#define LIBTRACE_ERRNO      1000
+#define NANOSEC_CONVERT     1000000000
+#define NANOSEC_CONVERT2    2000000000
 
 /* general */
-volatile int    exit_flag = false;      /* Global exit flag modify by signal handler */
-long int        window_ws = 0;
-long int        window_wc = 0;
+volatile int        exit_flag = false;      /* Global exit flag modify by signal handler */
+volatile int        filter_flag = false;    /* Global flag to filter out monitoring traffic */
+long int            window_ws = 0;
+long int            window_wc = 0;
+long unsigned int   old_f2 = 0;             /* F2 score of previous calculation */
+long unsigned int   new_f2 = 0;
+long unsigned int   dif_f2 = 0;
 
 /* CLI */
-const char     *hostname = NULL;        /* Monitoring IPv4 address */
-const char     *interface = NULL;       /* libtrace pcap interface */
-long int        window_size = 0;
-long int        window_count = 0;
-volatile bool   verbose = false;        /* Verbose mode */
+const char         *hostname = NULL;        /* Monitoring IPv4 address */
+const char         *interface = NULL;       /* libtrace pcap interface */
+long int            window_size = 0;
+long int            window_count = 0;
+long unsigned int   threshold_f2 = 0;
+volatile bool       verbose = false;        /* Verbose mode */
 
 /* timespec */
-time_t          previous_s = 0;         /* store time when last window ends */
-long int        previous_ns = 0;
-long int        elapse_ns = 0;          /* duration kept in nano-second */
+time_t              previous_s = 0;         /* store time when last window ends */
+long int            previous_ns = 0;
+long int            elapse_ns = 0;          /* duration kept in nano-second */
 
 /* packet */
-long int        vec_p_win = 0;          /* window pointer, used as index of vec */
-long int        old_f2 = 0;             /* F2 score of previous calculation */
-long int       *packet_cnt_vec = NULL;  /* packet count vector for initial interval */
+long int            vec_p_win = 0;          /* window pointer, used as index of vec */
+long int           *packet_cnt_vec = NULL;  /* packet count vector for initial interval */
 
 void print_help_message (void) {
     printf("Usage:\n");
-    printf("  ./traffic_AD -H <hostname> -i <interface> -s <window_size> -c <window_count> [-v]\n");
+    printf("  ./traffic_AD -H <hostname> -i <interface> -s <window_size> -c <window_count> -t <f2_threshold> [-v]\n");
     printf("  ./traffic_AD -h\n");
     printf("Options:\n");
     printf("  -H, --hostname <hostname>         Set the hostname to monitor (e.g. 192.168.0.1)\n");
     printf("  -i, --pcap-interface <interface>  Set the interface to capture traffic (e.g. wlan0)\n");
     printf("  -s, --window-size <number>        Window size in nano-second, power of 2\n");
     printf("  -c, --window-count <number>       Window count in a interval, power of 2\n");
+    printf("  -t, --f2-threshold <number>       F2 score to trigger packet filtering\n");
     printf("  -v, --verbose                     Verbose output\n");
     printf("  -h, --help                        Show this help message and exit\n");
     printf("Output format:\n");
@@ -75,6 +81,14 @@ void zero_vec (long int *vec) {
     }
 }
 
+void init_vec (long int *vec) {
+    for (long int i=0; i<window_wc; ++i) {
+        printf("%ld\r", i); // somehow required so that initial vec won't have weird value
+        vec[i] = 1;
+        vec[i] = 0;
+    }
+}
+
 void print_vec (long int *vec) {
     printf("[");
     for (long int i=0; i<window_wc; ++i) {
@@ -83,12 +97,25 @@ void print_vec (long int *vec) {
     printf("]\n");
 }
 
+void f2_vec (long int *vec) {
+    new_f2 = 0;
+    for (long int i=0; i<window_wc; ++i) {
+        new_f2 += (long unsigned int)(vec[i] * vec[i]);
+    }
+}
+
+void f2_diff_abs (long unsigned int a, long unsigned int b) {
+    if (a>b) dif_f2 = a-b;
+    else if (a<b) dif_f2 = b-a;
+    else dif_f2 = 0;
+}
+
 static inline bool filter_ip(struct sockaddr *ip) {
     char str[40];
     if (ip->sa_family==AF_INET) {
         struct sockaddr_in *v4 = (struct sockaddr_in *)ip;
         inet_ntop(AF_INET, &(v4->sin_addr), str, sizeof(str));
-        if (verbose) printf("%s\n", str);
+        //if (verbose) printf("%s\n", str);
         if (strncmp(str, hostname, 15)==0) {
             return true;
         }
@@ -96,6 +123,9 @@ static inline bool filter_ip(struct sockaddr *ip) {
     return false;
 }
 
+/*
+ * Use as much bit shit >> << as possible to optimize for / and %
+ */
 static void per_packet (libtrace_packet_t *packet) {
     struct sockaddr_storage addr;
     struct sockaddr *addr_ptr;
@@ -105,15 +135,23 @@ static void per_packet (libtrace_packet_t *packet) {
     if (addr_ptr == NULL) ;//printf("NULL");
     else monitored_host = filter_ip(addr_ptr);
 
-    if (monitored_host == true) {
-        struct timespec ts= trace_get_timespec(packet);
-        time_t tmp_s = ts.tv_sec - previous_s;
-        time_t tmp_ns = ts.tv_nsec - previous_ns;
-        if (tmp_ns < 0) {
-            tmp_s -= 1;
-            tmp_ns += NANOSEC_CONVERT;
-        }
-        elapse_ns = (tmp_s) * NANOSEC_CONVERT + (tmp_ns);
+    if ((monitored_host == true) && (filter_flag != true)) {
+        /* calculate current time and previous time
+         * difference as elapse time and store as 
+         * nano-second
+         *
+         * if minusing to negative result, elapse time
+         * calculation will still work
+         */
+        struct timespec ts = trace_get_timespec(packet);
+        //time_t tmp_s = ts.tv_sec - previous_s;
+        //time_t tmp_ns = ts.tv_nsec - previous_ns;
+        //if (tmp_ns < 0) {
+        //    tmp_s -= 1;
+        //    tmp_ns += NANOSEC_CONVERT;
+        //}
+        //elapse_ns = (tmp_s) * NANOSEC_CONVERT + (tmp_ns);
+        elapse_ns = (ts.tv_sec - previous_s) * NANOSEC_CONVERT + (ts.tv_nsec - previous_ns);
         //printf("Elapse_ns: %ld\n", elapse_ns);
         //printf("Window_ns: %ld\n", window_ws);
 
@@ -128,24 +166,45 @@ static void per_packet (libtrace_packet_t *packet) {
              *
              * can't use the time from packet since it is not the
              * last nano-second of previous window
+             *
+             * since packets are more likely to come in less than 
+             * 2 seconds interval, do special case processing for 
+             * this interval
              * */
-            previous_ns = vec_p_inc * window_ws;
-            long int previous_inc = previous_ns / NANOSEC_CONVERT;
-            if (previous_inc >= 1) {
-                previous_s += previous_inc;
-                previous_ns -= previous_inc * NANOSEC_CONVERT;
-            }
+            previous_ns += vec_p_inc * window_ws;
+            if (previous_ns >= NANOSEC_CONVERT) {
+                // 1s ~ 2s
+                previous_s++;
+                previous_ns -= NANOSEC_CONVERT;
+                if (previous_ns < NANOSEC_CONVERT2) {
+                    // > 2s
+                    long int previous_inc = previous_ns / NANOSEC_CONVERT;
+                    previous_s += previous_inc;
+                    previous_ns -= previous_inc * NANOSEC_CONVERT;
+                }
+            } // 0s ~ 1s do nothing
 
             /* check for interval switch */
             if (vec_p_win >= window_wc) {
-                //printf("Calculating F2, comparing F2\n");
+                /* new f2 score cal */
+                f2_vec(packet_cnt_vec);
+                f2_diff_abs(old_f2, new_f2);
+                if (verbose) printf("F2 old: %lu new: %lu absdiff: %lu\n", old_f2, new_f2, dif_f2);
+                if (dif_f2 > threshold_f2) {
+                    printf("d\n");
+                    printf("1:%ld.%ld:%s:%lu:diviation_too_large\n", ts.tv_sec, ts.tv_nsec, hostname, dif_f2);
+                    filter_flag = true;
+                    printf("filtering hostname\n");
+                }
+                old_f2 = new_f2;
+                /* update window pointer */
                 vec_p_win -= window_wc * (vec_p_win >> window_count);
+                if (verbose) print_vec(packet_cnt_vec);
                 zero_vec(packet_cnt_vec);
+                if (verbose) printf("\n");
             }
         }
         packet_cnt_vec[vec_p_win]++;
-        if (verbose) print_vec(packet_cnt_vec);
-        printf("\n");
     }
 }
 
@@ -200,6 +259,19 @@ int main (int argc, char *argv[]) {
                     errno = EXIT_FAILURE;
                 }
             } else errno = EINVAL;
+        } else if ((strcmp(argv[i], "-t")==0) || (strcmp(argv[i], "--f2-threshold")==0)) {
+            i++;
+            if (i<argc) {
+                threshold_f2 = (long unsigned int)strtol(argv[i], &endptr, base);
+                if (errno != 0) {
+                    perror("strtod");
+                    errno = EXIT_FAILURE;
+                }
+                if (endptr == argv[i]) {
+                    fprintf(stderr, "No digits were found\n");
+                    errno = EXIT_FAILURE;
+                }
+            } else errno = EINVAL;
         } else if ((strcmp(argv[i], "-h")==0) || (strcmp(argv[i], "--help")==0)) {
             print_help_message();
             return 0;
@@ -217,6 +289,7 @@ int main (int argc, char *argv[]) {
         printf("  interface:    %s\n", interface);
         printf("  window_size:  %ld\n", window_size);
         printf("  window_count: %ld\n", window_count);
+        printf("  f2_threshold: %lu\n", threshold_f2);
         printf("  verbose:      %d\n", verbose);
         /* preventing interger overflow during printing */
         window_ws = 1 << window_size;
@@ -230,9 +303,9 @@ int main (int argc, char *argv[]) {
     /* creating measuring vector */
     if (errno==0) {
         //if (verbose) printf("creating measuring vector\n");
-        packet_cnt_vec = (long int*)calloc(window_count, sizeof(long int));
-        zero_vec(packet_cnt_vec);
-        if (verbose) print_vec(packet_cnt_vec);
+        packet_cnt_vec = (long int*)calloc((size_t)window_count, sizeof(long int));
+        init_vec(packet_cnt_vec);
+        if (verbose) print_vec(packet_cnt_vec); // used to check allocated vec status
     }
 
     /* open trace */
@@ -278,10 +351,14 @@ int main (int argc, char *argv[]) {
         }
     }
 
-    printf("Cleaning up resource\n");
-    //free(packet_cnt_vec); // this line sometimes leads to unexpected behavior, but still fine
+    if (verbose) printf("Cleaning up resource\n");
+    /* these lines sometimes leads to unexpected behavior,
+     * likely resource re-claim by OS
+     */
+    free(packet_cnt_vec);
     if (trace) trace_destroy(trace);
     if (packet) trace_destroy_packet(packet);
+
     if (errno == 0) {
         exit(EXIT_SUCCESS);
     } else {
