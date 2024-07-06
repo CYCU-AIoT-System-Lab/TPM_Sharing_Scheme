@@ -1,5 +1,6 @@
 project = libacs
 common_cflag = -Wno-implicit-function-declaration -Wextra -Wall -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wstrict-prototypes -Wstrict-overflow=5 -Wwrite-strings -Waggregate-return -Wcast-qual -Wswitch-default -Wswitch-enum -Wconversion -Wunreachable-code -Wformat=2 -O2
+#common_cflag += -g
 
 # ====================================
 # install directory of public:
@@ -12,7 +13,7 @@ common_cflag = -Wno-implicit-function-declaration -Wextra -Wall -Wfloat-equal -W
 # NOTE: header ladir need to use the library name as prefix
 # ====================================
 libdir              = $(prefix)/lib/${project}
-libacs_ladir    = $(prefix)/include/${project}
+libacs_ladir    	= $(prefix)/include/${project}
 
 # ====================================
 # add library to install as plugin

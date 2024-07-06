@@ -26,6 +26,7 @@
 /* general */
 volatile int        exit_flag = false;      /* Global exit flag modify by signal handler */
 volatile int        filter_flag = false;    /* Global flag to filter out monitoring traffic */
+volatile int        filter_applied = false; /* Global flag to prevent filter being re-applied */
 long int            window_ws = 0;
 long int            window_wc = 0;
 long unsigned int   old_f2 = 0;             /* F2 score of previous calculation */
@@ -75,6 +76,36 @@ void print_help_message (void) {
     return;
 }
 
+/* First approach is using libtrace BPF filtering API, but
+ * it's not supported in the current configuration which
+ * displayed in `man trace`
+ *
+ * Second approach is using `iptables` to access netfilters
+ * No need to open with pipe since it does not need to be
+ * persist throughout multiple commands
+ */
+void apply_filter (void) {
+    char command[100];
+    int command_status;
+    snprintf(command, sizeof(command), "sudo iptables -A INPUT -s %s -j DROP", hostname);
+    command_status = system(command);
+    printf("Received %d after applying filter with command: \t%s\n", command_status, command);
+    printf("To see applied filter chains:               \tsudo iptables -L -n -v\n");
+    filter_applied = true;
+    return;
+}
+
+void remove_filter (void) {
+    char command[100];
+    int command_status;
+    snprintf(command, sizeof(command), "sudo iptables -D INPUT -s %s -j DROP", hostname);
+    command_status = system(command);
+    printf("Received %d after applying filter with command: \t%s\n", command_status, command);
+    printf("To see applied filter chains:               \tsudo iptables -L -n -v\n");
+    filter_applied = false;
+    return;
+}
+
 void zero_vec (long int *vec) {
     for (long int i=0; i<window_wc; ++i) {
         vec[i] = 0;
@@ -110,6 +141,7 @@ void f2_diff_abs (long unsigned int a, long unsigned int b) {
     else dif_f2 = 0;
 }
 
+/* filter out packets came from monitoring hostname */
 static inline bool filter_ip(struct sockaddr *ip) {
     char str[40];
     if (ip->sa_family==AF_INET) {
@@ -135,7 +167,8 @@ static void per_packet (libtrace_packet_t *packet) {
     if (addr_ptr == NULL) ;//printf("NULL");
     else monitored_host = filter_ip(addr_ptr);
 
-    if ((monitored_host == true) && (filter_flag != true)) {
+    if (monitored_host == true) {
+    //if (monitored_host == true) {
         /* calculate current time and previous time
          * difference as elapse time and store as 
          * nano-second
@@ -193,7 +226,7 @@ static void per_packet (libtrace_packet_t *packet) {
                 if (dif_f2 > threshold_f2) {
                     printf("d\n");
                     printf("1:%ld.%ld:%s:%lu:diviation_too_large\n", ts.tv_sec, ts.tv_nsec, hostname, dif_f2);
-                    filter_flag = true;
+                    filter_flag = true; // activate packet filtering
                     printf("filtering hostname\n");
                 }
                 old_f2 = new_f2;
@@ -206,6 +239,8 @@ static void per_packet (libtrace_packet_t *packet) {
         }
         packet_cnt_vec[vec_p_win]++;
     }
+
+    if (filter_flag==true) apply_filter();
 }
 
 int main (int argc, char *argv[]) {
@@ -308,14 +343,20 @@ int main (int argc, char *argv[]) {
         if (verbose) print_vec(packet_cnt_vec); // used to check allocated vec status
     }
 
-    /* open trace */
+    /* creating packet structure */
     if (errno==0) {
-        //if (verbose) printf("Opening trace\n");
+        //if (verbose) printf("Creating packet structure\n");
         packet = trace_create_packet();
         if (packet == NULL) {
             perror("trace_create_packet");
             errno = LIBTRACE_ERRNO;
         }
+        errno = 0; // resetting errno caused during trace opening process
+    }
+    
+    /* creating input trace */
+    if (errno==0) {
+        //if (verbose) printf("Creating input trace\n");
         trace = trace_create(interface);
         if (trace_is_err(trace)) {
             trace_perror(trace, "trace_create");
@@ -337,10 +378,25 @@ int main (int argc, char *argv[]) {
         previous_s = init_ts.tv_sec;
         previous_ns = init_ts.tv_nsec;
     }
-    /* main loop */
+    /* main loop 
+     *
+     * Note that this is not a regular while loop that execute infinitely and exhaust CPU, this
+     * loop wait for any packet coming through to trigger calculation
+     *
+     * when exiting, this loop will also wait till a packet to arrive to exit and cleanup resource
+     */
     bool exit_loop = false;
     while ((trace_read_packet(trace, packet) > 0) && (exit_loop==false) && (exit_flag==false)) {
-        per_packet(packet);
+        if (filter_flag==false) {
+            // if not filtering
+            per_packet(packet);
+        } else {
+            // if filtering
+            if (filter_applied==false) {
+                // if filter already applied
+                apply_filter();
+            }
+        }
         if (trace_is_err(trace)) {
             trace_perror(trace, "Reading packets");
             errno = LIBTRACE_ERRNO;
@@ -355,10 +411,10 @@ int main (int argc, char *argv[]) {
     /* these lines sometimes leads to unexpected behavior,
      * likely resource re-claim by OS
      */
+    remove_filter();
     free(packet_cnt_vec);
     if (trace) trace_destroy(trace);
     if (packet) trace_destroy_packet(packet);
-
     if (errno == 0) {
         exit(EXIT_SUCCESS);
     } else {
