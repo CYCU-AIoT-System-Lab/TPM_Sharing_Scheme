@@ -65,7 +65,7 @@ void print_help_message (void) {
     printf("Output format:\n");
     printf("  <result_num>:<timestamp>:<hostname/IP>:<vector_deviation>:<result_info>\n");
     printf("Description:\n");
-    printf("  This program will use previous interval monitored traffic to compare with the next one with F2 value to check for anomaly situation. Note that the first interval output is always wrong.");
+    printf("  This program will use previous interval monitored traffic to compare with the next one with F2 value to check for anomaly situation. Note that the first interval output is always wrong. Whenever traffic anomaly is detected or received SIGUSR1, this program applies netfilter with iptables to block all traffic from hostname.");
     printf("Size:\n");
     printf("  ws: window size\n");
     printf("  wc: window count\n");
