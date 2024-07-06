@@ -411,10 +411,10 @@ int main (int argc, char *argv[]) {
     /* these lines sometimes leads to unexpected behavior,
      * likely resource re-claim by OS
      */
-    remove_filter();
     free(packet_cnt_vec);
     if (trace) trace_destroy(trace);
     if (packet) trace_destroy_packet(packet);
+    if (filter_applied) remove_filter();
     if (errno == 0) {
         exit(EXIT_SUCCESS);
     } else {

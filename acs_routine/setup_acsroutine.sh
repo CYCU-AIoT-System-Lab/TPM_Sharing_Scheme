@@ -57,12 +57,12 @@ server_setup () {
 # execute SERVER program
 #   - [O] open ACS demo server
 #   - [O] open ACS demo server webpage
-#   - [O] routine ACS DB parsing for state change
 #   - [O] constant traffic monitoring
-#   - [ ] block client if top two condition fails
-server_exec_task1=0
-server_exec_task2=0
-server_exec_task3=0
+#   - [O] routine ACS DB parsing for state change
+#   - [O] block client if top two condition fails
+server_exec_task1=1
+server_exec_task2=1
+server_exec_task3=1
 server_exec_task4=1
 server_exec () {
     if [ $server_exec_task1 -eq 1 ]; then
@@ -83,29 +83,24 @@ server_exec () {
         newLXterm "ACS Webpage" "$lc1; $lc2" 1
     fi
     if [ $server_exec_task3 -eq 1 ]; then
-        # note: need to be executed in separate terminal
-        echo_notice "$dirname" "$filename" "Launching ACS DB monitoring binary"
-        lc1="source $script_path/../common/functions.sh"
-        lc2="echo_notice \"$dirname\" \"$filename\" 'ACS DB parsing'"
-        lc3="while true; do $script_path/attestlog_AD/attestlog_AD -H $MYSQL_HOST -u $MYSQL_USER -p $MYSQL_PASSWORD -d $MYSQL_DATABASE -P $MYSQL_PORT; sleep $interval; done"
-        bash -c "$lc1; $lc2; $lc3"
-        #newLXterm "ACS DB Parsing" "bash -c \"$lc1; $lc2; $lc3\"" 1
-    fi
-    if [ $server_exec_task4 -eq 1 ]; then
-        # note: need to be executed in separate terminal
         echo_notice "$dirname" "$filename" "Launching traffic monitoring binary"
         lc1="source $script_path/../common/functions.sh"
         lc2="echo_notice \"$dirname\" \"$filename\" 'Traffic monitoring'"
-        lc3="$script_path/traffic_AD/traffic_AD"
-        bash -c "$lc1; $lc2; $lc3"
-        #newLXterm "ACS DB Parsing" "bash -c \"$lc1; $lc2; $lc3\"" 1
+        lc3="sudo $script_path/traffic_AD/traffic_AD -H $TRAFFIC_MONITOR_HOST -i $TRAFFIC_MONITOR_INTERFACE -s 30 -c 3 -t 1000 -v || :"
+        #bash -c "$lc1; $lc2; $lc3"
+        newLXterm "Traffic Monitoring" "bash -c \"$lc1; $lc2; $lc3\"" 1
+    fi
+    if [ $server_exec_task4 -eq 1 ]; then
+        echo_notice "$dirname" "$filename" "Launching ACS DB monitoring binary"
+        #bash -c "MYSQL_HOST=${MYSQL_HOST} MYSQL_USER=${MYSQL_USER} MYSQL_PASSWORD=${MYSQL_PASSWORD} MYSQL_DATABASE=${MYSQL_DATABASE} MYSQL_PORT=${MYSQL_PORT} interval=${interval} ${script_path}/launch_attestlog_AD.sh"
+        newLXterm "ACS DB Parsing" "MYSQL_HOST=${MYSQL_HOST} MYSQL_USER=${MYSQL_USER} MYSQL_PASSWORD=${MYSQL_PASSWORD} MYSQL_DATABASE=${MYSQL_DATABASE} MYSQL_PORT=${MYSQL_PORT} interval=${interval} ${script_path}/launch_attestlog_AD.sh" 1
     fi
 }
 
 # install & compile CLIENT program:
 #   - [O] send attestation info to server
-#   - [ ] detect anomaly server traffic
-#   - [ ] block anomaly server traffic
+#   - [O] detect anomaly server traffic
+#   - [O] block anomaly server traffic
 client_setup_task1=0 # This is not neccesary since it is performed by setup_ibmtpm
 client_setup () {
     if [ $client_setup_task1 -eq 1 ]; then
@@ -119,8 +114,8 @@ client_setup () {
 
 # execute CLIENT program
 #   - [O] routine send attestation info
-#   - [ ] constant traffic monitoring
-#   - [ ] block client if top one condition fails
+#   - [O] constant traffic monitoring
+#   - [O] block client if top one condition fails
 client_exec_approach=2
 client_exec () {
     echo_notice "$dirname" "$filename" "client-side executing"

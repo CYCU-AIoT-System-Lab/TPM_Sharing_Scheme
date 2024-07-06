@@ -8,6 +8,7 @@ AC_INIT([acs_routine], [0.0.1], [dachuan516@gmail.com])
 #AC_SUBST([PROG_VER_INFO_LIBTOOL], [$PROG_VER_INFO_LIBTOOL])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects]) # Display all errors, treat warning as error, following minimum GNU policy, enable automake to look into subdirectories
+AC_CONFIG_SRCDIR([lib])
 AC_CONFIG_SRCDIR([attestlog_AD])
 AC_CONFIG_SRCDIR([traffic_AD])
 AC_CONFIG_HEADERS([config.h])
@@ -58,6 +59,7 @@ AC_TYPE_UINT64_T
 #                setvbuf strcmp strstr signal sizeof snprintf strdup strtod strtol strerror])
 
 AC_CONFIG_FILES([Makefile
+                 lib/Makefile
                  attestlog_AD/Makefile
                  traffic_AD/Makefile])
 AC_SUBST([ADD_LIBS])

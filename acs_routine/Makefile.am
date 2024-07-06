@@ -1,4 +1,4 @@
-SUBDIRS = attestlog_AD traffic_AD
+SUBDIRS = lib attestlog_AD traffic_AD
 
 EXTRA_DIST = m4/.keepdir
 ACLOCAL_AMFLAGS = -I m4 --install
@@ -37,6 +37,14 @@ clean-local:
 		traffic_AD/.deps \
 		traffic_AD/.libs \
 		traffic_AD/Makefile
+		lib_AD/*.in \
+		lib_AD/*.o \
+		lib_AD/*.la \
+		lib_AD/*.lo \
+		lib_AD/main \
+		lib_AD/.deps \
+		lib_AD/.libs \
+		lib_AD/Makefile
 	mkdir -p m4
 	touch m4/.keepdir
 	rm -rf \

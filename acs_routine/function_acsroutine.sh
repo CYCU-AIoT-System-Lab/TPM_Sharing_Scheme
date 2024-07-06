@@ -56,8 +56,14 @@ load_preset () {
     MYSQL_PASSWORD=$mysql_password
     #mysql_database="tpm2"
     MYSQL_DATABASE=$mysql_database
-    MYSQL_HOST=$acs_demo_server_ip
+    MYSQL_HOST=$acs_demo_server_ip # this needs to be consistent with setup_ibmtpm
     MYSQL_PORT=0 # default
+    if [ $is_server -eq 1 ]; then
+        TRAFFIC_MONITOR_HOST=$acs_demo_client_ip
+    else
+        TRAFFIC_MONITOR_HOST=$acs_demo_server_ip
+    fi
+    TRAFFIC_MONITOR_INTERFACE="wlan0"
 
     # format
     #log4j_time_format="%Y/%m/%d-%H:%M:%S"
