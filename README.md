@@ -8,7 +8,7 @@ Refer to [```./common```](./common/) for overall installation script.
 | --- | ---                                          | :--                                                                                                                 |
 | 1   | [./acs_routine/](./acs_routine/)             | Multiple ACS Remote Attestation system demo scripts and binaries.                                                   |
 | 1   | [./boot/](./boot/)                           | Boot phase of the project.                                                                                          |
-| 2   | [./deploy_repo/](./deploy_repo/)             | Common utilities accross different subprojects.                                                                     |
+| 2   | [./common/](./common/)                       | Common utilities accross different subprojects.                                                                     |
 | 3   | [./deploy_repo/](./deploy_repo/)             | Deploy demo purpose repository.                                                                                     |
 | 4   | [./device_util/](./device_util/)             | Scripts related to hardware and OS configuration.                                                                   |
 | 5   | [./doc/](./doc/)                             | Documentation used in this project.                                                                                 |
