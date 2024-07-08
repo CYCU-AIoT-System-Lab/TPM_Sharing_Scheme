@@ -40,11 +40,8 @@ setup_libtrace () {
     sudo bash ./setup.sh || :
 }
 
-# install & compile SERVER program:
-#   - [O] ACS DB parsing
-#   - [O] detect anomaly client traffic
-#   - [O] block anomaly client traffic
-server_setup () {
+# compile attestlog_AD and traffic_AD
+setup_acsroutine () {
     echo_notice "$dirname" "$filename" "Compiling binaries for ACS Remote Attestation routine"
     ./bootstrap.sh
     ./configure
@@ -92,17 +89,6 @@ server_exec () {
         #bash -c "MYSQL_HOST=${MYSQL_HOST} MYSQL_USER=${MYSQL_USER} MYSQL_PASSWORD=${MYSQL_PASSWORD} MYSQL_DATABASE=${MYSQL_DATABASE} MYSQL_PORT=${MYSQL_PORT} interval=${interval} ${script_path}/launch_attestlog_AD.sh"
         newLXterm "ACS DB Parsing" "MYSQL_HOST=${MYSQL_HOST} MYSQL_USER=${MYSQL_USER} MYSQL_PASSWORD=${MYSQL_PASSWORD} MYSQL_DATABASE=${MYSQL_DATABASE} MYSQL_PORT=${MYSQL_PORT} interval=${interval} ${script_path}/launch_attestlog_AD.sh" 1
     fi
-}
-
-# install & compile CLIENT program:
-#   - [O] send attestation info to server
-#   - [O] detect anomaly server traffic
-#   - [O] block anomaly server traffic
-client_setup () {
-    echo_notice "$dirname" "$filename" "Compiling binaries for ACS Remote Attestation routine"
-    ./bootstrap.sh
-    ./configure
-    make
 }
 
 # execute CLIENT program
@@ -162,11 +148,10 @@ client_exec () {
 }
 
 if [ $job_setup_libtrace    -eq 1 ]; then setup_libtrace; fi
+if [ $job_setup             -eq 1 ]; then setup_acsroutine; fi
 if [ $is_server -eq 1 ]; then
-    if [ $job_setup -eq 1 ]; then server_setup; fi
     if [ $job_exec  -eq 1 ]; then server_exec; fi
 else
-    if [ $job_setup -eq 1 ]; then client_setup; fi
     if [ $job_exec  -eq 1 ]; then client_exec; fi
 fi
 
