@@ -9,9 +9,9 @@ Currently, ACS doesn't support TPM2.0.
 If no presets are set (default), the script will require the user to input the option they desire.
 
 1. Installing platform: 1~6
-    - Add preset: `touch ./ip<1~6>`, like `touch ./ip<5>` for preset 5.
+    - Add preset: `touch ./ip<1~6>`, like `touch ./ip5` for preset 5.
 2. config file option: the script will list out options in `./config_files/` directory.
-    - Add preset: `touch ./cf<1~6>`, like `touch ./cf<5>` for preset 5.
+    - Add preset: `touch ./cf<1~6>`, like `touch ./cf5` for preset 5.
     - You can duplicate the default config files in `./config_files/` and modify them to your needs. It will also be listed as an option.
 
 ## Directory Description
