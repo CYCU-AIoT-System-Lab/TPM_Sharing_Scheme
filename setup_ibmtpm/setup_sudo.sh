@@ -340,10 +340,10 @@ activate_TPM_server () {
 # Only need to setup once (can re-run)
 activate_TPM_client () {
     TPM_client_executed=1
-    echo_notice "${dirname}" "${filename}-activate_TPM_client" "Sending activation command to TPM on new temrinal ..."
+    echo_notice "${dirname}" "${filename}-activate_TPM_client" "Sending activation command to TPM on new terminal ..."
     cd "${sym_link_ibmtss}/utils/"
     lc1="source ${current_dir}/../common/functions.sh"
-    lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Sending activation command to TPM on new temrinal ...\n\""
+    lc2="echo_notice \"setup_ibmtpm\" \"setup-activate_TPM_client\" \"Sending activation command to TPM on new terminal ...\n\""
     if [ $new_swtpm -ne 1 ]; then
         # legacy SWTPM will hang here (it's fine)
         lc3="./powerup"

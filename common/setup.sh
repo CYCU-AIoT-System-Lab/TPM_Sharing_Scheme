@@ -154,7 +154,7 @@ enable_pi_spi () {
         sudo sed -i 's/dtparam=spi=off/dtparam=spi=on/g' $hardware_config
         sudo sed -i 's/#dtparam=spi=on/dtparam=spi=on/g' $hardware_config
     elif [ $install_platform -eq 4 ]; then
-        echo_notice "${dirname}" "${filename}" "SPI is one by default in this platform"
+        echo_notice "${dirname}" "${filename}" "SPI is on by default in this platform"
     elif [ $install_platform -eq 5 ]; then
         echo_notice "${dirname}" "${filename}" "SPI is skipped in this platform"
     else

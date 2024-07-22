@@ -33,7 +33,7 @@ void signal_USR1_handler (int signum) {
     char *signal_name = strsignal(signum);
     extern int filter_flag;
     if (filter_flag==false) {
-        printf("\nSignal %2d -> %s received, aplying filter.\n", signum, signal_name);
+        printf("\nSignal %2d -> %s received, applying filter.\n", signum, signal_name);
         filter_flag = true;
     } else {
         printf("Signal %2d -> %s received, filter already applied.\n", signum, signal_name);
