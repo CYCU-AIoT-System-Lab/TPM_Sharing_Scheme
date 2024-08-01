@@ -67,7 +67,8 @@ load_preset () {
         echo_notice "$message1" "$message2" "Loading preset..."
     fi
     # ==== user ====
-    user="user"
+    #user="user"
+    user=$(getent passwd {1000..60000} | cut -d: -f1) # get unprivilege username
     # ==== version ====
     ibmtss_ver="1.6.0" # Platform 1: 2.1.1, Platform 3: 1.6.0
     ibmtpm_ver="1682"
