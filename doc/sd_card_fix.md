@@ -33,7 +33,7 @@ Sometimes, when SD card flashing is interrupted, Windows File Explorer will show
 6. Type ```create partition primary``` and press Enter.
 7. Type ```select partition 1``` and press Enter.
 8. Type ```active``` and press Enter.
-9. Type ```format fs=fat32``` and press Enter. (wait for it to finish, and you should see it appear in File Explorer)
+9. Type ```format fs=fat32``` or ```format fs=fat32 quick``` and press Enter. (wait for it to finish, and you should see it appear in File Explorer)
 
 Original sources:
 
