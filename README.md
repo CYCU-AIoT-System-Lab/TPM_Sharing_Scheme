@@ -55,6 +55,6 @@ SUM:                           139           1386           1459          11966
 
 Commit [66991feaa0c61000ebf18433af1d9ac04161158d](https://github.com/CYCU-AIoT-System-Lab/TPM_Sharing_Scheme/tree/66991feaa0c61000ebf18433af1d9ac04161158d).
 
-## Paper
+## Publication and Award
 
 1. *TPM Resource Sharing for Embedded System Network Security* [https://ieeexplore.ieee.org/document/10547999](https://ieeexplore.ieee.org/document/10547999)
